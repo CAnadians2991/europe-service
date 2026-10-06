@@ -172,19 +172,21 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
 export function LandingCatalog({ lang, landing: l, path, active }: { lang: Lang; landing: LandingPage; path: string; active: Vacancy[] }) {
   const uk = lang === 'uk'
   const cards = active.map((v) => toCard(localize(v, lang)))
-  const c = COUNTRY[l.country] ?? COUNTRY.pl
+  const all = l.country === 'all'
+  const c = (all ? undefined : COUNTRY[l.country]) ?? COUNTRY.pl
   const { list, narrowed } = landingList(l, active)
   const links = (l.links ?? []).filter((x) => x.href.startsWith('/'))
-  const countryPath = uk ? c.path : '/ru' + c.path
+  const countryPath = all ? (uk ? CATALOG_PATH : '/ru' + CATALOG_PATH) : uk ? c.path : '/ru' + c.path
+  const parent = all ? (uk ? 'Вакансії' : 'Вакансии') : uk ? `Робота ${c.inName}` : `Работа ${c.inNameRu}`
   return (
     <CatalogPage
       form={`landing-${l.path.split('/').pop()}`}
       lang={lang}
       title={l.h1 || l.title}
       text={l.intro || ''}
-      crumbs={[crumbHome(lang), { name: uk ? `Робота ${c.inName}` : `Работа ${c.inNameRu}`, path: countryPath }, { name: l.h1 || l.title, path }]}
+      crumbs={[crumbHome(lang), { name: parent, path: countryPath }, { name: l.h1 || l.title, path }]}
       cards={narrowed ? list.map((v) => toCard(localize(v, lang))) : cards}
-      preset={narrowed ? undefined : { country: c.code }}
+      preset={narrowed || all ? undefined : { country: c.code }}
       links={links.length ? [{ title: uk ? 'Дивіться також' : 'Смотрите также', items: links.map((x) => ({ href: x.href, label: x.label })) }] : undefined}
       faq={l.faq}
       seoText={<SeoText landing={l} />}

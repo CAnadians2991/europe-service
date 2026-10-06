@@ -21,6 +21,12 @@
 - `components/vacancy/CatalogPage.tsx` — `Breadcrumbs` (моно), `CatalogHero` (H1, моно-показники, велика літера коду країни в градієнті, `rule-grad`).
 - `components/layout/Header.tsx`, `Footer.tsx`, `trust/TrustBar.tsx`, `trust/OfficeTeam.tsx`, `trust/LicenseSection.tsx`, `trust/LicenseStamp.tsx`, `sections/Sections.tsx` (SectionHead, ReviewCard, Faq, CtaBand).
 
+## 3D і рух (головна)
+- `home/Suitcase3D.tsx` — логотип-валіза з CSS-граней (без WebGL), повільно «дихає», на десктопі нахиляється за курсором; під нею — поворотне коло (`es3d-orbit`). Тільки на головній, один об'єкт.
+- `home/VacancyTicker.tsx` — журнал реєстру: дата додавання · код країни · вакансія · ставка; пауза при наведенні, без руху при «reduce motion». Не табло вильотів.
+- Кроки — шкала статусу заявки (`stage-bar`, «Етап 01/04»), заповнюється при прокрутці. Не маршрут.
+- `trust/Guarantees.tsx` — «Гарантійний лист»: пункт + «Як перевірити» + посилання, підпис і печатка.
+
 ## Заборонено
 - Метафори Personal Work: «квиток», «посадковий талон», «пасажир», «напрямок» як у квитку, табло вильотів, перфорація (`ticket-perf`), «маршрут» як тема дизайну.
 - Емодзі-прапори як оформлення (замість них — двобуквений код країни моно-шрифтом на темній плашці).

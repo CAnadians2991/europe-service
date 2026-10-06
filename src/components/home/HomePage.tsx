@@ -351,17 +351,21 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       {/* ───────── 03 STEPS ───────── */}
       <section className="container-x pb-16 sm:pb-20" aria-labelledby="steps-h">
         <SectionHead id="steps-h" index={3} eyebrow={t.stepsLabel} title={t.stepsTitle} />
-        <ol className="route mt-12 grid gap-y-10 lg:grid-cols-4 lg:gap-x-8">
-          {STEPS[lang].map(([title, text], i) => (
-            <li key={title} className="relative min-h-[52px] pl-[76px] lg:pl-0 lg:pt-[84px]">
-              <span className="route-node" aria-hidden>
-                {i === STEPS[lang].length - 1 ? 'EU' : String(i + 1).padStart(2, '0')}
+        <ol className="mt-12 grid gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-6">
+          {STEPS[lang].map(([title, text], i, all) => (
+            <li key={title}>
+              <span className="block bg-line">
+                <span className="stage-bar" style={{ opacity: 0.4 + (0.6 * (i + 1)) / all.length }} />
               </span>
-              <h3 className="text-[19px]">
-                <span className="sr-only">{i + 1}. </span>
-                {title}
-              </h3>
-              <p className="mt-2 max-w-[300px] text-[15.5px] leading-relaxed text-ink-2">{text}</p>
+              <p className="mt-4 flex items-baseline justify-between font-mono text-[12px] uppercase tracking-[0.1em] text-muted">
+                <span>{uk ? 'Етап' : 'Этап'}</span>
+                <span className="num text-ink">
+                  {String(i + 1).padStart(2, '0')}
+                  <span className="text-muted">/{String(all.length).padStart(2, '0')}</span>
+                </span>
+              </p>
+              <h3 className="mt-3 text-[20px]">{title}</h3>
+              <p className="mt-2 max-w-[320px] text-[15.5px] leading-relaxed text-ink-2">{text}</p>
             </li>
           ))}
         </ol>

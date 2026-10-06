@@ -13,6 +13,7 @@ import { PageHero } from './PageHero'
 import { Blocks } from './Blocks'
 import { QuizLandingView } from '@/components/quiz/QuizLanding'
 import { LandingCatalog } from '@/components/vacancy/VacanciesRoute'
+import { InfoLanding } from './InfoLanding'
 
 type Lang = 'uk' | 'ru'
 
@@ -98,6 +99,7 @@ export async function ContentView({ path, lang }: { path: string; lang: Lang }) 
   if (r.kind === 'vacancy-ru') return <VacancyView v={r.v} as="ru" />
   const home = { name: lang === 'uk' ? 'Головна' : 'Главная', path: lang === 'uk' ? '/' : '/ru' }
   if (r.kind === 'article') return <ArticlePage a={r.a} posts={hubPosts(r.a)} />
+  if (r.kind === 'landing' && r.l.kind === 'info' && r.l.country === 'all') return <InfoLanding l={r.l} path={path} />
   if (r.kind === 'landing') return <LandingCatalog lang={r.l.lang} landing={r.l} path={path} active={await getActiveVacancies()} />
   if (r.kind === 'quiz') return <QuizLandingView q={r.q} lang={lang} />
   if (r.kind === 'legal') {

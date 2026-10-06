@@ -119,6 +119,10 @@ export function OfficeTeam({ about, heading, showTeam = true, lang = 'uk' }: { a
                 </li>
               ))}
             </ul>
+            <p className="mt-6 flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.06em] text-muted">
+              <span className="size-1.5 bg-leaf" aria-hidden />
+              {uk ? 'Фото команди — з письмової згоди кожного працівника' : 'Фото команды — с письменного согласия каждого сотрудника'}
+            </p>
           </div>
         )}
       </div>

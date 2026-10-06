@@ -16,8 +16,9 @@ export interface LandingPage {
   lang: 'uk' | 'ru'
   twin?: string
   kind: 'country' | 'city' | 'category' | 'profession' | 'season' | 'contract' | 'audience' | 'info' | 'ad'
-  country: CountryCode
-  filter?: { city?: string; category?: Category | string; keywords?: string[] }
+  /** 'all' — a page about every country (hubs, guides): lists the whole catalog */
+  country: CountryCode | 'all'
+  filter?: { city?: string; category?: Category | string; keywords?: string[]; housingFree?: boolean }
   title: string
   description: string
   h1: string
@@ -34,7 +35,7 @@ const BY_PATH = new Map(LANDINGS.map((l) => [l.path, l]))
 export const getLanding = (path: string) => BY_PATH.get(path)
 
 /** The Tilda country page of a country in a language (Poland = /vacancies) */
-export function countryLanding(code: CountryCode, lang: 'uk' | 'ru') {
+export function countryLanding(code: CountryCode, lang: 'uk' | 'ru'): LandingPage | undefined {
   const c = COUNTRY[code]
   if (!c) return undefined
   return getLanding(lang === 'uk' ? c.path : '/ru' + c.path)
@@ -57,7 +58,7 @@ function latinCity(v: Pick<Vacancy, 'city'>) {
 
 /** Vacancies a landing lists: its country, narrowed by city / job type / profession words when that leaves any */
 export function landingList(l: LandingPage, active: Vacancy[]): { list: Vacancy[]; narrowed: boolean } {
-  const country = active.filter((v) => v.country === l.country)
+  const country = l.country === 'all' ? active : active.filter((v) => v.country === l.country)
   const f = l.filter ?? {}
   let list = country
   if (f.city) {
@@ -65,6 +66,7 @@ export function landingList(l: LandingPage, active: Vacancy[]): { list: Vacancy[
     list = list.filter((v) => [v.hubCity ?? '', latinCity(v), v.city].some((x) => x && (fold(x) === want || fold(x).startsWith(want))))
   }
   if (f.category && f.category in CATEGORY) list = list.filter((v) => v.category === f.category)
+  if (f.housingFree) list = list.filter((v) => v.housingFree)
   if (f.keywords?.length) {
     const kws = f.keywords.map(fold).filter(Boolean)
     list = list.filter((v) => {

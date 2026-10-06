@@ -108,3 +108,11 @@ export function salaryCompact(s: Salary, lang: 'uk' | 'ru' = 'uk') {
   if (h) return `${num(h)}\u00a0${CURRENCY_SIGN[s.currency]}${PER_HOUR[lang]}`
   return s.text.split(/[;(]/)[0].slice(0, 18)
 }
+
+/** A review's date (dd.mm.yyyy) only while it is fresh — older ones show no date rather than a made-up one */
+export function freshDate(d: string | null | undefined, months = 12): string {
+  const m = d?.match(/^(\d{2})\.(\d{2})\.(\d{4})$/)
+  if (!m) return ''
+  const t = Date.UTC(+m[3], +m[2] - 1, +m[1])
+  return Date.now() - t <= months * 30.5 * 864e5 ? d! : ''
+}

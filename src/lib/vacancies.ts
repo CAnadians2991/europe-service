@@ -22,7 +22,7 @@ async function readAll(): Promise<Vacancy[]> {
   }
 }
 
-const cachedAll = unstable_cache(readAll, ['vacancies-open-v9'], { tags: [VACANCIES_TAG] })
+const cachedAll = unstable_cache(readAll, ['vacancies-open-v10'], { tags: [VACANCIES_TAG] })
 
 /** Open vacancies, cached until an admin edit revalidates the tag. Loads the admin's countries too. */
 export async function getAllVacancies(): Promise<Vacancy[]> {

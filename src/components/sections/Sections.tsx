@@ -1,3 +1,4 @@
+import { freshDate } from '@/lib/format'
 import { Photo, src } from '@/components/ui/Photo'
 import { IconCheck, IconStar } from '@/components/ui/icons'
 import { LeadForm } from '@/components/lead/LeadForm'
@@ -56,7 +57,7 @@ export function ReviewCard({ r, lang = 'uk' }: { r: ReviewItem; lang?: 'uk' | 'r
         </span>
         <span className="shrink-0 text-right">
           {r.rating !== undefined && <Stars n={r.rating} lang={lang} />}
-          {r.date && <span className="num mt-1 block text-[12px] text-muted">{r.date}</span>}
+          {freshDate(r.date) && <span className="num mt-1 block text-[12px] text-muted">{freshDate(r.date)}</span>}
         </span>
       </figcaption>
     </figure>

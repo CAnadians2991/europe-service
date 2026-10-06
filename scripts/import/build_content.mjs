@@ -172,6 +172,32 @@ if (exists('lang-fix.json')) {
   extra.pages = fix.pages
   extra.home = fix.home
 }
+// ---- SEO pass 2026 (out/seo.*.json): texts for thin pages appended (Tilda text stays first), new pages added ----
+if (exists('seo.patch.landings.json')) {
+  const P = read('seo.patch.landings.json')
+  let n = 0
+  for (const l of landings.landings) {
+    const p = P[l.path]
+    if (!p) continue
+    const { blocksAppend, faq, ...rest } = p
+    Object.assign(l, rest)
+    if (blocksAppend?.length) l.blocks = [...(l.blocks ?? []), ...blocksAppend]
+    if (faq?.length) {
+      const have = new Set((l.faq ?? []).map((f) => f.q))
+      l.faq = [...(l.faq ?? []), ...faq.filter((f) => !have.has(f.q))]
+    }
+    n++
+  }
+  console.log('seo patch', n, 'of', Object.keys(P).length)
+}
+if (exists('seo.new-landings.json')) {
+  const have = new Set(landings.landings.map((l) => l.path))
+  const add = read('seo.new-landings.json').filter((l) => !have.has(l.path))
+  // the free-housing hub lists only vacancies with free housing
+  for (const l of add) if (/\/(z-zhytlom|s-zhilem)$/.test(l.path)) l.filter = { ...l.filter, housingFree: true }
+  landings.landings.push(...add)
+  console.log('seo new pages', add.length)
+}
 // Tilda's near-copies: both stay online, one is canonical
 const CANONICAL = { '/vacancies/chekhiia/brno': '/vacancies/chekhiia/robota_v_brno' }
 for (const l of landings.landings) if (CANONICAL[l.path]) l.canonical = CANONICAL[l.path]
@@ -183,7 +209,18 @@ const patchFile = (f, data) => {
   if (f === 'home' && extra.home) for (const [lang, fields] of Object.entries(extra.home)) for (const [k, v] of Object.entries(fields)) setPath(data[lang], k, v)
   return data
 }
-for (const f of ['home', 'pages', 'services', 'reviews', 'legal', 'quizzes']) if (exists(`${f}.json`)) await build(f, patchFile(f, renamePaths(read(`${f}.json`))))
+// reviews from the agency's Telegram (out/telegram-reviews.json, real message dates) go first, newest on top
+const dmy = (d) => (d && /^\d{2}\.\d{2}\.\d{4}$/.test(d) ? d.split('.').reverse().join('') : '')
+const withTelegram = (list) => {
+  if (!exists('telegram-reviews.json')) return list
+  const tg = read('telegram-reviews.json').map(({ _src, _note, poster, employer, country, ...r }) => ({
+    ...r,
+    vacancy: employer && r.vacancy && !r.vacancy.includes(employer) ? `${r.vacancy} ${employer}` : r.vacancy || employer,
+  }))
+  return [...tg, ...list].sort((a, b) => dmy(b.date).localeCompare(dmy(a.date)))
+}
+for (const f of ['home', 'pages', 'services', 'reviews', 'legal', 'quizzes'])
+  if (exists(`${f}.json`)) await build(f, patchFile(f, renamePaths(f === 'reviews' ? withTelegram(read(`${f}.json`)) : read(`${f}.json`))))
 
 // ---- hreflang pairs: uk path -> ru path (landings + articles that carry `twin`) ----
 const twins = {}
@@ -193,7 +230,7 @@ for (const x of [...landings.landings, ...articles.articles]) {
   else if (!Object.values(twins).includes(x.path)) twins[x.twin] = x.path
 }
 // Russian pages of translated vacancies (/ru + Tilda address) — ukTwin needs the list without loading the seed
-const SEED = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../../src/data/vacancies.seed.json')
+const SEED = path.join(DATA, 'vacancies.seed.json')
 if (fs.existsSync(SEED)) twins.vacancyRu = JSON.parse(fs.readFileSync(SEED, 'utf8')).filter((v) => v.ru?.title && v.lang !== 'ru').map((v) => '/ru' + v.path)
 fs.writeFileSync(path.join(OUTDIR, 'twins.json'), JSON.stringify(twins, null, 1))
 console.log('twins', Object.keys(twins).length)

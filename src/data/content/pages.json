@@ -87,8 +87,8 @@
   "path": "/ru/about",
   "lang": "ru",
   "title": "О нас",
-  "seoTitle": "Про нас - офіційний сайт роботи в Польщі",
-  "seoDescription": "Офіційна робота у Польщі без посередників ✅Тільки безкоштовні вакансії від прямих роботодавців ✅Допомагаємо отримати робочу візу ➦ Звертайтеся!",
+  "seoTitle": "О нас - официальный сайт работы в Польше",
+  "seoDescription": "Официальная работа в Польше без посредников ✅Только бесплатные вакансии от прямых работодателей ✅Помогаем получить рабочую визу ➦ Обращайтесь!",
   "ogImage": "/media/c/f323336ad5",
   "blocks": [
    {
@@ -438,7 +438,7 @@
     "cityKey": "Київ",
     "heading": "Контакты главного офиса в г. Киеве",
     "main": true,
-    "address": "м. Київ, вул. Січових Стрільців, 77, офіс 612",
+    "address": "г. Киев, ул. Сечевых Стрельцов, 77, офис 612",
     "phones": [
      {
       "text": "0 800 357 278",
@@ -472,7 +472,7 @@
     "cityKey": "Рівне",
     "heading": "Контакты офиса в г. Ровно",
     "main": false,
-    "address": "м. Рівне, вул. Грушевського 32",
+    "address": "г. Ровно, ул. Грушевского, 32",
     "phones": [
      {
       "text": "+38 (067) 807 21 17",
@@ -487,7 +487,7 @@
     "cityKey": "Житомир",
     "heading": "Контакты офиса в г. Житомир",
     "main": false,
-    "address": "м. Житомир, Майдан Згоди, 6",
+    "address": "г. Житомир, Майдан Согласия, 6",
     "phones": [
      {
       "text": "+38 (073) 333 43 97",
@@ -568,73 +568,73 @@
   ],
   "channels": [
    {
-    "label": "Telegram канал Українці в Англії",
+    "label": "Telegram канал Украинцы в Англии",
     "kind": "telegram",
-    "community": "Українці в Англії",
+    "community": "Украинцы в Англии",
     "href": "https://t.me/ua_in_england"
    },
    {
-    "label": "Viber канал Українці в Англії",
+    "label": "Viber канал Украинцы в Англии",
     "kind": "viber",
-    "community": "Українці в Англії",
+    "community": "Украинцы в Англии",
     "href": "https://invite.viber.com/?g2=AQBM3G9yjrwpxE9hX0CmvuCCLfi9tnsq4i9NAUbmYs6YAhhsxKngzcI0tdAemWTO"
    },
    {
-    "label": "Telegram канал Українці в Німеччині",
+    "label": "Telegram канал Украинцы в Германии",
     "kind": "telegram",
-    "community": "Українці в Німеччині",
+    "community": "Украинцы в Германии",
     "href": "https://t.me/europeservice_germany"
    },
    {
-    "label": "Telegram канал Українці в Чехії",
+    "label": "Telegram канал Украинцы в Чехии",
     "kind": "telegram",
-    "community": "Українці в Чехії",
+    "community": "Украинцы в Чехии",
     "href": "https://t.me/europeservice_czechia"
    },
    {
-    "label": "Viber канал Українці в Чехії",
+    "label": "Viber канал Украинцы в Чехии",
     "kind": "viber",
-    "community": "Українці в Чехії",
+    "community": "Украинцы в Чехии",
     "href": "https://invite.viber.com/?g2=AQArdN5cXl3hWE7xS4bdoYwTNnABTMvM7hx0AibLOnJkejNaBHgYNnpTTyRm53CB"
    },
    {
-    "label": "Telegram канал Українці в Румунії",
+    "label": "Telegram канал Украинцы в Румынии",
     "kind": "telegram",
-    "community": "Українці в Румунії",
+    "community": "Украинцы в Румынии",
     "href": "https://t.me/europeservice_romania"
    },
    {
-    "label": "Viber канал Українці в Румунії",
+    "label": "Viber канал Украинцы в Румынии",
     "kind": "viber",
-    "community": "Українці в Румунії",
+    "community": "Украинцы в Румынии",
     "href": "https://invite.viber.com/?g2=AQArnBeE03Km9E8uOuJvOxgoepHPLe0IgKWw6yehs3gv9zAdbhrV1%2Fd1Z2v9WAHs"
    },
    {
-    "label": "Telegram канал Українці в Нідерландах",
+    "label": "Telegram канал Украинцы в Нидерландах",
     "kind": "telegram",
-    "community": "Українці в Нідерландах",
+    "community": "Украинцы в Нидерландах",
     "href": "https://t.me/europeservice_netherlands"
    },
    {
-    "label": "Viber канал Українці в Нідерландах",
+    "label": "Viber канал Украинцы в Нидерландах",
     "kind": "viber",
-    "community": "Українці в Нідерландах",
+    "community": "Украинцы в Нидерландах",
     "href": "https://invite.viber.com/?g2=AQANghjb0Jex5E7%2F6QgKkWFlfLP5iip3mI0sAIwFA4G3kJs0Nqxiy1JrnIFpJQCH"
    },
    {
-    "label": "Telegram канал Українці в Греції",
+    "label": "Telegram канал Украинцы в Греции",
     "kind": "telegram",
-    "community": "Українці в Греції",
+    "community": "Украинцы в Греции",
     "href": "https://t.me/europeservice_greece"
    },
    {
-    "label": "Viber канал Українці в Греції",
+    "label": "Viber канал Украинцы в Греции",
     "kind": "viber",
-    "community": "Українці в Греції",
+    "community": "Украинцы в Греции",
     "href": "https://invite.viber.com/?g2=AQBhR%2FmCctsm708uOmpQZ9153hgqHNLAsVp810B7AlQ%2B2jCE%2BY7PRavYmzlsObSH"
    }
   ],
-  "license": "Лицензия Министерства социальной политики Украины №223 от 15.02.2019, ООО «ЄВРОПА СЕРВІС УКРАЇНА»",
+  "license": "Лицензия Министерства социальной политики Украины №223 от 15.02.2019, ООО «ЕВРОПА СЕРВИС УКРАИНА»",
   "blocks": [
    {
     "type": "h2",
@@ -646,7 +646,7 @@
    },
    {
     "type": "p",
-    "text": "[м. Київ, вул. Січових Стрільців, 77, офіс 612](https://www.google.com/maps/dir//50.456727,30.4884947/@50.456727,30.488495,16z?hl=ru)\n[0 800 357 278](tel:0800357278)\n[+38 (073) 333 13 78](tel:+380733331378)"
+    "text": "[г. Киев, ул. Сечевых Стрельцов, 77, офис 612](https://www.google.com/maps/dir//50.456727,30.4884947/@50.456727,30.488495,16z?hl=ru)\n[0 800 357 278](tel:0800357278)\n[+38 (073) 333 13 78](tel:+380733331378)"
    },
    {
     "type": "h3",
@@ -662,7 +662,7 @@
    },
    {
     "type": "p",
-    "text": "м. Рівне, вул. Грушевського 32\n[+38 (067) 807 21 17](tel:+380678072117)"
+    "text": "г. Ровно, ул. Грушевского, 32\n[+38 (067) 807 21 17](tel:+380678072117)"
    },
    {
     "type": "h3",
@@ -670,7 +670,7 @@
    },
    {
     "type": "p",
-    "text": "м. Житомир, Майдан Згоди, 6\n[+38 (073) 333 43 97](tel:+380733334397)"
+    "text": "г. Житомир, Майдан Согласия, 6\n[+38 (073) 333 43 97](tel:+380733334397)"
    },
    {
     "type": "h3",

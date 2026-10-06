@@ -1,3 +1,4 @@
+import { freshDate } from '@/lib/format'
 import { REVIEWS } from '@/lib/content'
 import { PageHero } from './PageHero'
 import { ReviewCard, CtaBand, SectionHead } from '@/components/sections/Sections'
@@ -28,7 +29,7 @@ function VideoReviewCard({ r, lang }: { r: ReviewItem; lang: 'uk' | 'ru' }) {
       <figcaption className="flex-1 border-t border-line p-3 sm:p-4">
         <span className="block text-[15.5px] font-semibold leading-snug text-ink">{r.name}</span>
         {(vacancy || city) && <span className="mt-0.5 block text-[14px] leading-snug text-muted">{[vacancy, city].filter(Boolean).join(' · ')}</span>}
-        {r.date && <span className="num mt-1 block text-[12.5px] text-muted">{r.date}</span>}
+        {freshDate(r.date) && <span className="num mt-1 block text-[12.5px] text-muted">{freshDate(r.date)}</span>}
       </figcaption>
     </figure>
   )

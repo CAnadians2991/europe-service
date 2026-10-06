@@ -5,7 +5,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'node:crypto'
 import sharp from 'sharp'
-import { sanitizeVacancy } from './sanitize.mjs'
+import { fixVacancy, sanitizeVacancy } from './sanitize.mjs'
 
 const HERE = import.meta.dirname
 const EXPORT = path.resolve(HERE, '../../../tilda-export/project1613842')
@@ -160,7 +160,25 @@ if (fs.existsSync(RU_FILE)) {
   for (const v of vacancies) if (ru[v.id]?.title && v.lang !== 'ru') (v.ru = sanitizeVacancy(ru[v.id])), k++
   console.log('ru texts', k)
 }
-for (const list of [vacancies, closed]) for (let i = 0; i < list.length; i++) list[i] = { ...sanitizeVacancy(list[i]), ...(list[i].ru ? { ru: list[i].ru } : {}) }
+// photos from the agency's Telegram: housing → the housing block only, workplace → the gallery (after Tilda's)
+const TG = (f) => (fs.existsSync(path.join(HERE, 'out', f)) ? JSON.parse(fs.readFileSync(path.join(HERE, 'out', f), 'utf8')) : {})
+const tgHousing = TG('telegram-housing.json')
+const tgWork = TG('telegram-work.json')
+const noteRu = (s) =>
+  s.replace('Варіант житла на одному з заїздів під цю вакансію', 'Вариант жилья на одном из заездов по этой вакансии').replace('фото надіслали наші клієнти', 'фото прислали наши клиенты').replace('Фото з місця роботи від наших клієнтів', 'Фото с места работы от наших клиентов')
+for (const v of vacancies) {
+  const h = tgHousing[v.id]
+  if (h?.photos?.length) {
+    v.housingPhotos = [...new Set([...v.housingPhotos, ...h.photos])]
+    if (!v.housingNote && h.note) {
+      v.housingNote = h.note
+      if (v.ru) v.ru.housingNote = noteRu(h.note)
+    }
+  }
+  const w = tgWork[v.id]
+  if (w?.photos?.length) v.photos = [...new Set([...v.photos, ...w.photos])]
+}
+for (const list of [vacancies, closed]) for (let i = 0; i < list.length; i++) list[i] = fixVacancy({ ...sanitizeVacancy(list[i]), ...(list[i].ru ? { ru: list[i].ru } : {}) })
 fs.mkdirSync(path.dirname(OUT), { recursive: true })
 fs.writeFileSync(OUT, JSON.stringify(vacancies, null, 1))
 fs.mkdirSync(path.dirname(OUT_CLOSED), { recursive: true })
