@@ -1614,5 +1614,13 @@
  {
   "source": "/page146621683.html",
   "destination": "/kviz-instagram"
+ },
+ {
+  "source": "/vacancies/h-m",
+  "destination": "/vacancies/hm"
+ },
+ {
+  "source": "/ru/vacancies/rhenusgroup",
+  "destination": "/ru/vacancies/aktualni_vakansii"
  }
 ]

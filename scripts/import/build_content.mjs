@@ -293,6 +293,9 @@ const add = (source, destination) => {
 }
 for (const r of landings.redirects || []) add(r.source, r.destination)
 if (exists('redirects_pages.json')) for (const r of read('redirects_pages.json')) add(r.source, r.destination)
+// links inside old articles to Tilda store pages that no longer exist (QA crawl 2026-10-06)
+add('/vacancies/h-m', '/vacancies/hm')
+add('/ru/vacancies/rhenusgroup', '/ru/vacancies/aktualni_vakansii')
 // (article redirects are now handled per post uid in tpost-redirects.json)
 // a destination that itself redirects → follow it (no chains)
 const list = [...redirects.values()].map((r) => {
@@ -308,3 +311,4 @@ const tpost = { ...(exists('tpost-redirects.vacancies.json') ? read('tpost-redir
 fs.writeFileSync(path.join(DATA, 'tpost-redirects.json'), JSON.stringify(tpost))
 console.log('tpost redirects', Object.keys(tpost).length, 'images', jobs)
 await import('./apply_ru_pages.mjs')
+await import('./fix_texts.mjs')

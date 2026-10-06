@@ -34,7 +34,10 @@ export function pageMeta(o: {
 }): Metadata {
   const image = o.image ? imgAbs(o.image) : abs('/og-default.jpg')
   const langs = o.alternates ?? (o.hreflang === false || o.canonical ? undefined : languages(o.lang === 'ru' ? (ukTwin(o.path) ?? '') : o.path))
-  const description = clip(o.description, 158)
+  // Tilda left some one-line descriptions («Новини в Чехії») — Google shows a snippet of its own then; add who we are
+  const own = (o.description || '').trim()
+  const tail = o.lang === 'ru' ? 'Europe Service — официальное трудоустройство за границей, консультация бесплатно.' : 'Europe Service — офіційне працевлаштування за кордоном, консультація безкоштовна.'
+  const description = clip(own.length < 70 ? `${own.replace(/[.\s]+$/, '')}${own ? '. ' : ''}${tail}` : own, 158)
   return {
     // brand suffix only when it fits (~60 chars) and isn't already in the title
     title: o.absoluteTitle || o.title.includes('Europe Service') || o.title.length > 44 ? { absolute: o.title } : o.title,

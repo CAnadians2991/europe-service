@@ -4,8 +4,7 @@ import { plural } from '@/lib/format'
 import type { Category, Vacancy } from '@/lib/types'
 import { Photo } from '@/components/ui/Photo'
 import { Reveal } from '@/components/ui/Reveal'
-import { LeadForm } from '@/components/lead/LeadForm'
-import { ChatButtons } from '@/components/lead/ChatButtons'
+import { LeadButton } from '@/components/lead/LeadModal'
 import { SectionHead } from '@/components/sections/Sections'
 import { Suitcase3D } from './Suitcase3D'
 
@@ -75,19 +74,19 @@ const STEP_ICONS = [
 ]
 
 /**
- * First screen: what we do («підберемо будь-яку роботу») and what the visitor does (only the request) — the form is
- * right here, with the messenger and the time that suit them. Real workplace photos float behind the form.
+ * First screen: what we do («підберемо будь-яку роботу») and what the visitor does — one button: leave a request,
+ * choose how and when the manager gets in touch. Real workplace photos on the right.
  */
 export function HomeHero({ lang, total, photos }: { lang: Lang; total: number; photos: string[] }) {
   const t = HERO[lang]
+  const uk = lang === 'uk'
   return (
     <section className="relative isolate overflow-hidden bg-[linear-gradient(180deg,#f2f8f3_0%,#f7f9f4_60%,var(--color-cream)_100%)]" aria-labelledby="hero-h">
       <span aria-hidden className="hero-glow -left-24 top-10 size-[420px] bg-[#9fe0bb]" />
       <span aria-hidden className="hero-glow right-[-120px] top-40 size-[480px] bg-[#a9cdf0] [animation-delay:-6s]" />
 
-      <div className="container-x relative grid gap-8 pb-14 pt-8 sm:pt-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:grid-rows-[auto_1fr] lg:gap-x-12 lg:gap-y-0 lg:pb-20 lg:pt-16">
-        {/* the promise */}
-        <div className="animate-rise lg:col-start-1 lg:row-start-1">
+      <div className="container-x relative grid items-center gap-10 pb-14 pt-8 sm:pt-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-14 lg:pb-20 lg:pt-16">
+        <div className="animate-rise">
           <p className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/80 px-3.5 py-1.5 text-[13.5px] font-semibold text-brand-800 shadow-sm backdrop-blur">
             <span className="relative flex size-2">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-leaf opacity-60" />
@@ -101,13 +100,27 @@ export function HomeHero({ lang, total, photos }: { lang: Lang; total: number; p
             {t.h1c}
           </h1>
           <p className="mt-5 max-w-[600px] text-[17px] leading-relaxed text-ink-2 sm:text-[19px]">{t.sub}</p>
-        </div>
 
-        {/* how it goes + real workplaces — under the form on phones */}
-        <div className="animate-rise [animation-delay:200ms] lg:col-start-1 lg:row-start-2">
-          <ol className="grid gap-3 sm:grid-cols-3 lg:mt-7">
+          <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <LeadButton
+              form={uk ? 'home-hero' : 'home-hero-ru'}
+              title={t.formTitle}
+              subtitle={t.formSub}
+              submitLabel={t.send}
+              contactPrefs
+              className="btn-accent !min-h-14 !px-8 !text-[17px] shadow-[0_14px_30px_-14px_rgb(30_134_74/0.8)]"
+            >
+              {uk ? 'Залишити заявку' : 'Оставить заявку'} <span aria-hidden>→</span>
+            </LeadButton>
+            <a href={`tel:${SITE.phone}`} className="num inline-flex min-h-11 items-center gap-2 text-[17px] font-semibold text-ink hover:text-brand-700">
+              {SITE.phoneDisplay}
+              <span className="font-sans text-[13.5px] font-normal text-muted">{uk ? 'безкоштовно' : 'бесплатно'}</span>
+            </a>
+          </div>
+
+          <ol className="mt-8 grid gap-3 sm:grid-cols-3">
             {t.steps.map(([a, b], i) => (
-              <li key={a} className="flex items-start gap-3 rounded-2xl border border-white/70 bg-white/70 p-3.5 shadow-[0_10px_30px_-18px_rgb(15_36_27/0.35)] backdrop-blur" style={{ animationDelay: `${150 + i * 120}ms` }}>
+              <li key={a} className="flex items-start gap-3 rounded-2xl border border-white/70 bg-white/70 p-3.5 shadow-[0_10px_30px_-18px_rgb(15_36_27/0.35)] backdrop-blur">
                 <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-600 text-white">{STEP_ICONS[i]}</span>
                 <span>
                   <span className="block text-[15px] font-semibold leading-snug">{a}</span>
@@ -116,39 +129,27 @@ export function HomeHero({ lang, total, photos }: { lang: Lang; total: number; p
               </li>
             ))}
           </ol>
-
-          {/* real workplaces of our clients */}
-          <div className="mt-8 hidden items-end gap-3 sm:flex">
-            {photos.slice(0, 3).map((p, i) => (
-              <div key={p} className={`zoom-img overflow-hidden rounded-2xl shadow-[0_18px_40px_-20px_rgb(15_36_27/0.45)] ${i === 1 ? 'float-slow-2 h-40 w-36' : 'float-slow h-32 w-32'}`} style={{ ['--rot' as string]: `${(i - 1) * 2}deg` }}>
-                <Photo base={p} alt="" sizes="180px" className="size-full scale-[1.18] object-cover object-[85%_90%]" />
-              </div>
-            ))}
-            <p className="ml-2 max-w-[180px] pb-2 text-[14px] font-medium leading-snug text-ink-2">
-              <b className="num block font-display text-[26px] text-ink">{total}</b>
-              {t.open(total).replace(/^\d+\s/, '')}
-            </p>
-          </div>
         </div>
 
-        {/* the request: phone + how and when to reach you */}
-        <div className="relative animate-rise [animation-delay:120ms] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-start">
-          <div className="pointer-events-none absolute -right-5 -top-[86px] z-10 hidden origin-top-right scale-[0.4] lg:block" aria-hidden>
-            <Suitcase3D />
-          </div>
-          <div id="hero-form" className="relative scroll-mt-24 rounded-[24px] border border-white bg-white/95 p-5 shadow-[0_30px_80px_-30px_rgb(15_36_27/0.45)] backdrop-blur sm:p-7">
-            <h2 className="text-[24px] leading-tight sm:text-[28px]">{t.formTitle}</h2>
-            <p className="mt-1.5 text-[15px] text-ink-2">{t.formSub}</p>
-            <div className="mt-5">
-              <LeadForm form={lang === 'uk' ? 'home-hero' : 'home-hero-ru'} lang={lang} askMessenger askTime submitLabel={t.send} />
+        {/* real workplaces of our clients */}
+        <div className="relative animate-rise [animation-delay:150ms]" aria-hidden>
+          <div className="relative mx-auto grid max-w-[520px] grid-cols-[1.1fr_0.9fr] gap-3 sm:gap-4">
+            {photos[0] && (
+              <div className="zoom-img float-slow row-span-2 overflow-hidden rounded-[22px] shadow-[0_24px_50px_-24px_rgb(15_36_27/0.55)]" style={{ ['--rot' as string]: '-1.5deg' }}>
+                <Photo base={photos[0]} alt="" sizes="(max-width: 1024px) 55vw, 300px" priority className="aspect-[3/4] size-full origin-[80%_100%] scale-[1.2] object-cover object-[80%_90%]" />
+              </div>
+            )}
+            {photos.slice(1, 3).map((p, i) => (
+              <div key={p} className={`zoom-img ${i ? 'float-slow' : 'float-slow-2'} overflow-hidden rounded-[22px] shadow-[0_24px_50px_-24px_rgb(15_36_27/0.55)]`} style={{ ['--rot' as string]: `${i ? 1.5 : 2}deg` }}>
+                <Photo base={p} alt="" sizes="(max-width: 1024px) 45vw, 240px" className="aspect-[4/3] size-full origin-[80%_100%] scale-[1.2] object-cover object-[80%_90%]" />
+              </div>
+            ))}
+            <div className="absolute -bottom-5 left-4 rounded-2xl border border-white bg-white/95 px-4 py-3 shadow-xl backdrop-blur sm:left-6">
+              <p className="font-display text-[26px] font-bold leading-none text-ink">{total}</p>
+              <p className="mt-1 text-[13px] font-medium text-ink-2">{t.open(total).replace(/^\d+\s/, '')}</p>
             </div>
-            <div className="mt-5 border-t border-line pt-4">
-              <p className="text-[14px] text-muted">{t.or}</p>
-              <ChatButtons place="home-hero" lang={lang} inline className="mt-2" />
-              <a href={`tel:${SITE.phone}`} className="num mt-3 inline-flex min-h-11 items-center gap-2 text-[17px] font-semibold text-ink hover:text-brand-700">
-                {SITE.phoneDisplay}
-                <span className="font-sans text-[13.5px] font-normal text-muted">{lang === 'uk' ? 'безкоштовно' : 'бесплатно'}</span>
-              </a>
+            <div className="pointer-events-none absolute -right-6 -top-14 hidden origin-top-right scale-[0.36] lg:block">
+              <Suitcase3D />
             </div>
           </div>
         </div>

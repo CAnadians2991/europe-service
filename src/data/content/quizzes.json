@@ -129,7 +129,7 @@
   "questions": [],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -186,7 +186,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -250,7 +250,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -312,7 +312,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -377,7 +377,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -471,7 +471,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -531,7 +531,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -606,7 +606,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -670,7 +670,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -802,7 +802,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -864,7 +864,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -926,7 +926,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -988,7 +988,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1050,7 +1050,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1106,7 +1106,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1169,7 +1169,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1232,7 +1232,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1279,7 +1279,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1359,7 +1359,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1420,7 +1420,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1481,7 +1481,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name_work",
     "required": true
@@ -1537,7 +1537,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1599,7 +1599,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1663,7 +1663,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1725,7 +1725,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1842,7 +1842,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1904,7 +1904,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -1967,7 +1967,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -2042,7 +2042,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -2115,7 +2115,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -2176,7 +2176,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true
@@ -2250,7 +2250,7 @@
   ],
   "contactFields": [
    {
-    "label": "Ваше ім*я",
+    "label": "Ваше ім’я",
     "type": "name",
     "name": "name",
     "required": true

@@ -168,7 +168,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
   const countries = COUNTRIES.map((c) => ({ ...c, count: all.filter((v) => v.country === c.code).length })).filter((c) => c.count)
   // real photos: workplaces (hot vacancy covers), housing sent by clients, video reviews of clients
   const heroPhotos = categoryPhotos(all)
-  const heroList = [heroPhotos.warehouse, heroPhotos.horeca, heroPhotos.auto].filter(Boolean) as string[]
+  const heroList = [heroPhotos.warehouse, heroPhotos.horeca, heroPhotos.construction].filter(Boolean) as string[]
   const housing = [...new Set(all.flatMap((v) => v.housingPhotos.slice(0, 2)))].slice(0, 16)
   const videos = REVIEWS.filter((r) => r.video && r.video.endsWith('.mp4') && (r.lang === lang || lang === 'ru'))
     .map((r) => ({ poster: r.video!.replace(/\.mp4$/, '.webp'), name: r.name, vacancy: (lang === 'ru' ? r.vacancyRu : undefined) ?? r.vacancy, city: r.city }))

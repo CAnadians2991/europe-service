@@ -6,8 +6,8 @@ import { useHeaderAction, useLeadModal, useQuizModal } from '@/components/lead/L
 import { isQuizPage } from '@/lib/site'
 
 /**
- * Phones (<640px): once the visitor scrolls, the logo shrinks to the ES icon and a compact call to action appears
- * next to it — «Підібрати вакансію» (quiz) or, on a vacancy page, «Забронювати місце». The brand never disappears and
+ * Phones (<640px), on vacancy lists and vacancy pages only: once the visitor scrolls, the logo shrinks to the ES icon
+ * and a compact call to action appears next to it — «Підібрати роботу» (quiz) or, on a vacancy page, «Забронювати місце». The brand never disappears and
  * the phone / menu buttons are never covered. Full logo again at the top, on quiz pages and while a lead form is on screen.
  */
 export function MobileHeaderSlot({ lang, home, children }: { lang: 'uk' | 'ru'; home: string; children: React.ReactNode }) {
@@ -64,7 +64,9 @@ export function MobileHeaderSlot({ lang, home, children }: { lang: 'uk' | 'ru'; 
   }, [path])
 
   const formInView = formSeen?.path === path && formSeen.on
-  const show = scrolled && !formInView && !isQuizPage(path)
+  // only where the visitor is choosing a job: vacancy lists and a vacancy's own page (owner, 2026-10)
+  const vacancyPage = Boolean(action) || /^(?:\/ru)?\/(?:vacancies|vakansii)(?:\/|$)/.test(path)
+  const show = scrolled && vacancyPage && !formInView && !isQuizPage(path)
   const label = action ? (uk ? 'Забронювати місце' : 'Забронировать место') : uk ? 'Підібрати роботу' : 'Подобрать работу'
 
   return (

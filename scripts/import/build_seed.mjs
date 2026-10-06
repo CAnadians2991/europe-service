@@ -5,7 +5,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'node:crypto'
 import sharp from 'sharp'
-import { fixVacancy, sanitizeVacancy } from './sanitize.mjs'
+import { distinctTitles, fixVacancy, sanitizeVacancy } from './sanitize.mjs'
 
 const HERE = import.meta.dirname
 const EXPORT = path.resolve(HERE, '../../../tilda-export/project1613842')
@@ -179,6 +179,16 @@ for (const v of vacancies) {
   if (w?.photos?.length) v.photos = [...new Set([...v.photos, ...w.photos])]
 }
 for (const list of [vacancies, closed]) for (let i = 0; i < list.length; i++) list[i] = fixVacancy({ ...sanitizeVacancy(list[i]), ...(list[i].ru ? { ru: list[i].ru } : {}) })
+// descriptions written from each vacancy's own facts where Tilda had none (out/intros.json, 2026-10-06)
+const INTROS = fs.existsSync(path.join(HERE, 'out/intros.json')) ? JSON.parse(fs.readFileSync(path.join(HERE, 'out/intros.json'), 'utf8')) : {}
+for (const v of [...vacancies, ...closed]) {
+  const x = INTROS[v.id]
+  if (!x) continue
+  if (!v.intro?.trim() || v.intro.trim().split(/\s+/).length < 8) v.intro = x.intro
+  if (x.introRu && v.ru && !(v.ru.intro || '').trim()) v.ru.intro = x.introRu
+  if (x.sections?.length && !v.sections.length) v.sections = x.sections
+}
+console.log('distinct titles for duplicates', distinctTitles([vacancies, closed]))
 fs.mkdirSync(path.dirname(OUT), { recursive: true })
 fs.writeFileSync(OUT, JSON.stringify(vacancies, null, 1))
 fs.mkdirSync(path.dirname(OUT_CLOSED), { recursive: true })

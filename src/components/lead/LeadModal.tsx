@@ -14,6 +14,8 @@ interface OpenOpts {
   vacancyId?: string
   vacancyTitle?: string
   submitLabel?: string
+  /** ask how (call / Viber / Telegram / WhatsApp) and when the manager should get in touch */
+  contactPrefs?: boolean
 }
 
 interface Ctx {
@@ -134,7 +136,7 @@ export function LeadModalProvider({
           {opts?.vacancyTitle && <p className="mt-4 border-l-[3px] border-brand-600 bg-surface px-3.5 py-2.5 text-[15px] font-semibold leading-snug text-ink">{opts.vacancyTitle}</p>}
           <p className="mt-3 text-[16px] leading-relaxed text-ink-2">{opts?.subtitle || def.subtitle}</p>
           <div className="mt-5">
-            {opts && <LeadForm key={key} form={opts.form} vacancyId={opts.vacancyId} vacancyTitle={opts.vacancyTitle} submitLabel={opts.submitLabel} lang={lang} compact />}
+            {opts && <LeadForm key={key} form={opts.form} vacancyId={opts.vacancyId} vacancyTitle={opts.vacancyTitle} submitLabel={opts.submitLabel} lang={lang} compact askMessenger={opts.contactPrefs} askTime={opts.contactPrefs} />}
           </div>
         </div>
       </dialog>

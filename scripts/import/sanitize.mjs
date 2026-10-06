@@ -57,3 +57,42 @@ export function fixVacancy(v) {
   for (const [a, b] of f) s = s.split(a).join(b)
   return JSON.parse(s)
 }
+
+/**
+ * Two posts with the same title (Tilda kept old copies) → different <title>s for Google: the place, and if that is
+ * the same too, the month of the post. Only fills an empty seoTitle; the visible H1 stays the Tilda title.
+ */
+export function distinctTitles(lists) {
+  const all = lists.flat()
+  const groups = new Map()
+  for (const v of all) {
+    for (const [key, get, set] of [
+      [v.title, () => v.seoTitle, (t) => (v.seoTitle = t)],
+      ...(v.ru?.title ? [[v.ru.seoTitle || v.ru.title, () => '', (t) => (v.ru.seoTitle = t)]] : []),
+    ]) {
+      const k = String(key).trim().toLowerCase()
+      if (!groups.has(k)) groups.set(k, [])
+      groups.get(k).push({ v, get, set, base: key })
+    }
+  }
+  let n = 0
+  for (const g of groups.values()) {
+    if (g.length < 2) continue
+    // «Найближчі великі міста — Рига, Єлгава» → «Рига»; «Різні локації по Польщі» → that line itself
+    const place = (v) => {
+      const c = String(v.city || '').replace(/^(?:найближч\S* великі міста|ближайшие крупные города)\s*[—–-]\s*/i, '')
+      return c.split(/[,(—–]/)[0].trim().slice(0, 28)
+    }
+    const month = (v) => (v.createdAt || '').slice(0, 7).split('-').reverse().join('.')
+    const counts = new Map()
+    for (const x of g) counts.set(place(x.v), (counts.get(place(x.v)) ?? 0) + 1)
+    for (const x of g) {
+      if (x.get()) continue
+      const p = place(x.v)
+      const t = `${x.base}${p ? ` — ${p}` : ''}${!p || counts.get(p) > 1 ? ` (${month(x.v)})` : ''}`
+      x.set(t.length > 70 ? `${x.base} (${month(x.v)})` : t)
+      n++
+    }
+  }
+  return n
+}
