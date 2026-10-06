@@ -14,7 +14,7 @@ export default async function AdminRoot({ children }: { children: React.ReactNod
   const extraCountries = await ensureCountries()
   return (
     <html lang="uk" className={fontVars}>
-      <body className="min-h-dvh bg-surface">
+      <body className="min-h-dvh bg-cream">
         <CountriesInit list={extraCountries} />
         {children}
       </body>

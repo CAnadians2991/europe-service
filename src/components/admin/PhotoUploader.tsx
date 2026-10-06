@@ -84,27 +84,27 @@ export function Photos({ label, hint, value, onChange, folder, single }: { label
   return (
     <div>
       <span className="label">{label}</span>
-      {hint && <p className="-mt-1 mb-2 text-xs text-muted">{hint}</p>}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      {hint && <p className="-mt-1 mb-2 text-[13px] text-muted">{hint}</p>}
+      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
         {value.map((p, i) => (
-          <div key={p} className="group relative overflow-hidden rounded-2xl bg-surface ring-1 ring-line">
+          <div key={p} className="relative border border-line bg-surface">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={src(p, 480)} alt="" className={`aspect-[4/3] w-full ${single ? 'object-contain p-2' : 'object-cover'}`} />
-            {!single && i === 0 && <span className="absolute left-2 top-2 rounded-full bg-brand-600 px-2 py-0.5 text-[11px] font-bold text-white">Головне</span>}
+            <img src={src(p, 480)} alt="" loading="lazy" className={`aspect-[4/3] w-full ${single ? 'bg-white object-contain p-2' : 'object-cover'}`} />
+            {!single && i === 0 && <span className="absolute left-0 top-0 bg-brand-600 px-1.5 py-0.5 font-mono text-[10.5px] font-medium uppercase tracking-[0.06em] text-white">Головне</span>}
             {/* on the photo, not in the footer: on a phone the footer has room only for ← → ✕ */}
             {!single && i > 0 && (
-              <button type="button" onClick={() => onChange([p, ...value.filter((x) => x !== p)])} className="absolute left-2 top-2 rounded-full bg-white/90 px-2.5 py-1.5 text-xs font-bold text-brand-700 shadow hover:bg-white">
+              <button type="button" onClick={() => onChange([p, ...value.filter((x) => x !== p)])} className="absolute left-0 top-0 bg-white/95 px-2 py-1.5 text-[12px] font-semibold text-brand-700 hover:bg-white">
                 Зробити головним
               </button>
             )}
-            <div className="flex items-center justify-between gap-1 bg-white p-1.5">
+            <div className="flex items-center justify-between gap-1 border-t border-line bg-white p-1">
               {!single && (
                 <div className="flex gap-1">
-                  <button type="button" onClick={() => move(i, -1)} disabled={i === 0} className="grid size-8 place-items-center rounded-lg text-sm hover:bg-surface disabled:opacity-30" aria-label="Лівіше">←</button>
-                  <button type="button" onClick={() => move(i, 1)} disabled={i === value.length - 1} className="grid size-8 place-items-center rounded-lg text-sm hover:bg-surface disabled:opacity-30" aria-label="Правіше">→</button>
+                  <button type="button" onClick={() => move(i, -1)} disabled={i === 0} className="grid size-9 place-items-center text-sm hover:bg-surface disabled:opacity-30" aria-label="Лівіше">←</button>
+                  <button type="button" onClick={() => move(i, 1)} disabled={i === value.length - 1} className="grid size-9 place-items-center text-sm hover:bg-surface disabled:opacity-30" aria-label="Правіше">→</button>
                 </div>
               )}
-              <button type="button" onClick={() => onChange(value.filter((x) => x !== p))} className="ml-auto grid size-8 shrink-0 place-items-center rounded-lg text-danger hover:bg-danger/10" aria-label="Видалити фото">✕</button>
+              <button type="button" onClick={() => onChange(value.filter((x) => x !== p))} className="ml-auto grid size-9 shrink-0 place-items-center text-danger hover:bg-danger/5" aria-label="Видалити фото">✕</button>
             </div>
           </div>
         ))}
@@ -113,15 +113,14 @@ export function Photos({ label, hint, value, onChange, folder, single }: { label
             type="button"
             onClick={() => input.current?.click()}
             disabled={busy > 0}
-            className="grid aspect-[4/3] place-items-center rounded-2xl border-2 border-dashed border-brand-200 bg-brand-50/50 p-3 text-center text-sm font-semibold text-brand-700 hover:border-brand-500 disabled:cursor-wait"
+            className="grid aspect-[4/3] place-items-center border-[1.5px] border-dashed border-line-strong bg-white p-3 text-center text-[14px] font-semibold text-brand-700 hover:border-brand-600 hover:bg-brand-50 disabled:cursor-wait"
           >
             {busy ? `Завантаження… (${busy})` : single ? '+ Завантажити' : '+ Додати фото'}
           </button>
         )}
       </div>
       <input ref={input} type="file" accept="image/*" multiple={!single} className="hidden" onChange={(e) => upload(e.target.files)} />
-      {err && <p className="mt-2 text-sm font-semibold text-danger">{err}</p>}
+      {err && <p className="mt-2 border-l-[3px] border-danger bg-danger/5 px-3 py-2 text-sm font-semibold text-danger">{err}</p>}
     </div>
   )
 }
-

@@ -12,8 +12,8 @@ export function LoginForm({ next }: { next?: string }) {
         <span className="label">Пароль</span>
         <input name="password" type="password" autoComplete="current-password" required autoFocus className="field" />
       </label>
-      {state?.error && <p className="text-sm font-semibold text-danger">{state.error}</p>}
-      <button className="btn-primary w-full !py-3.5" disabled={pending}>{pending ? 'Перевіряємо…' : 'Увійти'}</button>
+      {state?.error && <p role="alert" className="border-l-[3px] border-danger bg-danger/5 px-3 py-2 text-sm font-semibold text-danger">{state.error}</p>}
+      <button className="btn-primary w-full" disabled={pending}>{pending ? 'Перевіряємо…' : 'Увійти'}</button>
     </form>
   )
 }

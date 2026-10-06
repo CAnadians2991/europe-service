@@ -1,6 +1,6 @@
 import type { Vacancy } from './types'
 
-export const SECTION_TEMPLATES = ['Обов’язки', 'Заробітна плата', 'Графік роботи', 'Проживання', 'Вимоги', 'Додаткові умови']
+export const SECTION_TEMPLATES = ['Обовʼязки', 'Заробітна плата', 'Графік роботи', 'Проживання', 'Вимоги', 'Додаткові умови']
 
 export function emptyVacancy(): Vacancy {
   const now = new Date().toISOString()

@@ -6,7 +6,7 @@ import { hasDb, sql } from './db'
 import { ADMIN_COOKIE, verifySession } from './admin-auth'
 import { FILES_PREFIX, type AdminFile } from './admin-files'
 import { SITE } from './site'
-import type { Lead, Vacancy } from './types'
+import type { Lead, Salary, Vacancy } from './types'
 
 export async function requireAdmin() {
   const ok = await verifySession((await cookies()).get(ADMIN_COOKIE)?.value)
@@ -22,6 +22,82 @@ export async function adminListVacancies(): Promise<Vacancy[]> {
   // 1 400+ rows (closed Tilda posts included): the list needs no texts, so the heavy fields stay in the database
   const rows = (await sql`select data - 'sections' - 'intro' - 'reviews' - 'housingPhotos' - 'ru' as data from vacancies order by active desc, sort asc, updated_at desc`) as { data: Vacancy }[]
   return rows.map((r) => Object.assign({ sections: [], intro: '', reviews: [], housingPhotos: [] }, r.data) as Vacancy)
+}
+
+/** One row of the admin list: only what the list shows (1 400+ rows travel to the browser on every refresh) */
+export interface AdminVacancyRow {
+  id: string
+  path: string
+  active: boolean
+  hot: boolean
+  title: string
+  company: string
+  city: string
+  country: string
+  photo: string
+  salary: Salary
+  updatedAt: string
+  /** imported from Tilda (closed posts are 1 200+ of them) */
+  tilda: boolean
+  /** has a Russian translation */
+  ru: boolean
+}
+
+export async function adminListRows(): Promise<AdminVacancyRow[]> {
+  needDb()
+  const rows = (await sql`
+    select id, path, active, coalesce((data->>'hot')::boolean, false) as hot,
+      coalesce(data->>'title', '') as title, coalesce(data->>'company', '') as company, coalesce(data->>'city', '') as city,
+      coalesce(data->>'country', 'pl') as country, coalesce(data->'photos'->>0, '') as photo,
+      data->'salary' - 'source' - 'uplift' as salary, coalesce(data->>'updatedAt', updated_at::text) as updated_at,
+      (data->>'tildaUid') is not null as tilda, coalesce(data->'ru'->>'title', '') <> '' as ru
+    from vacancies order by active desc, sort asc, updated_at desc`) as {
+    id: string; path: string; active: boolean; hot: boolean; title: string; company: string; city: string; country: string
+    photo: string; salary: Salary | null; updated_at: string; tilda: boolean; ru: boolean
+  }[]
+  return rows.map((r) => ({
+    id: r.id,
+    path: r.path,
+    active: r.active,
+    hot: r.hot,
+    title: r.title,
+    company: r.company,
+    city: r.city,
+    country: r.country,
+    photo: r.photo,
+    salary: r.salary ?? { text: '', hourMin: null, hourMax: null, monthMin: null, monthMax: null, currency: 'PLN', net: true },
+    updatedAt: r.updated_at,
+    tilda: r.tilda,
+    ru: r.ru,
+  }))
+}
+
+/**
+ * A vacancy's address may follow a new title only while nobody could have linked to it: an admin draft that was never
+ * shown on the site. Imported Tilda posts, anything active now or ever (history), anything not /tpost/… — fixed for good.
+ */
+export async function adminPathLocked(v: Pick<Vacancy, 'id' | 'path' | 'active' | 'tildaUid'>): Promise<boolean> {
+  if (v.active || v.tildaUid || !/^\/tpost\/[a-z0-9]{10}-/.test(v.path)) return true
+  if (!hasDb) return true
+  const rows = (await sql`
+    select 1 from vacancy_history
+    where vacancy_id = ${v.id} and data is not null and coalesce((data->>'active')::boolean, false) limit 1`) as unknown[]
+  return rows.length > 0
+}
+
+/** A Tilda-style post id (`ab12cd34e1`) already used by some vacancy address */
+export async function adminTpostUidTaken(uid: string) {
+  const rows = (await sql`select 1 from vacancies where path like ${`%/tpost/${uid}-%`} limit 1`) as unknown[]
+  return rows.length > 0
+}
+
+/** Vacancies per country, the hidden ones too (the cached site list has only the open ones) */
+export async function adminCountryCounts(): Promise<Record<string, { active: number; hidden: number }>> {
+  needDb()
+  const rows = (await sql`
+    select coalesce(data->>'country', '') as country, count(*) filter (where active)::int as active, count(*) filter (where not active)::int as hidden
+    from vacancies group by 1`) as { country: string; active: number; hidden: number }[]
+  return Object.fromEntries(rows.map((r) => [r.country, { active: r.active, hidden: r.hidden }]))
 }
 
 export async function adminGetVacancy(id: string): Promise<Vacancy | null> {

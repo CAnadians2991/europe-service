@@ -2,10 +2,10 @@
 
 import { useId, useState } from 'react'
 import { searchPresets, type CountryPreset } from '@/lib/country-presets'
-import { flagOf } from '@/lib/site'
+import { Code } from './ui'
 
 /**
- * «Почніть вводити назву країни» → matching countries with flag and page address; one tap picks one.
+ * «Почніть вводити назву країни» → matching countries with code and page address; one tap picks one.
  * Not in the list → «Додати … вручну» (the caller pre-fills the form with guessCountry).
  */
 export function CountryPicker({
@@ -34,7 +34,7 @@ export function CountryPicker({
         className="field"
         value={q}
         onChange={(e) => setQ(e.target.value)}
-        placeholder="Почніть вводити: Канада, Австрія, Італія…"
+        placeholder="Почніть вводити: Іспанія, Норвегія, Канада…"
         autoComplete="off"
         autoFocus={autoFocus}
         onKeyDown={(e) => {
@@ -45,31 +45,33 @@ export function CountryPicker({
         }}
       />
       {q.trim() && (
-        <ul className="mt-2 overflow-hidden rounded-2xl bg-white ring-1 ring-line">
+        <ul className="mt-2 divide-y divide-line border border-line bg-white">
           {list.map((p) => (
             <li key={p.code}>
-              <button type="button" onClick={() => onPick(p)} className="flex min-h-12 w-full items-center gap-3 px-4 py-2 text-left hover:bg-brand-50">
-                <span className="text-2xl" aria-hidden>{flagOf(p.code)}</span>
+              <button type="button" onClick={() => onPick(p)} className="flex min-h-12 w-full items-center gap-3 px-3 py-2 text-left hover:bg-brand-50">
+                <Code code={p.code} />
                 <span className="min-w-0 flex-1">
-                  <span className="block font-semibold">{p.name} <span className="font-normal text-muted">· {p.nameRu}</span></span>
-                  <span className="block truncate text-xs text-muted">Робота {p.inName} · /vacancies/{p.slug}</span>
+                  <span className="block font-semibold">
+                    {p.name} <span className="font-normal text-muted">· {p.nameRu}</span>
+                  </span>
+                  <span className="num block truncate text-[12px] text-muted">Робота {p.inName} · /vacancies/{p.slug}</span>
                 </span>
-                <span className="text-sm font-semibold text-brand-700">Вибрати</span>
+                <span className="text-[14px] font-semibold text-brand-700">Вибрати</span>
               </button>
             </li>
           ))}
           {taken.map((p) => (
-            <li key={p.code} className="flex min-h-12 items-center gap-3 px-4 py-2 text-sm text-muted">
-              <span className="text-2xl" aria-hidden>{flagOf(p.code)}</span> {p.name} — уже є на сайті
+            <li key={p.code} className="flex min-h-12 items-center gap-3 px-3 py-2 text-[14px] text-muted">
+              <Code code={p.code} className="!bg-line-strong" /> {p.name} — уже є на сайті
             </li>
           ))}
           {!list.length && !taken.length && q.trim().length > 2 && (
             <li>
-              <button type="button" onClick={() => onManual(q)} className="flex min-h-12 w-full items-center gap-3 px-4 py-2 text-left hover:bg-brand-50">
-                <span className="text-2xl" aria-hidden>➕</span>
+              <button type="button" onClick={() => onManual(q)} className="flex min-h-12 w-full items-center gap-3 px-3 py-2 text-left hover:bg-brand-50">
+                <span className="num grid h-6 min-w-[30px] place-items-center border border-dashed border-line-strong text-[13px] text-muted">+</span>
                 <span className="flex-1">
                   <span className="block font-semibold">Додати «{q.trim()}» вручну</span>
-                  <span className="block text-xs text-muted">Такої країни немає в готовому списку — заповните назву російською та код</span>
+                  <span className="block text-[12.5px] text-muted">Такої країни немає в готовому списку — заповните назву російською та код</span>
                 </span>
               </button>
             </li>

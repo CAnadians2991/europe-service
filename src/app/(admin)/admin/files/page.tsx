@@ -11,7 +11,7 @@ export default async function Page() {
   return (
     <>
       <AdminNav active="files" />
-      <main className="mx-auto max-w-[1000px] px-4 py-6">
+      <main className="mx-auto max-w-[1040px] px-4 py-6">
         <FilesManager files={files} />
       </main>
     </>

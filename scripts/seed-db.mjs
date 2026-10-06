@@ -1,6 +1,8 @@
 // Fills an empty Netlify Database with the vacancies imported from Tilda (src/data/vacancies.seed.json) through the
 // site's /api/db-script. Existing rows are never overwritten (insert … on conflict do nothing).
-// Run: node --env-file=.env.local scripts/seed-db.mjs
+// --refresh: also rewrites imported rows nobody touched in the admin (no vacancy_history) — after a re-import
+// (translations, photos, fixes). Rows edited or created in the admin are left alone.
+// Run: node --env-file=.env.local scripts/seed-db.mjs [--refresh]
 import fs from 'node:fs'
 import path from 'node:path'
 import { sql, revalidate } from './lib/db.mjs'
@@ -25,5 +27,26 @@ for (let i = 0; i < seed.length; i += 50) {
   const rows = await sql.query(`insert into vacancies (id, path, active, sort, data) values ${values.join(', ')} on conflict (path) do nothing returning id`, params)
   added += rows.length
 }
+let refreshed = 0
+if (process.argv.includes('--refresh')) {
+  for (let i = 0; i < seed.length; i += 50) {
+    const chunk = seed.slice(i, i + 50)
+    const params = []
+    const values = chunk.map((v, k) => {
+      params.push(v.id, v.active, v.order, JSON.stringify(v))
+      const b = k * 4
+      return `($${b + 1}, $${b + 2}::boolean, $${b + 3}::int, $${b + 4}::jsonb)`
+    })
+    const rows = await sql.query(
+      `update vacancies t set data = s.data, active = s.active, sort = s.sort, updated_at = now()
+       from (values ${values.join(', ')}) as s(id, active, sort, data)
+       where t.id = s.id and t.data is distinct from s.data
+         and not exists (select 1 from vacancy_history h where h.vacancy_id = t.id)
+       returning t.id`,
+      params,
+    )
+    refreshed += rows.length
+  }
+}
 await revalidate(['vacancies'])
-console.log('added', added, 'of', seed.length)
+console.log('added', added, 'refreshed', refreshed, 'of', seed.length)

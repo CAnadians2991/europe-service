@@ -4,16 +4,7 @@ import { useState, useTransition } from 'react'
 import { Photos } from './PhotoUploader'
 import { saveAbout } from '@/app/(admin)/admin/actions'
 import type { About, TeamMember } from '@/lib/about-types'
-
-function Card({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
-  return (
-    <section className="rounded-3xl bg-white p-5 ring-1 ring-line sm:p-6">
-      <h2 className="text-lg font-bold">{title}</h2>
-      {hint && <p className="mt-0.5 text-sm text-muted">{hint}</p>}
-      <div className="mt-4 space-y-4">{children}</div>
-    </section>
-  )
-}
+import { Notice, Panel } from './ui'
 
 export function AboutEditor({ initial }: { initial: About }) {
   const [a, setA] = useState<About>(initial)
@@ -37,16 +28,19 @@ export function AboutEditor({ initial }: { initial: About }) {
 
   return (
     <div className="space-y-5 pb-24">
-      <div className="sticky top-16 z-20 -mx-4 flex flex-wrap items-center gap-3 border-b border-line bg-white/95 px-4 py-3 backdrop-blur">
-        <h1 className="flex-1 text-lg font-bold sm:text-xl">Команда, офіс, ліцензія</h1>
-        <a href="/about" target="_blank" className="btn-ghost !px-4 !py-2.5 !text-sm">Відкрити сторінку ↗</a>
-        <button type="button" onClick={save} disabled={saving} className="btn-accent !px-6 !py-2.5">{saving ? 'Зберігаємо…' : 'Зберегти'}</button>
-        {msg && <p className={`w-full rounded-xl px-3 py-2 text-sm font-semibold ${msg.ok ? 'bg-brand-100 text-brand-700' : 'bg-danger/10 text-danger'}`}>{msg.text}</p>}
+      <div className="sticky top-[59px] z-20 -mx-4 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-line bg-cream/95 px-4 py-2.5 backdrop-blur">
+        <div className="min-w-0 flex-1">
+          <p className="eyebrow">04 — Компанія</p>
+          <h1 className="mt-0.5 truncate text-[20px] leading-tight sm:text-[22px]">Команда, офіс, ліцензія</h1>
+        </div>
+        <a href="/about" target="_blank" className="btn-ghost !min-h-11 !px-3.5 !text-[14px]">Сторінка ↗</a>
+        <button type="button" onClick={save} disabled={saving} className="btn-accent !min-h-11 !px-6">{saving ? 'Зберігаємо…' : 'Зберегти'}</button>
+        {msg && <Notice tone={msg.ok ? 'ok' : 'err'} className="w-full">{msg.text}</Notice>}
       </div>
 
-      <Card title="1. Команда (менеджери)" hint="Фото — вертикальне, по пояс, на світлому фоні (як для документів, але з усмішкою). Порядок = порядок на сайті. Менеджер без фото не показується.">
+      <Panel n="01" title="Команда (менеджери)" hint="Фото — вертикальне, по пояс, на світлому фоні (як для документів, але з усмішкою). Порядок = порядок на сайті. Менеджер без фото не показується.">
         {a.team.map((m, i) => (
-          <div key={m.id || i} className="grid gap-4 rounded-2xl border border-line p-4 sm:grid-cols-[180px_1fr]">
+          <div key={m.id || i} className="grid gap-4 border border-line p-3 sm:grid-cols-[180px_minmax(0,1fr)] sm:p-4">
             <Photos label="Фото" value={m.photo ? [m.photo] : []} onChange={(x) => setMember(i, { photo: x[0] ?? '' })} folder="team" single />
             <div className="grid gap-3 sm:grid-cols-2">
               <label className="block"><span className="label">Ім’я *</span><input className="field" value={m.name} onChange={(e) => setMember(i, { name: e.target.value })} placeholder="Анна" /></label>
@@ -55,37 +49,37 @@ export function AboutEditor({ initial }: { initial: About }) {
               <label className="block"><span className="label">Telegram (посилання)</span><input className="field" value={m.telegram ?? ''} onChange={(e) => setMember(i, { telegram: e.target.value })} placeholder="https://t.me/username" /></label>
               <label className="block"><span className="label">Viber (посилання)</span><input className="field" value={m.viber ?? ''} onChange={(e) => setMember(i, { viber: e.target.value })} placeholder="viber://chat?number=%2B380..." /></label>
               <div className="flex items-end gap-2">
-                <button type="button" onClick={() => move(i, -1)} disabled={i === 0} className="btn-ghost !px-3 !py-2.5 disabled:opacity-30">↑</button>
-                <button type="button" onClick={() => move(i, 1)} disabled={i === a.team.length - 1} className="btn-ghost !px-3 !py-2.5 disabled:opacity-30">↓</button>
-                <button type="button" onClick={() => set('team', a.team.filter((_, k) => k !== i))} className="btn !bg-danger/10 !px-4 !py-2.5 text-danger">Видалити</button>
+                <button type="button" onClick={() => move(i, -1)} disabled={i === 0} className="btn-ghost !min-h-11 !px-3.5 disabled:opacity-30" aria-label="Вище">↑</button>
+                <button type="button" onClick={() => move(i, 1)} disabled={i === a.team.length - 1} className="btn-ghost !min-h-11 !px-3.5 disabled:opacity-30" aria-label="Нижче">↓</button>
+                <button type="button" onClick={() => set('team', a.team.filter((_, k) => k !== i))} className="btn-ghost !min-h-11 !px-4 !text-danger">Видалити</button>
               </div>
             </div>
           </div>
         ))}
         <button type="button" className="chip" onClick={() => set('team', [...a.team, { id: '', name: '', role: '', photo: '' }])}>+ Додати менеджера</button>
-      </Card>
+      </Panel>
 
-      <Card title="2. Офіс" hint="3–6 фото: вхід з вивіскою, зона прийому, менеджери за роботою, консультація з клієнтом. Перше фото — головне.">
+      <Panel n="02" title="Офіс" hint="3–6 фото: вхід з вивіскою, зона прийому, менеджери за роботою, консультація з клієнтом. Перше фото — головне.">
         <Photos label="Фото офісу" value={a.officePhotos} onChange={(x) => set('officePhotos', x)} folder="office" />
         <label className="block"><span className="label">Текст про офіс</span><textarea className="field min-h-24" value={a.officeText} onChange={(e) => set('officeText', e.target.value)} /></label>
         <label className="block"><span className="label">Графік роботи</span><input className="field" value={a.hours} onChange={(e) => set('hours', e.target.value)} placeholder="Пн–Пт 9:00–18:00, Сб 10:00–15:00" /></label>
         <label className="block"><span className="label">Відео з офісу (посилання YouTube, необов’язково)</span><input className="field" value={a.video ?? ''} onChange={(e) => set('video', e.target.value)} placeholder="https://youtu.be/..." /></label>
-      </Card>
+      </Panel>
 
-      <Card title="3. Ліцензія, перелік і документи" hint="Ліцензія Мінсоцполітики № 223 від 15.02.2019 видана ТОВ «ЄВРОПА СЕРВІС УКРАЇНА» (ЄДРПОУ 42515343) — вона показується в блоці «Ліцензія та декларація», на головній і в футері. Скан ліцензії (за бажанням) замінить таблицю реквізитів. Дату включення до Переліку Мінекономіки вкажіть, коли звірите її в реєстрі data.gov.ua.">
+      <Panel n="03" title="Ліцензія, перелік і документи" hint="Ліцензія Мінсоцполітики № 223 від 15.02.2019 видана ТОВ «ЄВРОПА СЕРВІС УКРАЇНА» (ЄДРПОУ 42515343) — вона показується в блоці «Ліцензія та декларація», на головній і в футері. Скан ліцензії (за бажанням) замінить таблицю реквізитів. Дату включення до Переліку Мінекономіки вкажіть, коли звірите її в реєстрі data.gov.ua.">
         <Photos label="Скан документа" value={a.license.scan ? [a.license.scan] : []} onChange={(x) => set('license', { ...a.license, scan: x[0] ?? '' })} folder="license" single />
         <div className="grid gap-3 sm:grid-cols-3">
           <label className="block"><span className="label">Номер</span><input className="field" value={a.license.number} onChange={(e) => set('license', { ...a.license, number: e.target.value })} /></label>
           <label className="block"><span className="label">Дата</span><input className="field" value={a.license.date} onChange={(e) => set('license', { ...a.license, date: e.target.value })} /></label>
           <label className="block"><span className="label">Хто видав</span><input className="field" value={a.license.issuer} onChange={(e) => set('license', { ...a.license, issuer: e.target.value })} /></label>
         </div>
-        <p className="text-sm font-semibold">Запис у державному Переліку Мінекономіки</p>
+        <p className="font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-muted">Запис у державному Переліку Мінекономіки</p>
         <div className="grid gap-3 sm:grid-cols-3">
           <label className="block"><span className="label">Назва</span><input className="field" value={a.registry.name} onChange={(e) => set('registry', { ...a.registry, name: e.target.value })} /></label>
           <label className="block"><span className="label">Код ЄДРПОУ</span><input className="field" value={a.registry.code} onChange={(e) => set('registry', { ...a.registry, code: e.target.value })} /></label>
           <label className="block"><span className="label">Дата включення</span><input className="field" value={a.registry.included} onChange={(e) => set('registry', { ...a.registry, included: e.target.value })} /></label>
         </div>
-      </Card>
+      </Panel>
     </div>
   )
 }

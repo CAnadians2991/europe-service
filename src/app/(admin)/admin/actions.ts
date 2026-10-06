@@ -9,24 +9,28 @@ import { after } from 'next/server'
 import { pingIndexNow } from '@/lib/indexnow'
 import { ADMIN_COOKIE, checkPassword, createSession } from '@/lib/admin-auth'
 import {
+  adminCountryCounts,
   adminDeleteVacancy,
   adminGetVacancy,
+  adminPathLocked,
   adminPathTaken,
+  adminTpostUidTaken,
   adminRestore,
   adminRestoreVersion,
   adminSaveVacancy,
   adminSetLead,
   requireAdmin,
 } from '@/lib/admin-data'
-import { VACANCIES_TAG, getAllVacancies } from '@/lib/vacancies'
+import { VACANCIES_TAG } from '@/lib/vacancies'
 import { ABOUT_TAG } from '@/lib/about'
 import { hasDb, sql } from '@/lib/db'
 import type { About } from '@/lib/about-types'
-import { COUNTRIES, COUNTRY, SITE, flagOf, type CountryInfo, newVacancyPath } from '@/lib/site'
+import { COUNTRIES, COUNTRY, SITE, flagOf, type CountryInfo, newVacancyPath, tildaSlug } from '@/lib/site'
+import { tildaPostTarget } from '@/lib/legacy-urls'
 import { COUNTRIES_TAG, ensureCountries, getExtraCountries } from '@/lib/countries'
 import { RESERVED_SLUGS, getLanding } from '@/lib/landing'
 import { slugify } from '@/lib/format'
-import type { Lead, Vacancy } from '@/lib/types'
+import type { Lead, Section, Vacancy, VacancyRu } from '@/lib/types'
 
 /* ---------- auth ---------- */
 
@@ -65,6 +69,33 @@ const numOrNull = (x: unknown) => {
   return Number.isFinite(n) ? n : null
 }
 
+const TPOST = /^\/tpost\/([a-z0-9]{9}1)-([a-z0-9-]{1,50})$/
+
+/** a /tpost/<id>-… address is free when no vacancy uses the id and it is not an old Tilda post (those redirect) */
+async function tpostTaken(path: string) {
+  const uid = path.match(TPOST)?.[1]
+  if (!uid) return true
+  return Boolean(tildaPostTarget(path)) || (await adminTpostUidTaken(uid)) || (await adminPathTaken(path))
+}
+
+const cleanSections = (xs: Section[] | undefined) =>
+  (xs ?? []).map((x) => ({ title: clean(x.title), items: (x.items ?? []).map(clean).filter(Boolean) })).filter((x) => x.title || x.items.length)
+
+/** The Russian version: trimmed, empty fields dropped; no title = no translation */
+function cleanRu(ru: VacancyRu | undefined): VacancyRu | undefined {
+  if (!ru || !clean(ru.title)) return undefined
+  const out: VacancyRu = { title: clean(ru.title) }
+  for (const k of ['headline', 'city', 'schedule', 'contract', 'housing', 'housingNote', 'salaryText', 'seoTitle', 'seoDescription'] as const) {
+    const val = clean(ru[k])
+    if (val) out[k] = val
+  }
+  const intro = String(ru.intro ?? '').trim()
+  if (intro) out.intro = intro
+  const sections = cleanSections(ru.sections)
+  if (sections.length) out.sections = sections
+  return out
+}
+
 export type SaveResult = { ok: true; id: string; path: string } | { ok: false; error: string }
 
 export async function saveVacancy(input: Vacancy, isNew: boolean): Promise<SaveResult> {
@@ -76,23 +107,33 @@ export async function saveVacancy(input: Vacancy, isNew: boolean): Promise<SaveR
     if (!COUNTRY[input.country]) return { ok: false, error: 'Оберіть країну.' }
 
     const id = isNew ? `${slugify(title).slice(0, 40)}-${crypto.randomBytes(2).toString('hex')}` : input.id
-    // Addresses follow Tilda's logic and never change once published: an existing vacancy keeps its path;
-    // a new one gets /tpost/<10-char id>-<transliterated title>, exactly like Tilda Feeds made them
-    let path = clean(input.path).replace(/\/{2,}/g, '/').replace(/(.)\/+$/, '$1')
-    if (!path) path = newVacancyPath(title)
-    if (!/^\/[a-z0-9_\-/]+$/i.test(path)) return { ok: false, error: 'Адреса сторінки — лише латиниця, цифри, дефіс і «/», напр. /tpost/ab12cd34e1-pakuvalnik.' }
-    if (!isNew) {
-      const before = await adminGetVacancy(id)
-      if (before && before.path !== path && before.active) return { ok: false, error: `Адресу опублікованої вакансії не змінюємо (на неї можуть вести посилання): ${before.path}` }
+    // Addresses follow Tilda's logic (docs/SEO.md): a new vacancy gets /tpost/<10-char id>-<transliterated title>, exactly
+    // like Tilda Feeds made them; once anyone could have linked to it (published now or ever, imported from Tilda) it never
+    // changes. Only an admin draft that never was on the site follows a new title (same id, new slug).
+    const before = isNew ? null : await adminGetVacancy(id)
+    if (!isNew && !before) return { ok: false, error: 'Вакансію не знайдено — можливо, її видалили. Оновіть сторінку.' }
+    const want = clean(input.path).toLowerCase()
+    let path: string
+    if (isNew) {
+      const m = want.match(TPOST)
+      path = m ? `/tpost/${m[1]}-${tildaSlug(title)}` : newVacancyPath(title)
+      for (let i = 0; i < 6 && (await tpostTaken(path)); i++) path = newVacancyPath(title)
+      if (await tpostTaken(path)) return { ok: false, error: 'Не вдалося підібрати вільну адресу. Спробуйте ще раз.' }
+    } else {
+      path = before!.path
+      if (want && want !== before!.path.toLowerCase()) {
+        const was = before!.path.match(TPOST)
+        const m = want.match(TPOST)
+        if (await adminPathLocked(before!)) return { ok: false, error: `Адресу опублікованої вакансії не змінюємо (на неї можуть вести посилання й реклама): ${before!.path}` }
+        if (!was || !m || m[1] !== was[1] || want !== `/tpost/${was[1]}-${tildaSlug(title)}`) return { ok: false, error: 'Адреса чернетки змінюється лише разом із назвою — оновіть сторінку й спробуйте ще раз.' }
+        if (await adminPathTaken(want, id)) return { ok: false, error: `Адреса ${want} вже використовується іншою вакансією.` }
+        path = want
+      }
     }
     if (COUNTRIES.some((c) => c.path === path) || getLanding(path) || RESERVED_SLUGS.has(path.replace(/^\//, '')))
       return { ok: false, error: 'Ця адреса зайнята сторінкою каталогу (країна, місто чи розділ).' }
-    if (await adminPathTaken(path, isNew ? undefined : id)) {
-      if (isNew && !input.path) path = newVacancyPath(title)
-      else return { ok: false, error: `Адреса ${path} вже використовується іншою вакансією.` }
-    }
 
-    const prev = isNew ? null : await adminGetVacancy(id)
+    const prev = before
     const now = new Date().toISOString()
     const s = input.salary
     const v: Vacancy = {
@@ -105,8 +146,17 @@ export async function saveVacancy(input: Vacancy, isNew: boolean): Promise<SaveR
       schedule: clean(input.schedule),
       contract: clean(input.contract),
       housing: clean(input.housing),
+      hubCity: clean(input.hubCity) || undefined,
       headline: clean(input.headline),
       intro: String(input.intro ?? '').trim(),
+      housingNote: clean(input.housingNote),
+      videos: (() => {
+        const ids = [...new Set((input.videos ?? []).map((x) => clean(x)).filter((x) => /^[\w-]{11}$/.test(x)))]
+        return ids.length ? ids : undefined
+      })(),
+      noLanguage: input.noLanguage ? true : undefined,
+      noExperience: input.noExperience ? true : undefined,
+      ru: cleanRu(input.ru),
       order: Number.isFinite(input.order) ? input.order : 0,
       genders: ['men', 'women', 'couples'], // no gender restrictions on the site
       salary: {
@@ -118,10 +168,10 @@ export async function saveVacancy(input: Vacancy, isNew: boolean): Promise<SaveR
         currency: s.currency,
         net: !!s.net,
         ...(s.unlabelled ? { unlabelled: true } : {}),
+        // the pre-uplift text of the 2026-10 import (+19 %) stays while the pay text is the same — so it can be undone
+        ...(before?.salary.source && clean(s.text) === clean(before.salary.text) ? { source: before.salary.source, uplift: before.salary.uplift } : {}),
       },
-      sections: input.sections
-        .map((x) => ({ title: clean(x.title), items: x.items.map(clean).filter(Boolean) }))
-        .filter((x) => x.title || x.items.length),
+      sections: cleanSections(input.sections),
       // date / rating come from imported client reviews (no fields for them in the editor) — kept as they are
       reviews: input.reviews
         .map((r) => ({
@@ -138,6 +188,9 @@ export async function saveVacancy(input: Vacancy, isNew: boolean): Promise<SaveR
         clean(input.workAddress?.street) || clean(input.workAddress?.postalCode)
           ? { street: clean(input.workAddress?.street).slice(0, 120), postalCode: clean(input.workAddress?.postalCode).slice(0, 12) }
           : undefined,
+      // not editable in the admin: what the import set stays (a new vacancy or a copy is never a Tilda post)
+      tildaUid: prev?.tildaUid,
+      lang: isNew ? input.lang : prev?.lang,
       createdAt: prev?.createdAt ?? now,
       updatedAt: now,
     }
@@ -186,7 +239,8 @@ export async function duplicateVacancy(id: string) {
   await ensureCountries()
   const v = await adminGetVacancy(id)
   if (!v) return
-  const copy: Vacancy = { ...v, id: '', path: '', title: `${v.title} (копія)`, active: false, hot: false }
+  // a closed draft with its own new /tpost/ address; it follows the title until it is first published
+  const copy: Vacancy = { ...v, id: '', path: '', title: `${v.title} (копія)`, active: false, hot: false, tildaUid: undefined }
   const r = await saveVacancy(copy, true)
   if (r.ok) redirect(`/admin/vacancies/${r.id}`)
 }
@@ -303,6 +357,12 @@ export async function saveAbout(input: About): Promise<{ ok: boolean; error?: st
 
 /* ---------- countries ---------- */
 
+/** every vacancy of a country, the closed ones too (the cached site list has only the open ones) */
+async function vacanciesIn(code: string) {
+  const c = (await adminCountryCounts())[code]
+  return c ? c.active + c.hidden : 0
+}
+
 export type CountryInput = Pick<CountryInfo, 'code' | 'name' | 'nameRu' | 'inName' | 'inNameRu' | 'seo'> & { slug: string }
 
 /** Add or edit a country of the catalog (the nine built-in ones are fixed). `origCode` = the code being edited. */
@@ -324,10 +384,10 @@ export async function saveCountry(input: CountryInput, origCode?: string): Promi
   if (others.some((c) => c.code === code)) return { ok: false, error: `Країна з кодом «${code}» уже є.` }
   if (others.some((c) => c.name.toLowerCase() === t.name.toLowerCase())) return { ok: false, error: `${t.name} уже є в списку.` }
   const path = `/vacancies/${slug}`
-  if (others.some((c) => c.path === path) || RESERVED_SLUGS.has(slug)) return { ok: false, error: 'Ця адреса вже зайнята іншою сторінкою каталогу — змініть її.' }
-  if ((await getAllVacancies()).some((v) => v.path === path)) return { ok: false, error: 'За цією адресою вже є вакансія — змініть адресу країни.' }
-  if (editing && editing.code !== code && (await getAllVacancies()).some((v) => v.country === editing.code))
-    return { ok: false, error: 'Код не можна змінити: у цій країні вже є вакансії.' }
+  if (others.some((c) => c.path === path) || RESERVED_SLUGS.has(slug) || getLanding(path)) return { ok: false, error: 'Ця адреса вже зайнята іншою сторінкою каталогу — змініть її.' }
+  if (await adminPathTaken(path)) return { ok: false, error: 'За цією адресою вже є вакансія — змініть адресу країни.' }
+  if (editing && editing.code !== code && (await vacanciesIn(editing.code)))
+    return { ok: false, error: 'Код не можна змінити: у цій країні вже є вакансії (разом із закритими).' }
 
   const clip = (x?: string) => clean(x).slice(0, 400) || undefined
   const seo = (s?: { title?: string; description?: string; text?: string }) => {
@@ -345,10 +405,11 @@ export async function saveCountry(input: CountryInput, origCode?: string): Promi
 
 export async function deleteCountry(code: string): Promise<{ ok: boolean; error?: string }> {
   await requireAdmin()
+  if (!hasDb) return { ok: false, error: 'База даних не підключена' }
   const extra = await getExtraCountries()
   if (!extra.some((c) => c.code === code)) return { ok: false, error: 'Вбудовану країну видалити не можна.' }
-  const n = (await getAllVacancies()).filter((v) => v.country === code).length
-  if (n) return { ok: false, error: `У цій країні ${n} вакансій (разом із прихованими). Спершу перенесіть або видаліть їх.` }
+  const n = await vacanciesIn(code)
+  if (n) return { ok: false, error: `У цій країні ${n} вакансій (разом із закритими). Спершу перенесіть або видаліть їх.` }
   await sql`update settings set data = ${JSON.stringify(extra.filter((c) => c.code !== code))}, updated_at = now() where key = 'countries'`
   updateTag(COUNTRIES_TAG)
   revalidatePath('/', 'layout')

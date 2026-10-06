@@ -2,6 +2,8 @@ import { AdminNav } from '@/components/admin/AdminNav'
 import { LeadsTable } from '@/components/admin/LeadsTable'
 import { adminLeadStats, adminLeads, requireAdmin } from '@/lib/admin-data'
 import { formLabel } from '@/lib/leads'
+import { hasDb } from '@/lib/db'
+import { Notice, PageHead } from '@/components/admin/ui'
 
 export const dynamic = 'force-dynamic'
 export const metadata = { title: 'Заявки' }
@@ -14,7 +16,7 @@ function source(l: { gclid: string | null; gbraid: string | null; wbraid: string
     try {
       const h = new URL(l.referrer).hostname.replace(/^www\./, '')
       if (h.includes('google')) return 'Google (пошук)'
-      if (!h.includes('personalwork')) return h
+      if (!h.includes('europeservice')) return h
     } catch {}
   }
   return 'Прямий захід'
@@ -22,32 +24,47 @@ function source(l: { gclid: string | null; gbraid: string | null; wbraid: string
 
 export default async function Page() {
   await requireAdmin()
+  if (!hasDb)
+    return (
+      <>
+        <AdminNav active="leads" />
+        <main className="mx-auto max-w-[1240px] space-y-5 px-4 py-6">
+          <PageHead eyebrow="03 — Заявки" title="Заявки з сайту" />
+          <Notice tone="warn">База даних не підключена — заявки недоступні. На Netlify база підключається автоматично; локально додайте NETLIFY_DB_URL у .env.local.</Notice>
+        </main>
+      </>
+    )
   const [leads, stats] = await Promise.all([adminLeads(), adminLeadStats()])
   return (
     <>
       <AdminNav active="leads" />
-      <main className="mx-auto max-w-[1200px] px-4 py-6">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <h1 className="text-2xl font-bold">Заявки з сайту</h1>
-          <a href="/admin/leads/export" className="btn-ghost !py-2.5 !text-sm">Завантажити Excel (CSV)</a>
-        </div>
-        {!process.env.BITRIX_WEBHOOK_URL && !process.env.TELEGRAM_BOT_TOKEN && !process.env.LEAD_WEBHOOK_URL && (
-          <p className="mt-4 rounded-2xl bg-danger/10 p-4 text-sm font-semibold text-danger">
-            ⚠ Заявки зараз зберігаються лише тут — у Bitrix24 чи Telegram вони автоматично не надходять. Перевіряйте цю сторінку або підключіть канал:
-            вхідний вебхук Bitrix24 з правом «CRM» (змінна BITRIX_WEBHOOK_URL у Vercel) чи Telegram-бота (TELEGRAM_BOT_TOKEN і TELEGRAM_CHAT_ID).
-          </p>
+      <main className="mx-auto max-w-[1240px] space-y-5 px-4 py-6">
+        <PageHead
+          eyebrow="03 — Заявки"
+          title="Заявки з сайту"
+          actions={
+            // a file download, not a page: a plain link
+            // eslint-disable-next-line @next/next/no-html-link-for-pages
+            <a href="/admin/leads/export" className="btn-ghost !min-h-11 !text-[14px]">Завантажити Excel (CSV)</a>
+          }
+        />
+        {!process.env.BITRIX_WEBHOOK_URL && !process.env.TELEGRAM_BOT_TOKEN && !process.env.LEAD_WEBHOOK_URL && !process.env.TILDA_WEBHOOK_URL && (
+          <Notice tone="err">
+            Заявки зараз зберігаються лише тут — у Bitrix24 чи Telegram вони автоматично не надходять. Перевіряйте цю сторінку або підключіть канал: вхідний вебхук Bitrix24 з правом «CRM»
+            (змінна BITRIX_WEBHOOK_URL у Netlify) чи Telegram-бота (TELEGRAM_BOT_TOKEN і TELEGRAM_CHAT_ID).
+          </Notice>
         )}
-        <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
+        <dl className="grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-5">
           {[
-            ['Нові (не оброблені)', stats.new],
+            ['Нові', stats.new],
             ['Сьогодні', stats.today],
             ['За 7 днів', stats.week],
             ['За 30 днів', stats.month],
-            ['З Google Ads (30 дн.)', stats.ads_month],
+            ['Google Ads, 30 дн.', stats.ads_month],
           ].map(([l, n]) => (
-            <div key={l} className="rounded-2xl bg-white p-4 ring-1 ring-line">
-              <dt className="text-xs font-semibold text-muted">{l}</dt>
-              <dd className="mt-1 text-2xl font-extrabold">{n}</dd>
+            <div key={l} className="bg-white px-4 py-3 last:col-span-2 sm:last:col-span-1">
+              <dt className="font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-muted">{l}</dt>
+              <dd className="num mt-1 text-[26px] font-semibold leading-none text-ink">{n}</dd>
             </div>
           ))}
         </dl>

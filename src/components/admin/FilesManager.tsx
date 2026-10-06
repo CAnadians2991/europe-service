@@ -4,15 +4,16 @@ import { useRef, useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { deleteFile } from '@/app/(admin)/admin/actions'
 import { FILE_ACCEPT, FILE_MAX_BYTES, FILE_MAX_MB, FILE_TYPES, FILES_PREFIX, fileExt, type AdminFile } from '@/lib/admin-files'
+import { Confirm, Notice, PageHead, fmtDate } from './ui'
 
 const size = (n: number) => (n < 1048576 ? `${Math.max(1, Math.round(n / 1024))} КБ` : `${(n / 1048576).toFixed(1).replace('.', ',')} МБ`)
 
 const KIND: Record<string, [string, string]> = {
-  pdf: ['PDF', 'bg-danger/10 text-danger'],
-  doc: ['DOC', 'bg-brand-100 text-brand-800'],
-  docx: ['DOC', 'bg-brand-100 text-brand-800'],
-  xls: ['XLS', 'bg-ok/12 text-ok'],
-  xlsx: ['XLS', 'bg-ok/12 text-ok'],
+  pdf: ['PDF', 'bg-danger text-white'],
+  doc: ['DOC', 'bg-sky-700 text-white'],
+  docx: ['DOC', 'bg-sky-700 text-white'],
+  xls: ['XLS', 'bg-brand-700 text-white'],
+  xlsx: ['XLS', 'bg-brand-700 text-white'],
 }
 
 type Job = { name: string; pct: number; error?: string; done?: boolean }
@@ -89,36 +90,35 @@ export function FilesManager({ files }: { files: AdminFile[] | null }) {
   const short = (f: AdminFile) => name(f).replace(/-[A-Za-z0-9]{16,}(\.[a-z]+)$/, '$1')
 
   return (
-    <div className={pending ? 'opacity-80 transition' : ''}>
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div className="max-w-xl">
-          <h1 className="text-2xl font-bold">Файли</h1>
-          <p className="text-sm text-muted">
-            Зразки договорів, прайси, документи для статей і вакансій. PDF, DOC/DOCX, XLS/XLSX, JPG, PNG, WebP — до {FILE_MAX_MB} МБ. Посилання на файл відкривається для всіх, у кого воно є.
-          </p>
-        </div>
-        <button type="button" className="btn-accent !py-3.5" disabled={busy || !files} onClick={() => input.current?.click()}>
-          {busy ? 'Завантаження…' : '+ Завантажити файли'}
-        </button>
-        <input ref={input} type="file" multiple accept={FILE_ACCEPT} className="hidden" onChange={(e) => send(e.target.files)} />
-      </div>
+    <div className={`space-y-4 ${pending ? 'opacity-80 transition' : ''}`}>
+      <PageHead
+        eyebrow="05 — Файли"
+        title="Файли"
+        sub={<>Зразки договорів, прайси, документи для статей і вакансій. PDF, DOC/DOCX, XLS/XLSX, JPG, PNG, WebP — до <span className="num">{FILE_MAX_MB}</span> МБ. Посилання відкривається для всіх, у кого воно є.</>}
+        actions={
+          <button type="button" className="btn-accent" disabled={busy || !files} onClick={() => input.current?.click()}>
+            {busy ? 'Завантаження…' : '+ Завантажити файли'}
+          </button>
+        }
+      />
+      <input ref={input} type="file" multiple accept={FILE_ACCEPT} className="hidden" onChange={(e) => send(e.target.files)} />
 
-      {!files && <p className="mt-4 rounded-2xl bg-danger/10 p-4 text-sm font-semibold text-danger">Сховище файлів зараз недоступне (Netlify Blobs). Оновіть сторінку за хвилину.</p>}
-      {err && <p className="mt-4 rounded-2xl bg-danger/10 p-3 text-sm font-semibold text-danger">{err}</p>}
+      {!files && <Notice tone="err">Сховище файлів зараз недоступне (Netlify Blobs). Оновіть сторінку за хвилину.</Notice>}
+      {err && <Notice tone="err">{err}</Notice>}
 
       {jobs.length > 0 && (
-        <ul className="mt-4 space-y-3 rounded-3xl bg-white p-4 ring-1 ring-line">
+        <ul className="card divide-y divide-line">
           {jobs.map((j, i) => (
-            <li key={i} className="text-sm">
+            <li key={i} className="px-4 py-3 text-[14px]">
               <div className="flex items-center justify-between gap-3">
                 <span className="min-w-0 truncate font-semibold">{j.name}</span>
-                <span className={`shrink-0 font-semibold ${j.error ? 'text-danger' : j.done ? 'text-ok' : 'text-muted'}`}>{j.error ? 'Помилка' : j.done ? 'Готово ✓' : `${j.pct}%`}</span>
+                <span className={`num shrink-0 text-[13px] font-semibold ${j.error ? 'text-danger' : j.done ? 'text-brand-700' : 'text-muted'}`}>{j.error ? 'помилка' : j.done ? 'готово' : `${j.pct}%`}</span>
               </div>
               {j.error ? (
                 <p className="mt-1 text-danger">{j.error}</p>
               ) : (
-                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-line">
-                  <div className={`h-full rounded-full transition-[width] ${j.done ? 'bg-ok' : 'bg-brand-600'}`} style={{ width: `${j.pct}%` }} />
+                <div className="mt-1.5 h-[3px] overflow-hidden bg-line">
+                  <div className={`h-full transition-[width] ${j.done ? 'bg-brand-600' : 'bg-sky'}`} style={{ width: `${j.pct}%` }} />
                 </div>
               )}
             </li>
@@ -127,43 +127,34 @@ export function FilesManager({ files }: { files: AdminFile[] | null }) {
       )}
 
       {files && (
-        <ul className="mt-5 space-y-2.5">
+        <ul className="card divide-y divide-line">
           {files.map((f) => {
-            const [label, cls] = KIND[fileExt(f.pathname)] ?? ['ФОТО', 'bg-sun-100 text-ink']
+            const [label, cls] = KIND[fileExt(f.pathname)] ?? ['IMG', 'bg-ink text-white']
             return (
-              <li key={f.url} className="flex flex-wrap items-center gap-3 rounded-2xl bg-white p-3 ring-1 ring-line sm:flex-nowrap">
-                <span className={`grid h-12 w-14 shrink-0 place-items-center rounded-xl text-xs font-bold ${cls}`}>{label}</span>
+              <li key={f.url} className="flex flex-wrap items-center gap-3 px-3 py-3 sm:flex-nowrap sm:px-4">
+                <span className={`num grid h-10 w-12 shrink-0 place-items-center text-[11px] font-semibold ${cls}`}>{label}</span>
                 <span className="min-w-0 flex-1">
                   <span className="block truncate font-semibold text-ink" title={name(f)}>{short(f)}</span>
-                  <span className="block text-sm text-muted">
-                    {size(f.size)} · {new Date(f.uploadedAt).toLocaleString('uk-UA', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
-                  </span>
+                  <span className="num block text-[12.5px] text-muted">{size(f.size)} · {fmtDate(f.uploadedAt, true)}</span>
                 </span>
-                <div className="flex flex-wrap gap-2">
-                  <button type="button" className="btn-primary !px-4 !py-2.5 !text-sm" onClick={() => copy(f.url)}>
-                    {copied === f.url ? 'Скопійовано ✓' : 'Копіювати посилання'}
+                <div className="flex flex-wrap gap-1.5">
+                  <button type="button" className="btn-primary !min-h-10 !px-3.5 !text-[14px]" onClick={() => copy(f.url)}>
+                    {copied === f.url ? 'Скопійовано' : 'Копіювати посилання'}
                   </button>
-                  <a href={f.url} target="_blank" rel="noopener" className="btn-ghost !px-4 !py-2.5 !text-sm">Відкрити ↗</a>
-                  <button type="button" className="btn !bg-danger/10 !px-4 !py-2.5 !text-sm text-danger" onClick={() => setConfirm(f)}>Видалити</button>
+                  <a href={f.url} target="_blank" rel="noopener" className="btn-ghost !min-h-10 !px-3.5 !text-[14px]">Відкрити ↗</a>
+                  <button type="button" className="btn-ghost !min-h-10 !px-3.5 !text-[14px] !text-danger" onClick={() => setConfirm(f)}>Видалити</button>
                 </div>
               </li>
             )
           })}
-          {!files.length && <li className="rounded-2xl bg-white p-8 text-center text-muted ring-1 ring-line">Файлів поки немає</li>}
+          {!files.length && <li className="px-4 py-10 text-center text-muted">Файлів поки немає</li>}
         </ul>
       )}
 
       {confirm && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 p-4" role="dialog" aria-modal="true">
-          <div className="w-full max-w-md rounded-3xl bg-white p-6 shadow-2xl">
-            <p className="text-lg font-bold">Видалити файл?</p>
-            <p className="mt-2 break-words text-ink-2">«{short(confirm)}» буде видалено назавжди. Посилання на нього (на сайті, у статтях, у повідомленнях) перестануть працювати.</p>
-            <div className="mt-5 flex justify-end gap-2">
-              <button type="button" className="btn-ghost" onClick={() => setConfirm(null)}>Скасувати</button>
-              <button type="button" className="btn-accent" disabled={pending} onClick={() => remove(confirm)}>Так, видалити</button>
-            </div>
-          </div>
-        </div>
+        <Confirm title="Видалити файл?" okLabel="Так, видалити" danger busy={pending} onCancel={() => setConfirm(null)} onOk={() => remove(confirm)}>
+          <p className="break-words">«{short(confirm)}» буде видалено назавжди. Посилання на нього (на сайті, у статтях, у повідомленнях) перестануть працювати.</p>
+        </Confirm>
       )}
     </div>
   )

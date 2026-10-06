@@ -12,7 +12,7 @@ export default async function Page() {
   return (
     <>
       <AdminNav active="about" />
-      <main className="mx-auto max-w-[1000px] px-4 py-6">
+      <main className="mx-auto max-w-[1040px] px-4 py-6">
         <AboutEditor initial={about} />
       </main>
     </>
