@@ -4,6 +4,7 @@ import { ARTICLES } from '@/lib/content'
 import { CATALOG_PATH, COUNTRIES, SITE } from '@/lib/site'
 import { LANDINGS } from '@/lib/landing'
 import { QUIZZES } from '@/lib/quizzes'
+import { VISA_PAGES } from '@/lib/visa'
 import { ruTwin, ukTwin } from '@/lib/alt-routes'
 
 export const revalidate = 3600
@@ -62,6 +63,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const a of ARTICLES) {
     push(a.path, { lastModified: a.datePublished ? new Date(a.datePublished) : a.date ? new Date(a.date) : now, changeFrequency: 'yearly', priority: 0.5 }, a.lang)
   }
-  for (const q of QUIZZES) if (!q.noindex) push(q.path, { lastModified: now, changeFrequency: 'monthly', priority: 0.4 })
+  for (const q of QUIZZES) if (!q.noindex) push(q.path, { lastModified: now, changeFrequency: 'monthly', priority: 0.4 }, q.path.startsWith('/ru/') ? 'ru' : 'uk')
+  for (const v of VISA_PAGES) push(v.path, { lastModified: new Date(v.updated.split('.').reverse().join('-')), changeFrequency: 'monthly', priority: v.lang === 'uk' ? 0.85 : 0.6 }, v.lang)
+  for (const p of ['/charity', '/ru/charity']) push(p, { lastModified: now, changeFrequency: 'yearly', priority: 0.3 }, p.startsWith('/ru/') ? 'ru' : 'uk')
   return out
 }

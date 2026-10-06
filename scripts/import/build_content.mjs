@@ -204,7 +204,14 @@ for (const l of landings.landings) if (CANONICAL[l.path]) l.canonical = CANONICA
 
 await build('articles', { articles: articles.articles })
 await build('landings', { landings: landings.landings })
+// the Tilda privacy template cited a Russian law — Ukrainian company, Ukrainian law
+const LEGAL_FIX = [['Федерального закону від 27.07.2006. №152-ФЗ «Про персональні дані»', 'Закону України «Про захист персональних даних» від 01.06.2010 № 2297-VI']]
 const patchFile = (f, data) => {
+  if (f === 'legal') {
+    let s = JSON.stringify(data)
+    for (const [a, b] of LEGAL_FIX) s = s.split(a).join(b)
+    data = JSON.parse(s)
+  }
   if (f === 'pages' && extra.pages) for (const [k, v] of Object.entries(extra.pages)) if (data[k]) Object.assign(data[k], v)
   if (f === 'home' && extra.home) for (const [lang, fields] of Object.entries(extra.home)) for (const [k, v] of Object.entries(fields)) setPath(data[lang], k, v)
   return data
@@ -217,7 +224,39 @@ const withTelegram = (list) => {
     ...r,
     vacancy: employer && r.vacancy && !r.vacancy.includes(employer) ? `${r.vacancy} ${employer}` : r.vacancy || employer,
   }))
-  return [...tg, ...list].sort((a, b) => dmy(b.date).localeCompare(dmy(a.date)))
+  return [...tg, ...list].sort((a, b) => dmy(b.date).localeCompare(dmy(a.date))).map(ruStamp)
+}
+// the stamp under a Russian review (vacancy · place) in Russian
+const RU_STAMP = {
+  'Офіціант у готелі': 'Официант в отеле',
+  'Покоївка в готелі Lake Hill Mazury': 'Горничная в отеле Lake Hill Mazury',
+  'Покоївка на віллах': 'Горничная на виллах',
+  'Працівник птахофабрики': 'Работник птицефабрики',
+  'Працівник складу брендового одягу': 'Работник склада брендовой одежды',
+  'Працівник складу брендового одягу ID Logistics (Zara)': 'Работник склада брендовой одежды ID Logistics (Zara)',
+  'Різноробочий на фабрику з упаковки курячого мʼяса': 'Разнорабочий на фабрику по упаковке куриного мяса',
+  'о. Наксос': 'о. Наксос',
+  'околиці Мюнхена': 'окрестности Мюнхена',
+  'Збирач замовлень на складі зоотоварів Dirks': 'Сборщик заказов на складе зоотоваров Dirks',
+  'Оператор верстатів з ЧПУ на автозавод D&H': 'Оператор станков с ЧПУ на автозавод D&H',
+  'Покоївка в готелі': 'Горничная в отеле',
+  'Працівник виробництва FORVIA': 'Работник производства FORVIA',
+  'Працівник виробництва сухих сніданків SANTE': 'Работник производства сухих завтраков SANTE',
+  'Працівник готелю': 'Работник отеля',
+  'Працівник на виробництво картону': 'Работник на производство картона',
+  'Працівник на виробництві пінопласту Amitec': 'Работник на производстве пенопласта Amitec',
+  'Працівник складу косметики Notino': 'Работник склада косметики Notino',
+  'Працівник складу одягу Shein': 'Работник склада одежды Shein',
+  'Працівник складу продуктового інтернет-магазину Kifli': 'Работник склада продуктового интернет-магазина Kifli',
+  'о. Крит': 'о. Крит',
+}
+// Russian reviews and the video reviews (shown on both sites)
+function ruStamp(r) {
+  if (r.lang !== 'ru' && !r.video) return r
+  const out = { ...r }
+  if (r.vacancy && RU_STAMP[r.vacancy]) out.vacancyRu = RU_STAMP[r.vacancy]
+  if (r.city && RU_STAMP[r.city]) out.cityRu = RU_STAMP[r.city]
+  return out
 }
 for (const f of ['home', 'pages', 'services', 'reviews', 'legal', 'quizzes'])
   if (exists(`${f}.json`)) await build(f, patchFile(f, renamePaths(f === 'reviews' ? withTelegram(read(`${f}.json`)) : read(`${f}.json`))))
@@ -264,3 +303,4 @@ console.log('legacy redirects', list.length)
 const tpost = { ...(exists('tpost-redirects.vacancies.json') ? read('tpost-redirects.vacancies.json') : {}), ...articleTpost }
 fs.writeFileSync(path.join(DATA, 'tpost-redirects.json'), JSON.stringify(tpost))
 console.log('tpost redirects', Object.keys(tpost).length, 'images', jobs)
+await import('./apply_ru_pages.mjs')

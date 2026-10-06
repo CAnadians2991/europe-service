@@ -29,7 +29,9 @@
   "lang": "ru",
   "date": "07.09.2026",
   "vacancy": "Працівник складу брендового одягу",
-  "city": "околиці Мюнхена"
+  "city": "околиці Мюнхена",
+  "vacancyRu": "Работник склада брендовой одежды",
+  "cityRu": "окрестности Мюнхена"
  },
  {
   "name": "Лілія",
@@ -70,7 +72,8 @@
   "date": "07.08.2026",
   "vacancy": "Працівник складу одягу Shein",
   "city": "Magnice",
-  "video": "/reviews/video/shein-magnice-2026-08.mp4"
+  "video": "/reviews/video/shein-magnice-2026-08.mp4",
+  "vacancyRu": "Работник склада одежды Shein"
  },
  {
   "name": "Карина",
@@ -158,7 +161,8 @@
   "text": "Танюша, спасибо за работу! Всё отлично! Живём в хороших условиях со всеми удобствами! Остров, конечно, очень классный. Мне больше нравится, чем Кос. Спасибо вам большое за работу.",
   "lang": "ru",
   "date": "29.05.2026",
-  "vacancy": "Офіціант у готелі"
+  "vacancy": "Офіціант у готелі",
+  "vacancyRu": "Официант в отеле"
  },
  {
   "name": "Микола",
@@ -264,7 +268,8 @@
   "date": "12.05.2026",
   "vacancy": "Оператор верстатів з ЧПУ на автозавод D&H",
   "city": "Niezabyszewo",
-  "video": "/reviews/video/dh-niezabyszewo-2026-05.mp4"
+  "video": "/reviews/video/dh-niezabyszewo-2026-05.mp4",
+  "vacancyRu": "Оператор станков с ЧПУ на автозавод D&H"
  },
  {
   "name": "Олександра",
@@ -281,7 +286,8 @@
   "date": "20.04.2026",
   "vacancy": "Працівник складу брендового одягу ID Logistics (Zara)",
   "city": "Psary",
-  "video": "/reviews/video/zara-psary-2026-04.mp4"
+  "video": "/reviews/video/zara-psary-2026-04.mp4",
+  "vacancyRu": "Работник склада брендовой одежды ID Logistics (Zara)"
  },
  {
   "name": "Іван",
@@ -298,7 +304,8 @@
   "date": "26.03.2026",
   "vacancy": "Працівник на виробництві пінопласту Amitec",
   "city": "Sternalice",
-  "video": "/reviews/video/amitec-sternalice-2026-03.mp4"
+  "video": "/reviews/video/amitec-sternalice-2026-03.mp4",
+  "vacancyRu": "Работник на производстве пенопласта Amitec"
  },
  {
   "name": "Ганна",
@@ -344,7 +351,8 @@
   "date": "25.02.2026",
   "vacancy": "Працівник виробництва сухих сніданків SANTE",
   "city": "Stodzew",
-  "video": "/reviews/video/sante-stodzew-2026-02.mp4"
+  "video": "/reviews/video/sante-stodzew-2026-02.mp4",
+  "vacancyRu": "Работник производства сухих завтраков SANTE"
  },
  {
   "name": "Ольга",
@@ -357,7 +365,8 @@
   "country": "it",
   "vacancyUrl": "/tpost/dd5t90doo1-pokovka-v-gotel-leonardo",
   "postUid": "dd5t90doo1",
-  "video": "WE_OoRiYtOg"
+  "video": "WE_OoRiYtOg",
+  "vacancyRu": "Горничная в отеле"
  },
  {
   "name": "Диана",
@@ -499,7 +508,8 @@
   "date": "26.01.2026",
   "vacancy": "Працівник готелю",
   "city": "Kiel",
-  "video": "/reviews/video/hotel-kiel-2026-01.mp4"
+  "video": "/reviews/video/hotel-kiel-2026-01.mp4",
+  "vacancyRu": "Работник отеля"
  },
  {
   "name": "Максим",
@@ -553,7 +563,8 @@
   "text": "Хочу поделиться своим опытом в работе с Europe Service. Менеджер Алина помогла нам всё сделать, была на связи 24/7, переживала за нас больше, чем мы. По приезду в Польшу всё было так, как в нашем разговоре, нас встретили, и буквально через 5 дней вышли на работу. Europe Service могу смело рекомендовать: отличный сервис, приятные люди, коммуникабельность на высшем уровне)",
   "lang": "ru",
   "date": "26.12.2025",
-  "vacancy": "Різноробочий на фабрику з упаковки курячого мʼяса"
+  "vacancy": "Різноробочий на фабрику з упаковки курячого мʼяса",
+  "vacancyRu": "Разнорабочий на фабрику по упаковке куриного мяса"
  },
  {
   "name": "Анна",
@@ -582,7 +593,8 @@
   "country": "it",
   "vacancyUrl": "/tpost/dd5t90doo1-pokovka-v-gotel-leonardo",
   "postUid": "dd5t90doo1",
-  "video": "nBZ1PGyz2wQ"
+  "video": "nBZ1PGyz2wQ",
+  "vacancyRu": "Горничная в отеле"
  },
  {
   "name": "Марина",
@@ -613,7 +625,8 @@
   "lang": "ru",
   "date": "17.11.2025",
   "vacancy": "Працівник складу брендового одягу ID Logistics (Zara)",
-  "city": "Psary"
+  "city": "Psary",
+  "vacancyRu": "Работник склада брендовой одежды ID Logistics (Zara)"
  },
  {
   "name": "Вʼячеслав",
@@ -622,7 +635,8 @@
   "date": "05.11.2025",
   "vacancy": "Працівник виробництва FORVIA",
   "city": "Písek",
-  "video": "/reviews/video/forvia-pisek-2025-11.mp4"
+  "video": "/reviews/video/forvia-pisek-2025-11.mp4",
+  "vacancyRu": "Работник производства FORVIA"
  },
  {
   "name": "Вероника",
@@ -696,7 +710,8 @@
   "lang": "ru",
   "date": "09.10.2025",
   "vacancy": "Покоївка в готелі Lake Hill Mazury",
-  "city": "Ostróda"
+  "city": "Ostróda",
+  "vacancyRu": "Горничная в отеле Lake Hill Mazury"
  },
  {
   "name": "Лариса",
@@ -705,7 +720,8 @@
   "date": "30.09.2025",
   "vacancy": "Працівник складу косметики Notino",
   "city": "Rajhrad",
-  "video": "/reviews/video/notino-rajhrad-2025-09.mp4"
+  "video": "/reviews/video/notino-rajhrad-2025-09.mp4",
+  "vacancyRu": "Работник склада косметики Notino"
  },
  {
   "name": "Алла",
@@ -737,7 +753,8 @@
   "date": "15.09.2025",
   "vacancy": "Працівник складу продуктового інтернет-магазину Kifli",
   "city": "Budapest",
-  "video": "/reviews/video/kifli-budapest-2025-09.mp4"
+  "video": "/reviews/video/kifli-budapest-2025-09.mp4",
+  "vacancyRu": "Работник склада продуктового интернет-магазина Kifli"
  },
  {
   "name": "Світлана",
@@ -790,7 +807,8 @@
   "date": "15.08.2025",
   "vacancy": "Працівник на виробництво картону",
   "city": "Panevėžys",
-  "video": "/reviews/video/karton-panevezys-2025-08.mp4"
+  "video": "/reviews/video/karton-panevezys-2025-08.mp4",
+  "vacancyRu": "Работник на производство картона"
  },
  {
   "name": "Юлія",
@@ -887,7 +905,9 @@
   "lang": "ru",
   "date": "30.06.2025",
   "vacancy": "Покоївка на віллах",
-  "city": "о. Наксос"
+  "city": "о. Наксос",
+  "vacancyRu": "Горничная на виллах",
+  "cityRu": "о. Наксос"
  },
  {
   "name": "Тетяна",
@@ -963,7 +983,9 @@
   "date": "10.04.2025",
   "vacancy": "Покоївка в готелі",
   "city": "о. Крит",
-  "video": "/reviews/video/pokoivka-kryt-2025-04.mp4"
+  "video": "/reviews/video/pokoivka-kryt-2025-04.mp4",
+  "vacancyRu": "Горничная в отеле",
+  "cityRu": "о. Крит"
  },
  {
   "name": "Діана",
@@ -987,7 +1009,8 @@
   "lang": "ru",
   "date": "25.03.2025",
   "vacancy": "Працівник птахофабрики",
-  "city": "Kaišiadorys"
+  "city": "Kaišiadorys",
+  "vacancyRu": "Работник птицефабрики"
  },
  {
   "name": "Руслана",
@@ -1020,7 +1043,8 @@
   "date": "01.01.2025",
   "vacancy": "Збирач замовлень на складі зоотоварів Dirks",
   "city": "Krosno Odrzańskie",
-  "video": "/reviews/video/dirks-krosno-2025-01.mp4"
+  "video": "/reviews/video/dirks-krosno-2025-01.mp4",
+  "vacancyRu": "Сборщик заказов на складе зоотоваров Dirks"
  },
  {
   "name": "Диана",

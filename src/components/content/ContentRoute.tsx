@@ -14,6 +14,8 @@ import { Blocks } from './Blocks'
 import { QuizLandingView } from '@/components/quiz/QuizLanding'
 import { LandingCatalog } from '@/components/vacancy/VacanciesRoute'
 import { InfoLanding } from './InfoLanding'
+import { VisaLanding } from '@/components/visa/VisaLanding'
+import { VISA_PAGES, getVisaPage } from '@/lib/visa'
 
 type Lang = 'uk' | 'ru'
 
@@ -30,6 +32,7 @@ export async function contentPaths(lang: Lang) {
   for (const l of LANDINGS) if (!l.path.startsWith('/vacancies') && !l.path.startsWith('/ru/vacancies')) out.add(l.path)
   for (const l of LEGAL) out.add(l.path)
   for (const q of QUIZZES) out.add(q.path)
+  for (const v of VISA_PAGES) out.add(v.path)
   for (const p of Object.values(PAGES)) if (p?.path && !p.broken) out.add(p.path)
   // open vacancy posts are prerendered (+ their Russian pages); the closed ones render on the first visit
   for (const v of vacancies) {
@@ -42,6 +45,8 @@ export async function contentPaths(lang: Lang) {
 
 export async function resolveContent(path: string) {
   if (OWN_ROUTES.has(path)) return null
+  const visa = getVisaPage(path)
+  if (visa) return { kind: 'visa' as const, visa }
   const a = getArticle(path)
   if (a) return { kind: 'article' as const, a }
   const l = getLanding(path)
@@ -68,6 +73,11 @@ export async function contentMetadata(path: string): Promise<Metadata> {
   const r = await resolveContent(path)
   if (!r) return {}
   if (r.kind === 'redirect') return {}
+  if (r.kind === 'visa') {
+    const p = r.visa
+    const [ukP, ruP] = p.lang === 'uk' ? [p.path, p.twin] : [p.twin, p.path]
+    return pageMeta({ title: p.seoTitle, description: p.seoDescription, path: p.path, lang: p.lang, absoluteTitle: true, alternates: { uk: ukP, ru: ruP, 'x-default': ukP } })
+  }
   if (r.kind === 'vacancy') return vacancyPageMeta(r.v)
   if (r.kind === 'vacancy-ru') return vacancyPageMeta(r.v, 'ru')
   if (r.kind === 'article') {
@@ -85,8 +95,9 @@ export async function contentMetadata(path: string): Promise<Metadata> {
     })
   }
   if (r.kind === 'landing') return pageMeta({ title: r.l.title, description: r.l.description || r.l.h1, path, lang: r.l.lang, absoluteTitle: true, hreflang: Boolean(r.l.twin), canonical: r.l.canonical })
-  if (r.kind === 'quiz') return pageMeta({ title: r.q.title, description: r.q.description, path, noindex: r.q.noindex, absoluteTitle: true })
-  if (r.kind === 'legal') return pageMeta({ title: r.doc.seoTitle || r.doc.title, description: r.doc.seoDescription || r.doc.title, path, noindex: true, absoluteTitle: true })
+  const lang = path.startsWith('/ru/') ? 'ru' : 'uk'
+  if (r.kind === 'quiz') return pageMeta({ title: r.q.title, description: r.q.description, path, lang, noindex: r.q.noindex, absoluteTitle: true })
+  if (r.kind === 'legal') return pageMeta({ title: r.doc.seoTitle || r.doc.title, description: r.doc.seoDescription || r.doc.title, path, lang, noindex: true, absoluteTitle: true })
   const p = r.page
   return pageMeta({ title: p.seoTitle || p.title || 'Europe Service', description: p.seoDescription || p.title || p.seoTitle || 'Europe Service', path, lang: p.lang, absoluteTitle: true, noindex: /link/.test(path) })
 }
@@ -95,6 +106,7 @@ export async function ContentView({ path, lang }: { path: string; lang: Lang }) 
   const r = await resolveContent(path)
   if (!r) return null
   if (r.kind === 'redirect') permanentRedirect(r.to)
+  if (r.kind === 'visa') return <VisaLanding p={r.visa} />
   if (r.kind === 'vacancy') return <VacancyView v={r.v} />
   if (r.kind === 'vacancy-ru') return <VacancyView v={r.v} as="ru" />
   const home = { name: lang === 'uk' ? 'Головна' : 'Главная', path: lang === 'uk' ? '/' : '/ru' }

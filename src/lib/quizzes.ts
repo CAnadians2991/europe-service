@@ -47,6 +47,7 @@ interface RawQuiz {
 
 const WORK = new Set(['warehouse', 'factory', 'food', 'horeca'])
 const COMMON_BULLETS = ['Ліцензоване агентство з 2019 року', 'Житло від роботодавця', 'Супровід до першого робочого дня']
+const COMMON_BULLETS_RU = ['Лицензированное агентство с 2019 года', 'Жилье от работодателя', 'Сопровождение до первого рабочего дня']
 
 const raw = (Array.isArray(quizzesData) ? quizzesData : ((quizzesData as { quizzes?: RawQuiz[] }).quizzes ?? [])) as RawQuiz[]
 
@@ -64,6 +65,7 @@ export const QUIZZES: QuizLanding[] = [
     .filter((q) => q.path && q.path !== '/pidbir')
     .map((q): QuizLanding => {
       const id = q.id || q.path.replace(/^\//, '')
+      const ru = q.path.startsWith('/ru/')
       const preset: Record<string, string> = {}
       if (q.country) preset.country = q.country
       if (q.work && WORK.has(q.work)) preset.work = q.work
@@ -72,13 +74,13 @@ export const QUIZZES: QuizLanding[] = [
         id,
         title: q.title,
         h1: q.h1 || q.title,
-        subtitle: q.subtitle || 'Одна-дві короткі відповіді — і менеджер зателефонує з вакансіями під ваш запит.',
+        subtitle: q.subtitle || (ru ? 'Один-два коротких ответа — и менеджер перезвонит с вакансиями под ваш запрос.' : 'Одна-дві короткі відповіді — і менеджер зателефонує з вакансіями під ваш запит.'),
         description: q.description || q.subtitle || q.title,
-        bullets: (q.bullets?.length ? q.bullets : COMMON_BULLETS).slice(0, 4),
+        bullets: (q.bullets?.length ? q.bullets : ru ? COMMON_BULLETS_RU : COMMON_BULLETS).slice(0, 4),
         ...(Object.keys(preset).length ? { preset } : {}),
         ...(q.country ? { country: q.country } : {}),
         ...(q.recruiting
-          ? { match: false, steps: [], finalTitle: 'Залиште номер — HR-менеджер зателефонує', submitLabel: 'Надіслати', destination: { code: 'ua', name: 'Europe Service' } }
+          ? { match: false, steps: [], finalTitle: ru ? 'Оставьте номер — HR-менеджер перезвонит' : 'Залиште номер — HR-менеджер зателефонує', submitLabel: ru ? 'Отправить' : 'Надіслати', destination: { code: 'ua', name: 'Europe Service' } }
           : {}),
         ...(q.office ? { office: q.office } : {}),
         ...(q.employer ? { employer: q.employer } : {}),

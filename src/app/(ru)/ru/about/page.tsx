@@ -15,9 +15,9 @@ import { YouTube } from '@/components/content/YouTube'
 
 // title and description exactly as on Tilda (the page ranks with them)
 export const metadata: Metadata = pageMeta({
-  title: "Про нас - офіційний сайт роботи в Польщі",
+  title: "О нас — официальный сайт работы в Польше",
   absoluteTitle: true,
-  description: "Офіційна робота у Польщі без посередників ✅Тільки безкоштовні вакансії від прямих роботодавців ✅Допомогаємо отримати робочу візу ➦ Звертайтеся!",
+  description: "Официальная работа в Польше без посредников ✅Только бесплатные вакансии от прямых работодателей ✅Помогаем получить рабочую визу ➦ Обращайтесь!",
   path: '/ru/about',
   lang: 'ru',
 })

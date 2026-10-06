@@ -828,7 +828,8 @@
     "text": "Приєднатись до збору",
     "href": "https://send.monobank.ua/jar/3BMHDYgWJi"
    }
-  ]
+  ],
+  "twin": "/ru/charity"
  },
  "countries_hub": {
   "path": "/countires",
@@ -1128,5 +1129,54 @@
     "href": "https://invite.viber.com/?g2=AQBWlwFv5gdTdUrrbsIPs5k7qT3KjJ02JtV2pctD95fAJJgf2nXl7SmI%2F3Zt8DmV"
    }
   ]
+ },
+ "charity_ru": {
+  "path": "/ru/charity",
+  "lang": "ru",
+  "title": "Благотворительность",
+  "seoTitle": "Благотворительность Europe Service — помощь армии Украины",
+  "seoDescription": "Благотворительная акция Europe Service: каждую неделю переводим 5% дохода на помощь украинской армии. Сбор на DJI Mavic для пограничного отряда.",
+  "ogImage": "/media/c/5f79de301b",
+  "monobankJar": "https://send.monobank.ua/jar/3BMHDYgWJi",
+  "blocks": [
+   {
+    "type": "img",
+    "src": "/media/c/df83c2118f"
+   },
+   {
+    "type": "h2",
+    "text": "Сбор средств на DJI Mavic для пограничного отряда"
+   },
+   {
+    "type": "p",
+    "text": "Компания Европа Сервис каждую неделю переводит 5% своего дохода на помощь украинской армии."
+   },
+   {
+    "type": "p",
+    "text": "Раз в неделю мы будем переводить 5% от дохода на счет благотворительной организации Lifeandpeace для помощи украинской армии"
+   },
+   {
+    "type": "img",
+    "src": "/media/c/6227954685"
+   },
+   {
+    "type": "img",
+    "src": "/media/c/0cf8cf5827"
+   },
+   {
+    "type": "h2",
+    "text": "Благотворительная банка сбора"
+   },
+   {
+    "type": "p",
+    "text": "Сделай свой вклад в победу Украины!"
+   },
+   {
+    "type": "button",
+    "text": "Присоединиться к сбору",
+    "href": "https://send.monobank.ua/jar/3BMHDYgWJi"
+   }
+  ],
+  "twin": "/charity"
  }
 }

@@ -1,3 +1,4 @@
+import { VISA_PAGES } from './visa'
 import twins from '@/data/content/twins.json'
 
 /**
@@ -16,7 +17,9 @@ const STATIC: Record<string, string> = {
   '/news': '/ru/news',
 }
 const { vacancyRu: _vr, ...pairs } = twins as Record<string, unknown> & { vacancyRu?: string[] }
-export const UK_TO_RU: Record<string, string> = { ...(pairs as Record<string, string>), ...STATIC }
+// service landings with their own Russian slugs (visa)
+const VISA = Object.fromEntries(VISA_PAGES.filter((p) => p.lang === 'uk').map((p) => [p.path, p.twin]))
+export const UK_TO_RU: Record<string, string> = { ...(pairs as Record<string, string>), ...VISA, ...STATIC }
 export const RU_TO_UK: Record<string, string> = Object.fromEntries(Object.entries(UK_TO_RU).map(([a, b]) => [b, a]))
 
 /** Russian vacancy pages that exist (translated open vacancies), written by the import into twins.json as «vacancyRu» */
