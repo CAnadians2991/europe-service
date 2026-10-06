@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { SectionHead } from '@/components/sections/Sections'
-import { IconBuilding, IconCheck, IconDoc, IconHeadset, IconShield, IconWallet } from '@/components/ui/icons'
 import { COUNTRY, SITE } from '@/lib/site'
 import { plural } from '@/lib/format'
 import { COUNTRY_PRESETS } from '@/lib/country-presets'
@@ -71,42 +70,55 @@ export function AboutStory({ lang, facts }: { lang: Lang; facts: AboutFacts }) {
 
   return (
     <>
-      <section className="container-x pt-10" aria-label={uk ? 'Europe Service у цифрах' : 'Europe Service в цифрах'}>
-        <dl className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.l} className="rounded-3xl bg-brand-50 p-5">
+      {/* facts strip: display figures, hairline dividers */}
+      <section className="border-b border-line bg-white" aria-label={uk ? 'Europe Service у цифрах' : 'Europe Service в цифрах'}>
+        <dl className="container-x grid grid-cols-2 lg:grid-cols-4">
+          {stats.map((s, i) => (
+            <div key={s.l} className={`py-6 pr-4 ${i % 2 ? 'border-l border-line pl-4 lg:pl-6' : ''} ${i > 1 ? 'border-t border-line lg:border-t-0' : ''} ${i === 2 ? 'lg:border-l lg:pl-6' : ''}`}>
               <dt className="sr-only">{s.l}</dt>
-              <dd className="font-display text-[34px] font-extrabold leading-none text-brand-700 sm:text-[40px]">{s.v}</dd>
-              <dd className="mt-2 text-[14px] leading-snug text-ink-2">{s.l}</dd>
+              <dd className="font-display text-[26px] font-semibold leading-none tracking-[-0.02em] sm:text-[34px]">{s.v}</dd>
+              <dd className="mt-2 text-[15px] leading-snug text-muted">{s.l}</dd>
             </div>
           ))}
         </dl>
       </section>
 
-      <section className="container-x grid gap-10 py-14 lg:grid-cols-[1.15fr_0.85fr]" aria-labelledby="story-h">
-        <div>
-          <SectionHead id="story-h" eyebrow={uk ? 'Наша історія' : 'Наша история'} title={uk ? 'Як з’явився Europe Service' : 'Как появился Europe Service'} />
-          <div className="mt-5 space-y-4 text-[16.5px] leading-relaxed text-ink-2">
-            {story.map((p) => (
-              <p key={p.slice(0, 20)}>{p}</p>
+      {/* the story as an editorial column */}
+      <section className="container-x grid gap-8 py-16 sm:py-20 lg:grid-cols-[220px_minmax(0,1fr)]" aria-labelledby="story-h">
+        <p className="eyebrow self-start lg:pt-3">
+          <span className="opacity-60">01 —</span>
+          {uk ? 'Наша історія' : 'Наша история'}
+        </p>
+        <div className="max-w-[720px]">
+          <h2 id="story-h" className="text-[26px] sm:text-[38px]">{uk ? 'Як з’явився Europe Service' : 'Как появился Europe Service'}</h2>
+          <div className="mt-6 space-y-5 text-[17px] leading-[1.7] text-ink-2">
+            {story.map((p, i) => (
+              <p key={p.slice(0, 20)} className={i === 0 ? 'border-l-[3px] border-brand-500 pl-5 text-[18.5px] leading-relaxed text-ink' : ''}>
+                {p}
+              </p>
             ))}
           </div>
         </div>
-        <div>
-          <h3 className="text-xl font-bold">{uk ? 'Шлях агентства' : 'Путь агентства'}</h3>
-          <ol className="mt-5 space-y-0">
-            {path.map((x, i) => (
-              <li key={x.y} className="relative flex gap-4 pb-6 last:pb-0">
-                {i < path.length - 1 && <span aria-hidden className="absolute left-[35px] top-12 h-[calc(100%-3rem)] w-px bg-brand-200" />}
-                <span className="grid h-14 w-[72px] shrink-0 place-items-center rounded-2xl bg-brand-600 px-1 text-center text-[13px] font-bold leading-tight text-white">{x.y}</span>
-                <div className="pt-1">
-                  <p className="font-bold">{x.t}</p>
-                  <p className="mt-1 text-[15px] leading-relaxed text-ink-2">{x.d}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+      </section>
+
+      {/* the path: mono years over a 3-px rule */}
+      <section className="container-x pb-16 sm:pb-20" aria-labelledby="path-h">
+        <div className="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
+          <p className="eyebrow self-start lg:pt-1">
+            <span className="opacity-60">02 —</span>
+            {uk ? 'Шлях' : 'Путь'}
+          </p>
+          <h3 id="path-h" className="font-display text-[22px] font-semibold tracking-[-0.02em] sm:text-[28px]">{uk ? 'Шлях агентства' : 'Путь агентства'}</h3>
         </div>
+        <ol className="mt-8 grid gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+          {path.map((x) => (
+            <li key={x.y} className="border-t-[3px] border-ink pt-5 sm:pr-8">
+              <span className="num block text-[30px] font-medium leading-none text-brand-600 sm:text-[34px]">{x.y}</span>
+              <p className="mt-4 text-[18px] font-semibold leading-snug text-ink">{x.t}</p>
+              <p className="mt-2 text-[15.5px] leading-relaxed text-ink-2">{x.d}</p>
+            </li>
+          ))}
+        </ol>
       </section>
     </>
   )
@@ -116,42 +128,44 @@ export function AboutPrinciples({ lang }: { lang: Lang }) {
   const uk = lang === 'uk'
   const items = uk
     ? [
-        { I: IconShield, t: 'Офіційно й прозоро', d: 'Ліцензія Мінсоцполітики № 223 від 15.02.2019, декларація Мінекономіки, ЄДРПОУ 42515343. Договір оферти й оплата за офіційними реквізитами — жодних домовленостей «на словах».' },
-        { I: IconWallet, t: 'Вакансія — безкоштовно', d: 'Ви платите лише за оформлення документів і супровід, за фіксованою ціною пакета. Усі ціни відкриті на сторінці «Послуги».' },
-        { I: IconDoc, t: 'Чесні умови', d: 'Показуємо умови так, як їх дає роботодавець: ставку нетто чи брутто, графік, житло й вимоги. Незрозуміле — пояснимо до виїзду.' },
-        { I: IconHeadset, t: 'Особистий менеджер', d: 'Одна людина веде вас від першої консультації до першого робочого дня й на зв’язку в Telegram і Viber.' },
-        { I: IconCheck, t: 'Гарантія заміни вакансії', d: 'Якщо робота не підійшла, безкоштовно підберемо іншу: протягом місяця, пів року або року — залежно від пакета.' },
-        { I: IconBuilding, t: 'П’ять офісів в Україні', d: 'Київ (вул. Січових Стрільців, 77), Львів, Рівне, Житомир, Одеса. Приходьте на консультацію — познайомитеся з менеджером і поставите всі запитання особисто.' },
+        { t: 'Офіційно й прозоро', d: 'Ліцензія Мінсоцполітики № 223 від 15.02.2019, декларація Мінекономіки, ЄДРПОУ 42515343. Договір оферти й оплата за офіційними реквізитами — жодних домовленостей «на словах».' },
+        { t: 'Вакансія — безкоштовно', d: 'Ви платите лише за оформлення документів і супровід, за фіксованою ціною пакета. Усі ціни відкриті на сторінці «Послуги».' },
+        { t: 'Чесні умови', d: 'Показуємо умови так, як їх дає роботодавець: ставку нетто чи брутто, графік, житло й вимоги. Незрозуміле — пояснимо до виїзду.' },
+        { t: 'Особистий менеджер', d: 'Одна людина веде вас від першої консультації до першого робочого дня й на зв’язку в Telegram і Viber.' },
+        { t: 'Гарантія заміни вакансії', d: 'Якщо робота не підійшла, безкоштовно підберемо іншу: протягом місяця, пів року або року — залежно від пакета.' },
+        { t: 'П’ять офісів в Україні', d: 'Київ (вул. Січових Стрільців, 77), Львів, Рівне, Житомир, Одеса. Приходьте на консультацію — познайомитеся з менеджером і поставите всі запитання особисто.' },
       ]
     : [
-        { I: IconShield, t: 'Официально и прозрачно', d: 'Лицензия Минсоцполитики № 223 от 15.02.2019, декларация Минэкономики, ЕГРПОУ 42515343. Договор оферты и оплата по официальным реквизитам — никаких договорённостей «на словах».' },
-        { I: IconWallet, t: 'Вакансия — бесплатно', d: 'Вы платите только за оформление документов и сопровождение, по фиксированной цене пакета. Все цены открыты на странице «Услуги».' },
-        { I: IconDoc, t: 'Честные условия', d: 'Показываем условия так, как их даёт работодатель: ставку нетто или брутто, график, жильё и требования. Непонятное — объясним до выезда.' },
-        { I: IconHeadset, t: 'Личный менеджер', d: 'Один человек ведёт вас от первой консультации до первого рабочего дня и на связи в Telegram и Viber.' },
-        { I: IconCheck, t: 'Гарантия замены вакансии', d: 'Если работа не подошла, бесплатно подберём другую: в течение месяца, полугода или года — в зависимости от пакета.' },
-        { I: IconBuilding, t: 'Пять офисов в Украине', d: 'Киев (ул. Сечевых Стрельцов, 77), Львов, Ровно, Житомир, Одесса. Приходите на консультацию — познакомитесь с менеджером и зададите все вопросы лично.' },
+        { t: 'Официально и прозрачно', d: 'Лицензия Минсоцполитики № 223 от 15.02.2019, декларация Минэкономики, ЕГРПОУ 42515343. Договор оферты и оплата по официальным реквизитам — никаких договорённостей «на словах».' },
+        { t: 'Вакансия — бесплатно', d: 'Вы платите только за оформление документов и сопровождение, по фиксированной цене пакета. Все цены открыты на странице «Услуги».' },
+        { t: 'Честные условия', d: 'Показываем условия так, как их даёт работодатель: ставку нетто или брутто, график, жильё и требования. Непонятное — объясним до выезда.' },
+        { t: 'Личный менеджер', d: 'Один человек ведёт вас от первой консультации до первого рабочего дня и на связи в Telegram и Viber.' },
+        { t: 'Гарантия замены вакансии', d: 'Если работа не подошла, бесплатно подберём другую: в течение месяца, полугода или года — в зависимости от пакета.' },
+        { t: 'Пять офисов в Украине', d: 'Киев (ул. Сечевых Стрельцов, 77), Львов, Ровно, Житомир, Одесса. Приходите на консультацию — познакомитесь с менеджером и зададите все вопросы лично.' },
       ]
   return (
-    <section className="bg-surface py-14 sm:py-20" aria-labelledby="principles-h">
-      <div className="container-x">
-        <SectionHead id="principles-h" eyebrow={uk ? 'Наші принципи' : 'Наши принципы'} title={uk ? 'Як ми працюємо' : 'Как мы работаем'} />
-        <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map(({ I, t, d }) => (
-            <li key={t} className="rounded-3xl bg-white p-6 ring-1 ring-line">
-              <span className="grid size-11 place-items-center rounded-2xl bg-brand-50 text-brand-600">
-                <I className="size-6" />
-              </span>
-              <h3 className="mt-4 text-[18px] font-bold">{t}</h3>
-              <p className="mt-1.5 text-[15px] leading-relaxed text-ink-2">{d}</p>
-            </li>
+    <section className="border-t border-line bg-white" aria-labelledby="principles-h">
+      <div className="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+        <div>
+          <SectionHead id="principles-h" eyebrow={uk ? 'Наші принципи' : 'Наши принципы'} title={uk ? 'Як ми працюємо' : 'Как мы работаем'} />
+          <p className="mt-5 max-w-sm text-[15.5px] leading-relaxed text-ink-2">
+            {uk ? 'Ціни на пакети — на сторінці ' : 'Цены на пакеты — на странице '}
+            <Link href={uk ? '/poslugi' : '/ru/services'} className="font-semibold text-brand-700 underline underline-offset-2">{uk ? '«Послуги»' : '«Услуги»'}</Link>
+            {uk ? ', відгуки клієнтів — у розділі ' : ', отзывы клиентов — в разделе '}
+            <Link href={uk ? '/vidguki' : '/ru/otzyvy'} className="font-semibold text-brand-700 underline underline-offset-2">{uk ? '«Відгуки»' : '«Отзывы»'}</Link>.
+          </p>
+        </div>
+        <dl className="border-t-[3px] border-ink">
+          {items.map(({ t, d }, i) => (
+            <div key={t} className="grid gap-1 border-b border-line py-5 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] sm:gap-6">
+              <dt className="flex gap-3 text-[17px] font-semibold leading-snug">
+                <span className="num mt-0.5 w-7 shrink-0 text-[13px] font-medium text-muted">{String(i + 1).padStart(2, '0')}</span>
+                {t}
+              </dt>
+              <dd className="pl-10 text-[15.5px] leading-relaxed text-ink-2 sm:pl-0">{d}</dd>
+            </div>
           ))}
-        </ul>
-        <p className="mt-6 text-[15px] text-ink-2">
-          {uk ? 'Ціни на пакети — на сторінці ' : 'Цены на пакеты — на странице '}
-          <Link href={uk ? '/poslugi' : '/ru/services'} className="font-semibold text-brand-700 underline underline-offset-2">{uk ? '«Послуги»' : '«Услуги»'}</Link>
-          {uk ? ', відгуки клієнтів — у розділі ' : ', отзывы клиентов — в разделе '}
-          <Link href={uk ? '/vidguki' : '/ru/otzyvy'} className="font-semibold text-brand-700 underline underline-offset-2">{uk ? '«Відгуки»' : '«Отзывы»'}</Link>.
-        </p>
+        </dl>
       </div>
     </section>
   )

@@ -29,17 +29,20 @@ export const ANY_REQUEST = {
 export function AnyRequest({ lang = 'uk', id, preset, className = '' }: { lang?: 'uk' | 'ru'; id: string; preset?: Record<string, string>; className?: string }) {
   const t = ANY_REQUEST[lang]
   return (
-    <section data-cta className={`rounded-[24px] bg-brand-100 p-5 sm:p-7 ${className}`} aria-label={t.title}>
-      <p className="eyebrow">{t.eyebrow}</p>
-      <p className="mt-2 font-display text-[21px] font-bold leading-tight sm:text-[24px]">{t.title}</p>
-      <p className="mt-2 max-w-2xl text-[15.5px] leading-relaxed text-ink-2">{t.text}</p>
-      <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3">
-        <QuizButton id={id} preset={preset} className="btn-accent !px-6 !py-3.5">
+    <section data-cta className={`border border-line border-t-[3px] border-t-ink bg-white p-5 sm:p-7 ${className}`} aria-label={t.title}>
+      <p className="eyebrow">
+        <span aria-hidden className="size-2 bg-leaf" />
+        {t.eyebrow}
+      </p>
+      <p className="mt-3 font-display text-[21px] font-semibold leading-tight tracking-[-0.02em] sm:text-[25px]">{t.title}</p>
+      <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-ink-2">{t.text}</p>
+      <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-line pt-5">
+        <QuizButton id={id} preset={preset} className="btn-accent !px-6">
           {t.cta}
         </QuizButton>
-        <span className="text-sm text-ink-2">
+        <span className="text-[15px] text-ink-2">
           {t.call}{' '}
-          <a href={`tel:${SITE.phone}`} className="whitespace-nowrap font-semibold text-brand-800 underline underline-offset-2">
+          <a href={`tel:${SITE.phone}`} className="num inline-flex min-h-11 items-center whitespace-nowrap font-semibold text-ink underline decoration-line-strong underline-offset-[3px] hover:text-brand-700">
             {SITE.phoneDisplay}
           </a>
         </span>

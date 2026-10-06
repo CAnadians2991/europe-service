@@ -19,8 +19,9 @@ function needDb() {
 
 export async function adminListVacancies(): Promise<Vacancy[]> {
   needDb()
-  const rows = (await sql`select data from vacancies order by active desc, sort asc, updated_at desc`) as { data: Vacancy }[]
-  return rows.map((r) => r.data)
+  // 1 400+ rows (closed Tilda posts included): the list needs no texts, so the heavy fields stay in the database
+  const rows = (await sql`select data - 'sections' - 'intro' - 'reviews' - 'housingPhotos' - 'ru' as data from vacancies order by active desc, sort asc, updated_at desc`) as { data: Vacancy }[]
+  return rows.map((r) => Object.assign({ sections: [], intro: '', reviews: [], housingPhotos: [] }, r.data) as Vacancy)
 }
 
 export async function adminGetVacancy(id: string): Promise<Vacancy | null> {

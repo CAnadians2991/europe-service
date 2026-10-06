@@ -4,15 +4,19 @@ import Link from 'next/link'
 import { useEffect, useId, useRef, useState } from 'react'
 import { readAttribution, trackEvent, trackLead } from '@/lib/track'
 import { SITE } from '@/lib/site'
+import { IconTelegram, IconViber } from '@/components/ui/icons'
 
+/** `cc` — the 2-letter country code shown in the select (the register style uses codes, not emoji flags) */
 export const PHONE_CODES = [
-  { code: '+380', flag: '🇺🇦', len: 9, hint: '67 123 45 67' },
-  { code: '+48', flag: '🇵🇱', len: 9, hint: '512 345 678' },
-  { code: '+420', flag: '🇨🇿', len: 9, hint: '601 234 567' },
-  { code: '+49', flag: '🇩🇪', len: 11, hint: '1512 3456789' },
-  { code: '+373', flag: '🇲🇩', len: 8, hint: '621 12 345' },
-  { code: '+', flag: '🌍', len: 12, hint: 'код країни і номер', hintRu: 'код страны и номер' },
+  { code: '+380', cc: 'UA', flag: '🇺🇦', len: 9, hint: '67 123 45 67' },
+  { code: '+48', cc: 'PL', flag: '🇵🇱', len: 9, hint: '512 345 678' },
+  { code: '+420', cc: 'CZ', flag: '🇨🇿', len: 9, hint: '601 234 567' },
+  { code: '+49', cc: 'DE', flag: '🇩🇪', len: 11, hint: '1512 3456789' },
+  { code: '+373', cc: 'MD', flag: '🇲🇩', len: 8, hint: '621 12 345' },
+  { code: '+', cc: '', flag: '🌍', len: 12, hint: 'код країни і номер', hintRu: 'код страны и номер' },
 ]
+
+const codeLabel = (c: (typeof PHONE_CODES)[number], lang: 'uk' | 'ru') => (c.cc ? `${c.cc} ${c.code}` : lang === 'uk' ? 'Інший +' : 'Другой +')
 
 const now = () => Date.now()
 
@@ -201,24 +205,42 @@ export function LeadForm({
 
   if (state === 'done') {
     return (
-      <div role="status" className={`rounded-2xl p-5 ${dark ? 'bg-white/10 text-white' : 'bg-brand-50 text-ink'}`}>
+      <div role="status" className={`border-t-[3px] p-5 ${dark ? 'border-white bg-white/10 text-white' : 'border-brand-600 bg-brand-50 text-ink'}`}>
         <div className="flex items-center gap-3">
-          <span className="grid size-10 shrink-0 place-items-center rounded-full bg-ok text-white">
+          <span className={`grid size-9 shrink-0 place-items-center ${dark ? 'bg-white text-brand-700' : 'bg-brand-600 text-white'}`}>
             <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
           </span>
-          <p className="text-lg font-bold">{successTitle ?? t.okTitle}</p>
+          <p className="text-[18px] font-bold leading-snug">{successTitle ?? t.okTitle}</p>
         </div>
-        <p className={`mt-3 text-[15px] ${dark ? 'text-white/85' : 'text-ink-2'}`}>{successText ?? t.okText}</p>
-        <p className={`mt-3 text-sm ${dark ? 'text-white/75' : 'text-muted'}`}>{t.okMore}</p>
-        <div className="mt-2 flex flex-wrap gap-2">
-          <a href={SITE.telegram} target="_blank" rel="noopener" className={dark ? 'btn-white !py-2.5' : 'btn-ghost !py-2.5'}>Telegram</a>
-          <a href={SITE.viber} target="_blank" rel="noopener" className={dark ? 'btn-white !py-2.5' : 'btn-ghost !py-2.5'}>Viber</a>
+        <p className={`mt-3 text-[16px] leading-relaxed ${dark ? 'text-white/85' : 'text-ink-2'}`}>{successText ?? t.okText}</p>
+        <p className={`mt-4 text-[15px] ${dark ? 'text-white/80' : 'text-ink-2'}`}>{t.okMore}</p>
+        <div className="mt-2.5 grid grid-cols-2 gap-2">
+          <a href={SITE.telegram} target="_blank" rel="noopener" className="btn !min-h-12 border border-line-strong bg-white !px-4 !py-3 !text-[16px] text-ink hover:border-ink">
+            <IconTelegram className="size-5 shrink-0 text-[#1c8cc2]" /> Telegram
+          </a>
+          <a href={SITE.viber} target="_blank" rel="noopener" className="btn !min-h-12 border border-line-strong bg-white !px-4 !py-3 !text-[16px] text-ink hover:border-ink">
+            <IconViber className="size-5 shrink-0 text-[#6150d8]" /> Viber
+          </a>
         </div>
       </div>
     )
   }
 
-  const labelCls = dark ? 'mb-1.5 block text-sm font-semibold text-white/90' : 'label'
+  const labelCls = dark ? 'mb-1.5 block text-[15px] font-semibold text-white/90' : 'mb-1.5 block text-[15px] font-semibold text-ink-2'
+  const codeAria = lang === 'uk' ? 'Код країни' : 'Код страны'
+  const placeholder = lang === 'ru' ? (code.hintRu ?? code.hint) : code.hint
+  const onCode = (e: React.ChangeEvent<HTMLSelectElement>) => setCode(PHONE_CODES.find((c) => c.code === e.target.value) || PHONE_CODES[0])
+  const codeOptions = PHONE_CODES.map((c) => (
+    <option key={c.code} value={c.code}>
+      {codeLabel(c, lang)}
+    </option>
+  ))
+  const policy = (
+    <>
+      {t.agree}{' '}
+      <Link href="/privacy" className={`underline underline-offset-2 ${dark ? 'font-semibold text-white' : 'hover:text-ink'}`}>{t.policy}</Link>.
+    </>
+  )
 
   if (inline) {
     return (
@@ -228,46 +250,40 @@ export function LeadForm({
             Website <input type="text" name="company_site" tabIndex={-1} autoComplete="off" />
           </label>
         </div>
-        <div className="grid gap-2 rounded-[28px] bg-white p-2 shadow-[0_18px_40px_-20px_rgb(0_40_120/0.6)] sm:grid-cols-[1fr_auto] sm:rounded-full">
-          <div className="flex gap-1 rounded-full bg-brand-50 sm:bg-transparent">
-            <select aria-label={lang === 'uk' ? 'Код країни' : 'Код страны'} className="field select-code !w-[112px] shrink-0 !rounded-full !border-transparent !bg-transparent focus:!border-brand-600 !pl-3 !pr-[26px] max-[359px]:!w-[98px] max-[359px]:!pl-2 max-[359px]:!pr-5 max-[359px]:bg-[position:right_5px_center]" value={code.code} onChange={(e) => setCode(PHONE_CODES.find((c) => c.code === e.target.value) || PHONE_CODES[0])}>
-              {PHONE_CODES.map((c) => (
-                <option key={c.code} value={c.code}>
-                  {c.flag} {c.code}
-                </option>
-              ))}
+        {/* one bar: code · number · button (stacked on a phone) */}
+        <div className="grid border-[1.5px] border-line-strong bg-white focus-within:border-brand-600 sm:grid-cols-[minmax(0,1fr)_auto]">
+          <div className="flex min-w-0">
+            <select aria-label={codeAria} className="field select-code num !w-[112px] shrink-0 !rounded-none !border-0 !border-r !border-line !pl-3 !pr-[26px] !text-[16px] focus:!ring-0 max-[359px]:!w-[100px] max-[359px]:!pl-2 max-[359px]:!pr-5 max-[359px]:bg-[position:right_5px_center]" value={code.code} onChange={onCode}>
+              {codeOptions}
             </select>
             <input
               aria-label={t.phone}
-              className="field min-w-0 !rounded-full !border-transparent !bg-transparent focus:!border-brand-600 !text-[18px] font-semibold max-[359px]:!px-3 max-[359px]:!text-[17px]"
+              className="field num min-w-0 !rounded-none !border-0 !text-[18px] font-semibold focus:!ring-0 max-[359px]:!px-3 max-[359px]:!text-[17px]"
               name="phone"
               type="tel"
               inputMode="tel"
               autoComplete="tel-national"
-              placeholder={lang === 'ru' ? (code.hintRu ?? code.hint) : code.hint}
+              placeholder={placeholder}
               value={formatLocal(code.code, local.replace(/\D/g, ''))}
               onChange={(e) => onPhone(e.target.value)}
               aria-invalid={!!err.phone}
               aria-describedby={err.phone ? `${id}-err` : undefined}
             />
           </div>
-          <button type="submit" disabled={state === 'sending'} aria-busy={state === 'sending'} className="btn-accent !px-8 !py-4 !text-[17px]">
+          <button type="submit" disabled={state === 'sending'} aria-busy={state === 'sending'} className="btn-accent !min-h-14 !rounded-none !px-8 !text-[17px]">
             {state === 'sending' ? t.sending : submitLabel || t.send}
           </button>
         </div>
         {(err.name || err.phone || state === 'error') && (
-          <p id={`${id}-err`} role="alert" className={`mt-2 text-center text-sm font-semibold ${dark ? 'text-white' : 'text-danger'}`}>{err.name || err.phone || t.fail}</p>
+          <p id={`${id}-err`} role="alert" className={`mt-2 text-[15px] font-semibold ${dark ? 'text-white' : 'text-danger'}`}>{err.name || err.phone || t.fail}</p>
         )}
-        <p className={`mt-3 text-center text-xs ${dark ? 'text-white/90' : 'text-muted'}`}>
-          {t.agree}{' '}
-          <Link href="/privacy" className={`underline underline-offset-2 ${dark ? 'font-semibold text-white' : ''}`}>{t.policy}</Link>.
-        </p>
+        <p className={`mt-3 text-[14px] leading-snug ${dark ? 'text-white/85' : 'text-muted'}`}>{policy}</p>
       </form>
     )
   }
 
   return (
-    <form data-lead-form onSubmit={submit} noValidate className={compact ? 'space-y-3' : 'space-y-4'}>
+    <form data-lead-form onSubmit={submit} noValidate className={compact ? 'space-y-3.5' : 'space-y-4'}>
       {/* honeypot */}
       <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>
@@ -280,25 +296,21 @@ export function LeadForm({
         <div className="@container">
         <div className="flex gap-2 @max-[230px]:flex-col">
           <select
-            aria-label={lang === 'uk' ? 'Код країни' : 'Код страны'}
-            className="field select-code !w-[116px] shrink-0 !pl-2.5 !pr-[26px] !py-4 !text-[17px] max-[359px]:!w-[102px] max-[359px]:!pl-2 max-[359px]:!pr-5 max-[359px]:bg-[position:right_5px_center] @max-[300px]:!w-[102px] @max-[300px]:!pl-2 @max-[300px]:!pr-5 @max-[300px]:bg-[position:right_5px_center] @max-[230px]:!w-full"
+            aria-label={codeAria}
+            className="field select-code num !w-[118px] shrink-0 !pl-3 !pr-[26px] !py-4 !text-[16px] font-medium max-[359px]:!w-[104px] max-[359px]:!pl-2 max-[359px]:!pr-5 max-[359px]:bg-[position:right_5px_center] @max-[300px]:!w-[104px] @max-[300px]:!pl-2 @max-[300px]:!pr-5 @max-[300px]:bg-[position:right_5px_center] @max-[230px]:!w-full"
             value={code.code}
-            onChange={(e) => setCode(PHONE_CODES.find((c) => c.code === e.target.value) || PHONE_CODES[0])}
+            onChange={onCode}
           >
-            {PHONE_CODES.map((c) => (
-              <option key={c.code} value={c.code}>
-                {c.flag} {c.code}
-              </option>
-            ))}
+            {codeOptions}
           </select>
           <input
             id={`${id}-phone`}
-            className="field min-w-0 !py-4 !text-[19px] font-semibold tracking-wide max-[359px]:!px-2.5 max-[359px]:!text-[17px] max-[359px]:tracking-normal @max-[300px]:!px-2.5 @max-[300px]:!text-[17px] @max-[300px]:tracking-normal"
+            className="field num min-w-0 !py-4 !text-[19px] font-semibold max-[359px]:!px-2.5 max-[359px]:!text-[17px] @max-[300px]:!px-2.5 @max-[300px]:!text-[17px]"
             name="phone"
             type="tel"
             inputMode="tel"
             autoComplete="tel-national"
-            placeholder={lang === 'ru' ? (code.hintRu ?? code.hint) : code.hint}
+            placeholder={placeholder}
             value={formatLocal(code.code, local.replace(/\D/g, ''))}
             onChange={(e) => onPhone(e.target.value)}
             aria-invalid={!!err.phone}
@@ -306,7 +318,7 @@ export function LeadForm({
           />
         </div>
         </div>
-        {err.phone && <p id={`${id}-phone-err`} role="alert" className="mt-1.5 text-[15px] font-semibold text-danger">{err.phone}</p>}
+        {err.phone && <p id={`${id}-phone-err`} role="alert" className={`mt-1.5 text-[15px] font-semibold ${dark ? 'text-white' : 'text-danger'}`}>{err.phone}</p>}
       </div>
       {nameField !== 'none' && (
         <div>
@@ -325,7 +337,7 @@ export function LeadForm({
             aria-describedby={err.name ? `${id}-name-err` : undefined}
             placeholder={namePlaceholder ?? (lang === 'uk' ? 'Олена' : 'Елена')}
           />
-          {err.name && <p id={`${id}-name-err`} role="alert" className="mt-1.5 text-[15px] font-semibold text-danger">{err.name}</p>}
+          {err.name && <p id={`${id}-name-err`} role="alert" className={`mt-1.5 text-[15px] font-semibold ${dark ? 'text-white' : 'text-danger'}`}>{err.name}</p>}
         </div>
       )}
       {askMessenger && (
@@ -343,7 +355,7 @@ export function LeadForm({
                 type="button"
                 aria-pressed={messenger === v}
                 onClick={() => setMessenger(messenger === v ? '' : v)}
-                className={dark ? `chip !border-white/30 !bg-white/10 !text-white aria-pressed:!bg-white aria-pressed:!text-brand-700` : 'chip'}
+                className={dark ? `chip !border-white/40 !bg-transparent !text-white hover:!border-white aria-pressed:!border-white aria-pressed:!bg-white aria-pressed:!text-ink` : 'chip'}
               >
                 {l}
               </button>
@@ -351,19 +363,16 @@ export function LeadForm({
           </div>
         </fieldset>
       )}
-      {err.extra && <p role="alert" className="text-[15px] font-semibold text-danger">{err.extra}</p>}
-      <button type="submit" disabled={state === 'sending'} aria-busy={state === 'sending'} className="btn-accent w-full !py-4 !text-[18px]">
+      {err.extra && <p role="alert" className={`text-[15px] font-semibold ${dark ? 'text-white' : 'text-danger'}`}>{err.extra}</p>}
+      <button type="submit" disabled={state === 'sending'} aria-busy={state === 'sending'} className="btn-accent !min-h-14 w-full !text-[18px]">
         {state === 'sending' ? t.sending : submitLabel || t.send}
       </button>
       {state === 'error' && (
         <p role="alert" className={`text-[15px] font-semibold ${dark ? 'text-white' : 'text-danger'}`}>
-          {t.fail} <a className="underline" href={`tel:${SITE.phone}`}>{SITE.phoneDisplay}</a>
+          {t.fail} <a className="num whitespace-nowrap underline" href={`tel:${SITE.phone}`}>{SITE.phoneDisplay}</a>
         </p>
       )}
-      <p className={`text-xs leading-snug ${dark ? 'text-white/70' : 'text-muted'}`}>
-        {t.agree}{' '}
-        <Link href="/privacy" className="underline underline-offset-2">{t.policy}</Link>.
-      </p>
+      <p className={`text-[14px] leading-snug ${dark ? 'text-white/75' : 'text-muted'}`}>{policy}</p>
     </form>
   )
 }

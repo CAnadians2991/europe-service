@@ -34,20 +34,23 @@ export function ConsentBanner({ lang }: { lang: 'uk' | 'ru' }) {
   if (!show) return null
   const uk = lang === 'uk'
   return (
-    <div role="dialog" aria-live="polite" aria-label={uk ? 'Файли cookie' : 'Файлы cookie'} className="fixed inset-x-3 bottom-[calc(84px+env(safe-area-inset-bottom))] z-40 mx-auto max-w-xl rounded-2xl bg-brand-600 p-4 text-sm text-white shadow-2xl lg:bottom-4">
-      <p className="text-white/90">
-        {uk
-          ? 'Ми використовуємо cookie для аналітики та реклами, щоб показувати актуальні вакансії.'
-          : 'Мы используем cookie для аналитики и рекламы, чтобы показывать актуальные вакансии.'}{' '}
-        <Link href="/privacy" className="underline underline-offset-2">{uk ? 'Детальніше' : 'Подробнее'}</Link>
-      </p>
-      <div className="mt-3 flex gap-2">
-        <button type="button" className="btn-accent !px-5 !py-2.5" onClick={() => { apply(true); setShow(false) }}>
-          {uk ? 'Прийняти' : 'Принять'}
-        </button>
-        <button type="button" className="btn !px-5 !py-2.5 text-white ring-1 ring-inset ring-white/50 hover:!bg-white/10" onClick={() => { apply(false); setShow(false) }}>
-          {uk ? 'Лише необхідні' : 'Только необходимые'}
-        </button>
+    <div role="dialog" aria-live="polite" aria-label={uk ? 'Файли cookie' : 'Файлы cookie'} className="fixed inset-x-3 bottom-[calc(84px+env(safe-area-inset-bottom))] z-40 mx-auto max-w-xl border border-line bg-white text-ink shadow-[var(--shadow-lift)] lg:bottom-4">
+      <div className="rule-grad" />
+      <div className="p-4 sm:p-5">
+        <p className="text-[15px] leading-relaxed text-ink-2">
+          {uk
+            ? 'Ми використовуємо cookie для аналітики та реклами, щоб показувати актуальні вакансії.'
+            : 'Мы используем cookie для аналитики и рекламы, чтобы показывать актуальные вакансии.'}{' '}
+          <Link href="/privacy" className="font-medium text-brand-700 underline decoration-brand-300 underline-offset-[3px] hover:decoration-brand-700">{uk ? 'Детальніше' : 'Подробнее'}</Link>
+        </p>
+        <div className="mt-3.5 flex flex-wrap gap-2">
+          <button type="button" className="btn-accent !px-5" onClick={() => { apply(true); setShow(false) }}>
+            {uk ? 'Прийняти' : 'Принять'}
+          </button>
+          <button type="button" className="btn-ghost !px-5" onClick={() => { apply(false); setShow(false) }}>
+            {uk ? 'Лише необхідні' : 'Только необходимые'}
+          </button>
+        </div>
       </div>
     </div>
   )

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { CATALOG_PATH, CATALOG_PATH_RU, COUNTRIES, NAV, NAV_RU, SITE } from '@/lib/site'
 import { HOME } from '@/lib/content'
 import { getLanding } from '@/lib/landing'
-import { IconArrow, IconChevronDown, IconPhone } from '@/components/ui/icons'
+import { IconArrow, IconChevronDown } from '@/components/ui/icons'
 import { MobileMenu } from './MobileMenu'
 import { HeaderCta } from './HeaderCta'
 import { MobileHeaderSlot } from './MobileHeaderSlot'
@@ -35,50 +35,52 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
   const countries = COUNTRIES.filter((c) => counts[c.code])
   const catalog = lang === 'uk' ? CATALOG_PATH : CATALOG_PATH_RU
   const popular = popularLinks(lang)
-  const link = 'inline-flex h-11 items-center whitespace-nowrap rounded-full px-3 text-[15px] font-medium text-ink-2 transition hover:bg-brand-50 hover:text-ink'
+  const link = 'relative inline-flex h-[72px] items-center whitespace-nowrap px-3 text-[15px] font-medium text-ink-2 transition-colors hover:text-ink after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-brand-500 after:transition-transform hover:after:scale-x-100'
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper lg:bg-paper/85 lg:backdrop-blur-xl lg:backdrop-saturate-150">
+    <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
       <div className="container-x flex h-16 items-center gap-3 lg:h-[72px]">
         <MobileHeaderSlot lang={lang}>
           <Link href={lang === 'uk' ? '/' : '/ru'} className="flex h-11 shrink-0 items-center" aria-label={lang === 'uk' ? 'Europe Service — на головну' : 'Europe Service — на главную'}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/logo.svg" alt="Europe Service" width={160} height={43} className="h-[34px] w-auto lg:h-[40px]" />
+            <img src="/brand/logo.svg" alt="Europe Service" width={160} height={43} className="h-[34px] w-auto lg:h-[38px]" />
           </Link>
         </MobileHeaderSlot>
 
-        <nav aria-label={lang === 'uk' ? 'Головне меню' : 'Главное меню'} className="ml-4 hidden flex-1 items-center gap-0.5 lg:flex">
+        <nav aria-label={lang === 'uk' ? 'Головне меню' : 'Главное меню'} className="ml-6 hidden flex-1 items-center lg:flex">
           <div className="group relative">
             <Link href={catalog} className={`${link} gap-1.5 !font-semibold !text-ink`}>
               {nav[0].label}
-              <span className="rounded-full bg-accent-600 px-1.5 py-px text-[11px] font-bold tabular-nums text-white">{total}</span>
+              <span className="num bg-brand-600 px-1.5 py-0.5 text-[11.5px] font-semibold text-white">{total}</span>
               <IconChevronDown className="size-4 opacity-60 transition group-hover:rotate-180" />
             </Link>
-            <div className="invisible absolute left-0 top-full z-50 w-[680px] pt-3 opacity-0 transition duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-              <div className="grid grid-cols-[1.15fr_1fr] overflow-hidden rounded-[26px] bg-white shadow-[0_30px_70px_-25px_rgb(11_20_55/0.45)] ring-1 ring-brand-100">
-                <div className="p-5">
-                  <p className="px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">{lang === 'uk' ? 'Напрямки' : 'Направления'}</p>
-                  <ul className="mt-2 grid grid-cols-2 gap-0.5">
+            <div className="invisible absolute -left-3 top-full z-50 w-[720px] opacity-0 transition duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+              <div className="grid grid-cols-[1.2fr_1fr] border border-line bg-white shadow-[var(--shadow-lift)]">
+                <div className="border-r border-line p-6">
+                  <p className="eyebrow">{lang === 'uk' ? 'Країни' : 'Страны'}</p>
+                  <ul className="mt-3 grid grid-cols-2 gap-x-6">
                     {countries.map((c) => (
-                      <li key={c.code}>
-                        <Link href={localHref(c.path, lang)} className="flex min-h-11 items-center gap-2.5 rounded-xl px-2 py-2.5 text-[15px] font-medium hover:bg-brand-50">
-                          <span className="text-lg leading-none">{c.flag}</span>
+                      <li key={c.code} className="border-b border-line">
+                        <Link href={localHref(c.path, lang)} className="flex min-h-11 items-center gap-3 py-2 text-[15px] font-medium hover:text-brand-700">
+                          <span className="num w-6 text-[11px] font-semibold uppercase text-muted">{c.code}</span>
                           <span className="flex-1">{lang === 'uk' ? c.name : c.nameRu}</span>
-                          <span className="text-xs font-semibold tabular-nums text-muted">{counts[c.code]}</span>
+                          <span className="num text-[13px] text-muted">{counts[c.code]}</span>
                         </Link>
                       </li>
                     ))}
                   </ul>
-                  <Link href={catalog} className="mt-3 flex items-center justify-between rounded-2xl bg-brand-600 px-4 py-3 text-sm font-semibold text-white hover:bg-brand-700">
+                  <Link href={catalog} className="mt-5 flex items-center justify-between bg-ink px-4 py-3 text-[15px] font-semibold text-white hover:bg-night-2">
                     {lang === 'uk' ? `Усі ${total} ${plural(total, ['вакансія', 'вакансії', 'вакансій'])}` : `Все ${total} ${plural(total, ['вакансия', 'вакансии', 'вакансий'])}`} <IconArrow className="size-4" />
                   </Link>
                 </div>
-                <div className="bg-paper p-5">
-                  <p className="px-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">{lang === 'uk' ? 'Популярне' : 'Популярное'}</p>
-                  <ul className="mt-2 space-y-0.5">
+                <div className="bg-cream p-6">
+                  <p className="eyebrow">{lang === 'uk' ? 'Популярне' : 'Популярное'}</p>
+                  <ul className="mt-3">
                     {popular.map((l) => (
-                      <li key={l.href}>
-                        <Link href={l.href} className="flex min-h-11 items-center rounded-xl px-2 py-2 text-[15px] font-medium hover:bg-white">{l.label}</Link>
+                      <li key={l.href} className="border-b border-line">
+                        <Link href={l.href} className="flex min-h-11 items-center justify-between py-2 text-[15px] font-medium hover:text-brand-700">
+                          {l.label} <span aria-hidden className="text-muted">→</span>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -93,12 +95,11 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-1.5 lg:gap-2">
-          <a href={`tel:${SITE.phone}`} className="hidden h-11 items-center gap-2 whitespace-nowrap rounded-full px-3 text-[15px] font-semibold tabular-nums text-ink hover:bg-brand-50 md:flex lg:hidden xl:flex">
-            <IconPhone className="size-[18px] text-brand-600" />
+        <div className="ml-auto flex items-center gap-1.5 lg:gap-3">
+          <a href={`tel:${SITE.phone}`} className="num hidden h-11 items-center whitespace-nowrap px-1 text-[15px] font-semibold text-ink hover:text-brand-700 xl:flex">
             {SITE.phoneDisplay}
           </a>
-          <LangSwitch lang={lang} className="hidden h-11 min-w-11 place-items-center rounded-full px-2.5 text-[13px] font-bold text-muted ring-1 ring-line hover:text-ink sm:grid" />
+          <LangSwitch lang={lang} className="hidden h-11 min-w-11 place-items-center border border-line px-2.5 font-mono text-[12.5px] font-semibold text-muted hover:border-ink hover:text-ink sm:grid" />
           <HeaderCta lang={lang} />
           <MobileMenu lang={lang} nav={nav} countries={countries.map((c) => ({ ...c, count: counts[c.code] ?? 0 }))} total={total} />
         </div>

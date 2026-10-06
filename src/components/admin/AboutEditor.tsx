@@ -72,7 +72,7 @@ export function AboutEditor({ initial }: { initial: About }) {
         <label className="block"><span className="label">Відео з офісу (посилання YouTube, необов’язково)</span><input className="field" value={a.video ?? ''} onChange={(e) => set('video', e.target.value)} placeholder="https://youtu.be/..." /></label>
       </Card>
 
-      <Card title="3. Державний перелік і документи" hint="Головний доказ легальності — запис у Переліку Мінекономіки (заповнено нижче). Номер ліцензії вказуйте, ЛИШЕ якщо її видано саме на «ЄВРОПА СЕРВІС УКРАЇНА» (ЄДРПОУ 42515343) — чужу ліцензію показувати не можна: це порушення правил Google Ads і закону про рекламу. Скан (витяг з переліку, договір із закордонним партнером тощо) з’явиться в блоці «Офіційне агентство».">
+      <Card title="3. Ліцензія, перелік і документи" hint="Ліцензія Мінсоцполітики № 223 від 15.02.2019 видана ТОВ «ЄВРОПА СЕРВІС УКРАЇНА» (ЄДРПОУ 42515343) — вона показується в блоці «Ліцензія та декларація», на головній і в футері. Скан ліцензії (за бажанням) замінить таблицю реквізитів. Дату включення до Переліку Мінекономіки вкажіть, коли звірите її в реєстрі data.gov.ua.">
         <Photos label="Скан документа" value={a.license.scan ? [a.license.scan] : []} onChange={(x) => set('license', { ...a.license, scan: x[0] ?? '' })} folder="license" single />
         <div className="grid gap-3 sm:grid-cols-3">
           <label className="block"><span className="label">Номер</span><input className="field" value={a.license.number} onChange={(e) => set('license', { ...a.license, number: e.target.value })} /></label>

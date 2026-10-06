@@ -41,7 +41,7 @@ export function HeaderVacancyAction({ vacancyId, vacancyTitle }: HeaderAction) {
 // The quiz is only needed after a click — keep it out of every page's initial JS
 const QuizEngine = dynamic(() => import('@/components/quiz/QuizEngine').then((m) => m.QuizEngine), {
   ssr: false,
-  loading: () => <div className="h-[420px] animate-pulse rounded-3xl bg-white/60" />,
+  loading: () => <div className="mx-auto h-[420px] max-w-[560px] animate-pulse bg-surface" />,
 })
 
 const LeadCtx = createContext<Ctx>({ open: () => {}, openQuiz: () => {} })
@@ -61,7 +61,7 @@ function useDialogBackdropClose(ref: React.RefObject<HTMLDialogElement | null>) 
 }
 
 const CloseBtn = ({ onClick, label }: { onClick: () => void; label: string }) => (
-  <button type="button" onClick={onClick} className="grid size-11 place-items-center rounded-full text-muted hover:bg-brand-50 hover:text-ink active:bg-brand-50" aria-label={label}>
+  <button type="button" onClick={onClick} className="grid size-11 shrink-0 place-items-center border border-transparent text-muted hover:border-line hover:text-ink active:bg-surface" aria-label={label}>
     <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
       <path d="M6 6l12 12M18 6L6 18" />
     </svg>
@@ -118,18 +118,21 @@ export function LeadModalProvider({
     <LeadCtx.Provider value={{ open, openQuiz }}>
       <HeaderActionCtx.Provider value={{ action: headerAction, set: setHeaderAction }}>{children}</HeaderActionCtx.Provider>
 
+      {/* backdrop = night/50 as a literal: ::backdrop doesn't inherit the theme variables in older Safari/Chrome */}
       <dialog
         ref={formRef}
         aria-labelledby="lead-modal-title"
-        className="m-auto w-[min(460px,calc(100vw-24px))] rounded-[28px] bg-white p-0 text-ink shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-[3px] open:animate-[pwIn_.2s_ease-out]"
+        className="m-auto max-h-[calc(100dvh-24px)] w-[min(480px,calc(100vw-24px))] overflow-y-auto border border-line bg-white p-0 text-ink shadow-[var(--shadow-lift)] backdrop:bg-[rgb(15_36_27/0.5)] open:animate-[pwIn_.2s_ease-out]"
       >
-        <div className="relative p-6 sm:p-7">
-          <div className="absolute right-3 top-3">
+        <div className="rule-grad" />
+        <div className="relative p-5 min-[380px]:p-6 sm:p-7">
+          <div className="absolute right-2 top-2 sm:right-3 sm:top-3">
             <CloseBtn onClick={() => formRef.current?.close()} label={uk ? 'Закрити' : 'Закрыть'} />
           </div>
-          <h2 id="lead-modal-title" ref={formTitleRef} tabIndex={-1} className="pr-10 text-[21px] leading-tight outline-none">{opts?.title || def.title}</h2>
-          {opts?.vacancyTitle && <p className="mt-3 rounded-xl bg-paper px-3 py-2 text-sm font-semibold text-ink">{opts.vacancyTitle}</p>}
-          <p className="mt-2 text-[15px] text-ink-2">{opts?.subtitle || def.subtitle}</p>
+          <p className="eyebrow pr-12">{uk ? 'Заявка · безкоштовно' : 'Заявка · бесплатно'}</p>
+          <h2 id="lead-modal-title" ref={formTitleRef} tabIndex={-1} className="mt-2.5 pr-10 text-[22px] leading-tight outline-none sm:text-[24px]">{opts?.title || def.title}</h2>
+          {opts?.vacancyTitle && <p className="mt-4 border-l-[3px] border-brand-600 bg-surface px-3.5 py-2.5 text-[15px] font-semibold leading-snug text-ink">{opts.vacancyTitle}</p>}
+          <p className="mt-3 text-[16px] leading-relaxed text-ink-2">{opts?.subtitle || def.subtitle}</p>
           <div className="mt-5">
             {opts && <LeadForm key={key} form={opts.form} vacancyId={opts.vacancyId} vacancyTitle={opts.vacancyTitle} submitLabel={opts.submitLabel} lang={lang} compact />}
           </div>
@@ -139,13 +142,16 @@ export function LeadModalProvider({
       <dialog
         ref={quizRef}
         aria-label={uk ? 'Підбір вакансії' : 'Подбор вакансии'}
-        className="m-0 h-dvh max-h-none w-screen max-w-none bg-paper p-0 text-ink backdrop:bg-black/50 open:animate-[pwIn_.2s_ease-out] sm:m-auto sm:h-auto sm:max-h-[92dvh] sm:w-[min(1000px,calc(100vw-32px))] sm:rounded-[30px] [--notch:var(--color-paper)]"
+        className="m-0 h-dvh max-h-none w-screen max-w-none bg-white p-0 text-ink backdrop:bg-[rgb(15_36_27/0.5)] open:animate-[pwIn_.2s_ease-out] sm:m-auto sm:h-auto sm:max-h-[92dvh] sm:w-[min(720px,calc(100vw-32px))] sm:border sm:border-line sm:shadow-[var(--shadow-lift)]"
       >
-        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-paper/95 px-5 py-3 backdrop-blur sm:px-8">
-          <p ref={quizTitleRef} tabIndex={-1} className="font-display text-[16px] font-semibold outline-none">{uk ? 'Підбір вакансії — безкоштовно' : 'Подбор вакансии — бесплатно'}</p>
-          <CloseBtn onClick={() => quizRef.current?.close()} label={uk ? 'Закрити' : 'Закрыть'} />
+        <div className="sticky top-0 z-10 bg-white">
+          <div className="rule-grad" />
+          <div className="flex items-center justify-between gap-3 border-b border-line py-1.5 pl-4 pr-2 sm:pl-8 sm:pr-4">
+            <p ref={quizTitleRef} tabIndex={-1} className="font-display text-[16px] font-semibold tracking-[-0.01em] outline-none sm:text-[17px]">{uk ? 'Підбір вакансії — безкоштовно' : 'Подбор вакансии — бесплатно'}</p>
+            <CloseBtn onClick={() => quizRef.current?.close()} label={uk ? 'Закрити' : 'Закрыть'} />
+          </div>
         </div>
-        <div className="p-5 sm:p-8">{quiz && <QuizEngine key={key} lang={lang} config={standardQuiz(quiz.id, counts, quiz.preset)} />}</div>
+        <div className="px-4 py-6 min-[380px]:px-5 sm:p-8">{quiz && <QuizEngine key={key} lang={lang} config={standardQuiz(quiz.id, counts, quiz.preset)} />}</div>
       </dialog>
     </LeadCtx.Provider>
   )

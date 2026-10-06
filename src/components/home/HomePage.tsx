@@ -1,22 +1,22 @@
 import Link from 'next/link'
-import { getActiveVacancies } from '@/lib/vacancies'
+import { getActiveVacancies, toCard } from '@/lib/vacancies'
 import { getAbout } from '@/lib/about'
 import { ARTICLES, HOME, REVIEWS, isObsolete, type HomeContent } from '@/lib/content'
 import { CATALOG_PATH, COUNTRIES, COUNTRY, SITE } from '@/lib/site'
-import { ruTwin } from '@/lib/alt-routes'
+import { localHref, ruTwin } from '@/lib/alt-routes'
 import { localize } from '@/lib/vacancy-i18n'
-import { plural } from '@/lib/format'
+import { formatDate, plural } from '@/lib/format'
 import { organizationLd, websiteLd, faqLd } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { Photo } from '@/components/ui/Photo'
-import { IconArrow, IconBuilding, IconShield, IconUsers, IconClock, IconPhone, IconCheck } from '@/components/ui/icons'
-import { Faq, HOME_FAQ, HOME_FAQ_RU, ReviewCard } from '@/components/sections/Sections'
-import { ClassicAdvantages, ClassicCta, ClassicSteps, ClassicVacancyCard } from '@/components/home/ClassicBlocks'
+import { IconArrow } from '@/components/ui/icons'
+import { Faq, HOME_FAQ, HOME_FAQ_RU, ReviewCard, SectionHead } from '@/components/sections/Sections'
+import { VacancyCard } from '@/components/vacancy/VacancyCard'
 import { LeadForm } from '@/components/lead/LeadForm'
 import { QuizButton } from '@/components/lead/LeadModal'
 import { ChatButtons } from '@/components/lead/ChatButtons'
-import { AnyRequest } from '@/components/lead/AnyRequest'
 import { LicenseSection } from '@/components/trust/LicenseSection'
+import { LicenseStamp } from '@/components/trust/LicenseStamp'
 import { OfficeTeam } from '@/components/trust/OfficeTeam'
 import { SocialLinks } from '@/components/layout/SocialLinks'
 import { Blocks } from '@/components/content/Blocks'
@@ -24,105 +24,116 @@ import { YouTube } from '@/components/content/YouTube'
 
 const TX = {
   uk: {
-    vacancies: 'актуальних вакансій',
-    h1: 'Офіційна робота в Європі для українців',
-    sub: 'Польща, Німеччина, Чехія, Литва, Нідерланди та інші країни ЄС. Підберемо вакансію, допоможемо з документами й супроводимо до першого робочого дня.',
+    kicker: 'Кадрове агентство · Київ · з 2018 року',
+    h1: 'Офіційна робота в Європі для українців',
+    sub: 'Польща, Німеччина, Чехія, Литва, Нідерланди та ще 9 країн ЄС. Підберемо вакансію під ваш досвід і документи, допоможемо з оформленням і будемо на зв’язку до першого робочого дня.',
     pick: 'Підібрати вакансію',
-    anyReq: 'Не знайшли свою вакансію? Підберемо під ваш запит — навіть якщо її немає на сайті.',
-    allVac: 'Усі вакансії',
-    lic: 'Ліцензія № 223',
-    licSub: 'Мінсоцполітики, з 15.02.2019',
-    office: '5 офісів',
-    officeSub: 'Київ, Львів, Рівне, Житомир, Одеса',
-    clients: 'клієнтів',
-    clientsSub: 'за час роботи агентства',
-    since: (y: number) => `З ${y} року`,
-    sinceSub: 'на ринку працевлаштування',
-    promoTag: 'Безкоштовна консультація',
-    promo: 'Залиште номер — менеджер зателефонує й підбере вакансію під ваш досвід і документи',
-    send: 'Замовити дзвінок',
+    all: (n: number) => `Усі ${n} ${plural(n, ['вакансія', 'вакансії', 'вакансій'])}`,
+    free: '— безкоштовно з усіх операторів України',
+    open: 'Відкрито зараз',
+    openSub: 'вакансій у реєстрі',
+    updated: 'оновлюється щодня',
+    allCountries: 'Усі країни',
+    facts: [
+      ['80 000+', 'клієнтів за 7 років роботи'],
+      ['5', 'офісів: Київ, Львів, Рівне, Житомир, Одеса'],
+      ['№ 223', 'ліцензія Мінсоцполітики з 2019 року'],
+      ['24/7', 'підтримка клієнтів у Viber і Telegram'],
+    ],
     hot: 'Термінові заїзди',
-    hotSub: 'Актуальні вакансії з виїздом найближчим часом',
-    swipe: 'Гортайте вбік, щоб побачити більше →',
-    allN: (n: number) => `Усі ${n} ${plural(n, ['вакансія', 'вакансії', 'вакансій'])}`,
-    countries: 'Вибір країни для роботи',
-    view: 'Переглянути',
-    reviews: 'Відгуки наших клієнтів',
+    hotText: 'Вакансії з виїздом найближчим часом — житло, офіційний договір, супровід.',
+    countries: 'Країни',
+    countriesTitle: 'Де працюють наші клієнти',
+    consultTag: 'Безкоштовна консультація',
+    consult: 'Залиште номер — менеджер зателефонує й підбере вакансію під ваш досвід і документи',
+    send: 'Замовити дзвінок',
+    stepsLabel: 'Як ми працюємо',
+    stepsTitle: 'Від заявки до першого робочого дня',
+    advLabel: 'Чому Europe Service',
+    awards: 'Нагороди',
+    press: 'Про нас пишуть',
+    employers: 'Роботодавці, з якими ми співпрацюємо',
+    reviews: 'Відгуки клієнтів',
     allReviews: 'Усі відгуки',
-    articles: 'Корисні статті',
-    allArticles: 'Усі статті',
-    read: 'Читати статтю →',
-    social: 'Ми в соцмережах — вакансії та новини щодня',
-    steps: '4 кроки до роботи в Європі',
-    cities: 'Популярні міста Польщі',
     video: 'Відео про нас',
+    articles: 'Новини та статті',
+    allArticles: 'Усі статті',
+    cities: 'Робота в містах Польщі',
+    directions: 'Напрямки',
+    social: 'Вакансії щодня — у наших спільнотах',
+    seo: 'Про роботу за кордоном',
   },
   ru: {
-    vacancies: 'актуальных вакансий',
-    h1: 'Официальная работа в Европе для украинцев',
-    sub: 'Польша, Германия, Чехия, Литва, Нидерланды и другие страны ЕС. Подберём вакансию, поможем с документами и сопроводим до первого рабочего дня.',
+    kicker: 'Кадровое агентство · Киев · с 2018 года',
+    h1: 'Официальная работа в Европе для украинцев',
+    sub: 'Польша, Германия, Чехия, Литва, Нидерланды и ещё 9 стран ЕС. Подберём вакансию под ваш опыт и документы, поможем с оформлением и будем на связи до первого рабочего дня.',
     pick: 'Подобрать вакансию',
-    anyReq: 'Не нашли свою вакансию? Подберём под ваш запрос — даже если её нет на сайте.',
-    allVac: 'Все вакансии',
-    lic: 'Лицензия № 223',
-    licSub: 'Минсоцполитики, с 15.02.2019',
-    office: '5 офисов',
-    officeSub: 'Киев, Львов, Ровно, Житомир, Одесса',
-    clients: 'клиентов',
-    clientsSub: 'за время работы агентства',
-    since: (y: number) => `С ${y} года`,
-    sinceSub: 'на рынке трудоустройства',
-    promoTag: 'Бесплатная консультация',
-    promo: 'Оставьте номер — менеджер позвонит и подберёт вакансию под ваш опыт и документы',
-    send: 'Заказать звонок',
+    all: (n: number) => `Все ${n} ${plural(n, ['вакансия', 'вакансии', 'вакансий'])}`,
+    free: '— бесплатно со всех операторов Украины',
+    open: 'Открыто сейчас',
+    openSub: 'вакансий в реестре',
+    updated: 'обновляется ежедневно',
+    allCountries: 'Все страны',
+    facts: [
+      ['80 000+', 'клиентов за 7 лет работы'],
+      ['5', 'офисов: Киев, Львов, Ровно, Житомир, Одесса'],
+      ['№ 223', 'лицензия Минсоцполитики с 2019 года'],
+      ['24/7', 'поддержка клиентов в Viber и Telegram'],
+    ],
     hot: 'Срочные заезды',
-    hotSub: 'Актуальные вакансии с выездом в ближайшее время',
-    swipe: 'Листайте в сторону, чтобы увидеть больше →',
-    allN: (n: number) => `Все ${n} ${plural(n, ['вакансия', 'вакансии', 'вакансий'])}`,
-    countries: 'Выбор страны для работы',
-    view: 'Смотреть',
-    reviews: 'Отзывы наших клиентов',
+    hotText: 'Вакансии с выездом в ближайшее время — жильё, официальный договор, сопровождение.',
+    countries: 'Страны',
+    countriesTitle: 'Где работают наши клиенты',
+    consultTag: 'Бесплатная консультация',
+    consult: 'Оставьте номер — менеджер позвонит и подберёт вакансию под ваш опыт и документы',
+    send: 'Заказать звонок',
+    stepsLabel: 'Как мы работаем',
+    stepsTitle: 'От заявки до первого рабочего дня',
+    advLabel: 'Почему Europe Service',
+    awards: 'Награды',
+    press: 'О нас пишут',
+    employers: 'Работодатели, с которыми мы сотрудничаем',
+    reviews: 'Отзывы клиентов',
     allReviews: 'Все отзывы',
-    articles: 'Полезные статьи',
-    allArticles: 'Все статьи',
-    read: 'Читать статью →',
-    social: 'Мы в соцсетях — вакансии и новости каждый день',
-    steps: '4 шага к работе в Европе',
-    cities: 'Популярные города Польши',
     video: 'Видео о нас',
+    articles: 'Новости и статьи',
+    allArticles: 'Все статьи',
+    cities: 'Работа в городах Польши',
+    directions: 'Направления',
+    social: 'Вакансии каждый день — в наших сообществах',
+    seo: 'О работе за границей',
   },
 }
 
-/** Short, plain steps (the audience reads on a phone) */
 const STEPS = {
   uk: [
-    { title: 'Заявка', text: 'Залишаєте номер — менеджер телефонує й підбирає вакансію саме під вас.' },
-    { title: 'Документи', text: 'Допомагаємо з документами й реєструємо вас у роботодавця. Місце бронюємо за вами.' },
-    { title: 'Маршрут', text: 'Перед виїздом надсилаємо маршрутний лист: адреса, контакти, як доїхати.' },
-    { title: 'Приїзд і робота', text: 'На місці вас зустрічає координатор роботодавця, а менеджер лишається на зв’язку.' },
+    ['Заявка', 'Залишаєте номер або проходите підбір — менеджер телефонує й уточнює досвід, документи й побажання.'],
+    ['Підбір і документи', 'Пропонуємо вакансії, реєструємо вас у роботодавця, бронюємо місце й допомагаємо з документами.'],
+    ['Маршрут', 'Перед виїздом надсилаємо маршрутний лист: адреса, контакти координатора, як доїхати.'],
+    ['Робота', 'На місці зустрічає координатор роботодавця, а ваш менеджер лишається на зв’язку.'],
   ],
   ru: [
-    { title: 'Заявка', text: 'Оставляете номер — менеджер звонит и подбирает вакансию именно под вас.' },
-    { title: 'Документы', text: 'Помогаем с документами и регистрируем вас у работодателя. Место бронируем за вами.' },
-    { title: 'Маршрут', text: 'Перед выездом отправляем маршрутный лист: адрес, контакты, как добраться.' },
-    { title: 'Приезд и работа', text: 'На месте вас встречает координатор работодателя, а менеджер остаётся на связи.' },
+    ['Заявка', 'Оставляете номер или проходите подбор — менеджер звонит и уточняет опыт, документы и пожелания.'],
+    ['Подбор и документы', 'Предлагаем вакансии, регистрируем вас у работодателя, бронируем место и помогаем с документами.'],
+    ['Маршрут', 'Перед выездом отправляем маршрутный лист: адрес, контакты координатора, как добраться.'],
+    ['Работа', 'На месте встречает координатор работодателя, а ваш менеджер остаётся на связи.'],
   ],
 }
 
-function LogoStrip({ title, logos, plain }: { title: string; logos: { src: string; alt?: string; name?: string }[]; plain?: boolean }) {
+function LogoRow({ title, logos, big }: { title: string; logos: { src: string; alt?: string; name?: string }[]; big?: boolean }) {
   const list = logos.filter((l) => l.src)
   if (!list.length) return null
   return (
-    <section className="container-x py-10" aria-label={title}>
-      <h2 className="text-center text-[22px] sm:text-[28px]">{title}</h2>
-      <ul className={`mt-6 grid items-center gap-x-6 gap-y-5 ${plain ? 'grid-cols-2 justify-items-center sm:mx-auto sm:max-w-xl' : 'grid-cols-3 sm:grid-cols-4 lg:grid-cols-6'}`}>
+    <div className="border-t border-line pt-5">
+      <p className="eyebrow">{title}</p>
+      <ul className={`mt-4 flex flex-wrap items-center ${big ? 'gap-6' : 'gap-x-8 gap-y-4'}`}>
         {list.map((l) => (
-          <li key={l.src} className={`flex items-center justify-center ${plain ? 'h-44' : 'h-16'}`}>
-            <Photo base={l.src} alt={l.alt || l.name || ''} width={plain ? 300 : 200} height={plain ? 300 : 100} sizes={plain ? '240px' : '160px'} className={`w-auto object-contain ${plain ? 'max-h-44' : 'max-h-14 opacity-75 mix-blend-multiply grayscale transition hover:opacity-100 hover:grayscale-0'}`} />
+          <li key={l.src} className={big ? 'h-40' : 'h-11'}>
+            <Photo base={l.src} alt={l.alt || l.name || ''} width={big ? 300 : 160} height={big ? 300 : 80} sizes={big ? '200px' : '140px'} className={`h-full w-auto object-contain ${big ? '' : 'opacity-70 mix-blend-multiply grayscale transition hover:opacity-100 hover:grayscale-0'}`} />
           </li>
         ))}
       </ul>
-    </section>
+    </div>
   )
 }
 
@@ -132,23 +143,20 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
   const H: HomeContent = (uk ? HOME.uk : HOME.ru) ?? {}
   const U: HomeContent = HOME.uk ?? {}
   const p = (path: string) => (uk ? path : (ruTwin(path) ?? '/ru'))
+  const catalog = uk ? CATALOG_PATH : '/ru' + CATALOG_PATH
   const [all, about] = await Promise.all([getActiveVacancies(), getAbout()])
-  // «Термінові заїзди»: the vacancies marked hot, then the newest ones
   const byNew = [...all].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-  const hot = [...all.filter((v) => v.hot), ...byNew.filter((v) => !v.hot)].slice(0, 8).map((v) => localize(v, lang))
+  const hot = [...all.filter((v) => v.hot), ...byNew.filter((v) => !v.hot)].slice(0, 6).map((v) => toCard(localize(v, lang)))
   const countries = COUNTRIES.map((c) => ({ ...c, count: all.filter((v) => v.country === c.code).length })).filter((c) => c.count)
-  const countryCards = (U.countries?.items ?? []).filter((c) => c.country && COUNTRY[c.country])
+  const countryImage = Object.fromEntries((U.countries?.items ?? []).filter((c) => c.country && c.image).map((c) => [c.country as string, c.image as string]))
   const reviews = REVIEWS.filter((r) => r.lang === lang && r.text && r.name).slice(0, 3)
   const faq = uk ? HOME_FAQ : HOME_FAQ_RU
   const advantages = H.advantages ?? U.advantages
-  const stepIcons = (U.steps?.groups ?? []).flatMap((g) => g.items.map((i) => i.icon ?? '')).filter(Boolean)
-  const steps = STEPS[lang].map((s, i) => ({ ...s, icon: stepIcons[i] ?? '' }))
   const byDate = (x: { datePublished?: string | null; date?: string | null }, y: { datePublished?: string | null; date?: string | null }) =>
     (y.datePublished ?? y.date ?? '').localeCompare(x.datePublished ?? x.date ?? '')
   const articles = ARTICLES.filter((a) => a.lang === lang && !isObsolete(a) && !a.listing && (a.cover || a.ogImage?.startsWith('/')))
     .sort(byDate)
     .slice(0, 4)
-  const audiences = (U.audiences?.items ?? []).filter((a) => a.image)
 
   return (
     <>
@@ -156,258 +164,291 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       <JsonLd data={websiteLd()} />
       <JsonLd data={faqLd(faq)} />
 
-      {/* ───────── HERO ───────── */}
-      <section className="relative overflow-hidden bg-white">
-        <span aria-hidden className="pointer-events-none absolute -right-40 -top-40 size-[520px] rounded-full bg-brand-50" />
-        <span aria-hidden className="pointer-events-none absolute -left-32 bottom-0 size-[320px] rounded-full bg-[#eaf2fb]" />
-        <div className="container-x relative pb-10 pt-10 text-center sm:pb-14 sm:pt-16">
-          <Link href={p(CATALOG_PATH)} className="inline-flex min-h-11 items-center rounded-full bg-brand-100 px-5 py-2 text-[14px] font-semibold text-brand-800 hover:bg-brand-200">
-            {all.length} {t.vacancies}
+      {/* ───────── HERO: the promise on the left, the live register on the right ───────── */}
+      <section className="relative overflow-hidden border-b border-line bg-white">
+        <div className="container-x grid gap-10 pb-12 pt-10 sm:pt-14 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.9fr)] lg:gap-14 lg:pb-16 lg:pt-16">
+          <div className="relative animate-rise">
+            <LicenseStamp lang={lang} uid="hero" className="pointer-events-none absolute -bottom-6 right-0 hidden size-32 rotate-[-12deg] text-brand-700/80 mix-blend-multiply xl:block" />
+            <p className="eyebrow">
+              <span className="size-2 bg-leaf" aria-hidden />
+              {t.kicker}
+            </p>
+            <h1 className="mt-5 text-[32px] min-[380px]:text-[36px] sm:text-[52px] lg:text-[60px]">{t.h1}</h1>
+            <p className="mt-6 max-w-[600px] text-[17px] leading-relaxed text-ink-2 sm:text-[18px]">{t.sub}</p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <QuizButton id="hero" className="btn-accent !px-7">
+                {t.pick} <IconArrow className="size-4" />
+              </QuizButton>
+              <Link href={catalog} className="btn-ghost !px-7">
+                {t.all(all.length)}
+              </Link>
+            </div>
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <a href={`tel:${SITE.phone}`} className="num inline-flex min-h-11 flex-wrap items-center gap-x-2 text-[17px] font-semibold text-ink hover:text-brand-700">
+                <span className="whitespace-nowrap">{SITE.phoneDisplay}</span> <span className="font-sans text-[14px] font-normal text-muted">{t.free}</span>
+              </a>
+              <ChatButtons place="home-hero" lang={lang} inline />
+            </div>
+          </div>
+
+          {/* register of open vacancies — real numbers from the catalog */}
+          <div className="relative animate-rise [animation-delay:120ms]">
+            <div className="brand-band relative p-6 text-white sm:p-7">
+              <div className="flex items-end justify-between gap-4 border-b border-white/25 pb-4">
+                <div>
+                  <p className="font-mono text-[12px] uppercase tracking-[0.1em] text-white/80">{t.open}</p>
+                  <p className="mt-1 font-display text-[64px] font-bold leading-none tracking-[-0.04em] sm:text-[76px]">{all.length}</p>
+                </div>
+                <p className="pb-2 text-right font-mono text-[12px] leading-snug text-white/80">
+                  {t.openSub}
+                  <br />
+                  {t.updated}
+                </p>
+              </div>
+              <ul className="mt-2">
+                {countries.slice(0, 7).map((c) => (
+                  <li key={c.code} className="border-b border-white/15 last:border-b-0">
+                    <Link href={localHref(c.path, lang)} className="group flex min-h-11 items-center gap-3 py-2 text-[15.5px] font-medium">
+                      <span className="num w-7 text-[12px] font-semibold uppercase text-white/70">{c.code}</span>
+                      <span className="flex-1 group-hover:underline group-hover:underline-offset-4">{uk ? c.name : c.nameRu}</span>
+                      <span className="num text-[15px] font-semibold">{c.count}</span>
+                      <span aria-hidden className="text-white/60 transition group-hover:translate-x-0.5 group-hover:text-white">→</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <Link href={catalog} className="mt-3 flex items-center justify-between bg-white px-4 py-3 text-[15px] font-semibold text-ink hover:bg-brand-50">
+                {t.allCountries} <span className="num text-brand-700">{countries.length}</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* facts strip */}
+        <div className="border-t border-line">
+          <dl className="container-x grid grid-cols-2 lg:grid-cols-4">
+            {t.facts.map(([v, l], i) => (
+              <div key={v} className={`py-5 pr-4 ${i % 2 ? 'border-l border-line pl-4 lg:pl-6' : ''} ${i > 1 ? 'border-t border-line lg:border-t-0' : ''} ${i === 2 ? 'lg:border-l lg:pl-6' : ''}`}>
+                <dt className="sr-only">{l}</dt>
+                <dd className="font-display text-[24px] font-semibold leading-none tracking-[-0.02em] sm:text-[30px]">{v}</dd>
+                <dd className="mt-2 text-[14px] leading-snug text-muted">{l}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      {/* ───────── 01 HOT VACANCIES ───────── */}
+      <section className="container-x py-16 sm:py-20" aria-labelledby="hot-h">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <SectionHead id="hot-h" index={1} eyebrow={t.hot} title={t.hot} text={t.hotText} />
+          <Link href={catalog} className="btn-ghost">
+            {t.all(all.length)} <IconArrow className="size-4" />
           </Link>
-          <h1 className="mx-auto mt-6 max-w-[860px] text-[28px] leading-[1.12] min-[360px]:text-[32px] min-[400px]:text-[36px] sm:text-[52px]">{t.h1}</h1>
-          <p className="mx-auto mt-5 max-w-[660px] text-[17px] leading-relaxed text-ink-2">{t.sub}</p>
-          {H.hero?.bullets?.length ? (
-            <ul className="mx-auto mt-6 flex max-w-[760px] flex-wrap justify-center gap-x-5 gap-y-2 text-[15px] font-medium">
-              {H.hero.bullets.map((b) => (
-                <li key={b} className="flex items-center gap-2">
-                  <span className="grid size-5 place-items-center rounded-full bg-brand-600 text-white">
-                    <IconCheck className="size-3" />
+        </div>
+        <div className="mt-8 border-x border-t border-line">
+          {hot.map((v, i) => (
+            <VacancyCard key={v.id} v={v} lang={lang} priority={i === 0} />
+          ))}
+        </div>
+      </section>
+
+      {/* ───────── 02 COUNTRIES — an index ───────── */}
+      <section className="border-y border-line bg-white" aria-labelledby="countries-h">
+        <div className="container-x py-16 sm:py-20">
+          <SectionHead id="countries-h" index={2} eyebrow={t.countries} title={t.countriesTitle} />
+          <ul className="mt-8 grid border-t-[3px] border-ink sm:grid-cols-2 sm:gap-x-10">
+            {countries.map((c) => (
+              <li key={c.code} className="border-b border-line">
+                <Link href={localHref(c.path, lang)} className="group flex min-h-[76px] items-center gap-4 py-3">
+                  {countryImage[c.code] ? (
+                    <Photo base={countryImage[c.code]} alt="" width={96} height={64} sizes="96px" className="h-14 w-20 shrink-0 object-cover" />
+                  ) : (
+                    <span className="brand-band grid h-14 w-20 shrink-0 place-items-center font-mono text-[13px] font-semibold uppercase text-white">{c.code}</span>
+                  )}
+                  <span className="flex-1 font-display text-[19px] font-semibold tracking-[-0.01em] group-hover:text-brand-700 sm:text-[21px]">{uk ? c.name : c.nameRu}</span>
+                  <span className="num text-[14px] text-muted">
+                    {c.count} <span className="hidden min-[420px]:inline">{plural(c.count, uk ? ['вакансія', 'вакансії', 'вакансій'] : ['вакансия', 'вакансии', 'вакансий'])}</span>
                   </span>
-                  {b}
-                </li>
-              ))}
-            </ul>
+                  <span aria-hidden className="text-[18px] text-muted transition group-hover:translate-x-1 group-hover:text-brand-700">→</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          {uk && (U.cities?.items.length || U.audiences?.items.length) ? (
+            <div className="mt-10 grid gap-8 lg:grid-cols-2">
+              {U.cities?.items.length ? (
+                <div>
+                  <p className="eyebrow">{t.cities}</p>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {U.cities.items.map((c) => (
+                      <li key={c.href}>
+                        <Link href={c.href} className="chip">
+                          {c.text}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+              {U.audiences?.items.length ? (
+                <div>
+                  <p className="eyebrow">{t.directions}</p>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {U.audiences.items.map((a) => (
+                      <li key={a.title}>
+                        <Link href={a.href} className="chip">
+                          {a.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </div>
           ) : null}
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <QuizButton id="hero" className="btn-accent !px-8 !py-4 !text-base">
-              {t.pick}
-            </QuizButton>
-            <ChatButtons place="home-hero" lang={lang} inline />
-            <Link href={p(CATALOG_PATH)} className="btn-ghost !px-8 !py-4 !text-base">
-              {t.allVac} <IconArrow className="size-4" />
-            </Link>
-          </div>
-          <p className="mt-4">
-            <a href={`tel:${SITE.phone}`} className="inline-flex min-h-11 items-center gap-1.5 text-[16px] font-semibold text-brand-700">
-              <IconPhone className="size-[18px]" /> <span className="whitespace-nowrap">{SITE.phoneDisplay}</span>{' '}
-              <span className="font-normal text-muted">{uk ? '— безкоштовно з усіх операторів' : '— бесплатно со всех операторов'}</span>
-            </a>
-          </p>
-
-          {/* trust row */}
-          <ul className="mx-auto mt-10 grid max-w-[920px] grid-cols-2 gap-3 text-left sm:grid-cols-4">
-            {[
-              { I: IconShield, t: t.lic, d: t.licSub, href: `${p('/about')}#perelik` },
-              { I: IconBuilding, t: t.office, d: t.officeSub, href: p('/contacts') },
-              { I: IconUsers, t: `${SITE.clients} ${t.clients}`, d: t.clientsSub, href: p('/vidguki') },
-              { I: IconClock, t: t.since(SITE.foundingYear), d: t.sinceSub, href: p('/about') },
-            ].map(({ I, t: title, d, href }) => (
-              <li key={title}>
-                <Link href={href} className="flex h-full flex-col gap-2 rounded-2xl bg-white p-3.5 ring-1 ring-brand-100 transition hover:ring-brand-300 sm:flex-row sm:items-center sm:gap-3">
-                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-100 text-brand-600 sm:size-10">
-                    <I className="size-5" />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-[14px] font-bold leading-tight">{title}</span>
-                    <span className="mt-0.5 block text-[12.5px] leading-snug text-muted">{d}</span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
-      {/* ───────── HOT VACANCIES ───────── */}
-      <section className="container-x py-12 sm:py-16" aria-labelledby="hot-h">
-        <h2 id="hot-h" className="text-center text-[26px] sm:text-[34px]">{t.hot}</h2>
-        <p className="mt-2 text-center text-[15px] text-muted">{t.hotSub}</p>
-        <div className="-mx-4 mt-6 flex gap-2 overflow-x-auto px-4 pb-1 scrollbar-none sm:mx-0 sm:flex-wrap sm:justify-center sm:px-0">
-          {countries.map((c) => (
-            <Link key={c.code} href={p(c.path)} className="chip shrink-0">
-              <span aria-hidden>{c.flag}</span> {uk ? c.name : c.nameRu} <span className="text-xs">{c.count}</span>
-            </Link>
-          ))}
+      {/* ───────── CONSULTATION ───────── */}
+      <section className="container-x py-16" aria-labelledby="consult-h">
+        <div className="brand-band grid gap-8 p-6 text-white sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:items-center lg:p-12">
+          <div>
+            <p className="eyebrow !text-white/85">{t.consultTag}</p>
+            <h2 id="consult-h" className="mt-3 text-[24px] sm:text-[32px]">{t.consult}</h2>
+          </div>
+          <div className="bg-white p-5 text-ink sm:p-6">
+            <LeadForm form={uk ? 'home-consult' : 'home-consult-ru'} submitLabel={t.send} lang={lang} />
+          </div>
         </div>
-        {/* phone: one swipeable row instead of 8 screens of scrolling */}
-        <div className="-mx-4 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 scrollbar-none sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
-          {hot.map((v) => (
-            <ClassicVacancyCard key={v.id} v={v} lang={lang} className="w-[82%] shrink-0 snap-center sm:w-auto" />
+      </section>
+
+      {/* ───────── 03 STEPS ───────── */}
+      <section className="container-x pb-16 sm:pb-20" aria-labelledby="steps-h">
+        <SectionHead id="steps-h" index={3} eyebrow={t.stepsLabel} title={t.stepsTitle} />
+        <ol className="mt-10 grid gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+          {STEPS[lang].map(([title, text], i) => (
+            <li key={title} className="border-t-[3px] border-ink pt-5 sm:pr-8">
+              <span className="num block text-[44px] font-medium leading-none text-brand-600">{String(i + 1).padStart(2, '0')}</span>
+              <h3 className="mt-4 text-[19px]">{title}</h3>
+              <p className="mt-2 text-[15.5px] leading-relaxed text-ink-2">{text}</p>
+            </li>
           ))}
-        </div>
-        <p aria-hidden className="mt-2 text-center text-[13px] text-muted sm:hidden">{t.swipe}</p>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <QuizButton id="hot" className="btn-accent !px-8 !py-4 !text-base">
-            {t.pick}
+        </ol>
+        <div className="mt-10">
+          <QuizButton id="steps" className="btn-accent !px-7">
+            {t.pick} <IconArrow className="size-4" />
           </QuizButton>
-          <Link href={p(CATALOG_PATH)} className="btn-ghost !px-8 !py-4 !text-base">
-            {t.allN(all.length)}
-          </Link>
         </div>
       </section>
 
-      {/* ───────── CONSULTATION FORM ───────── */}
-      <section className="container-x pb-6" aria-labelledby="promo-h">
-        <div className="brand-band relative overflow-hidden rounded-[30px] px-5 py-10 text-center text-white sm:px-10 sm:py-12">
-          <span aria-hidden className="pointer-events-none absolute -left-24 -top-24 size-72 rounded-full border border-white/15" />
-          <span className="relative inline-flex rounded-full bg-white/15 px-4 py-1.5 text-[13px] font-bold uppercase tracking-[0.12em] ring-1 ring-white/30">{t.promoTag}</span>
-          <h2 id="promo-h" className="relative mx-auto mt-4 max-w-2xl text-[20px] leading-snug sm:text-[28px]">
-            {t.promo}
-          </h2>
-          <div className="relative mx-auto mt-7 max-w-[760px]">
-            <LeadForm form={uk ? 'home-consult' : 'home-consult-ru'} inline dark submitLabel={t.send} lang={lang} />
+      {/* ───────── 04 ADVANTAGES — a spec sheet ───────── */}
+      {advantages && (
+        <section className="border-t border-line bg-white" aria-labelledby="adv-h">
+          <div className="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+            <SectionHead id="adv-h" index={4} eyebrow={t.advLabel} title={advantages.title} />
+            <dl className="border-t-[3px] border-ink">
+              {advantages.items.map((a) => (
+                <div key={a.title} className="grid gap-1 border-b border-line py-5 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] sm:gap-6">
+                  <dt className="text-[17px] font-semibold">{a.title}</dt>
+                  <dd className="text-[15.5px] leading-relaxed text-ink-2">{a.text}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
-        </div>
-      </section>
-
-      {/* ───────── COUNTRIES (Tilda «Вибір країни для роботи») ───────── */}
-      {countryCards.length > 0 && (
-        <section className="container-x py-12 sm:py-16" aria-labelledby="countries-h">
-          <h2 id="countries-h" className="text-center text-[26px] sm:text-[34px]">{t.countries}</h2>
-          <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-            {countryCards.map((c) => {
-              const info = COUNTRY[c.country as string]
-              const n = all.filter((v) => v.country === info.code).length
-              return (
-                <li key={info.code}>
-                  <Link href={p(info.path)} className="group relative block overflow-hidden rounded-[22px] bg-brand-100">
-                    {c.image && <Photo base={c.image} alt="" sizes="(max-width: 640px) 50vw, 300px" className="aspect-[4/3] w-full object-cover" />}
-                    <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" aria-hidden />
-                    <span className="absolute inset-x-0 bottom-0 p-3.5 text-white sm:p-4">
-                      <span className="block text-[17px] font-bold leading-tight sm:text-[19px]">
-                        <span aria-hidden>{info.flag}</span> {uk ? info.name : info.nameRu}
-                      </span>
-                      <span className="mt-0.5 block text-[13px] text-white/85">{n ? `${n} ${plural(n, uk ? ['вакансія', 'вакансії', 'вакансій'] : ['вакансия', 'вакансии', 'вакансий'])}` : t.view}</span>
-                    </span>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
         </section>
       )}
 
-      <div className="container-x pb-4">
-        <AnyRequest lang={lang} id="home-any-request" className="mx-auto max-w-4xl" />
-      </div>
-
-      {/* ───────── AUDIENCES («Пропонуємо вакансії для кожного») ───────── */}
-      {uk && audiences.length > 0 && (
-        <section className="container-x py-12" aria-labelledby="aud-h">
-          <h2 id="aud-h" className="text-center text-[26px] sm:text-[34px]">{U.audiences?.title}</h2>
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {audiences.map((a) => (
-              <li key={a.title}>
-                <Link href={a.href} className="group flex h-full flex-col overflow-hidden rounded-[22px] bg-white ring-1 ring-line transition hover:ring-brand-300">
-                  <Photo base={a.image as string} alt="" sizes="(max-width: 640px) 100vw, 300px" className="aspect-[16/10] w-full object-cover" />
-                  <span className="p-5">
-                    <span className="block text-[18px] font-bold group-hover:text-brand-700">{a.title}</span>
-                    {a.text && <span className="mt-1 block text-[14.5px] text-ink-2">{a.text}</span>}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {advantages && <ClassicAdvantages title={advantages.title} items={advantages.items.map((i) => ({ ...i, icon: i.icon ?? '' }))} />}
-      <ClassicSteps title={t.steps} items={steps} lang={lang} />
-      <ClassicCta lang={lang} />
-
-      {/* ───────── TRUST: offices, licence, awards, press ───────── */}
+      {/* ───────── 05 OFFICES & TEAM, 06 DOCUMENTS ───────── */}
       <OfficeTeam about={about} lang={lang} />
-      <LicenseSection about={about} lang={lang} />
-      {U.awards && <LogoStrip title={uk ? U.awards.title : 'Наши награды'} logos={U.awards.images} plain />}
-      {U.employers && <LogoStrip title={uk ? U.employers.title : 'Работодатели, с которыми мы сотрудничаем'} logos={U.employers.logos} />}
-      {U.press && <LogoStrip title={uk ? U.press.title : 'О нас пишут'} logos={U.press.logos} />}
+      <LicenseSection about={about} lang={lang} compact />
 
-      {U.video?.youtube && (
-        <section className="container-x py-10" aria-labelledby="video-h">
-          <h2 id="video-h" className="text-center text-[26px] sm:text-[34px]">{t.video}</h2>
-          <div className="mx-auto mt-6 max-w-3xl">
-            <YouTube id={U.video.youtube} title={t.video} />
-          </div>
-        </section>
-      )}
+      {/* ───────── AWARDS · PRESS · EMPLOYERS ───────── */}
+      <section className="container-x space-y-8 py-16 sm:py-20" aria-label={`${t.awards}, ${t.press}`}>
+        <div className="grid gap-8 lg:grid-cols-2">
+          {U.awards && <LogoRow title={t.awards} logos={U.awards.images} big />}
+          {U.video?.youtube && (
+            <div className="border-t border-line pt-5">
+              <p className="eyebrow">{t.video}</p>
+              <div className="mt-4 [&>div]:!my-0 [&>div]:!rounded-none">
+                <YouTube id={U.video.youtube} title={t.video} />
+              </div>
+            </div>
+          )}
+        </div>
+        {U.press && <LogoRow title={t.press} logos={U.press.logos} />}
+        {U.employers && <LogoRow title={t.employers} logos={U.employers.logos} />}
+      </section>
 
       {/* ───────── REVIEWS ───────── */}
       {reviews.length > 0 && (
-        <section className="container-x py-14" aria-labelledby="rev-h">
-          <h2 id="rev-h" className="text-center text-[26px] sm:text-[34px]">{t.reviews}</h2>
-          <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
-            {reviews.map((r) => (
-              <ReviewCard key={r.name + (r.date ?? '') + r.text.slice(0, 12)} r={r} lang={lang} />
-            ))}
-          </div>
-          <div className="mt-8 text-center">
-            <Link href={p('/vidguki')} className="btn-ghost">
-              {t.allReviews} <IconArrow className="size-4" />
-            </Link>
-          </div>
-        </section>
-      )}
-
-      {/* ───────── POPULAR CITIES ───────── */}
-      {uk && (U.cities?.items.length ?? 0) > 0 && (
-        <section className="container-x pb-6" aria-labelledby="cities-h">
-          <h2 id="cities-h" className="text-[20px]">{t.cities}</h2>
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {U.cities!.items.map((c) => (
-              <li key={c.href}>
-                <Link href={c.href} className="chip">
-                  {c.text}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {/* ───────── SOCIALS ───────── */}
-      <section className="container-x py-6" aria-labelledby="social-h">
-        <div className="mx-auto max-w-4xl rounded-[24px] bg-surface p-5 sm:p-6">
-          <h2 id="social-h" className="text-[18px] leading-snug sm:text-[20px]">{t.social}</h2>
-          <SocialLinks lang={lang} place="home" className="mt-4" />
-        </div>
-      </section>
-
-      {/* ───────── ARTICLES ───────── */}
-      {articles.length > 0 && (
-        <section className="container-x py-14" aria-labelledby="art-h">
-          <h2 id="art-h" className="text-center text-[26px] sm:text-[34px]">{t.articles}</h2>
-          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {articles.map((a) => (
-              <Link key={a.path} href={a.path} className="group overflow-hidden rounded-[22px] bg-brand-50 transition lg:hover:shadow-[var(--shadow-lift)]">
-                <div className="aspect-[16/10] overflow-hidden">
-                  <Photo base={(a.cover || a.ogImage) as string} alt="" sizes="(max-width: 640px) 100vw, 300px" className="size-full object-cover" />
-                </div>
-                <div className="p-5">
-                  <h3 className="text-[16px] font-bold leading-snug group-hover:text-brand-700">{a.title}</h3>
-                  <span className="mt-4 inline-flex text-sm font-semibold text-brand-800">{t.read}</span>
-                </div>
+        <section className="border-t border-line bg-white" aria-labelledby="rev-h">
+          <div className="container-x py-16 sm:py-20">
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <SectionHead id="rev-h" eyebrow={t.reviews} title={t.reviews} />
+              <Link href={p('/vidguki')} className="btn-ghost">
+                {t.allReviews} <IconArrow className="size-4" />
               </Link>
-            ))}
+            </div>
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              {reviews.map((r) => (
+                <ReviewCard key={r.name + (r.date ?? '') + r.text.slice(0, 12)} r={r} lang={lang} />
+              ))}
+            </div>
           </div>
-          <div className="mt-8 text-center">
+        </section>
+      )}
+
+      {/* ───────── ARTICLES — editorial ───────── */}
+      {articles.length > 0 && (
+        <section className="container-x py-16 sm:py-20" aria-labelledby="art-h">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <SectionHead id="art-h" eyebrow={t.articles} title={t.articles} />
             <Link href={p('/news')} className="btn-ghost">
               {t.allArticles} <IconArrow className="size-4" />
             </Link>
           </div>
+          <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
+            <Link href={articles[0].path} className="group block">
+              <Photo base={(articles[0].cover || articles[0].ogImage) as string} alt="" sizes="(max-width: 1024px) 100vw, 640px" className="aspect-[16/9] w-full object-cover" />
+              {(articles[0].datePublished || articles[0].date) && <p className="num mt-4 text-[12.5px] text-muted">{formatDate((articles[0].datePublished || articles[0].date) as string, uk ? 'uk-UA' : 'ru-RU')}</p>}
+              <h3 className="mt-2 text-[22px] leading-snug group-hover:text-brand-700">{articles[0].title}</h3>
+            </Link>
+            <ul className="border-t-[3px] border-ink">
+              {articles.slice(1).map((a) => (
+                <li key={a.path} className="border-b border-line">
+                  <Link href={a.path} className="group grid grid-cols-[96px_minmax(0,1fr)] gap-4 py-4">
+                    <Photo base={(a.cover || a.ogImage) as string} alt="" width={96} height={72} sizes="96px" className="aspect-[4/3] w-full object-cover" />
+                    <span>
+                      {(a.datePublished || a.date) && <span className="num block text-[12px] text-muted">{formatDate((a.datePublished || a.date) as string, uk ? 'uk-UA' : 'ru-RU')}</span>}
+                      <span className="mt-1 block text-[16px] font-semibold leading-snug group-hover:text-brand-700">{a.title}</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
       )}
 
+      <section className="container-x pb-4" aria-labelledby="social-h">
+        <div className="flex flex-col gap-4 border-y border-line py-6 lg:flex-row lg:items-center lg:justify-between">
+          <h2 id="social-h" className="font-sans text-[18px] font-semibold tracking-normal">{t.social}</h2>
+          <SocialLinks lang={lang} place="home" />
+        </div>
+      </section>
+
       <Faq items={faq} lang={lang} />
 
-      {/* ───────── SEO text of the Tilda home page ───────── */}
+      {/* ───────── SEO text of the Tilda home page (indexed content, kept visible) ───────── */}
       {H.seoText?.length ? (
-        <section className="container-x pb-14">
-          <details className="mx-auto max-w-3xl rounded-2xl bg-surface p-5 sm:p-6">
-            <summary className="cursor-pointer text-[17px] font-semibold">{uk ? 'Про роботу за кордоном з Europe Service' : 'О работе за границей с Europe Service'}</summary>
-            <div className="mt-4">
+        <section className="border-t border-line bg-white py-16">
+          <div className="container-x grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
+            <p className="eyebrow self-start lg:pt-2">{t.seo}</p>
+            <div className="max-w-3xl [&_.prose-pw>*:first-child]:mt-0">
               <Blocks blocks={H.seoText} />
             </div>
-          </details>
+          </div>
         </section>
       ) : null}
     </>

@@ -8,7 +8,7 @@ import { trackContact, trackEvent } from '@/lib/track'
 
 /**
  * Always-on-screen «Зв'язок» button (replaces the Bitrix24 site button, which only had Instagram and Facebook).
- * Opens a stack of labelled channels — big rows with words, not bare icons, for a 40+ audience.
+ * Opens a white sheet of labelled channels — big rows with words, not bare icons, for a 40+ audience.
  * Telegram / Viber rows appear once the manager-chat links are filled in (SITE.chat).
  */
 
@@ -37,47 +37,54 @@ export function ContactFab({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
 
   // top → bottom; the messengers people use most sit closest to the thumb
   const items = [
-    { ch: 'phone', href: `tel:${SITE.phone}`, label: t.call, I: IconPhone, bg: 'bg-accent-600' },
-    { ch: 'facebook', href: SITE.messenger, label: 'Facebook', I: IconFacebook, bg: 'bg-[#0866FF]' },
-    { ch: 'instagram', href: SITE.instagramDm, label: 'Instagram', I: IconInstagram, bg: 'bg-[linear-gradient(45deg,#f9ce34,#ee2a7b_55%,#6228d7)]' },
-    SITE.chat.telegram && { ch: 'telegram', href: SITE.chat.telegram, label: 'Telegram', I: IconTelegram, bg: 'bg-[#229ED9]' },
-    SITE.chat.viber && { ch: 'viber', href: SITE.chat.viber, label: 'Viber', I: IconViber, bg: 'bg-[#7360F2]' },
-  ].filter(Boolean) as { ch: Channel; href: string; label: string; I: typeof IconPhone; bg: string }[]
+    { ch: 'phone', href: `tel:${SITE.phone}`, label: t.call, sub: SITE.phoneDisplay, I: IconPhone, color: 'text-brand-600' },
+    { ch: 'facebook', href: SITE.messenger, label: 'Facebook', I: IconFacebook, color: 'text-[#0866FF]' },
+    { ch: 'instagram', href: SITE.instagramDm, label: 'Instagram', I: IconInstagram, color: 'text-[#E1306C]' },
+    SITE.chat.telegram && { ch: 'telegram', href: SITE.chat.telegram, label: 'Telegram', I: IconTelegram, color: 'text-[#1c8cc2]' },
+    SITE.chat.viber && { ch: 'viber', href: SITE.chat.viber, label: 'Viber', I: IconViber, color: 'text-[#6150d8]' },
+  ].filter(Boolean) as { ch: Channel; href: string; label: string; sub?: string; I: typeof IconPhone; color: string }[]
 
   return (
     <div className="contact-fab">
       {/* tap outside to close */}
-      <div aria-hidden onClick={() => setOpen(false)} className={`fixed inset-0 z-40 bg-ink/30 transition-opacity duration-200 ${open ? 'opacity-100' : 'pointer-events-none opacity-0'}`} />
+      <div aria-hidden onClick={() => setOpen(false)} className={`fixed inset-0 z-40 bg-night/50 transition-opacity duration-200 ${open ? 'opacity-100' : 'pointer-events-none opacity-0'}`} />
 
       {/* the wrapper spans the (invisible) menu too, so it must never catch taps itself — only the button and the open menu do.
           It reappears the moment a phone field loses focus, i.e. right under the finger tapping a form's submit button. */}
       <div className="pointer-events-none fixed bottom-[calc(12px+env(safe-area-inset-bottom))] right-3 z-40 flex flex-col items-end lg:bottom-6 lg:right-6">
-        <div id={id} role="menu" aria-label={t.title} inert={!open} className={`mb-3 flex flex-col items-end gap-2.5 ${open ? 'pointer-events-auto' : 'invisible'}`}>
-          <p
-            className={`rounded-full bg-white px-3.5 py-1.5 text-[14px] font-semibold text-ink-2 shadow-md transition duration-200 motion-reduce:transition-none ${open ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}`}
-            style={{ transitionDelay: open ? `${items.length * 35}ms` : '0ms' }}
-          >
-            {t.title}
-          </p>
-          {items.map(({ ch, href, label, I, bg }, i) => (
-            <a
-              key={ch}
-              role="menuitem"
-              href={href}
-              {...(ch === 'phone' ? {} : { target: '_blank', rel: 'noopener' })}
-              onClick={() => {
-                trackContact(ch, 'contact-fab')
-                setOpen(false)
-              }}
-              className={`flex items-center gap-3 transition duration-200 ease-out motion-reduce:transition-none ${open ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0'}`}
-              style={{ transitionDelay: open ? `${(items.length - 1 - i) * 35}ms` : '0ms' }}
-            >
-              <span className="rounded-full bg-white px-4 py-2 text-[17px] font-bold text-ink shadow-md">{label}</span>
-              <span className={`grid size-[52px] shrink-0 place-items-center rounded-full text-white shadow-lg ${bg}`}>
-                <I className="size-6" />
-              </span>
-            </a>
-          ))}
+        {/* the channels: a white sheet of labelled rows (words, not bare icons) */}
+        <div
+          id={id}
+          role="menu"
+          aria-label={t.title}
+          inert={!open}
+          className={`mb-3 w-[min(300px,calc(100vw-24px))] border border-line bg-white shadow-[var(--shadow-lift)] transition duration-200 ease-out motion-reduce:transition-none ${open ? 'pointer-events-auto translate-y-0 opacity-100' : 'invisible translate-y-3 opacity-0'}`}
+        >
+          <div className="rule-grad" />
+          <p className="border-b border-line px-4 py-3 font-mono text-[12.5px] font-medium uppercase tracking-[0.08em] text-muted">{t.title}</p>
+          <ul role="none" className="divide-y divide-line">
+            {items.map(({ ch, href, label, sub, I, color }) => (
+              <li key={ch} role="none">
+                <a
+                  role="menuitem"
+                  href={href}
+                  {...(ch === 'phone' ? {} : { target: '_blank', rel: 'noopener' })}
+                  onClick={() => {
+                    trackContact(ch, 'contact-fab')
+                    setOpen(false)
+                  }}
+                  className="flex min-h-[56px] items-center gap-3.5 px-4 py-2.5 text-ink transition-colors hover:bg-brand-50 active:bg-brand-50"
+                >
+                  <I className={`size-6 shrink-0 ${color}`} />
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[17px] font-semibold leading-tight">{label}</span>
+                    {sub && <span className="num mt-0.5 block text-[14px] text-muted">{sub}</span>}
+                  </span>
+                  <span aria-hidden className="text-muted">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <button
@@ -89,7 +96,7 @@ export function ContactFab({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
             if (!open) trackEvent('contact_open', { place: 'contact-fab' })
             setOpen(!open)
           }}
-          className="pointer-events-auto relative grid size-[60px] place-items-center rounded-full bg-brand-600 text-white shadow-[0_10px_28px_-6px_rgb(0_104_250/0.55)] ring-4 ring-brand-600/20 transition-colors hover:bg-brand-700 active:bg-brand-700"
+          className={`pointer-events-auto relative grid size-[58px] place-items-center text-white shadow-[var(--shadow-lift)] transition-colors ${open ? 'bg-ink hover:bg-night-2' : 'bg-brand-600 hover:bg-brand-700 active:bg-brand-700'}`}
         >
           <IconChat className={`absolute size-7 transition duration-200 motion-reduce:transition-none ${open ? 'rotate-90 opacity-0' : 'opacity-100'}`} />
           <IconClose className={`absolute size-7 transition duration-200 motion-reduce:transition-none ${open ? 'opacity-100' : '-rotate-90 opacity-0'}`} />

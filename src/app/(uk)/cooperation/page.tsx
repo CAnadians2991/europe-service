@@ -28,64 +28,96 @@ export const metadata: Metadata = pageMeta({
 export default function Page() {
   return (
     <div lang="en">
-      <section className="brand-band text-white">
-        <div className="container-x grid gap-8 pb-12 pt-3 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <section className="relative overflow-hidden border-b border-line bg-white">
+        <div className="container-x grid gap-8 pb-10 pt-2 sm:pb-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:gap-14">
           <div>
-            <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Cooperation', path: '/cooperation' }]} />
-            <h1 className="mt-2 text-[30px] font-extrabold leading-tight sm:text-[44px]">{page.title}</h1>
-            <p className="mt-4 max-w-xl text-[17px] text-white/85">
-              {SITE.legalName.replace('ТОВ «ЄВРОПА СЕРВІС УКРАЇНА»', 'Europe Service Ukraine LLC')} · EDRPOU {SITE.edrpou} · licence of the Ministry of Social Policy of Ukraine № 223 of 15.02.2019.
+            <div className="text-ink-2">
+              <Breadcrumbs items={[{ name: 'Home', path: '/' }, { name: 'Cooperation', path: '/cooperation' }]} />
+            </div>
+            <p className="eyebrow mt-4">
+              <span className="size-2 bg-leaf" aria-hidden />
+              For employers in the EU
             </p>
-            <a href="#employer-form" className="btn-accent mt-6 !px-8 !py-4 !text-base">
-              Request workers
-            </a>
-          </div>
-          {page.heroImage && <Photo base={page.heroImage} alt="" priority sizes="(max-width: 1024px) 100vw, 520px" className="aspect-[4/3] w-full rounded-[28px] object-cover" />}
-        </div>
-      </section>
-
-      {page.benefits && (
-        <section className="container-x py-14">
-          <h2 className="text-[28px] sm:text-[36px]">{page.benefits.title}</h2>
-          <p className="mt-4 max-w-3xl text-[17px] leading-relaxed text-ink-2">{page.benefits.text}</p>
-          <ul className="mt-8 grid gap-4 sm:grid-cols-3">
-            {page.benefits.items.map((b) => (
-              <li key={b.title} className="flex items-center gap-4 rounded-3xl bg-brand-50 p-5">
-                {b.icon && <Photo base={b.icon} alt="" width={40} height={40} sizes="40px" className="size-10" />}
-                <span className="text-[17px] font-bold">{b.title}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {page.performance && (
-        <section className="bg-surface py-14">
-          <div className="container-x">
-            <h2 className="text-[28px] sm:text-[36px]">{page.performance.title}</h2>
-            <dl className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
-              {page.performance.items.map((x) => (
-                <div key={x.label} className="rounded-3xl bg-white p-6 ring-1 ring-line">
-                  <dd className="font-display text-[34px] font-extrabold text-brand-700">{x.value}</dd>
-                  <dt className="mt-1 text-[15px] text-ink-2">{x.label}</dt>
+            <h1 className="mt-3 max-w-3xl text-[27px] min-[380px]:text-[30px] sm:text-[44px]">{page.title}</h1>
+            <dl className="mt-6 border-t border-line font-mono text-[13px] text-ink-2">
+              {[
+                ['Company', SITE.legalName.replace('ТОВ «ЄВРОПА СЕРВІС УКРАЇНА»', 'Europe Service Ukraine LLC')],
+                ['EDRPOU', SITE.edrpou],
+                ['Licence', 'Ministry of Social Policy of Ukraine № 223 of 15.02.2019'],
+              ].map(([k, v]) => (
+                <div key={k} className="grid gap-1 border-b border-line py-2.5 sm:grid-cols-[120px_minmax(0,1fr)] sm:gap-4">
+                  <dt className="uppercase tracking-[0.06em] text-muted">{k}</dt>
+                  <dd className="text-[14.5px] font-semibold text-ink">{v}</dd>
                 </div>
               ))}
             </dl>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a href="#employer-form" className="btn-accent !px-8">
+                Request workers <span aria-hidden>→</span>
+              </a>
+              <a href={`mailto:${SITE.email}`} className="btn-ghost num !px-6">
+                {SITE.email}
+              </a>
+            </div>
+          </div>
+          {page.heroImage && <Photo base={page.heroImage} alt="" priority sizes="(max-width: 1024px) 100vw, 520px" className="aspect-[4/3] w-full bg-surface object-cover" />}
+        </div>
+        <div className="rule-grad" />
+      </section>
+
+      {page.performance && (
+        <section className="border-b border-line bg-white" aria-labelledby="perf-h">
+          <div className="container-x pt-10">
+            <p id="perf-h" className="eyebrow">{page.performance.title}</p>
+          </div>
+          <dl className="container-x mt-2 grid grid-cols-2 lg:grid-cols-4">
+            {page.performance.items.map((x, i) => (
+              <div key={x.label} className={`flex flex-col-reverse justify-end py-6 pr-4 ${i % 2 ? 'border-l border-line pl-4 lg:pl-6' : ''} ${i > 1 ? 'border-t border-line lg:border-t-0' : ''} ${i === 2 ? 'lg:border-l lg:pl-6' : ''}`}>
+                <dt className="mt-2 text-[15px] leading-snug text-muted">{x.label}</dt>
+                <dd className="font-display text-[26px] font-semibold leading-none tracking-[-0.02em] sm:text-[34px]">{x.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
+
+      {page.benefits && (
+        <section className="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]" aria-labelledby="benefits-h">
+          <div>
+            <p className="eyebrow">
+              <span className="opacity-60">01 —</span>Why us
+            </p>
+            <h2 id="benefits-h" className="mt-3 text-[26px] sm:text-[38px]">{page.benefits.title}</h2>
+          </div>
+          <div>
+            <p className="text-[17px] leading-relaxed text-ink-2">{page.benefits.text}</p>
+            <ul className="mt-8 border-t-[3px] border-ink">
+              {page.benefits.items.map((b, i) => (
+                <li key={b.title} className="flex min-h-16 items-center gap-4 border-b border-line py-4">
+                  <span className="num w-7 shrink-0 text-[13px] font-medium text-muted">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="flex-1 text-[18px] font-semibold">{b.title}</span>
+                  {b.icon && <Photo base={b.icon} alt="" width={32} height={32} sizes="32px" className="size-7 opacity-70 grayscale" />}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       )}
 
-      <section id="employer-form" className="container-x scroll-mt-28 py-14">
-        <div className="mx-auto max-w-2xl rounded-[28px] bg-white p-6 shadow-[var(--shadow-lift)] ring-1 ring-line sm:p-10">
-          <h2 className="text-[26px] sm:text-[32px]">{page.contact?.title ?? 'Contact us'}</h2>
-          <p className="mt-2 text-ink-2">
-            Leave your phone number and we will call you back, or write to{' '}
-            <a href={`mailto:${SITE.email}`} className="font-semibold text-brand-700 underline underline-offset-2">
-              {SITE.email}
-            </a>
-            .
-          </p>
-          <div className="mt-6">
+      <section id="employer-form" className="container-x scroll-mt-28 pb-16 sm:pb-20">
+        <div className="grid border border-line bg-white lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+          <div className="border-b border-line p-6 sm:p-10 lg:border-b-0 lg:border-r">
+            <p className="eyebrow">{page.contact?.subtitle ?? 'Direct message'}</p>
+            <h2 className="mt-3 text-[26px] sm:text-[34px]">{page.contact?.title ?? 'Contact us'}</h2>
+            <p className="mt-4 text-[16px] leading-relaxed text-ink-2">
+              Leave your phone number and we will call you back, or write to{' '}
+              <a href={`mailto:${SITE.email}`} className="font-semibold text-brand-700 underline underline-offset-2">
+                {SITE.email}
+              </a>
+              .
+            </p>
+          </div>
+          <div className="p-6 sm:p-10">
             <LeadForm form="employer" lang="uk" submitLabel="Send" />
           </div>
         </div>

@@ -1,133 +1,127 @@
 import { Photo } from '@/components/ui/Photo'
 import { LazyIframe } from '@/components/ui/LazyIframe'
-import { IconBuilding, IconClock, IconPin, IconTelegram, IconViber } from '@/components/ui/icons'
+import { IconTelegram, IconViber } from '@/components/ui/icons'
 import { LeadButton } from '@/components/lead/LeadModal'
 import { SITE } from '@/lib/site'
 import type { About } from '@/lib/about-types'
 
-const MAPS = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Europe Service, вул. Січових Стрільців 77, Київ')}`
 const MAP_EMBED = 'https://www.google.com/maps?q=' + encodeURIComponent('вул. Січових Стрільців, 77, Київ') + '&output=embed'
 
-/** Real office + real people: the strongest trust signal for a job agency */
+/**
+ * Offices and people — the strongest trust signal of a job agency.
+ * Five offices as a register; the office photos and the managers (photo, role, chats) come from /admin/about.
+ */
 export function OfficeTeam({ about, heading, showTeam = true, lang = 'uk' }: { about: About; heading?: string; showTeam?: boolean; lang?: 'uk' | 'ru' }) {
   const uk = lang === 'uk'
-  const clients = SITE.clients.replace('+', '')
   const t = uk
     ? {
-        eyebrow: 'Про нас',
-        h: 'Реальний офіс і живі люди',
-        route: 'Прокласти маршрут',
-        since: `Працюємо з ${SITE.foundingYear} року · понад ${clients} клієнтів`,
-        visit: 'Записатися на зустріч в офісі',
-        visitSub: 'Залиште номер — узгодимо зручний час, менеджер підготує для вас підбірку вакансій.',
+        eyebrow: 'Офіси та команда',
+        h: 'П’ять офісів в Україні й особистий менеджер для кожного',
+        lead: about.officeText,
+        main: 'головний',
+        visit: 'Записатися на зустріч',
+        visitSub: 'Залиште номер — узгодимо зручний час і офіс, менеджер підготує для вас підбірку вакансій.',
         visitBtn: 'Записатися',
         team: 'Ваші менеджери',
         teamSub: 'Кожного кандидата веде особистий менеджер — від першого дзвінка до першого робочого дня.',
-        address: SITE.address.full,
-        text: about.officeText,
+        photos: 'Наш офіс',
       }
     : {
-        eyebrow: 'О нас',
-        h: 'Реальный офис и живые люди',
-        route: 'Проложить маршрут',
-        since: `Работаем с ${SITE.foundingYear} года · более ${clients} клиентов`,
-        visit: 'Записаться на встречу в офисе',
-        visitSub: 'Оставьте номер — согласуем удобное время, менеджер подготовит для вас подборку вакансий.',
+        eyebrow: 'Офисы и команда',
+        h: 'Пять офисов в Украине и личный менеджер для каждого',
+        lead: 'Главный офис Europe Service — в Киеве, на ул. Сечевых Стрельцов, 77. Ещё четыре офиса — во Львове, Ровно, Житомире и Одессе. Каждого кандидата ведёт личный менеджер: подбирает вакансию, помогает с документами, бронирует место у работодателя и остаётся на связи до первого рабочего дня и после него.',
+        main: 'главный',
+        visit: 'Записаться на встречу',
+        visitSub: 'Оставьте номер — согласуем удобное время и офис, менеджер подготовит для вас подборку вакансий.',
         visitBtn: 'Записаться',
         team: 'Ваши менеджеры',
         teamSub: 'Каждого кандидата ведёт личный менеджер — от первого звонка до первого рабочего дня.',
-        address: SITE.addressRu,
-        text: 'Главный офис Europe Service — в Киеве, на ул. Сечевых Стрельцов, 77. Ещё четыре офиса — во Львове, Ровно, Житомире и Одессе. Каждого кандидата ведёт личный менеджер: подбирает вакансию, помогает с документами, бронирует место у работодателя и остаётся на связи до первого рабочего дня и после него.',
+        photos: 'Наш офис',
       }
   const photos = about.officePhotos
   const team = about.team
   return (
-    <section id="ofis" className="container-x scroll-mt-28 py-16 sm:py-20" aria-labelledby="ofis-h">
-      <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-14">
-        {/* photos (or the map until photos are uploaded); on phones — after the text */}
-        <div className="order-2 lg:order-none">
-          {photos.length ? (
-            <div className="grid grid-cols-3 grid-rows-2 gap-3">
-              <Photo base={photos[0]} alt={uk ? 'Офіс Europe Service у Києві' : 'Офис Europe Service в Киеве'} sizes="(max-width: 1024px) 100vw, 560px" className="col-span-2 row-span-2 aspect-[4/3] size-full rounded-[24px] object-cover" />
-              {photos.slice(1, 3).map((p, i) => (
-                <Photo key={p} base={p} alt={`${uk ? 'Офіс' : 'Офис'} Europe Service — фото ${i + 2}`} sizes="280px" className="aspect-square size-full rounded-[20px] object-cover" />
+    <section id="ofis" className="scroll-mt-28 border-y border-line bg-white" aria-labelledby="ofis-h">
+      <div className="container-x py-16 sm:py-20">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14">
+          <div>
+            <p className="eyebrow">{t.eyebrow}</p>
+            <h2 id="ofis-h" className="mt-3 text-[26px] sm:text-[36px]">{heading ?? t.h}</h2>
+            <p className="mt-4 text-[16.5px] leading-relaxed text-ink-2">{t.lead}</p>
+            <ul className="mt-7 border-t-[3px] border-ink">
+              {SITE.offices.map((o) => (
+                <li key={o.city} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-0.5 border-b border-line py-3.5">
+                  <span className="font-display text-[18px] font-semibold">
+                    {uk ? o.city : o.cityRu}
+                    {'main' in o && o.main && <span className="ml-2 bg-brand-600 px-1.5 py-0.5 align-middle font-mono text-[10.5px] font-semibold uppercase tracking-wide text-white">{t.main}</span>}
+                  </span>
+                  <a href={`tel:${o.phone}`} className="num text-[14px] font-semibold text-ink hover:text-brand-700">
+                    {o.phoneDisplay}
+                  </a>
+                  {(uk ? o.address : o.addressRu) && <span className="col-span-2 text-[14.5px] text-muted">{uk ? o.address : o.addressRu}</span>}
+                </li>
               ))}
+            </ul>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <LeadButton form="office-visit" title={t.visit} subtitle={t.visitSub} submitLabel={t.visitBtn} className="btn-accent">
+                {t.visit}
+              </LeadButton>
+              <a href={`tel:${SITE.phone}`} className="btn-ghost num">
+                {SITE.phoneDisplay}
+              </a>
             </div>
-          ) : (
-            // no office photos (the owner decided they're not needed) — the map shows where to come
-            <div className="overflow-hidden rounded-[24px] ring-1 ring-line">
-              <LazyIframe title={uk ? 'Офіс Europe Service на карті' : 'Офис Europe Service на карте'} src={MAP_EMBED} className="h-[340px] w-full" />
-            </div>
-          )}
-        </div>
+          </div>
 
-        <div className="order-1 lg:order-none">
-          <p className="eyebrow">{t.eyebrow}</p>
-          <h2 id="ofis-h" className="mt-3 text-[26px] leading-[1.15] sm:text-[36px]">{heading ?? t.h}</h2>
-          <p className="mt-4 text-[16px] leading-relaxed text-ink-2">{t.text}</p>
-          <ul className="mt-6 space-y-3 text-[15.5px]">
-            <li className="flex gap-3">
-              <IconPin className="mt-0.5 size-5 shrink-0 text-brand-600" />
-              <span>
-                <b>{t.address}</b>
-                <a href={MAPS} target="_blank" rel="noopener" className="ml-2 font-semibold text-brand-600 underline underline-offset-2">
-                  {t.route}
-                </a>
-              </span>
-            </li>
-            {about.hours && (
-              <li className="flex gap-3">
-                <IconClock className="mt-0.5 size-5 shrink-0 text-brand-600" /> <span>{about.hours}</span>
-              </li>
+          <div>
+            {photos.length ? (
+              <figure>
+                <div className="grid grid-cols-3 grid-rows-2 gap-2">
+                  <Photo base={photos[0]} alt={uk ? 'Офіс Europe Service' : 'Офис Europe Service'} sizes="(max-width: 1024px) 100vw, 600px" className="col-span-2 row-span-2 aspect-[4/3] size-full object-cover" />
+                  {photos.slice(1, 3).map((p, i) => (
+                    <Photo key={p} base={p} alt={`${uk ? 'Офіс' : 'Офис'} Europe Service — фото ${i + 2}`} sizes="300px" className="aspect-square size-full object-cover" />
+                  ))}
+                </div>
+                <figcaption className="eyebrow mt-3">{t.photos}</figcaption>
+              </figure>
+            ) : (
+              <div className="h-full min-h-[360px] border border-line">
+                <LazyIframe title={uk ? 'Головний офіс Europe Service на карті' : 'Главный офис Europe Service на карте'} src={MAP_EMBED} className="h-full min-h-[360px] w-full" />
+              </div>
             )}
-            <li className="flex gap-3">
-              <IconBuilding className="mt-0.5 size-5 shrink-0 text-brand-600" />
-              <span>{t.since}</span>
-            </li>
-          </ul>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <LeadButton form="office-visit" title={t.visit} subtitle={t.visitSub} submitLabel={t.visitBtn} className="btn-accent">
-              {t.visit}
-            </LeadButton>
-            <a href={`tel:${SITE.phone}`} className="btn-ghost">
-              {SITE.phoneDisplay}
-            </a>
           </div>
         </div>
-      </div>
 
-      {showTeam && team.length > 0 && (
-        <div className="mt-14">
-          <h3 className="text-center text-[22px] sm:text-[28px]">{t.team}</h3>
-          <p className="mx-auto mt-2 max-w-xl text-center text-ink-2">{t.teamSub}</p>
-          <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {team.map((m) => (
-                  <li key={m.id} className="overflow-hidden rounded-[22px] bg-white shadow-[var(--shadow-card)] ring-1 ring-brand-100">
-                    <Photo base={m.photo} alt={`${m.name} — ${m.role}`} sizes="(max-width: 640px) 50vw, 300px" className="aspect-[4/5] w-full bg-brand-50 object-cover" />
-                    <div className="p-4">
-                      <p className="font-display text-[16px] font-bold leading-tight">{m.name}</p>
-                      <p className="mt-0.5 text-[13.5px] text-ink-2">{m.role}</p>
-                      {m.since && <p className="mt-1 text-[12.5px] text-muted">{m.since}</p>}
-                      {(m.telegram || m.viber) && (
-                        <div className="mt-3 flex gap-2">
-                          {m.telegram && (
-                            <a href={m.telegram} target="_blank" rel="noopener" aria-label={`Telegram: ${m.name}`} className="grid size-11 place-items-center rounded-full bg-brand-50 text-brand-600 hover:bg-brand-100 active:bg-brand-100">
-                              <IconTelegram className="size-4" />
-                            </a>
-                          )}
-                          {m.viber && (
-                            <a href={m.viber} target="_blank" rel="noopener" aria-label={`Viber: ${m.name}`} className="grid size-11 place-items-center rounded-full bg-brand-50 text-brand-600 hover:bg-brand-100 active:bg-brand-100">
-                              <IconViber className="size-4" />
-                            </a>
-                          )}
-                        </div>
+        {showTeam && team.length > 0 && (
+          <div className="mt-16">
+            <p className="eyebrow">{t.team}</p>
+            <p className="mt-2 max-w-xl text-ink-2">{t.teamSub}</p>
+            <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">
+              {team.map((m) => (
+                <li key={m.id}>
+                  <Photo base={m.photo} alt={`${m.name} — ${m.role}`} sizes="(max-width: 640px) 50vw, 260px" className="aspect-[4/5] w-full bg-surface object-cover" />
+                  <p className="mt-3 text-[16px] font-semibold leading-tight">{m.name}</p>
+                  <p className="mt-0.5 text-[14px] text-ink-2">{m.role}</p>
+                  {m.since && <p className="num mt-1 text-[12px] text-muted">{m.since}</p>}
+                  {(m.telegram || m.viber) && (
+                    <div className="mt-2 flex gap-2">
+                      {m.telegram && (
+                        <a href={m.telegram} target="_blank" rel="noopener" aria-label={`Telegram: ${m.name}`} className="grid size-11 place-items-center border border-line text-ink hover:border-ink">
+                          <IconTelegram className="size-4" />
+                        </a>
+                      )}
+                      {m.viber && (
+                        <a href={m.viber} target="_blank" rel="noopener" aria-label={`Viber: ${m.name}`} className="grid size-11 place-items-center border border-line text-ink hover:border-ink">
+                          <IconViber className="size-4" />
+                        </a>
                       )}
                     </div>
-                  </li>
-                ))}
-          </ul>
-        </div>
-      )}
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </section>
   )
 }

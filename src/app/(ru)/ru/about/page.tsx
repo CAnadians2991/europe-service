@@ -6,7 +6,6 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { PageHero } from '@/components/content/PageHero'
 import { OfficeTeam } from '@/components/trust/OfficeTeam'
 import { LicenseSection } from '@/components/trust/LicenseSection'
-import { ClassicCta } from '@/components/home/ClassicBlocks'
 import { AboutPrinciples, AboutStory, aboutFaq, type AboutFacts } from '@/components/content/AboutStory'
 import { Faq } from '@/components/sections/Sections'
 import { faqLd } from '@/lib/seo'
@@ -39,8 +38,9 @@ export default async function Page() {
       <AboutStory lang="ru" facts={facts} />
       <OfficeTeam about={about} heading="Наш офис и команда" lang="ru" />
       {about.video && (
-        <section className="container-x pb-6">
-          <div className="mx-auto max-w-3xl">
+        <section className="container-x grid gap-6 py-14 sm:py-16 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-8" aria-label="Офис на видео">
+          <p className="eyebrow self-start lg:pt-1">Офис на видео</p>
+          <div className="max-w-3xl [&>div]:!my-0">
             <YouTube id={about.video} title="Офис Europe Service" lang="ru" />
           </div>
         </section>
@@ -49,7 +49,6 @@ export default async function Page() {
       <AboutPrinciples lang="ru" />
       <JsonLd data={faqLd(faq)} />
       <Faq items={faq} title="Вопросы об агентстве" lang="ru" />
-      <ClassicCta lang="ru" />
     </>
   )
 }

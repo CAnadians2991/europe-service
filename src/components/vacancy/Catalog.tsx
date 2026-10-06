@@ -215,7 +215,7 @@ export function Catalog({
           ))}
         </select>
       </label>
-      <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-line bg-white px-4 py-3.5 lg:mb-0">
+      <label className="flex min-h-[52px] cursor-pointer items-center gap-3 border-[1.5px] border-line-strong bg-white px-4 py-3 lg:mb-0">
         <input type="checkbox" className="size-5 accent-[var(--color-ok)]" checked={f.housingFree} onChange={(e) => set('housingFree', e.target.checked)} />
         <span className="text-[15px] font-semibold text-ink-2">{uk ? 'Житло безкоштовно' : 'Жильё бесплатно'}</span>
       </label>
@@ -227,17 +227,17 @@ export function Catalog({
   if (f.category && f.category !== 'other') quizPreset.work = f.category
 
   const leadCard = (key: string) => (
-    <div key={key} className="brand-band flex flex-col justify-between rounded-[var(--radius-card)] p-6 text-white shadow-[var(--shadow-lift)] sm:col-span-2 lg:col-span-1">
+    <div key={key} className="brand-band grid gap-5 border-b border-line p-5 text-white sm:grid-cols-[1fr_auto] sm:items-center sm:p-6">
       <div>
-        <p className="eyebrow !text-white">{ANY_REQUEST[lang].eyebrow}</p>
-        <p className="mt-3 font-display text-[22px] font-bold leading-tight">{ANY_REQUEST[lang].title}</p>
-        <p className="mt-2 text-[15px] text-white/90">{ANY_REQUEST[lang].text}</p>
+        <p className="eyebrow !text-white/85">{ANY_REQUEST[lang].eyebrow}</p>
+        <p className="mt-2 font-display text-[20px] font-semibold leading-tight sm:text-[22px]">{ANY_REQUEST[lang].title}</p>
+        <p className="mt-1.5 max-w-2xl text-[15px] text-white/90">{ANY_REQUEST[lang].text}</p>
       </div>
-      <div className="mt-6 grid gap-2">
-        <QuizButton id={`${leadForm}-card`} preset={quizPreset} className="btn-accent w-full !py-4">
+      <div className="grid gap-1.5 sm:justify-items-end">
+        <QuizButton id={`${leadForm}-card`} preset={quizPreset} className="btn-accent w-full sm:w-auto">
           {ANY_REQUEST[lang].cta}
         </QuizButton>
-        <p className="text-center text-xs text-white/85">{ANY_REQUEST[lang].free}</p>
+        <p className="text-center font-mono text-[11.5px] text-white/80 sm:text-right">{ANY_REQUEST[lang].free}</p>
       </div>
     </div>
   )
@@ -245,8 +245,8 @@ export function Catalog({
   // no content-visibility here: placeholder heights made the list jump while scrolling on phones
   const items: React.ReactNode[] = list.map((v, i) => <VacancyCard key={v.id} v={v} priority={i === 0} lang={lang} />)
   // «not sure you'd fit?» — early on phones (after the 2nd card) and again further down
-  if (items.length > 14) items.splice(14, 0, leadCard('lead-2'))
-  if (items.length > 2) items.splice(2, 0, leadCard('lead'))
+  if (items.length > 15) items.splice(15, 0, leadCard('lead-2'))
+  if (items.length > 4) items.splice(4, 0, leadCard('lead'))
   else items.push(leadCard('lead'))
 
   return (
@@ -258,7 +258,7 @@ export function Catalog({
           <IconSearch className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-muted" />
           <input
             type="search"
-            className="field !rounded-full !pl-11"
+            className="field !pl-11"
             placeholder={uk ? 'Пошук: склад, Toyota, Варшава…' : 'Поиск: склад, Toyota, Варшава…'}
             value={f.q}
             onChange={(e) => set('q', e.target.value)}
@@ -266,14 +266,14 @@ export function Catalog({
         </label>
         <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 scrollbar-none lg:mx-0 lg:flex-wrap lg:px-0">
           <Link href={countryHref('')} prefetch={false} scroll={false} className="chip shrink-0" data-active={!f.country} aria-current={!f.country ? 'true' : undefined} onClick={(e) => { e.preventDefault(); set('country', '') }}>
-            {uk ? 'Усі країни' : 'Все страны'} <span className="text-xs">{count('country', () => true)}</span>
+            {uk ? 'Усі країни' : 'Все страны'} <span className="num text-[12px] opacity-70">{count('country', () => true)}</span>
           </Link>
           {COUNTRIES.map((c) => {
             const n = count('country', (v) => v.country === c.code)
             if (!n && f.country !== c.code) return null
             return (
               <Link key={c.code} href={countryHref(f.country === c.code ? '' : c.code)} prefetch={false} scroll={false} className="chip shrink-0" data-active={f.country === c.code} aria-current={f.country === c.code ? 'true' : undefined} onClick={(e) => { e.preventDefault(); set('country', f.country === c.code ? '' : c.code) }}>
-                <span aria-hidden>{c.flag}</span> {uk ? c.name : c.nameRu} <span className="text-xs">{n}</span>
+                {uk ? c.name : c.nameRu} <span className="num text-[12px] opacity-70">{n}</span>
               </Link>
             )
           })}
@@ -281,12 +281,12 @@ export function Catalog({
       </div>
 
       {/* desktop filters */}
-      <div className="mt-4 hidden rounded-[26px] bg-white p-5 ring-1 ring-line lg:block">{filtersPanel}</div>
+      <div className="mt-4 hidden border border-line bg-white p-5 lg:block">{filtersPanel}</div>
 
       {/* result bar */}
       <div className="mt-5 flex flex-wrap items-center gap-3">
-        <p className="font-display text-[15px] font-semibold text-ink" aria-live="polite">
-          {uk ? 'Знайдено' : 'Найдено'}: <span className="text-brand-700">{list.length}</span>
+        <p className="font-mono text-[13px] font-medium uppercase tracking-[0.06em] text-ink-2" aria-live="polite">
+          {uk ? 'Знайдено' : 'Найдено'}: <span className="text-[15px] font-semibold text-brand-700">{list.length}</span>
         </p>
         {dirty && (
           <button type="button" onClick={() => setF(base)} className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-brand-700 hover:underline">
@@ -296,11 +296,11 @@ export function Catalog({
         <div className="ml-auto flex items-center gap-2">
           <button type="button" onClick={() => setSheet(true)} className="chip lg:hidden">
             <IconFilter className="size-4" /> {uk ? 'Фільтри' : 'Фильтры'}
-            {activeCount > 0 && <span className="grid size-5 place-items-center rounded-full bg-brand-600 text-[11px] font-bold text-white">{activeCount}</span>}
+            {activeCount > 0 && <span className="num grid size-5 place-items-center bg-brand-600 text-[11px] font-semibold text-white">{activeCount}</span>}
           </button>
           <label className="flex items-center gap-2 text-sm text-muted">
             <span className="hidden sm:inline">{uk ? 'Сортувати:' : 'Сортировать:'}</span>
-            <select aria-label={uk ? 'Сортування' : 'Сортировка'} className="select-code min-h-11 rounded-full border border-line bg-white py-2 pl-3 pr-8 text-[16px] font-semibold text-ink-2" value={f.sort} onChange={(e) => set('sort', e.target.value as Filters['sort'])}>
+            <select aria-label={uk ? 'Сортування' : 'Сортировка'} className="select-code min-h-11 border border-line-strong bg-white py-2 pl-3 pr-8 text-[16px] font-semibold text-ink-2" value={f.sort} onChange={(e) => set('sort', e.target.value as Filters['sort'])}>
               <option value="rec">{uk ? 'Рекомендовані' : 'Рекомендуемые'}</option>
               <option value="salary">{uk ? 'Вища зарплата' : 'Выше зарплата'}</option>
               <option value="new">{uk ? 'Нові' : 'Новые'}</option>
@@ -311,15 +311,15 @@ export function Catalog({
 
       <h2 className="sr-only">{uk ? 'Список вакансій' : 'Список вакансий'}</h2>
       {list.length ? (
-        <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">{items}</div>
+        <div className="mt-4 border-x border-t border-line">{items}</div>
       ) : (
-        <div className="mt-6 grid gap-6 rounded-[26px] bg-white p-6 ring-1 ring-line sm:p-8 lg:grid-cols-2">
+        <div className="mt-6 grid gap-6 border border-line bg-white p-6 sm:p-8 lg:grid-cols-2">
           <div>
             <p className="text-xl font-bold">{uk ? 'За цими фільтрами вакансій зараз немає' : 'По этим фильтрам вакансий сейчас нет'}</p>
             <p className="mt-2 text-ink-2">{uk ? 'Спробуйте змінити умови або залиште заявку — менеджер підбере схожі варіанти.' : 'Измените условия или оставьте заявку — менеджер подберёт похожие варианты.'}</p>
             <button type="button" onClick={() => setF(base)} className="btn-ghost mt-4">{uk ? 'Скинути фільтри' : 'Сбросить фильтры'}</button>
           </div>
-          <div className="rounded-2xl bg-paper p-5">
+          <div className="bg-cream p-5">
             <LeadForm form={`${leadForm}-empty`} lang={lang} compact />
           </div>
         </div>
@@ -328,11 +328,11 @@ export function Catalog({
       {/* mobile bottom sheet */}
       {sheet && (
         <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label={uk ? 'Фільтри' : 'Фильтры'}>
-          <div className="absolute inset-0 bg-black/40" onClick={() => setSheet(false)} />
-          <div className="absolute inset-x-0 bottom-0 max-h-[88dvh] overflow-y-auto rounded-t-3xl bg-white p-5 pb-[max(20px,env(safe-area-inset-bottom))] animate-[pwIn_.18s_ease-out]">
+          <div className="absolute inset-0 bg-night/50" onClick={() => setSheet(false)} />
+          <div className="absolute inset-x-0 bottom-0 max-h-[88dvh] overflow-y-auto border-t-[3px] border-brand-500 bg-white p-5 pb-[max(20px,env(safe-area-inset-bottom))] animate-[pwIn_.18s_ease-out]">
             <div className="mb-4 flex items-center justify-between">
               <p className="text-lg font-bold">{uk ? 'Фільтри' : 'Фильтры'}</p>
-              <button type="button" onClick={() => setSheet(false)} aria-label={uk ? 'Закрити' : 'Закрыть'} className="grid size-11 place-items-center rounded-full hover:bg-surface active:bg-surface">
+              <button type="button" onClick={() => setSheet(false)} aria-label={uk ? 'Закрити' : 'Закрыть'} className="grid size-11 place-items-center border border-line hover:border-ink">
                 <IconClose className="size-5" />
               </button>
             </div>

@@ -25,7 +25,12 @@ export function salaryHour(s: Salary, lang: 'uk' | 'ru' = 'uk') {
   return r ? `${r}\u00a0${CURRENCY_SIGN[s.currency]}${PER_HOUR[lang]}` : ''
 }
 
+/** Tilda texts sometimes give a bonus («премії до 300 зл/міс») where the parser expects the monthly pay:
+ *  a «month» below 60 hours of the hourly rate is not a monthly salary */
+export const monthPlausible = (s: Salary) => s.hourMin == null || (s.monthMax ?? s.monthMin ?? 0) >= s.hourMin * 60
+
 export function salaryMonth(s: Salary, lang: 'uk' | 'ru' = 'uk') {
+  if (!monthPlausible(s)) return ''
   const r = range(s.monthMin, s.monthMax)
   return r ? `${r}\u00a0${CURRENCY_SIGN[s.currency]}${PER_MONTH[lang]}` : ''
 }

@@ -89,8 +89,10 @@ export async function ContentView({ path, lang }: { path: string; lang: Lang }) 
     return (
       <>
         <PageHero title={r.doc.title} crumbs={[home, { name: r.doc.title, path }]} />
-        <div className="container-x max-w-[860px] py-10">
-          <Blocks blocks={r.doc.blocks} />
+        <div className="container-x py-10">
+          <div className="max-w-[860px]">
+            <Blocks blocks={r.doc.blocks} />
+          </div>
         </div>
       </>
     )
@@ -106,25 +108,40 @@ function GenericPage({ page, home }: { page: ContentPage; home: { name: string; 
   return (
     <>
       <PageHero title={title} text={typeof page.subtitle === 'string' ? page.subtitle : undefined} crumbs={[home, { name: title, path: page.path }]} />
-      <div className="container-x max-w-[860px] py-10">
-        {items.length > 0 && (
-          <ul className="mb-8 grid gap-3">
-            {items.map((it) => (
-              <li key={it.href + (it.label || it.text)}>
-                {it.href.startsWith('/') ? (
-                  <Link href={it.href} className="btn-primary w-full justify-center">
-                    {it.label || it.text}
-                  </Link>
-                ) : (
-                  <a href={it.href} target="_blank" rel="noopener" className="btn-primary w-full justify-center">
-                    {it.label || it.text}
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
-        <Blocks blocks={page.blocks ?? []} />
+      <div className="container-x py-10 sm:py-12">
+        <div className="max-w-[820px]">
+          {items.length > 0 && (
+            <ul className="mb-10 border-t-[3px] border-ink">
+              {items.map((it) => {
+                const inner = (
+                  <>
+                    <span className="flex-1">{it.label || it.text}</span>
+                    <span aria-hidden className="text-[18px] text-muted transition group-hover:translate-x-0.5 group-hover:text-brand-700">
+                      {it.href.startsWith('/') ? '→' : '↗'}
+                    </span>
+                  </>
+                )
+                const cls = 'group flex min-h-14 items-center gap-4 py-3 text-[17px] font-semibold text-ink hover:text-brand-700'
+                return (
+                  <li key={it.href + (it.label || it.text)} className="border-b border-line">
+                    {it.href.startsWith('/') ? (
+                      <Link href={it.href} className={cls}>
+                        {inner}
+                      </Link>
+                    ) : (
+                      <a href={it.href} target="_blank" rel="noopener" className={cls}>
+                        {inner}
+                      </a>
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
+          )}
+          <div className="[&>.prose-pw>*:first-child]:mt-0">
+            <Blocks blocks={page.blocks ?? []} />
+          </div>
+        </div>
       </div>
     </>
   )

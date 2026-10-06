@@ -13,15 +13,28 @@ export function ReviewForm({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
   const [text, setText] = useState('')
   const [vacancy, setVacancy] = useState('')
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <div>
         <p className="label">{uk ? 'Ваша оцінка' : 'Ваша оценка'}</p>
-        <div className="flex gap-1" role="radiogroup" aria-label={uk ? 'Оцінка' : 'Оценка'}>
-          {[1, 2, 3, 4, 5].map((n) => (
-            <button key={n} type="button" role="radio" aria-checked={rating === n} aria-label={uk ? `${n} з 5` : `${n} из 5`} onClick={() => setRating(n)} className="rounded-lg p-1.5 text-sun-600 transition active:bg-sun-100">
-              <IconStar className={`size-8 ${n <= rating ? '' : 'opacity-25'}`} />
-            </button>
-          ))}
+        <div className="flex items-center gap-3">
+          <div className="flex border border-line-strong bg-white" role="radiogroup" aria-label={uk ? 'Оцінка' : 'Оценка'}>
+            {[1, 2, 3, 4, 5].map((n) => (
+              <button
+                key={n}
+                type="button"
+                role="radio"
+                aria-checked={rating === n}
+                aria-label={uk ? `${n} з 5` : `${n} из 5`}
+                onClick={() => setRating(n)}
+                className="grid size-12 place-items-center border-l border-line text-sun-600 transition-colors first:border-l-0 hover:bg-surface aria-checked:bg-surface"
+              >
+                <IconStar className={`size-7 ${n <= rating ? '' : 'opacity-25'}`} />
+              </button>
+            ))}
+          </div>
+          <span className="num text-[15px] font-semibold text-ink" aria-hidden>
+            {rating}/5
+          </span>
         </div>
       </div>
       <div>

@@ -7,7 +7,7 @@ export interface QOption {
   label: string
   labelRu?: string
   hint?: string
-  /** a flag emoji (country pickers) or the name of a line icon: box | factory | jar | bed | compass | check */
+  /** the name of a line icon: box | factory | jar | bed | compass | check (country options show their 2-letter code instead) */
   icon?: string
 }
 
@@ -17,7 +17,7 @@ export interface QStep {
   hint?: string
   type: 'single' | 'number' | 'text'
   options?: QOption[]
-  /** label on the boarding pass */
+  /** short field label: the answers summary before the phone field and the key in the CRM / Telegram lead */
   pass: string
   placeholder?: string
   optional?: boolean
@@ -32,7 +32,7 @@ export interface QuizConfig {
   match?: boolean
   finalTitle?: string
   submitLabel?: string
-  /** fixed destination on the boarding pass when there is no country question */
+  /** fixed destination (e.g. a recruiting landing) when there is no country question */
   destination?: { code: string; name: string }
 }
 
@@ -57,10 +57,10 @@ export function countryStep(counts: Partial<Record<CountryCode, number>>): QStep
   return {
     key: 'country',
     question: 'У якій країні хочете працювати?',
-    pass: 'Напрямок',
+    pass: 'Країна',
     type: 'single',
     options: [
-      ...COUNTRIES.filter((c) => counts[c.code]).map((c) => ({ value: c.code, label: c.name, labelRu: c.nameRu, icon: c.flag, hint: `${counts[c.code]} ${plural(counts[c.code] ?? 0, ['вакансія', 'вакансії', 'вакансій'])}` })),
+      ...COUNTRIES.filter((c) => counts[c.code]).map((c) => ({ value: c.code, label: c.name, labelRu: c.nameRu, hint: `${counts[c.code]} ${plural(counts[c.code] ?? 0, ['вакансія', 'вакансії', 'вакансій'])}` })),
       { value: 'any', label: 'Не важливо', icon: 'compass', hint: 'Підберемо найкраще' },
     ],
   }
@@ -69,7 +69,7 @@ export function countryStep(counts: Partial<Record<CountryCode, number>>): QStep
 export const WHO_STEP: QStep = {
   key: 'who',
   question: 'Для кого шукаєте роботу?',
-  pass: 'Пасажир',
+  pass: 'Для кого',
   type: 'single',
   options: [
     { value: 'man', label: 'Для чоловіка' },
@@ -111,7 +111,7 @@ export const DOCS_STEP: QStep = {
 export const WHEN_STEP: QStep = {
   key: 'when',
   question: 'Коли готові виїхати?',
-  pass: 'Виїзд',
+  pass: 'Термін виїзду',
   type: 'single',
   options: [
     { value: 'now', label: 'Вже цього тижня' },
@@ -192,11 +192,11 @@ const RU: Record<string, string> = {
   'Пакування продуктів': 'Упаковка продуктов',
   'Готель або ресторан': 'Отель или ресторан',
   'Будь-яка робота': 'Любая работа',
-  Напрямок: 'Направление',
+  Країна: 'Страна',
   'Не важливо': 'Не важно',
   'Порадьте найкраще': 'Посоветуйте лучшее',
   'Для кого шукаєте роботу?': 'Для кого ищете работу?',
-  Пасажир: 'Пассажир',
+  'Для кого': 'Для кого',
   'Для чоловіка': 'Для мужчины',
   'Для жінки': 'Для женщины',
   'Для сімейної пари': 'Для семейной пары',
@@ -228,7 +228,7 @@ const RU: Record<string, string> = {
   'Можна бронювати заздалегідь': 'Можно бронировать заранее',
   'Підкажемо, як оформити': 'Подскажем, как оформить',
   'Коли готові виїхати?': 'Когда готовы выехать?',
-  Виїзд: 'Выезд',
+  'Термін виїзду': 'Срок выезда',
   'Вже цього тижня': 'Уже на этой неделе',
   'Протягом 2 тижнів': 'В течение 2 недель',
   'Протягом місяця': 'В течение месяца',

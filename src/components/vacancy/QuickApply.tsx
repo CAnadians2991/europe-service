@@ -2,7 +2,7 @@
 
 import { useLeadModal } from '@/components/lead/LeadModal'
 
-export function QuickApply({ id, title, lang = 'uk', className = 'btn-ghost !px-4 !py-3 !text-[14px]', label, submitLabel, form = 'vacancy-card' }: { id: string; title: string; lang?: 'uk' | 'ru'; className?: string; label?: string; submitLabel?: string; form?: string }) {
+export function QuickApply({ id, title, lang = 'uk', className = 'btn-ghost !px-4 !py-3 !text-[15px]', label, submitLabel, form = 'vacancy-card' }: { id: string; title: string; lang?: 'uk' | 'ru'; className?: string; label?: string; submitLabel?: string; form?: string }) {
   const open = useLeadModal()
   return (
     <button

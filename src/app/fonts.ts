@@ -1,29 +1,34 @@
-import localFont from 'next/font/local'
+import { Golos_Text, IBM_Plex_Mono, Unbounded } from 'next/font/google'
 
 /**
- * Display: Montserrat (the brand font of the logo and the original site), variable 500–800,
- * self-hosted and subset to Ukrainian/Russian Cyrillic + Latin (incl. Polish/Czech letters) — one ~53 KB file.
- * Rebuild: see scripts/fonts/README.md
+ * Europe Service type system
+ * - Unbounded: wide display grotesk for headlines and big numbers (Cyrillic incl. ї є ґ)
+ * - Golos Text: Cyrillic-first text face — very legible on phones
+ * - IBM Plex Mono: figures and requisites (salaries, licence, ЄДРПОУ, phones) — the «official register» voice
  */
-export const display = localFont({
-  src: './_fonts/montserrat-ua.woff2',
-  weight: '500 800',
+export const display = Unbounded({
+  subsets: ['cyrillic', 'latin', 'latin-ext'],
+  weight: ['500', '600', '700'],
   display: 'swap',
   variable: '--font-display-face',
   fallback: ['Arial', 'sans-serif'],
 })
 
-/**
- * Body: Onest — highly legible on phones. Self-hosted variable 400–700, same Cyrillic + Latin subset as Montserrat:
- * one ~31 KB file instead of three Google subsets (~68 KB) competing with the first photo on 4G.
- */
-export const sans = localFont({
-  src: './_fonts/onest-ua.woff2',
-  weight: '400 700',
+export const sans = Golos_Text({
+  subsets: ['cyrillic', 'latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
-  variable: '--font-onest',
+  variable: '--font-text',
   fallback: ['system-ui', 'Arial', 'sans-serif'],
-  preload: false,
 })
 
-export const fontVars = `${display.variable} ${sans.variable}`
+export const mono = IBM_Plex_Mono({
+  subsets: ['cyrillic', 'latin', 'latin-ext'],
+  weight: ['400', '500', '600'],
+  display: 'swap',
+  variable: '--font-mono-face',
+  preload: false,
+  fallback: ['ui-monospace', 'Menlo', 'monospace'],
+})
+
+export const fontVars = `${display.variable} ${sans.variable} ${mono.variable}`

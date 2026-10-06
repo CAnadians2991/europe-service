@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useHeaderAction, useLeadModal, useQuizModal } from '@/components/lead/LeadModal'
-import { QUIZ_PAGES } from '@/lib/site'
+import { isQuizPage } from '@/lib/site'
 
 /**
  * Phones (<640px): the logo slot of the sticky header turns into the main call to action once the visitor scrolls —
@@ -64,7 +64,7 @@ export function MobileHeaderSlot({ lang, children }: { lang: 'uk' | 'ru'; childr
   }, [path])
 
   const formInView = formSeen?.path === path && formSeen.on
-  const show = scrolled && !formInView && !QUIZ_PAGES.has(path)
+  const show = scrolled && !formInView && !isQuizPage(path)
   const label = action ? (uk ? 'Забронювати місце' : 'Забронировать место') : uk ? 'Підібрати вакансію' : 'Подобрать вакансию'
 
   return (

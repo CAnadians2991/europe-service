@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Photo } from '@/components/ui/Photo'
+import { IconArrow } from '@/components/ui/icons'
 import { YouTube } from './YouTube'
 import type { Block } from '@/lib/content'
 
@@ -61,7 +62,7 @@ export function Blocks({ blocks, nested }: { blocks: Block[]; nested?: boolean }
             )
           }
           case 'img':
-            return <Photo key={i} base={b.src} alt={b.alt || ''} sizes="(max-width: 768px) 100vw, 760px" className="h-auto w-full" />
+            return <Photo key={i} base={b.src} alt={b.alt || ''} sizes="(max-width: 768px) 100vw, 760px" className="h-auto w-full !rounded-none bg-surface" />
           case 'quote':
             return (
               <blockquote key={i}>
@@ -72,13 +73,18 @@ export function Blocks({ blocks, nested }: { blocks: Block[]; nested?: boolean }
               </blockquote>
             )
           case 'details':
+            // hairline accordion (as the FAQ): consecutive items share one rule
             return (
-              <details key={i} className="group my-4 rounded-2xl bg-white ring-1 ring-line [&_*]:my-2">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 font-semibold text-ink [&::-webkit-details-marker]:hidden">
-                  {b.summary}
-                  <span className="grid size-7 shrink-0 place-items-center rounded-full bg-brand-50 text-brand-600 transition group-open:rotate-45 group-open:bg-brand-600 group-open:text-white" aria-hidden>+</span>
+              <details key={i} className="group my-6 border-y border-line [&+details]:-mt-6 [&+details]:border-t-0">
+                <summary className="flex min-h-14 cursor-pointer list-none items-start gap-4 py-4 text-[17px] font-semibold leading-snug text-ink [&::-webkit-details-marker]:hidden">
+                  <span className="flex-1 pt-1">{b.summary}</span>
+                  <span aria-hidden className="grid size-8 shrink-0 place-items-center border border-line text-ink transition-colors group-open:border-brand-600 group-open:bg-brand-600 group-open:text-white">
+                    <svg viewBox="0 0 24 24" className="size-4 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+                      <path d="M12 5v14M5 12h14" />
+                    </svg>
+                  </span>
                 </summary>
-                <div className="px-5 pb-4">
+                <div className="pb-5 pr-2 text-[16px] sm:pr-12 [&_h2]:mb-2 [&_h2]:mt-4 [&_h2]:border-t-0 [&_h2]:pt-0 [&_h2]:text-[19px] [&_h3]:mt-4 [&_ol]:my-2 [&_p]:my-2 [&_ul]:my-2 [&>div>*:first-child]:mt-0 [&>div>*:last-child]:mb-0">
                   <Blocks blocks={b.blocks} nested />
                 </div>
               </details>
@@ -90,14 +96,14 @@ export function Blocks({ blocks, nested }: { blocks: Block[]; nested?: boolean }
             if (href.includes('tilda.cc') || href.startsWith('#')) return null
             return href.startsWith('/') ? (
               <p key={i}>
-                <Link href={href} className="btn-primary !text-white !no-underline">
-                  {b.text}
+                <Link href={href} className="btn-accent !text-white !no-underline">
+                  {b.text} <IconArrow className="size-4" />
                 </Link>
               </p>
             ) : (
               <p key={i}>
-                <a href={href} target="_blank" rel="noopener" className="btn-primary !text-white !no-underline">
-                  {b.text}
+                <a href={href} target="_blank" rel="noopener" className="btn-accent !text-white !no-underline">
+                  {b.text} <IconArrow className="size-4" />
                 </a>
               </p>
             )

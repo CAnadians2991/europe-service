@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Photo } from '@/components/ui/Photo'
-import { IconCheck, IconExternal, IconShield } from '@/components/ui/icons'
+import { IconCheck, IconExternal } from '@/components/ui/icons'
+import { LicenseStamp } from './LicenseStamp'
 import type { About } from '@/lib/about-types'
 
 /**
@@ -67,59 +68,70 @@ const TX = {
 export function LicenseSection({ about, compact, lang = 'uk' }: { about: About; compact?: boolean; lang?: 'uk' | 'ru' }) {
   const { license: l, registry: r } = about
   const t = TX[lang]
+  const uk = lang === 'uk'
+  const rows: [string, string][] = uk
+    ? [
+        ['Юридична особа', 'ТОВ «ЄВРОПА СЕРВІС УКРАЇНА»'],
+        ['Код ЄДРПОУ', r.code],
+        ['Ліцензія', l.number ? `№ ${l.number} від ${l.date}` : '—'],
+        ['Видана', 'Міністерство соціальної політики України'],
+        ['Діяльність', 'посередництво у працевлаштуванні за кордоном'],
+        ['Головний офіс', r.address],
+      ]
+    : [
+        ['Юридическое лицо', 'ООО «ЕВРОПА СЕРВИС УКРАИНА»'],
+        ['Код ЕГРПОУ', r.code],
+        ['Лицензия', l.number ? `№ ${l.number} от ${l.date}` : '—'],
+        ['Выдана', 'Министерство социальной политики Украины'],
+        ['Деятельность', 'посредничество в трудоустройстве за границей'],
+        ['Главный офис', 'г. Киев, ул. Сечевых Стрельцов, 77, офис 612'],
+      ]
   return (
-    <section id="perelik" className="container-x scroll-mt-28 py-16 sm:py-20" aria-labelledby="lic-h">
-      {/* old links (/about#licenziya) keep landing here */}
+    <section id="perelik" className="scroll-mt-28 bg-surface" aria-labelledby="lic-h">
       <span id="licenziya" className="block scroll-mt-28" aria-hidden />
-      <div className="grid gap-10 rounded-[30px] bg-brand-100 p-6 sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-14">
-        {/* the document; on phones — after the heading and facts */}
-        <div className="relative order-2 mx-auto w-full max-w-[420px] lg:order-none">
-          {l.scan ? (
-            <a href={`${l.scan}-1200.webp`} target="_blank" rel="noopener" className="block rotate-[-2deg] rounded-2xl bg-white p-3 shadow-[var(--shadow-lift)] transition hover:rotate-0">
-              <Photo base={l.scan} alt={l.number ? `Ліцензія № ${l.number} від ${l.date}` : t.doc} sizes="420px" className="h-auto w-full rounded-lg" />
-              <span className="mt-2 block text-center text-xs font-semibold text-brand-600">{t.open}</span>
-            </a>
-          ) : (
-            <div className="rotate-[-2deg] rounded-2xl bg-white p-7 shadow-[var(--shadow-lift)] ring-1 ring-brand-200">
-              <div className="flex items-center gap-3 border-b border-dashed border-brand-200 pb-4">
-                <span className="grid size-12 place-items-center rounded-full bg-brand-600 text-white">
-                  <IconShield className="size-6" />
-                </span>
-                <div>
-                  <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-muted">{t.doc}</p>
-                  <p className="font-display text-2xl font-bold">{t.docMain(r)}</p>
-                </div>
-              </div>
-              <p className="mt-4 font-semibold">{r.name}</p>
-              <dl className="mt-3 space-y-3 text-[14px]">
-                {t.docRows(r).map(([k, v]) => (
-                  <div key={k}>
-                    <dt className="text-muted">{k}</dt>
-                    <dd className="font-semibold">{v}</dd>
+      <div className="container-x grid gap-12 py-16 sm:py-20 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
+        {/* the requisites as a document sheet with the stamp */}
+        <div className="relative order-2 lg:order-none">
+          <div className="relative border border-line bg-white p-6 shadow-[var(--shadow-lift)] sm:p-8">
+            <div className="flex items-baseline justify-between gap-4 border-b-[3px] border-ink pb-3">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.1em]">{uk ? 'Реквізити агентства' : 'Реквизиты агентства'}</p>
+              <p className="num text-[12px] text-muted">europeservice.com.ua</p>
+            </div>
+            {l.scan ? (
+              <a href={`${l.scan}-1200.webp`} target="_blank" rel="noopener" className="mt-5 block">
+                <Photo base={l.scan} alt={l.number ? `Ліцензія № ${l.number} від ${l.date}` : t.doc} sizes="520px" className="h-auto w-full" />
+                <span className="mt-2 block font-mono text-[12px] font-semibold text-brand-700">{t.open} →</span>
+              </a>
+            ) : (
+              <dl className="mt-2">
+                {rows.map(([k, v]) => (
+                  <div key={k} className="grid gap-1 border-b border-line py-3 sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-4">
+                    <dt className="font-mono text-[12px] uppercase tracking-[0.06em] text-muted sm:pt-0.5">{k}</dt>
+                    <dd className="text-[15.5px] font-semibold text-ink">{v}</dd>
                   </div>
                 ))}
               </dl>
-            </div>
-          )}
+            )}
+          </div>
+          <LicenseStamp lang={lang} uid="doc" className="pointer-events-none absolute -bottom-10 right-4 size-36 rotate-[-14deg] text-brand-600/80 mix-blend-multiply sm:size-44" />
         </div>
 
-        {/* facts */}
         <div className="order-1 lg:order-none">
           <p className="eyebrow">{t.eyebrow}</p>
-          <h2 id="lic-h" className="mt-3 text-[26px] leading-[1.15] sm:text-[36px]">{t.h}</h2>
-          {!compact && <p className="mt-4 text-[16px] leading-relaxed text-ink-2">{t.lead}</p>}
+          <h2 id="lic-h" className="mt-3 text-[26px] sm:text-[36px]">{t.h}</h2>
+          {!compact && <p className="mt-4 text-[16.5px] leading-relaxed text-ink-2">{t.lead}</p>}
           <ul className="mt-6 space-y-3 text-[15.5px]">
-            {[l.number ? t.lic(l) : '', t.list, t.reg(r), t.addr(r)].filter(Boolean).map((line) => (
+            {[l.number ? t.lic(l) : '', t.list].filter(Boolean).map((line) => (
               <li key={line} className="flex gap-3">
-                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
-                  <IconCheck className="size-3.5" />
+                <span className="mt-1 grid size-5 shrink-0 place-items-center bg-brand-600 text-white">
+                  <IconCheck className="size-3" />
                 </span>
                 <span>{line}</span>
               </li>
             ))}
           </ul>
           <div className="mt-7 flex flex-wrap gap-3">
-            <a href={r.url} target="_blank" rel="noopener" className="btn-primary">
+            <a href={r.url} target="_blank" rel="noopener" className="btn-accent">
               {t.check} <IconExternal className="size-4" />
             </a>
             <Link href="/declaration" className="btn-ghost">
@@ -127,9 +139,9 @@ export function LicenseSection({ about, compact, lang = 'uk' }: { about: About; 
             </Link>
           </div>
           {!compact && (
-            <details className="mt-6 rounded-2xl bg-white/70 px-5 py-1 text-[14.5px]">
+            <details className="mt-6 border-t border-line pt-1 text-[15px]">
               <summary className="cursor-pointer py-3 font-semibold">{t.how}</summary>
-              <ol className="mb-3 list-decimal space-y-1.5 pl-5 text-ink-2">
+              <ol className="mb-3 list-decimal space-y-1.5 pl-5 text-ink-2 marker:font-mono marker:text-brand-700">
                 {t.steps(r.code).map((x) => (
                   <li key={x}>{x}</li>
                 ))}
