@@ -1,13 +1,9 @@
 import type { Metadata } from 'next'
 
-const google = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-
 /**
  * Ownership tokens that third parties read from the page <head>.
- * - Meta (Business Manager → Brand safety → Domains): token copied from the old Tilda home page.
- * - Google Search Console: optional HTML-tag token via env; the recommended method is a DNS TXT record (docs/CUTOVER.md).
+ * - Google Search Console: the HTML-tag token of the Tilda home page (keeps the property verified after the move).
  */
-export const siteVerification: Metadata['verification'] = {
-  ...(google ? { google } : {}),
-  other: { 'facebook-domain-verification': '5b2wepncom2wink91w60auc2jwjuis' },
-}
+const google = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || 'UCj7hEofAk4QehdGQUAUWxj_-9shcBTL9GL8_nAMI5s'
+
+export const siteVerification: Metadata['verification'] = { google }

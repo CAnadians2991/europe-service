@@ -3,7 +3,7 @@
 //   import { sql, revalidate } from './lib/db.mjs'
 //   const rows = await sql`select data from vacancies where id = ${id}`      // or sql.query(text, params)
 //   await revalidate(['vacancies'])                                           // refresh the cached pages after writes
-const base = process.env.SCRIPT_SITE_URL || 'https://personalwork.com.ua'
+const base = process.env.SCRIPT_SITE_URL || 'https://europeservice.com.ua'
 const token = process.env.DB_SCRIPT_TOKEN
 if (!token) throw new Error('DB_SCRIPT_TOKEN missing — run with --env-file=.env.local')
 

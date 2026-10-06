@@ -13,7 +13,8 @@ async function readAll(): Promise<Vacancy[]> {
   if (!hasDb) return SEED
   try {
     const rows = (await sql`select data from vacancies order by sort asc, updated_at desc`) as { data: Vacancy }[]
-    return rows.map((r) => r.data)
+    // a brand-new Netlify Database is empty until the first CI build seeds it — show the Tilda import meanwhile
+    return rows.length ? rows.map((r) => r.data) : SEED
   } catch (e) {
     console.error('[vacancies] DB read failed, using seed', e)
     return SEED

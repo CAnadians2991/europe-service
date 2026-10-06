@@ -6,8 +6,8 @@ import path from 'node:path'
 import { neon } from '@neondatabase/serverless'
 import { getConnectionString } from '@netlify/database'
 
-if (!process.env.NETLIFY) {
-  console.log('[db-check] not a Netlify build — skipped')
+if (!process.env.NETLIFY || process.env.NETLIFY_LOCAL) {
+  console.log('[db-check] not a Netlify CI build — skipped')
   process.exit(0)
 }
 let url
