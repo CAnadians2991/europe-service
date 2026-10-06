@@ -12,7 +12,8 @@ const SEED = seed as unknown as Vacancy[]
 async function readAll(): Promise<Vacancy[]> {
   if (!hasDb) return SEED
   try {
-    const rows = (await sql`select data from vacancies order by sort asc, updated_at desc`) as { data: Vacancy }[]
+    // only open vacancies are cached in one piece; the 1 200+ closed Tilda pages are read one by one (getVacancyByPath)
+    const rows = (await sql`select data from vacancies where active order by sort asc, updated_at desc`) as { data: Vacancy }[]
     // a brand-new Netlify Database is empty until the first CI build seeds it — show the Tilda import meanwhile
     return rows.length ? rows.map((r) => r.data) : SEED
   } catch (e) {
@@ -21,9 +22,9 @@ async function readAll(): Promise<Vacancy[]> {
   }
 }
 
-const cachedAll = unstable_cache(readAll, ['vacancies-all-v7'], { tags: [VACANCIES_TAG] })
+const cachedAll = unstable_cache(readAll, ['vacancies-open-v8'], { tags: [VACANCIES_TAG] })
 
-/** All vacancies (active + hidden), cached until an admin edit revalidates the tag. Loads the admin's countries too. */
+/** Open vacancies, cached until an admin edit revalidates the tag. Loads the admin's countries too. */
 export async function getAllVacancies(): Promise<Vacancy[]> {
   await ensureCountries()
   return cachedAll()
@@ -33,9 +34,56 @@ export async function getActiveVacancies(): Promise<Vacancy[]> {
   return (await getAllVacancies()).filter((v) => v.active)
 }
 
+/** local development without a database: the closed posts from data/vacancies.closed.json */
+let closedLocal: Map<string, Vacancy> | null = null
+async function closedFromFile(p: string) {
+  if (!closedLocal) {
+    closedLocal = new Map()
+    try {
+      const { readFile } = await import('node:fs/promises')
+      const list = JSON.parse(await readFile(process.cwd() + '/data/vacancies.closed.json', 'utf8')) as Vacancy[]
+      for (const v of list) closedLocal.set(v.path.toLowerCase(), v)
+    } catch {}
+  }
+  return closedLocal.get(p) ?? null
+}
+
+const closedByPath = unstable_cache(
+  async (p: string): Promise<Vacancy | null> => {
+    if (!hasDb) return closedFromFile(p)
+    try {
+      const rows = (await sql`select data from vacancies where lower(path) = ${p} limit 1`) as { data: Vacancy }[]
+      return rows[0]?.data ?? null
+    } catch {
+      return null
+    }
+  },
+  ['vacancy-by-path-v1'],
+  { tags: [VACANCIES_TAG] },
+)
+
+/** Any vacancy page by its address: open ones from the cached list, closed Tilda ones straight from the database */
 export async function getVacancyByPath(path: string): Promise<Vacancy | undefined> {
-  const p = decodeURI(path).replace(/\/+$/, '').toLowerCase()
-  return (await getAllVacancies()).find((v) => v.path.toLowerCase() === p)
+  let p = path
+  try {
+    p = decodeURI(path)
+  } catch {}
+  p = p.replace(/\/+$/, '').toLowerCase()
+  const open = (await getAllVacancies()).find((v) => v.path.toLowerCase() === p)
+  return open ?? (await closedByPath(p)) ?? undefined
+}
+
+/** Addresses of the closed vacancies (they stay online as on Tilda) — for the sitemap */
+export async function getClosedVacancyPaths(): Promise<{ path: string; updatedAt: string }[]> {
+  if (!hasDb) return []
+  try {
+    return ((await sql`select path, updated_at from vacancies where not active order by path`) as { path: string; updated_at: string }[]).map((r) => ({
+      path: r.path,
+      updatedAt: new Date(r.updated_at).toISOString(),
+    }))
+  } catch {
+    return []
+  }
 }
 
 export function toCard(v: Vacancy): VacancyCard {

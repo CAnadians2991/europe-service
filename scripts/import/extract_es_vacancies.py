@@ -31,15 +31,15 @@ COUNTRY_SLUG = {
     'lv': 'latvia', 'at': 'austria', 'it': 'italy', 'be': 'belgium', 'fr': 'france', 'ca': 'canada', 'hu': 'hungary',
     'sk': 'slovakia', 'gb': 'england',
 }
-COUNTRY_PAGE = {c: ('/vacancies' if c == 'pl' else f'/vacancies/{s}') for c, s in COUNTRY_SLUG.items()}
+COUNTRY_PAGE = {c: ('/vacancies' if c == 'pl' else f'/vakansii/{s}' if c in ('hu', 'sk', 'gb') else f'/vacancies/{s}') for c, s in COUNTRY_SLUG.items()}
 CURRENCY = {'pl': 'PLN', 'cz': 'CZK', 'ro': 'EUR', 'hu': 'EUR', 'gb': 'GBP', 'ca': 'USD'}
 # words in the text that give the country away when the post has no catalog tags
 COUNTRY_HINTS = [
-    ('gr', r'Греці|Родос|Крит|Афін|Кос\b|Халкідік|Корфу|Закінф|Санторін'), ('it', r'Італі'), ('lv', r'Латві|Рига|Riga'),
-    ('lt', r'Литв|Вільнюс|Каунас|Klaipėd|Клайпед|Šiauliai|Шяуля'), ('at', r'Австрі'), ('be', r'Бельгі'), ('fr', r'Франці'),
-    ('nl', r'Нідерланд|Голланд'), ('de', r'Німеччин|Гамбург|Берлін|Мюнхен|Баварі'), ('cz', r'Чехі|Kč|крон'),
-    ('sk', r'Словаччин'), ('hu', r'Угорщин|Будапешт'), ('ro', r'Румуні|Бухарест'), ('gb', r'Англі|Великобритан'),
-    ('ca', r'Канад'), ('pl', r'zł|зл\b|злот|Польщ|Umow'),
+    ('gr', r'Греці|Греци|Родос|Крит|Афін|Афин|Кос\b|Халкідік|Корфу|Закінф|Санторін'), ('it', r'Італі|Итали'), ('lv', r'Латві|Латви|Рига|Riga'),
+    ('lt', r'Литв|Вільнюс|Вильнюс|Каунас|Klaipėd|Клайпед|Šiauliai|Шяуля'), ('at', r'Австрі|Австри'), ('be', r'Бельгі|Бельги'), ('fr', r'Франці|Франци'),
+    ('nl', r'Нідерланд|Нидерланд|Голланд'), ('de', r'Німеччин|Германи|Гамбург|Берлін|Берлин|Мюнхен|Баварі'), ('cz', r'Чехі|Чехи|Kč|крон'),
+    ('sk', r'Словаччин|Словаки'), ('hu', r'Угорщин|Венгри|Будапешт'), ('ro', r'Румуні|Румыни|Бухарест'), ('gb', r'Англі|Англи|Великобритан'),
+    ('ca', r'Канад'), ('pl', r'zł|зл\b|злот|Польщ|Польш|Umow'),
 ]
 
 PL_CITY_LATIN = {
@@ -369,8 +369,22 @@ def slugify(s, words=6):
     return '-'.join(parts[:words]) or 'vakansiia'
 
 
+def canonical_paths():
+    """uid -> the URL Tilda gave Google (sitemap-feed-*.xml), falling back to the post's own URL"""
+    out = {}
+    for f in glob.glob(os.path.join(DATA, 'sitemaps', 'sitemap-feed-*.xml')):
+        for loc in re.findall(r'<loc>([^<]+)</loc>', open(f).read()):
+            u = tuid(loc)
+            if u:
+                out[u] = re.sub(r'^https?://[^/]+', '', loc)
+    return out
+
+
+def url_path(url):
+    return re.sub(r'^https?://[^/]+', '', url or '')
+
+
 def main():
-    store_pages = json.load(open(os.path.join(DATA, 'store_pages.json')))
     posts = {}
     for f in glob.glob(os.path.join(DATA, 'posts', '*.json')):
         p = json.load(open(f))
@@ -384,6 +398,7 @@ def main():
             feed_posts[fu].append(p)
     ARTICLE_FEEDS = {'332920854629', '784197735863'}
     RU_FEEDS = {'139159130611', '622567075511', '688894431781', '746898615151', '989221326881'}
+    canon = canonical_paths()
 
     # catalog products of the live UA pages
     products = {}
@@ -394,25 +409,36 @@ def main():
         d = json.load(open(f))
         for pr in d.get('products') or []:
             products.setdefault(pr['uid'], pr)
-
-    chosen = collections.OrderedDict()  # key -> {'post':…, 'product':…}
-    for pr in products.values():
-        u = tuid(pr['url'])
-        key = u or 'p' + str(pr['uid'])
-        if key in chosen:
-            continue
-        chosen[key] = {'post': posts.get(u) if u else None, 'product': pr}
     by_post_product = {tuid(pr['url']): pr for pr in products.values() if tuid(pr['url'])}
+
+    # active = shown in the live catalogs or posted since RECENT (Ukrainian vacancy feeds)
+    active_keys = set()
+    for pr in products.values():
+        active_keys.add(tuid(pr['url']) or 'p' + str(pr['uid']))
     for fu, plist in feed_posts.items():
         if fu in ARTICLE_FEEDS or fu in RU_FEEDS:
             continue
         for p in plist:
-            if p['date'] >= RECENT and p['uid'] not in chosen:
-                chosen[p['uid']] = {'post': posts.get(p['uid']), 'product': by_post_product.get(p['uid'])}
+            if p['date'] >= RECENT:
+                active_keys.add(p['uid'])
 
-    raw, used_slugs = [], collections.defaultdict(set)
-    for key, it in chosen.items():
-        post, pr = it['post'], it['product']
+    # every vacancy post keeps its page (Tilda served them all), plus catalog cards whose link was dead
+    items = collections.OrderedDict()
+    for pr in products.values():
+        u = tuid(pr['url'])
+        key = u or 'p' + str(pr['uid'])
+        items.setdefault(key, {'post': posts.get(u) if u else None, 'product': pr, 'feed': feed_of.get(u, '') if u else ''})
+    for fu, plist in feed_posts.items():
+        if fu in ARTICLE_FEEDS:
+            continue
+        for p in plist:
+            items.setdefault(p['uid'], {'post': posts.get(p['uid']), 'product': by_post_product.get(p['uid']), 'feed': fu})
+
+    raw, seen_paths = [], set()
+    for key, it in items.items():
+        post, pr, fu = it['post'], it['product'], it['feed']
+        if not post and not pr:
+            continue
         ch = L(pr.get('characteristics')) if pr else []
         chv = collections.defaultdict(list)
         for c in ch:
@@ -420,10 +446,9 @@ def main():
         if post:
             parsed = parse_post(post)
         else:
-            # product only (its Tilda link is dead): build from the catalog card
-            items = [strip_tags(x) for x in re.findall(r'<li[^>]*>(.*?)</li>', pr.get('descr') or '', flags=re.S)]
+            items_ = [strip_tags(x) for x in re.findall(r'<li[^>]*>(.*?)</li>', pr.get('descr') or '', flags=re.S)]
             summ = []
-            for x in items:
+            for x in items_:
                 lx = x.lower()
                 if lx.startswith('заробітна плата'):
                     summ.append('💵 ' + x)
@@ -435,55 +460,56 @@ def main():
                     summ.append('🏠 ' + re.sub(r'^Проживання\s*:\s*', '', x))
                 elif lx.startswith('місце роботи'):
                     summ.append('📍 ' + re.sub(r'^Місце роботи\s*:\s*', '', x))
-            parsed = dict(reviews=[], title=strip_tags(pr['title']), intro='', summary=summ, sections=[], photos=[], housing_photos=[],
-                          videos=[], housing_note='')
+            parsed = dict(reviews=[], title=strip_tags(pr['title']), intro='', summary=summ, sections=[], photos=[], housing_photos=[], videos=[], housing_note='')
         title = parsed['title']
-        if re.search(r'[ыэъё]', title):
-            continue  # Russian leftovers
+        lang = 'ru' if fu in RU_FEEDS or re.search(r'[ыэъё]', title) else 'uk'
+        active = key in active_keys and lang == 'uk'
         full_text = title + ' ' + parsed['intro'] + ' ' + ' '.join(parsed['summary']) + ' ' + ' '.join(i for s in parsed['sections'] for i in s['items'])
-        country = None
-        if chv.get('Країна'):
-            country = COUNTRY_BY_NAME.get(chv['Країна'][0])
+        country = COUNTRY_BY_NAME.get(chv['Країна'][0]) if chv.get('Країна') else None
         if not country and post:
-            country = COUNTRY_BY_FEED.get(feed_of.get(post['uid'], ''))
+            country = COUNTRY_BY_FEED.get(fu)
         place = summary_field(parsed['summary'], '📍')
         if not place:
-            sec = next((s for s in parsed['sections'] if re.search(r'місце роботи', s['title'], re.I)), None)
+            sec = next((s for s in parsed['sections'] if re.search(r'місце роботи|место работы', s['title'], re.I)), None)
             place = sec['items'][0] if sec and sec['items'] else ''
         if not country:
-            country = guess_country(place + ' ' + title) if guess_country(place + ' ' + title) != 'pl' or re.search(r'zł|зл|Польщ|Umow', full_text) else guess_country(full_text)
-        # a post tagged Італія in the catalog but about a Greek hotel (Tilda tag slip)
+            g = guess_country(place + ' ' + title)
+            country = g if g != 'pl' or re.search(r'zł|зл|Польщ|Польш|Umow', full_text) else guess_country(full_text)
         if country == 'it' and re.search(r'Греці', title):
             country = 'gr'
         salary = parse_salary(parsed['summary'], country)
         if not salary['text']:
-            sec = next((s for s in parsed['sections'] if re.search(r'заробітн', s['title'], re.I)), None)
+            sec = next((s for s in parsed['sections'] if re.search(r'заробітн|заработн', s['title'], re.I)), None)
             if sec:
                 salary = parse_salary([], country, '; '.join(sec['items'][:2]))
-        schedule = summary_field(parsed['summary'], '📈', r'^Робота\s+')
-        contract = summary_field(parsed['summary'], '🤝', r'^Офіційне працевлаштування( за договором)?\s*')
+        schedule = summary_field(parsed['summary'], '📈', r'^(Робота|Работа)\s+')
+        contract = summary_field(parsed['summary'], '🤝', r'^(Офіційне працевлаштування|Официальное трудоустройство)( за договором| по договору)?\s*')
         if not contract and chv.get('Вид договору'):
             contract = chv['Вид договору'][0].replace('Umova', 'Umowa')
-        if re.search(r'(?i)umo', contract):  # Cyrillic look-alikes typed into Polish words («Umowa о Prace»)
+        if re.search(r'(?i)umo', contract):
             contract = re.sub(r'[A-Za-zоОаАеЕрРсСіІуУęłó]+', lambda m: m.group(0).translate(str.maketrans('оОаАеЕрРсСіІуУ', 'oOaAeEpPcCiIyY')) if re.search(r'[A-Za-z]', m.group(0)) else m.group(0), contract)
         contract = re.sub(r'(?i)umo[vw]a zlecen\w*', 'Umowa Zlecenie', contract)
         contract = re.sub(r'(?i)umo[vw]a [oо] prac[eęy]', 'Umowa o Pracę', contract)
         contract = contract.strip('() ').replace('А1', 'A1')
-        housing = summary_field(parsed['summary'], '🏠', r'^Проживання\s*:?\s*')
+        housing = summary_field(parsed['summary'], '🏠', r'^(Проживання|Проживание)\s*:?\s*')
         hsec = next((s for s in parsed['sections'] if re.search(r'прожив', s['title'], re.I)), None)
-        housing_free = bool(re.search(r'безкоштов|безплатн|за рахунок роботодавця|оплачує роботодав', housing + ' ' + ' '.join((hsec or {}).get('items', [])[:2]), re.I))
+        housing_free = bool(re.search(r'безкоштов|безплатн|бесплатн|за рахунок роботодавця|оплачує роботодав', housing + ' ' + ' '.join((hsec or {}).get('items', [])[:2]), re.I))
         store_city = (chv.get('Фільтр по містам') or [''])[0]
         city = city_of(place) if place else (store_city or '')
         company = company_of(title)
         cat = category_of(title, parsed['intro'], chv.get('Тип підприємства', []))
-        base = slugify(company, 4) if company and len(slugify(company, 4)) >= 3 else slugify(title)
-        cslug = COUNTRY_SLUG[country]
-        slug = base
-        n = 2
-        while slug in used_slugs[cslug]:
-            slug = f'{base}-{slugify(city, 2)}' if n == 2 and city else f'{base}-{n}'
-            n += 1
-        used_slugs[cslug].add(slug)
+        # the address is Tilda's: the post URL Google knows (sitemap), or the catalog card's own link
+        if post:
+            path = canon.get(post['uid']) or url_path(post.get('url'))
+            if not path.startswith('/') or re.search(r'[^\x00-\x7f]', path):
+                slugpart = url_path(post.get('url')).split('/tpost/')[-1]
+                path = '/tpost/' + slugpart
+        else:
+            path = url_path(pr['url'])
+        path = path.rstrip('/')
+        if path in seen_paths:
+            continue
+        seen_paths.add(path)
         gallery = []
         if pr:
             try:
@@ -499,22 +525,19 @@ def main():
             if not media and post.get('image'):
                 media = [post['image']]
         photos = []
-        for s in media + gallery + parsed['photos']:
-            s = s.replace('static.tildacdn.one', 'static.tildacdn.com')
-            if s not in photos:
-                photos.append(s)
-        housing_photos = [s.replace('static.tildacdn.one', 'static.tildacdn.com') for s in parsed['housing_photos'] if s not in photos]
-        old_urls = []
-        if post:
-            old_urls.append(post['url'])
-        if pr and pr.get('url') and pr['url'] not in old_urls:
-            old_urls.append(pr['url'])
+        for s_ in media + gallery + parsed['photos']:
+            s_ = s_.replace('static.tildacdn.one', 'static.tildacdn.com')
+            if s_ not in photos:
+                photos.append(s_)
+        housing_photos = [s_.replace('static.tildacdn.one', 'static.tildacdn.com') for s_ in parsed['housing_photos'] if s_ not in photos]
+        old_urls = [u for u in [url_path((post or {}).get('url')), url_path((pr or {}).get('url'))] if u and u.rstrip('/') != path]
         raw.append({
             'tildaUid': post['uid'] if post else None,
             'productUid': str(pr['uid']) if pr else None,
-            'path': f'/vacancies/{cslug}/{slug}',
-            'id': f'{cslug}-{slug}',
-            'active': True,
+            'path': path,
+            'id': post['uid'] if post else 'p' + str(pr['uid']),
+            'lang': lang,
+            'active': active,
             'hot': bool(post and post['uid'] in HOT_UIDS),
             'country': country,
             'title': title,
@@ -530,9 +553,10 @@ def main():
             'housingFree': housing_free,
             'intro': parsed['intro'],
             'sections': parsed['sections'],
-            'photos': photos,
-            'housingPhotos': housing_photos,
-            'housingNote': parsed['housing_note'],
+            # closed vacancies keep their text; one picture is enough for them
+            'photos': photos if active else photos[:1],
+            'housingPhotos': housing_photos if active else [],
+            'housingNote': parsed['housing_note'] if active else '',
             'videos': parsed['videos'],
             'reviews': parsed['reviews'],
             'date': (post or {}).get('date', '')[:10],
@@ -540,29 +564,17 @@ def main():
             'storeTypes': chv.get('Тип підприємства', []),
         })
 
-    # 301 map for every vacancy post / product URL: active → its new page, closed → its country page
+    # tpost uid -> canonical path (any other prefix of the same post 301s there); product links too
     redirects = {}
-    active_by_uid = {r['tildaUid']: r['path'] for r in raw if r['tildaUid']}
-    for fu, plist in feed_posts.items():
-        if fu in ARTICLE_FEEDS:
-            continue
-        for p in plist:
-            u = p['uid']
-            if u in active_by_uid:
-                redirects[u] = active_by_uid[u]
-                continue
-            full = posts.get(u) or p
-            c = COUNTRY_BY_FEED.get(fu) or guess_country(strip_tags(full.get('title', '')) + ' ' + strip_tags((full.get('text') or '')[:3000]))
-            lang_ru = fu in RU_FEEDS
-            dest = COUNTRY_PAGE.get(c, '/vacancies/all')
-            redirects[u] = ('/ru' + dest) if lang_ru else dest
+    for r in raw:
+        if r['tildaUid']:
+            redirects[r['tildaUid']] = r['path']
     json.dump(raw, open(os.path.join(OUT, 'vacancies.raw.json'), 'w'), ensure_ascii=False, indent=1)
     json.dump(redirects, open(os.path.join(OUT, 'tpost-redirects.vacancies.json'), 'w'), ensure_ascii=False, indent=1)
-    cnt = collections.Counter(r['country'] for r in raw)
-    print('active vacancies', len(raw), dict(cnt))
-    print('categories', dict(collections.Counter(r['category'] for r in raw)))
-    print('no salary', sum(1 for r in raw if not r['salary']['text']), 'no sections', sum(1 for r in raw if not r['sections']),
-          'no photos', sum(1 for r in raw if not r['photos']), 'redirects', len(redirects))
+    act = [r for r in raw if r['active']]
+    print('vacancy pages', len(raw), 'active', len(act), dict(collections.Counter(r['country'] for r in act)))
+    print('closed', len(raw) - len(act), 'ru', sum(1 for r in raw if r['lang'] == 'ru'))
+    print('path prefixes', collections.Counter(r['path'].split('/tpost/')[0] if '/tpost/' in r['path'] else 'other:' + r['path'].rsplit('/', 1)[0] for r in raw).most_common(8))
 
 
 if __name__ == '__main__':

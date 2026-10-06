@@ -19,7 +19,7 @@ export function NotFound({ lang }: { lang: 'uk' | 'ru' }) {
         <QuizButton id="not-found" className="btn-accent !px-7 !py-4 !text-base">
           {uk ? 'Підібрати вакансію' : 'Подобрать вакансию'}
         </QuizButton>
-        <Link href={uk ? '/vacancies/all' : '/ru/vacancies/all'} className="btn-ghost !px-7 !py-4 !text-base">
+        <Link href={uk ? '/vacancies/aktualni_vakansii' : '/ru/vacancies/aktualni_vakansii'} className="btn-ghost !px-7 !py-4 !text-base">
           {uk ? 'Усі вакансії' : 'Все вакансии'}
         </Link>
       </div>

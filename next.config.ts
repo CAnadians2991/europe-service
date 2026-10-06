@@ -24,10 +24,14 @@ const nextConfig: NextConfig = {
       ...(tildaPages as { source: string; destination: string; permanent: boolean }[]),
       { source: '/page:id(\\d+).html', destination: '/', permanent: true },
       { source: '/index.html', destination: '/', permanent: true },
-      // Tilda's /vakansii/<country> pages moved next to the others (/vacancies/<country>); vacancy posts are handled in src/proxy.ts
-      { source: '/vakansii', destination: '/vacancies/all', permanent: true },
+      // /vakansii alone never existed on Tilda (only /vakansii/<country>); vacancy posts are handled in src/proxy.ts
+      { source: '/vakansii', destination: '/vacancies', permanent: true },
       { source: '/linktree', destination: '/links', permanent: true },
-      { source: '/ru/vakansii', destination: '/ru/vacancies/all', permanent: true },
+      // Tilda's sitemap files (submitted in Search Console) → the one sitemap of the new site
+      { source: '/sitemap-feeds.xml', destination: '/sitemap.xml', permanent: true },
+      { source: '/sitemap-store.xml', destination: '/sitemap.xml', permanent: true },
+      { source: '/sitemap-feed-:id(\\d+).xml', destination: '/sitemap.xml', permanent: true },
+      { source: '/ru/vakansii', destination: '/ru/vacancies', permanent: true },
     ]
   },
   async headers() {

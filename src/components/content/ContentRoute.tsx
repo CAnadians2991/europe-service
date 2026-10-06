@@ -4,7 +4,8 @@ import { ARTICLES, LEGAL, PAGES, getArticle, getLegal, hubPosts, isObsolete, pag
 import { LANDINGS, getLanding } from '@/lib/landing'
 import { QUIZZES, getQuiz } from '@/lib/quizzes'
 import { pageMeta } from '@/lib/seo'
-import { getActiveVacancies } from '@/lib/vacancies'
+import { getActiveVacancies, getVacancyByPath } from '@/lib/vacancies'
+import { VacancyView, vacancyPageMeta } from '@/components/vacancy/VacancyView'
 import { ArticlePage, articleSummary } from './ArticlePage'
 import { PageHero } from './PageHero'
 import { Blocks } from './Blocks'
@@ -14,22 +15,25 @@ import { LandingCatalog } from '@/components/vacancy/VacanciesRoute'
 type Lang = 'uk' | 'ru'
 
 /** Pages with their own route file — the catch-all never renders them */
-const OWN_ROUTES = new Set(['/', '/about', '/contacts', '/poslugi', '/vidguki', '/news', '/pidbir', '/cooperation', '/ru', '/ru/about', '/ru/contacts', '/ru/services', '/ru/otzyvy', '/ru/news', '/ru/podbor'])
+const OWN_ROUTES = new Set(['/', '/vacancies', '/about', '/contacts', '/poslugi', '/vidguki', '/news', '/pidbir', '/cooperation', '/ru', '/ru/about', '/ru/contacts', '/ru/services', '/ru/otzyvy', '/ru/news', '/ru/podbor'])
 
 const inLang = (p: string, lang: Lang) => (lang === 'ru' ? p.startsWith('/ru/') : !p.startsWith('/ru/') && p !== '/ru')
 
 /** Every address the catch-all serves in a language: articles, Tilda ad landings outside /vacancies, legal pages, quizzes, other pages */
-export function contentPaths(lang: Lang) {
+export async function contentPaths(lang: Lang) {
+  const vacancies = await getActiveVacancies()
   const out = new Set<string>()
   for (const a of ARTICLES) out.add(a.path)
   for (const l of LANDINGS) if (!l.path.startsWith('/vacancies') && !l.path.startsWith('/ru/vacancies')) out.add(l.path)
   for (const l of LEGAL) out.add(l.path)
   for (const q of QUIZZES) out.add(q.path)
   for (const p of Object.values(PAGES)) if (p?.path && !p.broken) out.add(p.path)
+  // open vacancy posts are prerendered; the closed ones render on the first visit
+  for (const v of vacancies) if (!v.path.startsWith('/vacancies') && !v.path.startsWith('/vakansii')) out.add(v.path)
   return [...out].filter((p) => inLang(p, lang) && !OWN_ROUTES.has(p))
 }
 
-export function resolveContent(path: string) {
+export async function resolveContent(path: string) {
   if (OWN_ROUTES.has(path)) return null
   const a = getArticle(path)
   if (a) return { kind: 'article' as const, a }
@@ -42,12 +46,16 @@ export function resolveContent(path: string) {
   const page = pageByPath(path)
   // the Tilda «linktree» page was blank (next.config redirects it to /links)
   if (page && !page.broken) return { kind: 'page' as const, page }
+  // vacancy posts at their Tilda address: /tpost/<id>-<slug> (open and closed ones)
+  const v = await getVacancyByPath(path)
+  if (v) return { kind: 'vacancy' as const, v }
   return null
 }
 
-export function contentMetadata(path: string): Metadata {
-  const r = resolveContent(path)
+export async function contentMetadata(path: string): Promise<Metadata> {
+  const r = await resolveContent(path)
   if (!r) return {}
+  if (r.kind === 'vacancy') return vacancyPageMeta(r.v)
   if (r.kind === 'article') {
     const a = r.a
     return pageMeta({
@@ -57,7 +65,7 @@ export function contentMetadata(path: string): Metadata {
       lang: a.lang,
       image: a.cover || (a.ogImage?.startsWith('/') ? a.ogImage : undefined) || undefined,
       type: 'article',
-      noindex: isObsolete(a),
+      // archived articles keep their place in Google (they were indexed on Tilda; links may point at them)
       absoluteTitle: true,
       hreflang: Boolean(a.twin),
     })
@@ -70,8 +78,9 @@ export function contentMetadata(path: string): Metadata {
 }
 
 export async function ContentView({ path, lang }: { path: string; lang: Lang }) {
-  const r = resolveContent(path)
+  const r = await resolveContent(path)
   if (!r) return null
+  if (r.kind === 'vacancy') return <VacancyView v={r.v} />
   const home = { name: lang === 'uk' ? 'Головна' : 'Главная', path: lang === 'uk' ? '/' : '/ru' }
   if (r.kind === 'article') return <ArticlePage a={r.a} posts={hubPosts(r.a)} />
   if (r.kind === 'landing') return <LandingCatalog lang={r.l.lang} landing={r.l} path={path} active={await getActiveVacancies()} />

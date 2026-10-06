@@ -2,10 +2,11 @@ import type { Metadata } from 'next'
 import { pageMeta } from '@/lib/seo'
 import { ReviewsPage } from '@/components/content/ReviewsPage'
 
+// title and description exactly as on Tilda (the page ranks with them)
 export const metadata: Metadata = pageMeta({
-  title: 'Europe Service Відгуки на сайті',
+  title: "Europe Service Відгуки на сайті",
   absoluteTitle: true,
-  description: 'Відгуки клієнтів Europe Service про роботу за кордоном: умови, житло, зарплата, менеджери. Залиште свій відгук або заявку на вакансію.',
+  description: "Europe Service Відгуки ✅ Без посередників ⚡ Нові вакансії Польща 2026",
   path: '/vidguki',
 })
 

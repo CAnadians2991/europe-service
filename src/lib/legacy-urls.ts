@@ -19,18 +19,22 @@ const LEGACY = new Map<string, string>(
 const TPOST = tpost as Record<string, string>
 
 /**
- * Tilda Feeds posts (vacancies and articles) lived at …/tpost/<uid>-<slug> under many prefixes (/tpost, /news/tpost,
- * /ru/tpost, /vacancies/netherlands/tpost, /vac/tpost …). The uid decides: an active vacancy / article → its new page,
- * a closed vacancy → its country page. Store product pages (/tproduct/…) go to the catalog.
+ * Tilda Feeds posts (vacancies and articles) keep their Tilda address — the one in Tilda's sitemap-feed-*.xml
+ * (/tpost/<uid>-<slug>, /news/tpost/…, /vacancies/netherlands/tpost/…, /ru/tpost/…). Tilda answered the same post under
+ * other prefixes too (/vac/tpost/…, /uploads/tpost/…, /test/tpost/…, a shorter slug…): those go to the canonical one.
+ * Store product pages (/tproduct/…) go to the catalog.
  */
 export function tildaPostTarget(pathname: string): string | null {
   const m = pathname.match(/\/tpost\/([a-z0-9]+)(?:-|$)/i)
   if (m) {
     const to = TPOST[m[1].toLowerCase()]
-    if (to) return to
-    return pathname.startsWith('/ru/') ? '/ru/news' : pathname.includes('/news/') ? '/news' : '/vacancies/all'
+    if (to) {
+      const clean = pathname.replace(/\/+$/, '')
+      return to.toLowerCase() === clean.toLowerCase() ? (clean === pathname ? null : to) : to
+    }
+    return pathname.startsWith('/ru/') ? '/ru/news' : pathname.includes('/news/') ? '/news' : '/vacancies/aktualni_vakansii'
   }
-  if (/\/tproduct\//i.test(pathname)) return pathname.startsWith('/ru/') ? '/ru/vacancies/all' : '/vacancies/all'
+  if (/\/tproduct\//i.test(pathname)) return pathname.startsWith('/ru/') ? '/ru/vacancies/aktualni_vakansii' : '/vacancies/aktualni_vakansii'
   return null
 }
 
@@ -43,6 +47,8 @@ export function canonicalPath(pathname: string): string | null {
   }
   const post = tildaPostTarget(p)
   if (post) return post
+  // post addresses are matched as they are (Tilda slugs are lower case already)
+  if (/\/tpost\//i.test(p)) return null
   let n = p.toLowerCase().replace(/\/index\.html?$/, '').replace(/\/+$/, '') || '/'
   // unknown Tilda page files go home like next.config's `/page:id.html` rule — /PAGE123.HTML in one hop, not two
   n = LEGACY.get(n) ?? (/^\/page\d+\.html$/.test(n) ? '/' : n)

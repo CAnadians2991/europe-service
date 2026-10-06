@@ -91,8 +91,10 @@ export interface Vacancy {
   /** Workplace address for Google Jobs (optional; the city's region comes from lib/places) */
   workAddress?: { street?: string; postalCode?: string }
   ru?: VacancyRu
-  /** Tilda Feeds post uid the vacancy was imported from (old /tpost/<uid>-… links redirect here) */
+  /** Tilda Feeds post uid the vacancy was imported from (other prefixes of /tpost/<uid>-… redirect to `path`) */
   tildaUid?: string
+  /** language of the texts — old Russian Tilda posts are 'ru' (they live at /tpost/… too) */
+  lang?: 'uk' | 'ru'
   createdAt: string
   updatedAt: string
 }

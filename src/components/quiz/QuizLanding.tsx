@@ -95,7 +95,7 @@ export async function QuizLandingView({ q, lang = 'uk' }: { q: QL; lang?: 'uk' |
             <h2 className="text-[26px]">
               {q.country ? `${uk ? 'Приклади вакансій' : 'Примеры вакансий'} ${uk ? COUNTRY[q.country].inName : COUNTRY[q.country].inNameRu}` : uk ? 'Приклади актуальних вакансій' : 'Примеры актуальных вакансий'}
             </h2>
-            <Link href={q.country ? localHref(COUNTRY[q.country].path, lang) : uk ? '/vacancies/all' : '/ru/vacancies/all'} className="btn-ghost">
+            <Link href={q.country ? localHref(COUNTRY[q.country].path, lang) : uk ? '/vacancies/aktualni_vakansii' : '/ru/vacancies/aktualni_vakansii'} className="btn-ghost">
               {uk ? 'Усі вакансії' : 'Все вакансии'}
             </Link>
           </div>

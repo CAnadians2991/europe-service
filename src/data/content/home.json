@@ -185,7 +185,7 @@
     },
     {
      "title": "Угорщина",
-     "href": "/vacancies/hungary",
+     "href": "/vakansii/hungary",
      "country": "hu",
      "image": "/media/c/73eb21eefe",
      "button": "Переглянути"
@@ -199,7 +199,7 @@
     },
     {
      "title": "Словаччина",
-     "href": "/vacancies/slovakia",
+     "href": "/vakansii/slovakia",
      "country": "sk",
      "image": "/media/c/38dc43beb7",
      "button": "Переглянути"
@@ -220,7 +220,7 @@
     },
     {
      "title": "Англія",
-     "href": "/vacancies/england",
+     "href": "/vakansii/england",
      "country": "gb",
      "image": "/media/c/e5c9f515af",
      "button": "Переглянути"
@@ -303,7 +303,7 @@
    ],
    "allButton": {
     "text": "ПЕРЕГЛЯНУТИ ВСІ ТЕРМІНОВІ ВАКАНСІЇ",
-    "href": "/vacancies/all"
+    "href": "/vacancies/aktualni_vakansii"
    }
   },
   "audiences": {
@@ -757,7 +757,7 @@
     },
     {
      "title": "Венгрия",
-     "href": "/ru/vacancies/hungary",
+     "href": "/ru/vakansii/hungary",
      "country": "hu",
      "image": "/media/c/73eb21eefe",
      "button": "Просмотреть"
@@ -771,7 +771,7 @@
     },
     {
      "title": "Словакия",
-     "href": "/ru/vacancies/slovakia",
+     "href": "/ru/vakansii/slovakia",
      "country": "sk",
      "image": "/media/c/38dc43beb7",
      "button": "Просмотреть"

@@ -6,7 +6,7 @@ import { ensureCountries } from './countries'
 import type { Category } from './types'
 
 /**
- * Catalog pages that stand for a filter selection: the all-countries list (/vacancies/all) and every country page
+ * Catalog pages that stand for a filter selection: the all-countries list (/vacancies/aktualni_vakansii) and every country page
  * (/vacancies = Poland, /vacancies/germany …). The catalog moves the visitor there when the country filter changes,
  * so the address, H1, SEO text and canonical always describe what is listed.
  */

@@ -45,7 +45,7 @@ export function DepartureBoard({ items, total, lang = 'uk' }: { items: Vacancy[]
           </li>
         ))}
       </ol>
-      <Link href={uk ? '/vacancies/all' : '/ru/vacancies/all'} className="mt-3 flex items-center justify-between rounded-2xl bg-white/[0.06] px-4 py-3 text-sm font-semibold text-white ring-1 ring-white/10 transition hover:bg-white/10">
+      <Link href={uk ? '/vacancies/aktualni_vakansii' : '/ru/vacancies/aktualni_vakansii'} className="mt-3 flex items-center justify-between rounded-2xl bg-white/[0.06] px-4 py-3 text-sm font-semibold text-white ring-1 ring-white/10 transition hover:bg-white/10">
         {uk ? `Усі ${total} ${plural(total, ['вакансія', 'вакансії', 'вакансій'])} на табло` : `Все ${total} ${plural(total, ['вакансия', 'вакансии', 'вакансий'])} на табло`} <IconArrow className="size-4 text-brand-100" />
       </Link>
     </div>

@@ -26,7 +26,7 @@ export default function GlobalNotFound() {
           <h1 className="mt-2 text-3xl font-bold sm:text-4xl">Такої сторінки немає</h1>
           <p className="mt-3 max-w-lg text-ink-2">Можливо, вакансію вже закрито або посилання застаріло. Подивіться актуальні пропозиції — щодня додаємо нові.</p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/vacancies/all" className="btn-primary">Усі вакансії</Link>
+            <Link href="/vacancies/aktualni_vakansii" className="btn-primary">Усі вакансії</Link>
             <Link href="/" className="btn-ghost">На головну</Link>
           </div>
           <a href={`tel:${SITE.phone}`} className="mt-4 inline-flex min-h-11 items-center font-semibold text-brand-700 underline underline-offset-2">

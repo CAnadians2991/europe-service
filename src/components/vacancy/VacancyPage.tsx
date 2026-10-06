@@ -70,13 +70,13 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
   const t = TX[lang]
   const c = COUNTRY[v.country]
   const cName = uk ? c.name : c.nameRu
-  const cPath = uk ? c.path : (ruTwin(c.path) ?? '/ru/vacancies/all')
+  const cPath = uk ? c.path : (ruTwin(c.path) ?? '/ru/vacancies/aktualni_vakansii')
   const city = vacancyCity(v)
   const month = salaryMonth(v.salary, lang)
   const hour = salaryHour(v.salary, lang)
   const crumbs = [
     { name: t.home, path: uk ? '/' : '/ru' },
-    { name: t.vac, path: uk ? '/vacancies/all' : '/ru/vacancies/all' },
+    { name: t.vac, path: uk ? '/vacancies/aktualni_vakansii' : '/ru/vacancies/aktualni_vakansii' },
     { name: `${t.work} ${uk ? c.inName : c.inNameRu}`, path: cPath },
     { name: v.company || v.title, path: v.path },
   ]

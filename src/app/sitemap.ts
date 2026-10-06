@@ -1,11 +1,10 @@
 import type { MetadataRoute } from 'next'
-import { getAllVacancies } from '@/lib/vacancies'
-import { ARTICLES, isObsolete } from '@/lib/content'
+import { getAllVacancies, getClosedVacancyPaths } from '@/lib/vacancies'
+import { ARTICLES } from '@/lib/content'
 import { CATALOG_PATH, COUNTRIES, SITE } from '@/lib/site'
 import { LANDINGS } from '@/lib/landing'
 import { QUIZZES } from '@/lib/quizzes'
 import { ruTwin, ukTwin } from '@/lib/alt-routes'
-import { hasRu } from '@/lib/vacancy-i18n'
 
 export const revalidate = 3600
 
@@ -51,15 +50,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const l of LANDINGS) {
     push(l.path, { lastModified: lastVac, changeFrequency: 'weekly', priority: l.lang === 'uk' ? 0.75 : 0.55 }, l.lang)
   }
-  for (const v of vacancies) {
-    push(v.path, { lastModified: v.updatedAt, changeFrequency: 'weekly', priority: v.hot ? 0.85 : 0.75 })
-    const ru = ruTwin(v.path)
-    if (ru && hasRu(v)) push(ru, { lastModified: v.updatedAt, changeFrequency: 'weekly', priority: 0.55 }, 'ru')
-  }
+  for (const v of vacancies) push(v.path, { lastModified: v.updatedAt, changeFrequency: 'weekly', priority: v.hot ? 0.85 : 0.75 }, v.lang ?? 'uk')
+  // closed vacancy posts stay online at their Tilda addresses (Tilda listed them in sitemap-feed-*.xml too)
+  for (const c of await getClosedVacancyPaths()) push(c.path, { lastModified: c.updatedAt, changeFrequency: 'yearly', priority: 0.3 }, 'uk')
   for (const p of ['/poslugi', '/about', '/vidguki', '/contacts', '/news', '/cooperation']) push(p, { lastModified: now, changeFrequency: 'monthly', priority: 0.6 })
   for (const p of ['/ru/services', '/ru/about', '/ru/otzyvy', '/ru/contacts', '/ru/news']) push(p, { lastModified: now, changeFrequency: 'monthly', priority: 0.45 }, 'ru')
   for (const a of ARTICLES) {
-    if (isObsolete(a)) continue
     push(a.path, { lastModified: a.datePublished ? new Date(a.datePublished) : a.date ? new Date(a.date) : now, changeFrequency: 'yearly', priority: 0.5 }, a.lang)
   }
   for (const q of QUIZZES) if (!q.noindex) push(q.path, { lastModified: now, changeFrequency: 'monthly', priority: 0.4 })

@@ -7,61 +7,63 @@ import { hasRu, localize } from '@/lib/vacancy-i18n'
 import { ruTwin, ukTwin } from '@/lib/alt-routes'
 import { ensureCountries } from '@/lib/countries'
 import { CatalogPage } from './CatalogPage'
-import { VacancyPage } from './VacancyPage'
+import { VacancyView, vacancyPageMeta } from './VacancyView'
 import { Blocks } from '@/components/content/Blocks'
 import type { CountryInfo } from '@/lib/site'
 import type { Vacancy } from '@/lib/types'
 
 type Lang = 'uk' | 'ru'
 
-const base = (lang: Lang) => (lang === 'uk' ? '/vacancies' : '/ru/vacancies')
+/** Section roots that hold catalog pages on Tilda: /vacancies/…, /vakansii/… (Hungary, Slovakia, England) and their /ru twins */
+export type Root = '/vacancies' | '/vakansii' | '/ru/vacancies' | '/ru/vakansii'
+const langOf = (root: Root): Lang => (root.startsWith('/ru') ? 'ru' : 'uk')
 
-/** Every path under /vacancies (or /ru/vacancies) that exists: countries, landings, vacancies */
-export async function vacanciesStaticParams(lang: Lang) {
-  const b = base(lang)
+/** Every address under a root that exists: countries, Tilda landings, the catalog and the open vacancies (closed ones render on demand) */
+export async function vacanciesStaticParams(root: Root) {
+  const lang = langOf(root)
   const all = await getAllVacancies()
-  const paths = new Set<string>([`${b}/all`])
+  const paths = new Set<string>()
+  if (root.endsWith('/vacancies')) paths.add(lang === 'uk' ? CATALOG_PATH : '/ru' + CATALOG_PATH)
   for (const c of COUNTRIES) paths.add(lang === 'uk' ? c.path : '/ru' + c.path)
-  for (const l of LANDINGS) if (l.lang === lang) paths.add(l.path)
-  for (const v of all) paths.add(lang === 'uk' ? v.path : (ruTwin(v.path) ?? '/ru' + v.path))
+  for (const l of LANDINGS) paths.add(l.path)
+  for (const v of all) paths.add(v.path)
   return [...paths]
-    .filter((p) => p.startsWith(b))
-    .map((p) => ({ slug: p.slice(b.length).split('/').filter(Boolean) }))
+    .filter((p) => p === root || p.startsWith(root + '/'))
+    .map((p) => ({ slug: p.slice(root.length).split('/').filter(Boolean) }))
 }
 
 type Resolved =
-  | { kind: 'all'; path: string }
-  | { kind: 'country'; path: string; country: CountryInfo; landing?: LandingPage }
-  | { kind: 'landing'; path: string; landing: LandingPage }
-  | { kind: 'vacancy'; path: string; v: Vacancy }
+  | { kind: 'all'; path: string; lang: Lang }
+  | { kind: 'country'; path: string; lang: Lang; country: CountryInfo; landing?: LandingPage }
+  | { kind: 'landing'; path: string; lang: Lang; landing: LandingPage }
+  | { kind: 'vacancy'; path: string; lang: Lang; v: Vacancy }
 
-export async function resolveVacancies(lang: Lang, slug: string[] = []): Promise<Resolved | null> {
+const pathOf = (root: Root, slug: string[] = []) => root + (slug.length ? '/' + slug.map((s) => decodeURIComponent(s)).join('/') : '')
+
+export async function resolveVacancies(root: Root, slug: string[] = []): Promise<Resolved | null> {
   await ensureCountries()
-  const parts = slug.map((s) => decodeURIComponent(s))
-  const path = base(lang) + (parts.length ? '/' + parts.join('/') : '')
-  if (parts.length === 1 && parts[0] === 'all') return { kind: 'all', path }
+  const lang = langOf(root)
+  const path = pathOf(root, slug)
+  const ukPath = lang === 'uk' ? path : path.slice(3)
+  if (ukPath === CATALOG_PATH) return { kind: 'all', path, lang }
   const landing = getLanding(path)
-  if (landing && landing.kind === 'country' && COUNTRY[landing.country]) return { kind: 'country', path, country: COUNTRY[landing.country], landing }
-  if (landing) return { kind: 'landing', path, landing }
-  if (parts.length === 0) return { kind: 'country', path, country: COUNTRY.pl }
-  if (parts.length === 1) {
-    const c = countryBySlug(parts[0])
-    if (c) return { kind: 'country', path, country: c }
-  }
-  if (parts.length === 2) {
-    const ukPath = lang === 'uk' ? path : (ukTwin(path) ?? path.slice(3))
-    const v = await getVacancyByPath(ukPath)
-    if (v) return { kind: 'vacancy', path, v }
-  }
+  if (landing && landing.kind === 'country' && COUNTRY[landing.country]) return { kind: 'country', path, lang, country: COUNTRY[landing.country], landing }
+  if (landing) return { kind: 'landing', path, lang, landing }
+  const country = COUNTRIES.find((c) => c.path === ukPath)
+  if (country) return { kind: 'country', path, lang, country }
+  // vacancy posts: /vacancies/netherlands/tpost/<id>-<slug> (Tilda's address), or a card link like /vacancies/hm
+  const v = await getVacancyByPath(path)
+  if (v) return { kind: 'vacancy', path, lang, v }
   return null
 }
 
 const crumbHome = (lang: Lang) => ({ name: lang === 'uk' ? 'Головна' : 'Главная', path: lang === 'uk' ? '/' : '/ru' })
 const crumbAll = (lang: Lang) => ({ name: lang === 'uk' ? 'Вакансії' : 'Вакансии', path: lang === 'uk' ? CATALOG_PATH : '/ru' + CATALOG_PATH })
 
-export async function vacanciesMetadata(lang: Lang, slug: string[] = []): Promise<Metadata> {
-  const r = await resolveVacancies(lang, slug)
+export async function vacanciesMetadata(root: Root, slug: string[] = []): Promise<Metadata> {
+  const r = await resolveVacancies(root, slug)
   if (!r) return {}
+  const lang = r.lang
   const uk = lang === 'uk'
   const active = await getActiveVacancies()
   if (r.kind === 'all') {
@@ -84,8 +86,7 @@ export async function vacanciesMetadata(lang: Lang, slug: string[] = []): Promis
     const l = r.landing
     return pageMeta({ title: l.title, description: l.description || l.intro || l.h1, path: r.path, lang, absoluteTitle: true, hreflang: Boolean(l.twin) })
   }
-  const v = localize(r.v, lang)
-  return pageMeta({ title: vacancyTitle(v, lang), description: vacancyDescription(v, lang), path: r.path, lang, image: v.photos[0], noindex: !v.active || (!uk && !hasRu(r.v)), hreflang: hasRu(r.v) })
+  return vacancyPageMeta(r.v)
 }
 
 function SeoText({ landing }: { landing?: LandingPage }) {
@@ -93,17 +94,14 @@ function SeoText({ landing }: { landing?: LandingPage }) {
   return <Blocks blocks={landing.blocks} nested />
 }
 
-export async function VacanciesPage({ lang, slug = [] }: { lang: Lang; slug?: string[] }) {
-  const r = await resolveVacancies(lang, slug)
+export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: string[] }) {
+  const r = await resolveVacancies(root, slug)
   if (!r) return null
+  const lang = r.lang
   const uk = lang === 'uk'
   const active = await getActiveVacancies()
 
-  if (r.kind === 'vacancy') {
-    const all = await getAllVacancies()
-    const list = similar(all, r.v, r.v.active ? 6 : 9)
-    return <VacancyPage v={localize(r.v, lang)} similar={list.map((x) => localize(x, lang))} lang={lang} />
-  }
+  if (r.kind === 'vacancy') return <VacancyView v={r.v} />
 
   const cards = active.map((v) => toCard(localize(v, lang)))
 

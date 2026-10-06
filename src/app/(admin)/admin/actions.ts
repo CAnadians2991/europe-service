@@ -22,7 +22,7 @@ import { VACANCIES_TAG, getAllVacancies } from '@/lib/vacancies'
 import { ABOUT_TAG } from '@/lib/about'
 import { hasDb, sql } from '@/lib/db'
 import type { About } from '@/lib/about-types'
-import { COUNTRIES, COUNTRY, SITE, flagOf, type CountryInfo, vacancyBase } from '@/lib/site'
+import { COUNTRIES, COUNTRY, SITE, flagOf, type CountryInfo, newVacancyPath } from '@/lib/site'
 import { COUNTRIES_TAG, ensureCountries, getExtraCountries } from '@/lib/countries'
 import { RESERVED_SLUGS, getLanding } from '@/lib/landing'
 import { slugify } from '@/lib/format'
@@ -76,15 +76,19 @@ export async function saveVacancy(input: Vacancy, isNew: boolean): Promise<SaveR
     if (!COUNTRY[input.country]) return { ok: false, error: 'Оберіть країну.' }
 
     const id = isNew ? `${slugify(title).slice(0, 40)}-${crypto.randomBytes(2).toString('hex')}` : input.id
-    let path = clean(input.path).toLowerCase().replace(/\/{2,}/g, '/').replace(/(.)\/+$/, '$1')
-    if (!path) {
-      path = `${vacancyBase(input.country)}/${slugify(input.company || title)}`
+    // Addresses follow Tilda's logic and never change once published: an existing vacancy keeps its path;
+    // a new one gets /tpost/<10-char id>-<transliterated title>, exactly like Tilda Feeds made them
+    let path = clean(input.path).replace(/\/{2,}/g, '/').replace(/(.)\/+$/, '$1')
+    if (!path) path = newVacancyPath(title)
+    if (!/^\/[a-z0-9_\-/]+$/i.test(path)) return { ok: false, error: 'Адреса сторінки — лише латиниця, цифри, дефіс і «/», напр. /tpost/ab12cd34e1-pakuvalnik.' }
+    if (!isNew) {
+      const before = await adminGetVacancy(id)
+      if (before && before.path !== path && before.active) return { ok: false, error: `Адресу опублікованої вакансії не змінюємо (на неї можуть вести посилання): ${before.path}` }
     }
-    if (!/^\/vacancies\/[a-z0-9_-]+\/[a-z0-9_-]+$/.test(path)) return { ok: false, error: 'Адреса сторінки має бути виду /vacancies/<країна>/<назва> і містити лише латиницю, цифри, дефіс.' }
-    if (RESERVED_SLUGS.has(path.split('/')[3]) || COUNTRIES.some((c) => c.path === path) || getLanding(path))
-      return { ok: false, error: 'Ця адреса зайнята сторінкою каталогу (країна, місто чи розділ). Додайте до адреси назву компанії, напр. /vacancies/poland/milka.' }
+    if (COUNTRIES.some((c) => c.path === path) || getLanding(path) || RESERVED_SLUGS.has(path.replace(/^\//, '')))
+      return { ok: false, error: 'Ця адреса зайнята сторінкою каталогу (країна, місто чи розділ).' }
     if (await adminPathTaken(path, isNew ? undefined : id)) {
-      if (isNew && !input.path) path = `${path}-${crypto.randomBytes(2).toString('hex')}`
+      if (isNew && !input.path) path = newVacancyPath(title)
       else return { ok: false, error: `Адреса ${path} вже використовується іншою вакансією.` }
     }
 
@@ -143,7 +147,7 @@ export async function saveVacancy(input: Vacancy, isNew: boolean): Promise<SaveR
       return { ok: false, error: 'Зарплата «від» більша за «до» — перевірте цифри.' }
 
     await adminSaveVacancy(v, isNew)
-    refresh([v.path, prev?.path ?? v.path, COUNTRY[v.country].path, '/vacancies/all', '/'])
+    refresh([v.path, prev?.path ?? v.path, COUNTRY[v.country].path, '/vacancies/aktualni_vakansii', '/'])
     return { ok: true, id: v.id, path: v.path }
   } catch (e) {
     console.error(e)
@@ -157,7 +161,7 @@ export async function setActive(id: string, active: boolean) {
   const v = await adminGetVacancy(id)
   if (!v) return
   await adminSaveVacancy({ ...v, active, updatedAt: new Date().toISOString() }, false)
-  refresh([v.path, COUNTRY[v.country].path, '/vacancies/all', '/'])
+  refresh([v.path, COUNTRY[v.country].path, '/vacancies/aktualni_vakansii', '/'])
 }
 
 export async function setHot(id: string, hot: boolean) {
@@ -174,7 +178,7 @@ export async function deleteVacancy(id: string) {
   await ensureCountries()
   const v = await adminGetVacancy(id)
   await adminDeleteVacancy(id)
-  if (v) refresh([v.path, COUNTRY[v.country].path, '/vacancies/all', '/'])
+  if (v) refresh([v.path, COUNTRY[v.country].path, '/vacancies/aktualni_vakansii', '/'])
 }
 
 export async function duplicateVacancy(id: string) {
@@ -191,14 +195,14 @@ export async function restoreDeleted(historyId: number) {
   await requireAdmin()
   await ensureCountries()
   const v = await adminRestore(historyId)
-  if (v) refresh([v.path, '/vacancies/all'])
+  if (v) refresh([v.path, '/vacancies/aktualni_vakansii'])
 }
 
 export async function restoreVersion(historyId: number) {
   await requireAdmin()
   await ensureCountries()
   const v = await adminRestoreVersion(historyId)
-  if (v) refresh([v.path, COUNTRY[v.country].path, '/vacancies/all', '/'])
+  if (v) refresh([v.path, COUNTRY[v.country].path, '/vacancies/aktualni_vakansii', '/'])
 }
 
 /* ---------- images ---------- */

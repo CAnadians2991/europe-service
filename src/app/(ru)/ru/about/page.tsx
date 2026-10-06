@@ -14,10 +14,11 @@ import { getActiveVacancies } from '@/lib/vacancies'
 import { COUNTRIES } from '@/lib/site'
 import { YouTube } from '@/components/content/YouTube'
 
+// title and description exactly as on Tilda (the page ranks with them)
 export const metadata: Metadata = pageMeta({
-  title: 'О нас — официальный сайт Europe Service',
+  title: "Про нас - офіційний сайт роботи в Польщі",
   absoluteTitle: true,
-  description: 'Кадровое агентство Europe Service: лицензия Минсоцполитики № 223 от 15.02.2019, главный офис в Киеве и офисы во Львове, Ровно, Житомире, Одессе. Официальная работа в Европе.',
+  description: "Офіційна робота у Польщі без посередників ✅Тільки безкоштовні вакансії від прямих роботодавців ✅Допомогаємо отримати робочу візу ➦ Звертайтеся!",
   path: '/ru/about',
   lang: 'ru',
 })

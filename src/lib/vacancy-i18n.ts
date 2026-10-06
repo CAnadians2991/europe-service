@@ -6,6 +6,7 @@ export type Lang = 'uk' | 'ru'
 /** Vacancy as shown on the Russian site: translated texts (data.ru) over the Ukrainian ones, path under /ru/vakancies */
 export function localize(v: Vacancy, lang: Lang): Vacancy {
   if (lang === 'uk') return v
+  // Tilda had no Russian twins of vacancy posts: the card on a /ru page links to the post itself
   const path = ruTwin(v.path) ?? v.path
   const r = v.ru
   if (!r?.title) return { ...v, path }

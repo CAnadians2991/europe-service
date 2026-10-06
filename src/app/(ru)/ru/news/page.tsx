@@ -3,10 +3,11 @@ import { pageMeta } from '@/lib/seo'
 import { PageHero } from '@/components/content/PageHero'
 import { ArticleList } from '@/components/content/ArticlePage'
 
+// title and description exactly as on Tilda (the page ranks with them)
 export const metadata: Metadata = pageMeta({
-  title: 'Новости на сайте europeservice.com.ua',
+  title: "Новости на сайте europeservice.com.ua",
   absoluteTitle: true,
-  description: 'Новости и полезные статьи Europe Service: виза, документы, легальная работа в Польше, Чехии, Германии и других странах ЕС для украинцев.',
+  description: "Новости на сайте europeservice.com.ua ✅ Полное сопровождение и подбор вакансий ☎️ Проведем подробную консультацию ⭐ Зарплата до 40 тыс. грн/мес ➦ Жми❗",
   path: '/ru/news',
   lang: 'ru',
 })

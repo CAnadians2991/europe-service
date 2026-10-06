@@ -26,9 +26,12 @@ for (const f of fs.readdirSync(path.join(root, 'netlify/database/migrations')).s
 }
 const [{ n }] = await sql.query('select count(*)::int as n from vacancies')
 if (!n) {
-  const seed = JSON.parse(fs.readFileSync(path.join(root, 'src/data/vacancies.seed.json'), 'utf8'))
+  const seed = [
+    ...JSON.parse(fs.readFileSync(path.join(root, 'src/data/vacancies.seed.json'), 'utf8')),
+    ...JSON.parse(fs.readFileSync(path.join(root, 'data/vacancies.closed.json'), 'utf8')),
+  ]
   for (const v of seed) {
-    await sql.query('insert into vacancies (id, path, active, sort, data) values ($1, $2, $3, $4, $5) on conflict (id) do nothing', [v.id, v.path, v.active, v.order, JSON.stringify(v)])
+    await sql.query('insert into vacancies (id, path, active, sort, data) values ($1, $2, $3, $4, $5) on conflict do nothing', [v.id, v.path, v.active, v.order, JSON.stringify(v)])
   }
   console.log(`[db-check] empty database — seeded ${seed.length} vacancies from the Tilda import`)
 } else {

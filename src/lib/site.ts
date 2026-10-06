@@ -92,29 +92,55 @@ export interface CountrySeoText {
   text?: string
 }
 
-/** Paths are the Tilda ones: Poland is /vacancies itself, the rest /vacancies/<slug> */
+/** Paths are the Tilda ones and never change: Poland is /vacancies itself, most countries /vacancies/<slug>, Hungary,
+ *  Slovakia and England /vakansii/<slug> (that is how Tilda had them — bought links point there) */
 export const COUNTRIES: CountryInfo[] = [
   { code: 'pl', name: 'Польща', nameRu: 'Польша', inName: 'в Польщі', inNameRu: 'в Польше', path: '/vacancies', flag: '🇵🇱' },
   { code: 'de', name: 'Німеччина', nameRu: 'Германия', inName: 'в Німеччині', inNameRu: 'в Германии', path: '/vacancies/germany', flag: '🇩🇪' },
   { code: 'cz', name: 'Чехія', nameRu: 'Чехия', inName: 'в Чехії', inNameRu: 'в Чехии', path: '/vacancies/chekhiia', flag: '🇨🇿' },
   { code: 'lt', name: 'Литва', nameRu: 'Литва', inName: 'в Литві', inNameRu: 'в Литве', path: '/vacancies/lithuania', flag: '🇱🇹' },
   { code: 'nl', name: 'Нідерланди', nameRu: 'Нидерланды', inName: 'в Нідерландах', inNameRu: 'в Нидерландах', path: '/vacancies/netherlands', flag: '🇳🇱' },
-  { code: 'sk', name: 'Словаччина', nameRu: 'Словакия', inName: 'у Словаччині', inNameRu: 'в Словакии', path: '/vacancies/slovakia', flag: '🇸🇰' },
+  { code: 'sk', name: 'Словаччина', nameRu: 'Словакия', inName: 'у Словаччині', inNameRu: 'в Словакии', path: '/vakansii/slovakia', flag: '🇸🇰' },
   { code: 'ro', name: 'Румунія', nameRu: 'Румыния', inName: 'в Румунії', inNameRu: 'в Румынии', path: '/vacancies/romania', flag: '🇷🇴' },
-  { code: 'hu', name: 'Угорщина', nameRu: 'Венгрия', inName: 'в Угорщині', inNameRu: 'в Венгрии', path: '/vacancies/hungary', flag: '🇭🇺' },
+  { code: 'hu', name: 'Угорщина', nameRu: 'Венгрия', inName: 'в Угорщині', inNameRu: 'в Венгрии', path: '/vakansii/hungary', flag: '🇭🇺' },
   { code: 'gr', name: 'Греція', nameRu: 'Греция', inName: 'в Греції', inNameRu: 'в Греции', path: '/vacancies/greece', flag: '🇬🇷' },
   { code: 'it', name: 'Італія', nameRu: 'Италия', inName: 'в Італії', inNameRu: 'в Италии', path: '/vacancies/italy', flag: '🇮🇹' },
   { code: 'be', name: 'Бельгія', nameRu: 'Бельгия', inName: 'в Бельгії', inNameRu: 'в Бельгии', path: '/vacancies/belgium', flag: '🇧🇪' },
   { code: 'lv', name: 'Латвія', nameRu: 'Латвия', inName: 'в Латвії', inNameRu: 'в Латвии', path: '/vacancies/latvia', flag: '🇱🇻' },
   { code: 'at', name: 'Австрія', nameRu: 'Австрия', inName: 'в Австрії', inNameRu: 'в Австрии', path: '/vacancies/austria', flag: '🇦🇹' },
   { code: 'fr', name: 'Франція', nameRu: 'Франция', inName: 'у Франції', inNameRu: 'во Франции', path: '/vacancies/france', flag: '🇫🇷' },
-  { code: 'gb', name: 'Англія', nameRu: 'Англия', inName: 'в Англії', inNameRu: 'в Англии', path: '/vacancies/england', flag: '🇬🇧' },
+  { code: 'gb', name: 'Англія', nameRu: 'Англия', inName: 'в Англії', inNameRu: 'в Англии', path: '/vakansii/england', flag: '🇬🇧' },
   { code: 'ca', name: 'Канада', nameRu: 'Канада', inName: 'в Канаді', inNameRu: 'в Канаде', path: '/vacancies/canada', flag: '🇨🇦' },
 ]
 export const COUNTRY: Record<CountryCode, CountryInfo> = Object.fromEntries(COUNTRIES.map((c) => [c.code, c]))
 
-/** Where a country's vacancy pages live: /vacancies/poland/<slug> (Poland's own page is /vacancies), /vacancies/germany/<slug> … */
-export const vacancyBase = (code: CountryCode) => (code === 'pl' ? '/vacancies/poland' : (COUNTRY[code]?.path ?? `/vacancies/${code}`))
+/**
+ * Address of a NEW vacancy — the same logic Tilda Feeds used for every vacancy so far: /tpost/<10-char id>-<transliterated title>
+ * (id: 9 random [a-z0-9] + «1», slug: Tilda's transliteration, ≤ 50 characters).
+ */
+const TILDA_TR: Record<string, string> = {
+  а: 'a', б: 'b', в: 'v', г: 'g', ґ: 'g', д: 'd', е: 'e', є: 'e', ж: 'zh', з: 'z', и: 'i', і: '', ї: '', й: 'i', к: 'k', л: 'l', м: 'm', н: 'n',
+  о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'h', ц: 'ts', ч: 'ch', ш: 'sh', щ: 'sch', ь: '', ю: 'yu', я: 'ya', ы: 'i', э: 'e',
+  ё: 'e', ъ: '',
+}
+export function tildaSlug(title: string) {
+  const t = title
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .split('')
+    .map((ch) => TILDA_TR[ch] ?? ch)
+    .join('')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+  return t.slice(0, 50).replace(/-+$/, '') || 'vakansiya'
+}
+export function newVacancyPath(title: string, rand: () => number = Math.random) {
+  const abc = 'abcdefghijklmnopqrstuvwxyz0123456789'
+  const id = Array.from({ length: 9 }, () => abc[Math.floor(rand() * abc.length)]).join('') + '1'
+  return `/tpost/${id}-${tildaSlug(title)}`
+}
 
 /**
  * Countries added in the admin join the list at runtime — on the server via ensureCountries() (lib/countries.ts),
@@ -155,9 +181,9 @@ export const GENDERS: { code: Gender; name: string; nameRu: string; short: strin
   { code: 'couples', name: 'Для сімейних пар', nameRu: 'Для семейных пар', short: 'Сімейні пари', shortRu: 'Семейные пары' },
 ]
 
-/** The all-countries catalog (new on this site; Tilda had only per-country lists) */
-export const CATALOG_PATH = '/vacancies/all'
-export const CATALOG_PATH_RU = '/ru/vacancies/all'
+/** All vacancies of every country — Tilda's «Актуальні вакансії / Термінові заїзди» page, now a real catalog */
+export const CATALOG_PATH = '/vacancies/aktualni_vakansii'
+export const CATALOG_PATH_RU = '/ru/vacancies/aktualni_vakansii'
 
 export const NAV = [
   { href: CATALOG_PATH, label: 'Вакансії' },

@@ -2,10 +2,11 @@ import type { Metadata } from 'next'
 import { pageMeta } from '@/lib/seo'
 import { ServicesPage } from '@/components/content/ServicesPage'
 
+// title and description exactly as on Tilda (the page ranks with them)
 export const metadata: Metadata = pageMeta({
-  title: 'Наші послуги - europeservice.com.ua',
+  title: "Наші послуги - europeservice.com.ua",
   absoluteTitle: true,
-  description: 'Пакети послуг Europe Service: Базовий 1099 грн, Стандарт 1599 грн, Преміум 2499 грн. Польська робоча віза, страховка, оформлення документів для Німеччини, Нідерландів, Греції.',
+  description: "Наші послуги ✅ Без посередників ⚡ Нові вакансії 2026",
   path: '/poslugi',
 })
 

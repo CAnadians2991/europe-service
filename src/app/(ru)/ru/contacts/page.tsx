@@ -3,10 +3,11 @@ import { organizationLd, pageMeta } from '@/lib/seo'
 import { ContactsPage } from '@/components/content/ContactsPage'
 import { JsonLd } from '@/components/seo/JsonLd'
 
+// title and description exactly as on Tilda (the page ranks with them)
 export const metadata: Metadata = pageMeta({
-  title: 'Контакты компании Europe Service',
+  title: "Контакты компании Europe Service",
   absoluteTitle: true,
-  description: 'Контакты Europe Service: 0 800 357 278 (бесплатно), Viber и Telegram +380633339078. Офисы в Киеве, Львове, Ровно, Житомире и Одессе. Бесплатная консультация.',
+  description: "Контакты компании Europe Service ☎️ Проведем подробную консультацию ⭐ Зарплата до 40 тыс. грн/мес ➦ Жми❗",
   path: '/ru/contacts',
   lang: 'ru',
 })

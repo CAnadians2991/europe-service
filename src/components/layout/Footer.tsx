@@ -66,7 +66,7 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
           <ul className="mt-4 space-y-0.5 text-[15px]">
             {(uk
               ? [
-                  ['/vacancies/all', 'Усі вакансії'],
+                  ['/vacancies/aktualni_vakansii', 'Усі вакансії'],
                   ['/vacancies/varshava', 'Робота у Варшаві'],
                   ['/vacancies/vrotslav', 'Робота у Вроцлаві'],
                   ['/vacancies/storage', 'Робота на складах'],
@@ -75,7 +75,7 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
                   ['/cooperation', 'Роботодавцям'],
                 ]
               : [
-                  ['/ru/vacancies/all', 'Все вакансии'],
+                  ['/ru/vacancies/aktualni_vakansii', 'Все вакансии'],
                   ['/ru/vacancies/varshava', 'Работа в Варшаве'],
                   ['/ru/vacancies/vrotslav', 'Работа во Вроцлаве'],
                   ['/ru/vacancies/storage', 'Работа на складах'],

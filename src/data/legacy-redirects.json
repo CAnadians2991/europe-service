@@ -1,37 +1,5 @@
 [
  {
-  "source": "/ru/vacanciesrabota_v_polshe_mekanikom",
-  "destination": "/ru/vacancies/rabota_v_polshe_mekanikom"
- },
- {
-  "source": "/ru/vakansii/hungary",
-  "destination": "/ru/vacancies/hungary"
- },
- {
-  "source": "/ru/vakansii/slovakia",
-  "destination": "/ru/vacancies/slovakia"
- },
- {
-  "source": "/vakansii/england",
-  "destination": "/vacancies/england"
- },
- {
-  "source": "/vakansii/hungary",
-  "destination": "/vacancies/hungary"
- },
- {
-  "source": "/vakansii/slovakia",
-  "destination": "/vacancies/slovakia"
- },
- {
-  "source": "/ru/vacancies/rabota_v_polshe_po_biometrii",
-  "destination": "/vacancies/robota_v_polshchi_po_bometrii"
- },
- {
-  "source": "/vacancies/chekhiia/brno",
-  "destination": "/ru/vacancies/chekhiia/rabota_v_brno"
- },
- {
   "source": "/header",
   "destination": "/"
  },
@@ -45,7 +13,7 @@
  },
  {
   "source": "/hung-head",
-  "destination": "/vacancies/hungary"
+  "destination": "/vakansii/hungary"
  },
  {
   "source": "/header-lytva",
@@ -53,7 +21,7 @@
  },
  {
   "source": "/actual_header_ua",
-  "destination": "/vacancies/all"
+  "destination": "/vacancies/aktualni_vakansii"
  },
  {
   "source": "/blocks",
@@ -81,11 +49,11 @@
  },
  {
   "source": "/uploads",
-  "destination": "/ru/vacancies/all"
+  "destination": "/ru/vacancies/aktualni_vakansii"
  },
  {
   "source": "/vac",
-  "destination": "/vacancies/all"
+  "destination": "/vacancies/aktualni_vakansii"
  },
  {
   "source": "/3241324123",
@@ -97,19 +65,19 @@
  },
  {
   "source": "/header_for_vacancies_ua",
-  "destination": "/vacancies/all"
+  "destination": "/vacancies/aktualni_vakansii"
  },
  {
   "source": "/footer_vacancies_ua",
-  "destination": "/vacancies/all"
+  "destination": "/vacancies/aktualni_vakansii"
  },
  {
   "source": "/header_for_vacancies_ru",
-  "destination": "/ru/vacancies/all"
+  "destination": "/ru/vacancies/aktualni_vakansii"
  },
  {
   "source": "/footer_vac_ru",
-  "destination": "/ru/vacancies/all"
+  "destination": "/ru/vacancies/aktualni_vakansii"
  },
  {
   "source": "/header_statti_ru",
@@ -126,10 +94,6 @@
  {
   "source": "/header_netherlands_ua",
   "destination": "/vacancies/netherlands"
- },
- {
-  "source": "/vacancies/aktualni_vakansii",
-  "destination": "/vacancies/all"
  },
  {
   "source": "/page7213424.html",
@@ -381,7 +345,7 @@
  },
  {
   "source": "/page12289385.html",
-  "destination": "/ru/vacancies/all"
+  "destination": "/ru/vacancies/aktualni_vakansii"
  },
  {
   "source": "/page12586754.html",
@@ -417,7 +381,7 @@
  },
  {
   "source": "/page13843894.html",
-  "destination": "/vacancies/all"
+  "destination": "/vacancies/aktualni_vakansii"
  },
  {
   "source": "/page14140942.html",
@@ -545,7 +509,7 @@
  },
  {
   "source": "/page14162637.html",
-  "destination": "/ru/vacancies/rabota_v_polshe_mekanikom"
+  "destination": "/ru/vacanciesrabota_v_polshe_mekanikom"
  },
  {
   "source": "/page14181464.html",
@@ -577,7 +541,7 @@
  },
  {
   "source": "/page14610437.html",
-  "destination": "/vacancies/robota_v_polshchi_po_bometrii"
+  "destination": "/ru/vacancies/rabota_v_polshe_po_biometrii"
  },
  {
   "source": "/page14610480.html",
@@ -761,11 +725,11 @@
  },
  {
   "source": "/page20427550.html",
-  "destination": "/vacancies/all"
+  "destination": "/vacancies/aktualni_vakansii"
  },
  {
   "source": "/page20910708.html",
-  "destination": "/vacancies/all"
+  "destination": "/vacancies/aktualni_vakansii"
  },
  {
   "source": "/page20937435.html",
@@ -901,7 +865,7 @@
  },
  {
   "source": "/page21037353.html",
-  "destination": "/vacancies/all"
+  "destination": "/vacancies/aktualni_vakansii"
  },
  {
   "source": "/page21362139.html",
@@ -913,11 +877,11 @@
  },
  {
   "source": "/page21929934.html",
-  "destination": "/ru/vacancies/all"
+  "destination": "/ru/vacancies/aktualni_vakansii"
  },
  {
   "source": "/page22075082.html",
-  "destination": "/ru/vacancies/all"
+  "destination": "/ru/vacancies/aktualni_vakansii"
  },
  {
   "source": "/page22104268.html",
@@ -1125,7 +1089,7 @@
  },
  {
   "source": "/page23240891.html",
-  "destination": "/vacancies/all"
+  "destination": "/vacancies/aktualni_vakansii"
  },
  {
   "source": "/page23760685.html",
@@ -1221,7 +1185,7 @@
  },
  {
   "source": "/page27914937.html",
-  "destination": "/vacancies/slovakia"
+  "destination": "/vakansii/slovakia"
  },
  {
   "source": "/page27919878.html",
@@ -1233,7 +1197,7 @@
  },
  {
   "source": "/page28367940.html",
-  "destination": "/vacancies/hungary"
+  "destination": "/vakansii/hungary"
  },
  {
   "source": "/page28424477.html",
@@ -1313,7 +1277,7 @@
  },
  {
   "source": "/page30619645.html",
-  "destination": "/vacancies/hungary"
+  "destination": "/vakansii/hungary"
  },
  {
   "source": "/page30773903.html",
@@ -1353,11 +1317,11 @@
  },
  {
   "source": "/page32923820.html",
-  "destination": "/ru/vacancies/slovakia"
+  "destination": "/ru/vakansii/slovakia"
  },
  {
   "source": "/page32924458.html",
-  "destination": "/ru/vacancies/hungary"
+  "destination": "/ru/vakansii/hungary"
  },
  {
   "source": "/page32924759.html",
@@ -1449,7 +1413,7 @@
  },
  {
   "source": "/page36670142.html",
-  "destination": "/vacancies/england"
+  "destination": "/vakansii/england"
  },
  {
   "source": "/page36670356.html",
@@ -1589,7 +1553,7 @@
  },
  {
   "source": "/page52496957.html",
-  "destination": "/ru/vacancies/chekhiia/rabota_v_brno"
+  "destination": "/vacancies/chekhiia/brno"
  },
  {
   "source": "/page59039373.html",

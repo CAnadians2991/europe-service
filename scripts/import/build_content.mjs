@@ -113,12 +113,49 @@ async function build(name, data) {
 // ---- content files ----
 const articles = exists('articles.json') ? read('articles.json') : { articles: [], redirects: [] }
 const landings = exists('landings.json') ? read('landings.json') : { landings: [], redirects: [] }
-// a page that only copies another one (wrong-language text at a Tilda address) → 301 to the original
-for (const l of landings.landings.filter((x) => x.duplicateOf)) (landings.redirects ||= []).push({ source: l.path, destination: l.duplicateOf })
-landings.landings = landings.landings.filter((x) => !x.duplicateOf)
+
+/* Tilda URLs stay exactly as they were (years of bought links point at them):
+   - feed posts (articles) keep /news/tpost/<uid>-<slug>, /ru/tpost/… — the address in Tilda's sitemap-feed-*.xml;
+   - landings keep /vakansii/hungary, /ru/vacanciesrabota_v_polshe_mekanikom …, duplicates included. */
+const TILDA_DATA = path.resolve(HERE, '../../../tilda-data')
+const sitemapPath = {}
+for (const f of fs.readdirSync(path.join(TILDA_DATA, 'sitemaps')).filter((x) => x.startsWith('sitemap-feed-'))) {
+  for (const m of fs.readFileSync(path.join(TILDA_DATA, 'sitemaps', f), 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)) {
+    const uid = m[1].match(/\/tpost\/([a-z0-9]+)-/)?.[1]
+    if (uid) sitemapPath[uid] = m[1].replace(/^https?:\/\/[^/]+/, '')
+  }
+}
+const tildaAliases = new Set(JSON.parse(fs.readFileSync(path.join(TILDA_DATA, 'pages.json'), 'utf8')).filter((p) => p.alias).map((p) => '/' + p.alias))
+const rename = new Map() // new path the import invented -> Tilda path
+const articleTpost = {} // uid -> page that answers it
+for (const r of articles.redirects || []) {
+  const uid = r.source.match(/\/tpost\/([a-z0-9]+)-/)?.[1]
+  if (!uid) continue
+  const canonical = sitemapPath[uid] || r.source
+  if (tildaAliases.has(r.destination)) articleTpost[uid] = r.destination // teaser post of a page article
+  else {
+    rename.set(r.destination, canonical)
+    articleTpost[uid] = canonical
+  }
+}
+for (const l of landings.landings) if (l.oldPath && l.oldPath !== l.path) rename.set(l.path, l.oldPath)
+const renamePaths = (node) => {
+  if (typeof node === 'string') {
+    if (rename.has(node)) return rename.get(node)
+    return node.replace(/\]\((\/[^)\s]+)\)/g, (m, p) => (rename.has(p) ? `](${rename.get(p)})` : m))
+  }
+  if (Array.isArray(node)) return node.map(renamePaths)
+  if (node && typeof node === 'object') return Object.fromEntries(Object.entries(node).map(([k, v]) => [k, renamePaths(v)]))
+  return node
+}
+articles.articles = renamePaths(articles.articles)
+landings.landings = renamePaths(landings.landings).map(({ oldPath, duplicateOf, ...l }) => l)
+landings.redirects = []
+console.log('paths restored to Tilda:', rename.size)
+
 await build('articles', { articles: articles.articles })
 await build('landings', { landings: landings.landings })
-for (const f of ['home', 'pages', 'services', 'reviews', 'legal', 'quizzes']) if (exists(`${f}.json`)) await build(f, read(`${f}.json`))
+for (const f of ['home', 'pages', 'services', 'reviews', 'legal', 'quizzes']) if (exists(`${f}.json`)) await build(f, renamePaths(read(`${f}.json`)))
 
 // ---- hreflang pairs: uk path -> ru path (landings + articles that carry `twin`) ----
 const twins = {}
@@ -132,19 +169,20 @@ console.log('twins', Object.keys(twins).length)
 
 // ---- redirects ----
 // exact old paths -> new paths (Tilda page files, technical pages, /vakansii/*, landing/article path changes)
-const live = new Set([...landings.landings.map((l) => l.path), ...articles.articles.map((a) => a.path)])
+const live = new Set([...landings.landings.map((l) => l.path), ...articles.articles.map((a) => a.path), '/vacancies/aktualni_vakansii', '/ru/vacancies/aktualni_vakansii'])
 const redirects = new Map()
 const add = (source, destination) => {
   if (!source || !destination) return
   const s = source.replace(/\/+$/, '') || '/'
-  const d = destination.replace(/\/+$/, '') || '/'
+  let d = destination.replace(/\/+$/, '') || '/'
+  d = rename.get(d) ?? (d === '/vacancies/all' ? '/vacancies/aktualni_vakansii' : d === '/ru/vacancies/all' ? '/ru/vacancies/aktualni_vakansii' : d)
   if (s === d || s === '/' || live.has(s)) return
   if (/\/tpost\//.test(s)) return // handled by tpost-redirects.json (by post uid)
   if (!redirects.has(s.toLowerCase())) redirects.set(s.toLowerCase(), { source: s, destination: d })
 }
 for (const r of landings.redirects || []) add(r.source, r.destination)
 if (exists('redirects_pages.json')) for (const r of read('redirects_pages.json')) add(r.source, r.destination)
-for (const r of articles.redirects || []) add(r.source, r.destination)
+// (article redirects are now handled per post uid in tpost-redirects.json)
 // a destination that itself redirects → follow it (no chains)
 const list = [...redirects.values()].map((r) => {
   let d = r.destination
@@ -155,10 +193,6 @@ fs.writeFileSync(path.join(DATA, 'legacy-redirects.json'), JSON.stringify(list, 
 console.log('legacy redirects', list.length)
 
 // tpost uid -> new path (vacancies: active page or country page; articles: new article path)
-const tpost = exists('tpost-redirects.vacancies.json') ? read('tpost-redirects.vacancies.json') : {}
-for (const r of articles.redirects || []) {
-  const m = r.source.match(/\/tpost\/([a-z0-9]+)-/)
-  if (m) tpost[m[1]] = r.destination
-}
+const tpost = { ...(exists('tpost-redirects.vacancies.json') ? read('tpost-redirects.vacancies.json') : {}), ...articleTpost }
 fs.writeFileSync(path.join(DATA, 'tpost-redirects.json'), JSON.stringify(tpost))
 console.log('tpost redirects', Object.keys(tpost).length, 'images', jobs)

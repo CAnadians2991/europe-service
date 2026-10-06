@@ -9,8 +9,8 @@ export const revalidate = 86400
 type Props = { params: Promise<{ rest: string[] }> }
 const pathOf = (rest: string[]) => '/' + rest.map(decodeURIComponent).join('/')
 
-export function generateStaticParams() {
-  return contentPaths('uk').map((p) => ({ rest: p.slice(1).split('/') }))
+export async function generateStaticParams() {
+  return (await contentPaths('uk')).map((p) => ({ rest: p.slice(1).split('/') }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -19,6 +19,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const path = pathOf((await params).rest)
-  if (!resolveContent(path)) notFound()
+  if (!(await resolveContent(path))) notFound()
   return <ContentView path={path} lang="uk" />
 }
