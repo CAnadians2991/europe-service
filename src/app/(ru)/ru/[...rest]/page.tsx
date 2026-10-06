@@ -22,7 +22,7 @@ export default async function Page({ params }: Props) {
   const path = pathOf((await params).rest)
   if (!(await resolveContent(path))) {
     // a deleted Tilda post that outside links still point to
-    if (path.includes('/tpost/')) permanentRedirect(tpostFallback(path))
+    if (/\/tpost\//i.test(path)) permanentRedirect(tpostFallback(path))
     notFound()
   }
   return <ContentView path={path} lang="ru" />

@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { slug } = await params
   if (!(await resolveVacancies(ROOT, slug))) {
-    if (slug?.includes('tpost')) permanentRedirect(tpostFallback(ROOT + '/' + slug.join('/')))
+    if (slug?.some((s) => s.toLowerCase() === 'tpost')) permanentRedirect(tpostFallback(ROOT + '/' + slug.join('/')))
     notFound()
   }
   return <VacanciesPage root={ROOT} slug={slug} />
