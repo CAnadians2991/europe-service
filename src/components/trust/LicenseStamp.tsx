@@ -1,12 +1,12 @@
-/** A rubber-stamp roundel with the licence requisites — the company's real document, not decoration */
+/** A rubber-stamp roundel with the real requisites (the Ministry of Economy list, ЄДРПОУ) — not decoration */
 export function LicenseStamp({ className = '', lang = 'uk', uid = 'a' }: { className?: string; lang?: 'uk' | 'ru'; /** unique per page (several stamps share one page) */ uid?: string }) {
   const ringId = `es-stamp-ring-${uid}`
   const ring =
     lang === 'uk'
-      ? 'ЛІЦЕНЗІЯ МІНСОЦПОЛІТИКИ № 223 · 15.02.2019 · ЄДРПОУ 42515343 · '
-      : 'ЛИЦЕНЗИЯ МИНСОЦПОЛИТИКИ № 223 · 15.02.2019 · ЕГРПОУ 42515343 · '
+      ? 'ПЕРЕЛІК МІНЕКОНОМІКИ · ДЕКЛАРАЦІЯ · ЄДРПОУ 42515343 · '
+      : 'ПЕРЕЧЕНЬ МИНЭКОНОМИКИ · ДЕКЛАРАЦИЯ · ЕГРПОУ 42515343 · '
   return (
-    <svg viewBox="0 0 200 200" className={className} role="img" aria-label={lang === 'uk' ? 'Ліцензія № 223 від 15.02.2019' : 'Лицензия № 223 от 15.02.2019'}>
+    <svg viewBox="0 0 200 200" className={className} role="img" aria-label={lang === 'uk' ? 'Europe Service у Переліку Мінекономіки, ЄДРПОУ 42515343' : 'Europe Service в Перечне Минэкономики, ЕГРПОУ 42515343'}>
       <defs>
         <path id={ringId} d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0" />
       </defs>
@@ -22,7 +22,7 @@ export function LicenseStamp({ className = '', lang = 'uk', uid = 'a' }: { class
         SERVICE
       </text>
       <text x="100" y="130" textAnchor="middle" fill="currentColor" style={{ fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 600, letterSpacing: 1.5 }}>
-        № 223
+        {lang === 'uk' ? 'З 2018' : 'С 2018'}
       </text>
     </svg>
   )

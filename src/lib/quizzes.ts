@@ -46,8 +46,8 @@ interface RawQuiz {
 }
 
 const WORK = new Set(['warehouse', 'factory', 'food', 'horeca'])
-const COMMON_BULLETS = ['Ліцензоване агентство з 2019 року', 'Житло від роботодавця', 'Супровід до першого робочого дня']
-const COMMON_BULLETS_RU = ['Лицензированное агентство с 2019 года', 'Жилье от работодателя', 'Сопровождение до первого рабочего дня']
+const COMMON_BULLETS = ['Офіційне агентство з 2018 року', 'Житло від роботодавця', 'Супровід до першого робочого дня']
+const COMMON_BULLETS_RU = ['Официальное агентство с 2018 года', 'Жилье от работодателя', 'Сопровождение до первого рабочего дня']
 
 const raw = (Array.isArray(quizzesData) ? quizzesData : ((quizzesData as { quizzes?: RawQuiz[] }).quizzes ?? [])) as RawQuiz[]
 

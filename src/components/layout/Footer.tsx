@@ -27,12 +27,14 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
         ['/ru/vacancies/vrotslav', 'Работа во Вроцлаве'],
         ['/ru/vacancies/storage', 'Работа на складах'],
         ['/ru/vacancies/married_couple', 'Работа для семейных пар'],
+        ['/ru/countires', 'Полезное о странах'],
         ['/ru/news', 'Новости и статьи'],
       ]
   const company: [string, string][] = uk
     ? [
         ['/about', 'Про нас'],
         ['/poslugi', 'Послуги та ціни'],
+        ['/robocha-viza-v-polshchu', 'Робоча віза в Польщу'],
         ['/vidguki', 'Відгуки клієнтів'],
         ['/contacts', 'Контакти'],
         ['/cooperation', 'Роботодавцям (EN)'],
@@ -40,6 +42,7 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
     : [
         ['/ru/about', 'О нас'],
         ['/ru/services', 'Услуги и цены'],
+        ['/ru/rabochaya-viza-v-polshu', 'Рабочая виза в Польшу'],
         ['/ru/otzyvy', 'Отзывы клиентов'],
         ['/ru/contacts', 'Контакты'],
         ['/cooperation', 'Работодателям (EN)'],
@@ -72,9 +75,9 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
               <br />
               {uk ? 'ЄДРПОУ' : 'ЕГРПОУ'} {SITE.edrpou}
               <br />
-              {uk ? 'Ліцензія МСП № 223 від 15.02.2019' : 'Лицензия МСП № 223 от 15.02.2019'}
+              {uk ? 'У Переліку Мінекономіки (з 2019 — ліцензія № 223)' : 'В Перечне Минэкономики (с 2019 — лицензия № 223)'}
               <br />
-              <Link href="/declaration" className="text-white underline underline-offset-[3px]">
+              <Link href={uk ? '/declaration' : '/ru/declaration'} className="text-white underline underline-offset-[3px]">
                 {uk ? 'Декларація Мінекономіки' : 'Декларация Минэкономики'}
               </Link>
             </p>
@@ -155,13 +158,13 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
             © {SITE.name} 2018–{year}
           </p>
           <p className="flex flex-wrap items-center gap-x-5">
-            <Link href="/privacy" className="inline-flex min-h-11 items-center hover:text-white">
+            <Link href={uk ? '/privacy' : '/ru/privacy'} className="inline-flex min-h-11 items-center hover:text-white">
               {uk ? 'Політика конфіденційності' : 'Политика конфиденциальности'}
             </Link>
-            <Link href="/oferta" className="inline-flex min-h-11 items-center hover:text-white">
+            <Link href={uk ? '/oferta' : '/ru/oferta'} className="inline-flex min-h-11 items-center hover:text-white">
               {uk ? 'Договір оферти' : 'Договор оферты'}
             </Link>
-            <Link href="/user_deal" className="inline-flex min-h-11 items-center hover:text-white">
+            <Link href={uk ? '/user_deal' : '/ru/user_deal'} className="inline-flex min-h-11 items-center hover:text-white">
               {uk ? 'Угода користувача' : 'Пользовательское соглашение'}
             </Link>
           </p>

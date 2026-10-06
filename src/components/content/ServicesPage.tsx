@@ -190,6 +190,22 @@ export function ServicesPage({ lang }: { lang: Lang }) {
               <PackageColumn key={p.title} p={p} index={i} featured={i === 1} note={p.groupNote || note} lang={lang} />
             ))}
           </div>
+          {/* the visa package has its own landing */}
+          <Link
+            href={uk ? '/robocha-viza-v-polshchu' : '/ru/rabochaya-viza-v-polshu'}
+            className="group mt-8 grid gap-3 border border-line bg-white p-5 transition hover:border-ink sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:p-6"
+          >
+            <span>
+              <span className="font-mono text-[11.5px] font-semibold uppercase tracking-[0.1em] text-brand-700">{uk ? 'Окремий пакет' : 'Отдельный пакет'}</span>
+              <span className="mt-1 block font-display text-[20px] font-semibold tracking-[-0.01em] sm:text-[22px]">
+                {uk ? 'Робоча віза в Польщу на рік без прив’язки — 15 000 грн' : 'Рабочая виза в Польшу на год без привязки — 15 000 грн'}
+              </span>
+              <span className="mt-1 block text-[15px] text-ink-2">
+                {uk ? 'Анкета, страховий поліс, запис у візовий центр і координація до візи; далі — можливе відрядження A1 у Нідерланди чи Німеччину.' : 'Анкета, страховой полис, запись в визовый центр и координация до визы; дальше — возможна командировка A1 в Нидерланды или Германию.'}
+              </span>
+            </span>
+            <span className="font-semibold text-brand-700 group-hover:underline">{uk ? 'Детальніше →' : 'Подробнее →'}</span>
+          </Link>
         </section>
       )}
 

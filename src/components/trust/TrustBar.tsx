@@ -10,7 +10,7 @@ export function TrustBar({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
         <Link href={uk ? '/about#perelik' : '/ru/about#perelik'} className="flex min-w-0 items-center gap-2 hover:text-white">
           <span className="size-1.5 shrink-0 bg-leaf" aria-hidden />
           <span className="truncate">
-            {uk ? 'Ліцензія МСП № 223 від 15.02.2019' : 'Лицензия МСП № 223 от 15.02.2019'}
+            {uk ? 'У Переліку посередників Мінекономіки' : 'В Перечне посредников Минэкономики'}
             <span className="hidden sm:inline"> · {uk ? 'ЄДРПОУ' : 'ЕГРПОУ'} {SITE.edrpou}</span>
           </span>
         </Link>
