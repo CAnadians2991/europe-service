@@ -163,7 +163,11 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
   const byNew = [...all].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
   const hot = [...all.filter((v) => v.hot), ...byNew.filter((v) => !v.hot)].slice(0, 6).map((v) => toCard(localize(v, lang)))
   const countries = COUNTRIES.map((c) => ({ ...c, count: all.filter((v) => v.country === c.code).length })).filter((c) => c.count)
-  const countryImage = Object.fromEntries((U.countries?.items ?? []).filter((c) => c.country && c.image).map((c) => [c.country as string, c.image as string]))
+  const countryImage: Record<string, string> = Object.fromEntries((U.countries?.items ?? []).filter((c) => c.country && c.image).map((c) => [c.country as string, c.image as string]))
+  for (const c of countries) if (!countryImage[c.code]) {
+    const v = all.find((x) => x.country === c.code && x.photos[0])
+    if (v) countryImage[c.code] = v.photos[0]
+  }
   const reviews = REVIEWS.filter((r) => r.lang === lang && r.text && r.name).slice(0, 3)
   const faq = uk ? HOME_FAQ : HOME_FAQ_RU
   const advantages = H.advantages ?? U.advantages
@@ -217,7 +221,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
               </span>
               <Suitcase3D className="relative" />
             </div>
-            <div className="relative mt-5 border border-line bg-white shadow-[var(--shadow-lift)]">
+            <div className="relative mt-5 hidden border border-line bg-white shadow-[var(--shadow-lift)] sm:block">
               <div className="rule-grad" />
               <div className="flex items-end justify-between gap-4 px-5 pb-3 pt-4">
                 <div>
@@ -263,6 +267,9 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
         <VacancyTicker list={byNew.slice(0, 14).map((v) => localize(v, lang))} lang={lang} />
       </section>
 
+      {/* ───────── GUARANTEES first: trust before the offer ───────── */}
+      <Guarantees lang={lang} />
+
       {/* ───────── 01 HOT VACANCIES ───────── */}
       <section className="container-x py-16 sm:py-20" aria-labelledby="hot-h">
         <div className="flex flex-wrap items-end justify-between gap-6">
@@ -278,10 +285,40 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
         </div>
       </section>
 
-      {/* ───────── 02 COUNTRIES — an index ───────── */}
+      {/* ───────── 02 STEPS — how it goes ───────── */}
+      <section className="border-y border-line bg-white" aria-labelledby="steps-h">
+        <div className="container-x py-14 sm:py-20">
+        <SectionHead id="steps-h" index={2} eyebrow={t.stepsLabel} title={t.stepsTitle} />
+        <ol className="mt-12 grid gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-6">
+          {STEPS[lang].map(([title, text], i, all) => (
+            <li key={title}>
+              <span className="block bg-line">
+                <span className="stage-bar" style={{ opacity: 0.4 + (0.6 * (i + 1)) / all.length }} />
+              </span>
+              <p className="mt-4 flex items-baseline justify-between font-mono text-[12px] uppercase tracking-[0.1em] text-muted">
+                <span>{uk ? 'Етап' : 'Этап'}</span>
+                <span className="num text-ink">
+                  {String(i + 1).padStart(2, '0')}
+                  <span className="text-muted">/{String(all.length).padStart(2, '0')}</span>
+                </span>
+              </p>
+              <h3 className="mt-3 text-[20px]">{title}</h3>
+              <p className="mt-2 max-w-[320px] text-[15.5px] leading-relaxed text-ink-2">{text}</p>
+            </li>
+          ))}
+        </ol>
+        <div className="mt-10">
+          <QuizButton id="steps" className="btn-accent !px-7">
+            {t.pick} <IconArrow className="size-4" />
+          </QuizButton>
+        </div>
+        </div>
+      </section>
+
+      {/* ───────── 03 COUNTRIES — an index ───────── */}
       <section className="border-y border-line bg-white" aria-labelledby="countries-h">
         <div className="container-x py-16 sm:py-20">
-          <SectionHead id="countries-h" index={2} eyebrow={t.countries} title={t.countriesTitle} />
+          <SectionHead id="countries-h" index={3} eyebrow={t.countries} title={t.countriesTitle} />
           <ul className="mt-8 grid border-t-[3px] border-ink sm:grid-cols-2 sm:gap-x-10">
             {countries.map((c) => (
               <li key={c.code} className="border-b border-line">
@@ -348,35 +385,6 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
         </div>
       </section>
 
-      {/* ───────── 03 STEPS ───────── */}
-      <section className="container-x pb-16 sm:pb-20" aria-labelledby="steps-h">
-        <SectionHead id="steps-h" index={3} eyebrow={t.stepsLabel} title={t.stepsTitle} />
-        <ol className="mt-12 grid gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-6">
-          {STEPS[lang].map(([title, text], i, all) => (
-            <li key={title}>
-              <span className="block bg-line">
-                <span className="stage-bar" style={{ opacity: 0.4 + (0.6 * (i + 1)) / all.length }} />
-              </span>
-              <p className="mt-4 flex items-baseline justify-between font-mono text-[12px] uppercase tracking-[0.1em] text-muted">
-                <span>{uk ? 'Етап' : 'Этап'}</span>
-                <span className="num text-ink">
-                  {String(i + 1).padStart(2, '0')}
-                  <span className="text-muted">/{String(all.length).padStart(2, '0')}</span>
-                </span>
-              </p>
-              <h3 className="mt-3 text-[20px]">{title}</h3>
-              <p className="mt-2 max-w-[320px] text-[15.5px] leading-relaxed text-ink-2">{text}</p>
-            </li>
-          ))}
-        </ol>
-        <div className="mt-10">
-          <QuizButton id="steps" className="btn-accent !px-7">
-            {t.pick} <IconArrow className="size-4" />
-          </QuizButton>
-        </div>
-      </section>
-
-      <Guarantees lang={lang} />
 
       {/* ───────── 04 ADVANTAGES — a spec sheet ───────── */}
       {advantages && (

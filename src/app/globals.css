@@ -10,7 +10,8 @@
 @theme {
   --font-sans: var(--font-text), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-display: var(--font-display-face), var(--font-text), ui-sans-serif, sans-serif;
-  --font-mono: var(--font-mono-face), ui-monospace, Menlo, monospace;
+  /* no monospace any more: «mono» labels and figures use the text face with tabular numbers */
+  --font-mono: var(--font-text), ui-sans-serif, system-ui, sans-serif;
 
   /* corporate greens (buttons use 600/700: white text ≥ 4.4:1) */
   --color-brand-50: #eef7f1;
@@ -148,9 +149,9 @@
   background-image: linear-gradient(90deg, #5ec58a 0%, #38af60 35%, #2f9a86 65%, #578fc7 100%);
 }
 
-/* Section label: «01 — Вакансії» in the register mono */
+/* Section label: «01 — Вакансії» — small caps line in the text face */
 @utility eyebrow {
-  @apply inline-flex items-center gap-2 font-mono text-[12.5px] font-medium tracking-[0.08em] text-brand-700 uppercase;
+  @apply inline-flex items-center gap-2 font-sans text-[13px] font-semibold tracking-[0.06em] text-brand-700 uppercase;
 }
 @utility num {
   @apply font-mono;

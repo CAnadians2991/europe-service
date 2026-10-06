@@ -4,7 +4,8 @@ import { PageHero } from './PageHero'
 import { Blocks, RichText } from './Blocks'
 import { IconCheck } from '@/components/ui/icons'
 import { CtaBand, Faq, HOME_FAQ, HOME_FAQ_RU, SectionHead } from '@/components/sections/Sections'
-import { PayButton } from './PayButton'
+import { AddToCart } from '@/components/shop/AddToCart'
+import { PRODUCT, productIdForPackage } from '@/lib/shop'
 import { LeadButton } from '@/components/lead/LeadModal'
 import { LicenseBadge } from '@/components/trust/LicenseBadge'
 import { JsonLd } from '@/components/seo/JsonLd'
@@ -41,18 +42,29 @@ function OfertaNote({ text, lang, className = '' }: { text?: string; lang: Lang;
 
 function PayActions({ p, featured, note, lang, compact }: { p: Package; featured?: boolean; note?: string; lang: Lang; /** price-list row: the price sits above, the oferta line under the group */ compact?: boolean }) {
   const uk = lang === 'uk'
+  // fixed hryvnia price → the cart (/oplata); ranges and euro prices → a manager quotes and sends the bill
+  const product = PRODUCT[productIdForPackage(p.title) ?? '']
   return (
     <div className="grid gap-2">
-      {p.payUrl ? (
-        <PayButton href={p.payUrl} title={p.title} className={`${featured ? 'btn-accent' : 'btn-primary'} w-full`}>
+      {product ? (
+        <AddToCart id={product.id} title={product.title} price={product.price} multiple={product.multiple} lang={lang} className={`${featured ? 'btn-accent' : 'btn-primary'} w-full`}>
           {uk ? 'Оплатити' : 'Оплатить'}
           {p.price && !compact && <span className="num font-medium opacity-80">· {p.price}</span>}
-        </PayButton>
+        </AddToCart>
+      ) : p.price ? (
+        <LeadButton form={`invoice:${p.title}`} title={uk ? 'Рахунок на оплату' : 'Счёт на оплату'} subtitle={p.title} className={`${featured ? 'btn-accent' : 'btn-primary'} w-full`}>
+          {uk ? 'Отримати рахунок' : 'Получить счёт'}
+        </LeadButton>
       ) : null}
+      {p.href && (
+        <Link href={p.href} className="btn-ghost w-full">
+          {uk ? 'Детальніше' : 'Подробнее'}
+        </Link>
+      )}
       <LeadButton form={`service:${p.title}`} title={uk ? 'Консультація щодо послуги' : 'Консультация по услуге'} subtitle={p.title} className="btn-ghost w-full">
         {uk ? 'Спершу консультація' : 'Сначала консультация'}
       </LeadButton>
-      {p.payUrl && !compact && <OfertaNote text={note} lang={lang} className="mt-1" />}
+      {product && !compact && <OfertaNote text={note} lang={lang} className="mt-1" />}
     </div>
   )
 }
@@ -221,7 +233,7 @@ export function ServicesPage({ lang }: { lang: Lang }) {
                     <ServiceRow key={p.title} p={p} lang={lang} />
                   ))}
                 </ul>
-                {g.items.some((p) => p.payUrl) && <OfertaNote text={g.items.find((p) => p.groupNote)?.groupNote || note} lang={lang} className="mt-4" />}
+                {g.items.some((p) => productIdForPackage(p.title)) && <OfertaNote text={g.items.find((p) => p.groupNote)?.groupNote || note} lang={lang} className="mt-4" />}
               </div>
             ))}
           </div>

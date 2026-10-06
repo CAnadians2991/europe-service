@@ -7,6 +7,7 @@ import { MobileMenu } from './MobileMenu'
 import { HeaderCta } from './HeaderCta'
 import { MobileHeaderSlot } from './MobileHeaderSlot'
 import { LangSwitch } from './LangSwitch'
+import { CartBadge } from '@/components/shop/CartBadge'
 import type { CountryCode } from '@/lib/types'
 import { localHref } from '@/lib/alt-routes'
 import { plural } from '@/lib/format'
@@ -40,7 +41,7 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
       <div className="container-x flex h-16 items-center gap-3 lg:h-[72px]">
-        <MobileHeaderSlot lang={lang}>
+        <MobileHeaderSlot lang={lang} home={lang === 'uk' ? '/' : '/ru'}>
           <Link href={lang === 'uk' ? '/' : '/ru'} className="flex h-11 shrink-0 items-center" aria-label={lang === 'uk' ? 'Europe Service — на головну' : 'Europe Service — на главную'}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/brand/logo.svg" alt="Europe Service" width={160} height={43} className="h-[34px] w-auto lg:h-[38px]" />
@@ -100,6 +101,7 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
             {SITE.phoneDisplay}
           </a>
           <LangSwitch lang={lang} className="hidden h-11 min-w-11 place-items-center border border-line px-2.5 font-mono text-[12.5px] font-semibold text-muted hover:border-ink hover:text-ink sm:grid" />
+          <CartBadge lang={lang} />
           <HeaderCta lang={lang} />
           <MobileMenu lang={lang} nav={nav} countries={countries.map((c) => ({ ...c, count: counts[c.code] ?? 0 }))} total={total} />
         </div>

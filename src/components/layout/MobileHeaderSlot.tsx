@@ -6,11 +6,11 @@ import { useHeaderAction, useLeadModal, useQuizModal } from '@/components/lead/L
 import { isQuizPage } from '@/lib/site'
 
 /**
- * Phones (<640px): the logo slot of the sticky header turns into the main call to action once the visitor scrolls —
- * «Підібрати вакансію» (quiz) or, on a vacancy page, «Забронювати місце». No bottom bar covering the content.
- * The logo comes back at the top of the page, on quiz pages and while a lead form with a phone field is on screen.
+ * Phones (<640px): once the visitor scrolls, the logo shrinks to the ES icon and a compact call to action appears
+ * next to it — «Підібрати вакансію» (quiz) or, on a vacancy page, «Забронювати місце». The brand never disappears and
+ * the phone / menu buttons are never covered. Full logo again at the top, on quiz pages and while a lead form is on screen.
  */
-export function MobileHeaderSlot({ lang, children }: { lang: 'uk' | 'ru'; children: React.ReactNode }) {
+export function MobileHeaderSlot({ lang, home, children }: { lang: 'uk' | 'ru'; home: string; children: React.ReactNode }) {
   const uk = lang === 'uk'
   const path = usePathname()
   const action = useHeaderAction()
@@ -68,32 +68,34 @@ export function MobileHeaderSlot({ lang, children }: { lang: 'uk' | 'ru'; childr
   const label = action ? (uk ? 'Забронювати місце' : 'Забронировать место') : uk ? 'Підібрати вакансію' : 'Подобрать вакансию'
 
   return (
-    <div className="relative flex h-11 min-w-0 flex-1 items-center sm:flex-none">
-      <div aria-hidden={show || undefined} inert={show} className={`transition duration-200 ${show ? 'pointer-events-none -translate-y-1 opacity-0' : ''}`}>
-        {children}
-      </div>
-      <button
-        type="button"
-        aria-hidden={!show || undefined}
-        inert={!show}
-        tabIndex={show ? 0 : -1}
-        onClick={() =>
-          action
-            ? open({
-                form: uk ? 'vacancy-header' : 'vacancy-header-ru',
-                vacancyId: action.vacancyId,
-                vacancyTitle: action.vacancyTitle,
-                title: uk ? 'Заявка на вакансію' : 'Заявка на вакансию',
-                submitLabel: label,
-              })
-            : openQuiz(undefined, 'header-mobile')
-        }
-        className={`btn-accent absolute inset-y-0 left-0 w-full max-w-[260px] truncate whitespace-nowrap !px-3 !py-0 !text-[14px] transition duration-200 min-[360px]:!text-[15px] sm:hidden ${
-          show ? '' : 'pointer-events-none translate-y-1 opacity-0'
-        }`}
-      >
-        {label}
-      </button>
+    <div className="flex h-11 min-w-0 flex-1 items-center gap-2 sm:flex-none">
+      {show ? (
+        <a href={home} aria-label="Europe Service" className="grid size-11 shrink-0 place-items-center sm:hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/icon.svg" alt="" width={34} height={34} className="size-[34px]" />
+        </a>
+      ) : (
+        children
+      )}
+      {show && (
+        <button
+          type="button"
+          onClick={() =>
+            action
+              ? open({
+                  form: uk ? 'vacancy-header' : 'vacancy-header-ru',
+                  vacancyId: action.vacancyId,
+                  vacancyTitle: action.vacancyTitle,
+                  title: uk ? 'Заявка на вакансію' : 'Заявка на вакансию',
+                  submitLabel: label,
+                })
+              : openQuiz(undefined, 'header-mobile')
+          }
+          className="btn-accent h-11 min-w-0 flex-1 animate-rise truncate whitespace-nowrap !px-3 !py-0 !text-[14px] min-[380px]:!text-[15px] sm:hidden"
+        >
+          <span className="truncate">{label}</span>
+        </button>
+      )}
     </div>
   )
 }

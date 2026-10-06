@@ -49,12 +49,12 @@ export function Guarantees({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
   const t = TX[lang]
   return (
     <section id="garantii" className="scroll-mt-28 bg-surface" aria-labelledby="guar-h">
-      <div className="container-x grid gap-10 py-16 sm:py-24 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-16">
+      <div className="container-x grid gap-8 py-12 sm:gap-10 sm:py-24 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="eyebrow">{t.eyebrow}</p>
           <h2 id="guar-h" className="mt-3 text-[28px] sm:text-[40px]">{t.h}</h2>
           <p className="mt-4 max-w-md text-[16.5px] leading-relaxed text-ink-2">{t.lead}</p>
-          <p className="num mt-8 text-[13px] text-muted">
+          <p className="num mt-6 hidden text-[13px] text-muted sm:block">
             {SITE.legalName} · {lang === 'uk' ? 'ЄДРПОУ' : 'ЕГРПОУ'} {SITE.edrpou}
           </p>
         </div>
@@ -67,12 +67,26 @@ export function Guarantees({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
           </div>
           <ol>
             {t.items.map((it, i) => (
-              <li key={it.t} className="grid gap-x-6 gap-y-2 border-b border-line px-6 py-6 sm:grid-cols-[52px_minmax(0,1fr)] sm:px-8">
-                <span className="num text-[28px] font-medium leading-none text-brand-600">{String(i + 1).padStart(2, '0')}</span>
+              <li key={it.t} className="grid grid-cols-[34px_minmax(0,1fr)] gap-x-3 border-b border-line px-4 py-4 sm:grid-cols-[52px_minmax(0,1fr)] sm:gap-x-6 sm:px-8 sm:py-6">
+                <span className="num text-[20px] font-medium leading-none text-brand-600 sm:text-[28px]">{String(i + 1).padStart(2, '0')}</span>
                 <div>
-                  <h3 className="text-[19px] leading-snug">{it.t}</h3>
-                  <p className="mt-2 text-[16px] leading-relaxed text-ink-2">{it.d}</p>
-                  <p className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1 border-l-[3px] border-brand-500 bg-brand-50/60 py-2 pl-3 pr-3 text-[14.5px] text-ink">
+                  <h3 className="text-[17px] leading-snug sm:text-[19px]">{it.t}</h3>
+                  <p className="mt-1.5 text-[15px] leading-relaxed text-ink-2 sm:mt-2 sm:text-[16px]">{it.d}</p>
+                  {/* phones: «how to check» folds away so the seven promises fit on two screens */}
+                  <details className="group mt-2 sm:hidden">
+                    <summary className="inline-flex min-h-10 cursor-pointer list-none items-center gap-1.5 font-mono text-[12px] font-semibold uppercase tracking-[0.08em] text-brand-700 [&::-webkit-details-marker]:hidden">
+                      {t.check} <span aria-hidden className="transition group-open:rotate-90">→</span>
+                    </summary>
+                    <p className="border-l-[3px] border-brand-500 bg-brand-50/60 px-3 py-2 text-[14.5px] text-ink">
+                      {it.check}{' '}
+                      {it.href && (
+                        <Link href={it.href} className="font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[3px]">
+                          {it.label} →
+                        </Link>
+                      )}
+                    </p>
+                  </details>
+                  <p className="mt-3 hidden flex-wrap items-baseline gap-x-2 sm:flex gap-y-1 border-l-[3px] border-brand-500 bg-brand-50/60 py-2 pl-3 pr-3 text-[14.5px] text-ink">
                     <span className="font-mono text-[11.5px] font-semibold uppercase tracking-[0.08em] text-brand-700">{t.check}:</span>
                     <span>{it.check}</span>
                     {it.href && (

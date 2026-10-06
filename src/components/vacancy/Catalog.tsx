@@ -1,5 +1,6 @@
 'use client'
 
+import { Portal } from '@/components/ui/Portal'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
@@ -327,6 +328,7 @@ export function Catalog({
 
       {/* mobile bottom sheet */}
       {sheet && (
+        <Portal>
         <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label={uk ? 'Фільтри' : 'Фильтры'}>
           <div className="absolute inset-0 bg-night/50" onClick={() => setSheet(false)} />
           <div className="absolute inset-x-0 bottom-0 max-h-[88dvh] overflow-y-auto border-t-[3px] border-brand-500 bg-white p-5 pb-[max(20px,env(safe-area-inset-bottom))] animate-[pwIn_.18s_ease-out]">
@@ -345,6 +347,7 @@ export function Catalog({
             </div>
           </div>
         </div>
+        </Portal>
       )}
     </section>
   )

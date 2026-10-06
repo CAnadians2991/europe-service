@@ -62,6 +62,8 @@ export interface Package {
   oldPrice?: string | null
   note?: string
   payUrl?: string
+  /** page that explains the package (the visa landing) */
+  href?: string
   buttonText?: string
   icon?: string
   groupNote?: string

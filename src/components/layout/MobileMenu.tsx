@@ -8,6 +8,7 @@ import { useQuizModal } from '@/components/lead/LeadModal'
 import { LangSwitch } from './LangSwitch'
 import { SocialLinks } from './SocialLinks'
 import { localHref } from '@/lib/alt-routes'
+import { Portal } from '@/components/ui/Portal'
 
 export function MobileMenu({
   lang,
@@ -51,6 +52,7 @@ export function MobileMenu({
       </button>
 
       {open && (
+        <Portal>
         <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Меню">
           <div className="absolute inset-0 bg-night/50" onClick={() => setOpen(false)} />
           <div className="absolute inset-y-0 right-0 flex w-[min(400px,100vw)] flex-col overflow-y-auto bg-cream text-ink animate-[pwIn_.18s_ease-out]">
@@ -101,6 +103,7 @@ export function MobileMenu({
             </div>
           </div>
         </div>
+        </Portal>
       )}
     </>
   )

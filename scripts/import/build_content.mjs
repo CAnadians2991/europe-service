@@ -207,6 +207,10 @@ await build('landings', { landings: landings.landings })
 // the Tilda privacy template cited a Russian law — Ukrainian company, Ukrainian law
 const LEGAL_FIX = [['Федерального закону від 27.07.2006. №152-ФЗ «Про персональні дані»', 'Закону України «Про захист персональних даних» від 01.06.2010 № 2297-VI']]
 const patchFile = (f, data) => {
+  // the visa package: 15 000 грн since 2026-10 (owner), with its own landing
+  if (f === 'services')
+    for (const [lang, title, href] of [['uk', 'Польська робоча віза на 1 рік', '/robocha-viza-v-polshchu'], ['ru', 'Польская рабочая виза на 1 год', '/ru/rabochaya-viza-v-polshu']])
+      for (const p of data[lang]?.packages ?? []) if (p.title === title) Object.assign(p, { price: '15 000 грн', href })
   if (f === 'legal') {
     let s = JSON.stringify(data)
     for (const [a, b] of LEGAL_FIX) s = s.split(a).join(b)

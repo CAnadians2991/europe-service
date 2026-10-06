@@ -1,20 +1,19 @@
-import { Golos_Text, IBM_Plex_Mono, Unbounded } from 'next/font/google'
+import { Geologica, Onest } from 'next/font/google'
 
 /**
- * Europe Service type system
- * - Unbounded: wide display grotesk for headlines and big numbers (Cyrillic incl. ї є ґ)
- * - Golos Text: Cyrillic-first text face — very legible on phones
- * - IBM Plex Mono: figures and requisites (salaries, licence, ЄДРПОУ, phones) — the «official register» voice
+ * Europe Service type system (2026-10: the owner found Unbounded + mono hard to read)
+ * - Geologica: headlines and big numbers — clear geometric shapes, full Cyrillic incl. ї є ґ, not stretched
+ * - Onest: everything else — a Cyrillic-first text face built for screens, tabular figures for salaries and phones
  */
-export const display = Unbounded({
+export const display = Geologica({
   subsets: ['cyrillic', 'latin', 'latin-ext'],
-  weight: ['500', '600', '700'],
+  weight: ['500', '600', '700', '800'],
   display: 'swap',
   variable: '--font-display-face',
   fallback: ['Arial', 'sans-serif'],
 })
 
-export const sans = Golos_Text({
+export const sans = Onest({
   subsets: ['cyrillic', 'latin', 'latin-ext'],
   weight: ['400', '500', '600', '700'],
   display: 'swap',
@@ -22,13 +21,4 @@ export const sans = Golos_Text({
   fallback: ['system-ui', 'Arial', 'sans-serif'],
 })
 
-export const mono = IBM_Plex_Mono({
-  subsets: ['cyrillic', 'latin', 'latin-ext'],
-  weight: ['400', '500', '600'],
-  display: 'swap',
-  variable: '--font-mono-face',
-  preload: false,
-  fallback: ['ui-monospace', 'Menlo', 'monospace'],
-})
-
-export const fontVars = `${display.variable} ${sans.variable} ${mono.variable}`
+export const fontVars = `${display.variable} ${sans.variable}`

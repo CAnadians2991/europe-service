@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import { logout } from '@/app/(admin)/admin/actions'
 
-type Section = 'vacancies' | 'leads' | 'about' | 'files' | 'countries'
+type Section = 'vacancies' | 'leads' | 'orders' | 'about' | 'files' | 'countries'
 
 const ITEMS: [Section, string, string][] = [
   ['vacancies', '/admin/vacancies', 'Вакансії'],
   ['countries', '/admin/countries', 'Країни'],
   ['leads', '/admin/leads', 'Заявки'],
+  ['orders', '/admin/orders', 'Оплати'],
   ['about', '/admin/about', 'Компанія'],
   ['files', '/admin/files', 'Файли'],
 ]
