@@ -1,0 +1,53 @@
+import type { Metadata } from 'next'
+import { getAbout } from '@/lib/about'
+import { pageMeta, organizationLd } from '@/lib/seo'
+import { SITE } from '@/lib/site'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { PageHero } from '@/components/content/PageHero'
+import { OfficeTeam } from '@/components/trust/OfficeTeam'
+import { LicenseSection } from '@/components/trust/LicenseSection'
+import { ClassicCta } from '@/components/home/ClassicBlocks'
+import { AboutPrinciples, AboutStory, aboutFaq, type AboutFacts } from '@/components/content/AboutStory'
+import { Faq } from '@/components/sections/Sections'
+import { faqLd } from '@/lib/seo'
+import { getActiveVacancies } from '@/lib/vacancies'
+import { COUNTRIES } from '@/lib/site'
+import { YouTube } from '@/components/content/YouTube'
+
+export const metadata: Metadata = pageMeta({
+  title: 'Про нас - офіційний сайт Europe Service',
+  absoluteTitle: true,
+  description: 'Кадрове агентство Europe Service: ліцензія Мінсоцполітики № 223 від 15.02.2019, головний офіс у Києві та офіси у Львові, Рівному, Житомирі, Одесі. Офіційна робота в Європі.',
+  path: '/about',
+})
+
+export default async function Page() {
+  const about = await getAbout()
+  const active = await getActiveVacancies()
+  const facts: AboutFacts = { vacancies: active.length, countries: COUNTRIES.filter((c) => active.some((v) => v.country === c.code)).map((c) => c.code) }
+  const faq = aboutFaq('uk', facts)
+  return (
+    <>
+      <JsonLd data={organizationLd()} />
+      <PageHero
+        title="Про агентство Europe Service"
+        text={`Кадрове агентство ТОВ «ЄВРОПА СЕРВІС УКРАЇНА» з ліцензією Мінсоцполітики № 223 (2019). Головний офіс — у Києві, ще чотири — у Львові, Рівному, Житомирі та Одесі. Понад ${SITE.clients.replace('+', '')} клієнтів за час роботи.`}
+        crumbs={[{ name: 'Головна', path: '/' }, { name: 'Про нас', path: '/about' }]}
+      />
+      <AboutStory lang="uk" facts={facts} />
+      <OfficeTeam about={about} heading="Наші офіси і команда" />
+      {about.video && (
+        <section className="container-x pb-6">
+          <div className="mx-auto max-w-3xl">
+            <YouTube id={about.video} title="Офіс Europe Service" />
+          </div>
+        </section>
+      )}
+      <LicenseSection about={about} />
+      <AboutPrinciples lang="uk" />
+      <JsonLd data={faqLd(faq)} />
+      <Faq items={faq} title="Запитання про агентство" />
+      <ClassicCta />
+    </>
+  )
+}

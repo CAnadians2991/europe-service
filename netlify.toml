@@ -1,0 +1,29 @@
+# Netlify (team «EuropeService Sites»): Next.js runtime builds on Netlify's Linux image, so sharp (photo uploads) works.
+[build]
+  # never publish on an empty / unreachable Netlify Database
+  command = "node scripts/check-netlify-db.mjs && npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "24"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Files from public/ are served by Netlify's CDN, which ignores next.config headers() for them and sends
+# «max-age=0, must-revalidate» — every photo was re-checked on every page view.
+# /media/v (vacancy photos): the file name carries a content hash (a new photo = a new name) → cached for a year.
+# /media/c also holds a few named icons (poland.svg, viber.svg…) that could be replaced in place → 30 days.
+# The patterns don't overlap on purpose: Netlify merges a header set by two matching rules.
+[[headers]]
+  for = "/media/v/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/media/c/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/brand/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"

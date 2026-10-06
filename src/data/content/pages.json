@@ -1,0 +1,1132 @@
+{
+ "about": {
+  "path": "/about",
+  "lang": "uk",
+  "title": "Про нас",
+  "seoTitle": "Про нас - офіційний сайт Europe Service",
+  "seoDescription": "Офіційна робота у Польщі без посередників. Тільки безкоштовні вакансії від прямих роботодавців. Допомагаємо отримати робочу візу. Звертайтеся!",
+  "ogImage": "/media/c/90eac5fbea",
+  "blocks": [
+   {
+    "type": "h2",
+    "text": "В спектр наших послуг входить"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Якісний інформаційний супровід: підбір вакансії, ознайомлення з її особливостями, інформування щодо статусу компанії-працедавця на польському ринку праці",
+     "Проведення співбесід з працедавцями, що дозволить вам отримати відповідь, не перетинаючи кордон батьківщини",
+     "Достовірне інформування щодо умов праці та проживання: посадові обов'язки, реальна оплата праці, кількість робочих часів, необхідність працювати вночі, вартість харчування та проживання",
+     "Допомога у зборі необхідного пакету документів, потрібного для отримання візи в Польщу та можливості працевлаштування",
+     "Допомога у підписанні трудового договору з польським працедавцем та перевірка його достовірності",
+     "Тільки офіційне працевлаштування",
+     "Допомога в подальшому отриманні постійного проживання в Польщі",
+     "Активна та безвідмовна підтримка тих, хто вже поїхав на роботу в Польщу"
+    ]
+   },
+   {
+    "type": "h3",
+    "text": "Для того, щоб перетнути кордон, будуть потрібні такі документи:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "закордонний паспорт",
+     "дійсна віза",
+     "договір медичного страхування на термін перебування в країні",
+     "запрошення від польського роботодавця."
+    ]
+   },
+   {
+    "type": "p",
+    "text": "Зібрати всі ці документи самостійно можливо, але на це буде потрібен час.\nКомпанія «Europe Service» полегшить це завдання та зробить дану роботу за вас.\nНавіть якщо ви вже маєте відкриту візу, ми зможемо знайти для вас привабливу пропозицію від закордонної компанії. Це звільнить вас від необхідності довгого самостійного пошуку роботи. А якщо з якихось причин вам не сподобалось обране місце праці, ви маєте право змінити його, звернувшись до нас.\nМи зацікавлені в довготривалій співпраці з кандидатами та працедавцями, тому наполягаємо на продовженні трудового договору та робочої візи. Крім того, через дозволений термін ви зможете отримати довготривалі запрошення та дозвіл на постійне проживання в Польщі."
+   },
+   {
+    "type": "h2",
+    "text": "Робота в Польщі. Трішки деталей"
+   },
+   {
+    "type": "p",
+    "text": "Давайте все ж таки розберемось, чому вам варто зупинити свій вибір саме на роботі у Польщі та з'ясуємо, що саме може дати українцям працевлаштування у цій країні."
+   },
+   {
+    "type": "h3",
+    "text": "ПРОСТОТА ПРОЦЕДУРИ ПРАЦЕВЛАШТУВАННЯ"
+   },
+   {
+    "type": "p",
+    "text": "На відміну від більшості інших країн, польські компанії зацікавлені саме в українських працівниках. У країні відбувається постійний відтік робочої сили до Західної Європи, внаслідок чого створюється нестача робітників, який потрібно постійно заповнювати, і наші громадяни як ніхто інший для цього підходять.\nДля українців діє спрощена процедура отримання польської робочої візи: не потребується знання мови, спеціалізація або досвід роботи. Завдяки цьому, наші громадяни можуть в найкоротші строки виїхати на заробітки."
+   },
+   {
+    "type": "h3",
+    "text": "ПОЛЬЩА – ВИБІР БІЛЬШОСТІ УКРАЇНЦІВ"
+   },
+   {
+    "type": "p",
+    "text": "Останніми роками саме до Польщі направляється більшість українців, що бажають працювати за кордоном. І не просто так. Ця східноєвропейська держава є одним з найближчих сусідів України. З ВВП на душу населення, перевищуючим 22 000 доларів США, Республіка Польща є однією з найбільш «відкритих» країн для працівників з України.\nЛише у 2016 році на заробітки до Польщі виїхало більше 700 тисяч українців і все йде до того, що у 2017 році цей показник зросте. Це підтверджується і статистикою найбільших пошуковиків за запитом «Робота в Польщі для українців»."
+   },
+   {
+    "type": "h3",
+    "text": "ЗНАЙТИ РОБОТУ В ПОЛЬЩІ ЗМОЖЕ КОЖЕН"
+   },
+   {
+    "type": "p",
+    "text": "Польща готова прийняти на роботу практично кожного українця. Для порівняння, інші країни Європи зацікавлені в конкретних вузьких категоріях фахівців. Наприклад, влаштуватись на роботу у Великобританії зможуть тільки фахівці зі сфери IT, пройшовши складну процедуру працевлаштування, підтвердження спеціальності та отримання робочої візи.\nУ Польщі ви завжди зможете знайти як тимчасову, так і постійну роботу. Регулярно відкриваються вакансії для жінок, студентів, сімейних пар і сезонних робітників. Мінімальний строк контракту зазвичай складає три місяці і більше."
+   },
+   {
+    "type": "h3",
+    "text": "ВИСОКІ ЗАРОБІТНІ ПЛАТИ"
+   },
+   {
+    "type": "p",
+    "text": "На завершення наведено декілька цифр. Середній заробіток некваліфікованого українського працівника тут складає 600 Євро на місяць. За тих самих витрат на харчування, що й на Батьківщині, українці мають можливість відкладати від 500 Євро щомісячно.\nЗа три місяці роботи кожен українець без зайвих зусиль може відкласти від 1500 – 1800 Євро, за півроку – від 3000 – 3600 Євро. Якщо ви – кваліфікований спеціаліст, ваша заробітна плата буде істотно вищою. Цифри говорять самі за себе."
+   }
+  ]
+ },
+ "about_ru": {
+  "path": "/ru/about",
+  "lang": "ru",
+  "title": "О нас",
+  "seoTitle": "Про нас - офіційний сайт роботи в Польщі",
+  "seoDescription": "Офіційна робота у Польщі без посередників ✅Тільки безкоштовні вакансії від прямих роботодавців ✅Допомагаємо отримати робочу візу ➦ Звертайтеся!",
+  "ogImage": "/media/c/f323336ad5",
+  "blocks": [
+   {
+    "type": "h2",
+    "text": "В спектр наших услуг входит"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Качественное информационное сопровождение: подбор вакансии, ознакомление с ее особенностями, информирование о статусе компании-работодателя на польском рынке труда",
+     "Проведение собеседований с работодателями, что позволит вам получить ответ, не пересекая границу.",
+     "Достоверное информирование об условиях труда и проживания: должностные обязанности, реальная оплата труда, количество рабочих часов, необходимость работать ночью, стоимость питания и проживания",
+     "Помощь в сборе полного пакета документов, необходимого для получения визы в Польшу и возможности трудоустройства",
+     "Помощь в подписании трудового договора с польским работодателем и проверка его подлинности",
+     "Только официальное трудоустройство",
+     "Помощь в дальнейшем получении постоянного проживания в Польше",
+     "Активная и безотказная поддержка тех, кто уже уехал на работу в Польшу"
+    ]
+   },
+   {
+    "type": "h3",
+    "text": "Для того, чтобы пересечь границу, потребуются следующие документы:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "загранпаспорт",
+     "действительная виза",
+     "договор медицинского страхования на срок пребывания в стране",
+     "приглашение от польского работодателя."
+    ]
+   },
+   {
+    "type": "p",
+    "text": "Собрать все эти документы самостоятельно возможно, но на это потребуется время.\nКомпания «Europe Service» облегчит эту задачу и сделает данную работу за вас. Даже если вы уже имеете открытую визу, мы сможем найти для вас заманчивое предложение от зарубежной компании. Это избавит вас от необходимости долгого самостоятельного поиска работы. А если по каким-то причинам вам не понравилось выбранное место работы, вы имеете право изменить его, обратившись к нам. Мы заинтересованы в долговременном сотрудничестве с кандидатами и работодателями, так настаиваем на продолжении трудового договора и рабочей визы. Кроме того, из разрешенный срок вы сможете получить долговременные приглашение и разрешение на постоянное проживание в Польше."
+   },
+   {
+    "type": "h2",
+    "text": "Работа в Польше, немного деталей"
+   },
+   {
+    "type": "p",
+    "text": "Давайте все же разберемся, почему вам стоит остановить свой выбор именно на работе в Польше и выясним, что именно может дать Украинцу трудоустройство в этой стране."
+   },
+   {
+    "type": "h3",
+    "text": "ПРОСТАЯ ПРОЦЕДУРА ТРУДОУСТРОЙСТВА"
+   },
+   {
+    "type": "p",
+    "text": "В отличие от большинства других стран, польские компании заинтересованы именно в украинских сотрудниках. В стране происходит постоянный отток рабочей силы в Западную Европу, в результате чего создается нехватка рабочих, который нужно постоянно восполнять, и наши граждане как никто другой для этого подходят.\nДля Украинцев действует упрощенная процедура получения польской рабочей визы: не требуется знания языка, специализация или опыт работы. Благодаря этому, наши граждане могут в кратчайшие сроки выехать на заработки."
+   },
+   {
+    "type": "h3",
+    "text": "ПОЛЬША - ВЫБОР БОЛЬШИНСТВА УКРАИНЦЕВ"
+   },
+   {
+    "type": "p",
+    "text": "В последние годы именно в Польшу направляется большинство украинцев, желающих работать за границей. И не просто так. Это восточноевропейское государство является одним из ближайших соседей Украины. С ВВП на душу населения, превышающим 22 000 долларов США, Республика Польша является одной из самых «открытых» стран для работников из Украины. Только в 2016 году на заработки в Польшу выехало более 700 000 Украинцев и все идет к тому, что в 2020 году этот показатель возрастет. Это подтверждается и статистикой крупнейших поисковиков по запросу «Работа в Польше для Украинцев»."
+   },
+   {
+    "type": "h3",
+    "text": "НАЙТИ РАБОТУ В ПОЛЬШЕ СМОЖЕТ КАЖДЫЙ"
+   },
+   {
+    "type": "p",
+    "text": "Польша готова принять на работу практически каждого украинца. Для сравнения, другие страны Европы заинтересованы в конкретных узких категориях специалистов. Например, устроиться на работу в Великобритании смогут только специалисты из сферы IT, пройдя сложную процедуру трудоустройства, подтверждение специальности и получения рабочей визы. В Польше вы всегда сможете найти как временную, так и постоянную работу. Регулярно открываются вакансии для женщин, студентов, семейных пар и сезонных рабочих. Минимальный срок контракта обычно составляет три месяца и более."
+   },
+   {
+    "type": "h3",
+    "text": "ВЫСОКАЯ ЗАРАБОТНАЯ ПЛАТА"
+   },
+   {
+    "type": "p",
+    "text": "В завершение приведены несколько цифр. Средний заработок неквалифицированного украинского работника здесь составляет 800 Евро в месяц. При тех же затратах на питание, и на родине, украинцы имеют возможность откладывать от 600 Евро ежемесячно. За три месяца работы каждый украинец без труда может отложить от 1900 - 2100 Евро, за полгода - от 3500 - 4000 Евро. Если вы - квалифицированный специалист, ваша заработная плата будет существенно выше. Цифры говорят сами за себя."
+   }
+  ]
+ },
+ "contacts": {
+  "path": "/contacts",
+  "lang": "uk",
+  "title": "Зв’яжіться з нами в будь-який момент",
+  "seoTitle": "Контакти - europeservice.com.ua",
+  "seoDescription": "Контакти ✅ Без посередників ⚡ Нові вакансії Польща 2026 ✈️ Допоможемо з візою і виїздом ✅ Від прямих роботодавців",
+  "ogImage": "/media/c/fd18851e19",
+  "offices": [
+   {
+    "city": "Київ",
+    "cityKey": "Київ",
+    "heading": "Контакти головного офісу у м. Київ",
+    "main": true,
+    "address": "м. Київ, вул. Січових Стрільців, 77, офіс 612",
+    "phones": [
+     {
+      "text": "+38 (073) 333 13 78",
+      "href": "tel:+380733331378"
+     },
+     {
+      "text": "0 800 357 278",
+      "href": "tel:0800357278"
+     }
+    ],
+    "mapLink": "https://www.google.com/maps/dir//50.456727,30.4884947/@50.456727,30.488495,16z?hl=ru",
+    "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.1607938847887!2d30.486306015359215!3d50.45673039479405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce634667090b%3A0x674623385ad1756a!2z0YPQuy4g0KHQtdGH0LXQstGL0YUg0KHRgtGA0LXQu9GM0YbQvtCyLCA3Nywg0JrQuNC10LIsINCj0LrRgNCw0LjQvdCwLCAwMjAwMA!5e0!3m2!1sru!2sus!4v1574095196892!5m2!1sru!2sus"
+   },
+   {
+    "city": "Львів",
+    "cityKey": "Львів",
+    "heading": "Контакти офісу у м. Львів",
+    "main": false,
+    "address": null,
+    "phones": [
+     {
+      "text": "+38 (067) 783 29 43",
+      "href": "tel:+380677832943"
+     }
+    ],
+    "mapLink": null,
+    "mapEmbed": null
+   },
+   {
+    "city": "Рівне",
+    "cityKey": "Рівне",
+    "heading": "Контакти офісу у м. Рівне",
+    "main": false,
+    "address": "м. Рівне, вул. Грушевського 32",
+    "phones": [
+     {
+      "text": "+38 (073) 333 83 94",
+      "href": "tel:+380733338394"
+     }
+    ],
+    "mapLink": null,
+    "mapEmbed": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2531.245014527649!2d26.2715934779107!3d50.62256507658449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472f1358e492a9b9%3A0x72d10767b9058a52!2z0YPQuy4g0JDQutCw0LTQtdC80LjQutCwINCT0YDRg9GI0LXQstGB0LrQvtCz0L4sIDMyLCDQoNC-0LLQvdC-LCDQoNC-0LLQtdC90YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDMzMDE3!5e0!3m2!1sru!2sua!4v1633964506853!5m2!1sru!2sua"
+   },
+   {
+    "city": "Житомир",
+    "cityKey": "Житомир",
+    "heading": "Контакти офісу у м. Житомир",
+    "main": false,
+    "address": "м. Житомир, Майдан Згоди, 6",
+    "phones": [
+     {
+      "text": "+38 (073) 333 43 97",
+      "href": "tel:+380733334397"
+     }
+    ],
+    "mapLink": null,
+    "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2550.445015052279!2d28.681234115724774!3d50.26494887945022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472c64a543db6899%3A0xef959168199cfce0!2z0L_Quy4g0KHQvtCz0LvQsNGB0LjRjywgNiwg0JbQuNGC0L7QvNC40YAsINCW0LjRgtC-0LzQuNGA0YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDEwMDAw!5e0!3m2!1sru!2sua!4v1633968500653!5m2!1sru!2sua"
+   },
+   {
+    "city": "Одеса",
+    "cityKey": "Одеса",
+    "heading": "Контакти офісу у м. Одеса",
+    "main": false,
+    "address": "м. Одеса, Успенська 39/1",
+    "phones": [
+     {
+      "text": "+38 (097) 146 70 06",
+      "href": "tel:+380971467006"
+     }
+    ],
+    "mapLink": null,
+    "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2747.6811467525868!2d30.746610900000007!3d46.4748234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c631762d50adc1%3A0x941cafd2b06df802!2sUspenska%20St%2C%2039%2F1%2C%20Odesa%2C%20Odes'ka%20oblast%2C%2065000!5e0!3m2!1sen!2sua!4v1724675419282!5m2!1sen!2sua"
+   }
+  ],
+  "mainPhones": [
+   {
+    "text": "+38 (063) 333 90 78",
+    "href": "tel:+380633339078",
+    "viber": "viber://chat?number=%2B380633339078",
+    "telegram": "https://t.me/+380633339078"
+   },
+   {
+    "text": "+38 (067) 333 90 78",
+    "href": "tel:+380673339078",
+    "viber": "viber://chat?number=%2B380673339078",
+    "telegram": "https://t.me/+380673339078"
+   },
+   {
+    "text": "0 800 357 278",
+    "href": "tel:0800357278",
+    "note": "безкоштовно з усіх операторів України"
+   }
+  ],
+  "messengerHint": "натискай на зручний тобі месенджер і задавай питання",
+  "email": "office@europeservice.com.ua",
+  "supportPhones": [
+   {
+    "text": "0 800 357 136",
+    "href": "tel:0800357136"
+   },
+   {
+    "text": "0 800 003 136",
+    "href": "tel:0800003136"
+   }
+  ],
+  "socials": {
+   "facebook": "https://www.facebook.com/Europeservice.com.ua/",
+   "instagram": "https://www.instagram.com/europe_service/",
+   "instagramUkraine": "https://www.instagram.com/europe_service_ukraine",
+   "youtube": "https://www.youtube.com/channel/UCPPNiE5b4nMi_W4tCRkVIRA",
+   "tiktok": "https://www.tiktok.com/@europe_service",
+   "telegram": "https://t.me/europeservicepl",
+   "viber": "https://invite.viber.com/?g2=AQBWlwFv5gdTdUrrbsIPs5k7qT3KjJ02JtV2pctD95fAJJgf2nXl7SmI%2F3Zt8DmV",
+   "telegramReviews": "https://t.me/espwreviews",
+   "telegramInvite": "https://t.me/+qKXtnhg3EZM3ZTUy"
+  },
+  "chats": [
+   {
+    "phone": "+380633339078",
+    "viber": "viber://chat?number=%2B380633339078",
+    "telegram": "https://t.me/+380633339078"
+   },
+   {
+    "phone": "+380673339078",
+    "viber": "viber://chat?number=%2B380673339078",
+    "telegram": "https://t.me/+380673339078"
+   }
+  ],
+  "channels": [
+   {
+    "label": "Telegram канал Українці в Англії",
+    "kind": "telegram",
+    "community": "Українці в Англії",
+    "href": "https://t.me/ua_in_england"
+   },
+   {
+    "label": "Viber канал Українці в Англії",
+    "kind": "viber",
+    "community": "Українці в Англії",
+    "href": "https://invite.viber.com/?g2=AQBM3G9yjrwpxE9hX0CmvuCCLfi9tnsq4i9NAUbmYs6YAhhsxKngzcI0tdAemWTO"
+   },
+   {
+    "label": "Telegram канал Українці в Німеччині",
+    "kind": "telegram",
+    "community": "Українці в Німеччині",
+    "href": "https://t.me/europeservice_germany"
+   },
+   {
+    "label": "Telegram канал Українці в Чехії",
+    "kind": "telegram",
+    "community": "Українці в Чехії",
+    "href": "https://t.me/europeservice_czechia"
+   },
+   {
+    "label": "Viber канал Українці в Чехії",
+    "kind": "viber",
+    "community": "Українці в Чехії",
+    "href": "https://invite.viber.com/?g2=AQArdN5cXl3hWE7xS4bdoYwTNnABTMvM7hx0AibLOnJkejNaBHgYNnpTTyRm53CB"
+   },
+   {
+    "label": "Telegram канал Українці в Румунії",
+    "kind": "telegram",
+    "community": "Українці в Румунії",
+    "href": "https://t.me/europeservice_romania"
+   },
+   {
+    "label": "Viber канал Українці в Румунії",
+    "kind": "viber",
+    "community": "Українці в Румунії",
+    "href": "https://invite.viber.com/?g2=AQArnBeE03Km9E8uOuJvOxgoepHPLe0IgKWw6yehs3gv9zAdbhrV1%2Fd1Z2v9WAHs"
+   },
+   {
+    "label": "Telegram канал Українці в Нідерландах",
+    "kind": "telegram",
+    "community": "Українці в Нідерландах",
+    "href": "https://t.me/europeservice_netherlands"
+   },
+   {
+    "label": "Viber канал Українці в Нідерландах",
+    "kind": "viber",
+    "community": "Українці в Нідерландах",
+    "href": "https://invite.viber.com/?g2=AQANghjb0Jex5E7%2F6QgKkWFlfLP5iip3mI0sAIwFA4G3kJs0Nqxiy1JrnIFpJQCH"
+   },
+   {
+    "label": "Telegram канал Українці в Греції",
+    "kind": "telegram",
+    "community": "Українці в Греції",
+    "href": "https://t.me/europeservice_greece"
+   },
+   {
+    "label": "Viber канал Українці в Греції",
+    "kind": "viber",
+    "community": "Українці в Греції",
+    "href": "https://invite.viber.com/?g2=AQBhR%2FmCctsm708uOmpQZ9153hgqHNLAsVp810B7AlQ%2B2jCE%2BY7PRavYmzlsObSH"
+   }
+  ],
+  "license": "Ліцензія Міністерства соціальної політики України №223 від 15.02.2019, ТОВ «ЄВРОПА СЕРВІС УКРАЇНА»",
+  "blocks": [
+   {
+    "type": "h2",
+    "text": "Зв’яжіться з нами в будь-який момент"
+   },
+   {
+    "type": "h3",
+    "text": "Контакти головного офісу у м. Київ"
+   },
+   {
+    "type": "p",
+    "text": "[м. Київ, вул. Січових Стрільців, 77, офіс 612](https://www.google.com/maps/dir//50.456727,30.4884947/@50.456727,30.488495,16z?hl=ru)\n[+38 (073) 333 13 78](tel:+380733331378)\n[0 800 357 278](tel:0800357278)"
+   },
+   {
+    "type": "h3",
+    "text": "Контакти офісу у м. Львів"
+   },
+   {
+    "type": "p",
+    "text": "[+38 (067) 783 29 43](tel:+380677832943)"
+   },
+   {
+    "type": "h3",
+    "text": "Контакти офісу у м. Рівне"
+   },
+   {
+    "type": "p",
+    "text": "м. Рівне, вул. Грушевського 32\n[+38 (073) 333 83 94](tel:+380733338394)"
+   },
+   {
+    "type": "h3",
+    "text": "Контакти офісу у м. Житомир"
+   },
+   {
+    "type": "p",
+    "text": "м. Житомир, Майдан Згоди, 6\n[+38 (073) 333 43 97](tel:+380733334397)"
+   },
+   {
+    "type": "h3",
+    "text": "Контакти офісу у м. Одеса"
+   },
+   {
+    "type": "p",
+    "text": "м. Одеса, Успенська 39/1\n[+38 (097) 146 70 06](tel:+380971467006)"
+   }
+  ]
+ },
+ "contacts_ru": {
+  "path": "/ru/contacts",
+  "lang": "ru",
+  "title": "Свяжитесь с нами в любой момент",
+  "seoTitle": "Контакты компании Europe Service",
+  "seoDescription": "Контакты компании Europe Service ☎️ Проведем подробную консультацию ⭐ Зарплата до 40 тыс. грн/мес ➦ Жми❗",
+  "ogImage": "/media/c/109d686ea6",
+  "offices": [
+   {
+    "city": "Киеве",
+    "cityKey": "Київ",
+    "heading": "Контакты главного офиса в г. Киеве",
+    "main": true,
+    "address": "м. Київ, вул. Січових Стрільців, 77, офіс 612",
+    "phones": [
+     {
+      "text": "0 800 357 278",
+      "href": "tel:0800357278"
+     },
+     {
+      "text": "+38 (073) 333 13 78",
+      "href": "tel:+380733331378"
+     }
+    ],
+    "mapLink": "https://www.google.com/maps/dir//50.456727,30.4884947/@50.456727,30.488495,16z?hl=ru",
+    "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.1607938847887!2d30.486306015359215!3d50.45673039479405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce634667090b%3A0x674623385ad1756a!2z0YPQuy4g0KHQtdGH0LXQstGL0YUg0KHRgtGA0LXQu9GM0YbQvtCyLCA3Nywg0JrQuNC10LIsINCj0LrRgNCw0LjQvdCwLCAwMjAwMA!5e0!3m2!1sru!2sus!4v1574095196892!5m2!1sru!2sus"
+   },
+   {
+    "city": "Львов",
+    "cityKey": "Львів",
+    "heading": "Контакты офиса в г. Львов",
+    "main": false,
+    "address": null,
+    "phones": [
+     {
+      "text": "+38 (067) 783 29 43",
+      "href": "tel:+380677832943"
+     }
+    ],
+    "mapLink": null,
+    "mapEmbed": null
+   },
+   {
+    "city": "Ровно",
+    "cityKey": "Рівне",
+    "heading": "Контакты офиса в г. Ровно",
+    "main": false,
+    "address": "м. Рівне, вул. Грушевського 32",
+    "phones": [
+     {
+      "text": "+38 (067) 807 21 17",
+      "href": "tel:+380678072117"
+     }
+    ],
+    "mapLink": null,
+    "mapEmbed": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2531.245014527649!2d26.2715934779107!3d50.62256507658449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472f1358e492a9b9%3A0x72d10767b9058a52!2z0YPQuy4g0JDQutCw0LTQtdC80LjQutCwINCT0YDRg9GI0LXQstGB0LrQvtCz0L4sIDMyLCDQoNC-0LLQvdC-LCDQoNC-0LLQtdC90YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDMzMDE3!5e0!3m2!1sru!2sua!4v1633964506853!5m2!1sru!2sua"
+   },
+   {
+    "city": "Житомир",
+    "cityKey": "Житомир",
+    "heading": "Контакты офиса в г. Житомир",
+    "main": false,
+    "address": "м. Житомир, Майдан Згоди, 6",
+    "phones": [
+     {
+      "text": "+38 (073) 333 43 97",
+      "href": "tel:+380733334397"
+     }
+    ],
+    "mapLink": null,
+    "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2550.445015052279!2d28.681234115724774!3d50.26494887945022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472c64a543db6899%3A0xef959168199cfce0!2z0L_Quy4g0KHQvtCz0LvQsNGB0LjRjywgNiwg0JbQuNGC0L7QvNC40YAsINCW0LjRgtC-0LzQuNGA0YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDEwMDAw!5e0!3m2!1sru!2sua!4v1633968500653!5m2!1sru!2sua"
+   },
+   {
+    "city": "Одесса",
+    "cityKey": "Одеса",
+    "heading": "Контакты офиса в г. Одесса",
+    "main": false,
+    "address": "г. Одесса, Успенская 39/1",
+    "phones": [
+     {
+      "text": "+38 (067) 807 21 17",
+      "href": "tel:+380678072117"
+     }
+    ],
+    "mapLink": null,
+    "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2747.6811467525868!2d30.746610900000007!3d46.4748234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c631762d50adc1%3A0x941cafd2b06df802!2sUspenska%20St%2C%2039%2F1%2C%20Odesa%2C%20Odes'ka%20oblast%2C%2065000!5e0!3m2!1sen!2sua!4v1724675419282!5m2!1sen!2sua"
+   }
+  ],
+  "mainPhones": [
+   {
+    "text": "0 800 357 278",
+    "href": "tel:0800357278",
+    "note": "бесплатно со всех операторов Украины"
+   },
+   {
+    "text": "+380633339078",
+    "href": "tel:+380633339078",
+    "viber": "viber://chat?number=%2B380633339078",
+    "telegram": "https://t.me/+380633339078"
+   },
+   {
+    "text": "+380673339078",
+    "href": "tel:+380673339078",
+    "viber": "viber://chat?number=%2B380673339078",
+    "telegram": "https://t.me/+380673339078"
+   }
+  ],
+  "email": "office@europeservice.com.ua",
+  "supportPhones": [
+   {
+    "text": "0 800 357 136",
+    "href": "tel:0800357136"
+   },
+   {
+    "text": "0 800 003 136",
+    "href": "tel:0800003136"
+   }
+  ],
+  "socials": {
+   "facebook": "https://www.facebook.com/Europeservice.com.ua/",
+   "instagram": "https://www.instagram.com/europe_service/",
+   "instagramUkraine": "https://www.instagram.com/europe_service_ukraine",
+   "youtube": "https://www.youtube.com/channel/UCPPNiE5b4nMi_W4tCRkVIRA",
+   "tiktok": "https://www.tiktok.com/@europe_service",
+   "telegram": "https://t.me/europeservicepl",
+   "viber": "https://invite.viber.com/?g2=AQBWlwFv5gdTdUrrbsIPs5k7qT3KjJ02JtV2pctD95fAJJgf2nXl7SmI%2F3Zt8DmV",
+   "telegramReviews": "https://t.me/espwreviews",
+   "telegramInvite": "https://t.me/+qKXtnhg3EZM3ZTUy"
+  },
+  "chats": [
+   {
+    "phone": "+380633339078",
+    "viber": "viber://chat?number=%2B380633339078",
+    "telegram": "https://t.me/+380633339078"
+   },
+   {
+    "phone": "+380673339078",
+    "viber": "viber://chat?number=%2B380673339078",
+    "telegram": "https://t.me/+380673339078"
+   }
+  ],
+  "channels": [
+   {
+    "label": "Telegram канал Українці в Англії",
+    "kind": "telegram",
+    "community": "Українці в Англії",
+    "href": "https://t.me/ua_in_england"
+   },
+   {
+    "label": "Viber канал Українці в Англії",
+    "kind": "viber",
+    "community": "Українці в Англії",
+    "href": "https://invite.viber.com/?g2=AQBM3G9yjrwpxE9hX0CmvuCCLfi9tnsq4i9NAUbmYs6YAhhsxKngzcI0tdAemWTO"
+   },
+   {
+    "label": "Telegram канал Українці в Німеччині",
+    "kind": "telegram",
+    "community": "Українці в Німеччині",
+    "href": "https://t.me/europeservice_germany"
+   },
+   {
+    "label": "Telegram канал Українці в Чехії",
+    "kind": "telegram",
+    "community": "Українці в Чехії",
+    "href": "https://t.me/europeservice_czechia"
+   },
+   {
+    "label": "Viber канал Українці в Чехії",
+    "kind": "viber",
+    "community": "Українці в Чехії",
+    "href": "https://invite.viber.com/?g2=AQArdN5cXl3hWE7xS4bdoYwTNnABTMvM7hx0AibLOnJkejNaBHgYNnpTTyRm53CB"
+   },
+   {
+    "label": "Telegram канал Українці в Румунії",
+    "kind": "telegram",
+    "community": "Українці в Румунії",
+    "href": "https://t.me/europeservice_romania"
+   },
+   {
+    "label": "Viber канал Українці в Румунії",
+    "kind": "viber",
+    "community": "Українці в Румунії",
+    "href": "https://invite.viber.com/?g2=AQArnBeE03Km9E8uOuJvOxgoepHPLe0IgKWw6yehs3gv9zAdbhrV1%2Fd1Z2v9WAHs"
+   },
+   {
+    "label": "Telegram канал Українці в Нідерландах",
+    "kind": "telegram",
+    "community": "Українці в Нідерландах",
+    "href": "https://t.me/europeservice_netherlands"
+   },
+   {
+    "label": "Viber канал Українці в Нідерландах",
+    "kind": "viber",
+    "community": "Українці в Нідерландах",
+    "href": "https://invite.viber.com/?g2=AQANghjb0Jex5E7%2F6QgKkWFlfLP5iip3mI0sAIwFA4G3kJs0Nqxiy1JrnIFpJQCH"
+   },
+   {
+    "label": "Telegram канал Українці в Греції",
+    "kind": "telegram",
+    "community": "Українці в Греції",
+    "href": "https://t.me/europeservice_greece"
+   },
+   {
+    "label": "Viber канал Українці в Греції",
+    "kind": "viber",
+    "community": "Українці в Греції",
+    "href": "https://invite.viber.com/?g2=AQBhR%2FmCctsm708uOmpQZ9153hgqHNLAsVp810B7AlQ%2B2jCE%2BY7PRavYmzlsObSH"
+   }
+  ],
+  "license": "Лицензия Министерства социальной политики Украины №223 от 15.02.2019, ООО «ЄВРОПА СЕРВІС УКРАЇНА»",
+  "blocks": [
+   {
+    "type": "h2",
+    "text": "Свяжитесь с нами в любой момент"
+   },
+   {
+    "type": "h3",
+    "text": "Контакты главного офиса в г. Киеве"
+   },
+   {
+    "type": "p",
+    "text": "[м. Київ, вул. Січових Стрільців, 77, офіс 612](https://www.google.com/maps/dir//50.456727,30.4884947/@50.456727,30.488495,16z?hl=ru)\n[0 800 357 278](tel:0800357278)\n[+38 (073) 333 13 78](tel:+380733331378)"
+   },
+   {
+    "type": "h3",
+    "text": "Контакты офиса в г. Львов"
+   },
+   {
+    "type": "p",
+    "text": "[+38 (067) 783 29 43](tel:+380677832943)"
+   },
+   {
+    "type": "h3",
+    "text": "Контакты офиса в г. Ровно"
+   },
+   {
+    "type": "p",
+    "text": "м. Рівне, вул. Грушевського 32\n[+38 (067) 807 21 17](tel:+380678072117)"
+   },
+   {
+    "type": "h3",
+    "text": "Контакты офиса в г. Житомир"
+   },
+   {
+    "type": "p",
+    "text": "м. Житомир, Майдан Згоди, 6\n[+38 (073) 333 43 97](tel:+380733334397)"
+   },
+   {
+    "type": "h3",
+    "text": "Контакты офиса в г. Одесса"
+   },
+   {
+    "type": "p",
+    "text": "г. Одесса, Успенская 39/1\n[+38 (067) 807 21 17](tel:+380678072117)"
+   }
+  ]
+ },
+ "cooperation": {
+  "path": "/cooperation",
+  "lang": "en",
+  "title": "Europe Service is a top 1 recruitment agency in Ukraine",
+  "seoTitle": "Cooperation Europe Service",
+  "seoDescription": null,
+  "ogImage": "/media/c/1509df9dae",
+  "heroImage": "/media/c/441f13d4ba",
+  "benefits": {
+   "title": "Our benefits",
+   "text": "We have been working at the recruitment market for a 5 years. Our team of experts will help you find the right employee for your business as fast as possible. We provide the most understandable price and high quality services. You will receive your desired employee without delay!",
+   "button": "Encourage",
+   "items": [
+    {
+     "title": "Improved Quality",
+     "icon": "/media/c/49af0821-smile.svg"
+    },
+    {
+     "title": "Faster Hiring Process",
+     "icon": "/media/c/fa269945-calendar.svg"
+    },
+    {
+     "title": "Cost Savings",
+     "icon": "/media/c/0d97b5a7-defend.svg"
+    }
+   ]
+  },
+  "performance": {
+   "title": "Our performance",
+   "items": [
+    {
+     "value": "7-14 %",
+     "label": "Candidate rotation"
+    },
+    {
+     "value": "2 Days",
+     "label": "To find the best employee"
+    },
+    {
+     "value": "95 %",
+     "label": "Positive reviews"
+    },
+    {
+     "value": "1000 +",
+     "label": "We recruit candidates for vacancies on a monthly basis"
+    }
+   ]
+  },
+  "contact": {
+   "title": "Contact us",
+   "subtitle": "Direct message",
+   "emailLabel": "email",
+   "email": "office@europeservice.com.ua",
+   "emailOnTilda": "office@europeservice.com",
+   "hasForm": true
+  },
+  "blocks": [
+   {
+    "type": "h2",
+    "text": "Europe Service is a top 1 recruitment agency in Ukraine"
+   },
+   {
+    "type": "h2",
+    "text": "Our benefits"
+   },
+   {
+    "type": "p",
+    "text": "We have been working at the recruitment market for a 5 years. Our team of experts will help you find the right employee for your business as fast as possible. We provide the most understandable price and high quality services. You will receive your desired employee without delay!"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Improved Quality",
+     "Faster Hiring Process",
+     "Cost Savings"
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Our performance"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "7-14 % — Candidate rotation",
+     "2 Days — To find the best employee",
+     "95 % — Positive reviews",
+     "1000 + — We recruit candidates for vacancies on a monthly basis"
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Contact us"
+   },
+   {
+    "type": "p",
+    "text": "Direct message: [office@europeservice.com.ua](mailto:office@europeservice.com.ua)"
+   }
+  ]
+ },
+ "charity": {
+  "path": "/charity",
+  "lang": "uk",
+  "title": "Благодійність",
+  "seoTitle": "Благодійність",
+  "seoDescription": "Благодійна акція від компанії Europe Service",
+  "ogImage": "/media/c/5f79de301b",
+  "monobankJar": "https://send.monobank.ua/jar/3BMHDYgWJi",
+  "blocks": [
+   {
+    "type": "img",
+    "src": "/media/c/df83c2118f"
+   },
+   {
+    "type": "h2",
+    "text": "Збір коштів на DJI Mavic для прикордонного загону"
+   },
+   {
+    "type": "p",
+    "text": "Компанія Європа Сервіс щотижня переводить 5% від свого доходу на допомогу українській армії."
+   },
+   {
+    "type": "p",
+    "text": "Раз на тиждень ми будемо переводити 5% від доходу на рахунок благодійної організації Lifeandpeace для допомоги українській армії"
+   },
+   {
+    "type": "img",
+    "src": "/media/c/6227954685"
+   },
+   {
+    "type": "img",
+    "src": "/media/c/0cf8cf5827"
+   },
+   {
+    "type": "h2",
+    "text": "Благодійна банка збору"
+   },
+   {
+    "type": "p",
+    "text": "Зроби свій внесок в перемогу України!"
+   },
+   {
+    "type": "button",
+    "text": "Приєднатись до збору",
+    "href": "https://send.monobank.ua/jar/3BMHDYgWJi"
+   }
+  ]
+ },
+ "countries_hub": {
+  "path": "/countires",
+  "lang": "uk",
+  "title": "Корисна інформація про країни Європи",
+  "seoTitle": "Корисна інформація про країни",
+  "seoDescription": null,
+  "ogImage": "/media/c/73f3194ea6",
+  "countries": [
+   {
+    "title": "Чехія",
+    "href": "/czechia/vyizd",
+    "image": "/media/c/e347fa0f8e"
+   },
+   {
+    "title": "Румунія",
+    "href": "/romania/vyizd",
+    "image": "/media/c/c5274e073f"
+   },
+   {
+    "title": "Нідерланди",
+    "href": "/netherlands/vyizd",
+    "image": "/media/c/9fbaee74bc"
+   },
+   {
+    "title": "Німеччина",
+    "href": "/germany/vyizd",
+    "image": "/media/c/48f9b562b5"
+   },
+   {
+    "title": "Польща",
+    "href": "/poland",
+    "image": "/media/c/e477d1e1f8"
+   },
+   {
+    "title": "Угорщина",
+    "href": "/hungary",
+    "image": "/media/c/f3ee17a0f5"
+   },
+   {
+    "title": "Словаччина",
+    "href": "/slovakia/vyizd",
+    "image": "/media/c/d1459051e3"
+   },
+   {
+    "title": "Англія",
+    "href": "/england/vyizd",
+    "image": "/media/c/6aa9e74621"
+   }
+  ],
+  "blocks": [
+   {
+    "type": "h2",
+    "text": "Корисна інформація про країни Європи"
+   },
+   {
+    "type": "p",
+    "text": "Ти — українець. Війна змусила тимчасово покинути свій дім, але пам'ятай, ти не один, нас підтримує світ. Компанія Europe Service допоможе знайти роботу в країні, яка тебе прихистила."
+   },
+   {
+    "type": "p",
+    "text": "Оперативна інформація в Viber-каналі [Українці за кордоном | ES](https://invite.viber.com/?g2=AQBWlwFv5gdTdUrrbsIPs5k7qT3KjJ02JtV2pctD95fAJJgf2nXl7SmI%2F3Zt8DmV)"
+   },
+   {
+    "type": "img",
+    "src": "/media/c/5c04092014"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "[Чехія](/czechia/vyizd)",
+     "[Румунія](/romania/vyizd)",
+     "[Нідерланди](/netherlands/vyizd)",
+     "[Німеччина](/germany/vyizd)",
+     "[Польща](/poland)",
+     "[Угорщина](/hungary)",
+     "[Словаччина](/slovakia/vyizd)",
+     "[Англія](/england/vyizd)"
+    ]
+   },
+   {
+    "type": "p",
+    "text": "Закликаємо бути ввічливим, підтримувати одне одного та бути вдячним країні, яка тебе прихистила.\nСлава Україні!"
+   }
+  ]
+ },
+ "links": {
+  "path": "/links",
+  "lang": "uk",
+  "title": null,
+  "seoTitle": "Europe Service Links",
+  "seoDescription": null,
+  "ogImage": "/media/c/32e21096d4",
+  "subtitle": "Канали з актуальними вакансіями та новинами",
+  "logo": "/media/c/a471fd6985",
+  "items": [
+   {
+    "label": "Сайт",
+    "href": "/",
+    "icon": "/media/c/7c73ec2af2"
+   },
+   {
+    "label": "Viber",
+    "href": "https://invite.viber.com/?g2=AQBWlwFv5gdTdUrrbsIPs5k7qT3KjJ02JtV2pctD95fAJJgf2nXl7SmI%2F3Zt8DmV&lang=ru",
+    "icon": "/media/c/257e66c46d"
+   },
+   {
+    "label": "Telegram",
+    "href": "https://t.me/+qKXtnhg3EZM3ZTUy",
+    "icon": "/media/c/a8fa04cb-telegram_svg.svg"
+   },
+   {
+    "label": "Instagram",
+    "href": "https://www.instagram.com/europe_service/?utm_source=ig_profile_share&igshid=1jjpldlyfbkl1",
+    "icon": "/media/c/d38d2274-instagram_svg.svg"
+   },
+   {
+    "label": "Facebook",
+    "href": "https://www.facebook.com/Europeservice.com.ua/",
+    "icon": "/media/c/b7a3318338"
+   },
+   {
+    "label": "TikTok",
+    "href": "https://www.tiktok.com/@europe_service",
+    "icon": "/media/c/6452cf26b2"
+   },
+   {
+    "label": "YouTube",
+    "href": "https://www.youtube.com/channel/UCPPNiE5b4nMi_W4tCRkVIRA",
+    "icon": "/media/c/e2290ef61d"
+   },
+   {
+    "label": "Відгуки від клієнтів",
+    "href": "https://t.me/espwreviews",
+    "icon": "/media/c/f310651fac"
+   },
+   {
+    "label": "Залишити заявку!",
+    "href": "/kviz-europe?utm_source=tiktok&utm_medium=organic&utm_campaign=link",
+    "icon": "/media/c/4129a934-iconamoon_link-duoto.svg"
+   }
+  ],
+  "blocks": [
+   {
+    "type": "p",
+    "text": "Канали з актуальними вакансіями та новинами"
+   },
+   {
+    "type": "button",
+    "text": "Сайт",
+    "href": "/"
+   },
+   {
+    "type": "button",
+    "text": "Viber",
+    "href": "https://invite.viber.com/?g2=AQBWlwFv5gdTdUrrbsIPs5k7qT3KjJ02JtV2pctD95fAJJgf2nXl7SmI%2F3Zt8DmV&lang=ru"
+   },
+   {
+    "type": "button",
+    "text": "Telegram",
+    "href": "https://t.me/+qKXtnhg3EZM3ZTUy"
+   },
+   {
+    "type": "button",
+    "text": "Instagram",
+    "href": "https://www.instagram.com/europe_service/?utm_source=ig_profile_share&igshid=1jjpldlyfbkl1"
+   },
+   {
+    "type": "button",
+    "text": "Facebook",
+    "href": "https://www.facebook.com/Europeservice.com.ua/"
+   },
+   {
+    "type": "button",
+    "text": "TikTok",
+    "href": "https://www.tiktok.com/@europe_service"
+   },
+   {
+    "type": "button",
+    "text": "YouTube",
+    "href": "https://www.youtube.com/channel/UCPPNiE5b4nMi_W4tCRkVIRA"
+   },
+   {
+    "type": "button",
+    "text": "Відгуки від клієнтів",
+    "href": "https://t.me/espwreviews"
+   },
+   {
+    "type": "button",
+    "text": "Залишити заявку!",
+    "href": "/kviz-europe?utm_source=tiktok&utm_medium=organic&utm_campaign=link"
+   }
+  ]
+ },
+ "linktree": {
+  "path": "/linktree",
+  "lang": "uk",
+  "title": "Кадрове агентство працевлаштування в Європі",
+  "seoTitle": "Blank page",
+  "seoDescription": null,
+  "subtitle": "Канали з актуальними вакансіями та новинами",
+  "otherTexts": [
+   "Наші соціальні мережі",
+   "Робота в країнах Європи"
+  ],
+  "logo": "/media/c/a471fd6985",
+  "items": [
+   {
+    "label": "YouTube",
+    "href": null,
+    "icon": "/media/c/439911bb-youtube_svg.svg"
+   },
+   {
+    "label": "Instagram",
+    "href": null,
+    "icon": "/media/c/d38d2274-instagram_svg.svg"
+   },
+   {
+    "label": "TikTok",
+    "href": null,
+    "icon": "/media/c/7551a974-tiktok_svg.svg"
+   },
+   {
+    "label": "Telegram",
+    "href": null,
+    "icon": "/media/c/a8fa04cb-telegram_svg.svg"
+   },
+   {
+    "label": "Viber",
+    "href": null,
+    "icon": "/media/c/e9772056ec"
+   }
+  ],
+  "broken": true,
+  "note": "На Tilda сторінка без жодного посилання (чернетка, <title> «Blank page»)",
+  "suggestedRedirect": "/links",
+  "blocks": [
+   {
+    "type": "p",
+    "text": "Канали з актуальними вакансіями та новинами"
+   }
+  ]
+ },
+ "linktreee_tiktok": {
+  "path": "/linktreee_tiktok",
+  "lang": "uk",
+  "title": "Кадрове агентство працевлаштування в Європі",
+  "seoTitle": "Europe Service",
+  "seoDescription": null,
+  "subtitle": "Канали з актуальними вакансіями та новинами",
+  "logo": "/media/c/a471fd6985",
+  "items": [
+   {
+    "label": "Instagram",
+    "href": "https://www.instagram.com/europe_service",
+    "icon": "/media/c/d38d2274-instagram_svg.svg"
+   },
+   {
+    "label": "Залишити заявку!",
+    "href": "/kviz-europe?utm_source=tiktok&utm_medium=organic&utm_campaign=link",
+    "icon": "/media/c/4129a934-iconamoon_link-duoto.svg"
+   },
+   {
+    "label": "Telegram",
+    "href": "https://t.me/europeservicepl",
+    "icon": "/media/c/a8fa04cb-telegram_svg.svg"
+   },
+   {
+    "label": "Viber",
+    "href": "https://invite.viber.com/?g2=AQBWlwFv5gdTdUrrbsIPs5k7qT3KjJ02JtV2pctD95fAJJgf2nXl7SmI%2F3Zt8DmV",
+    "icon": "/media/c/e9772056ec"
+   }
+  ],
+  "blocks": [
+   {
+    "type": "p",
+    "text": "Канали з актуальними вакансіями та новинами"
+   },
+   {
+    "type": "button",
+    "text": "Instagram",
+    "href": "https://www.instagram.com/europe_service"
+   },
+   {
+    "type": "button",
+    "text": "Залишити заявку!",
+    "href": "/kviz-europe?utm_source=tiktok&utm_medium=organic&utm_campaign=link"
+   },
+   {
+    "type": "button",
+    "text": "Telegram",
+    "href": "https://t.me/europeservicepl"
+   },
+   {
+    "type": "button",
+    "text": "Viber",
+    "href": "https://invite.viber.com/?g2=AQBWlwFv5gdTdUrrbsIPs5k7qT3KjJ02JtV2pctD95fAJJgf2nXl7SmI%2F3Zt8DmV"
+   }
+  ]
+ }
+}

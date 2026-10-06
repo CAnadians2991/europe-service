@@ -1,0 +1,345 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Europe Service design system
+   Corporate palette of europeservice.com.ua: the logo gradient green #5EC58A → blue #578FC7,
+   Tilda buttons #47C270 / #38AF60. Montserrat × Onest.
+   ------------------------------------------------------------------ */
+
+@theme {
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: var(--font-display-face), var(--font-onest), ui-sans-serif, sans-serif;
+
+  /* ── corporate greens (buttons use 600/700: white text ≥ 4.4:1) ── */
+  --color-brand-50: #edf8f1;
+  --color-brand-100: #d6f1e0;
+  --color-brand-200: #ade4c1;
+  --color-brand-300: #7cd29c;
+  --color-brand-500: #38af60; /* Tilda button */
+  --color-brand-600: #1e864a;
+  --color-brand-700: #186f3d;
+  --color-brand-800: #135a32;
+  /* logo gradient end (blue) — kept under the old token name used by the components */
+  --color-violet-600: #578fc7;
+  --color-violet-700: #4a7db3;
+
+  /* main call to action («Підібрати вакансію») — the same corporate green, a notch brighter */
+  --color-accent-500: #47c270;
+  --color-accent-600: #1e864a;
+  --color-accent-700: #176b3b;
+  /* highlights (stars, «гаряча вакансія») */
+  --color-sun: #f2a516;
+  --color-sun-100: #fdf1d8;
+  --color-sun-600: #c27c00;
+
+  --color-night: #1d2a25;
+  --color-night-2: #1d2a25;
+  --color-night-3: #186f3d;
+
+  --color-danger: #c62828;
+  --color-ok: #1e864a;
+  --color-ok-100: #d6f1e0;
+
+  --color-ink: #000000;
+  --color-ink-2: #3d4a44;
+  --color-muted: #5f6b66;
+  --color-line: #e2e2e2;
+  --color-surface: #f0f0f0;
+  --color-paper: #ffffff;
+
+  --radius-card: 22px;
+  --shadow-card: 0 1px 0 rgb(0 0 0 / 0.03), 0 10px 30px -18px rgb(20 90 50 / 0.25);
+  --shadow-lift: 0 2px 0 rgb(0 0 0 / 0.03), 0 22px 44px -22px rgb(30 134 74 / 0.45);
+
+  --animate-board: board-in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-rise: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@layer base {
+  /*
+   * Safari sizes an implicit grid column by the images' intrinsic width (width="1200"), so on iPhones a
+   * one-column grid of vacancy cards became 500–1200 px wide and the photos «spread» over the screen.
+   * Every grid gets a real column that can't outgrow its container; grid-cols-* utilities still override it.
+   */
+  :where(.grid) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: 88px;
+    /* phones: a double tap (easy on big card links) must not zoom the whole page; pinch-zoom still works */
+    touch-action: manipulation;
+    /* nothing may widen the page sideways (it makes phones zoom out and the page drift) */
+    overflow-x: clip;
+  }
+  body {
+    overflow-x: clip;
+    -webkit-tap-highlight-color: transparent;
+    @apply bg-paper font-sans text-ink antialiased;
+    font-feature-settings: 'lnum' 1;
+    --notch: var(--color-paper);
+  }
+  h1, h2, h3 {
+    @apply font-display text-balance;
+    letter-spacing: -0.015em;
+  }
+  h1 { font-weight: 700; }
+  h2 { font-weight: 700; }
+  h3 { font-weight: 600; letter-spacing: -0.015em; }
+  :focus-visible {
+    outline: 2.5px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+  /* on the blue gradient a blue ring is invisible: white there (white cards inside the band keep the blue one) */
+  .brand-band :focus-visible,
+  .bg-brand-600 :focus-visible {
+    outline-color: #fff;
+  }
+  .brand-band :is(.bg-white, .bg-paper) :focus-visible {
+    outline-color: var(--color-brand-600);
+  }
+  /* an open modal (lead form, quiz, photo) keeps the page behind it still */
+  html:has(dialog:modal) {
+    overflow: hidden;
+  }
+  ::selection {
+    background: var(--color-brand-100);
+    color: #000;
+  }
+}
+
+@utility container-x {
+  @apply mx-auto w-full max-w-[1240px] px-4 sm:px-6;
+}
+
+/* Night hero: navy with a faint transit-map grid and a blue glow */
+/* Corporate gradient (the logo: green → blue) */
+@utility brand-band {
+  background-color: #1e864a;
+  background-image: linear-gradient(100deg, #1e864a -5%, #2f9a6a 45%, #3f7fb5 105%);
+  --notch: #2a8f63;
+}
+@utility night-panel {
+  background-image: linear-gradient(100deg, #1e864a -5%, #2f9a6a 45%, #3f7fb5 105%);
+}
+
+@utility eyebrow {
+  @apply inline-flex items-center gap-2.5 text-[12px] font-semibold tracking-[0.18em] text-brand-600 uppercase;
+  &::before {
+    content: '';
+    @apply h-px w-7 bg-current;
+  }
+}
+
+/* min-h-11: every button is a 44px touch target, whatever padding a page gives it.
+   Pressed: a 1px shift + slightly darker (no zoom). While a form is sending (aria-busy) the button stays in full colour. */
+@utility btn {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3 text-[15px] leading-none font-semibold transition-[background-color,box-shadow,transform,color] duration-150 select-none active:translate-y-px active:brightness-95 disabled:pointer-events-none disabled:opacity-60 aria-busy:opacity-100;
+}
+@utility btn-primary {
+  @apply btn bg-brand-600 text-white shadow-[0_8px_20px_-10px_rgb(30_134_74/0.9)] hover:bg-brand-700;
+}
+/* Main conversion button: signal yellow with ink text (AAA contrast) */
+@utility btn-accent {
+  @apply btn bg-accent-600 font-bold text-white shadow-[0_8px_22px_-10px_rgb(30_134_74/0.9)] hover:bg-accent-700;
+}
+@utility btn-ghost {
+  @apply btn bg-white text-brand-700 ring-1 ring-brand-200 ring-inset hover:bg-brand-50;
+}
+@utility btn-white {
+  @apply btn bg-white text-brand-700 hover:bg-brand-50;
+}
+@utility btn-dark {
+  @apply btn bg-brand-600 text-white hover:bg-brand-700;
+}
+
+@utility chip {
+  @apply inline-flex min-h-11 items-center gap-1.5 rounded-full border border-brand-200 bg-white px-3.5 py-2 text-sm font-medium text-ink-2 transition-colors hover:border-brand-600 hover:text-brand-600 active:border-brand-600;
+  &[aria-pressed='true'],
+  &[data-active='true'] {
+    @apply border-brand-600 bg-brand-600 text-white hover:text-white;
+  }
+}
+@utility card {
+  @apply rounded-[var(--radius-card)] bg-white shadow-[var(--shadow-card)];
+}
+@utility field {
+  @apply block w-full rounded-2xl border border-line bg-white px-4 py-3.5 text-[16px] text-ink outline-none transition placeholder:text-muted/70 focus:border-brand-600 focus:ring-4 focus:ring-brand-100;
+}
+/* Phone country code: own chevron instead of the native control (Safari's arrows ate the last digit of «+380») */
+@utility select-code {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666c77' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 13px;
+  cursor: pointer;
+}
+@utility label {
+  @apply mb-1.5 block text-sm font-semibold text-ink-2;
+}
+
+/* Ticket: perforation with side notches that take the colour of the surface behind (--notch) */
+@utility ticket-perf {
+  position: relative;
+  height: 0;
+  margin-inline: 18px;
+  border-top: 2px dashed var(--color-line);
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: -12px;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: var(--notch);
+  }
+  &::before {
+    left: -30px;
+  }
+  &::after {
+    right: -30px;
+  }
+}
+
+/* Departure board */
+@utility board {
+  background: #070d24;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.07), 0 30px 60px -30px rgb(0 0 0 / 0.7);
+}
+@utility board-cell {
+  @apply rounded-[5px] px-1.5 py-1 font-semibold text-sun uppercase;
+  background-color: #111a3d;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  box-shadow: inset 0 -1px 0 rgb(0 0 0 / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.05);
+  background-image: linear-gradient(transparent calc(50% - 0.5px), rgb(0 0 0 / 0.55) calc(50% - 0.5px), rgb(0 0 0 / 0.55) calc(50% + 0.5px), transparent calc(50% + 0.5px));
+}
+
+@utility prose-pw {
+  @apply text-[17px] leading-relaxed text-ink-2;
+  & h2 {
+    @apply mt-10 mb-3 text-[24px] leading-tight text-ink;
+  }
+  & h3 {
+    @apply mt-8 mb-2 text-[19px] leading-snug text-ink;
+  }
+  & p {
+    @apply my-3;
+  }
+  & ul {
+    @apply my-3 list-disc space-y-1.5 pl-5 marker:text-brand-600;
+  }
+  & ol {
+    @apply my-3 list-decimal space-y-1.5 pl-5 marker:font-semibold marker:text-brand-600;
+  }
+  & a {
+    @apply font-medium text-brand-700 underline decoration-brand-200 underline-offset-2 hover:decoration-brand-600;
+  }
+  & img {
+    @apply my-6 rounded-2xl;
+  }
+  & blockquote {
+    @apply my-5 rounded-r-2xl border-l-4 border-brand-600 bg-brand-50 px-5 py-3;
+  }
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes board-in {
+  0% {
+    opacity: 0;
+    transform: perspective(600px) rotateX(-80deg);
+  }
+  60% {
+    opacity: 1;
+    transform: perspective(600px) rotateX(12deg);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pwIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+@keyframes dash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* «Зв'язок» button: out of the way while the menu is open or someone types their number.
+   It comes back only after a short pause, so the tap that closes the keyboard (e.g. on «Замовити дзвінок») can't land on it. */
+@media (max-width: 1023px) {
+  .contact-fab {
+    transition: visibility 0s linear 0.6s;
+  }
+  html[data-menu-open] .contact-fab,
+  html:has(main form :is(input, select):focus) .contact-fab {
+    visibility: hidden;
+    transition-delay: 0s;
+  }
+}
+
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
+}
+
+/* On the green→blue band a green button disappears: the main call to action turns white there
+   (unlayered on purpose — it must win over the btn-accent utility) */
+.brand-band .btn-accent {
+  background-color: #ffffff;
+  color: var(--color-brand-700);
+  box-shadow: 0 10px 24px -12px rgb(0 0 0 / 0.45);
+}
+.brand-band .btn-accent:hover {
+  background-color: var(--color-brand-50);
+}
+.brand-band .bg-paper .btn-accent,
+.brand-band .bg-white .btn-accent {
+  background-color: var(--color-accent-600);
+  color: #ffffff;
+}

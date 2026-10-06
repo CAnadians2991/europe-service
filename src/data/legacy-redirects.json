@@ -1,0 +1,1654 @@
+[
+ {
+  "source": "/ru/vacanciesrabota_v_polshe_mekanikom",
+  "destination": "/ru/vacancies/rabota_v_polshe_mekanikom"
+ },
+ {
+  "source": "/ru/vakansii/hungary",
+  "destination": "/ru/vacancies/hungary"
+ },
+ {
+  "source": "/ru/vakansii/slovakia",
+  "destination": "/ru/vacancies/slovakia"
+ },
+ {
+  "source": "/vakansii/england",
+  "destination": "/vacancies/england"
+ },
+ {
+  "source": "/vakansii/hungary",
+  "destination": "/vacancies/hungary"
+ },
+ {
+  "source": "/vakansii/slovakia",
+  "destination": "/vacancies/slovakia"
+ },
+ {
+  "source": "/ru/vacancies/rabota_v_polshe_po_biometrii",
+  "destination": "/vacancies/robota_v_polshchi_po_bometrii"
+ },
+ {
+  "source": "/vacancies/chekhiia/brno",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_brno"
+ },
+ {
+  "source": "/header",
+  "destination": "/"
+ },
+ {
+  "source": "/footer",
+  "destination": "/"
+ },
+ {
+  "source": "/fotter_for_posts",
+  "destination": "/news"
+ },
+ {
+  "source": "/hung-head",
+  "destination": "/vacancies/hungary"
+ },
+ {
+  "source": "/header-lytva",
+  "destination": "/vacancies/lithuania"
+ },
+ {
+  "source": "/actual_header_ua",
+  "destination": "/vacancies/all"
+ },
+ {
+  "source": "/blocks",
+  "destination": "/"
+ },
+ {
+  "source": "/main_test",
+  "destination": "/"
+ },
+ {
+  "source": "/test",
+  "destination": "/"
+ },
+ {
+  "source": "/test_ru",
+  "destination": "/ru"
+ },
+ {
+  "source": "/test_vacancies_chekia",
+  "destination": "/vacancies/chekhiia"
+ },
+ {
+  "source": "/page-not-found",
+  "destination": "/"
+ },
+ {
+  "source": "/uploads",
+  "destination": "/ru/vacancies/all"
+ },
+ {
+  "source": "/vac",
+  "destination": "/vacancies/all"
+ },
+ {
+  "source": "/3241324123",
+  "destination": "/"
+ },
+ {
+  "source": "/presentation",
+  "destination": "/"
+ },
+ {
+  "source": "/header_for_vacancies_ua",
+  "destination": "/vacancies/all"
+ },
+ {
+  "source": "/footer_vacancies_ua",
+  "destination": "/vacancies/all"
+ },
+ {
+  "source": "/header_for_vacancies_ru",
+  "destination": "/ru/vacancies/all"
+ },
+ {
+  "source": "/footer_vac_ru",
+  "destination": "/ru/vacancies/all"
+ },
+ {
+  "source": "/header_statti_ru",
+  "destination": "/ru/news"
+ },
+ {
+  "source": "/footer_statti_ru",
+  "destination": "/ru/news"
+ },
+ {
+  "source": "/header_romania_ua",
+  "destination": "/vacancies/romania"
+ },
+ {
+  "source": "/header_netherlands_ua",
+  "destination": "/vacancies/netherlands"
+ },
+ {
+  "source": "/vacancies/aktualni_vakansii",
+  "destination": "/vacancies/all"
+ },
+ {
+  "source": "/page7213424.html",
+  "destination": "/"
+ },
+ {
+  "source": "/page8211504.html",
+  "destination": "/"
+ },
+ {
+  "source": "/page8219461.html",
+  "destination": "/poslugi"
+ },
+ {
+  "source": "/page8219566.html",
+  "destination": "/"
+ },
+ {
+  "source": "/page8221120.html",
+  "destination": "/about"
+ },
+ {
+  "source": "/page8221177.html",
+  "destination": "/vidguki"
+ },
+ {
+  "source": "/page8221453.html",
+  "destination": "/contacts"
+ },
+ {
+  "source": "/page8800327.html",
+  "destination": "/vacancies"
+ },
+ {
+  "source": "/page9002479.html",
+  "destination": "/vacancies/vrotslav"
+ },
+ {
+  "source": "/page9004897.html",
+  "destination": "/vacancies/varshava"
+ },
+ {
+  "source": "/page9005287.html",
+  "destination": "/vacancies/hozhuv-velykopolskyi"
+ },
+ {
+  "source": "/page9005343.html",
+  "destination": "/vacancies/katovice"
+ },
+ {
+  "source": "/page9005424.html",
+  "destination": "/vacancies/krakow"
+ },
+ {
+  "source": "/page9005472.html",
+  "destination": "/vacancies/lodz"
+ },
+ {
+  "source": "/page9005497.html",
+  "destination": "/vacancies/liublin"
+ },
+ {
+  "source": "/page9005528.html",
+  "destination": "/vacancies/poznan"
+ },
+ {
+  "source": "/page9005574.html",
+  "destination": "/vacancies/shchetsyn"
+ },
+ {
+  "source": "/page9013499.html",
+  "destination": "/vacancies/storage"
+ },
+ {
+  "source": "/page9049875.html",
+  "destination": "/vacancies/auto-factories"
+ },
+ {
+  "source": "/page9049958.html",
+  "destination": "/vacancies/production"
+ },
+ {
+  "source": "/page9049964.html",
+  "destination": "/vacancies/manufactory"
+ },
+ {
+  "source": "/page9049966.html",
+  "destination": "/vacancies/supermarkets"
+ },
+ {
+  "source": "/page9049970.html",
+  "destination": "/vacancies/factories"
+ },
+ {
+  "source": "/page9049978.html",
+  "destination": "/vacancies/umova_o_prace"
+ },
+ {
+  "source": "/page9049982.html",
+  "destination": "/vacancies/umova_zlecenia"
+ },
+ {
+  "source": "/page9085292.html",
+  "destination": "/vacancies/gdansk"
+ },
+ {
+  "source": "/page9423886.html",
+  "destination": "/"
+ },
+ {
+  "source": "/page9715820.html",
+  "destination": "/ru/vacancies/umova_o_prace"
+ },
+ {
+  "source": "/page9715871.html",
+  "destination": "/ru/vacancies/umova_zlecenia"
+ },
+ {
+  "source": "/page9715919.html",
+  "destination": "/vacancies/women"
+ },
+ {
+  "source": "/page9716040.html",
+  "destination": "/vacancies/men"
+ },
+ {
+  "source": "/page9716059.html",
+  "destination": "/vacancies/married_couple"
+ },
+ {
+  "source": "/page9716096.html",
+  "destination": "/ru/vacancies/women"
+ },
+ {
+  "source": "/page9716111.html",
+  "destination": "/ru/vacancies/men"
+ },
+ {
+  "source": "/page9716123.html",
+  "destination": "/ru/vacancies/married_couple"
+ },
+ {
+  "source": "/page10823710.html",
+  "destination": "/news"
+ },
+ {
+  "source": "/page11069544.html",
+  "destination": "/ru"
+ },
+ {
+  "source": "/page11070292.html",
+  "destination": "/ru/vacancies"
+ },
+ {
+  "source": "/page11070301.html",
+  "destination": "/ru/services"
+ },
+ {
+  "source": "/page11070328.html",
+  "destination": "/ru/about"
+ },
+ {
+  "source": "/page11070338.html",
+  "destination": "/ru/otzyvy"
+ },
+ {
+  "source": "/page11070346.html",
+  "destination": "/ru/news"
+ },
+ {
+  "source": "/page11070353.html",
+  "destination": "/ru/contacts"
+ },
+ {
+  "source": "/page11244033.html",
+  "destination": "/ru/vacancies/auto-factories"
+ },
+ {
+  "source": "/page11244163.html",
+  "destination": "/ru/vacancies/hozhuv-velykopolskyi"
+ },
+ {
+  "source": "/page11246501.html",
+  "destination": "/ru/vacancies/production"
+ },
+ {
+  "source": "/page11246666.html",
+  "destination": "/ru/vacancies/manufactory"
+ },
+ {
+  "source": "/page11247484.html",
+  "destination": "/ru/vacancies/storage"
+ },
+ {
+  "source": "/page11248866.html",
+  "destination": "/ru/vacancies/supermarkets"
+ },
+ {
+  "source": "/page11249578.html",
+  "destination": "/ru/vacancies/factories"
+ },
+ {
+  "source": "/page11251582.html",
+  "destination": "/ru/vacancies/varshava"
+ },
+ {
+  "source": "/page11251786.html",
+  "destination": "/ru/vacancies/vrotslav"
+ },
+ {
+  "source": "/page11251953.html",
+  "destination": "/ru/vacancies/gdansk"
+ },
+ {
+  "source": "/page11252753.html",
+  "destination": "/ru/vacancies/katovice"
+ },
+ {
+  "source": "/page11252773.html",
+  "destination": "/ru/vacancies/krakow"
+ },
+ {
+  "source": "/page11252791.html",
+  "destination": "/ru/vacancies/lodz"
+ },
+ {
+  "source": "/page11252826.html",
+  "destination": "/ru/vacancies/liublin"
+ },
+ {
+  "source": "/page11252847.html",
+  "destination": "/ru/vacancies/poznan"
+ },
+ {
+  "source": "/page11252866.html",
+  "destination": "/ru/vacancies/shchetsyn"
+ },
+ {
+  "source": "/page12286777.html",
+  "destination": "/vacancies/spetsialisty"
+ },
+ {
+  "source": "/page12287022.html",
+  "destination": "/vacancies/silske_gospodarsvto"
+ },
+ {
+  "source": "/page12287713.html",
+  "destination": "/vacancies/miaso_ryba"
+ },
+ {
+  "source": "/page12289385.html",
+  "destination": "/ru/vacancies/all"
+ },
+ {
+  "source": "/page12586754.html",
+  "destination": "/news/yak_podatu_dokymenty_y_vizovui_tsentr"
+ },
+ {
+  "source": "/page13224511.html",
+  "destination": "/news/kilkist_liudei_v_polshe"
+ },
+ {
+  "source": "/page13277275.html",
+  "destination": "/news/polsha_dozvolyla_ne_prokhodyty_observatsiiu"
+ },
+ {
+  "source": "/page13299740.html",
+  "destination": "/ru/news/polsha_dozvolyla_ne_prokhodyty_observatsiiu"
+ },
+ {
+  "source": "/page13328639.html",
+  "destination": "/news/informatsia_pered_vyizdom_v_polshu"
+ },
+ {
+  "source": "/page13548331.html",
+  "destination": "/news/yak_zapovnyty_ankety_v_vizovyi_tsentr"
+ },
+ {
+  "source": "/page13777115.html",
+  "destination": "/vacancies/ua_kontrakt"
+ },
+ {
+  "source": "/page13777807.html",
+  "destination": "/ua_kontrakt"
+ },
+ {
+  "source": "/page13843894.html",
+  "destination": "/vacancies/all"
+ },
+ {
+  "source": "/page14140942.html",
+  "destination": "/news/robota_v_inshii_kraini"
+ },
+ {
+  "source": "/page14161421.html",
+  "destination": "/ru/vacancies/rabote_v_polshe_na_sto"
+ },
+ {
+  "source": "/page14161511.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_voditelem"
+ },
+ {
+  "source": "/page14161591.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_ofitsiantom"
+ },
+ {
+  "source": "/page14161627.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_v_otele"
+ },
+ {
+  "source": "/page14161672.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_v_restorane_kafe"
+ },
+ {
+  "source": "/page14161707.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_svarshchikom"
+ },
+ {
+  "source": "/page14161754.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_raznorabochim"
+ },
+ {
+  "source": "/page14161806.html",
+  "destination": "/ru/vacancies/rabote_v_polshe_gruzchikom"
+ },
+ {
+  "source": "/page14161836.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_yuristom"
+ },
+ {
+  "source": "/page14161860.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_pleteniie_venkov"
+ },
+ {
+  "source": "/page14161886.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_upakovschikom"
+ },
+ {
+  "source": "/page14162071.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_kosmetologom"
+ },
+ {
+  "source": "/page14162094.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_domrabotnitsei"
+ },
+ {
+  "source": "/page14162116.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_burilschikom"
+ },
+ {
+  "source": "/page14162144.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_na_ferme"
+ },
+ {
+  "source": "/page14162199.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_na_pilorame"
+ },
+ {
+  "source": "/page14162222.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_na_gelesnoi_dorohe"
+ },
+ {
+  "source": "/page14162261.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_na_miasokombinate"
+ },
+ {
+  "source": "/page14162289.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_na_oknakh"
+ },
+ {
+  "source": "/page14162308.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_na_vakhte"
+ },
+ {
+  "source": "/page14162327.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_s_prozhyvaniem_srochno"
+ },
+ {
+  "source": "/page14162376.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_bez_opyta"
+ },
+ {
+  "source": "/page14162409.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_s_kosmetikoi"
+ },
+ {
+  "source": "/page14162443.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_obvalschikom"
+ },
+ {
+  "source": "/page14162468.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_v_ashane"
+ },
+ {
+  "source": "/page14162498.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_santekhnikom"
+ },
+ {
+  "source": "/page14162532.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_na_sparzhe"
+ },
+ {
+  "source": "/page14162559.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_na_upakovke_sosisok"
+ },
+ {
+  "source": "/page14162590.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_s_vysshym_obrazovaniem"
+ },
+ {
+  "source": "/page14162612.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_okhranikom"
+ },
+ {
+  "source": "/page14162637.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_mekanikom"
+ },
+ {
+  "source": "/page14181464.html",
+  "destination": "/news/scho_potribno_dlia_pratsevlashtuvannia_v_polshe"
+ },
+ {
+  "source": "/page14610086.html",
+  "destination": "/vacancies/robota_v_polshchi_po_bometrii"
+ },
+ {
+  "source": "/page14610236.html",
+  "destination": "/ru/vacancies/mozhno_li_ehat_na_rabotu_v_polshe_po_bezvizu"
+ },
+ {
+  "source": "/page14610330.html",
+  "destination": "/vacancies/robota_v_polshchi_bez_vizu"
+ },
+ {
+  "source": "/page14610358.html",
+  "destination": "/yak_znajti_robotu_v_polshi_po_biometriyi"
+ },
+ {
+  "source": "/page14610412.html",
+  "destination": "/chi_mozhna_yihati_v_polshu_na_robotu_po_bezvizu"
+ },
+ {
+  "source": "/page14610419.html",
+  "destination": "/chto_znachit_rabota_po_biometrii"
+ },
+ {
+  "source": "/page14610437.html",
+  "destination": "/vacancies/robota_v_polshchi_po_bometrii"
+ },
+ {
+  "source": "/page14610480.html",
+  "destination": "/ru/vacancies/rabota-v-polshe-bez-vizy"
+ },
+ {
+  "source": "/page14630748.html",
+  "destination": "/news/yak_vedetsia_borodba_za_ukrainskykh_pratsivnykiv"
+ },
+ {
+  "source": "/page14670094.html",
+  "destination": "/ru/news/yak_podatu_dokymenty_y_vizovui_tsentr"
+ },
+ {
+  "source": "/page14670425.html",
+  "destination": "/ru/news/yak_vedetsia_borodba_za_ukrainskykh_pratsivnykiv"
+ },
+ {
+  "source": "/page14670440.html",
+  "destination": "/ru/news/scho_potribno_dlia_pratsevlashtuvannia_v_polshe"
+ },
+ {
+  "source": "/page14670456.html",
+  "destination": "/ru/news/robota_v_inshii_kraini"
+ },
+ {
+  "source": "/page14670471.html",
+  "destination": "/ru/ua_kontrakt"
+ },
+ {
+  "source": "/page14670490.html",
+  "destination": "/ru/news/yak_zapovnyty_ankety_v_vizovyi_tsentr"
+ },
+ {
+  "source": "/page14670503.html",
+  "destination": "/ru/news/informatsia_pered_vyizdom_v_polshu"
+ },
+ {
+  "source": "/page14670512.html",
+  "destination": "/ru/news/kilkist_liudei_v_polshe"
+ },
+ {
+  "source": "/page15539818.html",
+  "destination": "/ru/rabota-za-granicej-vsya-vazhnaya-informaciya-dlya-ukraincev"
+ },
+ {
+  "source": "/page15540093.html",
+  "destination": "/rabota-za-granicej-vsya-vazhnaya-informaciya-dlya-ukraincev"
+ },
+ {
+  "source": "/page15540869.html",
+  "destination": "/ru/perechen-dokumentom-dlya-legalnoj-raboty-v-polshe"
+ },
+ {
+  "source": "/page15540879.html",
+  "destination": "/perechen-dokumentom-dlya-legalnoj-raboty-v-polshe"
+ },
+ {
+  "source": "/page15541454.html",
+  "destination": "/ru/kak-ustroitsya-na-rabotu-v-polshe"
+ },
+ {
+  "source": "/page15541633.html",
+  "destination": "/kak-ustroitsya-na-rabotu-v-polshe"
+ },
+ {
+  "source": "/page15541864.html",
+  "destination": "/ru/ukraincy-v-polshe-skolko-zarabatyvayut-tratyat-i-gde-ishchut-rabotu"
+ },
+ {
+  "source": "/page15541869.html",
+  "destination": "/ukraincy-v-polshe-skolko-zarabatyvayut-tratyat-i-gde-ishchut-rabotu"
+ },
+ {
+  "source": "/page15542049.html",
+  "destination": "/ru/rabota-za-granicei-plyusy-i-minusy"
+ },
+ {
+  "source": "/page15542054.html",
+  "destination": "/rabota-za-granicei-plyusy-i-minusy"
+ },
+ {
+  "source": "/page15542144.html",
+  "destination": "/ru/chto-nuzhno-znat-o-rabote-za-granicej"
+ },
+ {
+  "source": "/page15542148.html",
+  "destination": "/chto-nuzhno-znat-o-rabote-za-granicej"
+ },
+ {
+  "source": "/page15542336.html",
+  "destination": "/ru/preimushchestva-i-nedostatki-raboty-za-rubezhom"
+ },
+ {
+  "source": "/page15542341.html",
+  "destination": "/preimushchestva-i-nedostatki-raboty-za-rubezhom"
+ },
+ {
+  "source": "/page15542388.html",
+  "destination": "/ru/skolko-ukraincev-rabotaet-v-polshe-legalno"
+ },
+ {
+  "source": "/page15542395.html",
+  "destination": "/skolko-ukraincev-rabotaet-v-polshe-legalno"
+ },
+ {
+  "source": "/page16484082.html",
+  "destination": "/news/operator_t-mobile"
+ },
+ {
+  "source": "/page16504954.html",
+  "destination": "/news/mob_operator_t-mobile"
+ },
+ {
+  "source": "/page16510825.html",
+  "destination": "/news/mobilnyi_operator_heyah"
+ },
+ {
+  "source": "/page16511132.html",
+  "destination": "/news/heyah"
+ },
+ {
+  "source": "/page16533300.html",
+  "destination": "/vacancies/chekhiia"
+ },
+ {
+  "source": "/page16790694.html",
+  "destination": "/news/yak_ne_prokhodydy_karantyn_observatsiiu_v_polshchi"
+ },
+ {
+  "source": "/page16793461.html",
+  "destination": "/ru/news/kak_ne_prokhodit_karantin_observatsiiu_v_polshe"
+ },
+ {
+  "source": "/page17103373.html",
+  "destination": "/ru/vacancies/sezonnaia_rabota"
+ },
+ {
+  "source": "/page17103477.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_zimoi"
+ },
+ {
+  "source": "/page17103549.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_na_osen"
+ },
+ {
+  "source": "/page17103602.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_na_vesnu"
+ },
+ {
+  "source": "/page17103684.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_na_leto"
+ },
+ {
+  "source": "/page17740581.html",
+  "destination": "/vacancies/rabota-v-polshe-bez-vizy"
+ },
+ {
+  "source": "/page18461359.html",
+  "destination": "/ru/news/novye_pravila_vezda_na_teritoriiu_polshy"
+ },
+ {
+  "source": "/page18464524.html",
+  "destination": "/news/novi_pravyla_prybuttia_v_polshu"
+ },
+ {
+  "source": "/page18974526.html",
+  "destination": "/news"
+ },
+ {
+  "source": "/page19607903.html",
+  "destination": "/news/yak_ne_platyty_v_2_razy_bilshe_podatkiv_v_polshi"
+ },
+ {
+  "source": "/page19608657.html",
+  "destination": "/ru/news/kak_ne_platit_2_nalohi_v_polshe"
+ },
+ {
+  "source": "/page20355351.html",
+  "destination": "/ru/vacancies/rabota_v_chekhii"
+ },
+ {
+  "source": "/page20427550.html",
+  "destination": "/vacancies/all"
+ },
+ {
+  "source": "/page20910708.html",
+  "destination": "/vacancies/all"
+ },
+ {
+  "source": "/page20937435.html",
+  "destination": "/"
+ },
+ {
+  "source": "/page21025175.html",
+  "destination": "/vacancies/chekhiia/robota_v_brno"
+ },
+ {
+  "source": "/page21025285.html",
+  "destination": "/vacancies/chekhiia/robota_v_hradets_kralovi"
+ },
+ {
+  "source": "/page21025305.html",
+  "destination": "/vacancies/chekhiia/robota_v_kladno"
+ },
+ {
+  "source": "/page21025333.html",
+  "destination": "/vacancies/chekhiia/robota_v_liberets"
+ },
+ {
+  "source": "/page21025374.html",
+  "destination": "/vacancies/chekhiia/robota_v_olomouts"
+ },
+ {
+  "source": "/page21025401.html",
+  "destination": "/vacancies/chekhiia/robota_v_ostrava"
+ },
+ {
+  "source": "/page21025442.html",
+  "destination": "/vacancies/chekhiia/robota_v_pardubitse"
+ },
+ {
+  "source": "/page21025459.html",
+  "destination": "/vacancies/chekhiia/robota_v_plzen"
+ },
+ {
+  "source": "/page21025478.html",
+  "destination": "/vacancies/chekhiia/robota_v_prazi"
+ },
+ {
+  "source": "/page21025504.html",
+  "destination": "/vacancies/chekhiia/robota_v_usti_nad_laboiu"
+ },
+ {
+  "source": "/page21025530.html",
+  "destination": "/vacancies/chekhiia/robota_v_mlada_boleclav"
+ },
+ {
+  "source": "/page21025585.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekii_dlia_simeinykh_par"
+ },
+ {
+  "source": "/page21025616.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_dlia_zhinok"
+ },
+ {
+  "source": "/page21025659.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekii_dlia_cholovikiv"
+ },
+ {
+  "source": "/page21025684.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_elektrykom"
+ },
+ {
+  "source": "/page21025741.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_shvachkoiu"
+ },
+ {
+  "source": "/page21028103.html",
+  "destination": "/vacancies/chekhiia/robota_vodiiem_v_chekhii"
+ },
+ {
+  "source": "/page21028157.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_stoliar"
+ },
+ {
+  "source": "/page21028192.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_sliusarem"
+ },
+ {
+  "source": "/page21028245.html",
+  "destination": "/vacancies/chekhiia/robota_na_shakhti_v_chekhii"
+ },
+ {
+  "source": "/page21028409.html",
+  "destination": "/vacancies/chekhiia/robota_karshchykom_v_chekhii"
+ },
+ {
+  "source": "/page21028453.html",
+  "destination": "/vacancies/chekhiia/sezonna_robota_v_chekhii"
+ },
+ {
+  "source": "/page21028969.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_vzymku"
+ },
+ {
+  "source": "/page21029042.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_na_lito"
+ },
+ {
+  "source": "/page21029068.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_na_avtozavodi"
+ },
+ {
+  "source": "/page21029194.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_na_zavodi"
+ },
+ {
+  "source": "/page21029223.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_na_skladakh"
+ },
+ {
+  "source": "/page21029249.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_na_fabrytsi"
+ },
+ {
+  "source": "/page21030758.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_v_supermarketi"
+ },
+ {
+  "source": "/page21030786.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_na_fermi"
+ },
+ {
+  "source": "/page21030824.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_na_silskomu_hospodarstvi"
+ },
+ {
+  "source": "/page21030855.html",
+  "destination": "/vacancies/chekhiia/robota_v_chekhii_na_miasokombinati"
+ },
+ {
+  "source": "/page21037353.html",
+  "destination": "/vacancies/all"
+ },
+ {
+  "source": "/page21362139.html",
+  "destination": "/"
+ },
+ {
+  "source": "/page21894626.html",
+  "destination": "/ru"
+ },
+ {
+  "source": "/page21929934.html",
+  "destination": "/ru/vacancies/all"
+ },
+ {
+  "source": "/page22075082.html",
+  "destination": "/ru/vacancies/all"
+ },
+ {
+  "source": "/page22104268.html",
+  "destination": "/vacancies/chekhiia"
+ },
+ {
+  "source": "/page22280331.html",
+  "destination": "/ru/vacancies/spetsialisty"
+ },
+ {
+  "source": "/page22281045.html",
+  "destination": "/ru/vacancies/selskoe_khoziaistvo"
+ },
+ {
+  "source": "/page22281082.html",
+  "destination": "/ru/vacancies/miaso_ryba"
+ },
+ {
+  "source": "/page22426249.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_elektrikom"
+ },
+ {
+  "source": "/page22426484.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_fasovschikom"
+ },
+ {
+  "source": "/page22426630.html",
+  "destination": "/ru/vacancies/rabota_shvei_v_polshe"
+ },
+ {
+  "source": "/page22426761.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_karschikom"
+ },
+ {
+  "source": "/page22426893.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_uborschikom"
+ },
+ {
+  "source": "/page22427041.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_stolyarom"
+ },
+ {
+  "source": "/page22427092.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_sortirovschikom"
+ },
+ {
+  "source": "/page22427166.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_slesarem"
+ },
+ {
+  "source": "/page22427232.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_montazhnikom"
+ },
+ {
+  "source": "/page22427291.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_malyarom-shtukaturom"
+ },
+ {
+  "source": "/page22427378.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_kranovschikom"
+ },
+ {
+  "source": "/page22427439.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_gornichnoi"
+ },
+ {
+  "source": "/page22427532.html",
+  "destination": "/ru/vacancies/rabota_v_polshe_medikom"
+ },
+ {
+  "source": "/page22594858.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_brno"
+ },
+ {
+  "source": "/page22595142.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_hradets_kralove"
+ },
+ {
+  "source": "/page22595282.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_kladno"
+ },
+ {
+  "source": "/page22595408.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_liberec"
+ },
+ {
+  "source": "/page23211102.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_olomouc"
+ },
+ {
+  "source": "/page23211835.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_ostrava"
+ },
+ {
+  "source": "/page23212232.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_pardubice"
+ },
+ {
+  "source": "/page23212688.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_plzen"
+ },
+ {
+  "source": "/page23213050.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_usti_nad_labem"
+ },
+ {
+  "source": "/page23213196.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_mlada_boleslav"
+ },
+ {
+  "source": "/page23215422.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_dlya_semejnyh_par"
+ },
+ {
+  "source": "/page23215887.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_dlya_zhenshchin"
+ },
+ {
+  "source": "/page23216230.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_dlya_muzhchin"
+ },
+ {
+  "source": "/page23221649.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_elektrikom"
+ },
+ {
+  "source": "/page23221927.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_shveej"
+ },
+ {
+  "source": "/page23222054.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_voditelem_v_chekhii"
+ },
+ {
+  "source": "/page23222139.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_stolyar"
+ },
+ {
+  "source": "/page23222217.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_slesarem"
+ },
+ {
+  "source": "/page23222297.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_na_shahte_v_chekhii"
+ },
+ {
+  "source": "/page23222377.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_karshchikom_v_chekhii"
+ },
+ {
+  "source": "/page23222449.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_gornichnoj"
+ },
+ {
+  "source": "/page23222532.html",
+  "destination": "/ru/vacancies/chekhiia/sezonnaya_rabota_v_chekhii"
+ },
+ {
+  "source": "/page23222626.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_zimoj"
+ },
+ {
+  "source": "/page23223488.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_na_leto"
+ },
+ {
+  "source": "/page23223572.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_na_avtozavode"
+ },
+ {
+  "source": "/page23223636.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_na_zavode"
+ },
+ {
+  "source": "/page23223699.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_na_skladah"
+ },
+ {
+  "source": "/page23223769.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_na_fabrike"
+ },
+ {
+  "source": "/page23223828.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_v_supermarkete"
+ },
+ {
+  "source": "/page23223919.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_na_ferme"
+ },
+ {
+  "source": "/page23223993.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_na_pilorame"
+ },
+ {
+  "source": "/page23224051.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_na_zheleznoj_doroge"
+ },
+ {
+  "source": "/page23224106.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_na_selskom_hozyajstve"
+ },
+ {
+  "source": "/page23224172.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_chekhii_na_myasokombinate"
+ },
+ {
+  "source": "/page23240891.html",
+  "destination": "/vacancies/all"
+ },
+ {
+  "source": "/page23760685.html",
+  "destination": "/ru/news"
+ },
+ {
+  "source": "/page23763865.html",
+  "destination": "/ru/news"
+ },
+ {
+  "source": "/page23817587.html",
+  "destination": "/news/putivnyk_pered_vyizdom_do_polshchi"
+ },
+ {
+  "source": "/page23823341.html",
+  "destination": "/ru/news/putevoditel_pered_vyezdom_v_polshu"
+ },
+ {
+  "source": "/page24236423.html",
+  "destination": "/news/pereviznyk_europe_service"
+ },
+ {
+  "source": "/page24246650.html",
+  "destination": "/ru/news/perevozchik_europe_service"
+ },
+ {
+  "source": "/page25461242.html",
+  "destination": "/news/nove_zaproshennia_na_robotu_v_polshchu"
+ },
+ {
+  "source": "/page25572276.html",
+  "destination": "/ru/news/novoe_priglashenie_na_rabotu_v_polshu"
+ },
+ {
+  "source": "/page26310580.html",
+  "destination": "/poland"
+ },
+ {
+  "source": "/page26338181.html",
+  "destination": "/hungary"
+ },
+ {
+  "source": "/page26478915.html",
+  "destination": "/countires"
+ },
+ {
+  "source": "/page26479749.html",
+  "destination": "/romania/vyizd"
+ },
+ {
+  "source": "/page26674223.html",
+  "destination": "/vacancies/germany"
+ },
+ {
+  "source": "/page26675580.html",
+  "destination": "/vacancies/romania"
+ },
+ {
+  "source": "/page26819274.html",
+  "destination": "/vacancies/netherlands"
+ },
+ {
+  "source": "/page26846852.html",
+  "destination": "/vacancies/romania"
+ },
+ {
+  "source": "/page26854432.html",
+  "destination": "/vacancies/netherlands"
+ },
+ {
+  "source": "/page26903187.html",
+  "destination": "/vacancies/greece"
+ },
+ {
+  "source": "/page27079679.html",
+  "destination": "/news/bizhenstvo_do_polshchi"
+ },
+ {
+  "source": "/page27269867.html",
+  "destination": "/news/yak_vyikhaty_do_polshchi_u_statusi_bizhentsia"
+ },
+ {
+  "source": "/page27656833.html",
+  "destination": "/vacancies/lithuania"
+ },
+ {
+  "source": "/page27728731.html",
+  "destination": "/kviz-lytva"
+ },
+ {
+  "source": "/page27731619.html",
+  "destination": "/kviz-romania"
+ },
+ {
+  "source": "/page27914937.html",
+  "destination": "/vacancies/slovakia"
+ },
+ {
+  "source": "/page27919878.html",
+  "destination": "/kviz-netherlands"
+ },
+ {
+  "source": "/page27966376.html",
+  "destination": "/kviz-slovakia"
+ },
+ {
+  "source": "/page28367940.html",
+  "destination": "/vacancies/hungary"
+ },
+ {
+  "source": "/page28424477.html",
+  "destination": "/news/england"
+ },
+ {
+  "source": "/page28438652.html",
+  "destination": "/slovakia/vyizd"
+ },
+ {
+  "source": "/page28457877.html",
+  "destination": "/kviz-poland"
+ },
+ {
+  "source": "/page28525428.html",
+  "destination": "/news/chekhia"
+ },
+ {
+  "source": "/page28525715.html",
+  "destination": "/news/netherlands"
+ },
+ {
+  "source": "/page28525858.html",
+  "destination": "/news/romania"
+ },
+ {
+  "source": "/page28526082.html",
+  "destination": "/news/germany"
+ },
+ {
+  "source": "/page28744501.html",
+  "destination": "/kviz-kyiv-filia"
+ },
+ {
+  "source": "/page28991814.html",
+  "destination": "/kviz-shvei"
+ },
+ {
+  "source": "/page29137000.html",
+  "destination": "/kviz-opikunky"
+ },
+ {
+  "source": "/page29174296.html",
+  "destination": "/privacy"
+ },
+ {
+  "source": "/page29174542.html",
+  "destination": "/oferta"
+ },
+ {
+  "source": "/page29219280.html",
+  "destination": "/user_deal"
+ },
+ {
+  "source": "/page29366362.html",
+  "destination": "/charity"
+ },
+ {
+  "source": "/page29569351.html",
+  "destination": "/kviz-chekhia"
+ },
+ {
+  "source": "/page29605573.html",
+  "destination": "/kviz-biedronka"
+ },
+ {
+  "source": "/page29709080.html",
+  "destination": "/cooperation"
+ },
+ {
+  "source": "/page29991222.html",
+  "destination": "/kviz-rivne"
+ },
+ {
+  "source": "/page30006824.html",
+  "destination": "/kviz-germany"
+ },
+ {
+  "source": "/page30619645.html",
+  "destination": "/vacancies/hungary"
+ },
+ {
+  "source": "/page30773903.html",
+  "destination": "/poland-international"
+ },
+ {
+  "source": "/page30966605.html",
+  "destination": "/kviz-zhytomyr"
+ },
+ {
+  "source": "/page32292527.html",
+  "destination": "/vacancies/canada"
+ },
+ {
+  "source": "/page32463909.html",
+  "destination": "/kviz-lviv"
+ },
+ {
+  "source": "/page32558105.html",
+  "destination": "/kviz-odesa"
+ },
+ {
+  "source": "/page32919483.html",
+  "destination": "/ru/vacancies/romania"
+ },
+ {
+  "source": "/page32919910.html",
+  "destination": "/ru/vacancies/netherlands"
+ },
+ {
+  "source": "/page32920618.html",
+  "destination": "/ru/vacancies/germany"
+ },
+ {
+  "source": "/page32922662.html",
+  "destination": "/ru/vacancies/england"
+ },
+ {
+  "source": "/page32923820.html",
+  "destination": "/ru/vacancies/slovakia"
+ },
+ {
+  "source": "/page32924458.html",
+  "destination": "/ru/vacancies/hungary"
+ },
+ {
+  "source": "/page32924759.html",
+  "destination": "/ru/vacancies/canada"
+ },
+ {
+  "source": "/page33299021.html",
+  "destination": "/czechia/vyizd"
+ },
+ {
+  "source": "/page33301300.html",
+  "destination": "/germany/vyizd"
+ },
+ {
+  "source": "/page33309075.html",
+  "destination": "/netherlands/vyizd"
+ },
+ {
+  "source": "/page33310726.html",
+  "destination": "/england/vyizd"
+ },
+ {
+  "source": "/page33310920.html",
+  "destination": "/canada/vyizd"
+ },
+ {
+  "source": "/page33371500.html",
+  "destination": "/kviz-zhytomyr-chekhia"
+ },
+ {
+  "source": "/page33371568.html",
+  "destination": "/kviz-odesa-chekhia"
+ },
+ {
+  "source": "/page33920082.html",
+  "destination": "/vacancies/france"
+ },
+ {
+  "source": "/page33923434.html",
+  "destination": "/ru/vacancies/france"
+ },
+ {
+  "source": "/page34054723.html",
+  "destination": "/vacancies/belgium"
+ },
+ {
+  "source": "/page34055363.html",
+  "destination": "/ru/vacancies/belgium"
+ },
+ {
+  "source": "/page34112190.html",
+  "destination": "/kviz-odesa-romania"
+ },
+ {
+  "source": "/page35572952.html",
+  "destination": "/kviz-france"
+ },
+ {
+  "source": "/page35774915.html",
+  "destination": "/kviz-vyrobnytstvo-plastyku"
+ },
+ {
+  "source": "/page35775148.html",
+  "destination": "/kviz-dhl"
+ },
+ {
+  "source": "/page35780541.html",
+  "destination": "/kviz-adidas"
+ },
+ {
+  "source": "/page35977521.html",
+  "destination": "/kvizpoland"
+ },
+ {
+  "source": "/page35977835.html",
+  "destination": "/kvizchekhia"
+ },
+ {
+  "source": "/page36308105.html",
+  "destination": "/kviz-recruter-odesa"
+ },
+ {
+  "source": "/page36667895.html",
+  "destination": "/vacancies/lithuania"
+ },
+ {
+  "source": "/page36668363.html",
+  "destination": "/ru/vacancies/lithuania"
+ },
+ {
+  "source": "/page36670142.html",
+  "destination": "/vacancies/england"
+ },
+ {
+  "source": "/page36670356.html",
+  "destination": "/ru/vacancies/greece"
+ },
+ {
+  "source": "/page36732156.html",
+  "destination": "/"
+ },
+ {
+  "source": "/page36876881.html",
+  "destination": "/visacanada"
+ },
+ {
+  "source": "/page37733025.html",
+  "destination": "/form_1"
+ },
+ {
+  "source": "/page37836517.html",
+  "destination": "/kviz-greece"
+ },
+ {
+  "source": "/page37878949.html",
+  "destination": "/form_2"
+ },
+ {
+  "source": "/page37879092.html",
+  "destination": "/form_3"
+ },
+ {
+  "source": "/page37879355.html",
+  "destination": "/form_all"
+ },
+ {
+  "source": "/page37879694.html",
+  "destination": "/form_6"
+ },
+ {
+  "source": "/page37879882.html",
+  "destination": "/form_8"
+ },
+ {
+  "source": "/page37887955.html",
+  "destination": "/form_5"
+ },
+ {
+  "source": "/page39669015.html",
+  "destination": "/news/zarplaty_za_kordonom"
+ },
+ {
+  "source": "/page39863496.html",
+  "destination": "/news/greece"
+ },
+ {
+  "source": "/page41279285.html",
+  "destination": "/"
+ },
+ {
+  "source": "/page41295595.html",
+  "destination": "/jooble-kviz"
+ },
+ {
+  "source": "/page43266407.html",
+  "destination": "/linktree"
+ },
+ {
+  "source": "/page43292017.html",
+  "destination": "/linktreee_tiktok"
+ },
+ {
+  "source": "/page43640595.html",
+  "destination": "/"
+ },
+ {
+  "source": "/page45456149.html",
+  "destination": "/greece"
+ },
+ {
+  "source": "/page45460413.html",
+  "destination": "/vidguki/greece"
+ },
+ {
+  "source": "/page48324725.html",
+  "destination": "/news/work_viza_in_england"
+ },
+ {
+  "source": "/page48325219.html",
+  "destination": "/news/work_viza_in_netherlands"
+ },
+ {
+  "source": "/page48325339.html",
+  "destination": "/news/work_viza_in_poland_d"
+ },
+ {
+  "source": "/page48325495.html",
+  "destination": "/news/work_viza_in_europe"
+ },
+ {
+  "source": "/page48325639.html",
+  "destination": "/news/parahraph_24_for_ukrainians"
+ },
+ {
+  "source": "/page48325875.html",
+  "destination": "/ru/news/work_viza_in_england"
+ },
+ {
+  "source": "/page48326101.html",
+  "destination": "/ru/news/work_viza_in_netherlands"
+ },
+ {
+  "source": "/page48326821.html",
+  "destination": "/ru/news/work_viza_type_d"
+ },
+ {
+  "source": "/page48327243.html",
+  "destination": "/ru/news/work_viza_in_europe"
+ },
+ {
+  "source": "/page48327381.html",
+  "destination": "/ru/parahraph_24_in_germany"
+ },
+ {
+  "source": "/page52272297.html",
+  "destination": "/vacancies/chekhiia/robota_v_czeskebudejovice"
+ },
+ {
+  "source": "/page52272831.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_czeskebudejovice"
+ },
+ {
+  "source": "/page52373415.html",
+  "destination": "/"
+ },
+ {
+  "source": "/page52496329.html",
+  "destination": "/ru/vacancies/chekhiia/praga"
+ },
+ {
+  "source": "/page52496957.html",
+  "destination": "/ru/vacancies/chekhiia/rabota_v_brno"
+ },
+ {
+  "source": "/page59039373.html",
+  "destination": "/kviz-telegramviber"
+ },
+ {
+  "source": "/page59881379.html",
+  "destination": "/status-studenta"
+ },
+ {
+  "source": "/page63716071.html",
+  "destination": "/kviz-europe"
+ },
+ {
+  "source": "/page64423115.html",
+  "destination": "/vacancies/italy"
+ },
+ {
+  "source": "/page64516155.html",
+  "destination": "/kviz-italy"
+ },
+ {
+  "source": "/page64994201.html",
+  "destination": "/kviz-europe2"
+ },
+ {
+  "source": "/page67120847.html",
+  "destination": "/declaration"
+ },
+ {
+  "source": "/page70313987.html",
+  "destination": "/links"
+ },
+ {
+  "source": "/page72129837.html",
+  "destination": "/kviz-olx"
+ },
+ {
+  "source": "/page73484095.html",
+  "destination": "/kviz-viber"
+ },
+ {
+  "source": "/page81392976.html",
+  "destination": "/vacancies/latvia"
+ },
+ {
+  "source": "/page111882016.html",
+  "destination": "/vacancies/austria"
+ },
+ {
+  "source": "/page116838996.html",
+  "destination": "/italy"
+ },
+ {
+  "source": "/page118014906.html",
+  "destination": "/greece_video"
+ },
+ {
+  "source": "/page146621683.html",
+  "destination": "/kviz-instagram"
+ }
+]

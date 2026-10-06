@@ -1,0 +1,2233 @@
+[
+ {
+  "path": "/form_1",
+  "id": "form_1",
+  "title": "Форма реєстрації на вакансію",
+  "h1": "Форма реєстрації на вакансію",
+  "subtitle": "",
+  "description": "Форма реєстрації на вакансію.",
+  "bullets": [],
+  "questions": [],
+  "bitrixForm": {
+   "form": "inline/12/nsna6n",
+   "loader": "https://europeservice.org.ua/upload/crm/form/loader_12_nsna6n.js"
+  },
+  "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
+  "noindex": true
+ },
+ {
+  "path": "/form_2",
+  "id": "form_2",
+  "title": "Форма реєстрації на вакансію",
+  "h1": "Форма реєстрації на вакансію",
+  "subtitle": "",
+  "description": "Форма реєстрації на вакансію.",
+  "bullets": [],
+  "questions": [],
+  "bitrixForm": {
+   "form": "inline/17/aaqtgt",
+   "loader": "https://europeservice.org.ua/upload/crm/form/loader_17_aaqtgt.js"
+  },
+  "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
+  "noindex": true
+ },
+ {
+  "path": "/form_3",
+  "id": "form_3",
+  "title": "Форма реєстрації на вакансію",
+  "h1": "Форма реєстрації на вакансію",
+  "subtitle": "",
+  "description": "Форма реєстрації на вакансію.",
+  "bullets": [],
+  "questions": [],
+  "bitrixForm": {
+   "form": "inline/22/2xhng8",
+   "loader": "https://europeservice.org.ua/upload/crm/form/loader_22_2xhng8.js"
+  },
+  "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
+  "noindex": true
+ },
+ {
+  "path": "/form_5",
+  "id": "form_5",
+  "title": "Форма реєстрації на вакансію",
+  "h1": "Форма реєстрації на вакансію",
+  "subtitle": "",
+  "description": "Форма реєстрації на вакансію.",
+  "bullets": [],
+  "questions": [],
+  "bitrixForm": {
+   "form": "inline/26/fme2nk",
+   "loader": "https://europeservice.org.ua/upload/crm/form/loader_26_fme2nk.js"
+  },
+  "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
+  "noindex": true
+ },
+ {
+  "path": "/form_6",
+  "id": "form_6",
+  "title": "Форма реєстрації на вакансію",
+  "h1": "Форма реєстрації на вакансію",
+  "subtitle": "",
+  "description": "Форма реєстрації на вакансію.",
+  "bullets": [],
+  "questions": [],
+  "bitrixForm": {
+   "form": "inline/27/makuhi",
+   "loader": "https://europeservice.org.ua/upload/crm/form/loader_27_makuhi.js"
+  },
+  "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
+  "noindex": true
+ },
+ {
+  "path": "/form_8",
+  "id": "form_8",
+  "title": "Форма реєстрації на вакансію",
+  "h1": "Форма реєстрації на вакансію",
+  "subtitle": "",
+  "description": "Форма реєстрації на вакансію.",
+  "bullets": [],
+  "questions": [],
+  "bitrixForm": {
+   "form": "inline/28/ym9ewr",
+   "loader": "https://europeservice.org.ua/upload/crm/form/loader_28_ym9ewr.js"
+  },
+  "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
+  "noindex": true
+ },
+ {
+  "path": "/form_all",
+  "id": "form_all",
+  "title": "Форма реєстрації на вакансію",
+  "h1": "Форма реєстрації на вакансію",
+  "subtitle": "",
+  "description": "Форма реєстрації на вакансію.",
+  "bullets": [],
+  "questions": [],
+  "bitrixForm": {
+   "form": "inline/24/qhgfx2",
+   "loader": "https://europeservice.org.ua/upload/crm/form/loader_24_qhgfx2.js"
+  },
+  "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
+  "noindex": true
+ },
+ {
+  "path": "/jooble-kviz",
+  "id": "jooble-kviz",
+  "title": "Форма заявки",
+  "h1": "Робота в Європі для українців",
+  "subtitle": "",
+  "description": "Робота в Європі для українців.",
+  "bullets": [],
+  "questions": [],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": null,
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   }
+  ],
+  "submitLabel": "Відправити",
+  "noindex": true
+ },
+ {
+  "path": "/kviz-adidas",
+  "id": "kviz-adidas",
+  "title": "Підбір роботи в Польщі",
+  "h1": "Робота в Польщі для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Польщі для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "pl",
+  "work": "warehouse",
+  "employer": "Adidas",
+  "preset": {
+   "country": "pl",
+   "work": "warehouse"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-biedronka",
+  "id": "kviz-biedronka",
+  "title": "Підбір роботи в Польщі",
+  "h1": "Робота в Польщі для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Польщі для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "pl",
+  "work": "retail",
+  "employer": "Biedronka",
+  "preset": {
+   "country": "pl",
+   "work": "retail"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-chekhia",
+  "id": "kviz-chekhia",
+  "title": "Квіз форма для підбору роботи в Чехії",
+  "h1": "Робота в Чехії для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Чехії для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "cz",
+  "preset": {
+   "country": "cz"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Чехія",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-dhl",
+  "id": "kviz-dhl",
+  "title": "Квіз форма для підбору роботи в Чехії",
+  "h1": "Робота в Чехії для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Чехії для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "cz",
+  "work": "warehouse",
+  "employer": "DHL",
+  "preset": {
+   "country": "cz",
+   "work": "warehouse"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Чехія",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-europe",
+  "id": "kviz-europe",
+  "title": "Підбір роботи в Європі",
+  "h1": "Робота в Європі для українців",
+  "subtitle": "",
+  "description": "Робота в Європі для українців.",
+  "bullets": [],
+  "questions": [
+   {
+    "question": "До якої країни плануєте їхати працювати?",
+    "type": "radio",
+    "name": "country",
+    "options": [
+     "Польща",
+     "Чехія",
+     "Німеччина",
+     "Греція",
+     "Словаччина",
+     "Нідерланди",
+     "Литва",
+     "Румунія",
+     "Інше"
+    ]
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім'я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   }
+  ],
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-europe2",
+  "id": "kviz-europe2",
+  "title": "Підбір роботи в Європі",
+  "h1": "Робота в Європі для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Європі для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "questions": [
+   {
+    "question": "До якої країни плануєте їхати працювати?",
+    "type": "radio",
+    "name": "country",
+    "options": [
+     "Польща",
+     "Чехія",
+     "Німеччина",
+     "Греція",
+     "Словаччина",
+     "Нідерланди",
+     "Литва",
+     "Румунія",
+     "Інше"
+    ]
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-france",
+  "id": "kviz-france",
+  "title": "Підбір роботи в Франції",
+  "h1": "Робота в Франції для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Франції для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "fr",
+  "preset": {
+   "country": "fr"
+  },
+  "questions": [
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   },
+   {
+    "question": "Чи були закордоном останні пів року?",
+    "type": "radio",
+    "name": "abroad",
+    "options": [
+     "✅ Так",
+     "⛔️ Ні"
+    ]
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-germany",
+  "id": "kviz-germany",
+  "title": "Підбір роботи в Німеччині",
+  "h1": "Робота в Німеччині для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Німеччині для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "de",
+  "preset": {
+   "country": "de"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Німеччина",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "checkbox",
+    "name": "for_who",
+    "options": [
+     "Жінка",
+     "чоловік",
+     "сімейна пара",
+     "2 жінки або більше",
+     "2 чоловіки або більше",
+     "група з чоловіків та жінок",
+     "інше"
+    ]
+   },
+   {
+    "question": "Вік кожного",
+    "type": "checkbox",
+    "name": "years",
+    "options": [
+     "до 18 років",
+     "18 - 25 років",
+     "25 - 55 років",
+     "більше 55 років"
+    ]
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-greece",
+  "id": "kviz-greece",
+  "title": "Підбір роботи в Греції",
+  "h1": "Робота в Греції для українців",
+  "subtitle": "Підберемо найкращу роботу в Греції",
+  "description": "Робота в Греції для українців. Підберемо найкращу роботу в Греції.",
+  "bullets": [],
+  "country": "gr",
+  "work": "horeca",
+  "preset": {
+   "country": "gr",
+   "work": "horeca"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Німеччина",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Греції",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-instagram",
+  "id": "kviz-instagram",
+  "title": "Підбір роботи в Європі",
+  "h1": "Робота в Європі для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Європі для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "radio",
+    "name": "for_who",
+    "options": [
+     "Жінка",
+     "Чоловік",
+     "Сімейна пара",
+     "2 жінки або більше",
+     "2 чоловіки або більше",
+     "Група з чоловіків та жінок",
+     "Інше"
+    ]
+   },
+   {
+    "question": "Вік кожного",
+    "type": "checkbox",
+    "name": "years",
+    "options": [
+     "18 - 45 років",
+     "45 - 55 років",
+     "більше 55 років"
+    ]
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім'я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити",
+  "noindex": true
+ },
+ {
+  "path": "/kviz-italy",
+  "id": "kviz-italy",
+  "title": "Підбір роботи в Італії",
+  "h1": "Робота в Італії для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Італії для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "it",
+  "preset": {
+   "country": "it"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Німеччина",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-kyiv-filia",
+  "id": "kviz-kyiv-filia",
+  "title": "Підбір роботи в Польщі",
+  "h1": "Робота в Польщі для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Польщі для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "pl",
+  "office": "Київ",
+  "preset": {
+   "country": "pl"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-lviv",
+  "id": "kviz-lviv",
+  "title": "Підбір роботи в Польщі",
+  "h1": "Робота в Польщі для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Польщі для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "pl",
+  "office": "Львів",
+  "preset": {
+   "country": "pl"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-lytva",
+  "id": "kviz-lytva",
+  "title": "Підбір роботи в Литві",
+  "h1": "Робота в Литві для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Литві для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "lt",
+  "preset": {
+   "country": "lt"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Литва",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-netherlands",
+  "id": "kviz-netherlands",
+  "title": "Підбір роботи в Голандії",
+  "h1": "Робота в Нідерландах для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Нідерландах для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "nl",
+  "preset": {
+   "country": "nl"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Нідерланди",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-odesa",
+  "id": "kviz-odesa",
+  "title": "Підбір роботи в Польщі",
+  "h1": "Робота в Польщі для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Польщі для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "pl",
+  "office": "Одеса",
+  "preset": {
+   "country": "pl"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-odesa-chekhia",
+  "id": "kviz-odesa-chekhia",
+  "title": "Квіз форма для підбору роботи в Чехії",
+  "h1": "Робота в Чехії для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Чехії для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "cz",
+  "office": "Одеса",
+  "preset": {
+   "country": "cz"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Чехія",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-odesa-romania",
+  "id": "kviz-odesa-romania",
+  "title": "Підбір роботи в Румунії",
+  "h1": "Робота в Румунії для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Румунії для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "ro",
+  "office": "Одеса",
+  "preset": {
+   "country": "ro"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Румунія",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-olx",
+  "id": "kviz-olx",
+  "title": "Офіційна та безкоштовна робота в Європі",
+  "h1": "Робота в Європі для українців",
+  "subtitle": "Офіційна та безкоштовна робота в Європі",
+  "description": "Робота в Європі для українців. Офіційна та безкоштовна робота в Європі.",
+  "bullets": [
+   "Ліцензія міністерства соціальної політики України №223 від 15.02.2019"
+  ],
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Офіційна та безкоштовна робота в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити",
+  "noindex": true
+ },
+ {
+  "path": "/kviz-opikunky",
+  "id": "kviz-opikunky",
+  "title": "Підбір роботи в Німеччині опікунки",
+  "h1": "Робота в Німеччині",
+  "subtitle": "Опікунка за людьми старшого віку",
+  "description": "Робота в Німеччині. Опікунка за людьми старшого віку.",
+  "bullets": [],
+  "country": "de",
+  "work": "care",
+  "preset": {
+   "country": "de",
+   "work": "care"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Німеччина",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   },
+   {
+    "question": "Рівень знання німецької мови",
+    "type": "text",
+    "name": "language",
+    "options": []
+   },
+   {
+    "question": "Чи маєте досвід роботи опікункою?",
+    "type": "radio",
+    "name": "experience",
+    "options": [
+     "✅ Так",
+     "⛔️ Ні"
+    ]
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-poland",
+  "id": "kviz-poland",
+  "title": "Підбір роботи в Польщі",
+  "h1": "Робота в Польщі для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Польщі для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "pl",
+  "preset": {
+   "country": "pl"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-recruter-odesa",
+  "id": "kviz-recruter-odesa",
+  "title": "Вакансія менеджера Europe Service",
+  "h1": "Вакансія менеджера",
+  "subtitle": "Вакансія менеджера",
+  "description": "Вакансія менеджера. Вакансія менеджера.",
+  "bullets": [],
+  "office": "Одеса",
+  "recruiting": true,
+  "questions": [
+   {
+    "question": "Вік",
+    "type": "text",
+    "name": "years_work",
+    "options": []
+   },
+   {
+    "question": "Чи мали досвід в спілкуванні з клієнтами по телефону?",
+    "type": "radio",
+    "name": "experience_work",
+    "options": [
+     "✅ Так",
+     "⛔️ Ні"
+    ]
+   },
+   {
+    "question": "Чи мали досвід в продажах або рекрутації?",
+    "type": "radio",
+    "name": "salesexp_work",
+    "options": [
+     "✅ Так",
+     "⛔️ Ні"
+    ]
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name_work",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone_work",
+    "required": true
+   }
+  ],
+  "quizTitle": "Вакансія менеджера",
+  "finalTitle": "Очікуйте на зворотній зв'язок!",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-rivne",
+  "id": "kviz-rivne",
+  "title": "Підбір роботи в Польщі",
+  "h1": "Робота в Польщі для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Польщі для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "pl",
+  "office": "Рівне",
+  "preset": {
+   "country": "pl"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-romania",
+  "id": "kviz-romania",
+  "title": "Підбір роботи в Румунії",
+  "h1": "Робота в Румунії для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Румунії для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "ro",
+  "preset": {
+   "country": "ro"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Румунія",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-shvei",
+  "id": "kviz-shvei",
+  "title": "Підбір роботи в Польщі швеї",
+  "h1": "Робота в Польщі",
+  "subtitle": "Швеї у сучасний швейний цех JOAN",
+  "description": "Робота в Польщі. Швеї у сучасний швейний цех JOAN.",
+  "bullets": [],
+  "country": "pl",
+  "work": "sewing",
+  "employer": "JOAN",
+  "preset": {
+   "country": "pl",
+   "work": "sewing"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-slovakia",
+  "id": "kviz-slovakia",
+  "title": "Підбір роботи в Словаччині",
+  "h1": "Робота в Словаччині для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Словаччині для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "sk",
+  "preset": {
+   "country": "sk"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Словаччина",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-telegramviber",
+  "id": "kviz-telegramviber",
+  "title": "Підбір роботи в Європі",
+  "h1": "Робота в Європі для українців",
+  "subtitle": "",
+  "description": "Робота в Європі для українців.",
+  "bullets": [],
+  "questions": [],
+  "contactFields": [
+   {
+    "label": "Ваше ім'я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   }
+  ],
+  "submitLabel": "Відправити",
+  "noindex": true
+ },
+ {
+  "path": "/kviz-viber",
+  "id": "kviz-viber",
+  "title": "Підбір роботи в Європі",
+  "h1": "Робота в Європі для українців",
+  "subtitle": "Перевірені вакансії з проживанням та офіційним працевлаштуванням",
+  "description": "Робота в Європі для українців. Перевірені вакансії з проживанням та офіційним працевлаштуванням.",
+  "bullets": [],
+  "questions": [],
+  "contactFields": [
+   {
+    "label": "Ваше ім`я ☺️",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон 📞",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   }
+  ],
+  "submitLabel": "Залишити заявку",
+  "noindex": true
+ },
+ {
+  "path": "/kviz-vyrobnytstvo-plastyku",
+  "id": "kviz-vyrobnytstvo-plastyku",
+  "title": "Підбір роботи в Польщі",
+  "h1": "Робота в Польщі для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Польщі для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "pl",
+  "work": "factory",
+  "preset": {
+   "country": "pl",
+   "work": "factory"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-zhytomyr",
+  "id": "kviz-zhytomyr",
+  "title": "Підбір роботи в Польщі",
+  "h1": "Робота в Польщі для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Польщі для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "pl",
+  "office": "Житомир",
+  "preset": {
+   "country": "pl"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kviz-zhytomyr-chekhia",
+  "id": "kviz-zhytomyr-chekhia",
+  "title": "Квіз форма для підбору роботи в Чехії",
+  "h1": "Робота в Чехії для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Чехії для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "cz",
+  "office": "Житомир",
+  "preset": {
+   "country": "cz"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Чехія",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kvizchekhia",
+  "id": "kvizchekhia",
+  "title": "Квіз форма для підбору роботи в Чехії",
+  "h1": "Робота в Чехії для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Чехії для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "cz",
+  "preset": {
+   "country": "cz"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Чехія",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "checkbox",
+    "name": "for_who",
+    "options": [
+     "Жінка",
+     "чоловік",
+     "сімейна пара",
+     "2 жінки або більше",
+     "2 чоловіки або більше",
+     "група з чоловіків та жінок",
+     "інше"
+    ]
+   },
+   {
+    "question": "Вік кожного",
+    "type": "checkbox",
+    "name": "years",
+    "options": [
+     "до 18 років",
+     "18 - 25 років",
+     "25 - 55 років",
+     "більше 55 років"
+    ]
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/kvizpoland",
+  "id": "kvizpoland",
+  "title": "Підбір роботи в Польщі",
+  "h1": "Робота в Польщі для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Польщі для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "pl",
+  "preset": {
+   "country": "pl"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "radio",
+    "name": "for_who",
+    "options": [
+     "Жінка",
+     "чоловік",
+     "сімейна пара",
+     "2 жінки або більше",
+     "2 чоловіки або більше",
+     "група з чоловіків та жінок",
+     "інше"
+    ]
+   },
+   {
+    "question": "Вік кожного",
+    "type": "checkbox",
+    "name": "years",
+    "options": [
+     "18 - 45 років",
+     "45 - 55 років",
+     "більше 55 років"
+    ]
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/poland-international",
+  "id": "poland-international",
+  "title": "Підбір роботи в Польщі",
+  "h1": "Робота в Польщі для українців",
+  "subtitle": "Підберемо найкращу роботу в Європі",
+  "description": "Робота в Польщі для українців. Підберемо найкращу роботу в Європі.",
+  "bullets": [],
+  "country": "pl",
+  "preset": {
+   "country": "pl"
+  },
+  "questions": [
+   {
+    "question": "Де ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   },
+   {
+    "question": "Вік кожного",
+    "type": "text",
+    "name": "years",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Підберемо найкращу роботу в Європі",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ },
+ {
+  "path": "/visacanada",
+  "id": "visacanada",
+  "title": "Квіз форма Відкриття візи в Канаду",
+  "h1": "Канадська віза під ключ",
+  "subtitle": "Допоможемо отримати візу в Канаду!",
+  "description": "Канадська віза під ключ. Допоможемо отримати візу в Канаду.",
+  "bullets": [],
+  "country": "ca",
+  "service": "visa",
+  "preset": {
+   "country": "ca"
+  },
+  "questions": [
+   {
+    "question": "У вас є біометричний закордонний паспорт?",
+    "type": "radio",
+    "name": "passport",
+    "options": [
+     "✅ Так",
+     "⛔️ Ні"
+    ]
+   },
+   {
+    "question": "Які послуги Вас цікавлять?",
+    "type": "radio",
+    "name": "services_canada",
+    "options": [
+     "Оформлення візи в Канаду",
+     "Вклейка візи в паспорт"
+    ]
+   },
+   {
+    "question": "В якій країні Ви зараз знаходитесь?",
+    "type": "radio",
+    "name": "location",
+    "options": [
+     "Україна",
+     "Польща",
+     "Інша країна ЄС"
+    ]
+   },
+   {
+    "question": "Для кого цікавитесь?",
+    "type": "text",
+    "name": "for_who",
+    "options": []
+   }
+  ],
+  "contactFields": [
+   {
+    "label": "Ваше ім*я",
+    "type": "name",
+    "name": "name",
+    "required": true
+   },
+   {
+    "label": "Ваш телефон",
+    "type": "phone",
+    "name": "phone",
+    "required": true
+   },
+   {
+    "label": "Додатковий телефон Viber/Telegram",
+    "type": "phone",
+    "name": "phone_viber",
+    "required": false
+   }
+  ],
+  "quizTitle": "Допоможемо отримати візу в Канаду!",
+  "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
+  "submitLabel": "Відправити"
+ }
+]
