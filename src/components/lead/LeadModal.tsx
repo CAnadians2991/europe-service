@@ -93,20 +93,20 @@ export function LeadModalProvider({
     setOpts(o)
     setKey((k) => k + 1)
     trackFormOpen(o.form)
-    requestAnimationFrame(() => {
-      formRef.current?.showModal()
-      formTitleRef.current?.focus({ preventScroll: true })
-    })
+    // open right away (the dialog is always in the DOM; its content re-renders inside) — waiting for a frame
+    // left the modal closed when frames were throttled (background tab, low-power mode)
+    const d = formRef.current
+    if (d && !d.open) d.showModal()
+    setTimeout(() => formTitleRef.current?.focus({ preventScroll: true }), 30)
   }, [])
 
   const openQuiz = useCallback((preset?: Record<string, string>, id = 'modal') => {
     setQuiz({ preset, id })
     setKey((k) => k + 1)
     trackFormOpen(`quiz:${id}`)
-    requestAnimationFrame(() => {
-      quizRef.current?.showModal()
-      quizTitleRef.current?.focus({ preventScroll: true })
-    })
+    const d = quizRef.current
+    if (d && !d.open) d.showModal()
+    setTimeout(() => quizTitleRef.current?.focus({ preventScroll: true }), 30)
   }, [])
 
   const uk = lang === 'uk'

@@ -160,7 +160,7 @@
 
 /* min-h-12: every button is a ≥ 44px touch target. Pressed: a 1px shift (no zoom). */
 @utility btn {
-  @apply inline-flex min-h-12 items-center justify-center gap-2.5 rounded-[4px] px-6 py-3 text-[16px] leading-none font-semibold transition-[background-color,box-shadow,color,border-color] duration-150 select-none active:translate-y-px disabled:pointer-events-none disabled:opacity-60 aria-busy:opacity-100;
+  @apply inline-flex min-h-12 items-center justify-center gap-2.5 rounded-xl px-6 py-3 text-[16px] leading-none font-semibold transition-[background-color,box-shadow,color,border-color] duration-150 select-none active:translate-y-px disabled:pointer-events-none disabled:opacity-60 aria-busy:opacity-100;
 }
 /* Main call to action — corporate green */
 @utility btn-accent {
@@ -182,17 +182,17 @@
 
 /* Filter / tag: a small square label */
 @utility chip {
-  @apply inline-flex min-h-11 items-center gap-1.5 rounded-[3px] border border-line-strong bg-white px-3.5 py-2 text-[15px] font-medium text-ink-2 transition-colors hover:border-ink hover:text-ink;
+  @apply inline-flex min-h-11 items-center gap-1.5 rounded-full border border-line-strong bg-white px-4 py-2 text-[15px] font-medium text-ink-2 transition-colors hover:border-ink hover:text-ink;
   &[aria-pressed='true'],
   &[data-active='true'] {
-    @apply border-ink bg-ink text-white hover:text-white;
+    @apply border-brand-600 bg-brand-600 text-white hover:text-white;
   }
 }
 @utility card {
-  @apply rounded-[6px] border border-line bg-white;
+  @apply rounded-2xl border border-line bg-white;
 }
 @utility field {
-  @apply block w-full rounded-[4px] border-[1.5px] border-line-strong bg-white px-4 py-3.5 text-[16px] text-ink outline-none transition placeholder:text-muted/70 focus:border-brand-600 focus:ring-[3px] focus:ring-brand-100;
+  @apply block w-full rounded-xl border-[1.5px] border-line-strong bg-white px-4 py-3.5 text-[16px] text-ink outline-none transition placeholder:text-muted/70 focus:border-brand-600 focus:ring-[3px] focus:ring-brand-100;
 }
 /* Phone country code: own chevron instead of the native control */
 @utility select-code {
@@ -650,5 +650,110 @@
   .es3d-ring,
   .stage-bar {
     animation: none;
+  }
+}
+
+
+/* ── softer, friendlier surfaces (2026-10 redesign): white bordered panels get rounded corners site-wide ── */
+:where(main, footer) :where(.border.border-line.bg-white, .border.border-line.bg-surface, .border.border-line.bg-cream) {
+  border-radius: 18px;
+  overflow: clip;
+}
+:where(main) :where(.brand-band) {
+  border-radius: 22px;
+}
+
+/* ── reveal on scroll (components/ui/Reveal.tsx adds data-in when the block enters the screen) ── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+[data-reveal][data-in] {
+  opacity: 1;
+  transform: none;
+}
+[data-reveal='zoom'] {
+  transform: scale(0.96);
+}
+[data-reveal='left'] {
+  transform: translateX(-28px);
+}
+
+/* ── hero: slow drifting colour fields behind the content ── */
+.hero-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.55;
+  pointer-events: none;
+  animation: glowDrift 18s ease-in-out infinite alternate;
+}
+@keyframes glowDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(40px, -30px, 0) scale(1.12);
+  }
+}
+.float-slow {
+  animation: floatSlow 7s ease-in-out infinite;
+}
+.float-slow-2 {
+  animation: floatSlow 9s ease-in-out -3s infinite;
+}
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--rot, 0deg));
+  }
+  50% {
+    transform: translateY(-12px) rotate(var(--rot, 0deg));
+  }
+}
+
+/* ── photo marquee (housing, workplaces) ── */
+.photo-marquee {
+  display: flex;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.photo-marquee > ul {
+  display: flex;
+  flex: none;
+  gap: 14px;
+  padding-right: 14px;
+  animation: ticker var(--dur, 70s) linear infinite;
+}
+.photo-marquee:hover > ul {
+  animation-play-state: paused;
+}
+
+/* photo tiles zoom gently on hover */
+.zoom-img img {
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.zoom-img:hover img {
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-glow,
+  .float-slow,
+  .float-slow-2,
+  .photo-marquee > ul {
+    animation: none;
+  }
+  .photo-marquee {
+    overflow-x: auto;
   }
 }

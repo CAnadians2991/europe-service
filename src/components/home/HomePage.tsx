@@ -19,6 +19,9 @@ import { LicenseSection } from '@/components/trust/LicenseSection'
 import { Guarantees } from '@/components/trust/Guarantees'
 import { Suitcase3D } from './Suitcase3D'
 import { VacancyTicker } from './VacancyTicker'
+import { Reveal } from '@/components/ui/Reveal'
+import { CountUp } from '@/components/ui/CountUp'
+import { ClientVideos, HomeHero, HousingStrip, JobCategories, categoryPhotos } from './HomeVisual'
 import { OfficeTeam } from '@/components/trust/OfficeTeam'
 import { SocialLinks } from '@/components/layout/SocialLinks'
 import { Blocks } from '@/components/content/Blocks'
@@ -163,6 +166,13 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
   const byNew = [...all].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
   const hot = [...all.filter((v) => v.hot), ...byNew.filter((v) => !v.hot)].slice(0, 6).map((v) => toCard(localize(v, lang)))
   const countries = COUNTRIES.map((c) => ({ ...c, count: all.filter((v) => v.country === c.code).length })).filter((c) => c.count)
+  // real photos: workplaces (hot vacancy covers), housing sent by clients, video reviews of clients
+  const heroPhotos = categoryPhotos(all)
+  const heroList = [heroPhotos.warehouse, heroPhotos.horeca, heroPhotos.auto].filter(Boolean) as string[]
+  const housing = [...new Set(all.flatMap((v) => v.housingPhotos.slice(0, 2)))].slice(0, 16)
+  const videos = REVIEWS.filter((r) => r.video && r.video.endsWith('.mp4') && (r.lang === lang || lang === 'ru'))
+    .map((r) => ({ poster: r.video!.replace(/\.mp4$/, '.webp'), name: r.name, vacancy: (lang === 'ru' ? r.vacancyRu : undefined) ?? r.vacancy, city: r.city }))
+    .filter((v) => !v.poster.includes('/work-'))
   const countryImage: Record<string, string> = Object.fromEntries((U.countries?.items ?? []).filter((c) => c.country && c.image).map((c) => [c.country as string, c.image as string]))
   for (const c of countries) if (!countryImage[c.code]) {
     const v = all.find((x) => x.country === c.code && x.photos[0])
@@ -183,82 +193,19 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       <JsonLd data={websiteLd()} />
       <JsonLd data={faqLd(faq)} />
 
-      {/* ───────── HERO: the promise on the left, the live register on the right ───────── */}
-      <section className="relative overflow-hidden border-b border-line bg-white">
-        <div className="container-x grid gap-10 pb-12 pt-10 sm:pt-14 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.9fr)] lg:gap-14 lg:pb-16 lg:pt-16">
-          <div className="relative animate-rise">
-            <p className="eyebrow">
-              <span className="size-2 bg-leaf" aria-hidden />
-              {t.kicker}
-            </p>
-            <h1 className="mt-5 text-[32px] min-[380px]:text-[36px] sm:text-[52px] lg:text-[62px]">
-              <Accent text={t.h1} word={uk ? 'Європі' : 'Европе'} />
-            </h1>
-            <p className="mt-6 max-w-[600px] text-[17px] leading-relaxed text-ink-2 sm:text-[18px]">{t.sub}</p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <QuizButton id="hero" className="btn-accent !px-7">
-                {t.pick} <IconArrow className="size-4" />
-              </QuizButton>
-              <Link href={catalog} className="btn-ghost !px-7">
-                {t.all(all.length)}
-              </Link>
-            </div>
-            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
-              <a href={`tel:${SITE.phone}`} className="num inline-flex min-h-11 flex-wrap items-center gap-x-2 text-[17px] font-semibold text-ink hover:text-brand-700">
-                <span className="whitespace-nowrap">{SITE.phoneDisplay}</span> <span className="font-sans text-[14px] font-normal text-muted">{t.free}</span>
-              </a>
-              <ChatButtons place="home-hero" lang={lang} inline />
-            </div>
-          </div>
+      {/* ───────── HERO: what we do + the request form right away ───────── */}
+      <HomeHero lang={lang} total={all.length} photos={heroList} />
 
-          {/* the logo as a 3-D object, the live register of open vacancies under it */}
-          <div className="relative animate-rise [animation-delay:120ms]">
-            <span aria-hidden className="pointer-events-none absolute left-1/2 top-[38%] size-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(94_197_138/0.28),rgb(87_143_199/0.14)_55%,transparent)] blur-2xl" />
-            <div className="relative mx-auto w-fit">
-              <span className="es3d-orbit" aria-hidden>
-                <span className="es3d-ring" />
-                <span className="es3d-ring es3d-ring-2" />
-              </span>
-              <Suitcase3D className="relative" />
-            </div>
-            <div className="relative mt-5 hidden border border-line bg-white shadow-[var(--shadow-lift)] sm:block">
-              <div className="rule-grad" />
-              <div className="flex items-end justify-between gap-4 px-5 pb-3 pt-4">
-                <div>
-                  <p className="font-mono text-[11.5px] uppercase tracking-[0.1em] text-muted">{t.open}</p>
-                  <p className="font-display text-[44px] font-semibold leading-none tracking-[-0.04em]">{all.length}</p>
-                </div>
-                <p className="pb-1 text-right font-mono text-[11.5px] leading-snug text-muted">
-                  {t.openSub}
-                  <br />
-                  {t.updated}
-                </p>
-              </div>
-              <ul className="grid grid-cols-2 border-t border-line">
-                {countries.slice(0, 6).map((c, i) => (
-                  <li key={c.code} className={`border-b border-line ${i % 2 ? 'border-l' : ''}`}>
-                    <Link href={localHref(c.path, lang)} className="group flex min-h-12 items-center gap-2.5 px-4 py-2 text-[15px] font-medium hover:bg-brand-50">
-                      <span className="num w-6 text-[11px] font-semibold uppercase text-muted">{c.code}</span>
-                      <span className="flex-1 truncate">{uk ? c.name : c.nameRu}</span>
-                      <span className="num text-[14px] font-semibold text-brand-700">{c.count}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <Link href={catalog} className="flex items-center justify-between px-5 py-3 text-[15px] font-semibold hover:bg-brand-50">
-                {t.allCountries} <span aria-hidden className="text-brand-700">→</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-
+      <section className="border-b border-line bg-white" aria-label={uk ? 'Europe Service у цифрах' : 'Europe Service в цифрах'}>
         {/* facts strip */}
         <div className="border-t border-line">
           <dl className="container-x grid grid-cols-2 lg:grid-cols-4">
             {t.facts.map(([v, l], i) => (
               <div key={v} className={`py-5 pr-4 ${i % 2 ? 'border-l border-line pl-4 lg:pl-6' : ''} ${i > 1 ? 'border-t border-line lg:border-t-0' : ''} ${i === 2 ? 'lg:border-l lg:pl-6' : ''}`}>
                 <dt className="sr-only">{l}</dt>
-                <dd className="font-display text-[24px] font-semibold leading-none tracking-[-0.02em] sm:text-[30px]">{v}</dd>
+                <dd className="font-display text-[24px] font-semibold leading-none tracking-[-0.02em] sm:text-[30px]">
+                  <CountUp value={v} />
+                </dd>
                 <dd className="mt-2 text-[14px] leading-snug text-muted">{l}</dd>
               </div>
             ))}
@@ -270,6 +217,9 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       {/* ───────── GUARANTEES first: trust before the offer ───────── */}
       <Guarantees lang={lang} />
 
+      {/* ───────── ANY JOB: job types as photo tiles ───────── */}
+      <JobCategories lang={lang} all={all} photos={categoryPhotos(all)} catalog={catalog} />
+
       {/* ───────── 01 HOT VACANCIES ───────── */}
       <section className="container-x py-16 sm:py-20" aria-labelledby="hot-h">
         <div className="flex flex-wrap items-end justify-between gap-6">
@@ -278,20 +228,23 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
             {t.all(all.length)} <IconArrow className="size-4" />
           </Link>
         </div>
-        <div className="mt-8 border-x border-t border-line">
+        <Reveal className="mt-8 overflow-hidden rounded-[18px] border border-line bg-white">
           {hot.map((v, i) => (
-            <VacancyCard key={v.id} v={v} lang={lang} priority={i === 0} />
+            <div key={v.id} data-reveal style={{ ['--i' as string]: i }}>
+              <VacancyCard v={v} lang={lang} priority={i === 0} />
+            </div>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* ───────── 02 STEPS — how it goes ───────── */}
       <section className="border-y border-line bg-white" aria-labelledby="steps-h">
         <div className="container-x py-14 sm:py-20">
         <SectionHead id="steps-h" index={2} eyebrow={t.stepsLabel} title={t.stepsTitle} />
+        <Reveal>
         <ol className="mt-12 grid gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-6">
           {STEPS[lang].map(([title, text], i, all) => (
-            <li key={title}>
+            <li key={title} data-reveal style={{ ['--i' as string]: i }}>
               <span className="block bg-line">
                 <span className="stage-bar" style={{ opacity: 0.4 + (0.6 * (i + 1)) / all.length }} />
               </span>
@@ -307,6 +260,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
             </li>
           ))}
         </ol>
+        </Reveal>
         <div className="mt-10">
           <QuizButton id="steps" className="btn-accent !px-7">
             {t.pick} <IconArrow className="size-4" />
@@ -315,18 +269,22 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
         </div>
       </section>
 
+      <HousingStrip lang={lang} photos={housing} />
+      <ClientVideos lang={lang} videos={videos} />
+
       {/* ───────── 03 COUNTRIES — an index ───────── */}
       <section className="border-y border-line bg-white" aria-labelledby="countries-h">
         <div className="container-x py-16 sm:py-20">
           <SectionHead id="countries-h" index={3} eyebrow={t.countries} title={t.countriesTitle} />
+          <Reveal>
           <ul className="mt-8 grid border-t-[3px] border-ink sm:grid-cols-2 sm:gap-x-10">
-            {countries.map((c) => (
-              <li key={c.code} className="border-b border-line">
+            {countries.map((c, i) => (
+              <li key={c.code} className="border-b border-line" data-reveal="left" style={{ ['--i' as string]: i % 6 }}>
                 <Link href={localHref(c.path, lang)} className="group flex min-h-[76px] items-center gap-4 py-3">
                   {countryImage[c.code] ? (
-                    <Photo base={countryImage[c.code]} alt="" width={96} height={64} sizes="96px" className="h-14 w-20 shrink-0 object-cover" />
+                    <Photo base={countryImage[c.code]} alt="" width={96} height={64} sizes="96px" className="h-14 w-20 shrink-0 rounded-xl object-cover" />
                   ) : (
-                    <span className="brand-band grid h-14 w-20 shrink-0 place-items-center font-mono text-[13px] font-semibold uppercase text-white">{c.code}</span>
+                    <span className="brand-band grid h-14 w-20 shrink-0 place-items-center rounded-xl font-mono text-[13px] font-semibold uppercase text-white">{c.code}</span>
                   )}
                   <span className="flex-1 font-display text-[19px] font-semibold tracking-[-0.01em] group-hover:text-brand-700 sm:text-[21px]">{uk ? c.name : c.nameRu}</span>
                   <span className="num text-[14px] text-muted">
@@ -337,6 +295,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
               </li>
             ))}
           </ul>
+          </Reveal>
           {uk && (U.cities?.items.length || U.audiences?.items.length) ? (
             <div className="mt-10 grid gap-8 lg:grid-cols-2">
               {U.cities?.items.length ? (

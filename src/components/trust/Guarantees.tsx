@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { SITE } from '@/lib/site'
 import { LicenseStamp } from './LicenseStamp'
+import { Reveal } from '@/components/ui/Reveal'
 
 type Item = { t: string; d: string; check: string; href?: string; label?: string }
 
@@ -59,7 +60,7 @@ export function Guarantees({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
           </p>
         </div>
 
-        <div className="reveal relative border border-line bg-white shadow-[var(--shadow-lift)]">
+        <Reveal className="relative border border-line bg-white shadow-[var(--shadow-lift)]">
           <div className="rule-grad" />
           <div className="flex items-baseline justify-between gap-4 border-b border-line px-6 py-4 sm:px-8">
             <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em]">{t.doc}</p>
@@ -67,7 +68,7 @@ export function Guarantees({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
           </div>
           <ol>
             {t.items.map((it, i) => (
-              <li key={it.t} className="grid grid-cols-[34px_minmax(0,1fr)] gap-x-3 border-b border-line px-4 py-4 sm:grid-cols-[52px_minmax(0,1fr)] sm:gap-x-6 sm:px-8 sm:py-6">
+              <li key={it.t} data-reveal style={{ ['--i' as string]: i % 4 }} className="grid grid-cols-[34px_minmax(0,1fr)] gap-x-3 border-b border-line px-4 py-4 sm:grid-cols-[52px_minmax(0,1fr)] sm:gap-x-6 sm:px-8 sm:py-6">
                 <span className="num text-[20px] font-medium leading-none text-brand-600 sm:text-[28px]">{String(i + 1).padStart(2, '0')}</span>
                 <div>
                   <h3 className="text-[17px] leading-snug sm:text-[19px]">{it.t}</h3>
@@ -106,7 +107,7 @@ export function Guarantees({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
             </div>
             <LicenseStamp lang={lang} uid="guar" className="size-28 shrink-0 rotate-[-10deg] text-brand-700/85 mix-blend-multiply sm:size-32" />
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

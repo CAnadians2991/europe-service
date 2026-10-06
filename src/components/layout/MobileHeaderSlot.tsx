@@ -65,7 +65,7 @@ export function MobileHeaderSlot({ lang, home, children }: { lang: 'uk' | 'ru'; 
 
   const formInView = formSeen?.path === path && formSeen.on
   const show = scrolled && !formInView && !isQuizPage(path)
-  const label = action ? (uk ? 'Забронювати місце' : 'Забронировать место') : uk ? 'Підібрати вакансію' : 'Подобрать вакансию'
+  const label = action ? (uk ? 'Забронювати місце' : 'Забронировать место') : uk ? 'Підібрати роботу' : 'Подобрать работу'
 
   return (
     <div className="flex h-11 min-w-0 flex-1 items-center gap-2 sm:flex-none">

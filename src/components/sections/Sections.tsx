@@ -11,7 +11,6 @@ export function SectionHead({ eyebrow, title, text, center, id, dark, index }: {
     <div className={center ? 'mx-auto max-w-2xl text-center' : 'max-w-3xl'}>
       {eyebrow && (
         <p className={`eyebrow ${dark ? '!text-white/80' : ''}`}>
-          {index != null && <span className="opacity-60">{String(index).padStart(2, '0')} —</span>}
           {eyebrow}
         </p>
       )}

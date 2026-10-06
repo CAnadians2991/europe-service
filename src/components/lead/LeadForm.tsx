@@ -48,6 +48,8 @@ export interface LeadFormProps {
   lang?: 'uk' | 'ru'
   onSuccess?: () => void
   askMessenger?: boolean
+  /** «Коли зручно поговорити?» — the manager calls / writes at that time */
+  askTime?: boolean
   onNameChange?: (name: string) => void
   /** extra validation (e.g. required questionnaire fields); return an error text to block sending */
   validate?: () => string | null
@@ -113,6 +115,7 @@ export function LeadForm({
   lang = 'uk',
   onSuccess,
   askMessenger = false,
+  askTime = false,
   onNameChange,
   validate,
   namePlaceholder,
@@ -129,6 +132,7 @@ export function LeadForm({
   const [local, setLocal] = useState('')
   const [name, setName] = useState('')
   const [messenger, setMessenger] = useState('')
+  const [when, setWhen] = useState('')
   const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
   const [err, setErr] = useState<{ name?: string; phone?: string; extra?: string }>({})
 
@@ -184,7 +188,7 @@ export function LeadForm({
           form,
           vacancyId,
           vacancyTitle,
-          answers: { ...(answers || {}), ...(messenger ? { messenger } : {}) },
+          answers: { ...(answers || {}), ...(messenger ? { messenger } : {}), ...(when ? { 'Коли зручно': when } : {}) },
           page: location.pathname,
           attr,
           hp: fd.get('company_site'),
@@ -358,6 +362,24 @@ export function LeadForm({
                 className={dark ? `chip !border-white/40 !bg-transparent !text-white hover:!border-white aria-pressed:!border-white aria-pressed:!bg-white aria-pressed:!text-ink` : 'chip'}
               >
                 {l}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+      )}
+      {askTime && (
+        <fieldset>
+          <legend className={labelCls}>{lang === 'uk' ? 'Коли зручно поговорити?' : 'Когда удобно поговорить?'}</legend>
+          <div className="flex flex-wrap gap-2">
+            {(lang === 'uk' ? ['Зараз', 'Зранку', 'Вдень', 'Ввечері'] : ['Сейчас', 'Утром', 'Днём', 'Вечером']).map((v) => (
+              <button
+                key={v}
+                type="button"
+                aria-pressed={when === v}
+                onClick={() => setWhen(when === v ? '' : v)}
+                className={dark ? `chip !border-white/40 !bg-transparent !text-white hover:!border-white aria-pressed:!border-white aria-pressed:!bg-white aria-pressed:!text-ink` : 'chip'}
+              >
+                {v}
               </button>
             ))}
           </div>
