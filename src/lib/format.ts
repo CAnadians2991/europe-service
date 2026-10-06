@@ -7,8 +7,10 @@ export const CURRENCY_SIGN: Record<Currency, string> = { PLN: 'zł', EUR: '€',
 const TO_EUR: Record<Currency, number> = { PLN: 0.235, EUR: 1, CZK: 0.04, RON: 0.2, HUF: 0.0025, USD: 0.92, GBP: 1.17, CHF: 1.06, SEK: 0.088, NOK: 0.086, DKK: 0.134 }
 
 const nf = new Intl.NumberFormat('uk-UA', { maximumFractionDigits: 2 })
+// money with kopecks always shows two digits: «36,30 zł», not «36,3 zł»
+const nf2 = new Intl.NumberFormat('uk-UA', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 // thousands are glued with a no-break space (any ICU flavour → U+00A0), so «4 700 zł» never splits into «4» / «700 zł» on a phone
-export const num = (n: number) => nf.format(n).replace(/[\u00a0\u202f ]/g, '\u00a0')
+export const num = (n: number) => (Number.isInteger(n) ? nf : nf2).format(n).replace(/[\u00a0\u202f ]/g, '\u00a0')
 
 function range(a: number | null, b: number | null) {
   if (a == null && b == null) return ''

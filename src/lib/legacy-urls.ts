@@ -30,12 +30,20 @@ export function tildaPostTarget(pathname: string): string | null {
     const to = TPOST[m[1].toLowerCase()]
     if (to) {
       const clean = pathname.replace(/\/+$/, '')
-      return to.toLowerCase() === clean.toLowerCase() ? (clean === pathname ? null : to) : to
+      // the Russian page of a vacancy lives at /ru + its address (the route sends untranslated ones back)
+      const own = to.toLowerCase() === clean.toLowerCase() || (!to.startsWith('/ru/') && clean.toLowerCase() === '/ru' + to.toLowerCase())
+      return own ? (clean === pathname ? null : clean) : to
     }
-    return pathname.startsWith('/ru/') ? '/ru/news' : pathname.includes('/news/') ? '/news' : '/vacancies/aktualni_vakansii'
+    // unknown uid: a vacancy added in the admin after the import — the route decides (tpostFallback when it does not exist)
+    return null
   }
   if (/\/tproduct\//i.test(pathname)) return pathname.startsWith('/ru/') ? '/ru/vacancies/aktualni_vakansii' : '/vacancies/aktualni_vakansii'
   return null
+}
+
+/** Where a /tpost/ address that matches nothing goes (Tilda's deleted posts were linked from outside) */
+export function tpostFallback(pathname: string): string {
+  return pathname.startsWith('/ru/') ? '/ru/news' : pathname.includes('/news/') ? '/news' : '/vacancies/aktualni_vakansii'
 }
 
 export function canonicalPath(pathname: string): string | null {

@@ -4,7 +4,9 @@ import { ARTICLES, LEGAL, PAGES, getArticle, getLegal, hubPosts, isObsolete, pag
 import { LANDINGS, getLanding } from '@/lib/landing'
 import { QUIZZES, getQuiz } from '@/lib/quizzes'
 import { pageMeta } from '@/lib/seo'
+import { permanentRedirect } from 'next/navigation'
 import { getActiveVacancies, getVacancyByPath } from '@/lib/vacancies'
+import { hasRu } from '@/lib/vacancy-i18n'
 import { VacancyView, vacancyPageMeta } from '@/components/vacancy/VacancyView'
 import { ArticlePage, articleSummary } from './ArticlePage'
 import { PageHero } from './PageHero'
@@ -28,8 +30,12 @@ export async function contentPaths(lang: Lang) {
   for (const l of LEGAL) out.add(l.path)
   for (const q of QUIZZES) out.add(q.path)
   for (const p of Object.values(PAGES)) if (p?.path && !p.broken) out.add(p.path)
-  // open vacancy posts are prerendered; the closed ones render on the first visit
-  for (const v of vacancies) if (!v.path.startsWith('/vacancies') && !v.path.startsWith('/vakansii')) out.add(v.path)
+  // open vacancy posts are prerendered (+ their Russian pages); the closed ones render on the first visit
+  for (const v of vacancies) {
+    if (v.path.startsWith('/vacancies') || v.path.startsWith('/vakansii')) continue
+    out.add(v.path)
+    if (hasRu(v)) out.add('/ru' + v.path)
+  }
   return [...out].filter((p) => inLang(p, lang) && !OWN_ROUTES.has(p))
 }
 
@@ -49,13 +55,20 @@ export async function resolveContent(path: string) {
   // vacancy posts at their Tilda address: /tpost/<id>-<slug> (open and closed ones)
   const v = await getVacancyByPath(path)
   if (v) return { kind: 'vacancy' as const, v }
+  // Russian page of a vacancy: /ru + its address; untranslated → back to the Ukrainian page
+  if (path.startsWith('/ru/')) {
+    const uk = await getVacancyByPath(path.slice(3))
+    if (uk) return hasRu(uk) && uk.lang !== 'ru' ? { kind: 'vacancy-ru' as const, v: uk } : { kind: 'redirect' as const, to: uk.path }
+  }
   return null
 }
 
 export async function contentMetadata(path: string): Promise<Metadata> {
   const r = await resolveContent(path)
   if (!r) return {}
+  if (r.kind === 'redirect') return {}
   if (r.kind === 'vacancy') return vacancyPageMeta(r.v)
+  if (r.kind === 'vacancy-ru') return vacancyPageMeta(r.v, 'ru')
   if (r.kind === 'article') {
     const a = r.a
     return pageMeta({
@@ -70,7 +83,7 @@ export async function contentMetadata(path: string): Promise<Metadata> {
       hreflang: Boolean(a.twin),
     })
   }
-  if (r.kind === 'landing') return pageMeta({ title: r.l.title, description: r.l.description || r.l.h1, path, lang: r.l.lang, absoluteTitle: true, hreflang: Boolean(r.l.twin) })
+  if (r.kind === 'landing') return pageMeta({ title: r.l.title, description: r.l.description || r.l.h1, path, lang: r.l.lang, absoluteTitle: true, hreflang: Boolean(r.l.twin), canonical: r.l.canonical })
   if (r.kind === 'quiz') return pageMeta({ title: r.q.title, description: r.q.description, path, noindex: r.q.noindex, absoluteTitle: true })
   if (r.kind === 'legal') return pageMeta({ title: r.doc.seoTitle || r.doc.title, description: r.doc.seoDescription || r.doc.title, path, noindex: true, absoluteTitle: true })
   const p = r.page
@@ -80,7 +93,9 @@ export async function contentMetadata(path: string): Promise<Metadata> {
 export async function ContentView({ path, lang }: { path: string; lang: Lang }) {
   const r = await resolveContent(path)
   if (!r) return null
+  if (r.kind === 'redirect') permanentRedirect(r.to)
   if (r.kind === 'vacancy') return <VacancyView v={r.v} />
+  if (r.kind === 'vacancy-ru') return <VacancyView v={r.v} as="ru" />
   const home = { name: lang === 'uk' ? 'Головна' : 'Главная', path: lang === 'uk' ? '/' : '/ru' }
   if (r.kind === 'article') return <ArticlePage a={r.a} posts={hubPosts(r.a)} />
   if (r.kind === 'landing') return <LandingCatalog lang={r.l.lang} landing={r.l} path={path} active={await getActiveVacancies()} />

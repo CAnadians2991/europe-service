@@ -5,6 +5,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'node:crypto'
 import sharp from 'sharp'
+import { sanitizeVacancy } from './sanitize.mjs'
 
 const HERE = import.meta.dirname
 const EXPORT = path.resolve(HERE, '../../../tilda-export/project1613842')
@@ -151,6 +152,15 @@ for (const r of RAW) {
   if (r.active) process.stdout.write(`${r.id} photos:${photos.length} housing:${housingPhotos.length}\n`)
 }
 
+// Russian texts of the open vacancies (out/vacancies.ru.json, keyed by id) → data.ru → pages at /ru + Tilda address
+const RU_FILE = path.join(HERE, 'out/vacancies.ru.json')
+if (fs.existsSync(RU_FILE)) {
+  const ru = JSON.parse(fs.readFileSync(RU_FILE, 'utf8'))
+  let k = 0
+  for (const v of vacancies) if (ru[v.id]?.title && v.lang !== 'ru') (v.ru = sanitizeVacancy(ru[v.id])), k++
+  console.log('ru texts', k)
+}
+for (const list of [vacancies, closed]) for (let i = 0; i < list.length; i++) list[i] = { ...sanitizeVacancy(list[i]), ...(list[i].ru ? { ru: list[i].ru } : {}) }
 fs.mkdirSync(path.dirname(OUT), { recursive: true })
 fs.writeFileSync(OUT, JSON.stringify(vacancies, null, 1))
 fs.mkdirSync(path.dirname(OUT_CLOSED), { recursive: true })

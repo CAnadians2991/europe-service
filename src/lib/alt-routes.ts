@@ -15,8 +15,12 @@ const STATIC: Record<string, string> = {
   '/pidbir': '/ru/podbor',
   '/news': '/ru/news',
 }
-export const UK_TO_RU: Record<string, string> = { ...(twins as Record<string, string>), ...STATIC }
+const { vacancyRu: _vr, ...pairs } = twins as Record<string, unknown> & { vacancyRu?: string[] }
+export const UK_TO_RU: Record<string, string> = { ...(pairs as Record<string, string>), ...STATIC }
 export const RU_TO_UK: Record<string, string> = Object.fromEntries(Object.entries(UK_TO_RU).map(([a, b]) => [b, a]))
+
+/** Russian vacancy pages that exist (translated open vacancies), written by the import into twins.json as «vacancyRu» */
+const VACANCY_RU = new Set<string>(((twins as unknown as { vacancyRu?: string[] }).vacancyRu ?? []) as string[])
 
 const COUNTRY_RX = /^\/(?:vacancies(?:\/(?:chekhiia|germany|netherlands|romania|lithuania|greece|latvia|austria|italy|belgium|france|canada))?|vakansii\/(?:hungary|slovakia|england))$/
 
@@ -25,6 +29,8 @@ export function ruTwin(ukPath: string): string | undefined {
   const pair = UK_TO_RU[ukPath]
   if (pair) return pair
   if (COUNTRY_RX.test(ukPath)) return '/ru' + ukPath
+  // a vacancy post has a Russian page only once it is translated (an hreflang must never point at a redirect)
+  if (/\/tpost\//.test(ukPath) && VACANCY_RU.has('/ru' + ukPath)) return '/ru' + ukPath
   return undefined
 }
 
@@ -32,6 +38,7 @@ export function ukTwin(ruPath: string): string | undefined {
   const pair = RU_TO_UK[ruPath]
   if (pair) return pair
   if (ruPath.startsWith('/ru/') && COUNTRY_RX.test(ruPath.slice(3))) return ruPath.slice(3)
+  if (/^\/ru\/(?:vacancies\/[a-z]+\/)?tpost\//.test(ruPath) && VACANCY_RU.has(ruPath)) return ruPath.slice(3)
   return undefined
 }
 

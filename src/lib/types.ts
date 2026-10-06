@@ -33,6 +33,9 @@ export interface Salary {
   /** The source (e.g. the job board) says neither нетто nor брутто: pages show the sum without either label.
    *  Cleared as soon as a manager picks нетто or брутто in the admin. */
   unlabelled?: boolean
+  /** the pay text as imported from Tilda, before the +19 % update of 2026-10 (salary.uplift = 1.19) */
+  source?: string
+  uplift?: number
 }
 
 /** Russian version of the text fields (shown on /ru/... pages); anything missing falls back to Ukrainian */

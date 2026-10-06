@@ -153,9 +153,37 @@ landings.landings = renamePaths(landings.landings).map(({ oldPath, duplicateOf, 
 landings.redirects = []
 console.log('paths restored to Tilda:', rename.size)
 
+// ---- language QA (out/lang-fix.json): whole fields replaced per page, home by dotted path ----
+const setPath = (obj, dotted, val) => {
+  const keys = dotted.split('.')
+  let o = obj
+  for (const k of keys.slice(0, -1)) o = o?.[/^\d+$/.test(k) ? +k : k]
+  if (o && typeof o === 'object') o[keys.at(-1)] = val
+}
+const patchByPath = (list, patch = {}) => {
+  let n = 0
+  for (const x of list) if (patch[x.path]) Object.assign(x, patch[x.path]), n++
+  return n
+}
+const extra = { home: null, pages: null }
+if (exists('lang-fix.json')) {
+  const fix = read('lang-fix.json')
+  console.log('lang-fix landings', patchByPath(landings.landings, fix.landings), 'articles', patchByPath(articles.articles, fix.articles))
+  extra.pages = fix.pages
+  extra.home = fix.home
+}
+// Tilda's near-copies: both stay online, one is canonical
+const CANONICAL = { '/vacancies/chekhiia/brno': '/vacancies/chekhiia/robota_v_brno' }
+for (const l of landings.landings) if (CANONICAL[l.path]) l.canonical = CANONICAL[l.path]
+
 await build('articles', { articles: articles.articles })
 await build('landings', { landings: landings.landings })
-for (const f of ['home', 'pages', 'services', 'reviews', 'legal', 'quizzes']) if (exists(`${f}.json`)) await build(f, renamePaths(read(`${f}.json`)))
+const patchFile = (f, data) => {
+  if (f === 'pages' && extra.pages) for (const [k, v] of Object.entries(extra.pages)) if (data[k]) Object.assign(data[k], v)
+  if (f === 'home' && extra.home) for (const [lang, fields] of Object.entries(extra.home)) for (const [k, v] of Object.entries(fields)) setPath(data[lang], k, v)
+  return data
+}
+for (const f of ['home', 'pages', 'services', 'reviews', 'legal', 'quizzes']) if (exists(`${f}.json`)) await build(f, patchFile(f, renamePaths(read(`${f}.json`))))
 
 // ---- hreflang pairs: uk path -> ru path (landings + articles that carry `twin`) ----
 const twins = {}
@@ -164,6 +192,9 @@ for (const x of [...landings.landings, ...articles.articles]) {
   if (x.lang === 'uk') twins[x.path] = x.twin
   else if (!Object.values(twins).includes(x.path)) twins[x.twin] = x.path
 }
+// Russian pages of translated vacancies (/ru + Tilda address) — ukTwin needs the list without loading the seed
+const SEED = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../../src/data/vacancies.seed.json')
+if (fs.existsSync(SEED)) twins.vacancyRu = JSON.parse(fs.readFileSync(SEED, 'utf8')).filter((v) => v.ru?.title && v.lang !== 'ru').map((v) => '/ru' + v.path)
 fs.writeFileSync(path.join(OUTDIR, 'twins.json'), JSON.stringify(twins, null, 1))
 console.log('twins', Object.keys(twins).length)
 

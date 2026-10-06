@@ -1,3 +1,4 @@
+import { permanentRedirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getActiveVacancies, getAllVacancies, getVacancyByPath, similar, toCard } from '@/lib/vacancies'
 import { CATALOG_PATH, COUNTRY, COUNTRIES, SITE } from '@/lib/site'
@@ -36,7 +37,8 @@ type Resolved =
   | { kind: 'all'; path: string; lang: Lang }
   | { kind: 'country'; path: string; lang: Lang; country: CountryInfo; landing?: LandingPage }
   | { kind: 'landing'; path: string; lang: Lang; landing: LandingPage }
-  | { kind: 'vacancy'; path: string; lang: Lang; v: Vacancy }
+  | { kind: 'vacancy'; path: string; lang: Lang; v: Vacancy; as?: Lang }
+  | { kind: 'redirect'; path: string; lang: Lang; to: string }
 
 const pathOf = (root: Root, slug: string[] = []) => root + (slug.length ? '/' + slug.map((s) => decodeURIComponent(s)).join('/') : '')
 
@@ -54,6 +56,11 @@ export async function resolveVacancies(root: Root, slug: string[] = []): Promise
   // vacancy posts: /vacancies/netherlands/tpost/<id>-<slug> (Tilda's address), or a card link like /vacancies/hm
   const v = await getVacancyByPath(path)
   if (v) return { kind: 'vacancy', path, lang, v }
+  // /ru/vacancies/netherlands/tpost/… — the Russian page of a translated vacancy
+  if (lang === 'ru') {
+    const uk = await getVacancyByPath(path.slice(3))
+    if (uk) return hasRu(uk) && uk.lang !== 'ru' ? { kind: 'vacancy', path, lang, v: uk, as: 'ru' } : { kind: 'redirect', path, lang, to: uk.path }
+  }
   return null
 }
 
@@ -84,9 +91,10 @@ export async function vacanciesMetadata(root: Root, slug: string[] = []): Promis
   }
   if (r.kind === 'landing') {
     const l = r.landing
-    return pageMeta({ title: l.title, description: l.description || l.intro || l.h1, path: r.path, lang, absoluteTitle: true, hreflang: Boolean(l.twin) })
+    return pageMeta({ title: l.title, description: l.description || l.intro || l.h1, path: r.path, lang, absoluteTitle: true, hreflang: Boolean(l.twin), canonical: l.canonical })
   }
-  return vacancyPageMeta(r.v)
+  if (r.kind === 'redirect') return {}
+  return vacancyPageMeta(r.v, r.as)
 }
 
 function SeoText({ landing }: { landing?: LandingPage }) {
@@ -101,7 +109,8 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
   const uk = lang === 'uk'
   const active = await getActiveVacancies()
 
-  if (r.kind === 'vacancy') return <VacancyView v={r.v} />
+  if (r.kind === 'redirect') permanentRedirect(r.to)
+  if (r.kind === 'vacancy') return <VacancyView v={r.v} as={r.as} />
 
   const cards = active.map((v) => toCard(localize(v, lang)))
 

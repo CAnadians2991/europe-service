@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
+import { tpostFallback } from '@/lib/legacy-urls'
 import { VacanciesPage, resolveVacancies, vacanciesMetadata, vacanciesStaticParams } from '@/components/vacancy/VacanciesRoute'
 
 // Russian Tilda addresses: /ru/vacancies (Poland), /ru/vacancies/<country|city|job type>, /ru/vacancies/chekhiia/<landing>
@@ -17,6 +18,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params
-  if (!(await resolveVacancies(ROOT, slug))) notFound()
+  if (!(await resolveVacancies(ROOT, slug))) {
+    if (slug?.includes('tpost')) permanentRedirect(tpostFallback(ROOT + '/' + slug.join('/')))
+    notFound()
+  }
   return <VacanciesPage root={ROOT} slug={slug} />
 }

@@ -327,3 +327,367 @@
   background-color: var(--color-brand-600);
   color: #ffffff;
 }
+
+/* ── 3-D ES suitcase (components/home/Suitcase3D.tsx) ── */
+.es3d {
+  --w: 248px;
+  --h: 186px;
+  --d: 88px;
+  --rx: 10deg;
+  --ry: -24deg;
+  position: relative;
+  width: calc(var(--w) + 40px);
+  height: calc(var(--h) + 110px);
+  perspective: 1100px;
+}
+.es3d-float {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  animation: es3dFloat 7s ease-in-out infinite;
+}
+.es3d-box {
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+  margin-top: 46px;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation: es3dSway 14s ease-in-out infinite;
+}
+.es3d-face {
+  position: absolute;
+  backface-visibility: hidden;
+}
+.es3d-front,
+.es3d-back {
+  inset: 0;
+  border-radius: 30px;
+}
+.es3d-front {
+  transform: translateZ(calc(var(--d) / 2));
+  background: linear-gradient(140deg, #79dba5 0%, #3fb57a 34%, #2f9a86 62%, #5b93cc 100%);
+  box-shadow:
+    inset 0 0 0 1.5px rgb(255 255 255 / 0.28),
+    inset 0 -26px 44px rgb(10 40 30 / 0.16),
+    inset 0 22px 34px rgb(255 255 255 / 0.22);
+  overflow: hidden;
+}
+.es3d-front::after {
+  /* a soft studio highlight across the lid */
+  content: '';
+  position: absolute;
+  inset: -40% -10% auto -10%;
+  height: 70%;
+  background: linear-gradient(170deg, rgb(255 255 255 / 0.32), rgb(255 255 255 / 0) 60%);
+  transform: rotate(-8deg);
+}
+.es3d-back {
+  transform: rotateY(180deg) translateZ(calc(var(--d) / 2));
+  background: linear-gradient(140deg, #2b8f5a, #3d6f9f);
+}
+.es3d-right,
+.es3d-left {
+  top: 14px;
+  bottom: 14px;
+  width: var(--d);
+  left: calc(50% - var(--d) / 2);
+  border-radius: 20px;
+}
+.es3d-right {
+  transform: rotateY(90deg) translateZ(calc(var(--w) / 2 - 8px));
+  background: linear-gradient(180deg, #3f9f8e, #3a72a8);
+}
+.es3d-left {
+  transform: rotateY(-90deg) translateZ(calc(var(--w) / 2 - 8px));
+  background: linear-gradient(180deg, #35a66c, #2c8a6e);
+}
+.es3d-top,
+.es3d-bottom {
+  left: 14px;
+  right: 14px;
+  height: var(--d);
+  top: calc(50% - var(--d) / 2);
+  border-radius: 20px;
+}
+.es3d-top {
+  transform: rotateX(90deg) translateZ(calc(var(--h) / 2 - 8px));
+  background: linear-gradient(90deg, #8fe2b4, #7cb3e2);
+}
+.es3d-bottom {
+  transform: rotateX(-90deg) translateZ(calc(var(--h) / 2 - 8px));
+  background: #1b6450;
+}
+.es3d-handle {
+  position: absolute;
+  left: 50%;
+  top: -50px;
+  width: 92px;
+  height: 58px;
+  border: 13px solid #9fd8b8;
+  border-bottom: 0;
+  border-radius: 42px 42px 0 0;
+  box-shadow: inset 0 3px 0 rgb(255 255 255 / 0.55);
+  filter: drop-shadow(0 2px 3px rgb(15 36 27 / 0.18));
+}
+.es3d-handle-mid {
+  border-color: #6cc495;
+}
+.es3d-mark {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 82px;
+  letter-spacing: -0.05em;
+  color: #fff;
+  text-shadow:
+    0 2px 0 rgb(0 0 0 / 0.06),
+    0 12px 26px rgb(10 40 30 / 0.22);
+  z-index: 1;
+}
+.es3d-strap {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 9px;
+  background: rgb(255 255 255 / 0.16);
+}
+.es3d-strap-l {
+  left: 19%;
+}
+.es3d-strap-r {
+  right: 19%;
+}
+.es3d-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 72%;
+  height: 28px;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgb(15 36 27 / 0.3), transparent);
+  filter: blur(3px);
+  animation: es3dShadow 7s ease-in-out infinite;
+}
+@keyframes es3dFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+@keyframes es3dSway {
+  0%,
+  100% {
+    rotate: y -5deg;
+  }
+  50% {
+    rotate: y 7deg;
+  }
+}
+@keyframes es3dShadow {
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-50%) scale(0.85);
+    opacity: 0.65;
+  }
+}
+@media (max-width: 639px) {
+  .es3d {
+    --w: 176px;
+    --h: 132px;
+    --d: 64px;
+  }
+  .es3d-mark {
+    font-size: 58px;
+  }
+  .es3d-handle {
+    top: -36px;
+    width: 66px;
+    height: 42px;
+    border-width: 10px;
+  }
+  .es3d-box {
+    margin-top: 34px;
+  }
+}
+
+/* scroll reveal where the browser supports scroll-driven animations (no JS) */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+}
+
+/* the ground ring under the suitcase: a route orbit on the floor, two stops travel along it */
+.es3d-orbit {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  width: 330px;
+  height: 330px;
+  margin: 0 0 -165px -165px;
+  transform: rotateX(76deg);
+  pointer-events: none;
+}
+.es3d-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px dashed rgb(30 134 74 / 0.38);
+  animation: es3dSpin 36s linear infinite;
+}
+.es3d-ring::before,
+.es3d-ring::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-leaf);
+  box-shadow: 0 0 0 5px rgb(94 197 138 / 0.22);
+}
+.es3d-ring::before {
+  top: -7px;
+  left: calc(50% - 7px);
+}
+.es3d-ring::after {
+  bottom: -7px;
+  left: calc(50% - 7px);
+  background: #578fc7;
+  box-shadow: 0 0 0 5px rgb(87 143 199 / 0.2);
+}
+.es3d-ring-2 {
+  inset: 34px;
+  border-style: solid;
+  border-color: rgb(30 134 74 / 0.12);
+  animation-duration: 60s;
+  animation-direction: reverse;
+}
+.es3d-ring-2::before,
+.es3d-ring-2::after {
+  display: none;
+}
+@keyframes es3dSpin {
+  to {
+    rotate: 360deg;
+  }
+}
+@media (max-width: 639px) {
+  .es3d-orbit {
+    width: 240px;
+    height: 240px;
+    margin: 0 0 -120px -120px;
+  }
+}
+
+/* ── live ticker of fresh vacancies (components/home/VacancyTicker.tsx) ── */
+.ticker {
+  --gap: 2.5rem;
+  display: flex;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.ticker-track {
+  display: flex;
+  flex: none;
+  gap: var(--gap);
+  padding-right: var(--gap);
+  animation: ticker var(--dur, 80s) linear infinite;
+}
+.ticker:hover .ticker-track,
+.ticker:focus-within .ticker-track {
+  animation-play-state: paused;
+}
+@keyframes ticker {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* ── «route» of the steps: stations on a line, the last one is the job ── */
+.route {
+  --node: 52px;
+  position: relative;
+}
+.route::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--node) / 2 - 1px);
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: repeating-linear-gradient(180deg, var(--color-brand-500) 0 10px, transparent 10px 18px);
+  background-size: 2px 18px;
+  animation: routeV 1.2s linear infinite;
+  opacity: 0.55;
+}
+@keyframes routeV {
+  to {
+    background-position: 0 18px;
+  }
+}
+.route-node {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: var(--node);
+  height: var(--node);
+  border: 2px solid var(--color-ink);
+  background: var(--color-paper, #fff);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-ink);
+  z-index: 1;
+}
+.route li:last-child .route-node {
+  border-color: transparent;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-brand-600), #3f86c4);
+  box-shadow: 0 10px 24px -8px rgb(30 134 74 / 0.55);
+}
+@media (min-width: 1024px) {
+  .route::before {
+    left: 8px;
+    right: 8px;
+    top: calc(var(--node) / 2 - 1px);
+    bottom: auto;
+    width: auto;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--color-brand-500) 0 10px, transparent 10px 18px);
+    background-size: 18px 2px;
+    animation-name: routeH;
+  }
+  @keyframes routeH {
+    to {
+      background-position: 18px 0;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker {
+    overflow-x: auto;
+  }
+  .ticker-track,
+  .es3d-ring,
+  .route::before {
+    animation: none;
+  }
+}

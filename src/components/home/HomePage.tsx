@@ -16,7 +16,9 @@ import { LeadForm } from '@/components/lead/LeadForm'
 import { QuizButton } from '@/components/lead/LeadModal'
 import { ChatButtons } from '@/components/lead/ChatButtons'
 import { LicenseSection } from '@/components/trust/LicenseSection'
-import { LicenseStamp } from '@/components/trust/LicenseStamp'
+import { Guarantees } from '@/components/trust/Guarantees'
+import { Suitcase3D } from './Suitcase3D'
+import { VacancyTicker } from './VacancyTicker'
 import { OfficeTeam } from '@/components/trust/OfficeTeam'
 import { SocialLinks } from '@/components/layout/SocialLinks'
 import { Blocks } from '@/components/content/Blocks'
@@ -137,6 +139,19 @@ function LogoRow({ title, logos, big }: { title: string; logos: { src: string; a
   )
 }
 
+/** One phrase of the heading in the corporate gradient (no-op when the phrase is not there) */
+function Accent({ text, word }: { text: string; word: string }) {
+  const i = text.indexOf(word)
+  if (i < 0) return <>{text}</>
+  return (
+    <>
+      {text.slice(0, i)}
+      <span className="grad-text">{word}</span>
+      {text.slice(i + word.length)}
+    </>
+  )
+}
+
 export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
   const uk = lang === 'uk'
   const t = TX[lang]
@@ -168,12 +183,13 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       <section className="relative overflow-hidden border-b border-line bg-white">
         <div className="container-x grid gap-10 pb-12 pt-10 sm:pt-14 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.9fr)] lg:gap-14 lg:pb-16 lg:pt-16">
           <div className="relative animate-rise">
-            <LicenseStamp lang={lang} uid="hero" className="pointer-events-none absolute -bottom-6 right-0 hidden size-32 rotate-[-12deg] text-brand-700/80 mix-blend-multiply xl:block" />
             <p className="eyebrow">
               <span className="size-2 bg-leaf" aria-hidden />
               {t.kicker}
             </p>
-            <h1 className="mt-5 text-[32px] min-[380px]:text-[36px] sm:text-[52px] lg:text-[60px]">{t.h1}</h1>
+            <h1 className="mt-5 text-[32px] min-[380px]:text-[36px] sm:text-[52px] lg:text-[62px]">
+              <Accent text={t.h1} word={uk ? 'Європі' : 'Европе'} />
+            </h1>
             <p className="mt-6 max-w-[600px] text-[17px] leading-relaxed text-ink-2 sm:text-[18px]">{t.sub}</p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <QuizButton id="hero" className="btn-accent !px-7">
@@ -191,34 +207,42 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
             </div>
           </div>
 
-          {/* register of open vacancies — real numbers from the catalog */}
+          {/* the logo as a 3-D object, the live register of open vacancies under it */}
           <div className="relative animate-rise [animation-delay:120ms]">
-            <div className="brand-band relative p-6 text-white sm:p-7">
-              <div className="flex items-end justify-between gap-4 border-b border-white/25 pb-4">
+            <span aria-hidden className="pointer-events-none absolute left-1/2 top-[38%] size-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(94_197_138/0.28),rgb(87_143_199/0.14)_55%,transparent)] blur-2xl" />
+            <div className="relative mx-auto w-fit">
+              <span className="es3d-orbit" aria-hidden>
+                <span className="es3d-ring" />
+                <span className="es3d-ring es3d-ring-2" />
+              </span>
+              <Suitcase3D className="relative" />
+            </div>
+            <div className="relative mt-5 border border-line bg-white shadow-[var(--shadow-lift)]">
+              <div className="rule-grad" />
+              <div className="flex items-end justify-between gap-4 px-5 pb-3 pt-4">
                 <div>
-                  <p className="font-mono text-[12px] uppercase tracking-[0.1em] text-white/80">{t.open}</p>
-                  <p className="mt-1 font-display text-[64px] font-bold leading-none tracking-[-0.04em] sm:text-[76px]">{all.length}</p>
+                  <p className="font-mono text-[11.5px] uppercase tracking-[0.1em] text-muted">{t.open}</p>
+                  <p className="font-display text-[44px] font-semibold leading-none tracking-[-0.04em]">{all.length}</p>
                 </div>
-                <p className="pb-2 text-right font-mono text-[12px] leading-snug text-white/80">
+                <p className="pb-1 text-right font-mono text-[11.5px] leading-snug text-muted">
                   {t.openSub}
                   <br />
                   {t.updated}
                 </p>
               </div>
-              <ul className="mt-2">
-                {countries.slice(0, 7).map((c) => (
-                  <li key={c.code} className="border-b border-white/15 last:border-b-0">
-                    <Link href={localHref(c.path, lang)} className="group flex min-h-11 items-center gap-3 py-2 text-[15.5px] font-medium">
-                      <span className="num w-7 text-[12px] font-semibold uppercase text-white/70">{c.code}</span>
-                      <span className="flex-1 group-hover:underline group-hover:underline-offset-4">{uk ? c.name : c.nameRu}</span>
-                      <span className="num text-[15px] font-semibold">{c.count}</span>
-                      <span aria-hidden className="text-white/60 transition group-hover:translate-x-0.5 group-hover:text-white">→</span>
+              <ul className="grid grid-cols-2 border-t border-line">
+                {countries.slice(0, 6).map((c, i) => (
+                  <li key={c.code} className={`border-b border-line ${i % 2 ? 'border-l' : ''}`}>
+                    <Link href={localHref(c.path, lang)} className="group flex min-h-12 items-center gap-2.5 px-4 py-2 text-[15px] font-medium hover:bg-brand-50">
+                      <span className="num w-6 text-[11px] font-semibold uppercase text-muted">{c.code}</span>
+                      <span className="flex-1 truncate">{uk ? c.name : c.nameRu}</span>
+                      <span className="num text-[14px] font-semibold text-brand-700">{c.count}</span>
                     </Link>
                   </li>
                 ))}
               </ul>
-              <Link href={catalog} className="mt-3 flex items-center justify-between bg-white px-4 py-3 text-[15px] font-semibold text-ink hover:bg-brand-50">
-                {t.allCountries} <span className="num text-brand-700">{countries.length}</span>
+              <Link href={catalog} className="flex items-center justify-between px-5 py-3 text-[15px] font-semibold hover:bg-brand-50">
+                {t.allCountries} <span aria-hidden className="text-brand-700">→</span>
               </Link>
             </div>
           </div>
@@ -236,6 +260,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
             ))}
           </dl>
         </div>
+        <VacancyTicker list={byNew.slice(0, 14).map((v) => localize(v, lang))} lang={lang} />
       </section>
 
       {/* ───────── 01 HOT VACANCIES ───────── */}
@@ -326,12 +351,17 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       {/* ───────── 03 STEPS ───────── */}
       <section className="container-x pb-16 sm:pb-20" aria-labelledby="steps-h">
         <SectionHead id="steps-h" index={3} eyebrow={t.stepsLabel} title={t.stepsTitle} />
-        <ol className="mt-10 grid gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="route mt-12 grid gap-y-10 lg:grid-cols-4 lg:gap-x-8">
           {STEPS[lang].map(([title, text], i) => (
-            <li key={title} className="border-t-[3px] border-ink pt-5 sm:pr-8">
-              <span className="num block text-[44px] font-medium leading-none text-brand-600">{String(i + 1).padStart(2, '0')}</span>
-              <h3 className="mt-4 text-[19px]">{title}</h3>
-              <p className="mt-2 text-[15.5px] leading-relaxed text-ink-2">{text}</p>
+            <li key={title} className="relative min-h-[52px] pl-[76px] lg:pl-0 lg:pt-[84px]">
+              <span className="route-node" aria-hidden>
+                {i === STEPS[lang].length - 1 ? 'EU' : String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 className="text-[19px]">
+                <span className="sr-only">{i + 1}. </span>
+                {title}
+              </h3>
+              <p className="mt-2 max-w-[300px] text-[15.5px] leading-relaxed text-ink-2">{text}</p>
             </li>
           ))}
         </ol>
@@ -341,6 +371,8 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
           </QuizButton>
         </div>
       </section>
+
+      <Guarantees lang={lang} />
 
       {/* ───────── 04 ADVANTAGES — a spec sheet ───────── */}
       {advantages && (

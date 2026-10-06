@@ -29,9 +29,11 @@ export function pageMeta(o: {
   hreflang?: boolean
   /** near-copy of another page: rel=canonical points there (no hreflang, keep it out of the sitemap) */
   canonical?: string
+  /** explicit hreflang pairs (vacancy posts know their Russian page from the data, not from alt-routes) */
+  alternates?: Record<string, string>
 }): Metadata {
   const image = o.image ? imgAbs(o.image) : abs('/og-default.jpg')
-  const langs = o.hreflang === false || o.canonical ? undefined : languages(o.lang === 'ru' ? (ukTwin(o.path) ?? '') : o.path)
+  const langs = o.alternates ?? (o.hreflang === false || o.canonical ? undefined : languages(o.lang === 'ru' ? (ukTwin(o.path) ?? '') : o.path))
   const description = clip(o.description, 158)
   return {
     // brand suffix only when it fits (~60 chars) and isn't already in the title
@@ -67,7 +69,9 @@ export const organizationLd = (lang: 'uk' | 'ru' = 'uk') => ({
   image: `${SITE.url}/og-default.jpg`,
   telephone: SITE.phone,
   priceRange: '₴₴',
-  foundingDate: String(SITE.foundingYear),
+  foundingDate: '2018-10-03',
+  alternateName: ['Європа Сервіс', 'Европа Сервис', 'Europe Service Ukraine'],
+  slogan: lang === 'uk' ? 'Офіційна робота в Європі для українців' : 'Официальная работа в Европе для украинцев',
   address: {
     '@type': 'PostalAddress',
     streetAddress: lang === 'uk' ? SITE.address.street : 'ул. Сечевых Стрельцов, 77, офис 612',
@@ -80,18 +84,24 @@ export const organizationLd = (lang: 'uk' | 'ru' = 'uk') => ({
   email: SITE.email,
   areaServed: 'UA',
   sameAs: [SITE.instagram, SITE.facebook, SITE.telegram, SITE.tiktok, SITE.youtube],
-  contactPoint: {
-    '@type': 'ContactPoint',
-    telephone: SITE.phone,
-    contactType: 'customer service',
-    availableLanguage: ['uk', 'ru'],
-    areaServed: 'UA',
-  },
+  contactPoint: [
+    { '@type': 'ContactPoint', telephone: '+380800357278', contactType: 'customer service', availableLanguage: ['uk', 'ru'], areaServed: 'UA', contactOption: 'TollFree' },
+    ...SITE.phones.map((p) => ({ '@type': 'ContactPoint', telephone: p.tel, contactType: 'sales', availableLanguage: ['uk', 'ru'], areaServed: 'UA' })),
+  ],
+  // the five offices (Kyiv is the head office above)
+  department: SITE.offices
+    .filter((o) => !('main' in o && o.main))
+    .map((o) => ({
+      '@type': 'EmploymentAgency',
+      name: `${SITE.name} — ${lang === 'uk' ? o.city : o.cityRu}`,
+      telephone: o.phone,
+      address: { '@type': 'PostalAddress', ...(o.address ? { streetAddress: lang === 'uk' ? o.address : o.addressRu } : {}), addressLocality: lang === 'uk' ? o.city : o.cityRu, addressCountry: 'UA' },
+    })),
   // what AI answers and Google should connect us with
   knowsAbout:
     lang === 'uk'
-      ? ['працевлаштування за кордоном', 'робота в Польщі', 'робота в Чехії', 'робота в Німеччині', 'робота в Нідерландах', 'робота з житлом у Європі', 'робоча віза до Польщі', 'оформлення документів для роботи в ЄС']
-      : ['трудоустройство за границей', 'работа в Польше', 'работа в Чехии', 'работа в Германии', 'работа в Нидерландах', 'работа с жильём в Европе', 'рабочая виза в Польшу', 'оформление документов для работы в ЕС'],
+      ? ['працевлаштування за кордоном', 'робота в Польщі для українців', 'робота в Німеччині', 'робота в Чехії', 'робота в Литві', 'робота в Нідерландах', 'робота в Греції', 'робота на складі за кордоном', 'робота з безкоштовним житлом', 'Umowa Zlecenie', 'робоча віза D до Польщі', 'ліцензоване кадрове агентство']
+      : ['трудоустройство за границей', 'работа в Польше для украинцев', 'работа в Германии', 'работа в Чехии', 'работа в Литве', 'работа в Нидерландах', 'работа в Греции', 'работа на складе за границей', 'работа с бесплатным жильём', 'Umowa Zlecenie', 'рабочая виза D в Польшу', 'лицензированное кадровое агентство'],
   hasCredential: {
     '@type': 'EducationalOccupationalCredential',
     credentialCategory: lang === 'uk' ? 'Ліцензія на посередництво у працевлаштуванні за кордоном № 223' : 'Лицензия на посредничество в трудоустройстве за границей № 223',
@@ -110,8 +120,15 @@ export const websiteLd = () => ({
   '@id': `${SITE.url}/#website`,
   url: SITE.url,
   name: SITE.name,
-  inLanguage: 'uk-UA',
+  alternateName: 'Європа Сервіс',
+  inLanguage: ['uk-UA', 'ru-UA'],
   publisher: { '@id': `${SITE.url}/#org` },
+  // the catalog searches by ?q= (job, company, city)
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: { '@type': 'EntryPoint', urlTemplate: `${SITE.url}/vacancies/aktualni_vakansii?q={search_term_string}` },
+    'query-input': 'required name=search_term_string',
+  },
 })
 
 export function breadcrumbLd(items: { name: string; path: string }[]) {

@@ -48,9 +48,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     if (LANDINGS.some((l) => l.path === ru) || has) push(ru, { lastModified: lastVac, changeFrequency: 'daily', priority: 0.6 }, 'ru')
   }
   for (const l of LANDINGS) {
+    if (l.canonical) continue
     push(l.path, { lastModified: lastVac, changeFrequency: 'weekly', priority: l.lang === 'uk' ? 0.75 : 0.55 }, l.lang)
   }
-  for (const v of vacancies) push(v.path, { lastModified: v.updatedAt, changeFrequency: 'weekly', priority: v.hot ? 0.85 : 0.75 }, v.lang ?? 'uk')
+  for (const v of vacancies) {
+    push(v.path, { lastModified: v.updatedAt, changeFrequency: 'weekly', priority: v.hot ? 0.85 : 0.75 }, v.lang ?? 'uk')
+    if (v.ru?.title && v.lang !== 'ru') push('/ru' + v.path, { lastModified: v.updatedAt, changeFrequency: 'weekly', priority: 0.55 }, 'ru')
+  }
   // closed vacancy posts stay online at their Tilda addresses (Tilda listed them in sitemap-feed-*.xml too)
   for (const c of await getClosedVacancyPaths()) push(c.path, { lastModified: c.updatedAt, changeFrequency: 'yearly', priority: 0.3 }, 'uk')
   for (const p of ['/poslugi', '/about', '/vidguki', '/contacts', '/news', '/cooperation']) push(p, { lastModified: now, changeFrequency: 'monthly', priority: 0.6 })

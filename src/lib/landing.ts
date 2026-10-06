@@ -25,6 +25,8 @@ export interface LandingPage {
   blocks: Block[]
   faq?: { q: string; a: string }[]
   links?: { label: string; href: string }[]
+  /** near-copy of another landing (Tilda had both): stays online, rel=canonical points there, not in the sitemap */
+  canonical?: string
 }
 
 export const LANDINGS = ((landingsData as unknown as { landings?: LandingPage[] }).landings ?? []) as LandingPage[]
