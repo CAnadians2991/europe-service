@@ -6,6 +6,7 @@ import { LANDINGS } from '@/lib/landing'
 import { QUIZZES } from '@/lib/quizzes'
 import { VISA_PAGES } from '@/lib/visa'
 import { ruTwin, ukTwin } from '@/lib/alt-routes'
+import { PARTNER_PATHS, partnerAlternates } from '@/lib/partners'
 
 export const revalidate = 3600
 
@@ -58,8 +59,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
   // closed vacancy posts stay online at their Tilda addresses (Tilda listed them in sitemap-feed-*.xml too)
   for (const c of await getClosedVacancyPaths()) push(c.path, { lastModified: c.updatedAt, changeFrequency: 'yearly', priority: 0.3 }, 'uk')
-  for (const p of ['/poslugi', '/about', '/vidguki', '/contacts', '/news', '/cooperation']) push(p, { lastModified: now, changeFrequency: 'monthly', priority: 0.6 })
+  for (const p of ['/poslugi', '/about', '/vidguki', '/contacts', '/news']) push(p, { lastModified: now, changeFrequency: 'monthly', priority: 0.6 })
   for (const p of ['/ru/services', '/ru/about', '/ru/otzyvy', '/ru/contacts', '/ru/news']) push(p, { lastModified: now, changeFrequency: 'monthly', priority: 0.45 }, 'ru')
+  // «Співпраця» in four languages: one hreflang cluster (uk / ru / en / pl, x-default = en)
+  const partnerLangs = Object.fromEntries(Object.entries(partnerAlternates()).map(([k, p]) => [k, u(p)]))
+  for (const p of Object.values(PARTNER_PATHS)) {
+    if (seen.has(p)) continue
+    seen.add(p)
+    out.push({ url: u(p), lastModified: new Date('2026-10-07'), changeFrequency: 'monthly', priority: p === '/spivpratsya' ? 0.6 : 0.5, alternates: { languages: partnerLangs } })
+  }
   for (const a of ARTICLES) {
     push(a.path, { lastModified: a.datePublished ? new Date(a.datePublished) : a.date ? new Date(a.date) : now, changeFrequency: 'yearly', priority: 0.5 }, a.lang)
   }

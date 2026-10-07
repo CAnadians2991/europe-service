@@ -18,7 +18,7 @@
     "href": "#cta"
    },
    "videoLabel": "Відео про нас",
-   "image": "/media/c/550cfe3575"
+   "image": null
   },
   "video": {
    "youtube": "VPWOHrm9nG8",
@@ -594,7 +594,7 @@
     "href": "#cta"
    },
    "videoLabel": "Видео о нас",
-   "image": "/media/c/550cfe3575"
+   "image": null
   },
   "advantages": {
    "title": "Наши преимущества",

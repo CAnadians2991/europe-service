@@ -23,6 +23,8 @@ const SUPPORT = [
   ['поддержка 24/7', 'поддержка менеджера во время работы'],
 ]
 const SUPPORT_FILES = new Set(['landings', 'services', 'home', 'pages'])
+// owner 2026-10-07: a former employee asked not to be shown — the Tilda home image with him is not used anywhere
+const DROP_MEDIA = ['/media/c/550cfe3575']
 // one page only: the Netherlands guide had the Polish heading copied over
 const BY_PATH = {
   '/netherlands/vyizd': [['Корисні контакти у Польщі', 'Корисні контакти в Нідерландах']],
@@ -45,6 +47,7 @@ for (const f of ['articles', 'landings', 'pages', 'home', 'quizzes', 'services',
   }
   let s = JSON.stringify(data, null, 1)
   for (const [x, y] of GLOBAL) if (s.includes(x)) (n += s.split(x).length - 1), (s = s.split(x).join(y))
+  for (const m of DROP_MEDIA) if (s.includes(`"${m}"`)) (n++, (s = s.split(`"${m}"`).join('null')))
   if (SUPPORT_FILES.has(f)) for (const [x, y] of SUPPORT) if (s.includes(x)) (n += s.split(x).length - 1), (s = s.split(x).join(y))
   fs.writeFileSync(file, s)
 }

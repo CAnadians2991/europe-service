@@ -20,8 +20,8 @@ export function YouTube({
   /** play only a part of the video, in seconds */
   start?: number
   end?: number
-  /** our own cover instead of YouTube's thumbnail (when its auto frames show the wrong person) */
-  cover?: React.ReactNode
+  /** our own cover instead of YouTube's thumbnail (when its auto frames show the wrong person): image + a caption on top */
+  cover?: { img: string; title: string; sub?: string }
 }) {
   const [play, setPlay] = useState(false)
   return (
@@ -36,9 +36,13 @@ export function YouTube({
         />
       ) : (
         <button type="button" onClick={() => setPlay(true)} className="group absolute inset-0 !m-0" aria-label={`${lang === 'uk' ? 'Відтворити відео' : 'Воспроизвести видео'}${title ? `: ${title}` : ''}`}>
-          {cover ?? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" className="!m-0 size-full !rounded-none object-cover opacity-85 transition-opacity group-hover:opacity-100" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={cover?.img ?? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" className={`!m-0 size-full !rounded-none object-cover transition-opacity ${cover ? '' : 'opacity-85 group-hover:opacity-100'}`} />
+          {cover && (
+            <span className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/65 to-transparent px-4 pb-10 pt-3 text-left text-white sm:px-5 sm:pt-4">
+              <span className="block font-display text-[19px] font-bold leading-tight sm:text-[24px]">{cover.title}</span>
+              {cover.sub && <span className="block text-[13.5px] text-white/95 sm:text-[15px]">{cover.sub}</span>}
+            </span>
           )}
           {/* with our own cover (a face in the middle) the play plate moves to the corner */}
           <span className={`absolute grid place-items-center bg-brand-600 text-white transition-colors group-hover:bg-brand-700 ${cover ? 'bottom-3 right-3 size-14 sm:bottom-4 sm:right-4' : `left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${vertical ? 'size-14' : 'size-16'}`}`}>

@@ -37,7 +37,7 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
         ['/robocha-viza-v-polshchu', 'Робоча віза в Польщу'],
         ['/vidguki', 'Відгуки клієнтів'],
         ['/contacts', 'Контакти'],
-        ['/cooperation', 'Роботодавцям (EN)'],
+        ['/spivpratsya', 'Співпраця для бізнесу'],
       ]
     : [
         ['/ru/about', 'О нас'],
@@ -45,7 +45,7 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
         ['/ru/rabochaya-viza-v-polshu', 'Рабочая виза в Польшу'],
         ['/ru/otzyvy', 'Отзывы клиентов'],
         ['/ru/contacts', 'Контакты'],
-        ['/cooperation', 'Работодателям (EN)'],
+        ['/ru/sotrudnichestvo', 'Сотрудничество для бизнеса'],
       ]
   return (
     <footer className="mt-auto bg-night pb-[calc(76px+env(safe-area-inset-bottom))] text-white lg:pb-0">

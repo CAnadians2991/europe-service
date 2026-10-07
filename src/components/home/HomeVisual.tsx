@@ -109,31 +109,27 @@ export function JobCategories({ lang, all, photos, catalog }: { lang: Lang; all:
   const t = CAT_TX[lang]
   const cats = CATEGORIES.filter((c) => photos[c.code] && all.some((v) => v.category === c.code))
   return (
-    <section className="container-x py-16 sm:py-20" aria-labelledby="cats-h">
+    <section className="container-x py-10 sm:py-16" aria-labelledby="cats-h">
       <SectionHead id="cats-h" title={t.title} text={t.text} />
-      <Reveal className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-5">
-        {cats.map((c, i) => {
+      {/* compact tiles (owner, 2026-10): a photo that shows the job, the name under it, three in a row on a phone */}
+      <ul className="mt-6 grid grid-cols-3 gap-x-2.5 gap-y-4 sm:grid-cols-4 sm:gap-x-4 lg:grid-cols-5">
+        {cats.map((c) => {
           const n = all.filter((v) => v.category === c.code).length
           return (
-            <Link
-              key={c.code}
-              href={`${catalog}?type=${c.code}`}
-              data-reveal="zoom"
-              style={{ ['--i' as string]: i % 5 }}
-              className="zoom-img group relative block aspect-[4/5] overflow-hidden rounded-2xl bg-ink"
-            >
-              <Photo base={photos[c.code]!} alt="" sizes="(max-width: 768px) 50vw, 20vw" className="absolute inset-0 size-full origin-[80%_100%] scale-[1.3] object-cover object-[70%_85%] opacity-90" />
-              <span className="absolute inset-0 bg-[linear-gradient(180deg,transparent_35%,rgb(10_28_20/0.85)_100%)]" />
-              <span className="absolute inset-x-0 bottom-0 p-3.5 text-white sm:p-4">
-                <span className="block font-display text-[17px] font-semibold leading-tight sm:text-[19px]">{lang === 'uk' ? c.name : c.nameRu}</span>
-                <span className="num mt-1 block text-[13px] text-white/80">
-                  {n} {plural(n, t.vac as [string, string, string])} <span className="inline-block transition group-hover:translate-x-1">→</span>
+            <li key={c.code}>
+              <Link href={`${catalog}?type=${c.code}`} className="group block">
+                <span className="zoom-img block overflow-hidden rounded-xl bg-surface">
+                  <Photo base={photos[c.code]!} alt="" sizes="(max-width: 640px) 32vw, (max-width: 1024px) 24vw, 220px" className="aspect-[4/3] w-full origin-[80%_90%] scale-[1.2] object-cover object-[70%_70%] transition group-hover:scale-[1.26]" />
                 </span>
-              </span>
-            </Link>
+                <span className="mt-1.5 block text-[13.5px] font-semibold leading-tight text-ink group-hover:text-brand-700 sm:text-[15.5px]">{lang === 'uk' ? c.name : c.nameRu}</span>
+                <span className="num block text-[12px] text-muted sm:text-[13px]">
+                  {n} {plural(n, t.vac as [string, string, string])}
+                </span>
+              </Link>
+            </li>
           )
         })}
-      </Reveal>
+      </ul>
     </section>
   )
 }

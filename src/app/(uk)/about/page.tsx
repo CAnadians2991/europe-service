@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import { getAbout } from '@/lib/about'
 import { pageMeta, organizationLd } from '@/lib/seo'
-import { SITE } from '@/lib/site'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { PageHero } from '@/components/content/PageHero'
 import { OfficeTeam } from '@/components/trust/OfficeTeam'
+import { TeamGallery } from '@/components/trust/TeamStory'
+import { AwardsList } from '@/components/trust/PressAwards'
 import { LicenseSection } from '@/components/trust/LicenseSection'
 import { AboutPrinciples, AboutStory, aboutFaq, type AboutFacts } from '@/components/content/AboutStory'
 import { Faq } from '@/components/sections/Sections'
@@ -31,10 +32,12 @@ export default async function Page() {
       <JsonLd data={organizationLd()} />
       <PageHero
         title="Про агентство Europe Service"
-        text={`Кадрове агентство ТОВ «ЄВРОПА СЕРВІС УКРАЇНА» з ліцензією Мінсоцполітики № 223 (2019), у Переліку посередників Мінекономіки. Головний офіс — у Києві, ще чотири — у Львові, Рівному, Житомирі та Одесі. Понад ${SITE.clients.replace('+', '')} клієнтів за час роботи.`}
+        text={`Кадрове агентство ТОВ «ЄВРОПА СЕРВІС УКРАЇНА» з ліцензією Мінсоцполітики № 223 (2019), у Переліку посередників Мінекономіки. Головний офіс — у Києві, ще чотири — у Львові, Рівному, Житомирі та Одесі. Працюємо з 2018 року, 65+ рекрутерів.`}
         crumbs={[{ name: 'Головна', path: '/' }, { name: 'Про нас', path: '/about' }]}
       />
       <AboutStory lang="uk" facts={facts} />
+      <TeamGallery lang="uk" />
+      <AwardsList lang="uk" />
       <OfficeTeam about={about} heading="Наші офіси і команда" />
       {about.video && (
         <section className="container-x grid gap-6 py-14 sm:py-16 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-8" aria-label="Офіс на відео">
