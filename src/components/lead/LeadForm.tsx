@@ -230,7 +230,7 @@ export function LeadForm({
     )
   }
 
-  const labelCls = dark ? 'mb-1.5 block text-[15px] font-semibold text-white/90' : 'mb-1.5 block text-[15px] font-semibold text-ink-2'
+  const labelCls = dark ? 'mb-1 block text-[14px] font-semibold text-white/90' : 'mb-1 block text-[14px] font-semibold text-ink-2'
   const codeAria = lang === 'uk' ? 'Код країни' : 'Код страны'
   const placeholder = lang === 'ru' ? (code.hintRu ?? code.hint) : code.hint
   const onCode = (e: React.ChangeEvent<HTMLSelectElement>) => setCode(PHONE_CODES.find((c) => c.code === e.target.value) || PHONE_CODES[0])
@@ -287,7 +287,7 @@ export function LeadForm({
   }
 
   return (
-    <form data-lead-form onSubmit={submit} noValidate className={compact ? 'space-y-3.5' : 'space-y-4'}>
+    <form data-lead-form onSubmit={submit} noValidate className={compact ? 'space-y-3' : 'space-y-3.5'}>
       {/* honeypot */}
       <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>
@@ -301,7 +301,7 @@ export function LeadForm({
         <div className="flex gap-2 @max-[230px]:flex-col">
           <select
             aria-label={codeAria}
-            className="field select-code num !w-[118px] shrink-0 !pl-3 !pr-[26px] !py-4 !text-[16px] font-medium max-[359px]:!w-[104px] max-[359px]:!pl-2 max-[359px]:!pr-5 max-[359px]:bg-[position:right_5px_center] @max-[300px]:!w-[104px] @max-[300px]:!pl-2 @max-[300px]:!pr-5 @max-[300px]:bg-[position:right_5px_center] @max-[230px]:!w-full"
+            className="field select-code num !w-[112px] shrink-0 !pl-3 !pr-[26px] !py-3 !text-[16px] font-medium max-[359px]:!w-[104px] max-[359px]:!pl-2 max-[359px]:!pr-5 max-[359px]:bg-[position:right_5px_center] @max-[300px]:!w-[104px] @max-[300px]:!pl-2 @max-[300px]:!pr-5 @max-[300px]:bg-[position:right_5px_center] @max-[230px]:!w-full"
             value={code.code}
             onChange={onCode}
           >
@@ -309,7 +309,7 @@ export function LeadForm({
           </select>
           <input
             id={`${id}-phone`}
-            className="field num min-w-0 !py-4 !text-[19px] font-semibold max-[359px]:!px-2.5 max-[359px]:!text-[17px] @max-[300px]:!px-2.5 @max-[300px]:!text-[17px]"
+            className="field num min-w-0 !py-3 !text-[17px] font-semibold max-[359px]:!px-2.5 max-[359px]:!text-[16px] @max-[300px]:!px-2.5 @max-[300px]:!text-[16px]"
             name="phone"
             type="tel"
             inputMode="tel"
@@ -329,7 +329,7 @@ export function LeadForm({
           <label htmlFor={`${id}-name`} className={labelCls}>{nameField === 'required' ? t.name : t.nameOpt}</label>
           <input
             id={`${id}-name`}
-            className="field !py-3.5 !text-[17px]"
+            className="field !py-3 !text-[16px]"
             name="name"
             autoComplete="given-name"
             value={name}
@@ -386,7 +386,7 @@ export function LeadForm({
         </fieldset>
       )}
       {err.extra && <p role="alert" className={`text-[15px] font-semibold ${dark ? 'text-white' : 'text-danger'}`}>{err.extra}</p>}
-      <button type="submit" disabled={state === 'sending'} aria-busy={state === 'sending'} className="btn-accent !min-h-14 w-full !text-[18px]">
+      <button type="submit" disabled={state === 'sending'} aria-busy={state === 'sending'} className="btn-accent !min-h-[52px] w-full !text-[17px]">
         {state === 'sending' ? t.sending : submitLabel || t.send}
       </button>
       {state === 'error' && (

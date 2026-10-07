@@ -462,7 +462,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
                 {c ? `${t.all} ${uk ? c.inName : c.inNameRu}` : t.all} <IconArrow className="size-4" />
               </Link>
             </div>
-            <div className="mt-8 border-x border-t border-line">
+            <div className="mt-8 overflow-hidden rounded-[18px] border-x border-t border-line">
               {similar.map((x) => (
                 <VacancyCard key={x.id} v={toCard(localize(x, lang))} lang={lang} />
               ))}

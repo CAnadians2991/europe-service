@@ -111,6 +111,7 @@ export function Checkout({ products, methods, lang, ofertaHref }: { products: Pu
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [comment, setComment] = useState('')
+  const [withComment, setWithComment] = useState(false)
   const [consent, setConsent] = useState(false)
   const shown = methods.filter((m) => m.enabled || m.id !== 'manual')
   const [method, setMethod] = useState<MethodId>(() => (methods.find((m) => m.id === 'monopay' && m.enabled) ? 'monopay' : 'manual'))
@@ -217,21 +218,22 @@ export function Checkout({ products, methods, lang, ofertaHref }: { products: Pu
       </div>
     )
 
-  const field = 'field mt-1.5 w-full'
+  const field = 'field mt-1 w-full !py-2.5'
+  const box = 'rounded-2xl border border-line bg-white'
+  const head = 'text-[12px] font-semibold uppercase tracking-[0.08em] text-muted'
   return (
-    <form onSubmit={submit} className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_400px] lg:items-start lg:gap-10" noValidate>
-      <div className="space-y-8">
+    <form onSubmit={submit} className="grid gap-4 pb-28 lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start lg:gap-6 lg:pb-0" noValidate>
+      <div className="space-y-4">
         {/* the bill */}
-        <section className="border border-line bg-white" aria-labelledby="cart-h">
-          <div className="rule-grad" />
-          <h2 id="cart-h" className="border-b border-line px-5 py-4 font-mono text-[12px] font-semibold uppercase tracking-[0.12em] sm:px-6">
+        <section className={box} aria-labelledby="cart-h">
+          <h2 id="cart-h" className={`${head} px-4 pb-1 pt-3`}>
             {t.title}
           </h2>
           <ul>
             {priced.map((l) => (
-              <li key={l.id} className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-2 border-b border-line px-5 py-4 sm:px-6">
-                <div className="min-w-0">
-                  <p className="text-[16.5px] font-semibold leading-snug">
+              <li key={l.id} className="grid grid-cols-[minmax(0,1fr)_auto_auto] items-start gap-x-2 border-b border-line py-2 pl-4 pr-1.5 last:border-b-0">
+                <div className="min-w-0 pt-1">
+                  <p className="text-[15px] font-semibold leading-snug">
                     {(lang === 'ru' ? l.p.hrefRu : l.p.href) ? (
                       <Link href={(lang === 'ru' ? l.p.hrefRu : l.p.href)!} className="hover:text-brand-700">
                         {lang === 'ru' ? l.p.titleRu : l.p.title}
@@ -242,91 +244,85 @@ export function Checkout({ products, methods, lang, ofertaHref }: { products: Pu
                       l.p.title
                     )}
                   </p>
-                  {(lang === 'ru' ? l.p.noteRu : l.p.note) && <p className="mt-0.5 text-[14px] text-muted">{lang === 'ru' ? l.p.noteRu : l.p.note}</p>}
-                </div>
-                <p className="num text-right text-[16px] font-semibold">{fmt(l.p.price * l.qty)}</p>
-                <div className="col-span-2 flex items-center gap-3">
+                  {(lang === 'ru' ? l.p.noteRu : l.p.note) && <p className="truncate text-[12.5px] leading-snug text-muted">{lang === 'ru' ? l.p.noteRu : l.p.note}</p>}
                   {l.p.multiple && (
-                    <span className="inline-flex items-center border border-line" aria-label={t.qty}>
-                      <button type="button" className="grid size-10 place-items-center text-[18px] hover:bg-brand-50" onClick={() => update(l.id, l.qty - 1)} aria-label="−">
+                    <span className="mt-1.5 inline-flex items-center rounded-lg border border-line" aria-label={t.qty}>
+                      <button type="button" className="grid size-9 place-items-center text-[17px] hover:bg-brand-50" onClick={() => update(l.id, l.qty - 1)} aria-label="−">
                         −
                       </button>
-                      <span className="num w-8 text-center text-[15px]">{l.qty}</span>
-                      <button type="button" className="grid size-10 place-items-center text-[18px] hover:bg-brand-50" onClick={() => update(l.id, Math.min(10, l.qty + 1))} aria-label="+">
+                      <span className="num w-6 text-center text-[14px]">{l.qty}</span>
+                      <button type="button" className="grid size-9 place-items-center text-[17px] hover:bg-brand-50" onClick={() => update(l.id, Math.min(10, l.qty + 1))} aria-label="+">
                         +
                       </button>
                     </span>
                   )}
-                  <button type="button" onClick={() => update(l.id, 0)} className="min-h-10 text-[14px] text-muted underline-offset-2 hover:text-ink hover:underline">
-                    {t.remove}
-                  </button>
                 </div>
+                <p className="num whitespace-nowrap pt-1 text-right text-[15px] font-semibold">{fmt(l.p.price * l.qty)}</p>
+                <button type="button" onClick={() => update(l.id, 0)} aria-label={`${t.remove}: ${lang === 'ru' ? l.p.titleRu : l.p.title}`} className="grid size-9 place-items-center rounded-lg text-muted hover:bg-surface hover:text-ink">
+                  <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden>
+                    <path d="M6 6l12 12M18 6L6 18" />
+                  </svg>
+                </button>
               </li>
             ))}
           </ul>
-          <div className="flex items-baseline justify-between px-5 py-4 sm:px-6">
-            <span className="font-mono text-[12px] uppercase tracking-[0.1em] text-muted">{t.total}</span>
-            <span className="num text-[26px] font-semibold">{fmt(total)}</span>
-          </div>
         </section>
 
         {/* payer */}
-        <section className="border border-line bg-white p-5 sm:p-6" aria-labelledby="who-h">
-          <h2 id="who-h" className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em]">
+        <section className={`${box} px-4 pb-4 pt-3`} aria-labelledby="who-h">
+          <h2 id="who-h" className={head}>
             {t.who}
           </h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <label className="block text-[14.5px] font-medium sm:col-span-2">
+          <div className="mt-2 grid gap-3 sm:grid-cols-2">
+            <label className="block text-[13.5px] font-medium sm:col-span-2">
               {t.name}
-              <input className={field} value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" required />
+              <input className={field} value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" autoCapitalize="words" enterKeyHint="next" required />
             </label>
-            <label className="block text-[14.5px] font-medium">
+            <label className="block text-[13.5px] font-medium">
               {t.phone}
-              <input className={`${field} num`} value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" inputMode="tel" autoComplete="tel" placeholder="+380 67 123 45 67" required />
+              <input className={`${field} num`} value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" inputMode="tel" autoComplete="tel" enterKeyHint="next" placeholder="+380 67 123 45 67" required />
             </label>
-            <label className="block text-[14.5px] font-medium">
+            <label className="block text-[13.5px] font-medium">
               {t.email}
-              <input className={field} value={email} onChange={(e) => setEmail(e.target.value)} type="email" autoComplete="email" />
+              <input className={field} value={email} onChange={(e) => setEmail(e.target.value)} type="email" inputMode="email" autoComplete="email" autoCapitalize="none" spellCheck={false} enterKeyHint="done" />
             </label>
-            <label className="block text-[14.5px] font-medium sm:col-span-2">
-              {t.comment}
-              <textarea className={`${field} min-h-20`} value={comment} onChange={(e) => setComment(e.target.value)} rows={2} />
-            </label>
+            {withComment ? (
+              <label className="block text-[13.5px] font-medium sm:col-span-2">
+                {t.comment}
+                <textarea className={`${field} min-h-16`} value={comment} onChange={(e) => setComment(e.target.value)} rows={2} autoFocus />
+              </label>
+            ) : (
+              <button type="button" onClick={() => setWithComment(true)} className="justify-self-start text-[13.5px] font-medium text-brand-700 underline underline-offset-2 sm:col-span-2">
+                + {lang === 'uk' ? 'Додати коментар' : 'Добавить комментарий'}
+              </button>
+            )}
           </div>
           <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
         </section>
       </div>
 
       {/* method + pay */}
-      <aside className="border border-line bg-white lg:sticky lg:top-28" aria-labelledby="how-h">
-        <h2 id="how-h" className="border-b border-line px-5 py-4 font-mono text-[12px] font-semibold uppercase tracking-[0.12em] sm:px-6">
+      <aside className={`${box} lg:sticky lg:top-24`} aria-labelledby="how-h">
+        <h2 id="how-h" className={`${head} px-4 pb-1 pt-3`}>
           {t.how}
         </h2>
-        <div className="space-y-2 p-4 sm:p-5">
+        <div className="space-y-1.5 px-3 pb-3">
           {shown.map((x) => {
             const tooSmall = Boolean(x.min && total < x.min)
             const off = !x.enabled || tooSmall
             const active = method === x.id && !off
             const [title, sub] = t.m[x.id]
             return (
-              <label key={x.id} className={`block cursor-pointer border p-4 transition ${active ? 'border-brand-600 bg-brand-50/60 shadow-[inset_0_0_0_1px_var(--color-brand-600)]' : 'border-line'} ${off ? 'cursor-not-allowed opacity-55' : 'hover:border-ink'}`}>
-                <span className="flex items-start gap-3">
-                  <input type="radio" name="method" className="mt-1 size-4 accent-[var(--color-brand-600)]" checked={active} disabled={off} onChange={() => setMethod(x.id)} />
-                  <span className="min-w-0 flex-1">
-                    <span className="flex flex-wrap items-baseline gap-x-2 text-[16px] font-semibold">
-                      {title}
-                      {!x.enabled && <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">{t.soon}</span>}
-                      {x.enabled && tooSmall && x.min && (
-                        <span className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted">
-                          {t.from} {fmt(x.min)}
-                        </span>
-                      )}
-                    </span>
-                    <span className="mt-0.5 block text-[13.5px] leading-snug text-ink-2">{sub}</span>
-                  </span>
+              <label key={x.id} className={`block cursor-pointer rounded-xl border px-3 py-2.5 transition ${active ? 'border-brand-600 bg-brand-50/70 shadow-[inset_0_0_0_1px_var(--color-brand-600)]' : 'border-line'} ${off ? 'cursor-not-allowed opacity-50' : 'hover:border-ink'}`}>
+                <span className="flex items-center gap-2.5">
+                  <input type="radio" name="method" className="size-4 shrink-0 accent-[var(--color-brand-600)]" checked={active} disabled={off} onChange={() => setMethod(x.id)} />
+                  <span className="min-w-0 flex-1 text-[14.5px] font-semibold leading-tight">{title}</span>
+                  {!x.enabled && <span className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.06em] text-muted">{t.soon}</span>}
+                  {x.enabled && tooSmall && x.min && <span className="shrink-0 text-[11px] text-muted">{t.from} {fmt(x.min)}</span>}
                 </span>
+                {active && <span className="mt-1 block pl-[26px] text-[12.5px] leading-snug text-ink-2">{sub}</span>}
                 {active && x.parts && (
-                  <span className="mt-3 flex flex-wrap gap-2 pl-7">
+                  <span className="mt-2 flex flex-wrap gap-1.5 pl-[26px]">
                     {x.parts.map((n) => (
                       <button
                         key={n}
@@ -335,7 +331,7 @@ export function Checkout({ products, methods, lang, ofertaHref }: { products: Pu
                           e.preventDefault()
                           setParts(n)
                         }}
-                        className={`chip !min-h-10 ${nParts === n ? '!border-brand-600 !bg-brand-600 !text-white' : ''}`}
+                        className={`chip !min-h-9 !px-3 !text-[13px] ${nParts === n ? '!border-brand-600 !bg-brand-600 !text-white' : ''}`}
                       >
                         <span className="num">
                           {n} × {fmtPart(Math.ceil(total / n))}
@@ -348,43 +344,47 @@ export function Checkout({ products, methods, lang, ofertaHref }: { products: Pu
             )
           })}
         </div>
+        <label className="mx-4 mb-3 flex items-start gap-2.5 text-[13px] leading-snug text-ink-2">
+          <input type="checkbox" className="mt-0.5 size-[18px] shrink-0 accent-[var(--color-brand-600)]" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
+          <span>
+            {t.consent(
+              <Link href={ofertaHref} target="_blank" className="font-semibold text-brand-700 underline underline-offset-2">
+                {t.oferta}
+              </Link>,
+            )}
+          </span>
+        </label>
+        {err && (
+          <p role="alert" className="mx-4 mb-3 rounded-lg border-l-[3px] border-red-600 bg-red-50 px-3 py-2 text-[13.5px] text-red-800">
+            {err}
+          </p>
+        )}
+        {app && (
+          <p role="status" className="mx-4 mb-3 rounded-lg border-l-[3px] border-brand-600 bg-brand-50 px-3 py-2.5 text-[14px] font-medium text-ink">
+            {t.appWait}: {app.message}
+          </p>
+        )}
 
-        <div className="border-t border-line p-4 sm:p-5">
-          <div className="flex items-baseline justify-between">
-            <span className="font-mono text-[12px] uppercase tracking-[0.1em] text-muted">{t.total}</span>
-            <span className="num text-[24px] font-semibold">{fmt(total)}</span>
-          </div>
-          {nParts && m?.id !== 'monopay' && m?.id !== 'manual' && (
-            <p className="num mt-1 text-right text-[13.5px] text-ink-2">
-              {nParts} {t.parts} · {fmtPart(Math.ceil(total / nParts))} / {t.perPart}
-            </p>
-          )}
-          <label className="mt-4 flex items-start gap-2.5 text-[14px] leading-snug text-ink-2">
-            <input type="checkbox" className="mt-0.5 size-4 shrink-0 accent-[var(--color-brand-600)]" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
-            <span>
-              {t.consent(
-                <Link href={ofertaHref} target="_blank" className="font-semibold text-brand-700 underline underline-offset-2">
-                  {t.oferta}
-                </Link>,
+        {/* total + pay: pinned to the bottom of the screen on phones, inside the panel on desktop */}
+        <div className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-white/95 px-4 pb-[max(10px,env(safe-area-inset-bottom))] pt-2.5 shadow-[0_-10px_30px_-18px_rgb(15_36_27/0.35)] backdrop-blur lg:static lg:rounded-b-2xl lg:bg-surface/60 lg:pb-4 lg:shadow-none lg:backdrop-blur-none">
+          <div className="flex items-center gap-3">
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.06em] text-muted">{t.total}</p>
+              <p className="num text-[20px] font-bold leading-tight">{fmt(total)}</p>
+              {nParts && m?.id !== 'monopay' && m?.id !== 'manual' && (
+                <p className="num text-[12px] text-ink-2">
+                  {nParts} × {fmtPart(Math.ceil(total / nParts))}
+                </p>
               )}
-            </span>
-          </label>
-          {err && (
-            <p role="alert" className="mt-3 border-l-[3px] border-red-600 bg-red-50 px-3 py-2 text-[14px] text-red-800">
-              {err}
-            </p>
-          )}
-          {app ? (
-            <p role="status" className="mt-4 border-l-[3px] border-brand-600 bg-brand-50 px-3 py-3 text-[15px] font-medium text-ink">
-              {t.appWait}: {app.message}
-            </p>
-          ) : (
-            <button type="submit" disabled={busy} className="btn-accent mt-4 w-full !py-4 text-[17px] disabled:opacity-60">
-              {busy ? '…' : method === 'manual' ? t.order : `${t.pay} ${fmt(total)}`}
-            </button>
-          )}
-          <p className="mt-3 flex items-start gap-2 text-[12.5px] leading-snug text-muted">
-            <svg viewBox="0 0 24 24" className="mt-0.5 size-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+            </div>
+            {!app && (
+              <button type="submit" disabled={busy} className="btn-accent ml-auto !min-h-12 flex-1 !px-4 !text-[16px] disabled:opacity-60 lg:flex-none lg:!px-6">
+                {busy ? '…' : method === 'manual' ? t.order : t.pay}
+              </button>
+            )}
+          </div>
+          <p className="mt-1.5 hidden items-center gap-1.5 text-[11.5px] leading-snug text-muted lg:flex">
+            <svg viewBox="0 0 24 24" className="size-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
               <rect x="5" y="11" width="14" height="9" rx="1.5" />
               <path d="M8 11V8a4 4 0 0 1 8 0v3" />
             </svg>

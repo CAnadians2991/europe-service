@@ -182,7 +182,7 @@
 
 /* Filter / tag: a small square label */
 @utility chip {
-  @apply inline-flex min-h-11 items-center gap-1.5 rounded-full border border-line-strong bg-white px-4 py-2 text-[15px] font-medium text-ink-2 transition-colors hover:border-ink hover:text-ink;
+  @apply inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line-strong bg-white px-3.5 py-1.5 text-[14.5px] font-medium text-ink-2 transition-colors hover:border-ink hover:text-ink;
   &[aria-pressed='true'],
   &[data-active='true'] {
     @apply border-brand-600 bg-brand-600 text-white hover:text-white;
@@ -664,7 +664,9 @@
 }
 
 /* ── reveal on scroll (components/ui/Reveal.tsx adds data-in when the block enters the screen) ── */
-[data-reveal] {
+/* hidden only after Reveal has started (data-armed on its root): without JS everything stays visible */
+[data-armed] [data-reveal],
+[data-armed][data-reveal] {
   opacity: 0;
   transform: translateY(22px);
   transition:
@@ -672,15 +674,16 @@
     transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
   transition-delay: calc(var(--i, 0) * 80ms);
 }
-[data-reveal][data-in] {
-  opacity: 1;
-  transform: none;
-}
-[data-reveal='zoom'] {
+[data-armed] [data-reveal='zoom'] {
   transform: scale(0.96);
 }
-[data-reveal='left'] {
+[data-armed] [data-reveal='left'] {
   transform: translateX(-28px);
+}
+[data-armed] [data-reveal][data-in],
+[data-armed][data-reveal][data-in] {
+  opacity: 1;
+  transform: none;
 }
 
 /* ── hero: slow drifting colour fields behind the content ── */
@@ -755,5 +758,25 @@
   }
   .photo-marquee {
     overflow-x: auto;
+  }
+}
+
+/* phones: less air between sections and in big panels (owner: «гігантське» on small screens) */
+@media (max-width: 639px) {
+  main .py-16 { padding-top: 2.75rem; padding-bottom: 2.75rem; }
+  main .py-20 { padding-top: 3rem; padding-bottom: 3rem; }
+  main .pb-16 { padding-bottom: 2.75rem; }
+  main .p-7 { padding: 1.25rem; }
+  main .mt-10 { margin-top: 1.75rem; }
+  main .mt-12 { margin-top: 2rem; }
+}
+
+/* a page bottom bar (package + «Оформити») is showing: the chat button moves above it */
+html[data-bottom-bar] .contact-fab-dock {
+  transform: translateY(-74px);
+}
+@media (min-width: 1024px) {
+  html[data-bottom-bar] .contact-fab-dock {
+    transform: none;
   }
 }

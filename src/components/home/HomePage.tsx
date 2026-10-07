@@ -223,18 +223,16 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       {/* ───────── 01 HOT VACANCIES ───────── */}
       <section className="container-x py-16 sm:py-20" aria-labelledby="hot-h">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHead id="hot-h" index={1} eyebrow={t.hot} title={t.hot} text={t.hotText} />
+          <SectionHead id="hot-h" index={1} eyebrow={uk ? 'Вакансії' : 'Вакансии'} title={t.hot} text={t.hotText} />
           <Link href={catalog} className="btn-ghost">
             {t.all(all.length)} <IconArrow className="size-4" />
           </Link>
         </div>
-        <Reveal className="mt-8 overflow-hidden rounded-[18px] border border-line bg-white">
+        <div className="mt-8 overflow-hidden rounded-[18px] border-x border-t border-line bg-white">
           {hot.map((v, i) => (
-            <div key={v.id} data-reveal style={{ ['--i' as string]: i }}>
-              <VacancyCard v={v} lang={lang} priority={i === 0} />
-            </div>
+            <VacancyCard key={v.id} v={v} lang={lang} priority={i === 0} />
           ))}
-        </Reveal>
+        </div>
       </section>
 
       {/* ───────── 02 STEPS — how it goes ───────── */}

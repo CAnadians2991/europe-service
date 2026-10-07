@@ -312,7 +312,7 @@ export function Catalog({
 
       <h2 className="sr-only">{uk ? 'Список вакансій' : 'Список вакансий'}</h2>
       {list.length ? (
-        <div className="mt-4 border-x border-t border-line">{items}</div>
+        <div className="mt-4 overflow-hidden rounded-[18px] border-x border-t border-line">{items}</div>
       ) : (
         <div className="mt-6 grid gap-6 border border-line bg-white p-6 sm:p-8 lg:grid-cols-2">
           <div>

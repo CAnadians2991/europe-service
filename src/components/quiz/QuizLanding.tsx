@@ -153,7 +153,7 @@ export async function QuizLandingView({ q, lang = 'uk' }: { q: QL; lang?: 'uk' |
               {uk ? 'Усі вакансії' : 'Все вакансии'} <IconArrow className="size-4" />
             </Link>
           </div>
-          <div className="mt-8 border-x border-t border-line">
+          <div className="mt-8 overflow-hidden rounded-[18px] border-x border-t border-line">
             {vac.map((v) => (
               <VacancyCard key={v.id} v={v} lang={lang} />
             ))}

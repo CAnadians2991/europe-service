@@ -85,11 +85,16 @@ export const WORK_STEP: QStep = {
   hint: 'Можна без досвіду — на більшості вакансій навчають на місці.',
   pass: 'Робота',
   type: 'single',
+  // photo tiles in the quiz (the photo comes from a vacancy of that type); types with no open vacancy are hidden
   options: [
     { value: 'warehouse', label: 'Склад', icon: 'box' },
     { value: 'factory', label: 'Завод', icon: 'factory' },
     { value: 'food', label: 'Пакування продуктів', icon: 'jar' },
     { value: 'horeca', label: 'Готель або ресторан', icon: 'bed' },
+    { value: 'auto', label: 'Автозавод', labelRu: 'Автозавод', icon: 'factory' },
+    { value: 'construction', label: 'Будівництво', labelRu: 'Стройка', icon: 'box' },
+    { value: 'cleaning', label: 'Прибирання', labelRu: 'Уборка', icon: 'check' },
+    { value: 'agro', label: 'Ферма, теплиці', labelRu: 'Ферма, теплицы', icon: 'check' },
     { value: 'any', label: 'Будь-яка робота', icon: 'check' },
   ],
 }

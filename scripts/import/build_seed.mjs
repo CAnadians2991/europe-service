@@ -179,6 +179,8 @@ for (const v of vacancies) {
   if (w?.photos?.length) v.photos = [...new Set([...v.photos, ...w.photos])]
 }
 for (const list of [vacancies, closed]) for (let i = 0; i < list.length; i++) list[i] = fixVacancy({ ...sanitizeVacancy(list[i]), ...(list[i].ru ? { ru: list[i].ru } : {}) })
+// a fix may close a vacancy (duplicate copies) — it moves to the archive, its page stays
+for (let i = vacancies.length - 1; i >= 0; i--) if (!vacancies[i].active) closed.push(...vacancies.splice(i, 1))
 // descriptions written from each vacancy's own facts where Tilda had none (out/intros.json, 2026-10-06)
 const INTROS = fs.existsSync(path.join(HERE, 'out/intros.json')) ? JSON.parse(fs.readFileSync(path.join(HERE, 'out/intros.json'), 'utf8')) : {}
 for (const v of [...vacancies, ...closed]) {

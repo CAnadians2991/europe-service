@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { SERVICES, type Package } from '@/lib/content'
-import { PageHero } from './PageHero'
+import { Breadcrumbs } from '@/components/vacancy/CatalogPage'
+import { ExtrasBlock, PackagesBlock } from '@/components/services/Pricing'
 import { Blocks, RichText } from './Blocks'
 import { IconCheck } from '@/components/ui/icons'
 import { CtaBand, Faq, HOME_FAQ, HOME_FAQ_RU, SectionHead } from '@/components/sections/Sections'
@@ -166,79 +167,11 @@ export function ServicesPage({ lang }: { lang: Lang }) {
   return (
     <>
       <JsonLd data={servicesLd(lang)} />
-      <PageHero
-        title={uk ? 'Послуги та ціни' : 'Услуги и цены'}
-        text={uk ? 'Вакансія для вас безкоштовна — ви оплачуєте лише послуги з оформлення та супроводу. Оберіть пакет або отримайте безкоштовну консультацію.' : 'Вакансия для вас бесплатна — вы оплачиваете только услуги по оформлению и сопровождению. Выберите пакет или получите бесплатную консультацию.'}
-        crumbs={[{ name: uk ? 'Головна' : 'Главная', path: uk ? '/' : '/ru' }, { name: uk ? 'Послуги' : 'Услуги', path: uk ? '/poslugi' : '/ru/services' }]}
-      >
-        <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-2 font-mono text-[13px] text-ink-2">
-          {main.some((p) => p.price) && (
-            <div className="flex items-baseline gap-2">
-              <dt className="uppercase tracking-[0.06em] text-muted">{uk ? 'Пакети' : 'Пакеты'}</dt>
-              <dd className="text-[17px] font-semibold text-brand-700">{main.map((p) => p.price?.replace(/\s*грн/, '')).filter(Boolean).join(' · ')} грн</dd>
-            </div>
-          )}
-          <div className="flex items-baseline gap-2">
-            <dt className="uppercase tracking-[0.06em] text-muted">{uk ? 'Вакансія' : 'Вакансия'}</dt>
-            <dd className="font-semibold text-ink">{uk ? 'безкоштовно' : 'бесплатно'}</dd>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <dt className="uppercase tracking-[0.06em] text-muted">{uk ? 'Консультація' : 'Консультация'}</dt>
-            <dd>
-              <a href={`tel:${SITE.phone}`} className="font-semibold text-ink hover:text-brand-700">
-                {SITE.phoneDisplay}
-              </a>
-            </dd>
-          </div>
-        </dl>
-        <LicenseBadge lang={lang} className="mt-5 !text-[15px]" />
-      </PageHero>
-
-      {main.length > 0 && (
-        <section className="container-x py-14 sm:py-16" aria-labelledby="packages-h">
-          <SectionHead id="packages-h" index={1} eyebrow={uk ? 'Тарифи' : 'Тарифы'} title={main[0]?.group || (uk ? 'Пакети послуг з працевлаштування' : 'Пакеты услуг по трудоустройству')} />
-          <div className="mt-10 grid gap-5 lg:grid-cols-3 lg:grid-rows-[auto_auto_1fr_auto] lg:gap-0">
-            {main.map((p, i) => (
-              <PackageColumn key={p.title} p={p} index={i} featured={i === 1} note={p.groupNote || note} lang={lang} />
-            ))}
-          </div>
-          {/* the visa package has its own landing */}
-          <Link
-            href={uk ? '/robocha-viza-v-polshchu' : '/ru/rabochaya-viza-v-polshu'}
-            className="group mt-8 grid gap-3 border border-line bg-white p-5 transition hover:border-ink sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:p-6"
-          >
-            <span>
-              <span className="font-mono text-[11.5px] font-semibold uppercase tracking-[0.1em] text-brand-700">{uk ? 'Окремий пакет' : 'Отдельный пакет'}</span>
-              <span className="mt-1 block font-display text-[20px] font-semibold tracking-[-0.01em] sm:text-[22px]">
-                {uk ? 'Робоча віза в Польщу на рік без прив’язки — 15 000 грн' : 'Рабочая виза в Польшу на год без привязки — 15 000 грн'}
-              </span>
-              <span className="mt-1 block text-[15px] text-ink-2">
-                {uk ? 'Анкета, страховий поліс, запис у візовий центр і координація до візи; далі — можливе відрядження A1 у Нідерланди чи Німеччину.' : 'Анкета, страховой полис, запись в визовый центр и координация до визы; дальше — возможна командировка A1 в Нидерланды или Германию.'}
-              </span>
-            </span>
-            <span className="font-semibold text-brand-700 group-hover:underline">{uk ? 'Детальніше →' : 'Подробнее →'}</span>
-          </Link>
-        </section>
-      )}
-
-      {rest.length > 0 && (
-        <section className="border-t border-line bg-white" aria-labelledby="extra-h">
-          <div className="container-x py-14 sm:py-16">
-            <SectionHead id="extra-h" index={2} eyebrow={uk ? 'Прайс' : 'Прайс'} title={uk ? 'Оформлення в інші країни та додаткові послуги' : 'Оформление в другие страны и дополнительные услуги'} />
-            {groups.map((g) => (
-              <div key={g.name} className="mt-10">
-                {g.name && <p className="eyebrow">{g.name}</p>}
-                <ul className="mt-3 border-t-[3px] border-ink">
-                  {g.items.map((p) => (
-                    <ServiceRow key={p.title} p={p} lang={lang} />
-                  ))}
-                </ul>
-                {g.items.some((p) => productIdForPackage(p.title)) && <OfertaNote text={g.items.find((p) => p.groupNote)?.groupNote || note} lang={lang} className="mt-4" />}
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+      <div className="container-x pt-2 text-ink-2">
+        <Breadcrumbs items={[{ name: uk ? 'Головна' : 'Главная', path: uk ? '/' : '/ru' }, { name: uk ? 'Послуги' : 'Услуги', path: uk ? '/poslugi' : '/ru/services' }]} />
+      </div>
+      <PackagesBlock lang={lang} />
+      <ExtrasBlock lang={lang} />
 
       {s.steps?.length > 0 && (
         <section className="container-x py-14 sm:py-16" aria-labelledby="steps-h">

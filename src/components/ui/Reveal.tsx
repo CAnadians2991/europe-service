@@ -12,7 +12,10 @@ export function Reveal({ children, className = '', as: Tag = 'div' }: { children
     const root = ref.current
     if (!root) return
     const els = [root, ...root.querySelectorAll<HTMLElement>('[data-reveal]')].filter((e) => e.hasAttribute('data-reveal'))
-    if (!('IntersectionObserver' in window)) return els.forEach((e) => e.setAttribute('data-in', ''))
+    if (!('IntersectionObserver' in window)) return
+    // already on screen → shown as is (no flash); only what is still below the fold animates in
+    for (const e of els) if (e.getBoundingClientRect().top < innerHeight) e.setAttribute('data-in', '')
+    root.setAttribute('data-armed', '')
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries)

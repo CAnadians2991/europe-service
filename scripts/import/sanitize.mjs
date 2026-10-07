@@ -50,12 +50,39 @@ const FIXES = {
   '4il2ktv3i1': [['"category":"food"', '"category":"cleaning"']],
 }
 
+// owner's decisions 2026-10-07: Mars housing 300 €, ZARA pay as in its description (monthly), Verona without the
+// unrelated Olympics note, one Latvia cleaning vacancy (the older copy closes; its page stays at the Tilda address)
+const FIX_FN = {
+  ac3mvy37x1: (v) => {
+    for (const sec of [...v.sections, ...(v.ru?.sections ?? [])]) sec.items = sec.items.map((i) => i.replace(/^325 €\/(міс|мес)/, '300 €/$1'))
+  },
+  '2n9rnnfnf1': (v) => {
+    v.salary = { ...v.salary, text: '5120–6310 зл/міс нетто', hourMin: null, hourMax: null, monthMin: 5120, monthMax: 6310 }
+    if (v.ru) v.ru.salaryText = '5120–6310 зл/мес нетто'
+  },
+  '7y8tetsuv1': (v) => {
+    const olympic = (sec) => !sec.items.some((i) => /Олімпійськ|Олимпийск/.test(i))
+    v.sections = v.sections.filter(olympic)
+    if (v.ru?.sections) v.ru.sections = v.ru.sections.filter(olympic)
+  },
+  z289g9n1b1: (v) => {
+    v.active = false
+  },
+}
+
 export function fixVacancy(v) {
   const f = FIXES[v?.id]
-  if (!f) return v
-  let s = JSON.stringify(v)
-  for (const [a, b] of f) s = s.split(a).join(b)
-  return JSON.parse(s)
+  let out = v
+  if (f) {
+    let s = JSON.stringify(v)
+    for (const [a, b] of f) s = s.split(a).join(b)
+    out = JSON.parse(s)
+  }
+  if (FIX_FN[out?.id]) {
+    out = structuredClone(out)
+    FIX_FN[out.id](out)
+  }
+  return out
 }
 
 /**

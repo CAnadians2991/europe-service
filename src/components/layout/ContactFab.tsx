@@ -44,6 +44,9 @@ export function ContactFab({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
     SITE.chat.viber && { ch: 'viber', href: SITE.chat.viber, label: 'Viber', I: IconViber, color: 'text-[#6150d8]' },
   ].filter(Boolean) as { ch: Channel; href: string; label: string; sub?: string; I: typeof IconPhone; color: string }[]
 
+  // the cart has its own bottom bar (total + pay) — the round chat button would sit on top of it
+  if (/^(?:\/ru)?\/oplata(?:\/|$)/.test(pathname)) return null
+
   return (
     <div className="contact-fab">
       {/* tap outside to close */}
@@ -51,7 +54,7 @@ export function ContactFab({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
 
       {/* the wrapper spans the (invisible) menu too, so it must never catch taps itself — only the button and the open menu do.
           It reappears the moment a phone field loses focus, i.e. right under the finger tapping a form's submit button. */}
-      <div className="pointer-events-none fixed bottom-[calc(12px+env(safe-area-inset-bottom))] right-3 z-40 flex flex-col items-end lg:bottom-6 lg:right-6">
+      <div className="contact-fab-dock pointer-events-none fixed bottom-[calc(12px+env(safe-area-inset-bottom))] right-3 z-40 flex flex-col items-end transition-transform duration-300 lg:bottom-6 lg:right-6">
         {/* the channels: a white sheet of labelled rows (words, not bare icons) */}
         <div
           id={id}
