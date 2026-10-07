@@ -105,31 +105,57 @@ const CAT_TX = {
 }
 
 /** Job types as photo tiles → the catalog filtered by type */
+/** the «all vacancies» tile fills the free cells of the last row (3 columns on phones, 4 on tablets, 5 on desktop) */
+const SPAN = {
+  base: ['col-span-3', 'col-span-1', 'col-span-2'],
+  sm: ['sm:col-span-4', 'sm:col-span-1', 'sm:col-span-2', 'sm:col-span-3'],
+  lg: ['lg:col-span-5', 'lg:col-span-1', 'lg:col-span-2', 'lg:col-span-3', 'lg:col-span-4'],
+}
+const fill = (n: number, cols: number, list: string[]) => {
+  const rem = n % cols
+  return { cls: list[rem ? cols - rem : 0], full: rem === 0 }
+}
+
 export function JobCategories({ lang, all, photos, catalog }: { lang: Lang; all: Vacancy[]; photos: Partial<Record<Category, string>>; catalog: string }) {
   const t = CAT_TX[lang]
+  const uk = lang === 'uk'
   const cats = CATEGORIES.filter((c) => photos[c.code] && all.some((v) => v.category === c.code))
+  const b = fill(cats.length, 3, SPAN.base)
+  const m = fill(cats.length, 4, SPAN.sm)
+  const l = fill(cats.length, 5, SPAN.lg)
   return (
-    <section className="container-x py-10 sm:py-16" aria-labelledby="cats-h">
-      <SectionHead id="cats-h" title={t.title} text={t.text} />
-      {/* compact tiles (owner, 2026-10): a photo that shows the job, the name under it, three in a row on a phone */}
-      <ul className="mt-6 grid grid-cols-3 gap-x-2.5 gap-y-4 sm:grid-cols-4 sm:gap-x-4 lg:grid-cols-5">
-        {cats.map((c) => {
-          const n = all.filter((v) => v.category === c.code).length
-          return (
-            <li key={c.code}>
-              <Link href={`${catalog}?type=${c.code}`} className="group block">
-                <span className="zoom-img block overflow-hidden rounded-xl bg-surface">
-                  <Photo base={photos[c.code]!} alt="" sizes="(max-width: 640px) 32vw, (max-width: 1024px) 24vw, 220px" className="aspect-[4/3] w-full origin-[80%_90%] scale-[1.2] object-cover object-[70%_70%] transition group-hover:scale-[1.26]" />
-                </span>
-                <span className="mt-1.5 block text-[13.5px] font-semibold leading-tight text-ink group-hover:text-brand-700 sm:text-[15.5px]">{lang === 'uk' ? c.name : c.nameRu}</span>
-                <span className="num block text-[12px] text-muted sm:text-[13px]">
-                  {n} {plural(n, t.vac as [string, string, string])}
-                </span>
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+    <section className="border-y border-line bg-white" aria-labelledby="cats-h">
+      <div className="container-x py-10 sm:py-16">
+        <SectionHead id="cats-h" title={t.title} text={t.text} />
+        {/* compact tiles (owner, 2026-10): a photo that shows the job, the name under it, three in a row on a phone */}
+        <ul className="mt-6 grid grid-cols-3 gap-x-2.5 gap-y-4 sm:grid-cols-4 sm:gap-x-4 lg:grid-cols-5">
+          {cats.map((c) => {
+            const n = all.filter((v) => v.category === c.code).length
+            return (
+              <li key={c.code}>
+                <Link href={`${catalog}?type=${c.code}`} className="group block">
+                  <span className="zoom-img block overflow-hidden rounded-xl bg-surface">
+                    <Photo base={photos[c.code]!} alt="" sizes="(max-width: 640px) 32vw, (max-width: 1024px) 24vw, 220px" className="aspect-[4/3] w-full origin-[80%_90%] scale-[1.2] object-cover object-[70%_70%] transition group-hover:scale-[1.26]" />
+                  </span>
+                  <span className="mt-1.5 block text-[13.5px] font-semibold leading-tight text-ink group-hover:text-brand-700 sm:text-[15.5px]">{uk ? c.name : c.nameRu}</span>
+                  <span className="num block text-[12px] text-muted sm:text-[13px]">
+                    {n} {plural(n, t.vac as [string, string, string])}
+                  </span>
+                </Link>
+              </li>
+            )
+          })}
+          <li className={`${b.cls} ${m.cls} ${l.cls}`}>
+            <Link
+              href={catalog}
+              className={`flex h-full min-h-14 flex-col justify-center rounded-xl bg-brand-600 px-4 py-3 text-white transition hover:bg-brand-700 ${b.full ? '' : 'max-sm:aspect-auto'} ${l.full ? 'lg:min-h-0 lg:flex-row lg:items-center lg:justify-between' : ''}`}
+            >
+              <span className="text-[15px] font-semibold leading-tight sm:text-[17px]">{uk ? `Усі ${all.length} ${plural(all.length, ['вакансія', 'вакансії', 'вакансій'])}` : `Все ${all.length} ${plural(all.length, ['вакансия', 'вакансии', 'вакансий'])}`}</span>
+              <span className="mt-1 text-[13px] text-white/90 lg:mt-0">{uk ? 'Дивитися каталог →' : 'Смотреть каталог →'}</span>
+            </Link>
+          </li>
+        </ul>
+      </div>
     </section>
   )
 }

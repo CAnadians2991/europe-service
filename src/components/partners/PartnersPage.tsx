@@ -6,15 +6,10 @@ import { breadcrumbLd, faqLd, organizationLd } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { Photo } from '@/components/ui/Photo'
 import { PartnerForm } from './PartnerForm'
+import { Flag } from '@/components/ui/Flag'
 
 /** Our team with the Ukrainian Business Award plaques (owner's office shoot) */
 export const PARTNER_PHOTO = '/media/team/team-awards'
-
-const Check = () => (
-  <svg viewBox="0 0 20 20" className="size-5 shrink-0 text-brand-600" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <path d="m4.5 10.5 3.5 3.5 7.5-8" />
-  </svg>
-)
 
 /**
  * «Співпраця» in four languages: who we work with, figures, how we fill a vacancy, countries, the request form, FAQ.
@@ -139,7 +134,7 @@ export async function PartnersPage({ lang, photo = PARTNER_PHOTO }: { lang: Part
         <ul className="mt-5 flex flex-wrap gap-2">
           {countries.map((c) => (
             <li key={c.code} className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3.5 py-2 text-[14.5px] font-medium">
-              <Check />
+              <Flag code={c.code} className="h-3.5 w-[21px]" />
               {cname(c)}
             </li>
           ))}

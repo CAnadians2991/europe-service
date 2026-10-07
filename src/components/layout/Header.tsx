@@ -4,6 +4,7 @@ import { HOME } from '@/lib/content'
 import { getLanding } from '@/lib/landing'
 import { IconArrow, IconChevronDown } from '@/components/ui/icons'
 import { MobileMenu } from './MobileMenu'
+import { Flag } from '@/components/ui/Flag'
 import { HeaderCta } from './HeaderCta'
 import { MobileHeaderSlot } from './MobileHeaderSlot'
 import { LangSwitch } from './LangSwitch'
@@ -63,7 +64,7 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
                     {countries.map((c) => (
                       <li key={c.code} className="border-b border-line">
                         <Link href={localHref(c.path, lang)} className="flex min-h-11 items-center gap-3 py-2 text-[15px] font-medium hover:text-brand-700">
-                          <span className="num w-6 text-[11px] font-semibold uppercase text-muted">{c.code}</span>
+                          <Flag code={c.code} className="h-4 w-6" />
                           <span className="flex-1">{lang === 'uk' ? c.name : c.nameRu}</span>
                           <span className="num text-[13px] text-muted">{counts[c.code]}</span>
                         </Link>

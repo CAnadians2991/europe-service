@@ -9,6 +9,7 @@ import { formatDate, plural } from '@/lib/format'
 import { organizationLd, websiteLd, faqLd } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { Photo } from '@/components/ui/Photo'
+import { Flag } from '@/components/ui/Flag'
 import { IconArrow } from '@/components/ui/icons'
 import { Faq, HOME_FAQ, HOME_FAQ_RU, ReviewCard, SectionHead } from '@/components/sections/Sections'
 import { VacancyCard } from '@/components/vacancy/VacancyCard'
@@ -159,11 +160,6 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
   const videos = REVIEWS.filter((r) => r.video && r.video.endsWith('.mp4') && (r.lang === lang || lang === 'ru'))
     .map((r) => ({ poster: r.video!.replace(/\.mp4$/, '.webp'), name: r.name, vacancy: (lang === 'ru' ? r.vacancyRu : undefined) ?? r.vacancy, city: r.city }))
     .filter((v) => !v.poster.includes('/work-'))
-  const countryImage: Record<string, string> = Object.fromEntries((U.countries?.items ?? []).filter((c) => c.country && c.image).map((c) => [c.country as string, c.image as string]))
-  for (const c of countries) if (!countryImage[c.code]) {
-    const v = all.find((x) => x.country === c.code && x.photos[0])
-    if (v) countryImage[c.code] = v.photos[0]
-  }
   const reviews = REVIEWS.filter((r) => r.lang === lang && r.text && r.name).slice(0, 3)
   const faq = uk ? HOME_FAQ : HOME_FAQ_RU
   const byDate = (x: { datePublished?: string | null; date?: string | null }, y: { datePublished?: string | null; date?: string | null }) =>
@@ -208,12 +204,8 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
         <ul className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
           {countries.map((c) => (
             <li key={c.code}>
-              <Link href={localHref(c.path, lang)} className="group flex min-h-14 items-center gap-3 rounded-xl border border-line bg-white p-2 pr-3 transition hover:border-brand-600">
-                {countryImage[c.code] ? (
-                  <Photo base={countryImage[c.code]} alt="" width={64} height={64} sizes="44px" className="size-10 shrink-0 rounded-lg object-cover" />
-                ) : (
-                  <span className="brand-band grid size-10 shrink-0 place-items-center rounded-lg font-mono text-[12px] font-semibold uppercase text-white">{c.code}</span>
-                )}
+              <Link href={localHref(c.path, lang)} className="group flex min-h-14 items-center gap-3 rounded-xl border border-line bg-white px-3 py-2 transition hover:border-brand-600">
+                <Flag code={c.code} className="h-6 w-9" />
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-[14.5px] font-semibold leading-tight group-hover:text-brand-700 sm:text-[15.5px]">{uk ? c.name : c.nameRu}</span>
                   <span className="num block text-[12px] text-muted">{c.count} {plural(c.count, uk ? ['вакансія', 'вакансії', 'вакансій'] : ['вакансия', 'вакансии', 'вакансий'])}</span>
@@ -222,15 +214,6 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
             </li>
           ))}
         </ul>
-        {uk && (U.cities?.items.length || U.audiences?.items.length) ? (
-          <div className="mt-5 flex flex-wrap gap-2">
-            {[...(U.cities?.items ?? []).map((c) => ({ href: c.href, text: c.text })), ...(U.audiences?.items ?? []).map((a) => ({ href: a.href, text: a.title }))].map((x) => (
-              <Link key={x.href + x.text} href={x.href} className="chip !text-[13px]">
-                {x.text}
-              </Link>
-            ))}
-          </div>
-        ) : null}
       </section>
 
 

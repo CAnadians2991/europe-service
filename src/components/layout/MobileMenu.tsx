@@ -10,6 +10,7 @@ import { altPath } from '@/lib/alt-routes'
 import { SocialLinks } from './SocialLinks'
 import { localHref } from '@/lib/alt-routes'
 import { Portal } from '@/components/ui/Portal'
+import { Flag } from '@/components/ui/Flag'
 
 export function MobileMenu({
   lang,
@@ -97,6 +98,7 @@ export function MobileMenu({
                       {countries.map((c) => (
                         <li key={c.code} className="border-b border-line/70">
                           <Link href={localHref(c.path, lang)} className="flex min-h-11 items-center gap-2 pl-1 text-[14.5px] font-medium active:bg-white">
+                            <Flag code={c.code} className="h-3.5 w-[21px]" />
                             <span className="min-w-0 flex-1 truncate">{uk ? c.name : c.nameRu}</span>
                             <span className="num text-[12px] text-muted">{c.count}</span>
                           </Link>
