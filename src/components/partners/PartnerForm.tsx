@@ -118,10 +118,15 @@ const intlPhone = (raw: string) => {
 export function PartnerForm({ lang }: { lang: PartnerLang }) {
   const t = T[lang]
   const id = useId()
-  const started = useRef(Date.now())
+  const started = useRef(0)
   const [kind, setKind] = useState<PartnerKind>('employer')
   const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
   const [err, setErr] = useState<{ phone?: string; name?: string }>({})
+
+  // time-to-submit for the bot check starts when the form is on screen
+  useEffect(() => {
+    started.current = Date.now()
+  }, [])
 
   // the audience cards above link to #pf-employer / #pf-agency / #pf-freelancer (a hash keeps the page static)
   useEffect(() => {

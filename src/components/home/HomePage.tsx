@@ -6,7 +6,7 @@ import { CATALOG_PATH, COUNTRIES } from '@/lib/site'
 import { localHref, ruTwin } from '@/lib/alt-routes'
 import { localize } from '@/lib/vacancy-i18n'
 import { formatDate, plural } from '@/lib/format'
-import { organizationLd, websiteLd, faqLd } from '@/lib/seo'
+import { organizationLd, websiteLd, faqLd, tildaHomeProductLd } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { Photo } from '@/components/ui/Photo'
 import { Flag } from '@/components/ui/Flag'
@@ -20,7 +20,6 @@ import { Guarantees } from '@/components/trust/Guarantees'
 import { PressAwards } from '@/components/trust/PressAwards'
 import { PackagePitch } from '@/components/services/PackagePitch'
 import { VacancyTicker } from './VacancyTicker'
-import { Reveal } from '@/components/ui/Reveal'
 import { CountUp } from '@/components/ui/CountUp'
 import { ClientVideos, HomeHero, HousingStrip, JobCategories, categoryPhotos } from './HomeVisual'
 import { TeamSection } from '@/components/trust/TeamStory'
@@ -46,22 +45,22 @@ const TX = {
       ['5 офісів', 'Київ, Львів, Рівне, Житомир, Одеса'],
     ],
     hot: 'Термінові заїзди',
-    hotText: 'Вакансії з виїздом найближчим часом — житло, офіційний договір, супровід.',
+    hotText: '(актуальні вакансії з виїздом найближчим часом)',
     countries: 'Країни',
-    countriesTitle: 'Вакансії по країнах',
+    countriesTitle: 'Вибір країни для роботи',
     consultTag: 'Безкоштовна консультація',
     consult: 'Залиште номер — менеджер зателефонує й підбере вакансію під ваш досвід і документи',
     send: 'Замовити дзвінок',
     stepsLabel: 'Як ми працюємо',
-    stepsTitle: 'Від заявки до першого робочого дня',
+    stepsTitle: 'Етапи працевлаштування',
     advLabel: 'Чому Europe Service',
     awards: 'Нагороди',
     press: 'Про нас пишуть',
-    employers: 'Роботодавці, з якими ми співпрацюємо',
-    reviews: 'Відгуки клієнтів',
+    employers: 'Роботодавці з якими ми співпрацюємо',
+    reviews: 'Відгуки про нас',
     allReviews: 'Усі відгуки',
     video: 'Відео про нас',
-    articles: 'Новини та статті',
+    articles: 'Корисні статті',
     allArticles: 'Усі статті',
     cities: 'Робота в містах Польщі',
     directions: 'Напрямки',
@@ -86,22 +85,22 @@ const TX = {
       ['5 офисов', 'Киев, Львов, Ровно, Житомир, Одесса'],
     ],
     hot: 'Срочные заезды',
-    hotText: 'Вакансии с выездом в ближайшее время — жильё, официальный договор, сопровождение.',
+    hotText: '(актуальные вакансии с выездом в ближайшее время)',
     countries: 'Страны',
-    countriesTitle: 'Вакансии по странам',
+    countriesTitle: 'Выбор страны для работы',
     consultTag: 'Бесплатная консультация',
     consult: 'Оставьте номер — менеджер позвонит и подберёт вакансию под ваш опыт и документы',
     send: 'Заказать звонок',
     stepsLabel: 'Как мы работаем',
-    stepsTitle: 'От заявки до первого рабочего дня',
+    stepsTitle: 'Этапы трудоустройства',
     advLabel: 'Почему Europe Service',
     awards: 'Награды',
     press: 'О нас пишут',
-    employers: 'Работодатели, с которыми мы сотрудничаем',
-    reviews: 'Отзывы клиентов',
+    employers: 'Работодатели с которыми мы сотрудничаем',
+    reviews: 'Отзывы о нас',
     allReviews: 'Все отзывы',
     video: 'Видео о нас',
-    articles: 'Новости и статьи',
+    articles: 'Полезные статьи',
     allArticles: 'Все статьи',
     cities: 'Работа в городах Польши',
     directions: 'Направления',
@@ -113,24 +112,24 @@ const TX = {
 const STEPS = {
   uk: [
     ['Залишаєте номер', 'Менеджер напише у Viber, Telegram або зателефонує, коли вам зручно.'],
-    ['Обираєте роботу', 'Розповімо про умови, житло й договір. Рішення — за вами, ми лише радимо.'],
-    ['Готуємо до виїзду', 'Резюме, реєстрація в роботодавця, бронь місця, маршрут і допомога з квитками.'],
+    ['Підбір вакансії', 'Розповімо про умови, житло й договір. Рішення — за вами, ми лише радимо.'],
+    ['Оформлення договору', 'Резюме, реєстрація в роботодавця, бронь місця, маршрут і допомога з квитками.'],
     ['Ведемо до роботи', 'Координуємо дорогу до місця, а менеджер лишається на зв’язку.'],
   ],
   ru: [
     ['Оставляете номер', 'Менеджер напишет в Viber, Telegram или позвонит, когда вам удобно.'],
-    ['Выбираете работу', 'Расскажем об условиях, жилье и договоре. Решение — за вами, мы только советуем.'],
-    ['Готовим к выезду', 'Резюме, регистрация у работодателя, бронь места, маршрут и помощь с билетами.'],
+    ['Подбор вакансии', 'Расскажем об условиях, жилье и договоре. Решение — за вами, мы только советуем.'],
+    ['Оформление договора', 'Резюме, регистрация у работодателя, бронь места, маршрут и помощь с билетами.'],
     ['Ведём до работы', 'Координируем дорогу до места, а менеджер остаётся на связи.'],
   ],
 }
 
-function LogoRow({ title, logos, big }: { title: string; logos: { src: string; alt?: string; name?: string }[]; big?: boolean }) {
+function LogoRow({ title, logos, big, h2 }: { title: string; logos: { src: string; alt?: string; name?: string }[]; big?: boolean; h2?: boolean }) {
   const list = logos.filter((l) => l.src)
   if (!list.length) return null
   return (
     <div className="border-t border-line pt-5">
-      <p className="eyebrow">{title}</p>
+      {h2 ? <h2 className="text-[20px] sm:text-[24px]">{title}</h2> : <p className="eyebrow">{title}</p>}
       <ul className={`mt-4 flex flex-wrap items-center ${big ? 'gap-6' : 'gap-x-8 gap-y-4'}`}>
         {list.map((l) => (
           <li key={l.src} className={big ? 'h-40' : 'h-11'}>
@@ -173,6 +172,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       <JsonLd data={organizationLd(lang)} />
       <JsonLd data={websiteLd()} />
       <JsonLd data={faqLd(faq)} />
+      {uk && <JsonLd data={tildaHomeProductLd()} />}
 
       {/* ───────── HERO: what we do + the request form right away ───────── */}
       <HomeHero lang={lang} photos={heroList} />
@@ -196,7 +196,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       </section>
 
       {/* ───────── GUARANTEES first: trust before the offer ───────── */}
-      <Guarantees lang={lang} />
+      <Guarantees lang={lang} vacancies={all.length} countries={countries.length} />
 
       {/* ───────── COUNTRIES — compact index (owner, 2026-10: above the job types) ───────── */}
       <section className="container-x pt-10 sm:pt-16" aria-labelledby="countries-h">
@@ -223,7 +223,10 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       {/* ───────── 01 HOT VACANCIES ───────── */}
       <section className="container-x py-16 sm:py-20" aria-labelledby="hot-h">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHead id="hot-h" title={t.hot} text={t.hotText} />
+          <div className="max-w-3xl">
+            <h2 id="hot-h" className="text-[26px] sm:text-[38px]">{t.hot}</h2>
+            <h3 className="mt-2 font-sans text-[16.5px] font-normal leading-relaxed tracking-normal text-ink-2">{t.hotText}</h3>
+          </div>
           <Link href={catalog} className="btn-ghost">
             {t.all(all.length)} <IconArrow className="size-4" />
           </Link>
@@ -251,7 +254,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
               <li key={title} className="grid grid-cols-[32px_minmax(0,1fr)] gap-x-3">
                 <span className="num grid size-8 place-items-center rounded-full bg-brand-600 text-[14px] font-semibold text-white">{i + 1}</span>
                 <span>
-                  <span className="block text-[16px] font-semibold leading-snug sm:text-[17px]">{title}</span>
+                  <h3 className="font-sans text-[16px] font-semibold leading-snug tracking-normal sm:text-[17px]">{title}</h3>
                   <span className="mt-0.5 block text-[14px] leading-snug text-muted sm:text-[14.5px]">{text}</span>
                 </span>
               </li>
@@ -308,7 +311,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       {/* ───────── EMPLOYERS (awards and the 1+1 story moved up, next to the client videos) ───────── */}
       {U.employers && (
         <section className="container-x py-12 sm:py-16" aria-label={t.employers}>
-          <LogoRow title={t.employers} logos={U.employers.logos} />
+          <LogoRow title={t.employers} logos={U.employers.logos} h2 />
         </section>
       )}
 

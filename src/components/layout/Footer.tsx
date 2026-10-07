@@ -5,10 +5,14 @@ import { SocialLinks } from './SocialLinks'
 import { LicenseStamp } from '@/components/trust/LicenseStamp'
 import type { CountryCode } from '@/lib/types'
 import { localHref } from '@/lib/alt-routes'
+import { HOME } from '@/lib/content'
 
 export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Partial<Record<CountryCode, number>> }) {
   const uk = lang === 'uk'
   const year = new Date().getFullYear()
+  const home = (uk ? HOME.uk : HOME.ru) ?? {}
+  const cities = home.cities?.items ?? []
+  const directions = home.audiences?.items ?? []
   const head = 'font-mono text-[12px] font-medium uppercase tracking-[0.1em] text-white/60'
   const a = 'inline-flex min-h-11 items-center text-[15px] text-white/90 underline-offset-[3px] transition hover:text-white hover:underline'
   const popular: [string, string][] = uk
@@ -63,6 +67,40 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
           </a>
         </div>
       </div>
+
+      {/* the Tilda home's city and direction links — kept site-wide for the internal links (owner removed them from the home body) */}
+      {(cities.length > 0 || directions.length > 0) && (
+        <div className="container-x grid gap-6 border-b border-white/10 py-8 lg:grid-cols-2">
+          {cities.length > 0 && (
+            <div>
+              <h2 className={head}>{home.cities?.title ?? (uk ? 'Популярні міста' : 'Популярные города')}</h2>
+              <ul className="mt-2 flex flex-wrap gap-x-4">
+                {cities.map((c) => (
+                  <li key={c.href}>
+                    <Link href={c.href} className={a}>
+                      {c.text}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {directions.length > 0 && (
+            <div>
+              <h2 className={head}>{uk ? 'Напрямки' : 'Направления'}</h2>
+              <ul className="mt-2 flex flex-wrap gap-x-4">
+                {directions.map((d) => (
+                  <li key={d.href + d.title}>
+                    <Link href={d.href} className={a}>
+                      {d.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="container-x grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.25fr_1fr_1fr_1fr]">
         <div>

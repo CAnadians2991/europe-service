@@ -13,7 +13,8 @@ type Lang = 'uk' | 'ru'
  */
 const TX = {
   uk: {
-    h: 'Про нас говорять',
+    h: 'Про нас пишуть',
+    awardsH: 'Наші нагороди',
     lead: 'Наш директор Андрій Котов розповідав у «Сніданку з 1+1», як обрати надійну агенцію для роботи за кордоном.',
     video: 'На відео — директор «Європа Сервіс» Андрій Котов',
     who: ['Андрій Котов', 'директор «Європа Сервіс»'],
@@ -24,7 +25,8 @@ const TX = {
     ],
   },
   ru: {
-    h: 'О нас говорят',
+    h: 'О нас пишут',
+    awardsH: 'Наши награды',
     lead: 'Наш директор Андрей Котов рассказывал в «Сніданку з 1+1», как выбрать надёжное агентство для работы за границей.',
     video: 'На видео — директор «Европа Сервис» Андрей Котов',
     who: ['Андрей Котов', 'директор «Европа Сервис»'],
@@ -66,6 +68,8 @@ export function PressAwards({ lang }: { lang: Lang }) {
             </a>
           </figcaption>
         </figure>
+        <div>
+          <h3 className="mb-3 font-sans text-[17px] font-semibold tracking-normal">{t.awardsH}</h3>
         <ul className="grid grid-cols-2 gap-3 lg:grid-cols-1 lg:gap-4">
           {t.awards.map((a) => (
             <li key={a.img} className="flex h-full flex-col overflow-hidden rounded-[18px] border border-line bg-white lg:flex-row lg:items-center">
@@ -84,6 +88,7 @@ export function PressAwards({ lang }: { lang: Lang }) {
             </li>
           ))}
         </ul>
+        </div>
       </div>
     </section>
   )

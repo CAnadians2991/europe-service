@@ -34,13 +34,13 @@ export function pageMeta(o: {
 }): Metadata {
   const image = o.image ? imgAbs(o.image) : abs('/og-default.jpg')
   const langs = o.alternates ?? (o.hreflang === false || o.canonical ? undefined : languages(o.lang === 'ru' ? (ukTwin(o.path) ?? '') : o.path))
-  // Tilda left some one-line descriptions («Новини в Чехії») — Google shows a snippet of its own then; add who we are
+  // Owner, 2026-10: titles and descriptions stay exactly as on Tilda (the pages rank with them) — no tail, no clipping.
+  // Only a page with no description at all gets a neutral one.
   const own = (o.description || '').trim()
-  const tail = o.lang === 'ru' ? 'Europe Service — официальное трудоустройство за границей, консультация бесплатно.' : 'Europe Service — офіційне працевлаштування за кордоном, консультація безкоштовна.'
-  const description = clip(own.length < 70 ? `${own.replace(/[.\s]+$/, '')}${own ? '. ' : ''}${tail}` : own, 158)
+  const description = own || (o.lang === 'ru' ? 'Europe Service — официальное трудоустройство за границей, консультация бесплатно.' : 'Europe Service — офіційне працевлаштування за кордоном, консультація безкоштовна.')
   return {
-    // brand suffix only when it fits (~60 chars) and isn't already in the title
-    title: o.absoluteTitle || o.title.includes('Europe Service') || o.title.length > 44 ? { absolute: o.title } : o.title,
+    // exactly the page's own title (Tilda's for old pages) — no «| Europe Service» suffix
+    title: { absolute: o.title },
     description,
     alternates: {
       canonical: o.canonical ?? o.path,
@@ -141,6 +141,31 @@ export function breadcrumbLd(items: { name: string; path: string }[]) {
     itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, item: abs(it.path) })),
   }
 }
+
+/** The Tilda home page's own Product markup, kept one-to-one for SEO (owner, 2026-10) */
+export const tildaHomeProductLd = () => ({
+  '@context': 'http://schema.org/',
+  '@type': 'Product',
+  name: 'Легальна робота в Польщі для українців',
+  sku: 'europeservice24',
+  MPN: 'europeservice24',
+  aggregateRating: { '@type': 'AggregateRating', ratingValue: '5', ratingCount: '33', reviewCount: '33' },
+  brand: 'europeservice',
+  description: 'Офіційна робота в Польщі без посередників. Тільки безкоштовні вакансії від прямих роботодавців. Допомогаємо отримати робочу візу. Звертайтеся!',
+  image: `${SITE.url}/media/team/team-awards-1200.webp`,
+  offers: { '@type': 'AggregateOffer', priceCurrency: 'PLN', highPrice: '5500', lowPrice: '3000', offerCount: '1', offers: [{ '@type': 'Offer', url: 'https://europeservice.com.ua' }] },
+  review: [
+    {
+      '@type': 'Review',
+      author: 'Микола',
+      datePublished: '2019-10-15',
+      description:
+        'Добрий день! Хочу подякувати компанії Європа Сервіс за надану роботу та залишити хороший відгук. Працюю карщиком у Вроцлаві на складі Jeronimo. Дуже задоволений, робота легка, плюс навчають їзди на карах та виготовляють польські права, тому що українські не підходять. Окрема подяка моєму менеджеру Антону за допомогу, завжди відповідав на мої запитання, хоча бувало, що телефонував я не в робочий час. Успіхів вам та гарних клієнтів!!! ',
+      name: 'Хочу подякувати',
+      reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5', worstRating: '1' },
+    },
+  ],
+})
 
 export function faqLd(items: { q: string; a: string }[]) {
   return {
@@ -255,7 +280,8 @@ function mentions(text: string, place: string) {
 }
 
 export function vacancyDescription(v: Vacancy, lang: 'uk' | 'ru' = 'uk') {
-  if (v.seoDescription) return clip(v.seoDescription, 158)
+  // the post's own (Tilda) description — exactly, never clipped
+  if (v.seoDescription) return v.seoDescription
   const uk = lang === 'uk'
   const c = COUNTRY[v.country]
   const city = realCity(v.city)

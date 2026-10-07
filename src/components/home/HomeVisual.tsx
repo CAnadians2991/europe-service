@@ -23,7 +23,8 @@ export function categoryPhotos(all: Vacancy[]) {
 
 const HERO = {
   uk: {
-    pill: 'Офіційне кадрове агентство · працюємо з 2018 року',
+    /** Tilda's main H1 (the page ranks with it) — kept as the H1, styled as the line above the big headline */
+    seoH1: 'Офіційна робота в Європі для українців',
     h1a: 'Підберемо роботу в Європі',
     h1b: 'і допоможемо доїхати',
     sub: 'Склади, заводи, готелі, будівництво — обираєте ви. Ми підготуємо документи, допоможемо з квитками й дорогою, а менеджер буде на зв’язку.',
@@ -36,7 +37,7 @@ const HERO = {
     open: (n: number) => `${n} ${plural(n, ['вакансія', 'вакансії', 'вакансій'])} відкрито зараз`,
   },
   ru: {
-    pill: 'Официальное кадровое агентство · работаем с 2018 года',
+    seoH1: 'Официальная работа в Европе для украинцев',
     h1a: 'Подберём работу в Европе',
     h1b: 'и поможем доехать',
     sub: 'Склады, заводы, отели, стройка — выбираете вы. Мы подготовим документы, поможем с билетами и дорогой, а менеджер будет на связи.',
@@ -70,10 +71,10 @@ export function HomeHero({ lang, photos }: { lang: Lang; photos: string[] }) {
         </div>
 
         <div className="flex flex-col justify-center px-4 py-9 sm:px-8 sm:py-12 lg:order-1 lg:py-16 lg:pl-[max(2rem,calc((100vw-1240px)/2+1rem))] lg:pr-14 xl:pr-20">
-          <p className="text-[14px] font-semibold text-white/90">{t.pill}</p>
-          <h1 id="hero-h" className="mt-3 text-[38px] font-bold leading-[1.02] tracking-[-0.035em] text-white min-[380px]:text-[42px] sm:text-[60px] lg:text-[68px] xl:text-[76px]">
+          <h1 id="hero-h" className="font-sans text-[15px] font-semibold leading-snug tracking-normal text-white/95 sm:text-[17px]">{t.seoH1}</h1>
+          <p className="mt-3 font-display text-[38px] font-bold leading-[1.02] tracking-[-0.035em] text-white min-[380px]:text-[42px] sm:text-[60px] lg:text-[68px] xl:text-[76px]">
             {t.h1a} <span className="block text-[#c9f0d8]">{t.h1b}</span>
-          </h1>
+          </p>
           <p className="mt-5 max-w-[540px] text-[17px] leading-relaxed text-white sm:text-[18.5px]">{t.sub}</p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <LeadButton
@@ -100,8 +101,8 @@ export function HomeHero({ lang, photos }: { lang: Lang; photos: string[] }) {
 }
 
 const CAT_TX = {
-  uk: { eyebrow: 'Будь-яка робота', title: 'Яку роботу підберемо', text: 'Не знаєте, з чого почати? Скажіть менеджеру, що вмієте, — запропонуємо кілька варіантів.', vac: ['вакансія', 'вакансії', 'вакансій'] },
-  ru: { eyebrow: 'Любая работа', title: 'Какую работу подберём', text: 'Не знаете, с чего начать? Скажите менеджеру, что умеете, — предложим несколько вариантов.', vac: ['вакансия', 'вакансии', 'вакансий'] },
+  uk: { eyebrow: 'Будь-яка робота', title: 'Пропонуємо вакансії для кожного', text: 'Не знаєте, з чого почати? Скажіть менеджеру, що вмієте, — запропонуємо кілька варіантів.', vac: ['вакансія', 'вакансії', 'вакансій'] },
+  ru: { eyebrow: 'Любая работа', title: 'Предлагаем вакансии для каждого', text: 'Не знаете, с чего начать? Скажите менеджеру, что умеете, — предложим несколько вариантов.', vac: ['вакансия', 'вакансии', 'вакансий'] },
 }
 
 /** Job types as photo tiles → the catalog filtered by type */
