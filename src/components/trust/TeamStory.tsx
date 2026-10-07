@@ -70,7 +70,7 @@ const TX = {
 }
 
 /** Home: a compact block — the story in two lines, three facts, a photo mosaic with the award clip, a visit button */
-export function TeamSection({ lang }: { lang: Lang }) {
+export function TeamSection({ lang, compact }: { lang: Lang; compact?: boolean }) {
   const t = TX[lang]
   const uk = lang === 'uk'
   return (
@@ -97,8 +97,12 @@ export function TeamSection({ lang }: { lang: Lang }) {
         </div>
         <div className="grid grid-cols-2 gap-2 sm:gap-3">
           <Photo base={TEAM_PHOTOS.awards} alt={t.alt.awards} sizes="(max-width: 1024px) 100vw, 680px" className="col-span-2 aspect-[3/2] w-full rounded-[18px] object-cover" />
-          <Photo base={TEAM_PHOTOS.sign} alt={t.alt.sign} sizes="(max-width: 1024px) 50vw, 340px" className="aspect-[3/4] w-full rounded-[18px] object-cover object-[50%_30%]" />
-          <LoopVideo src={CLIP.src} poster={CLIP.poster} label={t.alt.video} className="aspect-[3/4] w-full rounded-[18px] bg-surface object-cover" />
+          {!compact && (
+            <>
+              <Photo base={TEAM_PHOTOS.sign} alt={t.alt.sign} sizes="(max-width: 1024px) 50vw, 340px" className="aspect-[3/4] w-full rounded-[18px] object-cover object-[50%_30%]" />
+              <LoopVideo src={CLIP.src} poster={CLIP.poster} label={t.alt.video} className="aspect-[3/4] w-full rounded-[18px] bg-surface object-cover" />
+            </>
+          )}
         </div>
       </div>
     </section>

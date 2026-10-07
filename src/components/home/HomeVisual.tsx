@@ -127,14 +127,14 @@ export function JobCategories({ lang, all, photos, catalog }: { lang: Lang; all:
   const l = fill(cats.length, 5, SPAN.lg)
   return (
     <section className="border-y border-line bg-white" aria-labelledby="cats-h">
-      <div className="container-x py-10 sm:py-16">
+      <div className="container-x py-9 sm:py-14">
         <SectionHead id="cats-h" title={t.title} text={t.text} />
         {/* compact tiles (owner, 2026-10): a photo that shows the job, the name under it, three in a row on a phone */}
-        <ul className="mt-6 grid grid-cols-3 gap-x-2.5 gap-y-4 sm:grid-cols-4 sm:gap-x-4 lg:grid-cols-5">
+        <ul className="-mx-4 mt-5 flex snap-x gap-2.5 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:mt-6 sm:grid sm:grid-cols-4 sm:gap-x-4 sm:gap-y-4 sm:overflow-visible sm:px-0 lg:grid-cols-5">
           {cats.map((c) => {
             const n = all.filter((v) => v.category === c.code).length
             return (
-              <li key={c.code}>
+              <li key={c.code} className="w-[34%] shrink-0 snap-start sm:w-auto">
                 <Link href={`${catalog}?type=${c.code}`} className="group block">
                   <span className="zoom-img block overflow-hidden rounded-xl bg-surface">
                     <Photo base={photos[c.code]!} alt="" sizes="(max-width: 640px) 32vw, (max-width: 1024px) 24vw, 220px" className="aspect-[4/3] w-full origin-[80%_90%] scale-[1.2] object-cover object-[70%_70%] transition group-hover:scale-[1.26]" />
@@ -147,7 +147,7 @@ export function JobCategories({ lang, all, photos, catalog }: { lang: Lang; all:
               </li>
             )
           })}
-          <li className={`${b.cls} ${m.cls} ${l.cls}`}>
+          <li className={`w-[40%] shrink-0 snap-start sm:w-auto ${b.cls} ${m.cls} ${l.cls}`}>
             <Link
               href={catalog}
               className={`flex h-full min-h-14 flex-col justify-center rounded-xl bg-brand-600 px-4 py-3 text-white transition hover:bg-brand-700 ${b.full ? '' : 'max-sm:aspect-auto'} ${l.full ? 'lg:min-h-0 lg:flex-row lg:items-center lg:justify-between' : ''}`}
@@ -191,14 +191,14 @@ export function HousingStrip({ lang, photos }: { lang: Lang; photos: string[] })
 }
 
 /** Video reviews: posters of real clients (consent given), play on the reviews page */
-export function ClientVideos({ lang, videos }: { lang: Lang; videos: VideoCard[] }) {
+export function ClientVideos({ lang, videos, title }: { lang: Lang; videos: VideoCard[]; title?: string }) {
   if (videos.length < 4) return null
   return (
     <section className="container-x py-12 sm:py-16" aria-labelledby="vids-h">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <SectionHead
           id="vids-h"
-          title={lang === 'uk' ? 'Вони вже працюють за кордоном' : 'Они уже работают за границей'}
+          title={title ?? (lang === 'uk' ? 'Вони вже працюють за кордоном' : 'Они уже работают за границей')}
           text={lang === 'uk' ? 'Наші клієнти — про роботу, житло й менеджерів.' : 'Наши клиенты — о работе, жилье и менеджерах.'}
         />
         <Link href={lang === 'uk' ? '/vidguki' : '/ru/otzyvy'} className="btn-ghost">
