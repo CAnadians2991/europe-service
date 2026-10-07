@@ -5,14 +5,14 @@ type Lang = 'uk' | 'ru'
 
 /**
  * Proof from outside: the «Сніданок з 1+1» story (republished on tsn.ua, 02.06.2021) where our director Andrii Kotov explains
- * how to check an agency and not fall for scammers — exactly the candidate's fear — and the two award documents we hold.
+ * how to choose a reliable agency, and the two award documents we hold.
  * Verified 2026-10-07: tsn.ua/exclusive/…-1796566.html, YouTube Ouf8hrTZiS4 (official «Сніданок з 1+1» channel, embeddable);
  * UBA ranking uba.top/employment-companies-abroad-ukraine (1st place, 2025). Unverified press logos are not shown.
  */
 const TX = {
   uk: {
-    h: 'Нам довіряють не на слово',
-    lead: 'Як перевірити агенцію і не потрапити до шахраїв — наш директор Андрій Котов розповідав у «Сніданку з 1+1».',
+    h: 'Про нас говорять',
+    lead: 'Наш директор Андрій Котов розповідав у «Сніданку з 1+1», як обрати надійну агенцію для роботи за кордоном.',
     video: '«Сніданок з 1+1», ТСН — як обрати агенцію з працевлаштування за кордоном',
     src: 'Сюжет на tsn.ua, 2 червня 2021',
     awards: [
@@ -21,8 +21,8 @@ const TX = {
     ],
   },
   ru: {
-    h: 'Нам доверяют не на слово',
-    lead: 'Как проверить агентство и не попасть к мошенникам — наш директор Андрей Котов рассказывал в «Сніданку з 1+1».',
+    h: 'О нас говорят',
+    lead: 'Наш директор Андрей Котов рассказывал в «Сніданку з 1+1», как выбрать надёжное агентство для работы за границей.',
     video: '«Сніданок з 1+1», ТСН — как выбрать агентство по трудоустройству за границей',
     src: 'Сюжет на tsn.ua, 2 июня 2021',
     awards: [
