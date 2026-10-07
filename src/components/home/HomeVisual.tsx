@@ -6,7 +6,6 @@ import { Photo } from '@/components/ui/Photo'
 import { Reveal } from '@/components/ui/Reveal'
 import { LeadButton } from '@/components/lead/LeadModal'
 import { SectionHead } from '@/components/sections/Sections'
-import { Suitcase3D } from './Suitcase3D'
 
 type Lang = 'uk' | 'ru'
 
@@ -24,136 +23,82 @@ export function categoryPhotos(all: Vacancy[]) {
 
 const HERO = {
   uk: {
-    pill: 'Ліцензоване агентство · з 2018 року · 80 000+ клієнтів',
+    pill: 'Ліцензія МСП № 223 · 80 000+ клієнтів з 2018 року',
     h1a: 'Підберемо вам ',
     h1b: 'роботу',
     h1c: ' в Європі',
     sub: 'Склад, завод, готель, будівництво, ферма — будь-яка робота під ваш досвід і документи. Від вас — лише заявка: менеджер зв’яжеться, коли вам зручно, у Viber, Telegram чи телефоном.',
-    steps: [
-      ['Заявка за 30 секунд', 'Номер телефону — і все'],
-      ['Менеджер на зв’язку', 'У зручний час і зручний месенджер'],
-      ['Вакансії під вас', 'Підбір безкоштовний'],
-    ],
     formTitle: 'Залиште заявку — підберемо роботу',
-    formSub: 'Безкоштовно і без зобов’язань. Відповідаємо щодня з 8:00 до 22:00.',
+    formSub: 'Безкоштовно і без зобов’язань. Менеджер зв’яжеться у зручний для вас час.',
     send: 'Підібрати мені роботу',
     or: 'або напишіть одразу:',
     open: (n: number) => `${n} ${plural(n, ['вакансія', 'вакансії', 'вакансій'])} відкрито зараз`,
   },
   ru: {
-    pill: 'Лицензированное агентство · с 2018 года · 80 000+ клиентов',
+    pill: 'Лицензия МСП № 223 · 80 000+ клиентов с 2018 года',
     h1a: 'Подберём вам ',
     h1b: 'работу',
     h1c: ' в Европе',
     sub: 'Склад, завод, отель, стройка, ферма — любая работа под ваш опыт и документы. От вас — только заявка: менеджер свяжется, когда вам удобно, в Viber, Telegram или по телефону.',
-    steps: [
-      ['Заявка за 30 секунд', 'Номер телефона — и всё'],
-      ['Менеджер на связи', 'В удобное время и удобный мессенджер'],
-      ['Вакансии под вас', 'Подбор бесплатный'],
-    ],
     formTitle: 'Оставьте заявку — подберём работу',
-    formSub: 'Бесплатно и без обязательств. Отвечаем ежедневно с 8:00 до 22:00.',
+    formSub: 'Бесплатно и без обязательств. Менеджер свяжется в удобное для вас время.',
     send: 'Подобрать мне работу',
     or: 'или напишите сразу:',
     open: (n: number) => `${n} ${plural(n, ['вакансия', 'вакансии', 'вакансий'])} открыто сейчас`,
   },
 }
 
-const STEP_ICONS = [
-  <svg key="a" viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <rect x="5" y="3" width="14" height="18" rx="2" />
-    <path d="M9 8h6M9 12h6M9 16h3" />
-  </svg>,
-  <svg key="b" viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z" />
-    <path d="M8.5 12h.01M12 12h.01M15.5 12h.01" />
-  </svg>,
-  <svg key="c" viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <path d="m5 12 4.5 4.5L19 7" />
-  </svg>,
-]
-
 /**
- * First screen: what we do («підберемо будь-яку роботу») and what the visitor does — one button: leave a request,
- * choose how and when the manager gets in touch. Real workplace photos on the right.
+ * First screen as a magazine spread: a solid brand-green plane with one big white headline and one real photo of
+ * a person at work. No blobs, pills, floating cards or icon tiles — the look every template has.
  */
+/** Hero photo: a packer at a clothing warehouse in Poland (our employer's own shot, 1200 px — sharp on phones) */
+const HERO_PHOTO = '/media/v/poland-pakuvalnyk-na-skladi-odiahu/f8b2fec409'
+
 export function HomeHero({ lang, total, photos }: { lang: Lang; total: number; photos: string[] }) {
   const t = HERO[lang]
   const uk = lang === 'uk'
+  const photo = HERO_PHOTO || photos[0]
   return (
-    <section className="relative isolate overflow-hidden bg-[linear-gradient(180deg,#f2f8f3_0%,#f7f9f4_60%,var(--color-cream)_100%)]" aria-labelledby="hero-h">
-      <span aria-hidden className="hero-glow -left-24 top-10 size-[420px] bg-[#9fe0bb]" />
-      <span aria-hidden className="hero-glow right-[-120px] top-40 size-[480px] bg-[#a9cdf0] [animation-delay:-6s]" />
-
-      <div className="container-x relative grid items-center gap-10 pb-14 pt-8 sm:pt-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-14 lg:pb-20 lg:pt-16">
-        <div className="animate-rise">
-          <p className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/80 px-3.5 py-1.5 text-[13.5px] font-semibold text-brand-800 shadow-sm backdrop-blur">
-            <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-leaf opacity-60" />
-              <span className="relative inline-flex size-2 rounded-full bg-leaf" />
-            </span>
-            {t.pill}
+    <section className="relative bg-[linear-gradient(165deg,#1a7341_0%,#135a32_55%,#0f4a29_100%)] text-white" aria-labelledby="hero-h">
+      <div className="mx-auto grid max-w-[1440px] lg:min-h-[600px] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)]">
+        {/* photo first on phones */}
+        <div className="relative aspect-[4/3] overflow-hidden bg-ink sm:aspect-[16/9] lg:order-2 lg:aspect-auto">
+          {photo && <Photo base={photo} alt={uk ? 'Працівник складу одягу в Польщі' : 'Работник склада одежды в Польше'} sizes="(max-width: 1024px) 100vw, 50vw" priority className="absolute inset-0 size-full object-cover object-[70%_40%]" />}
+          <p className="absolute bottom-0 left-0 bg-white px-4 py-2.5 text-ink lg:bottom-8 lg:left-0">
+            <span className="num font-display text-[22px] font-bold leading-none">{total}</span>{' '}
+            <span className="text-[13.5px] font-semibold">{t.open(total).replace(/^\d+\s/, '')}</span>
           </p>
-          <h1 id="hero-h" className="mt-5 text-[36px] leading-[1.05] tracking-[-0.03em] min-[380px]:text-[40px] sm:text-[56px] lg:text-[64px]">
+        </div>
+
+        <div className="flex flex-col justify-center px-4 py-9 sm:px-8 sm:py-12 lg:order-1 lg:py-16 lg:pl-[max(2rem,calc((100vw-1240px)/2+1rem))] lg:pr-14 xl:pr-20">
+          <p className="text-[14px] font-semibold text-white/75">{t.pill}</p>
+          <h1 id="hero-h" className="mt-3 text-[38px] font-bold leading-[1.02] tracking-[-0.035em] text-white min-[380px]:text-[42px] sm:text-[60px] lg:text-[68px] xl:text-[76px]">
             {t.h1a}
-            <span className="grad-text">{t.h1b}</span>
+            {t.h1b}
             {t.h1c}
           </h1>
-          <p className="mt-5 max-w-[600px] text-[17px] leading-relaxed text-ink-2 sm:text-[19px]">{t.sub}</p>
-
-          <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+          <p className="mt-5 max-w-[540px] text-[17px] leading-relaxed text-white/85 sm:text-[18.5px]">{t.sub}</p>
+          <div className="mt-7 flex flex-wrap items-center gap-3">
             <LeadButton
               form={uk ? 'home-hero' : 'home-hero-ru'}
               title={t.formTitle}
               subtitle={t.formSub}
               submitLabel={t.send}
               contactPrefs
-              className="btn-accent !min-h-14 !px-8 !text-[17px] shadow-[0_14px_30px_-14px_rgb(30_134_74/0.8)]"
+              className="btn !min-h-14 w-full bg-white !px-7 !text-[17px] text-brand-800 hover:bg-brand-50 sm:w-auto"
             >
               {uk ? 'Залишити заявку' : 'Оставить заявку'} <span aria-hidden>→</span>
             </LeadButton>
-            <a href={`tel:${SITE.phone}`} className="num inline-flex min-h-11 items-center gap-2 text-[17px] font-semibold text-ink hover:text-brand-700">
+            <a href={`tel:${SITE.phone}`} className="btn num !min-h-14 w-full border border-white/35 !px-6 text-white hover:border-white sm:w-auto">
               {SITE.phoneDisplay}
-              <span className="font-sans text-[13.5px] font-normal text-muted">{uk ? 'безкоштовно' : 'бесплатно'}</span>
             </a>
           </div>
-
-          <ol className="mt-8 grid gap-3 sm:grid-cols-3">
-            {t.steps.map(([a, b], i) => (
-              <li key={a} className="flex items-start gap-3 rounded-2xl border border-white/70 bg-white/70 p-3.5 shadow-[0_10px_30px_-18px_rgb(15_36_27/0.35)] backdrop-blur">
-                <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-600 text-white">{STEP_ICONS[i]}</span>
-                <span>
-                  <span className="block text-[15px] font-semibold leading-snug">{a}</span>
-                  <span className="block text-[13.5px] leading-snug text-ink-2">{b}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        {/* real workplaces of our clients */}
-        <div className="relative animate-rise [animation-delay:150ms]" aria-hidden>
-          <div className="relative mx-auto grid max-w-[520px] grid-cols-[1.1fr_0.9fr] gap-3 sm:gap-4">
-            {photos[0] && (
-              <div className="zoom-img float-slow row-span-2 overflow-hidden rounded-[22px] shadow-[0_24px_50px_-24px_rgb(15_36_27/0.55)]" style={{ ['--rot' as string]: '-1.5deg' }}>
-                <Photo base={photos[0]} alt="" sizes="(max-width: 1024px) 55vw, 300px" priority className="aspect-[3/4] size-full origin-[80%_100%] scale-[1.2] object-cover object-[80%_90%]" />
-              </div>
-            )}
-            {photos.slice(1, 3).map((p, i) => (
-              <div key={p} className={`zoom-img ${i ? 'float-slow' : 'float-slow-2'} overflow-hidden rounded-[22px] shadow-[0_24px_50px_-24px_rgb(15_36_27/0.55)]`} style={{ ['--rot' as string]: `${i ? 1.5 : 2}deg` }}>
-                <Photo base={p} alt="" sizes="(max-width: 1024px) 45vw, 240px" className="aspect-[4/3] size-full origin-[80%_100%] scale-[1.2] object-cover object-[80%_90%]" />
-              </div>
-            ))}
-            <div className="absolute -bottom-5 left-4 rounded-2xl border border-white bg-white/95 px-4 py-3 shadow-xl backdrop-blur sm:left-6">
-              <p className="font-display text-[26px] font-bold leading-none text-ink">{total}</p>
-              <p className="mt-1 text-[13px] font-medium text-ink-2">{t.open(total).replace(/^\d+\s/, '')}</p>
-            </div>
-            <div className="pointer-events-none absolute -right-6 -top-14 hidden origin-top-right scale-[0.36] lg:block">
-              <Suitcase3D />
-            </div>
-          </div>
+          <p className="mt-4 text-[13.5px] text-white/65">{uk ? 'Дзвінок безкоштовний з усіх операторів України' : 'Звонок бесплатный со всех операторов Украины'}</p>
         </div>
       </div>
+      {/* the logo gradient as a seam between the hero and the page */}
+      <div className="rule-grad !h-1" aria-hidden />
     </section>
   )
 }
@@ -169,7 +114,7 @@ export function JobCategories({ lang, all, photos, catalog }: { lang: Lang; all:
   const cats = CATEGORIES.filter((c) => photos[c.code] && all.some((v) => v.category === c.code))
   return (
     <section className="container-x py-16 sm:py-20" aria-labelledby="cats-h">
-      <SectionHead id="cats-h" eyebrow={t.eyebrow} title={t.title} text={t.text} />
+      <SectionHead id="cats-h" title={t.title} text={t.text} />
       <Reveal className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-5">
         {cats.map((c, i) => {
           const n = all.filter((v) => v.category === c.code).length
@@ -206,7 +151,6 @@ export function HousingStrip({ lang, photos }: { lang: Lang; photos: string[] })
       <div className="container-x">
         <SectionHead
           id="housing-h"
-          eyebrow={lang === 'uk' ? 'Житло' : 'Жильё'}
           title={lang === 'uk' ? 'Де живуть наші клієнти' : 'Где живут наши клиенты'}
           text={lang === 'uk' ? 'Фото житла на заїздах — їх надсилають самі клієнти. Житло надає роботодавець, умови вказані в кожній вакансії.' : 'Фото жилья на заездах — их присылают сами клиенты. Жильё предоставляет работодатель, условия указаны в каждой вакансии.'}
         />
@@ -234,7 +178,6 @@ export function ClientVideos({ lang, videos }: { lang: Lang; videos: { poster: s
       <div className="flex flex-wrap items-end justify-between gap-4">
         <SectionHead
           id="vids-h"
-          eyebrow={lang === 'uk' ? 'Відеовідгуки' : 'Видеоотзывы'}
           title={lang === 'uk' ? 'Вони вже працюють за кордоном' : 'Они уже работают за границей'}
           text={lang === 'uk' ? 'Справжні клієнти — про роботу, житло й менеджерів. Кожен дав згоду на публікацію.' : 'Настоящие клиенты — о работе, жилье и менеджерах. Каждый дал согласие на публикацию.'}
         />

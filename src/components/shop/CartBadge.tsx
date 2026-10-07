@@ -1,18 +1,23 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { cartPath, onCart, readCart } from '@/lib/cart'
 
-/** Header cart icon — only when something is in the cart */
+/** Pages where the cart makes sense: the services (packages are sold there) and the cart itself */
+const SHOP_PATH = /^(?:\/ru)?\/(?:poslugi|services|oplata)(?:\/|$)/
+
+/** Header cart icon — only on the services and payment pages, and only when something is in the cart */
 export function CartBadge({ lang }: { lang: 'uk' | 'ru' }) {
+  const path = usePathname() ?? ''
   const [n, setN] = useState(0)
   useEffect(() => {
     const sync = () => setN(readCart().reduce((s, l) => s + l.qty, 0))
     sync()
     return onCart(sync)
   }, [])
-  if (!n) return null
+  if (!n || !SHOP_PATH.test(path)) return null
   return (
     <Link href={cartPath(lang)} aria-label={lang === 'uk' ? `Кошик: ${n}` : `Корзина: ${n}`} className="relative grid size-11 place-items-center text-ink hover:bg-brand-50">
       <svg viewBox="0 0 24 24" className="size-[22px]" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

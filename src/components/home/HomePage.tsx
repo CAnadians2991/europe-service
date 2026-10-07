@@ -223,7 +223,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       {/* ───────── 01 HOT VACANCIES ───────── */}
       <section className="container-x py-16 sm:py-20" aria-labelledby="hot-h">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHead id="hot-h" index={1} eyebrow={uk ? 'Вакансії' : 'Вакансии'} title={t.hot} text={t.hotText} />
+          <SectionHead id="hot-h" title={t.hot} text={t.hotText} />
           <Link href={catalog} className="btn-ghost">
             {t.all(all.length)} <IconArrow className="size-4" />
           </Link>
@@ -238,7 +238,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       {/* ───────── 02 STEPS — how it goes ───────── */}
       <section className="border-y border-line bg-white" aria-labelledby="steps-h">
         <div className="container-x py-14 sm:py-20">
-        <SectionHead id="steps-h" index={2} eyebrow={t.stepsLabel} title={t.stepsTitle} />
+        <SectionHead id="steps-h" title={t.stepsTitle} />
         <Reveal>
         <ol className="mt-12 grid gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-6">
           {STEPS[lang].map(([title, text], i, all) => (
@@ -273,7 +273,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       {/* ───────── 03 COUNTRIES — an index ───────── */}
       <section className="border-y border-line bg-white" aria-labelledby="countries-h">
         <div className="container-x py-16 sm:py-20">
-          <SectionHead id="countries-h" index={3} eyebrow={t.countries} title={t.countriesTitle} />
+          <SectionHead id="countries-h" title={t.countriesTitle} />
           <Reveal>
           <ul className="mt-8 grid border-t-[3px] border-ink sm:grid-cols-2 sm:gap-x-10">
             {countries.map((c, i) => (
@@ -347,7 +347,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       {advantages && (
         <section className="border-t border-line bg-white" aria-labelledby="adv-h">
           <div className="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-            <SectionHead id="adv-h" index={4} eyebrow={t.advLabel} title={advantages.title} />
+            <SectionHead id="adv-h" title={advantages.title} />
             <dl className="border-t-[3px] border-ink">
               {advantages.items.map((a) => (
                 <div key={a.title} className="grid gap-1 border-b border-line py-5 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] sm:gap-6">
@@ -386,7 +386,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
         <section className="border-t border-line bg-white" aria-labelledby="rev-h">
           <div className="container-x py-16 sm:py-20">
             <div className="flex flex-wrap items-end justify-between gap-6">
-              <SectionHead id="rev-h" eyebrow={t.reviews} title={t.reviews} />
+              <SectionHead id="rev-h" title={t.reviews} />
               <Link href={p('/vidguki')} className="btn-ghost">
                 {t.allReviews} <IconArrow className="size-4" />
               </Link>
@@ -404,7 +404,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       {articles.length > 0 && (
         <section className="container-x py-16 sm:py-20" aria-labelledby="art-h">
           <div className="flex flex-wrap items-end justify-between gap-6">
-            <SectionHead id="art-h" eyebrow={t.articles} title={t.articles} />
+            <SectionHead id="art-h" title={t.articles} />
             <Link href={p('/news')} className="btn-ghost">
               {t.allArticles} <IconArrow className="size-4" />
             </Link>
