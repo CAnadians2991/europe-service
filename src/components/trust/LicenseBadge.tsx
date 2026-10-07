@@ -8,7 +8,7 @@ export function LicenseBadge({ className = '', lang = 'uk', dark }: { className?
     <p className={`flex items-center gap-2 text-[13px] ${dark ? 'text-white/90' : 'text-ink-2'} ${className}`}>
       <IconShield className={`size-4 shrink-0 ${dark ? 'text-white' : 'text-brand-600'}`} />
       <span>
-        {uk ? 'Офіційне агентство: у державному Переліку Мінекономіки, ЄДРПОУ 42515343.' : 'Официальное агентство: в государственном Перечне Минэкономики, ЕГРПОУ 42515343.'}{' '}
+        {uk ? 'Ліцензоване агентство: ліцензія № 223 від 15.02.2019.' : 'Лицензированное агентство: лицензия № 223 от 15.02.2019.'}{' '}
         <Link href={uk ? '/about#perelik' : '/ru/about#perelik'} className={`font-semibold underline underline-offset-2 ${dark ? 'text-white' : 'text-brand-600'}`}>
           {uk ? 'Перевірити' : 'Проверить'}
         </Link>

@@ -75,7 +75,7 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
               <br />
               {uk ? 'ЄДРПОУ' : 'ЕГРПОУ'} {SITE.edrpou}
               <br />
-              {uk ? 'У Переліку Мінекономіки (з 2019 — ліцензія № 223)' : 'В Перечне Минэкономики (с 2019 — лицензия № 223)'}
+              {uk ? 'Ліцензія МСП № 223 від 15.02.2019 · у Переліку Мінекономіки' : 'Лицензия МСП № 223 от 15.02.2019 · в Перечне Минэкономики'}
               <br />
               <Link href={uk ? '/declaration' : '/ru/declaration'} className="text-white underline underline-offset-[3px]">
                 {uk ? 'Декларація Мінекономіки' : 'Декларация Минэкономики'}

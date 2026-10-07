@@ -3,10 +3,10 @@ export function LicenseStamp({ className = '', lang = 'uk', uid = 'a' }: { class
   const ringId = `es-stamp-ring-${uid}`
   const ring =
     lang === 'uk'
-      ? 'ПЕРЕЛІК МІНЕКОНОМІКИ · ДЕКЛАРАЦІЯ · ЄДРПОУ 42515343 · '
-      : 'ПЕРЕЧЕНЬ МИНЭКОНОМИКИ · ДЕКЛАРАЦИЯ · ЕГРПОУ 42515343 · '
+      ? 'ЛІЦЕНЗІЯ МІНСОЦПОЛІТИКИ № 223 · 15.02.2019 · ЄДРПОУ 42515343 · '
+      : 'ЛИЦЕНЗИЯ МИНСОЦПОЛИТИКИ № 223 · 15.02.2019 · ЕГРПОУ 42515343 · '
   return (
-    <svg viewBox="0 0 200 200" className={className} role="img" aria-label={lang === 'uk' ? 'Europe Service у Переліку Мінекономіки, ЄДРПОУ 42515343' : 'Europe Service в Перечне Минэкономики, ЕГРПОУ 42515343'}>
+    <svg viewBox="0 0 200 200" className={className} role="img" aria-label={lang === 'uk' ? 'Ліцензія № 223 від 15.02.2019' : 'Лицензия № 223 от 15.02.2019'}>
       <defs>
         <path id={ringId} d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0" />
       </defs>
@@ -22,7 +22,7 @@ export function LicenseStamp({ className = '', lang = 'uk', uid = 'a' }: { class
         SERVICE
       </text>
       <text x="100" y="130" textAnchor="middle" fill="currentColor" style={{ fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 600, letterSpacing: 1.5 }}>
-        {lang === 'uk' ? 'З 2018' : 'С 2018'}
+        № 223
       </text>
     </svg>
   )

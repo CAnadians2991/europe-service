@@ -60,7 +60,7 @@ export async function QuizLandingView({ q, lang = 'uk' }: { q: QL; lang?: 'uk' |
   const shownCount = q.country ? (counts[q.country] ?? 0) : all.length
   const about = uk ? '/about#perelik' : '/ru/about#perelik'
   const edrpou = `${uk ? 'ЄДРПОУ' : 'ЕГРПОУ'} ${SITE.edrpou}`
-  const license = uk ? 'У державному Переліку посередників Мінекономіки' : 'В государственном Перечне посредников Минэкономики'
+  const license = uk ? 'Ліцензія Мінсоцполітики № 223 від 15.02.2019' : 'Лицензия Минсоцполитики № 223 от 15.02.2019'
   const reviews = REVIEWS.filter((r) => r.lang === lang && r.text).slice(0, 3)
 
   return (
@@ -102,7 +102,7 @@ export async function QuizLandingView({ q, lang = 'uk' }: { q: QL; lang?: 'uk' |
                   <p>{edrpou}</p>
                   {jobs && <p className="mt-1 text-ink">{uk ? 'Вакансія безкоштовна · супровід від 1099\u00a0грн' : 'Вакансия бесплатна · сопровождение от 1099\u00a0грн'}</p>}
                   <Link href={about} className="mt-1 inline-flex min-h-11 items-center gap-1.5 font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[3px] hover:decoration-brand-700">
-                    {uk ? 'Перевірити агентство' : 'Проверить агентство'} <IconArrow className="size-3.5" />
+                    {uk ? 'Перевірити ліцензію' : 'Проверить лицензию'} <IconArrow className="size-3.5" />
                   </Link>
                 </div>
               </div>

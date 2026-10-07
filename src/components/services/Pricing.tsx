@@ -22,7 +22,7 @@ export function PackagesBlock({ lang }: { lang: Lang }) {
   const tiers = TIERS[lang]
   const prices = tierPrices(lang)
   const parts = methods().find((m) => m.id === 'monoparts' && m.enabled)
-  const trust = [uk ? 'Разова оплата, без абонплати' : 'Разовая оплата, без абонплаты', uk ? 'Вакансія безкоштовна' : 'Вакансия бесплатная', ...(parts ? [uk ? 'можна частинами' : 'можно частями'] : [])].join(' · ')
+  const trust = [uk ? 'Ліцензія № 223' : 'Лицензия № 223', uk ? 'Разова оплата, без абонплати' : 'Разовая оплата, без абонплаты', uk ? 'Вакансія безкоштовна' : 'Вакансия бесплатная', ...(parts ? [uk ? 'можна частинами' : 'можно частями'] : [])].join(' · ')
   const rows = tiers.map((t, i) => ({ id: t.id, name: t.name, short: t.pick, price: prices[i].price, old: prices[i].old, badge: t.badge }))
   const cmp = COMPARE[lang]
   return (
@@ -92,6 +92,15 @@ export function PackagesBlock({ lang }: { lang: Lang }) {
             )
           })}
         </ul>
+        <p className="mt-4 flex items-start gap-2.5 rounded-xl border border-brand-200 bg-brand-50/70 px-3.5 py-2.5 text-[14px] leading-snug text-ink">
+          <svg viewBox="0 0 24 24" className="mt-0.5 size-5 shrink-0 text-brand-700" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M4 12a8 8 0 0 1 13.7-5.6L20 9M20 4v5h-5M20 12a8 8 0 0 1-13.7 5.6L4 15M4 20v-5h5" />
+          </svg>
+          <span>
+            <b className="font-semibold">{uk ? 'Хочете інший пакет?' : 'Хотите другой пакет?'}</b>{' '}
+            {uk ? 'Оплачуєте новий пакет — гроші за попередній повертаємо.' : 'Оплачиваете новый пакет — деньги за предыдущий возвращаем.'}
+          </span>
+        </p>
         <p className="mt-3 text-[13px] text-muted">
           {uk ? 'Натискаючи «Обрати», ви переходите до кошика; оплата — за умовами ' : 'Нажимая «Выбрать», вы переходите в корзину; оплата — на условиях '}
           <Link href={uk ? '/oferta' : '/ru/oferta'} className="font-semibold text-brand-700 underline underline-offset-2">
