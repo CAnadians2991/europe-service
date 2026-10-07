@@ -8,6 +8,7 @@ import { hasRu, localize } from '@/lib/vacancy-i18n'
 import { ruTwin, ukTwin } from '@/lib/alt-routes'
 import { ensureCountries } from '@/lib/countries'
 import { CatalogPage } from './CatalogPage'
+import { CitySections } from './CitySections'
 import { VacancyView, vacancyPageMeta } from './VacancyView'
 import { Blocks } from '@/components/content/Blocks'
 import type { CountryInfo } from '@/lib/site'
@@ -147,6 +148,7 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
         preset={{ country: c.code }}
         links={landingLinks.length ? [{ title: uk ? 'Популярні вакансії' : 'Популярные вакансии', items: landingLinks.map((l) => ({ href: l.href, label: l.label })) }] : undefined}
         faq={landing?.faq}
+        extra={<CitySections code={c.code} lang={lang} active={active} />}
         seoText={
           landing?.blocks?.length ? (
             <SeoText landing={landing} />

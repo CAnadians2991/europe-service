@@ -77,6 +77,7 @@ export async function CatalogPage({
   links,
   faq,
   code,
+  extra,
 }: {
   title: string
   text: string
@@ -91,13 +92,15 @@ export async function CatalogPage({
   faq?: { q: string; a: string }[]
   /** country code for the decorative letters in the head */
   code?: string
+  /** extra blocks after the list (city sections on country pages) */
+  extra?: React.ReactNode
 }) {
   const uk = lang === 'uk'
   const count = cards.filter((c) => (!preset?.country || c.country === preset.country) && (!preset?.category || c.category === preset.category) && (!preset?.housingFree || c.housingFree)).length
   return (
     <>
       <CatalogHero title={title} text={text} crumbs={crumbs} count={count} lang={lang} code={code ?? preset?.country} />
-      <div className="container-x py-8 sm:py-10">
+      <div id="catalog" className="container-x scroll-mt-24 py-8 sm:py-10">
         <Catalog cards={cards} preset={preset} leadForm={form} lang={lang} {...await catalogLandings(lang)} />
       </div>
       {links?.some((g) => g.items.length) && (
@@ -119,6 +122,7 @@ export async function CatalogPage({
           ))}
         </nav>
       )}
+      {extra}
       {seoText && (
         <section className="border-t border-line bg-white py-12">
           <div className="container-x grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
