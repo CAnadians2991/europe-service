@@ -13,8 +13,9 @@ const TX = {
   uk: {
     h: 'Про нас говорять',
     lead: 'Наш директор Андрій Котов розповідав у «Сніданку з 1+1», як обрати надійну агенцію для роботи за кордоном.',
-    video: '«Сніданок з 1+1», ТСН — як обрати агенцію з працевлаштування за кордоном',
-    src: 'Сюжет на tsn.ua, 2 червня 2021',
+    video: 'На відео — директор «Європа Сервіс» Андрій Котов',
+    who: ['Андрій Котов', 'директор «Європа Сервіс»'],
+    src: 'Оригінал сюжету — «Сніданок з 1+1» на tsn.ua, 2 червня 2021',
     awards: [
       { img: '/media/c/5db53a132d', t: 'Ukrainian Business Award 2025', d: '1 місце серед компаній з працевлаштування за кордоном' },
       { img: '/media/c/fa2bcbfe73', t: 'Національний сертифікат', d: '«Вибір споживача 2025»' },
@@ -23,8 +24,9 @@ const TX = {
   ru: {
     h: 'О нас говорят',
     lead: 'Наш директор Андрей Котов рассказывал в «Сніданку з 1+1», как выбрать надёжное агентство для работы за границей.',
-    video: '«Сніданок з 1+1», ТСН — как выбрать агентство по трудоустройству за границей',
-    src: 'Сюжет на tsn.ua, 2 июня 2021',
+    video: 'На видео — директор «Европа Сервис» Андрей Котов',
+    who: ['Андрей Котов', 'директор «Европа Сервис»'],
+    src: 'Оригинал сюжета — «Сніданок з 1+1» на tsn.ua, 2 июня 2021',
     awards: [
       { img: '/media/c/5db53a132d', t: 'Ukrainian Business Award 2025', d: '1 место среди компаний по трудоустройству за границей' },
       { img: '/media/c/fa2bcbfe73', t: 'Национальный сертификат', d: '«Выбор потребителя 2025»' },
@@ -45,11 +47,29 @@ export function PressAwards({ lang }: { lang: Lang }) {
       <div className="mt-7 grid gap-4 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-6">
         <figure className="overflow-hidden rounded-[18px] border border-line bg-white">
           <div className="[&>div]:!my-0">
-            <YouTube id="Ouf8hrTZiS4" title={t.video} lang={lang} />
+            {/* the director's part of the story: 2:00–2:43 */}
+            <YouTube
+              id="Ouf8hrTZiS4"
+              title={t.video}
+              lang={lang}
+              start={120}
+              end={163}
+              cover={
+                <span className="absolute inset-0">
+                  {/* frame from the story itself, 2:39 (the director) — the 1+1 watermark stays as the source */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/media/press/kotov-1plus1.webp" alt="" width={560} height={315} loading="lazy" className="!m-0 size-full !rounded-none object-cover" />
+                  <span className="absolute inset-x-0 top-0 bg-gradient-to-b from-black/65 to-transparent px-4 pb-10 pt-3 text-left text-white sm:px-5 sm:pt-4">
+                    <span className="block font-display text-[19px] font-bold leading-tight sm:text-[24px]">{t.who[0]}</span>
+                    <span className="block text-[13.5px] text-white/95 sm:text-[15px]">{t.who[1]}</span>
+                  </span>
+                </span>
+              }
+            />
           </div>
           <figcaption className="px-4 py-3 sm:px-5">
             <p className="text-[15px] font-semibold leading-snug">{t.video}</p>
-            <a href={TSN_URL} target="_blank" rel="noopener" className="mt-1 inline-block text-[13px] text-brand-700 underline decoration-brand-300 underline-offset-[3px]">
+            <a href={TSN_URL} target="_blank" rel="nofollow noopener noreferrer" className="mt-1 inline-block text-[13px] text-brand-700 underline decoration-brand-300 underline-offset-[3px]">
               {t.src} ↗
             </a>
           </figcaption>
