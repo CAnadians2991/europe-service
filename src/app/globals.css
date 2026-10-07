@@ -780,3 +780,10 @@ html[data-bottom-bar] .contact-fab-dock {
     transform: none;
   }
 }
+
+/* phones: the scrolled header call to action takes the language switch's place (UA/RU stays in the menu) */
+@media (max-width: 639px) {
+  html[data-header-cta] .header-lang {
+    display: none;
+  }
+}

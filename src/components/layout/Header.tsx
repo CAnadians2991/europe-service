@@ -100,7 +100,7 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
           <a href={`tel:${SITE.phone}`} className="num hidden h-11 items-center whitespace-nowrap px-1 text-[15px] font-semibold text-ink hover:text-brand-700 xl:flex">
             {SITE.phoneDisplay}
           </a>
-          <LangSwitch lang={lang} className="hidden h-11 min-w-11 place-items-center border border-line px-2.5 font-mono text-[12.5px] font-semibold text-muted hover:border-ink hover:text-ink sm:grid" />
+          <LangSwitch lang={lang} className="header-lang grid h-11 min-w-10 place-items-center border border-line px-2 font-mono text-[12.5px] font-semibold text-muted hover:border-ink hover:text-ink sm:min-w-11 sm:px-2.5" />
           <CartBadge lang={lang} />
           <HeaderCta lang={lang} />
           <MobileMenu lang={lang} nav={nav} countries={countries.map((c) => ({ ...c, count: counts[c.code] ?? 0 }))} total={total} />

@@ -32,12 +32,15 @@ export function SocialLinks({
   variant = 'light',
   place,
   className = '',
+  compact,
 }: {
   lang?: 'uk' | 'ru'
   variant?: 'light' | 'dark'
   /** analytics: where the click happened (footer, menu, contacts, home) */
   place: string
   className?: string
+  /** smaller type and padding (the phone menu), still a 44px touch target */
+  compact?: boolean
 }) {
   const dark = variant === 'dark'
   // columns follow the space the block really has: a card on a 320px phone gets one column, the footer two, a wide section three
@@ -51,14 +54,14 @@ export function SocialLinks({
               target="_blank"
               rel="noopener"
               onClick={() => ch && trackContact(ch, key === 'reviews' ? `${place}-reviews` : place)}
-              className={`flex h-full min-h-12 items-center gap-3 border px-3 py-2 text-left text-[15px] font-semibold leading-tight transition-colors ${
+              className={`flex h-full items-center border text-left font-semibold leading-tight transition-colors ${compact ? 'min-h-11 gap-2 px-2.5 py-1.5 text-[13.5px]' : 'min-h-12 gap-3 px-3 py-2 text-[15px]'} ${
                 dark
                   ? 'border-white/20 bg-white/[0.04] text-white hover:border-white/70 active:bg-white/10'
                   : 'border-line bg-white text-ink hover:border-ink active:bg-brand-50'
               }`}
             >
-              <span className={`grid size-7 shrink-0 place-items-center ${dark ? 'bg-white' : ''} ${color}`}>
-                <I className="size-5" />
+              <span className={`grid shrink-0 place-items-center ${compact ? 'size-6' : 'size-7'} ${dark ? 'bg-white' : ''} ${color}`}>
+                <I className={compact ? 'size-[18px]' : 'size-5'} />
               </span>
               <span className="min-w-0">{lang === 'uk' ? uk : ru}</span>
             </a>

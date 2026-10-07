@@ -69,6 +69,12 @@ export function MobileHeaderSlot({ lang, home, children }: { lang: 'uk' | 'ru'; 
   const show = scrolled && vacancyPage && !formInView && !isQuizPage(path)
   const label = action ? (uk ? 'Забронювати місце' : 'Забронировать место') : uk ? 'Підібрати роботу' : 'Подобрать работу'
 
+  // while the button is there, the language switch steps aside on phones (it stays in the menu)
+  useEffect(() => {
+    document.documentElement.toggleAttribute('data-header-cta', show)
+    return () => document.documentElement.removeAttribute('data-header-cta')
+  }, [show])
+
   return (
     <div className="flex h-11 min-w-0 flex-1 items-center gap-2 sm:flex-none">
       {show ? (
