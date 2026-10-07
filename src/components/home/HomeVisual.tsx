@@ -3,9 +3,10 @@ import { CATEGORIES, SITE } from '@/lib/site'
 import { plural } from '@/lib/format'
 import type { Category, Vacancy } from '@/lib/types'
 import { Photo } from '@/components/ui/Photo'
-import { Reveal } from '@/components/ui/Reveal'
 import { LeadButton } from '@/components/lead/LeadModal'
 import { SectionHead } from '@/components/sections/Sections'
+import { VideoCards } from '@/components/reviews/VideoCards'
+import type { VideoCard } from '@/lib/video-reviews'
 
 type Lang = 'uk' | 'ru'
 
@@ -190,44 +191,23 @@ export function HousingStrip({ lang, photos }: { lang: Lang; photos: string[] })
 }
 
 /** Video reviews: posters of real clients (consent given), play on the reviews page */
-export function ClientVideos({ lang, videos }: { lang: Lang; videos: { poster: string; name: string; vacancy?: string; city?: string }[] }) {
+export function ClientVideos({ lang, videos }: { lang: Lang; videos: VideoCard[] }) {
   if (videos.length < 4) return null
   return (
-    <section className="container-x py-16 sm:py-20" aria-labelledby="vids-h">
+    <section className="container-x py-12 sm:py-16" aria-labelledby="vids-h">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <SectionHead
           id="vids-h"
           title={lang === 'uk' ? 'Вони вже працюють за кордоном' : 'Они уже работают за границей'}
-          text={lang === 'uk' ? 'Справжні клієнти — про роботу, житло й менеджерів. Кожен дав згоду на публікацію.' : 'Настоящие клиенты — о работе, жилье и менеджерах. Каждый дал согласие на публикацию.'}
+          text={lang === 'uk' ? 'Наші клієнти — про роботу, житло й менеджерів.' : 'Наши клиенты — о работе, жилье и менеджерах.'}
         />
         <Link href={lang === 'uk' ? '/vidguki' : '/ru/otzyvy'} className="btn-ghost">
           {lang === 'uk' ? 'Усі відгуки' : 'Все отзывы'} →
         </Link>
       </div>
-      <Reveal className="mt-8 flex snap-x gap-4 overflow-x-auto pb-2 [scrollbar-width:none] sm:grid sm:grid-cols-4 sm:overflow-visible lg:grid-cols-6">
-        {videos.slice(0, 6).map((v, i) => (
-          <Link
-            key={v.poster}
-            href={lang === 'uk' ? '/vidguki' : '/ru/otzyvy'}
-            data-reveal
-            style={{ ['--i' as string]: i }}
-            className={`zoom-img group relative aspect-[9/16] w-40 shrink-0 snap-start overflow-hidden rounded-2xl bg-ink sm:w-auto ${i > 3 ? 'hidden lg:block' : ''}`}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={v.poster} alt="" loading="lazy" className="absolute inset-0 size-full object-cover" />
-            <span className="absolute inset-0 bg-[linear-gradient(180deg,transparent_50%,rgb(10_28_20/0.85))]" />
-            <span className="absolute left-1/2 top-1/2 grid size-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-brand-700 shadow-lg transition group-hover:scale-110" aria-hidden>
-              <svg viewBox="0 0 24 24" className="ml-0.5 size-5" fill="currentColor">
-                <path d="M8 5.5v13l11-6.5z" />
-              </svg>
-            </span>
-            <span className="absolute inset-x-0 bottom-0 p-3 text-white">
-              <span className="block text-[15px] font-semibold">{v.name}</span>
-              {v.vacancy && <span className="mt-0.5 line-clamp-2 block text-[12.5px] leading-snug text-white/80">{v.vacancy}</span>}
-            </span>
-          </Link>
-        ))}
-      </Reveal>
+      <div className="mt-6">
+        <VideoCards items={videos.slice(0, 8)} lang={lang} layout="row" />
+      </div>
     </section>
   )
 }

@@ -1,39 +1,11 @@
-import { freshDate } from '@/lib/format'
 import { REVIEWS } from '@/lib/content'
 import { PageHero } from './PageHero'
 import { ReviewCard, CtaBand, SectionHead } from '@/components/sections/Sections'
 import { SITE } from '@/lib/site'
 import { Photo } from '@/components/ui/Photo'
 import { ReviewForm } from './ReviewForm'
-import { YouTube } from './YouTube'
-import type { ReviewItem } from '@/lib/content'
-
-/** Video review: poster until tapped (preload none), name + vacancy · city + month */
-function VideoReviewCard({ r, lang }: { r: ReviewItem; lang: 'uk' | 'ru' }) {
-  const vacancy = lang === 'ru' ? (r.vacancyRu ?? r.vacancy) : r.vacancy
-  const city = lang === 'ru' ? (r.cityRu ?? r.city) : r.city
-  return (
-    <figure className="flex min-w-0 flex-col border border-line bg-white">
-      {r.video && /^[\w-]{8,15}$/.test(r.video) ? (
-        <YouTube id={r.video} title={r.name} lang={lang} vertical />
-      ) : (
-        <video
-          src={r.video}
-          poster={r.video?.replace(/\.mp4$/, '.webp')}
-          controls
-          preload="none"
-          playsInline
-          className="block aspect-[9/16] w-full bg-black object-contain"
-        />
-      )}
-      <figcaption className="flex-1 border-t border-line p-3 sm:p-4">
-        <span className="block text-[15.5px] font-semibold leading-snug text-ink">{r.name}</span>
-        {(vacancy || city) && <span className="mt-0.5 block text-[14px] leading-snug text-muted">{[vacancy, city].filter(Boolean).join(' · ')}</span>}
-        {freshDate(r.date) && <span className="num mt-1 block text-[12.5px] text-muted">{freshDate(r.date)}</span>}
-      </figcaption>
-    </figure>
-  )
-}
+import { VideoCards } from '@/components/reviews/VideoCards'
+import { videoCards } from '@/lib/video-reviews'
 
 export function ReviewsPage({ lang }: { lang: 'uk' | 'ru' }) {
   const uk = lang === 'uk'
@@ -75,10 +47,8 @@ export function ReviewsPage({ lang }: { lang: 'uk' | 'ru' }) {
             title={uk ? 'Відеовідгуки клієнтів' : 'Видеоотзывы клиентов'}
             text={uk ? 'Записали люди, які поїхали на роботу через Europe Service.' : 'Записали люди, которые уехали на работу через Europe Service.'}
           />
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-            {videos.map((r) => (
-              <VideoReviewCard key={r.video} r={r} lang={lang} />
-            ))}
+          <div className="mt-8">
+            <VideoCards items={videoCards(videos, lang)} lang={lang} />
           </div>
         </section>
       )}

@@ -6,6 +6,7 @@ import { CATALOG_PATH, COUNTRIES } from '@/lib/site'
 import { localHref, ruTwin } from '@/lib/alt-routes'
 import { localize } from '@/lib/vacancy-i18n'
 import { formatDate, plural } from '@/lib/format'
+import { videoCards } from '@/lib/video-reviews'
 import { organizationLd, websiteLd, faqLd, tildaHomeProductLd } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { Photo } from '@/components/ui/Photo'
@@ -156,9 +157,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
   const heroPhotos = categoryPhotos(all)
   const heroList = [heroPhotos.warehouse, heroPhotos.horeca, heroPhotos.construction].filter(Boolean) as string[]
   const housing = [...new Set(all.flatMap((v) => v.housingPhotos.slice(0, 2)))].slice(0, 16)
-  const videos = REVIEWS.filter((r) => r.video && r.video.endsWith('.mp4') && (r.lang === lang || lang === 'ru'))
-    .map((r) => ({ poster: r.video!.replace(/\.mp4$/, '.webp'), name: r.name, vacancy: (lang === 'ru' ? r.vacancyRu : undefined) ?? r.vacancy, city: r.city }))
-    .filter((v) => !v.poster.includes('/work-'))
+  const videos = videoCards(REVIEWS.filter((r) => r.lang === lang || lang === 'ru'), lang)
   const reviews = REVIEWS.filter((r) => r.lang === lang && r.text && r.name).slice(0, 3)
   const faq = uk ? HOME_FAQ : HOME_FAQ_RU
   const byDate = (x: { datePublished?: string | null; date?: string | null }, y: { datePublished?: string | null; date?: string | null }) =>
