@@ -1,42 +1,36 @@
 import Link from 'next/link'
-import { SITE } from '@/lib/site'
-import { LicenseStamp } from './LicenseStamp'
 import { Reveal } from '@/components/ui/Reveal'
 
 type Item = { t: string; d: string; href?: string; label?: string }
 
 /**
- * Guarantees as a short checklist: the promise in a few words, one line on how to check it, and where.
- * Only commitments the company really makes (licence, packages, contracts, support, consent for photos) — nothing invented.
- * Owner, 2026-10: the long «letter» took 3–4 swipes on a phone — now a list that fits about one screen.
+ * «You are not alone»: what the candidate gets against the biggest fear — being left on their own.
+ * Candidate panel copy (2026-10): only the candidate's benefit, no licence here (it is above the hero), no «24/7».
+ * Kept the id «garantii» — old links point at it.
  */
-const TX: Record<'uk' | 'ru', { h: string; lead: string; sign: string; items: Item[] }> = {
+const TX: Record<'uk' | 'ru', { h: string; lead: string; items: Item[] }> = {
   uk: {
-    h: 'Сім гарантій, які можна перевірити',
-    lead: 'Ось що ми гарантуємо — і де це перевірити ще до оплати чи виїзду.',
-    sign: 'Підпис і печатка агентства',
+    h: 'Ви не самі — ні в дорозі, ні на місці',
+    lead: 'Найбільший страх — що кинуть. Тому ми поруч від першого дзвінка до роботи — і після.',
     items: [
-      { t: 'Офіційне агентство', d: `Ліцензія № 223 від 15.02.2019, ЄДРПОУ ${SITE.edrpou}`, href: '/declaration', label: 'Декларація' },
-      { t: 'Підбір вакансії — безкоштовно', d: 'Платите лише за обраний пакет, за договором оферти', href: '/poslugi', label: 'Ціни' },
-      { t: 'Офіційний договір з роботодавцем', d: 'Тип договору вказано в кожній вакансії', href: '/vacancies/aktualni_vakansii', label: 'Вакансії' },
-      { t: 'Безкоштовна заміна вакансії', d: '1, 6 або 12 місяців — залежно від пакета', href: '/poslugi', label: 'Пакети' },
-      { t: 'Маршрутний лист до виїзду', d: 'Адреса, координатор і як доїхати — ще до квитків' },
-      { t: 'Менеджер на зв’язку 24/7', d: 'Viber, Telegram і 5 офісів в Україні', href: '/contacts', label: 'Контакти' },
-      { t: 'Реальні люди на фото', d: 'Кожен дав письмову згоду на публікацію', href: '/vidguki', label: 'Відгуки' },
+      { t: 'Умови видно до виїзду', d: 'У кожній вакансії — тип договору і чи є житло від роботодавця.', href: '/vacancies/aktualni_vakansii', label: 'Вакансії' },
+      { t: 'Допоможемо доїхати', d: 'Маршрутний лист, перевізник-партнер і допомога з квитками.', href: '/poslugi', label: 'Послуги' },
+      { t: 'Координатор до місця роботи', d: 'Підкажемо на кожному кроці, поки не доберетеся до місця роботи.' },
+      { t: 'Не підійшла робота — замінимо', d: 'Запропонуємо іншу вакансію безкоштовно. Термін залежить від пакета.', href: '/poslugi', label: 'Ціни' },
+      { t: 'Є кому подзвонити', d: 'Viber, Telegram чи телефон — менеджер відповідає щодня.', href: '/contacts', label: 'Контакти' },
+      { t: 'Відгуки живих людей', d: 'Відео від клієнтів і фото житла, які вони надіслали самі.', href: '/vidguki', label: 'Відгуки' },
     ],
   },
   ru: {
-    h: 'Семь гарантий, которые можно проверить',
-    lead: 'Вот что мы гарантируем — и где это проверить ещё до оплаты или выезда.',
-    sign: 'Подпись и печать агентства',
+    h: 'Вы не одни — ни в дороге, ни на месте',
+    lead: 'Главный страх — что бросят. Поэтому мы рядом от первого звонка до работы — и после.',
     items: [
-      { t: 'Официальное агентство', d: `Лицензия № 223 от 15.02.2019, ЕГРПОУ ${SITE.edrpou}`, href: '/declaration', label: 'Декларация' },
-      { t: 'Подбор вакансии — бесплатно', d: 'Платите только за выбранный пакет, по договору оферты', href: '/ru/services', label: 'Цены' },
-      { t: 'Официальный договор с работодателем', d: 'Тип договора указан в каждой вакансии', href: '/ru/vacancies/aktualni_vakansii', label: 'Вакансии' },
-      { t: 'Бесплатная замена вакансии', d: '1, 6 или 12 месяцев — в зависимости от пакета', href: '/ru/services', label: 'Пакеты' },
-      { t: 'Маршрутный лист до выезда', d: 'Адрес, координатор и как доехать — ещё до билетов' },
-      { t: 'Менеджер на связи 24/7', d: 'Viber, Telegram и 5 офисов в Украине', href: '/ru/contacts', label: 'Контакты' },
-      { t: 'Реальные люди на фото', d: 'Каждый дал письменное согласие на публикацию', href: '/ru/otzyvy', label: 'Отзывы' },
+      { t: 'Условия видны до выезда', d: 'В каждой вакансии — тип договора и есть ли жильё от работодателя.', href: '/ru/vacancies/aktualni_vakansii', label: 'Вакансии' },
+      { t: 'Поможем доехать', d: 'Маршрутный лист, перевозчик-партнёр и помощь с билетами.', href: '/ru/services', label: 'Услуги' },
+      { t: 'Координатор до места работы', d: 'Подскажем на каждом шаге, пока не доберётесь до места работы.' },
+      { t: 'Не подошла работа — заменим', d: 'Предложим другую вакансию бесплатно. Срок зависит от пакета.', href: '/ru/services', label: 'Цены' },
+      { t: 'Есть кому позвонить', d: 'Viber, Telegram или телефон — менеджер отвечает каждый день.', href: '/ru/contacts', label: 'Контакты' },
+      { t: 'Отзывы живых людей', d: 'Видео от клиентов и фото жилья, которые они прислали сами.', href: '/ru/otzyvy', label: 'Отзывы' },
     ],
   },
 }
@@ -54,22 +48,14 @@ export function Guarantees({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
       <div className="container-x grid gap-6 py-10 sm:py-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
         <div className="lg:self-center">
           <h2 id="guar-h" className="text-[26px] sm:text-[40px]">{t.h}</h2>
-          <p className="mt-2 max-w-md text-[15.5px] leading-relaxed text-ink-2 sm:mt-4 sm:text-[16.5px]">{t.lead}</p>
-          <div className="mt-8 hidden items-center gap-5 lg:flex">
-            <LicenseStamp lang={lang} uid="guar" className="size-28 shrink-0 rotate-[-10deg] text-brand-700/85 mix-blend-multiply" />
-            <p className="num text-[13px] leading-relaxed text-muted">
-              {SITE.legalName}
-              <br />
-              {lang === 'uk' ? 'ЄДРПОУ' : 'ЕГРПОУ'} {SITE.edrpou} · {t.sign.toLowerCase()}
-            </p>
-          </div>
+          <p className="mt-2 max-w-md text-[15.5px] leading-relaxed text-ink-2 sm:mt-4 sm:text-[17px]">{t.lead}</p>
         </div>
 
-        <Reveal className="overflow-hidden border border-line bg-white">
+        <Reveal className="overflow-hidden rounded-[18px] border border-line bg-white">
           <div className="rule-grad" />
-          <ol className="divide-y divide-line">
-            {t.items.map((it) => (
-              <li key={it.t} className="flex gap-3 px-4 py-3 sm:px-6 sm:py-4">
+          <ul className="divide-y divide-line sm:grid sm:grid-cols-2 sm:divide-y-0">
+            {t.items.map((it, i) => (
+              <li key={it.t} className={`flex gap-3 px-4 py-3 sm:px-6 sm:py-5 ${i > 1 ? 'sm:border-t sm:border-line' : ''} ${i % 2 ? 'sm:border-l sm:border-line' : ''}`}>
                 <Check />
                 <div className="min-w-0">
                   <h3 className="text-[15.5px] font-semibold leading-snug sm:text-[17px]">{it.t}</h3>
@@ -77,7 +63,7 @@ export function Guarantees({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
                     {it.d}
                     {it.href && (
                       <>
-                        {' · '}
+                        {' '}
                         <Link href={it.href} className="whitespace-nowrap font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[3px] hover:decoration-brand-700">
                           {it.label} →
                         </Link>
@@ -87,7 +73,7 @@ export function Guarantees({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
                 </div>
               </li>
             ))}
-          </ol>
+          </ul>
         </Reveal>
       </div>
     </section>

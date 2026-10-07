@@ -9,6 +9,20 @@ const GLOBAL = [
   ['Агенство', 'Агентство'],
   ['Ваше ім*я', 'Ваше ім’я'],
 ]
+// owner 2026-10: nobody answers at night — no «24/7» in the agency's own texts (reviews and embassy hotlines stay)
+const SUPPORT = [
+  ['Клієнтська підтримка 24/7', 'Менеджер на зв’язку щодня'],
+  ['Клиентская поддержка 24/7', 'Менеджер на связи каждый день'],
+  ['Підтримка 24/7.', 'Менеджер на зв’язку щодня — і під час роботи.'],
+  ['Поддержка 24/7.', 'Менеджер на связи каждый день — и во время работы.'],
+  ['підтримкою 24/7', 'підтримкою менеджера під час роботи'],
+  ['підтримку 24/7', 'підтримку менеджера під час роботи'],
+  ['підтримка 24/7', 'підтримка менеджера під час роботи'],
+  ['поддержкой 24/7', 'поддержкой менеджера во время работы'],
+  ['поддержку 24/7', 'поддержку менеджера во время работы'],
+  ['поддержка 24/7', 'поддержка менеджера во время работы'],
+]
+const SUPPORT_FILES = new Set(['landings', 'services', 'home', 'pages'])
 // one page only: the Netherlands guide had the Polish heading copied over
 const BY_PATH = {
   '/netherlands/vyizd': [['Корисні контакти у Польщі', 'Корисні контакти в Нідерландах']],
@@ -31,6 +45,7 @@ for (const f of ['articles', 'landings', 'pages', 'home', 'quizzes', 'services',
   }
   let s = JSON.stringify(data, null, 1)
   for (const [x, y] of GLOBAL) if (s.includes(x)) (n += s.split(x).length - 1), (s = s.split(x).join(y))
+  if (SUPPORT_FILES.has(f)) for (const [x, y] of SUPPORT) if (s.includes(x)) (n += s.split(x).length - 1), (s = s.split(x).join(y))
   fs.writeFileSync(file, s)
 }
 console.log('text fixes', n)

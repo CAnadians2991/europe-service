@@ -23,11 +23,12 @@ export function categoryPhotos(all: Vacancy[]) {
 
 const HERO = {
   uk: {
-    pill: 'Ліцензія МСП № 223 · 80 000+ клієнтів з 2018 року',
-    h1a: 'Підберемо вам ',
-    h1b: 'роботу',
-    h1c: ' в Європі',
-    sub: 'Склад, завод, готель, будівництво, ферма — будь-яка робота під ваш досвід і документи. Від вас — лише заявка: менеджер зв’яжеться, коли вам зручно, у Viber, Telegram чи телефоном.',
+    pill: 'Офіційне кадрове агентство · працюємо з 2018 року',
+    h1a: 'Підберемо роботу в Європі',
+    h1b: '— і не кинемо',
+    sub: 'Склади, заводи, готелі, будівництво — обираєте ви. Ми допоможемо з квитками й дорогою, а на місці буде кому подзвонити, якщо щось піде не так.',
+    cta: 'Підібрати мені роботу',
+    under: 'Менеджер напише у Viber чи Telegram у зручний час',
     formTitle: 'Залиште заявку — підберемо роботу',
     formSub: 'Безкоштовно і без зобов’язань. Менеджер зв’яжеться у зручний для вас час.',
     send: 'Підібрати мені роботу',
@@ -35,11 +36,12 @@ const HERO = {
     open: (n: number) => `${n} ${plural(n, ['вакансія', 'вакансії', 'вакансій'])} відкрито зараз`,
   },
   ru: {
-    pill: 'Лицензия МСП № 223 · 80 000+ клиентов с 2018 года',
-    h1a: 'Подберём вам ',
-    h1b: 'работу',
-    h1c: ' в Европе',
-    sub: 'Склад, завод, отель, стройка, ферма — любая работа под ваш опыт и документы. От вас — только заявка: менеджер свяжется, когда вам удобно, в Viber, Telegram или по телефону.',
+    pill: 'Официальное кадровое агентство · работаем с 2018 года',
+    h1a: 'Подберём работу в Европе',
+    h1b: '— и не бросим',
+    sub: 'Склады, заводы, отели, стройка — выбираете вы. Мы поможем с билетами и дорогой, а на месте будет кому позвонить, если что-то пойдёт не так.',
+    cta: 'Подобрать мне работу',
+    under: 'Менеджер напишет в Viber или Telegram в удобное время',
     formTitle: 'Оставьте заявку — подберём работу',
     formSub: 'Бесплатно и без обязательств. Менеджер свяжется в удобное для вас время.',
     send: 'Подобрать мне работу',
@@ -55,30 +57,24 @@ const HERO = {
 /** Hero photo (owner's pick, 2026-10): a woman and a man in hard hats in a warehouse aisle — from our IKEA vacancy, 1200 px */
 const HERO_PHOTO = '/media/v/chekhiia-ikea/38a6b6c422'
 
-export function HomeHero({ lang, total, photos }: { lang: Lang; total: number; photos: string[] }) {
+export function HomeHero({ lang, photos }: { lang: Lang; photos: string[] }) {
   const t = HERO[lang]
   const uk = lang === 'uk'
   const photo = HERO_PHOTO || photos[0]
   return (
-    <section className="relative bg-[linear-gradient(165deg,#1a7341_0%,#135a32_55%,#0f4a29_100%)] text-white" aria-labelledby="hero-h">
+    <section className="relative bg-[linear-gradient(135deg,#25834f_0%,#1f7d5e_58%,#2a7a85_100%)] text-white" aria-labelledby="hero-h">
       <div className="mx-auto grid max-w-[1440px] lg:min-h-[600px] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)]">
         {/* photo first on phones */}
         <div className="relative aspect-[4/3] overflow-hidden bg-ink sm:aspect-[16/9] lg:order-2 lg:aspect-auto">
           {photo && <Photo base={photo} alt={uk ? 'Працівники складу в касках' : 'Работники склада в касках'} sizes="(max-width: 1024px) 100vw, 50vw" priority className="absolute inset-0 size-full object-cover object-[18%_40%]" />}
-          <p className="absolute bottom-0 right-0 bg-white px-4 py-2.5 text-ink lg:bottom-8">
-            <span className="num font-display text-[22px] font-bold leading-none">{total}</span>{' '}
-            <span className="text-[13.5px] font-semibold">{t.open(total).replace(/^\d+\s/, '')}</span>
-          </p>
         </div>
 
         <div className="flex flex-col justify-center px-4 py-9 sm:px-8 sm:py-12 lg:order-1 lg:py-16 lg:pl-[max(2rem,calc((100vw-1240px)/2+1rem))] lg:pr-14 xl:pr-20">
-          <p className="text-[14px] font-semibold text-white/75">{t.pill}</p>
+          <p className="text-[14px] font-semibold text-white/90">{t.pill}</p>
           <h1 id="hero-h" className="mt-3 text-[38px] font-bold leading-[1.02] tracking-[-0.035em] text-white min-[380px]:text-[42px] sm:text-[60px] lg:text-[68px] xl:text-[76px]">
-            {t.h1a}
-            {t.h1b}
-            {t.h1c}
+            {t.h1a} <span className="block text-[#c9f0d8]">{t.h1b}</span>
           </h1>
-          <p className="mt-5 max-w-[540px] text-[17px] leading-relaxed text-white/85 sm:text-[18.5px]">{t.sub}</p>
+          <p className="mt-5 max-w-[540px] text-[17px] leading-relaxed text-white sm:text-[18.5px]">{t.sub}</p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <LeadButton
               form={uk ? 'home-hero' : 'home-hero-ru'}
@@ -88,13 +84,13 @@ export function HomeHero({ lang, total, photos }: { lang: Lang; total: number; p
               contactPrefs
               className="btn !min-h-14 w-full bg-white !px-7 !text-[17px] text-brand-800 hover:bg-brand-50 sm:w-auto"
             >
-              {uk ? 'Залишити заявку' : 'Оставить заявку'} <span aria-hidden>→</span>
+              {t.cta} <span aria-hidden>→</span>
             </LeadButton>
             <a href={`tel:${SITE.phone}`} className="btn num !min-h-14 w-full border border-white/35 !px-6 text-white hover:border-white sm:w-auto">
               {SITE.phoneDisplay}
             </a>
           </div>
-          <p className="mt-4 text-[13.5px] text-white/65">{uk ? 'Дзвінок безкоштовний з усіх операторів України' : 'Звонок бесплатный со всех операторов Украины'}</p>
+          <p className="mt-4 text-[13.5px] text-white/90">{t.under}</p>
         </div>
       </div>
       {/* the logo gradient as a seam between the hero and the page */}

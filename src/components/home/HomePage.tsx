@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { getActiveVacancies, toCard } from '@/lib/vacancies'
 import { getAbout } from '@/lib/about'
 import { ARTICLES, HOME, REVIEWS, isObsolete, type HomeContent } from '@/lib/content'
-import { CATALOG_PATH, COUNTRIES, COUNTRY, SITE } from '@/lib/site'
+import { CATALOG_PATH, COUNTRIES } from '@/lib/site'
 import { localHref, ruTwin } from '@/lib/alt-routes'
 import { localize } from '@/lib/vacancy-i18n'
 import { formatDate, plural } from '@/lib/format'
@@ -14,10 +14,10 @@ import { Faq, HOME_FAQ, HOME_FAQ_RU, ReviewCard, SectionHead } from '@/component
 import { VacancyCard } from '@/components/vacancy/VacancyCard'
 import { LeadForm } from '@/components/lead/LeadForm'
 import { QuizButton } from '@/components/lead/LeadModal'
-import { ChatButtons } from '@/components/lead/ChatButtons'
 import { LicenseSection } from '@/components/trust/LicenseSection'
 import { Guarantees } from '@/components/trust/Guarantees'
-import { Suitcase3D } from './Suitcase3D'
+import { PressAwards } from '@/components/trust/PressAwards'
+import { PackagePitch } from '@/components/services/PackagePitch'
 import { VacancyTicker } from './VacancyTicker'
 import { Reveal } from '@/components/ui/Reveal'
 import { CountUp } from '@/components/ui/CountUp'
@@ -25,7 +25,6 @@ import { ClientVideos, HomeHero, HousingStrip, JobCategories, categoryPhotos } f
 import { OfficeTeam } from '@/components/trust/OfficeTeam'
 import { SocialLinks } from '@/components/layout/SocialLinks'
 import { Blocks } from '@/components/content/Blocks'
-import { YouTube } from '@/components/content/YouTube'
 
 const TX = {
   uk: {
@@ -39,16 +38,16 @@ const TX = {
     openSub: 'вакансій у реєстрі',
     updated: 'оновлюється щодня',
     allCountries: 'Усі країни',
-    facts: [
-      ['80 000+', 'клієнтів за 7 років роботи'],
-      ['5', 'офісів: Київ, Львів, Рівне, Житомир, Одеса'],
-      ['№ 223', 'ліцензія Мінсоцполітики з 2019 року'],
-      ['24/7', 'підтримка клієнтів у Viber і Telegram'],
+    facts: (vac: number, countries: number) => [
+      [String(vac), 'відкритих вакансій прямо зараз'],
+      [String(countries), 'країн: Польща, Німеччина, Литва, Чехія…'],
+      ['Житло', 'від роботодавця — у багатьох вакансіях'],
+      ['5 офісів', 'Київ, Львів, Рівне, Житомир, Одеса'],
     ],
     hot: 'Термінові заїзди',
     hotText: 'Вакансії з виїздом найближчим часом — житло, офіційний договір, супровід.',
     countries: 'Країни',
-    countriesTitle: 'Де працюють наші клієнти',
+    countriesTitle: 'Вакансії по країнах',
     consultTag: 'Безкоштовна консультація',
     consult: 'Залиште номер — менеджер зателефонує й підбере вакансію під ваш досвід і документи',
     send: 'Замовити дзвінок',
@@ -79,16 +78,16 @@ const TX = {
     openSub: 'вакансий в реестре',
     updated: 'обновляется ежедневно',
     allCountries: 'Все страны',
-    facts: [
-      ['80 000+', 'клиентов за 7 лет работы'],
-      ['5', 'офисов: Киев, Львов, Ровно, Житомир, Одесса'],
-      ['№ 223', 'лицензия Минсоцполитики с 2019 года'],
-      ['24/7', 'поддержка клиентов в Viber и Telegram'],
+    facts: (vac: number, countries: number) => [
+      [String(vac), 'открытых вакансий прямо сейчас'],
+      [String(countries), 'стран: Польша, Германия, Литва, Чехия…'],
+      ['Жильё', 'от работодателя — во многих вакансиях'],
+      ['5 офисов', 'Киев, Львов, Ровно, Житомир, Одесса'],
     ],
     hot: 'Срочные заезды',
     hotText: 'Вакансии с выездом в ближайшее время — жильё, официальный договор, сопровождение.',
     countries: 'Страны',
-    countriesTitle: 'Где работают наши клиенты',
+    countriesTitle: 'Вакансии по странам',
     consultTag: 'Бесплатная консультация',
     consult: 'Оставьте номер — менеджер позвонит и подберёт вакансию под ваш опыт и документы',
     send: 'Заказать звонок',
@@ -112,16 +111,16 @@ const TX = {
 
 const STEPS = {
   uk: [
-    ['Заявка', 'Залишаєте номер або проходите підбір — менеджер телефонує й уточнює досвід, документи й побажання.'],
-    ['Підбір і документи', 'Пропонуємо вакансії, реєструємо вас у роботодавця, бронюємо місце й допомагаємо з документами.'],
-    ['Маршрут', 'Перед виїздом надсилаємо маршрутний лист: адреса, контакти координатора, як доїхати.'],
-    ['Робота', 'На місці зустрічає координатор роботодавця, а ваш менеджер лишається на зв’язку.'],
+    ['Залишаєте номер', 'Менеджер напише у Viber, Telegram або зателефонує, коли вам зручно.'],
+    ['Обираєте роботу', 'Розповімо про умови, житло й договір. Рішення — за вами, ми лише радимо.'],
+    ['Готуємо до виїзду', 'Резюме, реєстрація в роботодавця, бронь місця, маршрут і допомога з квитками.'],
+    ['Ведемо до роботи', 'Координуємо дорогу до місця. Не підійде робота — запропонуємо заміну.'],
   ],
   ru: [
-    ['Заявка', 'Оставляете номер или проходите подбор — менеджер звонит и уточняет опыт, документы и пожелания.'],
-    ['Подбор и документы', 'Предлагаем вакансии, регистрируем вас у работодателя, бронируем место и помогаем с документами.'],
-    ['Маршрут', 'Перед выездом отправляем маршрутный лист: адрес, контакты координатора, как добраться.'],
-    ['Работа', 'На месте встречает координатор работодателя, а ваш менеджер остаётся на связи.'],
+    ['Оставляете номер', 'Менеджер напишет в Viber, Telegram или позвонит, когда вам удобно.'],
+    ['Выбираете работу', 'Расскажем об условиях, жилье и договоре. Решение — за вами, мы только советуем.'],
+    ['Готовим к выезду', 'Резюме, регистрация у работодателя, бронь места, маршрут и помощь с билетами.'],
+    ['Ведём до работы', 'Координируем дорогу до места. Не подойдёт работа — предложим замену.'],
   ],
 }
 
@@ -139,19 +138,6 @@ function LogoRow({ title, logos, big }: { title: string; logos: { src: string; a
         ))}
       </ul>
     </div>
-  )
-}
-
-/** One phrase of the heading in the corporate gradient (no-op when the phrase is not there) */
-function Accent({ text, word }: { text: string; word: string }) {
-  const i = text.indexOf(word)
-  if (i < 0) return <>{text}</>
-  return (
-    <>
-      {text.slice(0, i)}
-      <span className="grad-text">{word}</span>
-      {text.slice(i + word.length)}
-    </>
   )
 }
 
@@ -180,7 +166,6 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
   }
   const reviews = REVIEWS.filter((r) => r.lang === lang && r.text && r.name).slice(0, 3)
   const faq = uk ? HOME_FAQ : HOME_FAQ_RU
-  const advantages = H.advantages ?? U.advantages
   const byDate = (x: { datePublished?: string | null; date?: string | null }, y: { datePublished?: string | null; date?: string | null }) =>
     (y.datePublished ?? y.date ?? '').localeCompare(x.datePublished ?? x.date ?? '')
   const articles = ARTICLES.filter((a) => a.lang === lang && !isObsolete(a) && !a.listing && (a.cover || a.ogImage?.startsWith('/')))
@@ -194,13 +179,13 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       <JsonLd data={faqLd(faq)} />
 
       {/* ───────── HERO: what we do + the request form right away ───────── */}
-      <HomeHero lang={lang} total={all.length} photos={heroList} />
+      <HomeHero lang={lang} photos={heroList} />
 
       <section className="border-b border-line bg-white" aria-label={uk ? 'Europe Service у цифрах' : 'Europe Service в цифрах'}>
         {/* facts strip */}
         <div className="border-t border-line">
           <dl className="container-x grid grid-cols-2 lg:grid-cols-4">
-            {t.facts.map(([v, l], i) => (
+            {t.facts(all.length, countries.length).map(([v, l], i) => (
               <div key={v} className={`py-5 pr-4 ${i % 2 ? 'border-l border-line pl-4 lg:pl-6' : ''} ${i > 1 ? 'border-t border-line lg:border-t-0' : ''} ${i === 2 ? 'lg:border-l lg:pl-6' : ''}`}>
                 <dt className="sr-only">{l}</dt>
                 <dd className="font-display text-[24px] font-semibold leading-none tracking-[-0.02em] sm:text-[30px]">
@@ -267,8 +252,12 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
         </div>
       </section>
 
+      {/* ───────── why a package when somewhere it is «free» ───────── */}
+      <PackagePitch lang={lang} href={uk ? '/poslugi' : '/ru/services'} />
+
       <HousingStrip lang={lang} photos={housing} />
       <ClientVideos lang={lang} videos={videos} />
+      <PressAwards lang={lang} />
 
       {/* ───────── 03 COUNTRIES — an index ───────── */}
       <section className="border-y border-line bg-white" aria-labelledby="countries-h">
@@ -343,43 +332,16 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       </section>
 
 
-      {/* ───────── 04 ADVANTAGES — a spec sheet ───────── */}
-      {advantages && (
-        <section className="border-t border-line bg-white" aria-labelledby="adv-h">
-          <div className="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-            <SectionHead id="adv-h" title={advantages.title} />
-            <dl className="border-t-[3px] border-ink">
-              {advantages.items.map((a) => (
-                <div key={a.title} className="grid gap-1 border-b border-line py-5 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] sm:gap-6">
-                  <dt className="text-[17px] font-semibold">{a.title}</dt>
-                  <dd className="text-[15.5px] leading-relaxed text-ink-2">{a.text}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </section>
-      )}
-
       {/* ───────── 05 OFFICES & TEAM, 06 DOCUMENTS ───────── */}
       <OfficeTeam about={about} lang={lang} />
       <LicenseSection about={about} lang={lang} compact />
 
-      {/* ───────── AWARDS · PRESS · EMPLOYERS ───────── */}
-      <section className="container-x space-y-8 py-16 sm:py-20" aria-label={`${t.awards}, ${t.press}`}>
-        <div className="grid gap-8 lg:grid-cols-2">
-          {U.awards && <LogoRow title={t.awards} logos={U.awards.images} big />}
-          {U.video?.youtube && (
-            <div className="border-t border-line pt-5">
-              <p className="eyebrow">{t.video}</p>
-              <div className="mt-4 [&>div]:!my-0 [&>div]:!rounded-none">
-                <YouTube id={U.video.youtube} title={t.video} />
-              </div>
-            </div>
-          )}
-        </div>
-        {U.press && <LogoRow title={t.press} logos={U.press.logos} />}
-        {U.employers && <LogoRow title={t.employers} logos={U.employers.logos} />}
-      </section>
+      {/* ───────── EMPLOYERS (awards and the 1+1 story moved up, next to the client videos) ───────── */}
+      {U.employers && (
+        <section className="container-x py-12 sm:py-16" aria-label={t.employers}>
+          <LogoRow title={t.employers} logos={U.employers.logos} />
+        </section>
+      )}
 
       {/* ───────── REVIEWS ───────── */}
       {reviews.length > 0 && (
