@@ -308,6 +308,8 @@ console.log('legacy redirects', list.length)
 
 // tpost uid -> new path (vacancies: active page or country page; articles: new article path)
 const tpost = { ...(exists('tpost-redirects.vacancies.json') ? read('tpost-redirects.vacancies.json') : {}), ...articleTpost }
+// a post whose Tilda address was broken (spaces, emoji) — see FIX_FN in sanitize.mjs
+tpost.o9yca9j201 = '/tpost/o9yca9j201-legalnaya-rabota-v-gdine-dlya-ukrain'
 fs.writeFileSync(path.join(DATA, 'tpost-redirects.json'), JSON.stringify(tpost))
 console.log('tpost redirects', Object.keys(tpost).length, 'images', jobs)
 await import('./apply_ru_pages.mjs')

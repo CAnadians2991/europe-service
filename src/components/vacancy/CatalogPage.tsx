@@ -21,7 +21,7 @@ export function Breadcrumbs({ items }: { items: { name: string; path: string }[]
               {i < items.length - 1 ? (
                 <Link href={it.path} className="inline-flex min-h-10 items-center underline-offset-[3px] hover:underline">{it.name}</Link>
               ) : (
-                <span aria-current="page" className="truncate opacity-70">{it.name}</span>
+                <span aria-current="page" className="truncate text-muted">{it.name}</span>
               )}
             </li>
           ))}

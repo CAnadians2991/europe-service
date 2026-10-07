@@ -5,6 +5,18 @@ import { canonicalPath } from '@/lib/legacy-urls'
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl
 
+  // After the domain switch (env PRIMARY_HOST=europeservice.com.ua): the Netlify subdomain and www → the main domain,
+  // one 308 with the path and query kept. Deploy previews (…--europeservice-ua.netlify.app) and the API stay reachable.
+  const primary = process.env.PRIMARY_HOST
+  const host = (req.headers.get('host') || '').toLowerCase()
+  if (primary && host && host !== primary && !host.includes('--') && !host.startsWith('localhost') && !pathname.startsWith('/api/')) {
+    const url = new URL(req.url)
+    url.host = primary
+    url.protocol = 'https:'
+    url.port = ''
+    return NextResponse.redirect(url, 308)
+  }
+
   // Admin: auth only (matching is case-insensitive on Vercel, so /ADMIN is guarded too); only the trailing slash is normalised
   if (/^\/admin(?:\/|$)/i.test(pathname)) {
     if (pathname.length > 1 && pathname.endsWith('/')) return permanent(req, pathname.replace(/\/+$/, ''))

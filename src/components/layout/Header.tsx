@@ -44,7 +44,7 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
         <MobileHeaderSlot lang={lang} home={lang === 'uk' ? '/' : '/ru'}>
           <Link href={lang === 'uk' ? '/' : '/ru'} className="flex h-11 shrink-0 items-center" aria-label={lang === 'uk' ? 'Europe Service — на головну' : 'Europe Service — на главную'}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/logo.svg" alt="Europe Service" width={160} height={43} className="h-[34px] w-auto lg:h-[38px]" />
+            <img src="/brand/logo.svg" alt="Europe Service" width={160} height={43} fetchPriority="high" className="h-[34px] w-auto lg:h-[38px]" />
           </Link>
         </MobileHeaderSlot>
 

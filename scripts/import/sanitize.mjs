@@ -68,6 +68,10 @@ const FIX_FN = {
   z289g9n1b1: (v) => {
     v.active = false
   },
+  // Tilda gave this post a broken address (spaces, emoji; not in its sitemap) — a normal Tilda-style one instead
+  o9yca9j201: (v) => {
+    v.path = '/tpost/o9yca9j201-legalnaya-rabota-v-gdine-dlya-ukrain'
+  },
 }
 
 export function fixVacancy(v) {
