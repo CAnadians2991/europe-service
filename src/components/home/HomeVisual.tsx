@@ -52,8 +52,8 @@ const HERO = {
  * First screen as a magazine spread: a solid brand-green plane with one big white headline and one real photo of
  * a person at work. No blobs, pills, floating cards or icon tiles — the look every template has.
  */
-/** Hero photo: a packer at a clothing warehouse in Poland (our employer's own shot, 1200 px — sharp on phones) */
-const HERO_PHOTO = '/media/v/poland-pakuvalnyk-na-skladi-odiahu/f8b2fec409'
+/** Hero photo (owner's pick, 2026-10): a woman and a man in hard hats in a warehouse aisle — from our IKEA vacancy, 1200 px */
+const HERO_PHOTO = '/media/v/chekhiia-ikea/38a6b6c422'
 
 export function HomeHero({ lang, total, photos }: { lang: Lang; total: number; photos: string[] }) {
   const t = HERO[lang]
@@ -64,8 +64,8 @@ export function HomeHero({ lang, total, photos }: { lang: Lang; total: number; p
       <div className="mx-auto grid max-w-[1440px] lg:min-h-[600px] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)]">
         {/* photo first on phones */}
         <div className="relative aspect-[4/3] overflow-hidden bg-ink sm:aspect-[16/9] lg:order-2 lg:aspect-auto">
-          {photo && <Photo base={photo} alt={uk ? 'Працівник складу одягу в Польщі' : 'Работник склада одежды в Польше'} sizes="(max-width: 1024px) 100vw, 50vw" priority className="absolute inset-0 size-full object-cover object-[70%_40%]" />}
-          <p className="absolute bottom-0 left-0 bg-white px-4 py-2.5 text-ink lg:bottom-8 lg:left-0">
+          {photo && <Photo base={photo} alt={uk ? 'Працівники складу в касках' : 'Работники склада в касках'} sizes="(max-width: 1024px) 100vw, 50vw" priority className="absolute inset-0 size-full object-cover object-[18%_40%]" />}
+          <p className="absolute bottom-0 right-0 bg-white px-4 py-2.5 text-ink lg:bottom-8">
             <span className="num font-display text-[22px] font-bold leading-none">{total}</span>{' '}
             <span className="text-[13.5px] font-semibold">{t.open(total).replace(/^\d+\s/, '')}</span>
           </p>
