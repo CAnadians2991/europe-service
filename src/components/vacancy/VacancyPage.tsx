@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { vacancyMedia } from '@/lib/vacancy-media'
+import { VideoCards } from '@/components/reviews/VideoCards'
 import { Gallery } from './Gallery'
 import { VacancyCard } from './VacancyCard'
 import { Breadcrumbs } from './CatalogPage'
@@ -172,12 +174,16 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
     { name: v.company || v.title, path: v.path },
   ]
 
+  // the agency's own Drive media for this vacancy: housing photos join the housing block, workplace photos the gallery
+  const extra = vacancyMedia(v.path, lang)
+  const housing = [...new Set([...v.housingPhotos, ...extra.housing])]
+  const photos = [...new Set([...v.photos, ...extra.work])]
   const housingAt = v.sections.findIndex((x) => isHousing(x.title))
-  const housingFigure = v.housingPhotos.length > 0 && (
+  const housingFigure = housing.length > 0 && (
     <figure className="mt-5">
       <h3 className="eyebrow">{t.housingPhotos}</h3>
       <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
-        {v.housingPhotos.map((p, k) => (
+        {housing.map((p, k) => (
           <a key={p} href={src(p, 1200)} target="_blank" rel="noopener" className="block overflow-hidden bg-surface">
             <Photo base={p} alt={`${t.housingAlt} ${k + 1}`} sizes="(max-width: 640px) 50vw, 260px" className="aspect-[4/3] w-full object-cover" />
           </a>
@@ -307,7 +313,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
         {/* ───────── body: the original text as a register + the application panel ───────── */}
         <div className="container-x grid gap-10 py-8 sm:py-10 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-12">
           <div className="min-w-0">
-            <Gallery photos={v.photos} alt={v.title} priority lang={lang} />
+            <Gallery photos={photos} alt={v.title} priority lang={lang} />
 
             {/* phones: the form right after the photos */}
             {v.active && (
@@ -364,6 +370,15 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
                 </section>
               )}
             </div>
+
+            {extra.videos.length > 0 && (
+              <section className="mt-10" aria-labelledby="vvid-h">
+                <RegisterHead id="vvid-h" as="h3" title={uk ? 'Відеовідгуки працівників' : 'Видеоотзывы работников'} />
+                <div className="mt-4">
+                  <VideoCards items={extra.videos} lang={lang} />
+                </div>
+              </section>
+            )}
 
             <AnyRequest lang={lang} id="vacancy-any-request" preset={{ country: v.country }} className="mt-10" />
 
