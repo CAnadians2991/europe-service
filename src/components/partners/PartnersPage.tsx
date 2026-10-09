@@ -57,8 +57,17 @@ export async function PartnersPage({ lang, photo = PARTNER_PHOTO }: { lang: Part
                 <li aria-current="page" className="text-muted">{t.crumb}</li>
               </ol>
             </nav>
-            <p className="mt-2 text-[14px] font-semibold text-brand-700">{t.eyebrow}</p>
-            <h1 className="mt-2 text-[32px] leading-[1.05] tracking-[-0.03em] sm:text-[48px] lg:text-[54px]">{t.h1}</h1>
+            {t.tildaH1 ? (
+              <>
+                <h1 className="mt-2 font-sans text-[14px] font-semibold leading-snug tracking-normal text-brand-700">{t.tildaH1}</h1>
+                <p className="mt-2 font-display text-[32px] font-semibold leading-[1.05] tracking-[-0.03em] text-balance sm:text-[48px] lg:text-[54px]">{t.h1}</p>
+              </>
+            ) : (
+              <>
+                <p className="mt-2 text-[14px] font-semibold text-brand-700">{t.eyebrow}</p>
+                <h1 className="mt-2 text-[32px] leading-[1.05] tracking-[-0.03em] sm:text-[48px] lg:text-[54px]">{t.h1}</h1>
+              </>
+            )}
             <p className="mt-4 max-w-[600px] text-[16.5px] leading-relaxed text-ink-2 sm:text-[18px]">{t.sub}</p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <a href="#partner-form" className="btn-accent !min-h-[52px] !px-7 !text-[16px]">

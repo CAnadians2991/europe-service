@@ -189,7 +189,7 @@ export function ArticlePage({ a, posts = [] }: { a: Article; posts?: Article[] }
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <p className="eyebrow">{uk ? 'Ще з розділу' : 'Ещё из раздела'}</p>
-                <h2 id="more-h" className="mt-3 text-[26px] sm:text-[32px]">{uk ? 'Читайте також' : 'Читайте также'}</h2>
+                <h2 id="more-h" className="mt-3 text-[26px] sm:text-[32px]">{a.relatedTitle ?? (uk ? 'Читайте також' : 'Читайте также')}</h2>
               </div>
               <Link href={listPath} className="btn-ghost">
                 {uk ? 'Усі статті' : 'Все статьи'} <span aria-hidden>→</span>

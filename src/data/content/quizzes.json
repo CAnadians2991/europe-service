@@ -13,7 +13,6 @@
    "loader": "https://europeservice.org.ua/upload/crm/form/loader_12_nsna6n.js"
   },
   "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
-  "noindex": true,
   "twin": "/ru/form_1"
  },
  {
@@ -30,7 +29,6 @@
    "loader": "https://europeservice.org.ua/upload/crm/form/loader_17_aaqtgt.js"
   },
   "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
-  "noindex": true,
   "twin": "/ru/form_2"
  },
  {
@@ -47,7 +45,6 @@
    "loader": "https://europeservice.org.ua/upload/crm/form/loader_22_2xhng8.js"
   },
   "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
-  "noindex": true,
   "twin": "/ru/form_3"
  },
  {
@@ -64,7 +61,6 @@
    "loader": "https://europeservice.org.ua/upload/crm/form/loader_26_fme2nk.js"
   },
   "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
-  "noindex": true,
   "twin": "/ru/form_5"
  },
  {
@@ -81,7 +77,6 @@
    "loader": "https://europeservice.org.ua/upload/crm/form/loader_27_makuhi.js"
   },
   "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
-  "noindex": true,
   "twin": "/ru/form_6"
  },
  {
@@ -98,7 +93,6 @@
    "loader": "https://europeservice.org.ua/upload/crm/form/loader_28_ym9ewr.js"
   },
   "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
-  "noindex": true,
   "twin": "/ru/form_8"
  },
  {
@@ -115,7 +109,6 @@
    "loader": "https://europeservice.org.ua/upload/crm/form/loader_24_qhgfx2.js"
   },
   "note": "Форма на Tilda = вбудована CRM-форма Bitrix24 (питання в експорті відсутні)",
-  "noindex": true,
   "twin": "/ru/form_all"
  },
  {
@@ -142,7 +135,6 @@
    }
   ],
   "submitLabel": "Відправити",
-  "noindex": true,
   "twin": "/ru/jooble-kviz"
  },
  {
@@ -760,7 +752,6 @@
   "quizTitle": "Підберемо найкращу роботу в Європі",
   "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
   "submitLabel": "Відправити",
-  "noindex": true,
   "twin": "/ru/kviz-instagram"
  },
  {
@@ -1300,7 +1291,6 @@
   "quizTitle": "Офіційна та безкоштовна робота в Європі",
   "finalTitle": "Очікуйте дзвінка від менеджера нашої компанії",
   "submitLabel": "Відправити",
-  "noindex": true,
   "twin": "/ru/kviz-olx"
  },
  {
@@ -1772,7 +1762,6 @@
    }
   ],
   "submitLabel": "Відправити",
-  "noindex": true,
   "twin": "/ru/kviz-telegramviber"
  },
  {
@@ -1799,7 +1788,6 @@
    }
   ],
   "submitLabel": "Залишити заявку",
-  "noindex": true,
   "twin": "/ru/kviz-viber"
  },
  {

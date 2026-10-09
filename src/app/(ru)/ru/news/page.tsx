@@ -15,7 +15,7 @@ export const metadata: Metadata = pageMeta({
 export default function Page() {
   return (
     <>
-      <PageHero title="Новости и полезные статьи" text="Виза, документы, легальная работа за границей — инструкции и новости от Europe Service." crumbs={[{ name: 'Главная', path: '/ru' }, { name: 'Новости', path: '/ru/news' }]} />
+      <PageHero title="Полезные статьи" lead="Новости и полезные статьи" text="Виза, документы, легальная работа за границей — инструкции и новости от Europe Service." crumbs={[{ name: 'Главная', path: '/ru' }, { name: 'Новости', path: '/ru/news' }]} />
       <ArticleList lang="ru" />
     </>
   )

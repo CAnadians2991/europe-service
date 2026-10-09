@@ -77,7 +77,8 @@ export function Blocks({ blocks, nested }: { blocks: Block[]; nested?: boolean }
             return (
               <details key={i} className="group my-6 border-y border-line [&+details]:-mt-6 [&+details]:border-t-0">
                 <summary className="flex min-h-14 cursor-pointer list-none items-start gap-4 py-4 text-[17px] font-semibold leading-snug text-ink [&::-webkit-details-marker]:hidden">
-                  <span className="flex-1 pt-1">{b.summary}</span>
+                  {/* Tilda's FAQ questions were <h3> — a heading is allowed inside <summary> */}
+                  <h3 className="inline flex-1 pt-1 font-sans text-[17px] font-semibold leading-snug tracking-normal text-ink">{b.summary}</h3>
                   <span aria-hidden className="grid size-8 shrink-0 place-items-center border border-line text-ink transition-colors group-open:border-brand-600 group-open:bg-brand-600 group-open:text-white">
                     <svg viewBox="0 0 24 24" className="size-4 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
                       <path d="M12 5v14M5 12h14" />

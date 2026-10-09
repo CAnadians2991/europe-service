@@ -93,10 +93,14 @@ function sentences(text: string, max: number) {
   return (out || parts[0].slice(0, max)).trim()
 }
 
-/** Template texts for a country without its own Tilda page (e.g. one added in the admin) */
-export function countrySeo(c: CountryInfo, lang: 'uk' | 'ru'): CountrySeo {
+/**
+ * Title / description / H1 / intro of a country page: its own Tilda landing, else template texts (a country without a
+ * Tilda page, e.g. one added in the admin). `landing` = the page being rendered — Tilda's Russian Czech and English pages
+ * live at other slugs (/ru/vacancies/rabota_v_chekhii, /ru/vacancies/england) than '/ru' + the country path.
+ */
+export function countrySeo(c: CountryInfo, lang: 'uk' | 'ru', landing?: LandingPage): CountrySeo {
   const uk = lang === 'uk'
-  const own = countryLanding(c.code, lang)
+  const own = landing ?? countryLanding(c.code, lang)
   const where = uk ? c.inName : c.inNameRu
   const custom = (uk ? c.seo?.uk : c.seo?.ru) ?? {}
   const firstP = own?.blocks.find((b) => b.type === 'p') as { text: string } | undefined

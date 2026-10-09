@@ -33,6 +33,8 @@ export interface Article {
   /** a hub page (/news/chekhia …) that lists the posts of a Tilda feed category */
   listing?: { feed: string; category: string }
   categories?: string[]
+  /** the heading Tilda's page gave its «more articles» block («Читайте так же», «Читайте теж») — kept as that <h2> */
+  relatedTitle?: string
 }
 
 export interface ReviewItem {

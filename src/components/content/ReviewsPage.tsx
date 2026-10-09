@@ -17,7 +17,9 @@ export function ReviewsPage({ lang }: { lang: 'uk' | 'ru' }) {
   return (
     <>
       <PageHero
-        title={uk ? 'Відгуки клієнтів Europe Service' : 'Отзывы клиентов Europe Service'}
+        // Tilda's H1 of /vidguki and /ru/otzyvy stays the <h1>; our headline is the big line
+        title={uk ? 'Europe Service відгуки' : 'Europe Service отзывы'}
+        lead={uk ? 'Відгуки клієнтів Europe Service' : 'Отзывы клиентов Europe Service'}
         text={uk ? `Понад ${SITE.clients.replace('+', '')} клієнтів за час роботи агентства. Ось що вони кажуть про роботу, житло та наших менеджерів.` : `Более ${SITE.clients.replace('+', '')} клиентов за время работы агентства. Вот что они говорят о работе, жилье и наших менеджерах.`}
         crumbs={[{ name: uk ? 'Головна' : 'Главная', path: uk ? '/' : '/ru' }, { name: uk ? 'Відгуки' : 'Отзывы', path: uk ? '/vidguki' : '/ru/otzyvy' }]}
       >

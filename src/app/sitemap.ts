@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getAllVacancies, getClosedVacancyPaths } from '@/lib/vacancies'
 import { ARTICLES } from '@/lib/content'
-import { CATALOG_PATH, COUNTRIES, SITE } from '@/lib/site'
+import { COUNTRIES, SITE } from '@/lib/site'
 import { LANDINGS } from '@/lib/landing'
 import { QUIZZES } from '@/lib/quizzes'
 import { VISA_PAGES } from '@/lib/visa'
@@ -37,8 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   push('/', { lastModified: lastVac, changeFrequency: 'daily', priority: 1 })
   push('/ru', { lastModified: lastVac, changeFrequency: 'daily', priority: 0.7 }, 'ru')
-  push(CATALOG_PATH, { lastModified: lastVac, changeFrequency: 'daily', priority: 0.95 })
-  push('/ru' + CATALOG_PATH, { lastModified: lastVac, changeFrequency: 'daily', priority: 0.6 }, 'ru')
+  // the catalog (/vacancies/aktualni_vakansii) is noindex as on Tilda — not in the sitemap; Google still follows its links
 
   // country pages: Tilda's (with their SEO text) always; a country without a Tilda page only while it has vacancies
   for (const c of COUNTRIES) {

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound, permanentRedirect } from 'next/navigation'
 import { tpostFallback } from '@/lib/legacy-urls'
 import { VacanciesPage, resolveVacancies, vacanciesMetadata, vacanciesStaticParams } from '@/components/vacancy/VacanciesRoute'
+import { TildaLd } from '@/components/seo/JsonLd'
 
 // Tilda addresses: /vacancies (Poland), /vacancies/<country|city|job type>, /vacancies/chekhiia/<landing>, /vacancies/netherlands/tpost/<post>
 export const dynamicParams = true
@@ -22,5 +23,11 @@ export default async function Page({ params }: Props) {
     if (slug?.some((s) => s.toLowerCase() === 'tpost')) permanentRedirect(tpostFallback(ROOT + '/' + slug.join('/')))
     notFound()
   }
-  return <VacanciesPage root={ROOT} slug={slug} />
+  return (
+    <>
+      {/* Tilda's own JSON-LD of the address (/vacancies: Product + AggregateRating), next to ours */}
+      <TildaLd path={ROOT + (slug?.length ? '/' + slug.map(decodeURIComponent).join('/') : '')} />
+      <VacanciesPage root={ROOT} slug={slug} />
+    </>
+  )
 }

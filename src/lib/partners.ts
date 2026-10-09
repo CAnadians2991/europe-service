@@ -35,6 +35,8 @@ type Copy = {
   home: string
   eyebrow: string
   h1: string
+  /** the H1 of the old Tilda page at this address (kept as the <h1>; `h1` is then shown as the big line) */
+  tildaH1?: string
   sub: string
   cta: string
   langs: string
@@ -137,12 +139,14 @@ export const PARTNER: Record<PartnerLang, Copy> = {
     ],
   },
   en: {
-    metaTitle: 'Cooperation Europe Service — workers from Ukraine for EU employers',
+    // Tilda's /cooperation: <title> «Cooperation Europe Service», H1 «Our performance» (kept one-to-one)
+    metaTitle: 'Cooperation Europe Service',
     metaDescription: 'Europe Service recruits workers from Ukraine for employers and labour agencies in the EU: 65+ recruiters, 5 offices, since 2018. Partnership for agencies and freelance recruiters.',
     crumb: 'Cooperation',
     home: 'Home',
     eyebrow: 'Cooperation',
     h1: 'Workers from Ukraine for your business',
+    tildaH1: 'Our performance',
     sub: 'Since 2018 we have been recruiting staff for employers and labour agencies across Europe. We are open to partnerships with agencies from any country and with freelance recruiters.',
     cta: 'Send a request',
     langs: 'This page in other languages:',

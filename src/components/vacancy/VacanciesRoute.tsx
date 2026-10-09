@@ -75,18 +75,20 @@ export async function vacanciesMetadata(root: Root, slug: string[] = []): Promis
   const uk = lang === 'uk'
   const active = await getActiveVacancies()
   if (r.kind === 'all') {
+    // as on Tilda («Актуальні вакансії», page13843894): its title and description, and it was hidden from search (noindex)
     return pageMeta({
-      title: uk ? `Вакансії за кордоном для українців — ${active.length} актуальних пропозицій` : `Вакансии за границей для украинцев — ${active.length} актуальных предложений`,
+      title: uk ? 'Актуальні вакансії Europe Service 2022' : 'Актуальные вакансии Europe Service 2022',
       description: uk
-        ? 'Усі актуальні вакансії Europe Service: Польща, Німеччина, Чехія, Литва, Нідерланди та інші країни ЄС. Офіційне працевлаштування, житло, супровід.'
+        ? 'Свіжі вакансії для клієнтів Європа Сервіс ⚡ Актуальна робота дял чоловіків, жінок і сімейних пар'
         : 'Все актуальные вакансии Europe Service: Польша, Германия, Чехия, Литва, Нидерланды и другие страны ЕС. Официальное трудоустройство, жильё, сопровождение.',
+      noindex: true,
       path: r.path,
       lang,
     })
   }
   if (r.kind === 'country') {
     const n = active.filter((v) => v.country === r.country.code).length
-    const s = countrySeo(r.country, lang)
+    const s = countrySeo(r.country, lang, r.landing)
     // the Tilda title ranks — keep it; a country without its own page gets «Робота в … — N вакансій»
     return pageMeta({ title: r.landing ? s.title : n ? countryTitle(r.country, n, lang) : s.title, description: s.description, path: r.path, lang, noindex: !r.landing && n === 0, absoluteTitle: true })
   }
@@ -120,11 +122,12 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
       <CatalogPage
         form="catalog-all"
         lang={lang}
-        title={uk ? 'Усі вакансії за кордоном' : 'Все вакансии за границей'}
+        // Tilda's H1 of this page; the description of the list goes in the lead line
+        title={uk ? 'Терміновий заїзд' : 'Срочный заезд'}
         text={
           uk
-            ? 'Офіційна робота в Польщі, Німеччині, Чехії, Литві, Нідерландах та інших країнах ЄС. Оберіть країну й сферу або залиште заявку — підберемо вакансію під ваш запит.'
-            : 'Официальная работа в Польше, Германии, Чехии, Литве, Нидерландах и других странах ЕС. Выберите страну и сферу или оставьте заявку — подберём вакансию под ваш запрос.'
+            ? 'Усі вакансії за кордоном: офіційна робота в Польщі, Німеччині, Чехії, Литві, Нідерландах та інших країнах ЄС. Оберіть країну й сферу або залиште заявку — підберемо вакансію під ваш запит.'
+            : 'Все вакансии за границей: официальная работа в Польше, Германии, Чехии, Литве, Нидерландах и других странах ЕС. Выберите страну и сферу или оставьте заявку — подберём вакансию под ваш запрос.'
         }
         crumbs={[crumbHome(lang), { ...crumbAll(lang), path: r.path }]}
         cards={cards}
@@ -134,7 +137,7 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
 
   if (r.kind === 'country') {
     const c = r.country
-    const s = countrySeo(c, lang)
+    const s = countrySeo(c, lang, r.landing)
     const landing = r.landing ?? countryLanding(c.code, lang)
     const landingLinks = (landing?.links ?? []).filter((l) => l.href.startsWith('/'))
     return (

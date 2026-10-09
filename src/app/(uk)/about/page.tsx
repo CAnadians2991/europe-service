@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { getAbout } from '@/lib/about'
 import { pageMeta, organizationLd } from '@/lib/seo'
-import { JsonLd } from '@/components/seo/JsonLd'
+import { JsonLd, TildaLd } from '@/components/seo/JsonLd'
 import { PageHero } from '@/components/content/PageHero'
 import { OfficeTeam } from '@/components/trust/OfficeTeam'
 import { TeamGallery } from '@/components/trust/TeamStory'
@@ -13,6 +13,8 @@ import { faqLd } from '@/lib/seo'
 import { getActiveVacancies } from '@/lib/vacancies'
 import { COUNTRIES } from '@/lib/site'
 import { YouTube } from '@/components/content/YouTube'
+import { TildaText } from '@/components/content/TildaText'
+import { PAGES } from '@/lib/content'
 
 // title and description exactly as on Tilda (the page ranks with them)
 export const metadata: Metadata = pageMeta({
@@ -30,12 +32,17 @@ export default async function Page() {
   return (
     <>
       <JsonLd data={organizationLd()} />
+      <TildaLd path="/about" />
+      {/* Tilda's H1 of /about stays the <h1>; our headline is the big line */}
       <PageHero
-        title="Про агентство Europe Service"
+        title="В спектр наших послуг входить"
+        lead="Про агентство Europe Service"
         text={`Кадрове агентство ТОВ «ЄВРОПА СЕРВІС УКРАЇНА» з ліцензією Мінсоцполітики № 223 (2019), у Переліку посередників Мінекономіки. Головний офіс — у Києві, ще чотири — у Львові, Рівному, Житомирі та Одесі. Працюємо з 2018 року, 65+ рекрутерів.`}
         crumbs={[{ name: 'Головна', path: '/' }, { name: 'Про нас', path: '/about' }]}
       />
       <AboutStory lang="uk" facts={facts} />
+      {/* the text of Tilda's /about (services, documents, «Простота процедури працевлаштування»…) with its headings */}
+      <TildaText label="Що ми робимо" blocks={PAGES.about?.blocks ?? []} skip="В спектр наших послуг входить" />
       <TeamGallery lang="uk" />
       <AwardsList lang="uk" />
       <OfficeTeam about={about} heading="Наші офіси і команда" />

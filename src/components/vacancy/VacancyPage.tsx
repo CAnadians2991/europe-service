@@ -30,6 +30,8 @@ const isCrumbTrail = (t: string) => /^(главная|головна)\s*\//i.tes
 const isHousing = (title: string) => /прожив|житл|жил[ьи]/i.test(title)
 /** «Робота:» — a short line ending with a colon is a sub-heading inside a list */
 const isSubhead = (it: string) => /:\s*$/.test(it) && it.length < 60
+/** Section titles that were <h3> labels in Tilda's post text («Відгуки про роботу:», «Отзывы о работе:») keep that level */
+const isTildaH3 = (title: string) => /^(відгуки? про роботу|отзывы? о работе)\s*:?$/i.test(title.trim())
 /** «безкоштовне» alone repeats the green tag */
 const isJustFree = (t: string) => /^(безкоштовн|бесплатн)\S*\.?$/i.test(t.trim())
 
@@ -46,7 +48,8 @@ const TX = {
     callback: 'Менеджер зателефонує й розповість деталі.',
     faster: 'Швидше — напишіть нам:', channels: 'Нові вакансії першими — у наших каналах:', orCall: 'Безкоштовно з усіх операторів',
     desc: 'Опис вакансії',
-    housingPhotos: 'Фото житла', housingAlt: 'Житло для працівників — фото',
+    // «Фото житла:», «Відгуки про роботу» — Tilda's <h3> labels of the vacancy posts
+    housingPhotos: 'Фото житла:', housingAlt: 'Житло для працівників — фото',
     videos: 'Відео з місця роботи', reviews: 'Відгуки про роботу', leaveReview: 'Працювали тут? Залиште відгук',
     how: 'Як виїхати на цю вакансію',
     steps: [
@@ -71,7 +74,7 @@ const TX = {
     callback: 'Менеджер позвонит и расскажет детали.',
     faster: 'Быстрее — напишите нам:', channels: 'Новые вакансии первыми — в наших каналах:', orCall: 'Бесплатно со всех операторов',
     desc: 'Описание вакансии',
-    housingPhotos: 'Фото жилья', housingAlt: 'Жильё для работников — фото',
+    housingPhotos: 'Фото жилья:', housingAlt: 'Жильё для работников — фото',
     videos: 'Видео с места работы', reviews: 'Отзывы о работе', leaveReview: 'Работали здесь? Оставьте отзыв',
     how: 'Как выехать на эту вакансию',
     steps: [
@@ -86,14 +89,18 @@ const TX = {
   },
 }
 
-/** Heading row of a register block: 3-px ink rule, optional mono number, the title, something on the right */
-function RegisterHead({ id, n, title, aside }: { id: string; n?: number; title: string; aside?: React.ReactNode }) {
+/** Heading row of a register block: 3-px ink rule, optional mono number, the title, something on the right.
+ * `as="h3"`: a block Tilda's post headed with an <h3> (the reviews) keeps that level, styled the same. */
+function RegisterHead({ id, n, title, aside, as: Tag = 'h2' }: { id: string; n?: number; title: string; aside?: React.ReactNode; as?: 'h2' | 'h3' }) {
   return (
     <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t-[3px] border-ink pt-4">
-      <h2 id={id} className="flex items-baseline gap-3 text-[20px] leading-tight text-ink sm:text-[23px]">
+      {/* the mono number sits outside the heading: the heading text is the section title alone */}
+      <div className="flex items-baseline gap-3">
         {n != null && <span className="num shrink-0 text-[14px] font-medium tracking-normal text-brand-700">{String(n).padStart(2, '0')}</span>}
-        <span>{title}</span>
-      </h2>
+        <Tag id={id} className="font-display text-[20px] font-semibold leading-tight tracking-[-0.02em] text-ink sm:text-[23px]">
+          {title}
+        </Tag>
+      </div>
       {aside}
     </div>
   )
@@ -168,7 +175,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
   const housingAt = v.sections.findIndex((x) => isHousing(x.title))
   const housingFigure = v.housingPhotos.length > 0 && (
     <figure className="mt-5">
-      <p className="eyebrow">{t.housingPhotos}</p>
+      <h3 className="eyebrow">{t.housingPhotos}</h3>
       <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {v.housingPhotos.map((p, k) => (
           <a key={p} href={src(p, 1200)} target="_blank" rel="noopener" className="block overflow-hidden bg-surface">
@@ -330,7 +337,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
                 const k = ++n
                 return (
                   <section key={`${x.title}-${i}`} aria-labelledby={`vs-${i}`}>
-                    <RegisterHead id={`vs-${i}`} n={k} title={x.title} />
+                    <RegisterHead id={`vs-${i}`} n={k} title={x.title} as={isTildaH3(x.title) ? 'h3' : 'h2'} />
                     <RegisterList items={x.items} />
                     {i === housingAt && housingFigure}
                   </section>
@@ -364,6 +371,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
               <section className="mt-10" aria-labelledby="vrev-h">
                 <RegisterHead
                   id="vrev-h"
+                  as="h3"
                   title={t.reviews}
                   aside={
                     <Link href={uk ? '/vidguki#review-form-h' : '/ru/otzyvy#review-form-h'} className="inline-flex min-h-11 items-center text-[15px] font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[3px] hover:decoration-brand-700">

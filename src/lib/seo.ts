@@ -4,6 +4,7 @@ import { languages, ukTwin } from './alt-routes'
 import { salaryHour, salaryMain } from './format'
 import type { Vacancy } from './types'
 import { placeOf } from './places'
+import tildaJsonLd from '@/data/tilda-jsonld.json'
 
 /** Cut at a word boundary, never mid-word, no trailing punctuation mess */
 export function clip(s: string, max: number) {
@@ -142,30 +143,15 @@ export function breadcrumbLd(items: { name: string; path: string }[]) {
   }
 }
 
-/** The Tilda home page's own Product markup, kept one-to-one for SEO (owner, 2026-10) */
-export const tildaHomeProductLd = () => ({
-  '@context': 'http://schema.org/',
-  '@type': 'Product',
-  name: 'Легальна робота в Польщі для українців',
-  sku: 'europeservice24',
-  MPN: 'europeservice24',
-  aggregateRating: { '@type': 'AggregateRating', ratingValue: '5', ratingCount: '33', reviewCount: '33' },
-  brand: 'europeservice',
-  description: 'Офіційна робота в Польщі без посередників. Тільки безкоштовні вакансії від прямих роботодавців. Допомогаємо отримати робочу візу. Звертайтеся!',
-  image: `${SITE.url}/media/team/team-awards-1200.webp`,
-  offers: { '@type': 'AggregateOffer', priceCurrency: 'PLN', highPrice: '5500', lowPrice: '3000', offerCount: '1', offers: [{ '@type': 'Offer', url: 'https://europeservice.com.ua' }] },
-  review: [
-    {
-      '@type': 'Review',
-      author: 'Микола',
-      datePublished: '2019-10-15',
-      description:
-        'Добрий день! Хочу подякувати компанії Європа Сервіс за надану роботу та залишити хороший відгук. Працюю карщиком у Вроцлаві на складі Jeronimo. Дуже задоволений, робота легка, плюс навчають їзди на карах та виготовляють польські права, тому що українські не підходять. Окрема подяка моєму менеджеру Антону за допомогу, завжди відповідав на мої запитання, хоча бувало, що телефонував я не в робочий час. Успіхів вам та гарних клієнтів!!! ',
-      name: 'Хочу подякувати',
-      reviewRating: { '@type': 'Rating', bestRating: '5', ratingValue: '5', worstRating: '1' },
-    },
-  ],
-})
+/**
+ * Tilda's own JSON-LD of an old page (Product + AggregateRating on /, /vacancies, /news; Review on /about, /vidguki,
+ * /contacts, /vidguki/greece, /greece_video), from src/data/tilda-jsonld.json (scripts/import/tilda_parity.mjs) —
+ * rendered next to ours: the owner keeps every old page's structured data one-to-one.
+ */
+export const tildaLd = (path: string): object[] => (tildaJsonLd as Record<string, object[]>)[path] ?? []
+
+/** The Tilda Product block of the home page */
+export const tildaHomeProductLd = () => tildaLd('/')[0]
 
 export function faqLd(items: { q: string; a: string }[]) {
   return {

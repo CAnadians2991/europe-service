@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound, permanentRedirect } from 'next/navigation'
 import { tpostFallback } from '@/lib/legacy-urls'
 import { ContentView, contentMetadata, contentPaths, resolveContent } from '@/components/content/ContentRoute'
+import { TildaLd } from '@/components/seo/JsonLd'
 
 // articles, Tilda ad landings (/greece, /italy), legal pages, quizzes (/kviz-*, /form_*) and other Tilda pages keep their URLs
 export const dynamicParams = true
@@ -25,5 +26,11 @@ export default async function Page({ params }: Props) {
     if (/\/tpost\//i.test(path)) permanentRedirect(tpostFallback(path))
     notFound()
   }
-  return <ContentView path={path} lang="uk" />
+  return (
+    <>
+      {/* Tilda's own JSON-LD of the address (/vidguki/greece, /greece_video: Review), next to ours */}
+      <TildaLd path={path} />
+      <ContentView path={path} lang="uk" />
+    </>
+  )
 }

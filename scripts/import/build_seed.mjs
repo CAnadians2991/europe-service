@@ -15,6 +15,19 @@ const OUT = path.resolve(HERE, '../../src/data/vacancies.seed.json')
 // closed vacancies (Tilda kept their pages online): straight into the database, not bundled with the site
 const OUT_CLOSED = path.resolve(HERE, '../../data/vacancies.closed.json')
 const PUBLIC = path.resolve(HERE, '../../public')
+// Tilda Feeds post «descr» (10 posts had one) = the post page's meta description on Tilda — kept one-to-one (owner, 2026-10)
+const POSTS_DIR = path.resolve(HERE, '../../../tilda-data/posts')
+const tildaDescr = (uid) => {
+  const f = uid && path.join(POSTS_DIR, `${uid}.json`)
+  if (!f || !fs.existsSync(f)) return ''
+  const d = String(JSON.parse(fs.readFileSync(f, 'utf8')).descr || '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/[\u200b\u2800]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+  return d.length >= 3 ? d : ''
+}
 
 const mediaMap = fs.existsSync(MAP_FILE) ? JSON.parse(fs.readFileSync(MAP_FILE, 'utf8')) : {}
 const saveMap = () => fs.writeFileSync(MAP_FILE, JSON.stringify(mediaMap, null, 1))
@@ -143,7 +156,7 @@ for (const r of RAW) {
     logo: '',
     reviews: (r.reviews || []).map((x) => ({ name: clean(x.name), text: clean(x.text), ...(x.rating ? { rating: x.rating } : {}) })),
     seoTitle: '',
-    seoDescription: '',
+    seoDescription: tildaDescr(r.tildaUid),
     tildaUid: r.tildaUid ?? undefined,
     ...(r.lang === 'ru' ? { lang: 'ru' } : {}),
     createdAt: created,

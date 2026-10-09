@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { pageMeta } from '@/lib/seo'
 import { ReviewsPage } from '@/components/content/ReviewsPage'
+import { TildaLd } from '@/components/seo/JsonLd'
 
 // title and description exactly as on Tilda (the page ranks with them)
 export const metadata: Metadata = pageMeta({
@@ -11,5 +12,10 @@ export const metadata: Metadata = pageMeta({
 })
 
 export default function Page() {
-  return <ReviewsPage lang="uk" />
+  return (
+    <>
+      <TildaLd path="/vidguki" />
+      <ReviewsPage lang="uk" />
+    </>
+  )
 }

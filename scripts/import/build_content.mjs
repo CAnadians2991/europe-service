@@ -166,9 +166,24 @@ const patchByPath = (list, patch = {}) => {
   return n
 }
 const extra = { home: null, pages: null }
+// Pages that keep the text Tilda had, in Tilda's language (owner, 2026-10: old pages keep their SEO text one-to-one);
+// only the interface language follows the address.
+const KEEP_TILDA_TEXT = new Set([
+  '/vacancies/chekhiia/brno',
+  '/ru/vacancies/rabota_v_polshe_po_biometrii',
+  '/ru/rabota-za-granicej-vsya-vazhnaya-informaciya-dlya-ukraincev',
+  '/ru/ua_kontrakt',
+  // the language QA rewrote most of these texts / their Tilda headings
+  '/ru/vacancies/greece',
+  '/news/tpost/51a3b7jb7r-yak-zdisniti-oplatu-v-dodatku-privat24',
+  '/tpost/x2djeolmbn-mogu-li-ya-viehat-na-rabotu-v-polshu-esl',
+  '/tpost/l84rx32a91-scho-robiti-z-grivnyami-ta-ukranskimi-ra',
+])
+const onlyLang = (patch = {}) =>
+  Object.fromEntries(Object.entries(patch).map(([p, v]) => [p, KEEP_TILDA_TEXT.has(p) ? (v.lang ? { lang: v.lang } : {}) : v]))
 if (exists('lang-fix.json')) {
   const fix = read('lang-fix.json')
-  console.log('lang-fix landings', patchByPath(landings.landings, fix.landings), 'articles', patchByPath(articles.articles, fix.articles))
+  console.log('lang-fix landings', patchByPath(landings.landings, onlyLang(fix.landings)), 'articles', patchByPath(articles.articles, onlyLang(fix.articles)))
   extra.pages = fix.pages
   extra.home = fix.home
 }
@@ -180,7 +195,8 @@ if (exists('seo.patch.landings.json')) {
     const p = P[l.path]
     if (!p) continue
     const { blocksAppend, faq, ...rest } = p
-    Object.assign(l, rest)
+    // only what the Tilda page did not have: its title, description and intro stay as on Tilda (owner, 2026-10)
+    for (const [k, v] of Object.entries(rest)) if (!l[k]) l[k] = v
     if (blocksAppend?.length) l.blocks = [...(l.blocks ?? []), ...blocksAppend]
     if (faq?.length) {
       const have = new Set((l.faq ?? []).map((f) => f.q))
@@ -197,6 +213,12 @@ if (exists('seo.new-landings.json')) {
   for (const l of add) if (/\/(z-zhytlom|s-zhilem)$/.test(l.path)) l.filter = { ...l.filter, housingFree: true }
   landings.landings.push(...add)
   console.log('seo new pages', add.length)
+}
+// Tilda text records the landing import lost (out/tilda-meta.json → restore, see extract_tilda_meta.py): back in front
+if (exists('tilda-meta.json')) {
+  const R = read('tilda-meta.json').restore ?? {}
+  for (const l of landings.landings) if (R[l.path]?.blocks?.length) l.blocks = [...R[l.path].blocks, ...(l.blocks ?? [])]
+  console.log('tilda text restored', Object.keys(R).filter((p) => landings.landings.some((l) => l.path === p)).length)
 }
 // Tilda's near-copies: both stay online, one is canonical
 const CANONICAL = { '/vacancies/chekhiia/brno': '/vacancies/chekhiia/robota_v_brno' }
@@ -314,3 +336,6 @@ fs.writeFileSync(path.join(DATA, 'tpost-redirects.json'), JSON.stringify(tpost))
 console.log('tpost redirects', Object.keys(tpost).length, 'images', jobs)
 await import('./apply_ru_pages.mjs')
 await import('./fix_texts.mjs')
+// last: Tilda's title / description / H1 / heading levels / robots on every old address, then Tilda's own 301 rules
+await import('./tilda_parity.mjs')
+await import('./tilda_301.mjs')

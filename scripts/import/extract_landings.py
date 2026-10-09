@@ -477,7 +477,9 @@ class Rich:
                 elif nm in ('ul', 'ol'):
                     self.flush()
                     items = []
-                    for li in c.find_all('li', recursive=False):
+                    # Tilda's pasted HTML wraps list items in <font> (<ul><font><li>…) — take those too
+                    lis = c.find_all('li', recursive=False) or [li for li in c.find_all('li') if li.find_parent(['ul', 'ol']) is c]
+                    for li in lis:
                         sub = Rich(self.lang)
                         sub.walk(li)
                         sub.flush()

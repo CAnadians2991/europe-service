@@ -91,15 +91,15 @@ export function fixVacancy(v) {
 
 /**
  * Two posts with the same title (Tilda kept old copies) → different <title>s for Google: the place, and if that is
- * the same too, the month of the post. Only fills an empty seoTitle; the visible H1 stays the Tilda title.
+ * the same too, the month of the post. Only for the Russian copies (/ru + address — new pages): a Tilda post keeps
+ * Tilda's <title> one-to-one (owner, 2026-10), its own seoTitle is never filled here.
  */
 export function distinctTitles(lists) {
   const all = lists.flat()
   const groups = new Map()
   for (const v of all) {
     for (const [key, get, set] of [
-      [v.title, () => v.seoTitle, (t) => (v.seoTitle = t)],
-      ...(v.ru?.title ? [[v.ru.seoTitle || v.ru.title, () => '', (t) => (v.ru.seoTitle = t)]] : []),
+      ...(v.ru?.title && v.lang !== 'ru' ? [[v.ru.seoTitle || v.ru.title, () => '', (t) => (v.ru.seoTitle = t)]] : []),
     ]) {
       const k = String(key).trim().toLowerCase()
       if (!groups.has(k)) groups.set(k, [])

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { pageMeta } from '@/lib/seo'
 import { PageHero } from '@/components/content/PageHero'
 import { ArticleList } from '@/components/content/ArticlePage'
+import { TildaLd } from '@/components/seo/JsonLd'
 
 // title and description exactly as on Tilda (the page ranks with them)
 export const metadata: Metadata = pageMeta({
@@ -14,7 +15,8 @@ export const metadata: Metadata = pageMeta({
 export default function Page() {
   return (
     <>
-      <PageHero title="Новини та корисні статті" text="Віза, документи, легальна робота за кордоном — інструкції та новини від Europe Service." crumbs={[{ name: 'Головна', path: '/' }, { name: 'Новини', path: '/news' }]} />
+      <TildaLd path="/news" />
+      <PageHero title="Корисні статті" lead="Новини та корисні статті" text="Віза, документи, легальна робота за кордоном — інструкції та новини від Europe Service." crumbs={[{ name: 'Головна', path: '/' }, { name: 'Новини', path: '/news' }]} />
       <ArticleList lang="uk" />
     </>
   )

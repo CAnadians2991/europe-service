@@ -1,0 +1,238 @@
+{
+ "/news": [
+  {
+   "@context": "http://schema.org/",
+   "@type": "Product",
+   "name": "Вакансії Europe Service в Польщі",
+   "sku": "europeservice24vacancies",
+   "MPN": "europeservice24vacancies",
+   "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "ratingCount": "33",
+    "reviewCount": "33"
+   },
+   "brand": "europeservice",
+   "description": "Робота в Польщі вакансії від роботодавців. Допоможемо українцям отримати робочу візу. Звертайтеся!",
+   "image": "https://europeservice.com.ua/media/team/team-awards-1200.webp",
+   "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "PLN",
+    "highPrice": "4500",
+    "lowPrice": "3500",
+    "offerCount": "1",
+    "offers": [
+     {
+      "@type": "Offer",
+      "url": "https://europeservice.com.ua/vacancies"
+     }
+    ]
+   },
+   "review": [
+    {
+     "@type": "Review",
+     "author": "Микола",
+     "datePublished": "2019-10-15",
+     "description": "Добрий день! Хочу подякувати компанії Європа Сервіс за надану роботу та залишити хороший відгук. Працюю карщиком у Вроцлаві на складі Jeronimo. Дуже задоволений, робота легка, плюс навчають їзди на карах та виготовляють польські права, тому що українські не підходять. Окрема подяка моєму менеджеру Антону за допомогу, завжди відповідав на мої запитання, хоча бувало, що телефонував я не в робочий час. Успіхів вам та гарних клієнтів!!! ",
+     "name": "Хочу подякувати",
+     "reviewRating": {
+      "@type": "Rating",
+      "bestRating": "5",
+      "ratingValue": "5",
+      "worstRating": "1"
+     }
+    }
+   ]
+  }
+ ],
+ "/greece_video": [
+  {
+   "@context": "http://schema.org/",
+   "@type": "Review",
+   "itemReviewed": {
+    "@type": "Thing",
+    "name": "Легальна робота в Польщі для українців"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Микола"
+   },
+   "datePublished": "2019-10-15",
+   "reviewRating": {
+    "@type": "Rating",
+    "description": "Офіційна робота в Польщі без посередників. Тільки безкоштовні вакансії від прямих роботодавців. Допомогаємо отримати робочу візу. Звертайтеся!",
+    "ratingValue": "5"
+   }
+  }
+ ],
+ "/vidguki/greece": [
+  {
+   "@context": "http://schema.org/",
+   "@type": "Review",
+   "itemReviewed": {
+    "@type": "Thing",
+    "name": "Легальна робота в Польщі для українців"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Микола"
+   },
+   "datePublished": "2019-10-15",
+   "reviewRating": {
+    "@type": "Rating",
+    "description": "Офіційна робота в Польщі без посередників. Тільки безкоштовні вакансії від прямих роботодавців. Допомогаємо отримати робочу візу. Звертайтеся!",
+    "ratingValue": "5"
+   }
+  }
+ ],
+ "/": [
+  {
+   "@context": "http://schema.org/",
+   "@type": "Product",
+   "name": "Легальна робота в Польщі для українців",
+   "sku": "europeservice24",
+   "MPN": "europeservice24",
+   "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "ratingCount": "33",
+    "reviewCount": "33"
+   },
+   "brand": "europeservice",
+   "description": "Офіційна робота в Польщі без посередників. Тільки безкоштовні вакансії від прямих роботодавців. Допомогаємо отримати робочу візу. Звертайтеся!",
+   "image": "https://europeservice.com.ua/media/team/team-awards-1200.webp",
+   "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "PLN",
+    "highPrice": "5500",
+    "lowPrice": "3000",
+    "offerCount": "1",
+    "offers": [
+     {
+      "@type": "Offer",
+      "url": "https://europeservice.com.ua"
+     }
+    ]
+   },
+   "review": [
+    {
+     "@type": "Review",
+     "author": "Микола",
+     "datePublished": "2019-10-15",
+     "description": "Добрий день! Хочу подякувати компанії Європа Сервіс за надану роботу та залишити хороший відгук. Працюю карщиком у Вроцлаві на складі Jeronimo. Дуже задоволений, робота легка, плюс навчають їзди на карах та виготовляють польські права, тому що українські не підходять. Окрема подяка моєму менеджеру Антону за допомогу, завжди відповідав на мої запитання, хоча бувало, що телефонував я не в робочий час. Успіхів вам та гарних клієнтів!!! ",
+     "name": "Хочу подякувати",
+     "reviewRating": {
+      "@type": "Rating",
+      "bestRating": "5",
+      "ratingValue": "5",
+      "worstRating": "1"
+     }
+    }
+   ]
+  }
+ ],
+ "/about": [
+  {
+   "@context": "http://schema.org/",
+   "@type": "Review",
+   "itemReviewed": {
+    "@type": "Thing",
+    "name": "Легальна робота в Польщі для українців"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Микола"
+   },
+   "datePublished": "2019-10-15",
+   "reviewRating": {
+    "@type": "Rating",
+    "description": "Офіційна робота в Польщі без посередників. Тільки безкоштовні вакансії від прямих роботодавців. Допомогаємо отримати робочу візу. Звертайтеся!",
+    "ratingValue": "5"
+   }
+  }
+ ],
+ "/vidguki": [
+  {
+   "@context": "http://schema.org/",
+   "@type": "Review",
+   "itemReviewed": {
+    "@type": "Thing",
+    "name": "Легальна робота в Польщі для українців"
+   },
+   "author": {
+    "@type": "Person",
+    "name": "Микола"
+   },
+   "datePublished": "2019-10-15",
+   "reviewRating": {
+    "@type": "Rating",
+    "description": "Офіційна робота в Польщі без посередників. Тільки безкоштовні вакансії від прямих роботодавців. Допомогаємо отримати робочу візу. Звертайтеся!",
+    "ratingValue": "5"
+   }
+  }
+ ],
+ "/contacts": [
+  {
+   "@context": "https://schema.org",
+   "@type": "Organization",
+   "image": [
+    "https://europeservice.com.ua/media/team/team-awards-1200.webp",
+    "https://europeservice.com.ua/brand/logo.svg"
+   ],
+   "@id": "https://europeservice.com.ua/",
+   "name": "Кадрове агенство Europe Service",
+   "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "ул. Сечевых Стрельцов, 77, Киев, Украина, 02000",
+    "addressLocality": "Киев",
+    "addressRegion": "Киев",
+    "postalCode": "02000",
+    "addressCountry": "UA"
+   },
+   "review": {
+    "@type": "Review",
+    "reviewRating": {
+     "@type": "Rating",
+     "ratingValue": "5",
+     "bestRating": "5"
+    },
+    "author": {
+     "@type": "Person",
+     "name": "Наталия"
+    }
+   },
+   "url": "https://europeservice.com.ua/contacts",
+   "telephone": "+380673339078"
+  }
+ ],
+ "/vacancies": [
+  {
+   "@context": "http://schema.org/",
+   "@type": "Product",
+   "name": "Вакансії Europe Service в Польщі",
+   "sku": "europeservice24vacancies",
+   "MPN": "europeservice24vacancies",
+   "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "ratingCount": "33",
+    "reviewCount": "33"
+   },
+   "description": "Робота в Польщі вакансії від роботодавців. Допоможемо українцям отримати робочу візу. Звертайтеся!",
+   "image": "https://europeservice.com.ua/media/team/team-awards-1200.webp",
+   "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "PLN",
+    "highPrice": "4500",
+    "lowPrice": "3500",
+    "offerCount": "1",
+    "offers": [
+     {
+      "@type": "Offer",
+      "url": "https://europeservice.com.ua/vacancies"
+     }
+    ]
+   }
+  }
+ ]
+}

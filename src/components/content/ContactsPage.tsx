@@ -7,6 +7,13 @@ import { LeadForm } from '@/components/lead/LeadForm'
 import { LicenseBadge } from '@/components/trust/LicenseBadge'
 import { LicenseSection } from '@/components/trust/LicenseSection'
 import { getAbout } from '@/lib/about'
+import { PAGES } from '@/lib/content'
+
+/** Tilda's office headings («Контакти офісу у м. Львів» — H1s on Tilda's /contacts), from pages.json, by the office's city */
+function officeHeading(lang: 'uk' | 'ru', city: string) {
+  const offices = ((lang === 'uk' ? PAGES.contacts : PAGES.contacts_ru)?.offices ?? []) as { cityKey?: string; heading?: string }[]
+  return offices.find((o) => o.cityKey === city)?.heading || (lang === 'uk' ? `Контакти офісу у м. ${city}` : `Контакты офиса в г. ${city}`)
+}
 
 const MAP = 'https://www.google.com/maps?q=' + encodeURIComponent('вул. Січових Стрільців, 77, Київ') + '&output=embed'
 
@@ -29,7 +36,9 @@ export async function ContactsPage({ lang }: { lang: 'uk' | 'ru' }) {
   return (
     <>
       <PageHero
-        title={uk ? 'Контакти' : 'Контакты'}
+        // Tilda's first office heading (an H1 there) stays the <h1>; the other four are the office rows below (<h2>)
+        title={officeHeading(lang, SITE.offices[0].city)}
+        lead={uk ? 'Контакти' : 'Контакты'}
         text={uk ? 'Зв’яжіться з нами в будь-який зручний спосіб — відповімо на всі питання щодо роботи та документів.' : 'Свяжитесь с нами любым удобным способом — ответим на все вопросы о работе и документах.'}
         crumbs={[{ name: uk ? 'Головна' : 'Главная', path: uk ? '/' : '/ru' }, { name: uk ? 'Контакти' : 'Контакты', path: uk ? '/contacts' : '/ru/contacts' }]}
       />
@@ -107,10 +116,15 @@ export async function ContactsPage({ lang }: { lang: 'uk' | 'ru' }) {
                 const route = 'map' in o ? o.map : undefined
                 return (
                   <li key={o.city} className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1 border-b border-line py-4">
-                    <span className="font-display text-[19px] font-semibold tracking-[-0.01em]">
-                      {uk ? o.city : o.cityRu}
-                      {main && <span className="ml-2 bg-brand-600 px-1.5 py-0.5 align-middle font-mono text-[11px] font-semibold uppercase tracking-wide text-white">{uk ? 'головний' : 'главный'}</span>}
-                    </span>
+                    {main ? (
+                      <span className="font-display text-[19px] font-semibold tracking-[-0.01em]">
+                        {uk ? o.city : o.cityRu}
+                        <span className="ml-2 bg-brand-600 px-1.5 py-0.5 align-middle font-mono text-[11px] font-semibold uppercase tracking-wide text-white">{uk ? 'головний' : 'главный'}</span>
+                      </span>
+                    ) : (
+                      // the other offices keep Tilda's heading text
+                      <h2 className="text-[19px] tracking-[-0.01em]">{officeHeading(lang, o.city)}</h2>
+                    )}
                     <a href={`tel:${o.phone}`} className="num inline-flex min-h-11 items-center text-[15px] font-semibold text-ink hover:text-brand-700">
                       {o.phoneDisplay}
                     </a>
