@@ -11,7 +11,8 @@ type Props = { params: Promise<{ rest: string[] }> }
 const pathOf = (rest: string[]) => '/ru/' + rest.map(decodeURIComponent).join('/')
 
 export async function generateStaticParams() {
-  return (await contentPaths('ru')).map((p) => ({ rest: p.slice(4).split('/') }))
+  // posts render on first visit and are cached — see (uk)/[...rest]
+  return (await contentPaths('ru')).filter((p) => !p.includes('/tpost/')).map((p) => ({ rest: p.slice(4).split('/') }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

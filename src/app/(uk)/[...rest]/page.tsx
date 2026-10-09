@@ -11,8 +11,9 @@ export const revalidate = 86400
 type Props = { params: Promise<{ rest: string[] }> }
 const pathOf = (rest: string[]) => '/' + rest.map(decodeURIComponent).join('/')
 
+// posts (/tpost/…, ~750 pages) render on first visit and are cached (revalidate) — prebuilding them made the deploy ~1 GB
 export async function generateStaticParams() {
-  return (await contentPaths('uk')).map((p) => ({ rest: p.slice(1).split('/') }))
+  return (await contentPaths('uk')).filter((p) => !p.includes('/tpost/')).map((p) => ({ rest: p.slice(1).split('/') }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

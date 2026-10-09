@@ -1,6 +1,6 @@
 import { permanentRedirect } from 'next/navigation'
 import type { Metadata } from 'next'
-import { getActiveVacancies, getAllVacancies, getVacancyByPath, similar, toCard } from '@/lib/vacancies'
+import { getActiveVacancies, getVacancyByPath, similar, toCard } from '@/lib/vacancies'
 import { CATALOG_PATH, COUNTRY, COUNTRIES, SITE } from '@/lib/site'
 import { countryBySlug, countryLanding, countrySeo, countryTitle, getLanding, landingList, LANDINGS, type LandingPage } from '@/lib/landing'
 import { pageMeta, vacancyDescription, vacancyTitle } from '@/lib/seo'
@@ -23,12 +23,11 @@ const langOf = (root: Root): Lang => (root.startsWith('/ru') ? 'ru' : 'uk')
 /** Every address under a root that exists: countries, Tilda landings, the catalog and the open vacancies (closed ones render on demand) */
 export async function vacanciesStaticParams(root: Root) {
   const lang = langOf(root)
-  const all = await getAllVacancies()
   const paths = new Set<string>()
   if (root.endsWith('/vacancies')) paths.add(lang === 'uk' ? CATALOG_PATH : '/ru' + CATALOG_PATH)
   for (const c of COUNTRIES) paths.add(lang === 'uk' ? c.path : '/ru' + c.path)
   for (const l of LANDINGS) paths.add(l.path)
-  for (const v of all) paths.add(v.path)
+  // vacancy posts are not prebuilt: rendered on first visit and cached (see [...rest]/page.tsx)
   return [...paths]
     .filter((p) => p === root || p.startsWith(root + '/'))
     .map((p) => ({ slug: p.slice(root.length).split('/').filter(Boolean) }))
