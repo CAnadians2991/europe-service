@@ -202,9 +202,14 @@ export function ClientVideos({ lang, videos, title }: { lang: Lang; videos: Vide
           title={title ?? (lang === 'uk' ? 'Вони вже працюють за кордоном' : 'Они уже работают за границей')}
           text={lang === 'uk' ? 'Наші клієнти — про роботу, житло й менеджерів.' : 'Наши клиенты — о работе, жилье и менеджерах.'}
         />
-        <Link href={lang === 'uk' ? '/vidguki' : '/ru/otzyvy'} className="btn-ghost">
-          {lang === 'uk' ? 'Усі відгуки' : 'Все отзывы'} →
-        </Link>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <Link href={lang === 'uk' ? '/vidguki' : '/ru/otzyvy'} className="btn-ghost">
+            {lang === 'uk' ? 'Усі відгуки' : 'Все отзывы'} →
+          </Link>
+          <Link href={lang === 'uk' ? '/vacancies/z-zhytlom' : '/ru/vacancies/s-zhilem'} className="text-[15px] font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[4px]">
+            {lang === 'uk' ? 'Вакансії з житлом →' : 'Вакансии с жильём →'}
+          </Link>
+        </div>
       </div>
       <div className="mt-6">
         <VideoCards items={videos.slice(0, 8)} lang={lang} layout="row" />
