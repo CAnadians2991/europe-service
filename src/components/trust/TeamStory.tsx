@@ -77,7 +77,7 @@ export function TeamSection({ lang, compact }: { lang: Lang; compact?: boolean }
     <section id="ofis" className="scroll-mt-28 border-y border-line bg-white" aria-labelledby="team-h">
       <div className="container-x grid gap-7 py-10 sm:py-16 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-12">
         <div>
-          <h2 id="team-h" className="text-[26px] sm:text-[38px]">{t.h}</h2>
+          <h2 id="team-h" className="accent-bar text-[24px] sm:text-[36px]">{t.h}</h2>
           <p className="mt-3 text-[15.5px] leading-relaxed text-ink-2 sm:text-[17px]">{t.lead}</p>
           <ul className="mt-4 flex flex-wrap gap-2">
             {t.facts.map((f) => (
@@ -92,6 +92,9 @@ export function TeamSection({ lang, compact }: { lang: Lang; compact?: boolean }
             </LeadButton>
             <Link href={uk ? '/about' : '/ru/about'} className="inline-flex min-h-11 items-center font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[4px]">
               {t.more} →
+            </Link>
+            <Link href={uk ? '/contacts' : '/ru/contacts'} className="inline-flex min-h-11 items-center font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[4px]">
+              {uk ? 'Адреси офісів →' : 'Адреса офисов →'}
             </Link>
           </div>
         </div>

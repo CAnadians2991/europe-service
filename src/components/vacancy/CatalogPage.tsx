@@ -39,21 +39,21 @@ export function CatalogHero({ title, text, crumbs, count, lang = 'uk', code }: {
       <span aria-hidden className="grad-text pointer-events-none absolute -right-4 top-1/2 hidden -translate-y-1/2 select-none font-display text-[220px] font-bold leading-none tracking-[-0.06em] opacity-[0.16] lg:block">
         {(code || 'eu').toUpperCase()}
       </span>
-      <div className="container-x relative pb-8 pt-2 sm:pb-10">
+      <div className="container-x relative pb-5 pt-1 sm:pb-8"> 
         <div className="text-ink-2"><Breadcrumbs items={crumbs} /></div>
-        <h1 className="mt-2 max-w-4xl text-[27px] min-[380px]:text-[30px] sm:text-[44px]">{title}</h1>
-        {text && <p className="mt-4 max-w-3xl text-[16.5px] leading-relaxed text-ink-2">{text}</p>}
-        <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-2 font-mono text-[13px] text-ink-2">
+        <h1 className="mt-1 max-w-4xl text-[24px] leading-tight min-[380px]:text-[26px] sm:text-[38px]">{title}</h1>
+        {text && <p className="mt-2 max-w-3xl text-[15px] leading-relaxed text-ink-2 sm:text-[16px]">{text}</p>}
+        <dl className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[13px] text-ink-2">
           <div className="flex items-baseline gap-2">
-            <dt className="uppercase tracking-[0.06em] text-muted">{uk ? 'Вакансій' : 'Вакансий'}</dt>
-            <dd className="text-[17px] font-semibold text-brand-700">{count}</dd>
+            <dt className="text-muted">{uk ? 'Вакансій' : 'Вакансий'}</dt>
+            <dd className="num text-[15px] font-semibold text-brand-700">{count}</dd>
           </div>
           <div className="flex items-baseline gap-2">
-            <dt className="uppercase tracking-[0.06em] text-muted">{uk ? 'Оновлено' : 'Обновлено'}</dt>
+            <dt className="text-muted">{uk ? 'Оновлено' : 'Обновлено'}</dt>
             <dd className="font-semibold text-ink">{new Date().toLocaleDateString(uk ? 'uk-UA' : 'ru-RU', { day: 'numeric', month: 'long' })}</dd>
           </div>
           <div className="flex items-baseline gap-2">
-            <dt className="uppercase tracking-[0.06em] text-muted">{uk ? 'Безкоштовно' : 'Бесплатно'}</dt>
+            <dt className="text-muted">{uk ? 'Безкоштовно' : 'Бесплатно'}</dt>
             <dd>
               <a href={`tel:${SITE.phone}`} className="font-semibold text-ink hover:text-brand-700">{SITE.phoneDisplay}</a>
             </dd>
@@ -100,7 +100,7 @@ export async function CatalogPage({
   return (
     <>
       <CatalogHero title={title} text={text} crumbs={crumbs} count={count} lang={lang} code={code ?? preset?.country} />
-      <div id="catalog" className="container-x scroll-mt-24 py-8 sm:py-10">
+      <div id="catalog" className="container-x scroll-mt-24 py-5 sm:py-8">
         <Catalog cards={cards} preset={preset} leadForm={form} lang={lang} {...await catalogLandings(lang)} />
       </div>
       {links?.some((g) => g.items.length) && (

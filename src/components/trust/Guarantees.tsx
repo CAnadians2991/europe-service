@@ -46,10 +46,18 @@ export function Guarantees({ lang = 'uk', vacancies = 0, countries = 0 }: { lang
   const items = t.items(vacancies, countries)
   return (
     <section id="garantii" className="scroll-mt-28 bg-surface" aria-labelledby="guar-h">
-      <div className="container-x grid gap-6 py-10 sm:py-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
+      <div className="container-x grid gap-6 py-10 sm:py-16 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16">
         <div className="lg:self-center">
-          <h2 id="guar-h" className="text-[26px] sm:text-[40px]">{t.h}</h2>
+          <h2 id="guar-h" className="accent-bar text-[24px] sm:text-[36px]">{t.h}</h2>
           <p className="mt-2 max-w-md text-[15.5px] leading-relaxed text-ink-2 sm:mt-4 sm:text-[17px]">{t.lead}</p>
+          <p className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[15px] font-semibold">
+            <Link href={lang === 'uk' ? '/poslugi' : '/ru/services'} className="text-brand-700 underline decoration-brand-300 underline-offset-[4px]">
+              {lang === 'uk' ? 'Послуги та ціни →' : 'Услуги и цены →'}
+            </Link>
+            <Link href={lang === 'uk' ? '/about' : '/ru/about'} className="text-brand-700 underline decoration-brand-300 underline-offset-[4px]">
+              {lang === 'uk' ? 'Ліцензія й документи →' : 'Лицензия и документы →'}
+            </Link>
+          </p>
         </div>
 
         <Reveal className="overflow-hidden rounded-[18px] border border-line bg-white">

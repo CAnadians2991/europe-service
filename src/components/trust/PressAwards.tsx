@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Photo, src } from '@/components/ui/Photo'
 import { YouTube } from '@/components/content/YouTube'
 
@@ -43,12 +44,15 @@ const TSN_URL = 'https://tsn.ua/exclusive/robota-za-kordonom-yak-ne-potrapiti-na
 export function PressAwards({ lang }: { lang: Lang }) {
   const t = TX[lang]
   return (
-    <section className="container-x py-12 sm:py-20" aria-labelledby="press-h">
+    <section className="container-x py-10 sm:py-14" aria-labelledby="press-h">
       <div className="max-w-2xl">
-        <h2 id="press-h" className="text-[26px] sm:text-[38px]">{t.h}</h2>
+        <h2 id="press-h" className="accent-bar text-[24px] sm:text-[36px]">{t.h}</h2>
         <p className="mt-3 text-[15.5px] leading-relaxed text-ink-2 sm:text-[17px]">{t.lead}</p>
+        <Link href={lang === 'uk' ? '/about' : '/ru/about'} className="mt-3 inline-flex min-h-11 items-center text-[15px] font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[4px]">
+          {lang === 'uk' ? 'Усі нагороди й рейтинги →' : 'Все награды и рейтинги →'}
+        </Link>
       </div>
-      <div className="mt-7 grid gap-4 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-6">
+      <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-6">
         <figure className="overflow-hidden rounded-[18px] border border-line bg-white">
           <div className="[&>div]:!my-0">
             {/* the director's part of the story: 2:00–2:43 */}

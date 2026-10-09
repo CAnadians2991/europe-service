@@ -125,7 +125,7 @@ function LogoRow({ title, logos, big, h2 }: { title: string; logos: { src: strin
   if (!list.length) return null
   return (
     <div className="border-t border-line pt-5">
-      {h2 ? <h2 className="text-[20px] sm:text-[24px]">{title}</h2> : <p className="eyebrow">{title}</p>}
+      {h2 ? <h2 className="accent-bar text-[20px] sm:text-[24px]">{title}</h2> : <p className="eyebrow">{title}</p>}
       <ul className={`mt-4 flex flex-wrap items-center ${big ? 'gap-6' : 'gap-x-8 gap-y-4'}`}>
         {list.map((l) => (
           <li key={l.src} className={big ? 'h-40' : 'h-11'}>
@@ -190,7 +190,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       <Guarantees lang={lang} vacancies={all.length} countries={countries.length} />
 
       {/* ───────── COUNTRIES — compact index (owner, 2026-10: above the job types) ───────── */}
-      <section className="container-x pt-10 sm:pt-16" aria-labelledby="countries-h">
+      <section className="container-x py-10 sm:py-14" aria-labelledby="countries-h">
         <SectionHead id="countries-h" title={t.countriesTitle} />
         <ul className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
           {countries.map((c) => (
@@ -210,10 +210,10 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       <JobCategories lang={lang} all={all} photos={categoryPhotos(all)} catalog={catalog} />
 
       {/* ───────── 01 HOT VACANCIES ───────── */}
-      <section className="container-x py-16 sm:py-20" aria-labelledby="hot-h">
+      <section className="container-x py-10 sm:py-14" aria-labelledby="hot-h">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-3xl">
-            <h2 id="hot-h" className="text-[26px] sm:text-[38px]">{t.hot}</h2>
+            <h2 id="hot-h" className="accent-bar text-[24px] sm:text-[36px]">{t.hot}</h2>
             <h3 className="mt-2 font-sans text-[16.5px] font-normal leading-relaxed tracking-normal text-ink-2">{t.hotText}</h3>
           </div>
           <Link href={catalog} className="btn-ghost">
@@ -265,7 +265,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
 
       {/* ───────── EMPLOYERS (awards and the 1+1 story moved up, next to the client videos) ───────── */}
       {U.employers && (
-        <section className="container-x py-12 sm:py-16" aria-label={t.employers}>
+        <section className="container-x py-10 sm:py-14" aria-label={t.employers}>
           <LogoRow title={t.employers} logos={U.employers.logos} h2 />
         </section>
       )}

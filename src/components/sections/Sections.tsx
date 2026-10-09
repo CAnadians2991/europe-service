@@ -14,7 +14,7 @@ export function SectionHead({ eyebrow, title, text, center, id, dark, index }: {
           {eyebrow}
         </p>
       )}
-      <h2 id={id} className={`mt-3 text-[26px] sm:text-[38px] ${dark ? 'text-white' : 'text-ink'}`}>
+      <h2 id={id} className={`accent-bar mt-3 text-[24px] sm:text-[36px] ${center ? '[&::before]:mx-auto' : ''} ${dark ? 'text-white' : 'text-ink'}`}>
         {title}
       </h2>
       {text && <p className={`mt-3 text-[16.5px] leading-relaxed ${dark ? 'text-white/80' : 'text-ink-2'}`}>{text}</p>}
@@ -88,7 +88,7 @@ export function Faq({ items, title, eyebrow, lang = 'uk' }: { items: { q: string
           <details key={f.q} className="group border-b border-line">
             <summary className="flex cursor-pointer list-none items-start gap-4 py-5 text-[17px] font-semibold text-ink [&::-webkit-details-marker]:hidden">
               <span className="num mt-0.5 w-7 shrink-0 text-[13px] font-medium text-muted">{String(i + 1).padStart(2, '0')}</span>
-              <span className="flex-1">{f.q}</span>
+              <h3 className="flex-1 font-sans text-[16.5px] font-semibold leading-snug tracking-normal sm:text-[17px]">{f.q}</h3>
               <span className="grid size-8 shrink-0 place-items-center border border-line text-ink transition group-open:rotate-45 group-open:border-brand-600 group-open:bg-brand-600 group-open:text-white">
                 <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden>
                   <path d="M12 5v14M5 12h14" />

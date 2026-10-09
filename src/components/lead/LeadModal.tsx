@@ -132,7 +132,7 @@ export function LeadModalProvider({
             <CloseBtn onClick={() => formRef.current?.close()} label={uk ? 'Закрити' : 'Закрыть'} />
           </div>
           <p className="eyebrow pr-12">{uk ? 'Заявка · безкоштовно' : 'Заявка · бесплатно'}</p>
-          <h2 id="lead-modal-title" ref={formTitleRef} tabIndex={-1} className="mt-2.5 pr-10 text-[22px] leading-tight outline-none sm:text-[24px]">{opts?.title || def.title}</h2>
+          <p id="lead-modal-title" ref={formTitleRef} tabIndex={-1} className="mt-2.5 pr-10 font-display text-[22px] font-bold leading-tight tracking-[-0.02em] text-ink outline-none sm:text-[24px]">{opts?.title || def.title}</p>
           {opts?.vacancyTitle && <p className="mt-4 border-l-[3px] border-brand-600 bg-surface px-3.5 py-2.5 text-[15px] font-semibold leading-snug text-ink">{opts.vacancyTitle}</p>}
           <p className="mt-3 text-[16px] leading-relaxed text-ink-2">{opts?.subtitle || def.subtitle}</p>
           <div className="mt-5">

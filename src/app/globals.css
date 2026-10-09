@@ -182,7 +182,7 @@
 
 /* Filter / tag: a small square label */
 @utility chip {
-  @apply inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line-strong bg-white px-3.5 py-1.5 text-[14.5px] font-medium text-ink-2 transition-colors hover:border-ink hover:text-ink;
+  @apply inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line-strong bg-white px-3 py-1 text-[14px] font-medium text-ink-2 transition-colors hover:border-ink hover:text-ink;
   &[aria-pressed='true'],
   &[data-active='true'] {
     @apply border-brand-600 bg-brand-600 text-white hover:text-white;
@@ -785,5 +785,18 @@ html[data-bottom-bar] .contact-fab-dock {
 @media (max-width: 639px) {
   html[data-header-cta] .header-lang {
     display: none;
+  }
+}
+
+/* Section title accent (owner, 2026-10: blocks need a clear divider in the corporate colours) — a short logo-gradient bar */
+@utility accent-bar {
+  &::before {
+    content: '';
+    display: block;
+    width: 44px;
+    height: 4px;
+    margin-bottom: 12px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #5ec58a 0%, #38af60 35%, #2f9a86 65%, #578fc7 100%);
   }
 }

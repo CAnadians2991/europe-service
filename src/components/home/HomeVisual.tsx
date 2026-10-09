@@ -194,7 +194,8 @@ export function HousingStrip({ lang, photos }: { lang: Lang; photos: string[] })
 export function ClientVideos({ lang, videos, title }: { lang: Lang; videos: VideoCard[]; title?: string }) {
   if (videos.length < 4) return null
   return (
-    <section className="container-x py-12 sm:py-16" aria-labelledby="vids-h">
+    <section className="border-y border-line bg-white" aria-labelledby="vids-h">
+      <div className="container-x py-10 sm:py-14">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <SectionHead
           id="vids-h"
@@ -207,6 +208,7 @@ export function ClientVideos({ lang, videos, title }: { lang: Lang; videos: Vide
       </div>
       <div className="mt-6">
         <VideoCards items={videos.slice(0, 8)} lang={lang} layout="row" />
+      </div>
       </div>
     </section>
   )

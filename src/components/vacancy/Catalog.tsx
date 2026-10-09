@@ -253,13 +253,13 @@ export function Catalog({
   return (
     <section aria-label={uk ? 'Каталог вакансій' : 'Каталог вакансий'}>
       {/* search + country chips */}
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2.5">
         <label className="relative block lg:max-w-[520px]">
           <span className="sr-only">{uk ? 'Пошук вакансії' : 'Поиск вакансии'}</span>
           <IconSearch className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-muted" />
           <input
             type="search"
-            className="field !pl-11"
+            className="field !py-2.5 !pl-11"
             placeholder={uk ? 'Пошук: склад, Toyota, Варшава…' : 'Поиск: склад, Toyota, Варшава…'}
             value={f.q}
             onChange={(e) => set('q', e.target.value)}
@@ -285,8 +285,8 @@ export function Catalog({
       <div className="mt-4 hidden border border-line bg-white p-5 lg:block">{filtersPanel}</div>
 
       {/* result bar */}
-      <div className="mt-5 flex flex-wrap items-center gap-3">
-        <p className="font-mono text-[13px] font-medium uppercase tracking-[0.06em] text-ink-2" aria-live="polite">
+      <div className="mt-3 flex flex-wrap items-center gap-3">
+        <p className="text-[13.5px] font-medium text-ink-2" aria-live="polite">
           {uk ? 'Знайдено' : 'Найдено'}: <span className="text-[15px] font-semibold text-brand-700">{list.length}</span>
         </p>
         {dirty && (
