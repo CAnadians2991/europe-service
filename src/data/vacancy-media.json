@@ -584,5 +584,135 @@
       "/media/vx/lgrl5hgms1/74917ae7",
       "/media/vx/lgrl5hgms1/b735e206"
     ]
+  },
+  "/tpost/ozb33xaen1-logisticheskii-sklad-avtozapchastei-jamp": {
+    "housing": [
+      "/media/vx/suv2n144r1/595745f9",
+      "/media/vx/suv2n144r1/256ab0cc",
+      "/media/vx/suv2n144r1/837576d4",
+      "/media/vx/suv2n144r1/bcc613e1",
+      "/media/vx/suv2n144r1/a91fe117",
+      "/media/vx/suv2n144r1/2104af56",
+      "/media/vx/suv2n144r1/7ffee0d0",
+      "/media/vx/suv2n144r1/7291372a"
+    ]
+  },
+  "/tpost/hcmlblnpi1-pratsvnik-skladu-brendovogo-odyagu-shein": {
+    "housing": [
+      "/media/vx/hcmlblnpi1/4ba29e1e",
+      "/media/vx/hcmlblnpi1/33f71b7c",
+      "/media/vx/hcmlblnpi1/95d2bc24",
+      "/media/vx/hcmlblnpi1/83e2b0d9",
+      "/media/vx/hcmlblnpi1/ee859227",
+      "/media/vx/hcmlblnpi1/9defba73",
+      "/media/vx/hcmlblnpi1/468b5db7",
+      "/media/vx/hcmlblnpi1/4edec90c"
+    ]
+  },
+  "/tpost/5300cnv7z1-pratsvnik-skladu-odyagu-shein": {
+    "videos": [
+      {
+        "src": "/reviews/video/shein-magnice-2026-08.mp4",
+        "cover": "/reviews/video/shein-magnice-2026-08-cover-800.webp",
+        "name": "Катерина",
+        "dur": "0:37",
+        "uk": "Склад Shein у Польщі",
+        "ru": "Склад Shein в Польше",
+        "kind": "review"
+      }
+    ],
+    "housing": [
+      "/media/vx/5300cnv7z1/8c32ebc7",
+      "/media/vx/5300cnv7z1/944d6e69",
+      "/media/vx/5300cnv7z1/a313410d",
+      "/media/vx/5300cnv7z1/9148cdb6",
+      "/media/vx/5300cnv7z1/0616002a",
+      "/media/vx/5300cnv7z1/394369e4",
+      "/media/vx/5300cnv7z1/e6fab845",
+      "/media/vx/5300cnv7z1/95121683"
+    ]
+  },
+  "/tpost/suv2n144r1-pobtnik-skladu-avtozapchastin-ils-logist": {
+    "housing": [
+      "/media/vx/suv2n144r1/595745f9",
+      "/media/vx/suv2n144r1/256ab0cc",
+      "/media/vx/suv2n144r1/837576d4",
+      "/media/vx/suv2n144r1/bcc613e1",
+      "/media/vx/suv2n144r1/a91fe117",
+      "/media/vx/suv2n144r1/2104af56",
+      "/media/vx/suv2n144r1/7ffee0d0",
+      "/media/vx/suv2n144r1/7291372a"
+    ]
+  },
+  "/tpost/696e09h991-pratsvnik-na-sklad-brendovogo-odyagu": {
+    "housing": [
+      "/media/vx/696e09h991/09cff8be",
+      "/media/vx/696e09h991/eccb6ec5",
+      "/media/vx/696e09h991/43f36b00",
+      "/media/vx/696e09h991/813fd098",
+      "/media/vx/696e09h991/cf2f6be4",
+      "/media/vx/696e09h991/d0750883",
+      "/media/vx/696e09h991/9389aeca",
+      "/media/vx/696e09h991/7672269b"
+    ]
+  },
+  "/tpost/su10ddkv31-pratsvnik-na-sklad-kosmetiki-notino": {
+    "videos": [
+      {
+        "src": "/reviews/video/notino-rajhrad-2025-09.mp4",
+        "cover": "/reviews/video/notino-rajhrad-2025-09-cover-800.webp",
+        "name": "Лариса",
+        "dur": "0:53",
+        "uk": "Склад Notino в Чехії",
+        "ru": "Склад Notino в Чехии",
+        "kind": "review"
+      }
+    ],
+    "housing": [
+      "/media/vx/su10ddkv31/8ace46a3",
+      "/media/vx/su10ddkv31/2fcd3d9f",
+      "/media/vx/su10ddkv31/4ca80ee1",
+      "/media/vx/su10ddkv31/5aba3fc4",
+      "/media/vx/su10ddkv31/fe7f845c",
+      "/media/vx/su10ddkv31/c690defe",
+      "/media/vx/su10ddkv31/81253dfb",
+      "/media/vx/su10ddkv31/eb2ae4a5"
+    ]
+  },
+  "/tpost/e8bvl5sz01-montazhnik-mehanchnogo-ustatkuvannya-na": {
+    "videos": [
+      {
+        "src": "/reviews/video/forvia-pisek-2025-11.mp4",
+        "cover": "/reviews/video/forvia-pisek-2025-11-cover-800.webp",
+        "name": "Вʼячеслав",
+        "dur": "0:26",
+        "uk": "Завод FORVIA в Чехії",
+        "ru": "Завод FORVIA в Чехии",
+        "kind": "review"
+      }
+    ]
+  },
+  "/tpost/ggvy16sb31-virobnitstvo-kabelv-do-avtomoblv-leoni": {
+    "videos": [
+      {
+        "src": "/reviews/video/ggvy16sb31-r1.mp4",
+        "cover": "/reviews/video/ggvy16sb31-r1-cover-800.webp",
+        "name": "",
+        "dur": "0:36",
+        "uk": "Огляд житла LEONI",
+        "ru": "Обзор жилья LEONI",
+        "kind": "housing"
+      }
+    ],
+    "housing": [
+      "/media/vx/ggvy16sb31/aa60df5e",
+      "/media/vx/ggvy16sb31/d744c8bd",
+      "/media/vx/ggvy16sb31/fc884ebd",
+      "/media/vx/ggvy16sb31/77f097c5",
+      "/media/vx/ggvy16sb31/d8937403",
+      "/media/vx/ggvy16sb31/1cf19946",
+      "/media/vx/ggvy16sb31/5512b889",
+      "/media/vx/ggvy16sb31/bb2f1c50"
+    ]
   }
 }
