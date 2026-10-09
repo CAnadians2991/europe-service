@@ -2,17 +2,17 @@
 
 import Link from 'next/link'
 import { useDeferredValue, useEffect, useMemo, useState, useTransition } from 'react'
-import { COUNTRIES, COUNTRY } from '@/lib/site'
+import { COUNTRIES } from '@/lib/site'
 import { salaryMain } from '@/lib/format'
 import { src } from '@/components/ui/Photo'
 import { deleteVacancy, duplicateVacancy, restoreDeleted, setActive, setHot } from '@/app/(admin)/admin/actions'
 import { belowMinimum } from '@/lib/salary-check'
 import type { AdminVacancyRow } from '@/lib/admin-data'
-import { Code, Confirm, Notice, PageHead, Switch, Tag, fmtDate } from './ui'
+import { Confirm, Notice, PageHead, Switch, Tag, fmtDate } from './ui'
 
 export type ListFilter = { status: 'open' | 'closed' | 'all' | 'hot'; country: string; q: string }
 
-/** rows drawn at once — 1 400+ in the table (1 200+ closed Tilda posts): more on «Показати ще» */
+/** rows drawn at once — 1 400+ in the table (1 200+ old Tilda posts): more on «Показати ще» */
 const PAGE = 60
 
 const fold = (s: string) =>
@@ -23,9 +23,10 @@ const fold = (s: string) =>
     .replace(/ł/g, 'l')
     .replace(/[’ʼ'`]/g, '')
 
+/** 'open' / 'closed' stay as the keys (the address keeps working): on the site / switched off */
 const STATUS: [ListFilter['status'], string][] = [
-  ['open', 'Відкриті'],
-  ['closed', 'Закриті'],
+  ['open', 'На сайті'],
+  ['closed', 'Вимкнені'],
   ['hot', 'Топ'],
   ['all', 'Усі'],
 ]
@@ -36,7 +37,7 @@ export function VacancyList({ items, deleted, initial }: { items: AdminVacancyRo
   const [limit, setLimit] = useState(PAGE)
   // optimistic switches: the server refresh brings the same values a moment later
   const [over, setOver] = useState<Record<string, { active?: boolean; hot?: boolean }>>({})
-  // rows switched since the filter last changed stay in view (a closed vacancy doesn't vanish from «Відкриті» mid-click)
+  // rows switched since the filter last changed stay in view (a vacancy switched off doesn't vanish from «На сайті» mid-click)
   const [keep, setKeep] = useState<Set<string>>(new Set())
   const [pending, start] = useTransition()
   const [busyId, setBusyId] = useState('')
@@ -118,7 +119,7 @@ export function VacancyList({ items, deleted, initial }: { items: AdminVacancyRo
         title="Вакансії"
         sub={
           <span className="num">
-            {open} відкрито · {rows.length - open} закрито · {hot} у топі
+            {open} на сайті · {rows.length - open} вимкнено · {hot} у топі
           </span>
         }
         actions={<Link href="/admin/vacancies/new" className="btn-accent">+ Нова вакансія</Link>}
@@ -160,46 +161,53 @@ export function VacancyList({ items, deleted, initial }: { items: AdminVacancyRo
 
       {low > 0 && (
         <Notice tone="err">
-          <span className="num">{low}</span> відкритих вакансій мають ставку нижчу за мінімальну в Польщі (31,40 zł/год брутто, 4 806 zł/міс) — позначені «ставка ↓». Оновіть ставки.
+          <span className="num">{low}</span> вакансій на сайті мають ставку нижчу за мінімальну в Польщі (31,40 zł/год брутто, 4 806 zł/міс) — позначені «ставка ↓». Оновіть ставки.
         </Notice>
       )}
       {err && <Notice tone="err">{err}</Notice>}
 
       <ul className={`card divide-y divide-line overflow-visible ${pending ? 'opacity-90' : ''}`}>
         {list.slice(0, limit).map((v) => {
-          const c = COUNTRY[v.country]
           const edit = `/admin/vacancies/${encodeURIComponent(v.id)}`
           const low = v.active && belowMinimum(v)
+          const pay = salaryMain(v.salary)
           return (
-            <li key={v.id} className={`relative grid grid-cols-[72px_minmax(0,1fr)] gap-x-3 gap-y-2 px-3 py-3 has-[details[open]]:z-10 sm:grid-cols-[96px_minmax(0,1fr)] sm:px-4 lg:grid-cols-[84px_minmax(0,1fr)_minmax(120px,170px)_auto] lg:items-center ${v.active ? 'bg-white' : 'bg-cream'}`}>
-              <Link href={edit} className="relative block aspect-[4/3] self-start overflow-hidden bg-surface" tabIndex={-1} aria-hidden>
-                {v.photo ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={src(v.photo, 480)} alt="" loading="lazy" decoding="async" className={`size-full object-cover ${v.active ? '' : 'opacity-60 grayscale'}`} />
-                ) : (
-                  <span className="grid size-full place-items-center font-mono text-[10px] uppercase text-muted">без фото</span>
-                )}
-                <Code code={v.country} className="absolute left-0 top-0 !h-5 !min-w-0 !px-1 !text-[10px]" />
+            // phone: thumb + two lines, the controls below; md+: one row
+            <li key={v.id} className={`relative flex flex-wrap items-center gap-x-3 gap-y-1 px-3 py-2 has-[details[open]]:z-10 sm:px-4 md:flex-nowrap ${v.active ? 'bg-white' : 'bg-cream'}`}>
+              <Link href={edit} className="group flex min-h-11 min-w-0 flex-1 basis-full items-center gap-3 md:basis-auto" title={v.title}>
+                <span className="block h-[42px] w-14 shrink-0 overflow-hidden bg-surface">
+                  {v.photo ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={src(v.photo, 480)} alt="" loading="lazy" decoding="async" className={`size-full object-cover ${v.active ? '' : 'opacity-60 grayscale'}`} />
+                  ) : (
+                    <span className="grid size-full place-items-center font-mono text-[9px] uppercase leading-tight text-muted">без фото</span>
+                  )}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-[15px] font-semibold leading-snug text-ink group-hover:text-brand-700">{v.title || 'Без назви'}</span>
+                  <span className="mt-0.5 flex min-w-0 items-center gap-1.5 text-[13px] leading-snug text-muted">
+                    {!v.active && <Tag className="sm:hidden">вимкнена</Tag>}
+                    {low && <Tag tone="err">ставка ↓</Tag>}
+                    <span className="min-w-0 truncate">
+                      <span className="num font-semibold text-ink-2">{(v.country || '··').toUpperCase()}</span>
+                      {[v.city, v.company].filter(Boolean).map((x) => ` · ${x}`).join('')}
+                      {pay && (
+                        <>
+                          {' · '}
+                          <span className="num text-ink-2">{pay}</span>
+                        </>
+                      )}
+                    </span>
+                    {v.ru && <Tag className="hidden md:inline-flex">ru</Tag>}
+                    {v.tilda && <Tag className="hidden lg:inline-flex">tilda</Tag>}
+                    <span className="num hidden shrink-0 text-[11.5px] lg:inline" title="Остання зміна">{fmtDate(v.updatedAt)}</span>
+                  </span>
+                </span>
               </Link>
-              <div className="min-w-0">
-                <Link href={edit} className="line-clamp-2 text-[15.5px] font-semibold leading-snug text-ink hover:text-brand-700">{v.title || 'Без назви'}</Link>
-                <p className="mt-0.5 truncate text-[13.5px] text-muted">
-                  {[v.city || c?.name || v.country.toUpperCase(), v.company].filter(Boolean).join(' · ')}
-                </p>
-                <p className="mt-1 flex flex-wrap items-center gap-1.5">
-                  {!v.active && <Tag>закрита</Tag>}
-                  {v.hot && <Tag tone="ink">топ</Tag>}
-                  {v.ru && <Tag>ru</Tag>}
-                  {v.tilda && <Tag className="hidden sm:inline-flex">tilda</Tag>}
-                  {low && <Tag tone="err">ставка ↓</Tag>}
-                  <span className="num text-[11.5px] text-muted" title="Остання зміна">{fmtDate(v.updatedAt)}</span>
-                </p>
-              </div>
-              <p className="num col-start-2 text-[14px] font-semibold text-ink lg:col-start-3 lg:text-right">{salaryMain(v.salary) || '—'}</p>
-              <div className="col-span-2 flex items-center justify-between gap-1 border-t border-line pt-2 sm:col-span-1 sm:col-start-2 sm:justify-start sm:gap-2 sm:border-0 sm:pt-0 lg:col-start-4 lg:justify-end lg:gap-1">
+              <div className="flex w-full items-center gap-1 md:w-auto md:shrink-0 md:gap-1.5">
                 <div className="flex items-center">
-                  <Switch on={v.active} label={v.active ? 'На сайті — закрити набір' : 'Закрита — показати на сайті'} onChange={(on) => toggle(v, 'active', on)} />
-                  <span className={`ml-1.5 hidden w-[64px] whitespace-nowrap text-[13px] font-medium sm:inline ${v.active ? 'text-brand-700' : 'text-muted'}`}>{v.active ? 'На сайті' : 'Закрита'}</span>
+                  <Switch on={v.active} label={v.active ? 'На сайті. Вимкнути — вакансія зникне з каталогу' : 'Вимкнена. Увімкнути — показати в каталозі'} onChange={(on) => toggle(v, 'active', on)} />
+                  <span className={`ml-1.5 hidden w-[66px] whitespace-nowrap text-[13px] font-medium sm:inline ${v.active ? 'text-brand-700' : 'text-muted'}`}>{v.active ? 'На сайті' : 'Вимкнена'}</span>
                 </div>
                 <button
                   type="button"
@@ -210,16 +218,16 @@ export function VacancyList({ items, deleted, initial }: { items: AdminVacancyRo
                 >
                   {v.hot ? '★' : '☆'} Топ
                 </button>
-                <button type="button" className="btn-ghost hidden !min-h-10 !px-3 !text-[14px] md:inline-flex" disabled={busyId === v.id} onClick={() => copy(v)}>
-                  {busyId === v.id ? 'Копіюємо…' : 'Копія'}
-                </button>
+                <span className="flex-1 md:hidden" />
                 <Link href={edit} className="btn-primary !min-h-10 !px-3.5 !text-[14px]">Редагувати</Link>
                 <details className="relative">
                   <summary className="grid size-10 cursor-pointer list-none place-items-center text-[20px] leading-none text-muted hover:bg-surface [&::-webkit-details-marker]:hidden" aria-label="Ще дії">⋯</summary>
                   <div className="absolute right-0 z-20 mt-1 w-56 border border-line bg-white py-1 shadow-[var(--shadow-lift)]">
                     <a href={v.path} target="_blank" className="block px-4 py-2.5 text-[14px] hover:bg-surface">Відкрити на сайті ↗</a>
                     <p className="num truncate px-4 pb-2 text-[11px] text-muted">{v.path}</p>
-                    <button type="button" onClick={() => copy(v)} className="block w-full border-t border-line px-4 py-2.5 text-left text-[14px] hover:bg-surface">Зробити копію</button>
+                    <button type="button" disabled={busyId === v.id} onClick={() => copy(v)} className="block w-full border-t border-line px-4 py-2.5 text-left text-[14px] hover:bg-surface disabled:opacity-60">
+                      {busyId === v.id ? 'Копіюємо…' : 'Зробити копію'}
+                    </button>
                     <button type="button" onClick={() => setConfirm(v)} className="block w-full px-4 py-2.5 text-left text-[14px] font-semibold text-danger hover:bg-danger/5">Видалити…</button>
                   </div>
                 </details>
@@ -244,7 +252,7 @@ export function VacancyList({ items, deleted, initial }: { items: AdminVacancyRo
             <span className="eyebrow">Кошик</span> <span className="num ml-2 text-[13px] text-muted">{deleted.length} за 60 днів</span>
           </summary>
           <div className="border-t border-line px-4 pb-2 sm:px-5">
-            <p className="py-3 text-[14px] text-muted">Видалені вакансії зберігаються 60 днів. Відновлена з’являється закритою — увімкніть її, коли будете готові.</p>
+            <p className="py-3 text-[14px] text-muted">Видалені вакансії зберігаються 60 днів. Відновлена з’являється вимкненою — увімкніть «На сайті», коли будете готові.</p>
             <ul className="divide-y divide-line">
               {deleted.map((d) => (
                 <li key={d.historyId} className="flex items-center justify-between gap-3 py-2.5">
@@ -273,7 +281,7 @@ export function VacancyList({ items, deleted, initial }: { items: AdminVacancyRo
           }}
         >
           <p>«{confirm.title}» зникне з сайту. Її можна відновити з кошика протягом 60 днів.</p>
-          <p className="text-[14px] text-muted">Якщо набір тимчасово закрито — краще вимкніть «На сайті»: сторінка лишиться з позначкою «набір закрито», посилання не зламаються.</p>
+          <p className="text-[14px] text-muted">Якщо набір лише на паузі — краще вимкніть «На сайті»: вакансія зникне з каталогу, а її сторінка лишиться й далі прийматиме заявки. Посилання не зламаються.</p>
         </Confirm>
       )}
     </div>

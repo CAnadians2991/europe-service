@@ -1,0 +1,920 @@
+[
+ {
+  "base": "/media/hx/e3ffbfb6",
+  "country": "any",
+  "source": "GO_site/public/amazon-housing-room-1.jpg",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/582253c0",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/operator-vyrobnytstva-abo-navantazhuvacha-forvia-bezdiechin-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/aa10e603",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/operator-vyrobnytstva-kosmetyky-schwan-cosmetics-ches-kyi-kr-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/ab1187b8",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/operator-vyrobnytstva-kosmetyky-schwan-cosmetics-ches-kyi-kr-zhytlo-es-2.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/94c7d0d4",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/operator-vyrobnytstva-kosmetyky-schwan-cosmetics-ches-kyi-kr-zhytlo-es-3.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/31dfd2e9",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/operator-vyrobnytstva-kosmetyky-schwan-cosmetics-ches-kyi-kr-zhytlo-es-4.webp",
+  "kind": "living"
+ },
+ {
+  "base": "/media/hx/7657eb03",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/operator-vyrobnytstva-kosmetyky-schwan-cosmetics-ches-kyi-kr-zhytlo-es-5.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/fe1939d7",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pakuval-nyk-na-skladi-odiahu-ceva-holeniuv-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/9b8fd9ac",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pakuval-nyk-na-skladi-odiahu-ceva-holeniuv-zhytlo-es-2.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/ccf4b36d",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pakuval-nyk-na-skladi-odiahu-ceva-holeniuv-zhytlo-es-3.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/25ca015d",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pakuval-nyk-na-skladi-odiahu-ceva-holeniuv-zhytlo-es-4.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/98a44962",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pakuval-nyk-na-skladi-odiahu-ceva-holeniuv-zhytlo-es-5.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/bf3f5cf3",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-avtomobil-noho-vyrobnytstva-gedia-nova-sul-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/1f6d631f",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-avtomobil-noho-vyrobnytstva-gedia-nova-sul-zhytlo-es-2.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/e65dc828",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-avtomobil-noho-vyrobnytstva-gedia-nova-sul-zhytlo-es-3.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/43e439af",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-avtomobil-noho-vyrobnytstva-gedia-nova-sul-zhytlo-es-4.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/678b9220",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-na-sklad-brendovoho-odiahu-lpp-zhytlo-tg-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/eb4514bb",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-na-sklad-brendovoho-odiahu-lpp-zhytlo-tg-2.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/426f19ca",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-na-sklad-brendovoho-odiahu-lpp-zhytlo-tg-3.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/743f6ff8",
+  "country": "hu",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-na-sklad-produktovoho-internet-mahazynu-kifli-zhytlo-tg-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/9fdb6637",
+  "country": "hu",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-na-sklad-produktovoho-internet-mahazynu-kifli-zhytlo-tg-2.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/f753988f",
+  "country": "hu",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-na-sklad-produktovoho-internet-mahazynu-kifli-zhytlo-tg-3.webp",
+  "kind": "living"
+ },
+ {
+  "base": "/media/hx/9d2d17db",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-na-sklad-produktovoho-internet-mahazynu-rohlik-zhytlo-tg-2.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/c0f8539c",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-na-sklad-produktovoho-internet-mahazynu-rohlik-zhytlo-tg-3.webp",
+  "kind": "living"
+ },
+ {
+  "base": "/media/hx/a6185d78",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-na-sklad-produktovoho-internet-mahazynu-rohlik-zhytlo-tg-4.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/2394b6c4",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-amazon-kzhyzhovitse-zhytlo-tg-2.webp",
+  "kind": "building"
+ },
+ {
+  "base": "/media/hx/a56d7c58",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-kosmetyky-est-e-lauder-kheb-zhytlo-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/90ceaca2",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-kosmetyky-est-e-lauder-kheb-zhytlo-2.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/d1521326",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-ceva-svebodzin-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/93e813d3",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-ceva-svebodzin-zhytlo-es-2.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/d8ffa372",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-ceva-svebodzin-zhytlo-es-4.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/49e5b701",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-h-m-strykuv-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/24f62004",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-h-m-strykuv-zhytlo-es-2.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/370e234e",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-h-m-strykuv-zhytlo-es-3.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/9f4ba949",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-h-m-strykuv-zhytlo-es-4.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/55d58977",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-h-m-strykuv-zhytlo-es-5.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/b41a4340",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-h-m-strykuv-zhytlo-es-6.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/ca6746a1",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-inditex-tarnovo-podhurne-zhytlo-tg-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/9838154c",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-inditex-tarnovo-podhurne-zhytlo-tg-2.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/67d3b59b",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-inditex-tarnovo-podhurne-zhytlo-tg-3.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/eac0b46b",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-inditex-tarnovo-podhurne-zhytlo-tg-4.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/f55500e8",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-inditex-tarnovo-podhurne-zhytlo-tg-5.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/1e1e689b",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-inditex-tarnovo-podhurne-zhytlo-tg-6.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/72e57046",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-zara-psary-zhytlo-tg-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/f8b3bb6f",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-zara-psary-zhytlo-tg-2.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/fe2af974",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-zara-psary-zhytlo-tg-3.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/acf560f2",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-zara-psary-zhytlo-tg-4.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/6344e4b9",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-zara-psary-zhytlo-tg-5.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/83b4d400",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-odiahu-zara-psary-zhytlo-tg-6.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/992110b4",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-temu-myslovitse-zabzhe-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/5fd72c50",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-skladu-temu-myslovitse-zabzhe-zhytlo-es-3.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/82108a1e",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-avtomobil-nykh-far-kojto-zhatets-zhytlo-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/20acf152",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-avtomobil-nykh-far-kojto-zhatets-zhytlo-2.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/409d3450",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-avtomobil-nykh-far-kojto-zhatets-zhytlo-3.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/4e45e6c6",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-avtomobil-nykh-ruchok-huf-tykhy-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/75139407",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-avtomobil-nykh-ruchok-huf-tykhy-zhytlo-es-2.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/a14c66d2",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-avtomobil-nykh-ruchok-huf-tykhy-zhytlo-es-3.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/2933b751",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-avtomobil-nykh-ruchok-huf-tykhy-zhytlo-es-4.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/346888fa",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-avtosydin-forvia-pisek-zhytlo-es-2.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/8dd7fa2c",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-avtosydin-forvia-pisek-zhytlo-es-3.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/2feec768",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-avtosydin-forvia-pisek-zhytlo-es-4.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/4ff45d13",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-plastykovykh-avtodetalei-kdk-automot-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/9a622a4b",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-plastykovykh-avtodetalei-kdk-automot-zhytlo-es-2.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/053bc33e",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-plastykovykh-avtodetalei-kdk-automot-zhytlo-es-3.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/8d35cc47",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-plastykovykh-avtodetalei-kdk-automot-zhytlo-es-4.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/6df5b841",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-plastykovykh-detalei-resrg-moravs-ka-zhytlo-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/6a32bbb0",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-plastykovykh-detalei-resrg-moravs-ka-zhytlo-3.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/6fdbcdad",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-plastykovykh-detalei-resrg-moravs-ka-zhytlo-4.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/98f2832f",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-plastykovykh-detalei-resrg-moravs-ka-zhytlo-5.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/63304790",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-ta-skladu-forvia-nyrzhany-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/7139e9c9",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-vyrobnytstva-ta-skladu-forvia-nyrzhany-zhytlo-es-4.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/d259ce0b",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-zavodu-lg-energy-solution-biskupitse-podhurne-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/23caa322",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-zavodu-lg-energy-solution-biskupitse-podhurne-zhytlo-es-2.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/4c1716b1",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-zavodu-lg-energy-solution-biskupitse-podhurne-zhytlo-es-3.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/c4d80a6b",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-zavodu-lg-energy-solution-biskupitse-podhurne-zhytlo-es-4.webp",
+  "kind": "living"
+ },
+ {
+  "base": "/media/hx/ffa1cef1",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-zavodu-lg-energy-solution-biskupitse-podhurne-zhytlo-es-5.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/6be4425a",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-zavodu-plastykovykh-detalei-hranitse-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/63416e13",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-zavodu-plastykovykh-detalei-hranitse-zhytlo-es-2.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/e0fac58f",
+  "country": "cz",
+  "source": "GO_site/public/uploads/accommodation/pratsivnyk-zavodu-plastykovykh-detalei-hranitse-zhytlo-es-5.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/6dde9228",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnytsia-mcdonald-s-hrodzys-k-mazovets-kyi-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/f28d568b",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnytsia-mcdonald-s-hrodzys-k-mazovets-kyi-zhytlo-es-4.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/ae671c56",
+  "country": "lt",
+  "source": "GO_site/public/uploads/accommodation/pratsivnytsia-na-vyrobnytstvo-lososia-vi-i-plunhe-zhytlo-tg-1.webp",
+  "kind": "building"
+ },
+ {
+  "base": "/media/hx/2e830395",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/pratsivnytsia-vyrobnytstva-hotovykh-strav-kooperol-zduny-zhytlo-es-1.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/06635c88",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/prybyral-nytsia-na-skladi-hermes-konin-zhahans-kyi-zhytlo-es-1.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/ab7bbcf3",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/prybyral-nytsia-na-skladi-hermes-konin-zhahans-kyi-zhytlo-es-2.webp",
+  "kind": "building"
+ },
+ {
+  "base": "/media/hx/a6520d12",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/prybyral-nytsia-na-skladi-hermes-konin-zhahans-kyi-zhytlo-es-3.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/96d7115f",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/prybyral-nytsia-na-skladi-hermes-konin-zhahans-kyi-zhytlo-es-4.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/4a80c797",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/prybyral-nytsia-na-skladi-hermes-konin-zhahans-kyi-zhytlo-es-5.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/93422187",
+  "country": "pl",
+  "source": "GO_site/public/uploads/accommodation/prybyral-nytsia-na-skladi-hermes-konin-zhahans-kyi-zhytlo-es-6.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/6d6d506e",
+  "country": "pl",
+  "source": "personal-work/public/media/v/adidas/94347d149b-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/f7509c77",
+  "country": "pl",
+  "source": "personal-work/public/media/v/biedronka/a4c98c8ea3-1200.webp",
+  "kind": "living"
+ },
+ {
+  "base": "/media/hx/053a5bfe",
+  "country": "pl",
+  "source": "personal-work/public/media/v/burger-king/2b827a0c33-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/2d56afd5",
+  "country": "cz",
+  "source": "personal-work/public/media/v/chekhiia-inglot/55bdce808e-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/b405fa25",
+  "country": "cz",
+  "source": "personal-work/public/media/v/chekhiia-inglot/865b791af6-1200.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/54ee80f7",
+  "country": "cz",
+  "source": "personal-work/public/media/v/chekhiia-inglot/8c6ec7f04b-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/e9dfe1b9",
+  "country": "cz",
+  "source": "personal-work/public/media/v/chekhiia-inglot/f84077598d-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/1135334e",
+  "country": "cz",
+  "source": "personal-work/public/media/v/chekhiia-mahle/6f53ecc46e-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/429113b5",
+  "country": "pl",
+  "source": "personal-work/public/media/v/faurecia/700afc7d47-1200.webp",
+  "kind": "living"
+ },
+ {
+  "base": "/media/hx/628e9b2f",
+  "country": "pl",
+  "source": "personal-work/public/media/v/felix/9626b70b28-1200.webp",
+  "kind": "living"
+ },
+ {
+  "base": "/media/hx/fd22ba55",
+  "country": "pl",
+  "source": "personal-work/public/media/v/felix/fe52719589-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/b7d30d96",
+  "country": "de",
+  "source": "personal-work/public/media/v/germany-prybyralnytsia/07fbce2f07-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/7183581a",
+  "country": "de",
+  "source": "personal-work/public/media/v/germany-prybyralnytsia/5b33af47c9-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/5d27948d",
+  "country": "de",
+  "source": "personal-work/public/media/v/germany-prybyralnytsia/e24bdd099a-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/6afe0d99",
+  "country": "de",
+  "source": "personal-work/public/media/v/germany-prybyralnytsia/fcc1d2f187-1200.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/980d9fca",
+  "country": "gr",
+  "source": "personal-work/public/media/v/greece-pokoivka/ea5c0ad694-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/e3ac8ced",
+  "country": "pl",
+  "source": "personal-work/public/media/v/inpost/7add114283-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/9a1579bd",
+  "country": "pl",
+  "source": "personal-work/public/media/v/inpost/d855f4c057-1200.webp",
+  "kind": "building"
+ },
+ {
+  "base": "/media/hx/1dd9c2fa",
+  "country": "pl",
+  "source": "personal-work/public/media/v/kuhar/171cc773cc-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/8c1399f2",
+  "country": "pl",
+  "source": "personal-work/public/media/v/kuhar/665df09023-1200.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/eda76fe7",
+  "country": "pl",
+  "source": "personal-work/public/media/v/lavazza/39ab620b53-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/7b3d6bd3",
+  "country": "pl",
+  "source": "personal-work/public/media/v/lipton/673d43a1aa-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/e24dcd19",
+  "country": "nl",
+  "source": "personal-work/public/media/v/netherlands-kuhar/571def9083-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/f1d10829",
+  "country": "nl",
+  "source": "personal-work/public/media/v/netherlands-kuhar/67e3119a0e-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/08b3d862",
+  "country": "nl",
+  "source": "personal-work/public/media/v/netherlands-kuhar/e2a90d5ae2-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/c7d40b7c",
+  "country": "nl",
+  "source": "personal-work/public/media/v/netherlands-lashmaker/7bb29f2dcc-1200.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/7b2ff1df",
+  "country": "nl",
+  "source": "personal-work/public/media/v/netherlands-plukon/635a3c0254-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/5ee30bae",
+  "country": "nl",
+  "source": "personal-work/public/media/v/netherlands-total-packaging/1a16b3b667-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/9d3edd78",
+  "country": "nl",
+  "source": "personal-work/public/media/v/netherlands-total-packaging/1a721bee6a-1200.webp",
+  "kind": "living"
+ },
+ {
+  "base": "/media/hx/4dbd0f25",
+  "country": "nl",
+  "source": "personal-work/public/media/v/netherlands-total-packaging/50f00ba752-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/66650abc",
+  "country": "nl",
+  "source": "personal-work/public/media/v/netherlands-total-packaging/7acf5f51cd-1200.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/a7ded160",
+  "country": "nl",
+  "source": "personal-work/public/media/v/netherlands-total-packaging/877a348091-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/a7a68620",
+  "country": "nl",
+  "source": "personal-work/public/media/v/netherlands-total-packaging/d573e51e12-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/e6ab8f15",
+  "country": "nl",
+  "source": "personal-work/public/media/v/netherlands-veldt/a5ea28ed60-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/8d2abe92",
+  "country": "nl",
+  "source": "personal-work/public/media/v/netherlands-veldt/cca5333dc0-1200.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/63ce914f",
+  "country": "pl",
+  "source": "personal-work/public/media/v/nutella/f04edd4785-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/4cf26d1d",
+  "country": "pl",
+  "source": "personal-work/public/media/v/philips/4e43436b0a-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/1433f357",
+  "country": "pl",
+  "source": "personal-work/public/media/v/pokoivka/ae7f1622ad-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/9e7b9764",
+  "country": "pl",
+  "source": "personal-work/public/media/v/poland-foreststyle/53dee37b8c-1200.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/41f99e37",
+  "country": "pl",
+  "source": "personal-work/public/media/v/poland-idlogistics/7497d4b510-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/bbdb3b94",
+  "country": "pl",
+  "source": "personal-work/public/media/v/poland-lg/5c9f0be5de-1200.webp",
+  "kind": "building"
+ },
+ {
+  "base": "/media/hx/04131da6",
+  "country": "pl",
+  "source": "personal-work/public/media/v/poland-mieszko/2991a7b7e8-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/54958489",
+  "country": "pl",
+  "source": "personal-work/public/media/v/poland-mieszko/b4fef663f4-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/acf653cc",
+  "country": "pl",
+  "source": "personal-work/public/media/v/poland-pcc/fd3c3d8b87-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/e80b1d55",
+  "country": "pl",
+  "source": "personal-work/public/media/v/poland-tenneco/08b3ff4814-1200.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/70d757c1",
+  "country": "pl",
+  "source": "personal-work/public/media/v/poland-tenneco/3f58cb4076-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/c4736ab6",
+  "country": "pl",
+  "source": "personal-work/public/media/v/poland-wendre-poland/a09246fd97-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/4a1bea5c",
+  "country": "pl",
+  "source": "personal-work/public/media/v/poland-wendre-poland/a31c19ba0b-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/c10aebd2",
+  "country": "pl",
+  "source": "personal-work/public/media/v/poland-wendre-poland/ab83eb6716-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/ba6285f3",
+  "country": "ro",
+  "source": "personal-work/public/media/v/romania-answear/37888baaba-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/94bcf2db",
+  "country": "ro",
+  "source": "personal-work/public/media/v/romania-answear/3d26530883-1200.webp",
+  "kind": "living"
+ },
+ {
+  "base": "/media/hx/45171b74",
+  "country": "ro",
+  "source": "personal-work/public/media/v/romania-answear/9e1751e757-1200.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/37ba9349",
+  "country": "sk",
+  "source": "personal-work/public/media/v/slovakia-penelope/2c10761b60-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/eb676451",
+  "country": "sk",
+  "source": "personal-work/public/media/v/slovakia-penelope/6288504d06-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/3f1d6998",
+  "country": "sk",
+  "source": "personal-work/public/media/v/slovakia-penelope/9c81e0ffe4-1200.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/bfa55f13",
+  "country": "sk",
+  "source": "personal-work/public/media/v/slovakia-penelope/b5ce372217-1200.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/580b3f5b",
+  "country": "sk",
+  "source": "personal-work/public/media/v/slovakia-vatsak/0909afe2dc-1200.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/548b8177",
+  "country": "sk",
+  "source": "personal-work/public/media/v/slovakia-vatsak/170dfe5201-1200.webp",
+  "kind": "bath"
+ },
+ {
+  "base": "/media/hx/ec4022f6",
+  "country": "sk",
+  "source": "personal-work/public/media/v/slovakia-vatsak/17697aaa32-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/52cb5c41",
+  "country": "sk",
+  "source": "personal-work/public/media/v/slovakia-vatsak/8ca296b1fd-1200.webp",
+  "kind": "kitchen"
+ },
+ {
+  "base": "/media/hx/d8911fe4",
+  "country": "pl",
+  "source": "personal-work/public/media/v/tpv/0f84461e57-1200.webp",
+  "kind": "building"
+ },
+ {
+  "base": "/media/hx/e075cbbe",
+  "country": "pl",
+  "source": "personal-work/public/media/v/tpv/726c7d199a-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/eeb3f10c",
+  "country": "pl",
+  "source": "personal-work/public/media/v/tpv/81e7289d89-1200.webp",
+  "kind": "room"
+ },
+ {
+  "base": "/media/hx/8e9aeb37",
+  "country": "pl",
+  "source": "personal-work/public/media/v/tpv/cd63db7bfc-1200.webp",
+  "kind": "kitchen"
+ }
+]

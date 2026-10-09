@@ -9,25 +9,51 @@ export const VACANCIES_TAG = 'vacancies'
 
 const SEED = seed as unknown as Vacancy[]
 
-async function readAll(): Promise<Vacancy[]> {
-  if (!hasDb) return SEED
+/**
+ * Open vacancies in PARTS cache entries: Next keeps no data-cache entry over 2 MB, and with the ~950 revived Tilda posts
+ * (2026-10) the open list is ~3,5 MB. part 0 = today's vacancies, 1…PARTS-1 = the revived posts split by id.
+ * The switched-off pages are read one by one (getVacancyByPath).
+ */
+const PARTS = 4
+async function readPart(part: number): Promise<Vacancy[] | null> {
+  if (!hasDb) return null
   try {
-    // only open vacancies are cached in one piece; the 1 200+ closed Tilda pages are read one by one (getVacancyByPath)
-    const rows = (await sql`select data from vacancies where active order by sort asc, updated_at desc`) as { data: Vacancy }[]
-    // a brand-new Netlify Database is empty until the first CI build seeds it — show the Tilda import meanwhile
-    return rows.length ? rows.map((r) => r.data) : SEED
+    const rows = (
+      part === 0
+        ? await sql`select data from vacancies where active and not (data ? 'revived') order by sort asc, updated_at desc`
+        : await sql`select data from vacancies where active and data ? 'revived' and mod(abs(hashtext(id)), ${PARTS - 1}::int) = ${part - 1}::int order by sort asc, updated_at desc`
+    ) as { data: Vacancy }[]
+    return rows.map((r) => r.data)
   } catch (e) {
     console.error('[vacancies] DB read failed, using seed', e)
-    return SEED
+    return null
   }
 }
 
-const cachedAll = unstable_cache(readAll, ['vacancies-open-v10'], { tags: [VACANCIES_TAG] })
+const cachedPart = unstable_cache(readPart, ['vacancies-open-v11'], { tags: [VACANCIES_TAG] })
+
+/** local development without a database: today's vacancies + the revived posts from data/vacancies.closed.json */
+let revivedLocal: Vacancy[] | null = null
+async function revivedFromFile(): Promise<Vacancy[]> {
+  if (!revivedLocal) {
+    try {
+      const { readFile } = await import('node:fs/promises')
+      revivedLocal = (JSON.parse(await readFile(process.cwd() + '/data/vacancies.closed.json', 'utf8')) as Vacancy[]).filter((v) => v.active)
+    } catch {
+      revivedLocal = []
+    }
+  }
+  return revivedLocal
+}
 
 /** Open vacancies, cached until an admin edit revalidates the tag. Loads the admin's countries too. */
 export async function getAllVacancies(): Promise<Vacancy[]> {
   await ensureCountries()
-  return cachedAll()
+  const parts = await Promise.all(Array.from({ length: PARTS }, (_, i) => cachedPart(i)))
+  // a brand-new Netlify Database is empty until the first CI build seeds it — show the Tilda import meanwhile
+  const byOrder = (xs: Vacancy[]) => xs.sort((a, b) => a.order - b.order)
+  if (parts.some((p) => p === null) || !parts[0]!.length) return [...SEED, ...byOrder([...(await revivedFromFile())])]
+  return [...parts[0]!, ...byOrder(parts.slice(1).flat() as Vacancy[])]
 }
 
 export async function getActiveVacancies(): Promise<Vacancy[]> {
@@ -96,7 +122,8 @@ export function toCard(v: Vacancy): VacancyCard {
     city: v.city,
     category: v.category,
     genders: v.genders,
-    salary: { ...v.salary, text: v.salary.text.slice(0, 60) },
+    // what a card shows (the Tilda source text and the rate history stay on the vacancy)
+    salary: { text: v.salary.text.slice(0, 60), hourMin: v.salary.hourMin, hourMax: v.salary.hourMax, monthMin: v.salary.monthMin, monthMax: v.salary.monthMax, currency: v.salary.currency, net: v.salary.net, unlabelled: v.salary.unlabelled },
     schedule: v.schedule.split(/[,;]/)[0].slice(0, 60),
     housingFree: v.housingFree,
     hot: v.hot,

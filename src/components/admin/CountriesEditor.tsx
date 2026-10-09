@@ -46,7 +46,7 @@ function CountryPreview({ form, lang, saved }: { form: CountryInput; lang: 'uk' 
           <p className="mt-2 text-[15px] leading-relaxed text-ink-2">{t.text || auto.text}</p>
           <div className="rule-grad mt-4" />
           <p className="mt-3 text-[13.5px] text-muted">
-            {lang === 'uk' ? 'Далі — вакансії країни. Без відкритих вакансій сторінка закрита від Google, а в меню й фільтрі країни немає.' : 'Дальше — вакансии страны.'}
+            {lang === 'uk' ? 'Далі — вакансії країни. Без вакансій «На сайті» сторінка закрита від Google, а в меню й фільтрі країни немає.' : 'Дальше — вакансии страны.'}
           </p>
         </div>
       </div>
@@ -124,7 +124,7 @@ export function CountriesEditor({ rows, initialName = '', hasDb = true }: { rows
       if (!r.ok) return setMsg({ ok: false, text: r.error ?? 'Не вдалося зберегти' })
       setMsg({
         ok: true,
-        text: `${editing ? 'Збережено' : `${form.name} додано`}. Країну вже можна вибрати у вакансії; у меню й фільтрі сайту вона з’явиться з першою відкритою вакансією.`,
+        text: `${editing ? 'Збережено' : `${form.name} додано`}. Країну вже можна вибрати у вакансії; у меню й фільтрі сайту вона з’явиться з першою вакансією «На сайті».`,
         path: `/vacancies/${form.slug}`,
       })
       reset()
@@ -245,7 +245,7 @@ export function CountriesEditor({ rows, initialName = '', hasDb = true }: { rows
                   {c.name} <span className="font-normal text-muted">· {c.nameRu}</span>
                 </span>
                 <span className="num block text-[12.5px] text-muted">
-                  {c.active} відкр.{c.hidden ? ` · ${c.hidden} закр.` : ''} {c.active ? '' : '· у фільтрі з’явиться з першою відкритою'}
+                  {c.active} на сайті{c.hidden ? ` · ${c.hidden} вимк.` : ''} {c.active ? '' : '· у фільтрі з’явиться з першою увімкненою'}
                 </span>
               </span>
               <a href={c.path} target="_blank" className="num py-2 text-[13px] text-brand-700 hover:underline">{c.path} ↗</a>

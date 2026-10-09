@@ -387,7 +387,7 @@ export async function saveCountry(input: CountryInput, origCode?: string): Promi
   if (others.some((c) => c.path === path) || RESERVED_SLUGS.has(slug) || getLanding(path)) return { ok: false, error: 'Ця адреса вже зайнята іншою сторінкою каталогу — змініть її.' }
   if (await adminPathTaken(path)) return { ok: false, error: 'За цією адресою вже є вакансія — змініть адресу країни.' }
   if (editing && editing.code !== code && (await vacanciesIn(editing.code)))
-    return { ok: false, error: 'Код не можна змінити: у цій країні вже є вакансії (разом із закритими).' }
+    return { ok: false, error: 'Код не можна змінити: у цій країні вже є вакансії (разом із вимкненими).' }
 
   const clip = (x?: string) => clean(x).slice(0, 400) || undefined
   const seo = (s?: { title?: string; description?: string; text?: string }) => {
@@ -409,7 +409,7 @@ export async function deleteCountry(code: string): Promise<{ ok: boolean; error?
   const extra = await getExtraCountries()
   if (!extra.some((c) => c.code === code)) return { ok: false, error: 'Вбудовану країну видалити не можна.' }
   const n = await vacanciesIn(code)
-  if (n) return { ok: false, error: `У цій країні ${n} вакансій (разом із закритими). Спершу перенесіть або видаліть їх.` }
+  if (n) return { ok: false, error: `У цій країні ${n} вакансій (разом із вимкненими). Спершу перенесіть або видаліть їх.` }
   await sql`update settings set data = ${JSON.stringify(extra.filter((c) => c.code !== code))}, updated_at = now() where key = 'countries'`
   updateTag(COUNTRIES_TAG)
   revalidatePath('/', 'layout')

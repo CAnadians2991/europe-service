@@ -10,7 +10,7 @@ import { LicenseBadge } from '@/components/trust/LicenseBadge'
 import { ANY_REQUEST, AnyRequest } from '@/components/lead/AnyRequest'
 import { LeadForm } from '@/components/lead/LeadForm'
 import { ChatButtons } from '@/components/lead/ChatButtons'
-import { HeaderVacancyAction, QuizButton } from '@/components/lead/LeadModal'
+import { HeaderVacancyAction } from '@/components/lead/LeadModal'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { YouTube } from '@/components/content/YouTube'
 import { Photo, src } from '@/components/ui/Photo'
@@ -42,10 +42,6 @@ const TX = {
     home: 'Головна', vac: 'Вакансії', work: 'Робота', no: 'Вакансія №',
     terms: 'Ключові умови', salary: 'Зарплата', net: 'на руки', gross: 'брутто',
     place: 'Місце роботи', schedule: 'Графік', contract: 'Договір', housing: 'Проживання', employer: 'Роботодавець', free: 'Житло безкоштовно',
-    closedShort: 'Набір закрито',
-    closed: 'Набір на цю вакансію зараз закрито. Оголошення збережене для довідки — оберіть схожу відкриту вакансію або пройдіть підбір, і менеджер запропонує актуальний аналог.',
-    closedText: 'Підберемо схожу актуальну вакансію за 1 хвилину.',
-    analog: 'Підібрати схожу вакансію', seeSimilar: 'Схожі відкриті вакансії',
     apply: 'Заявка на вакансію', book: 'Забронювати місце', bookText: 'Залиште номер — менеджер перевірить наявність місць і розповість деталі.',
     callback: 'Менеджер зателефонує й розповість деталі.',
     faster: 'Швидше — напишіть нам:', channels: 'Нові вакансії першими — у наших каналах:', orCall: 'Безкоштовно з усіх операторів',
@@ -68,10 +64,6 @@ const TX = {
     home: 'Главная', vac: 'Вакансии', work: 'Работа', no: 'Вакансия №',
     terms: 'Ключевые условия', salary: 'Зарплата', net: 'на руки', gross: 'брутто',
     place: 'Место работы', schedule: 'График', contract: 'Договор', housing: 'Проживание', employer: 'Работодатель', free: 'Жильё бесплатно',
-    closedShort: 'Набор закрыт',
-    closed: 'Набор на эту вакансию сейчас закрыт. Объявление сохранено для справки — выберите похожую открытую вакансию или пройдите подбор, и менеджер предложит актуальный аналог.',
-    closedText: 'Подберём похожую актуальную вакансию за 1 минуту.',
-    analog: 'Подобрать похожую вакансию', seeSimilar: 'Похожие открытые вакансии',
     apply: 'Заявка на вакансию', book: 'Забронировать место', bookText: 'Оставьте номер — менеджер проверит наличие мест и расскажет детали.',
     callback: 'Менеджер позвонит и расскажет детали.',
     faster: 'Быстрее — напишите нам:', channels: 'Новые вакансии первыми — в наших каналах:', orCall: 'Бесплатно со всех операторов',
@@ -176,7 +168,9 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
 
   // the agency's own Drive media for this vacancy: housing photos join the housing block, workplace photos the gallery
   const extra = vacancyMedia(v.path, lang)
-  const housing = [...new Set([...v.housingPhotos, ...extra.housing])]
+  // example photos from the shared pool give way to the real housing of this vacancy
+  const pooled = v.housingPool && extra.housing.length > 0
+  const housing = [...new Set([...(pooled ? [] : v.housingPhotos), ...extra.housing])]
   const photos = [...new Set([...v.photos, ...extra.work])]
   const housingAt = v.sections.findIndex((x) => isHousing(x.title))
   const housingFigure = housing.length > 0 && (
@@ -189,7 +183,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
           </a>
         ))}
       </div>
-      {v.housingNote && <figcaption className="mt-2.5 text-[15px] leading-snug text-muted">{v.housingNote}</figcaption>}
+      {v.housingNote && !pooled && <figcaption className="mt-2.5 text-[15px] leading-snug text-muted">{v.housingNote}</figcaption>}
     </figure>
   )
 
@@ -219,13 +213,12 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
     { label: t.employer, value: v.company && norm(v.company) !== norm(v.title) ? v.company : '' },
   ].filter((x) => x.value)
 
-  const ctaRow = (place: 'vacancy-top' | 'vacancy-bottom') =>
-    v.active && (
-      <div data-cta className="flex gap-2 lg:hidden">
-        <QuickApply id={v.id} title={v.title} lang={lang} form={form(place)} label={t.book} submitLabel={t.book} className="btn-accent min-w-0 flex-1 !px-4" />
-        <ChatButtons place={place} lang={lang} compact />
-      </div>
-    )
+  const ctaRow = (place: 'vacancy-top' | 'vacancy-bottom') => (
+    <div data-cta className="flex gap-2 lg:hidden">
+      <QuickApply id={v.id} title={v.title} lang={lang} form={form(place)} label={t.book} submitLabel={t.book} className="btn-accent min-w-0 flex-1 !px-4" />
+      <ChatButtons place={place} lang={lang} compact />
+    </div>
+  )
 
   const contacts = (place: string) => (
     <div>
@@ -243,7 +236,9 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
 
   return (
     <>
-      {v.active && <JsonLd data={jobPostingLd(v, lang)} />}
+      {/* every vacancy page takes applications (owner, 2026-10: «no switched-off vacancies — each one brings calls and requests»);
+          JobPosting only for today's vacancies — not for the switched-off ones nor the revived Tilda posts (Google Jobs) */}
+      {v.active && !v.revived && <JsonLd data={jobPostingLd(v, lang)} />}
 
       <article aria-labelledby="vacancy-h">
         {/* ───────── page head: crumbs, country code, H1, the key terms as a spec sheet ───────── */}
@@ -275,25 +270,6 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
               )}
             </div>
 
-            {/* closed: the Tilda page stays online with its full text — say so plainly and offer a live alternative */}
-            {!v.active && (
-              <div data-cta role="note" className="mt-6 border border-danger/35 bg-danger/[0.05] p-4 sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-5">
-                <div className="max-w-2xl">
-                  <p className="num inline-block bg-danger px-2 py-1 text-[13px] font-semibold uppercase tracking-[0.06em] text-white">{t.closedShort}</p>
-                  <p className="mt-2.5 text-[16px] leading-relaxed text-ink">{t.closed}</p>
-                </div>
-                <div className="mt-4 flex flex-col gap-2 min-[480px]:flex-row sm:mt-0 sm:shrink-0 sm:flex-col">
-                  <QuizButton id="closed-vacancy" preset={{ country: v.country }} className="btn-dark">
-                    {t.analog}
-                  </QuizButton>
-                  {similar.length > 0 && (
-                    <a href="#similar" className="btn-ghost">
-                      {t.seeSimilar} <span aria-hidden>↓</span>
-                    </a>
-                  )}
-                </div>
-              </div>
-            )}
 
             <p className="eyebrow mt-7">{t.terms}</p>
             <dl className="mt-3 grid border-t-[3px] border-ink sm:grid-cols-2 sm:gap-x-10 xl:grid-cols-3">
@@ -305,7 +281,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
               ))}
             </dl>
 
-            {v.active && <div className="mt-5">{ctaRow('vacancy-top')}</div>}
+            <div className="mt-5">{ctaRow('vacancy-top')}</div>
           </div>
           <div className="rule-grad" />
         </section>
@@ -316,19 +292,17 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
             <Gallery photos={photos} alt={v.title} priority lang={lang} />
 
             {/* phones: the form right after the photos */}
-            {v.active && (
-              <section id="apply-mobile" aria-labelledby="apply-mobile-h" className="mt-8 border border-line border-t-[3px] border-t-ink bg-white p-5 lg:hidden">
-                <p className="eyebrow">{t.apply}</p>
-                <h2 id="apply-mobile-h" className="mt-2 text-[22px] text-ink">{t.book}</h2>
-                <p className="mt-2 text-[16px] leading-relaxed text-ink-2">{t.bookText}</p>
-                <p className="mt-2 text-[15px] font-semibold text-brand-800">{ANY_REQUEST[lang].short}</p>
-                <div className="mt-4">
-                  <LeadForm form={form('vacancy')} vacancyId={v.id} vacancyTitle={v.title} submitLabel={t.book} lang={lang} />
-                </div>
-                <LicenseBadge className="mt-4" lang={lang} />
-                <div className="mt-5 border-t border-line pt-4">{contacts('vacancy-mobile')}</div>
-              </section>
-            )}
+            <section id="apply-mobile" aria-labelledby="apply-mobile-h" className="mt-8 border border-line border-t-[3px] border-t-ink bg-white p-5 lg:hidden">
+              <p className="eyebrow">{t.apply}</p>
+              <h2 id="apply-mobile-h" className="mt-2 text-[22px] text-ink">{t.book}</h2>
+              <p className="mt-2 text-[16px] leading-relaxed text-ink-2">{t.bookText}</p>
+              <p className="mt-2 text-[15px] font-semibold text-brand-800">{ANY_REQUEST[lang].short}</p>
+              <div className="mt-4">
+                <LeadForm form={form('vacancy')} vacancyId={v.id} vacancyTitle={v.title} submitLabel={t.book} lang={lang} />
+              </div>
+              <LicenseBadge className="mt-4" lang={lang} />
+              <div className="mt-5 border-t border-line pt-4">{contacts('vacancy-mobile')}</div>
+            </section>
 
             {(v.intro && !isCrumbTrail(v.intro)) || (v.headline && norm(v.headline) !== norm(v.title)) ? (
               <div className="mt-10 max-w-3xl">
@@ -424,16 +398,16 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
             </section>
 
             {/* after reading everything — book right here instead of scrolling back up (phones; desktop has the sticky panel) */}
-            {v.active && <div className="mt-6">{ctaRow('vacancy-bottom')}</div>}
+            <div className="mt-6">{ctaRow('vacancy-bottom')}</div>
           </div>
 
           {/* ───────── sticky application panel (desktop) ───────── */}
-          <aside className="hidden lg:block" aria-label={v.active ? t.apply : t.closedShort}>
+          <aside className="hidden lg:block" aria-label={t.apply}>
             <div className="sticky top-[96px] space-y-3">
               <div className="border border-line bg-white shadow-[var(--shadow-lift)]">
                 <div className="border-b border-line px-6 pb-5 pt-5">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="eyebrow">{v.active ? t.apply : t.closedShort}</p>
+                    <p className="eyebrow">{t.apply}</p>
                     <span className="num bg-ink px-1.5 py-0.5 text-[12px] font-semibold uppercase text-white" title={cName}>
                       {v.country}
                     </span>
@@ -443,30 +417,13 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
                   {month && hour && <p className="num mt-0.5 text-[15px] font-medium text-brand-700">{hour}</p>}
                 </div>
                 <div className="px-6 py-5">
-                  {v.active ? (
-                    <>
-                      <h2 id="apply" className="text-[20px] text-ink">{t.book}</h2>
-                      <p className="mt-1.5 text-[15px] text-ink-2">{t.callback}</p>
-                      <p className="mt-2 text-[15px] font-semibold leading-snug text-brand-800">{ANY_REQUEST[lang].short}</p>
-                      <div className="mt-4">
-                        <LeadForm form={form('vacancy')} vacancyId={v.id} vacancyTitle={v.title} submitLabel={t.book} compact lang={lang} />
-                      </div>
-                      <LicenseBadge className="mt-4" lang={lang} />
-                    </>
-                  ) : (
-                    <>
-                      <h2 className="text-[20px] text-ink">{t.closedShort}</h2>
-                      <p className="mt-1.5 text-[15px] text-ink-2">{t.closedText}</p>
-                      <QuizButton id="closed-vacancy-side" preset={{ country: v.country }} className="btn-accent mt-4 w-full">
-                        {t.analog}
-                      </QuizButton>
-                      {similar.length > 0 && (
-                        <a href="#similar" className="btn-ghost mt-2 w-full">
-                          {t.seeSimilar} <span aria-hidden>↓</span>
-                        </a>
-                      )}
-                    </>
-                  )}
+                  <h2 id="apply" className="text-[20px] text-ink">{t.book}</h2>
+                  <p className="mt-1.5 text-[15px] text-ink-2">{t.callback}</p>
+                  <p className="mt-2 text-[15px] font-semibold leading-snug text-brand-800">{ANY_REQUEST[lang].short}</p>
+                  <div className="mt-4">
+                    <LeadForm form={form('vacancy')} vacancyId={v.id} vacancyTitle={v.title} submitLabel={t.book} compact lang={lang} />
+                  </div>
+                  <LicenseBadge className="mt-4" lang={lang} />
                 </div>
                 <div className="border-t border-line px-6 py-5">{contacts('vacancy-sidebar')}</div>
               </div>
@@ -480,7 +437,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
         <section id="similar" className="border-t border-line bg-surface py-14 sm:py-16" aria-labelledby="sim-h">
           <div className="container-x">
             <div className="flex flex-wrap items-end justify-between gap-6">
-              <SectionHead id="sim-h" eyebrow={t.alsoLabel} title={v.active ? t.also : t.seeSimilar} />
+              <SectionHead id="sim-h" eyebrow={t.alsoLabel} title={t.also} />
               <Link href={cPath} className="btn-ghost">
                 {c ? `${t.all} ${uk ? c.inName : c.inNameRu}` : t.all} <IconArrow className="size-4" />
               </Link>
@@ -494,7 +451,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
         </section>
       )}
 
-      {v.active && <HeaderVacancyAction vacancyId={v.id} vacancyTitle={v.title} />}
+      <HeaderVacancyAction vacancyId={v.id} vacancyTitle={v.title} />
     </>
   )
 }

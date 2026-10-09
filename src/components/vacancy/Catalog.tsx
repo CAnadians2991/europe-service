@@ -24,6 +24,9 @@ export interface Filters {
   sort: 'rec' | 'salary' | 'new'
 }
 
+/** cards drawn at once — with the revived Tilda posts (2026-10) a country has up to ~1 000 vacancies */
+const PAGE = 40
+
 const EMPTY: Filters = { q: '', country: '', gender: '', category: '', city: '', housingFree: false, sort: 'rec' }
 
 function fromQuery(sp: URLSearchParams, base: Filters): Filters {
@@ -223,6 +226,11 @@ export function Catalog({
     </div>
   )
 
+  // «Показати ще» — back to the first page whenever the filters change
+  const sig = JSON.stringify(f)
+  const [more, setMore] = useState({ sig, n: PAGE })
+  const limit = more.sig === sig ? more.n : PAGE
+
   const quizPreset: Record<string, string> = {}
   if (f.country) quizPreset.country = f.country
   if (f.category && f.category !== 'other') quizPreset.work = f.category
@@ -244,7 +252,7 @@ export function Catalog({
   )
 
   // no content-visibility here: placeholder heights made the list jump while scrolling on phones
-  const items: React.ReactNode[] = list.map((v, i) => <VacancyCard key={v.id} v={v} priority={i === 0} lang={lang} />)
+  const items: React.ReactNode[] = list.slice(0, limit).map((v, i) => <VacancyCard key={v.id} v={v} priority={i === 0} lang={lang} />)
   // «not sure you'd fit?» — early on phones (after the 2nd card) and again further down
   if (items.length > 15) items.splice(15, 0, leadCard('lead-2'))
   if (items.length > 4) items.splice(4, 0, leadCard('lead'))
@@ -312,7 +320,19 @@ export function Catalog({
 
       <h2 className="sr-only">{uk ? 'Список вакансій' : 'Список вакансий'}</h2>
       {list.length ? (
-        <div className="mt-4 overflow-hidden rounded-[18px] border-x border-t border-line">{items}</div>
+        <>
+          <div className="mt-4 overflow-hidden rounded-[18px] border-x border-t border-line">{items}</div>
+          {list.length > limit && (
+            <div className="mt-5 flex flex-col items-center gap-2">
+              <button type="button" className="btn-ghost w-full sm:w-auto" onClick={() => setMore({ sig, n: limit + PAGE })}>
+                {uk ? 'Показати ще' : 'Показать ещё'} {Math.min(PAGE, list.length - limit)}
+              </button>
+              <p className="num text-[13px] text-muted">
+                {uk ? 'показано' : 'показано'} {limit} {uk ? 'з' : 'из'} {list.length}
+              </p>
+            </div>
+          )}
+        </>
       ) : (
         <div className="mt-6 grid gap-6 border border-line bg-white p-6 sm:p-8 lg:grid-cols-2">
           <div>

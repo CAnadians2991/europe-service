@@ -36,6 +36,8 @@ export interface Salary {
   /** the pay text as imported from Tilda, before the +19 % update of 2026-10 (salary.uplift = 1.19) */
   source?: string
   uplift?: number
+  /** an old Tilda post's figures × factor = today's level (scripts/import/modernize_closed.mjs) */
+  modern?: { year: number; factor: number; at: string }
 }
 
 /** Russian version of the text fields (shown on /ru/... pages); anything missing falls back to Ukrainian */
@@ -98,6 +100,10 @@ export interface Vacancy {
   tildaUid?: string
   /** language of the texts — old Russian Tilda posts are 'ru' (they live at /tpost/… too) */
   lang?: 'uk' | 'ru'
+  /** an old Tilda post brought up to date and put back in the catalog (scripts/import/modernize_closed.mjs): no JobPosting */
+  revived?: string
+  /** housingPhotos are examples from the shared pool (scripts/media/assign_housing_pool.mjs), not this vacancy's housing */
+  housingPool?: boolean
   createdAt: string
   updatedAt: string
 }

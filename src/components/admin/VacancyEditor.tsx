@@ -30,7 +30,7 @@ const num = (x: unknown) => {
 const salaryNums = (s: Salary): Salary => ({ ...s, hourMin: num(s.hourMin), hourMax: num(s.hourMax) ?? num(s.hourMin), monthMin: num(s.monthMin), monthMax: num(s.monthMax) ?? num(s.monthMin) })
 
 const savedText = (active: boolean) =>
-  active ? 'Збережено. Зміни вже на сайті.' : 'Збережено. Вакансія закрита — у каталозі її не видно, доки не ввімкнете «На сайті».'
+  active ? 'Збережено. Зміни вже на сайті.' : 'Збережено. Вакансія вимкнена — у каталозі її не видно, доки не ввімкнете «На сайті». Її сторінка за посиланням працює й приймає заявки.'
 
 type History = { id: number; action: string; created_at: string; version_at: string | null }[]
 
@@ -181,7 +181,7 @@ export function VacancyEditor({
           <span className="flex-1 sm:hidden" />
           <div className="flex items-center">
             <Switch on={v.active} label="Показувати на сайті" onChange={(on) => set('active', on)} />
-            <span className={`ml-1.5 text-[14px] font-medium ${v.active ? 'text-brand-700' : 'text-muted'}`}>{v.active ? 'На сайті' : 'Закрита'}</span>
+            <span className={`ml-1.5 text-[14px] font-medium ${v.active ? 'text-brand-700' : 'text-muted'}`}>{v.active ? 'На сайті' : 'Вимкнена'}</span>
           </div>
           {!isNew && (
             <>
@@ -190,7 +190,7 @@ export function VacancyEditor({
                 href={savedPath}
                 target="_blank"
                 className="btn-ghost !min-h-11 !px-3.5 !text-[14px]"
-                title={initial.active ? undefined : 'Закрита вакансія відкривається з позначкою «Набір закрито», без форми заявки. Так можна перевірити фото й текст перед публікацією.'}
+                title={initial.active ? undefined : 'Вимкнена вакансія не показується в каталозі, але її сторінка працює як звичайна — з формою заявки.'}
               >
                 {initial.active ? 'Відкрити ↗' : 'Переглянути ↗'}
               </a>
@@ -228,14 +228,14 @@ export function VacancyEditor({
         ) : (
           <div className="min-w-0 space-y-5">
             {isNew ? (
-              <Panel n="00" title="Текст вакансії" hint="Вставте текст з Tilda, Telegram чи Viber і натисніть «Розпізнати» — форма нижче заповниться сама.">
+              <Panel n="00" title="Текст вакансії" hint="Вставте весь текст вакансії як є (з Telegram, Viber, Word) і натисніть «Розпізнати» — сайт сам розкладе його на блоки й заповнить форму нижче.">
                 <ParseBox onParsed={onParsed} />
               </Panel>
             ) : (
               <details className="card group">
                 <summary className="cursor-pointer list-none px-4 py-3 sm:px-5 [&::-webkit-details-marker]:hidden">
-                  <span className="eyebrow">00 — Оновити з тексту</span>
-                  <span className="ml-2 text-[14px] text-muted group-open:hidden">вставити новий текст вакансії — поля перезапишуться</span>
+                  <span className="eyebrow">00 — Вставити опис текстом</span>
+                  <span className="ml-2 text-[14px] text-muted group-open:hidden">вставте текст як є — сайт сам розкладе його на блоки (зарплата, графік, обовʼязки, житло…)</span>
                 </summary>
                 <div className="border-t border-line p-4 sm:p-5">
                   <Notice tone="warn" className="mb-3">Розпізнаний текст замінить назву, зарплату, умови й розділи. Фото, відгуки, адреса сторінки та показ на сайті не зміняться.</Notice>
@@ -451,7 +451,7 @@ export function VacancyEditor({
           <div className="card px-4 py-3 text-[14px] text-ink-2">
             <p className="font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-muted">Підказки</p>
             <ul className="mt-2 space-y-1.5">
-              <li>Набір тимчасово закрито — вимкніть «На сайті», а не видаляйте.</li>
+              <li>Набір на паузі — вимкніть «На сайті», а не видаляйте: сторінка й далі прийматиме заявки.</li>
               <li>Після «Зберегти» зміни на сайті за кілька секунд.</li>
               <li>Фото можна завантажувати прямо з телефону.</li>
               <li className="hidden lg:list-item">Ctrl/⌘ + Enter у полі тексту — «Розпізнати».</li>
