@@ -319,7 +319,8 @@ export function Catalog({
         </div>
       </div>
 
-      <h2 className="sr-only">{uk ? 'Список вакансій' : 'Список вакансий'}</h2>
+      {/* Tilda's heading over the list (/italy, /greece …) */}
+      <h2 className="sr-only">{uk ? 'Актуальні вакансії' : 'Актуальные вакансии'}</h2>
       {list.length ? (
         <>
           <div className="mt-4 overflow-hidden rounded-[18px] border-x border-t border-line">{items}</div>

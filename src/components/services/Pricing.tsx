@@ -102,9 +102,9 @@ export function PackagesBlock({ lang }: { lang: Lang }) {
           </span>
         </p>
         <p className="mt-3 text-[13px] text-muted">
-          {uk ? 'Натискаючи «Обрати», ви переходите до кошика; оплата — за умовами ' : 'Нажимая «Выбрать», вы переходите в корзину; оплата — на условиях '}
+          {uk ? 'Натискаючи «Обрати», ви переходите до кошика. * Натискаючи кнопку «Оплатити» Ви погоджуєтеся з умовами ' : 'Нажимая «Выбрать», вы переходите в корзину. * Нажимая кнопку «Оплатить» Вы соглашаетесь с условиями '}
           <Link href={uk ? '/oferta' : '/ru/oferta'} className="font-semibold text-brand-700 underline underline-offset-2">
-            {uk ? 'публічної оферти' : 'публичной оферты'}
+            {uk ? 'Публічної оферти' : 'Публичной оферты'}
           </Link>
           .
         </p>
@@ -170,10 +170,11 @@ export function ExtrasBlock({ lang }: { lang: Lang }) {
   const row = 'grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1.5 border-b border-line px-4 py-3 last:border-b-0 sm:flex [&>div:first-child]:col-span-2 sm:[&>div:first-child]:flex-1'
   return (
     <section className="container-x py-12" aria-labelledby="extras-h">
+      {/* Tilda's heading of this group («Послуги Europe Service») */}
       <h2 id="extras-h" className="text-[24px] sm:text-[32px]">
-        {uk ? 'Додатково до будь-якого пакета' : 'Дополнительно к любому пакету'}
+        {uk ? 'Послуги Europe Service' : 'Услуги Europe Service'}
       </h2>
-      <p className="mt-1.5 text-[15px] text-ink-2">{uk ? 'Можна додати в кошик разом із пакетом або окремо.' : 'Можно добавить в корзину вместе с пакетом или отдельно.'}</p>
+      <p className="mt-1.5 text-[15px] text-ink-2">{uk ? 'Додатково до будь-якого пакета: можна додати в кошик разом із пакетом або окремо.' : 'Дополнительно к любому пакету: можно добавить в корзину вместе с пакетом или отдельно.'}</p>
       <ul className="mt-5 overflow-hidden rounded-2xl border border-line bg-white">
         {sim && (
           <li className={row}>
@@ -226,7 +227,9 @@ export function ExtrasBlock({ lang }: { lang: Lang }) {
         </Link>
         {abroad.length > 0 && (
           <div className="rounded-2xl border border-line bg-white">
-            <p className="px-4 pt-4 text-[12px] font-semibold uppercase tracking-[0.06em] text-brand-700">{uk ? 'Переоформлення документів' : 'Переоформление документов'}</p>
+            <h3 className="px-4 pt-4 font-sans text-[13px] font-semibold uppercase leading-snug tracking-[0.06em] text-brand-700">
+              {uk ? 'Послуги інші країни Європи: Німеччина, Нідерланди, Греція' : 'Услуги другие страны Европы: Германия, Нидерланды, Греция'}
+            </h3>
             <ul>
               {abroad.map((p) => (
                 <li key={p.title} className={row}>

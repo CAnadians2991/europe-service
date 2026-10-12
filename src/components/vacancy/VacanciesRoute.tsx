@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { permanentRedirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import { getActiveVacancies, getVacancyByPath, similar, toCard } from '@/lib/vacancies'
@@ -150,7 +151,12 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
         preset={{ country: c.code }}
         links={landingLinks.length ? [{ title: uk ? 'Популярні вакансії' : 'Популярные вакансии', items: landingLinks.map((l) => ({ href: l.href, label: l.label })) }] : undefined}
         faq={landing?.faq}
-        extra={<CitySections code={c.code} lang={lang} active={active} />}
+        extra={
+          <>
+            {c.code === 'pl' && <OtherCountries lang={lang} active={active} />}
+            <CitySections code={c.code} lang={lang} active={active} />
+          </>
+        }
         seoText={
           landing?.blocks?.length ? (
             <SeoText landing={landing} />
@@ -170,6 +176,33 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
   }
 
   return <LandingCatalog lang={lang} landing={r.landing} path={r.path} active={active} />
+}
+
+/** /vacancies and /ru/vacancies (Poland): Tilda's «Шукаєте вакансії в інших країнах?» block — the other countries and the urgent arrivals */
+function OtherCountries({ lang, active }: { lang: Lang; active: Vacancy[] }) {
+  const uk = lang === 'uk'
+  const list = COUNTRIES.filter((x) => x.code !== 'pl').map((x) => ({ x, n: active.filter((v) => v.country === x.code).length })).filter((r) => r.n > 0)
+  return (
+    <section className="container-x pb-10" aria-labelledby="other-countries-h">
+      <div className="border-t border-line pt-6">
+        <h2 id="other-countries-h" className="text-[22px] sm:text-[28px]">{uk ? 'Шукаєте вакансії в інших країнах?' : 'Ищете вакансии в других странах?'}</h2>
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {list.map(({ x, n }) => (
+            <li key={x.code}>
+              <Link href={uk ? x.path : (ruTwin(x.path) ?? '/ru' + x.path)} className="chip">
+                {uk ? x.name : x.nameRu} <span className="num text-[12px] opacity-70">{n}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <h3 className="mt-5 text-[17px] sm:text-[19px]">
+          <Link href={uk ? '/vacancies/aktualni_vakansii' : '/ru/vacancies/aktualni_vakansii'} className="text-brand-700 underline decoration-brand-300 underline-offset-[4px] hover:decoration-brand-700">
+            {uk ? 'Перейдіть до термінових заїздів, щоб побачити всі актуальні вакансії!' : 'Перейдите к срочным заездам, чтобы увидеть все актуальные вакансии!'}
+          </Link>
+        </h3>
+      </div>
+    </section>
+  )
 }
 
 /** A Tilda SEO landing (city / job type / profession … or an ad page like /greece): its list + its text */
