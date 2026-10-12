@@ -17,7 +17,7 @@ export const PARTNER_PHOTO = '/media/team/team-awards'
  */
 export async function PartnersPage({ lang, photo = PARTNER_PHOTO }: { lang: PartnerLang; photo?: string }) {
   const t = PARTNER[lang]
-  const all = await getActiveVacancies()
+  const all = await getActiveVacancies(lang === 'ru' ? 'ru' : 'uk')
   const countries = COUNTRIES.map((c) => ({ ...c, n: all.filter((v) => v.country === c.code).length })).filter((c) => c.n)
   const cname = (c: (typeof countries)[number]) => (lang === 'uk' ? c.name : lang === 'ru' ? c.nameRu : (COUNTRY_NAMES[c.code]?.[lang] ?? c.name))
   const home = lang === 'ru' ? '/ru' : '/'

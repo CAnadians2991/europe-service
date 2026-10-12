@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ARTICLES, LEGAL, PAGES, getArticle, getLegal, hubPosts, isObsolete, pageByPath, type ContentPage } from '@/lib/content'
+import { ARTICLES, LEGAL, PAGES, getArticle, getLegal, hubPosts, isObsolete, pageByPath, type Article, type ContentPage } from '@/lib/content'
 import { LANDINGS, getLanding } from '@/lib/landing'
 import { QUIZZES, getQuiz } from '@/lib/quizzes'
 import { pageMeta } from '@/lib/seo'
@@ -21,6 +21,21 @@ type Lang = 'uk' | 'ru'
 
 /** Pages with their own route file — the catch-all never renders them */
 const OWN_ROUTES = new Set(['/', '/vacancies', '/about', '/contacts', '/poslugi', '/vidguki', '/news', '/pidbir', '/cooperation', '/ru', '/ru/about', '/ru/contacts', '/ru/services', '/ru/otzyvy', '/ru/news', '/ru/podbor'])
+
+/** Russian news hubs (/ru/news/chekhia …) are new pages without a description of their own — a real one, not the title */
+const HUB_RU: Record<string, string> = {
+  chekhia: 'в Чехии',
+  england: 'в Англии',
+  germany: 'в Германии',
+  greece: 'в Греции',
+  netherlands: 'в Нидерландах',
+  romania: 'в Румынии',
+}
+function hubDescription(a: Article): string | null {
+  const m = a.listing && !a.seoDescription && a.path.match(/^\/ru\/news\/([\w-]+)$/)
+  const where = m && HUB_RU[m[1]]
+  return where ? `Новости для украинцев ${where}: работа и зарплаты, документы и правила въезда, жильё и жизнь в стране. Подборка статей Europe Service.` : null
+}
 
 const inLang = (p: string, lang: Lang) => (lang === 'ru' ? p.startsWith('/ru/') : !p.startsWith('/ru/') && p !== '/ru')
 
@@ -84,7 +99,7 @@ export async function contentMetadata(path: string): Promise<Metadata> {
     const a = r.a
     return pageMeta({
       title: a.seoTitle || a.title,
-      description: articleSummary(a),
+      description: hubDescription(a) ?? articleSummary(a),
       path: a.path,
       lang: a.lang,
       image: a.cover || (a.ogImage?.startsWith('/') ? a.ogImage : undefined) || undefined,
@@ -114,7 +129,7 @@ export async function ContentView({ path, lang }: { path: string; lang: Lang }) 
   const home = { name: lang === 'uk' ? 'Головна' : 'Главная', path: lang === 'uk' ? '/' : '/ru' }
   if (r.kind === 'article') return <ArticlePage a={r.a} posts={hubPosts(r.a)} />
   if (r.kind === 'landing' && r.l.kind === 'info' && r.l.country === 'all') return <InfoLanding l={r.l} path={path} />
-  if (r.kind === 'landing') return <LandingCatalog lang={r.l.lang} landing={r.l} path={path} active={await getActiveVacancies()} />
+  if (r.kind === 'landing') return <LandingCatalog lang={r.l.lang} landing={r.l} path={path} active={await getActiveVacancies(r.l.lang)} />
   if (r.kind === 'quiz') return <QuizLandingView q={r.q} lang={lang} />
   if (r.kind === 'legal') {
     return (

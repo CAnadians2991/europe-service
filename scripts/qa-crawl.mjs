@@ -8,7 +8,7 @@ import path from 'node:path'
 const BASE = (process.argv[2] || 'http://localhost:3600').replace(/\/+$/, '')
 const SITE = 'https://europeservice.com.ua'
 const PUBLIC = path.resolve(import.meta.dirname, '../public')
-const CONC = 8
+const CONC = Number(process.env.CONC || 8)
 
 const strip = (h) => h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<noscript[\s\S]*?<\/noscript>/g, ' ')
 const text = (h) =>

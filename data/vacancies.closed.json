@@ -2875,9 +2875,9 @@
  {
   "id": "szos8g5431",
   "path": "/tpost/szos8g5431-operator-sborki-far-varroc",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 2177,
+  "order": 1949,
   "country": "cz",
   "title": "Оператор сборки фар Varroc",
   "company": "Varroc",
@@ -2983,14 +2983,15 @@
   "lang": "ru",
   "createdAt": "2022-02-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "r1bs2mosl1",
   "path": "/tpost/r1bs2mosl1-rabochii-na-avtomobilnii-zavod-jifeng",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 2178,
+  "order": 1950,
   "country": "cz",
   "title": "Рабочий на автомобильний завод Jifeng",
   "company": "Jifeng",
@@ -3092,14 +3093,15 @@
   "lang": "ru",
   "createdAt": "2022-02-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "02ea1ch5z1",
   "path": "/tpost/02ea1ch5z1-rabochii-na-proizvodstve-witzenmann",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 2179,
+  "order": 2136,
   "country": "cz",
   "title": "Рабочий на производстве Witzenmann",
   "company": "Witzenmann",
@@ -3205,14 +3207,15 @@
   "lang": "ru",
   "createdAt": "2021-09-11T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "rkylns3s31",
   "path": "/tpost/rkylns3s31-shlifovschik-po-metallu",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 180,
+  "order": 2137,
   "country": "pl",
   "title": "Шлифовщик по металлу",
   "company": "",
@@ -3265,14 +3268,15 @@
   "lang": "ru",
   "createdAt": "2021-05-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ugth8fvoc1",
   "path": "/tpost/ugth8fvoc1-rabota-na-shahte-v-polshe",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 181,
+  "order": 2138,
   "country": "pl",
   "title": "Работа на шахте в Польше",
   "company": "",
@@ -3369,14 +3373,15 @@
   "lang": "ru",
   "createdAt": "2021-05-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "cbe19mpan1",
   "path": "/tpost/cbe19mpan1-rabota-master-otdelochnih-rabot-v-polshe",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 182,
+  "order": 2139,
   "country": "pl",
   "title": "Работа мастер отделочных работ в Польше",
   "company": "",
@@ -3438,14 +3443,15 @@
   "lang": "ru",
   "createdAt": "2021-05-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "i7rluripj1",
   "path": "/tpost/i7rluripj1-rabota-kassirom-v-polshe",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 183,
+  "order": 2140,
   "country": "pl",
   "title": "Работа кассиром в Польше",
   "company": "",
@@ -3512,14 +3518,15 @@
   "lang": "ru",
   "createdAt": "2021-05-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "l4x6xipi01",
   "path": "/tpost/l4x6xipi01-legalnaya-rabota-v-lodzi-dlya-ukraintsev",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 184,
+  "order": 2141,
   "country": "pl",
   "title": "Легальная работа в Лодзи для украинцев",
   "company": "",
@@ -3572,14 +3579,15 @@
   "lang": "ru",
   "createdAt": "2021-02-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "o9yca9j201",
   "path": "/tpost/o9yca9j201-legalnaya-rabota-v-gdine-dlya-ukrain",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 185,
+  "order": 2142,
   "country": "pl",
   "title": "Легальная работа в Гдыне для украинцев",
   "company": "",
@@ -3632,14 +3640,15 @@
   "lang": "ru",
   "createdAt": "2021-02-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "xf2df341e1",
   "path": "/tpost/xf2df341e1-legalnaya-rabota-v-vlotslavek-dlya-ukrai",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 186,
+  "order": 2143,
   "country": "pl",
   "title": "Легальная работа в Влоцлавек для украинцев",
   "company": "",
@@ -3692,14 +3701,15 @@
   "lang": "ru",
   "createdAt": "2021-02-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "oizrrs1if1",
   "path": "/tpost/oizrrs1if1-legalnaya-rabota-v-valbzhih-dlya-ukraint",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 187,
+  "order": 2144,
   "country": "pl",
   "title": "Легальная работа в Валбжих для украинцев",
   "company": "",
@@ -3752,14 +3762,15 @@
   "lang": "ru",
   "createdAt": "2021-02-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "1ty8ae1it1",
   "path": "/tpost/1ty8ae1it1-legalnaya-rabota-v-bidgosch-dlya-ukraint",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 188,
+  "order": 2145,
   "country": "pl",
   "title": "Легальная работа в Быдгощ для украинцев",
   "company": "",
@@ -3812,14 +3823,15 @@
   "lang": "ru",
   "createdAt": "2021-02-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "rgi3asfiv1",
   "path": "/tpost/rgi3asfiv1-legalnaya-rabota-v-belskobyala-dlya-ukra",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 189,
+  "order": 2146,
   "country": "pl",
   "title": "Легальная работа в БельскоБяла для украинцев",
   "company": "",
@@ -3872,14 +3884,15 @@
   "lang": "ru",
   "createdAt": "2021-02-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "teslb28a51",
   "path": "/tpost/teslb28a51-legalnaya-rabota-v-belostok-dlya-ukraint",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 190,
+  "order": 2147,
   "country": "pl",
   "title": "Легальная работа в Белосток для украинцев",
   "company": "",
@@ -3932,7 +3945,8 @@
   "lang": "ru",
   "createdAt": "2021-02-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ttr74c9g51",
@@ -17052,9 +17066,9 @@
  {
   "id": "ozb33xaen1",
   "path": "/tpost/ozb33xaen1-logisticheskii-sklad-avtozapchastei-jamp",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 314,
+  "order": 1951,
   "country": "pl",
   "title": "Логистический склад автозапчастей J&M Logistics",
   "company": "J&M Logistics",
@@ -17185,14 +17199,15 @@
   "lang": "ru",
   "createdAt": "2022-02-15T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "rj0ya3ihc1",
   "path": "/tpost/rj0ya3ihc1-rabotnik-proizvodstva-someo",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 315,
+  "order": 1952,
   "country": "pl",
   "title": "Работник производства SOMEO",
   "company": "SOMEO",
@@ -17299,14 +17314,15 @@
   "lang": "ru",
   "createdAt": "2022-01-31T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "rnn1guito1",
   "path": "/tpost/rnn1guito1-rabotnik-kontrolya-kachestva-produktsii",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 316,
+  "order": 1953,
   "country": "pl",
   "title": "Работник контроля качества продукции AKTRION",
   "company": "AKTRION",
@@ -17415,14 +17431,15 @@
   "lang": "ru",
   "createdAt": "2022-01-31T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "3209cjl7g1",
   "path": "/tpost/3209cjl7g1-rabotnik-teplitsi-agroenergia",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 317,
+  "order": 1954,
   "country": "pl",
   "title": "Работник теплицы AGROENERGIA",
   "company": "AGROENERGIA",
@@ -17525,14 +17542,15 @@
   "lang": "ru",
   "createdAt": "2022-01-31T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "7bhfdti7d1",
   "path": "/tpost/7bhfdti7d1-rabotnik-kuhni-kfc",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 318,
+  "order": 1955,
   "country": "pl",
   "title": "Работник кухни KFC",
   "company": "KFC",
@@ -17645,7 +17663,8 @@
   "lang": "ru",
   "createdAt": "2022-01-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "210rds4k61",
@@ -17773,9 +17792,9 @@
  {
   "id": "3f63gfhgt1",
   "path": "/tpost/3f63gfhgt1-rabotnik-na-proizvodstvo-polotna-safilin",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 320,
+  "order": 1956,
   "country": "pl",
   "title": "Работник на производство полотна Safilin",
   "company": "Safilin",
@@ -17884,14 +17903,15 @@
   "lang": "ru",
   "createdAt": "2022-01-25T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "610yo76ap1",
   "path": "/tpost/610yo76ap1-rabotnik-na-proizvodstvo-jelenia-plast",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 321,
+  "order": 1957,
   "country": "pl",
   "title": "Работник на производство Jelenia Plast",
   "company": "Jelenia Plast",
@@ -17999,14 +18019,15 @@
   "lang": "ru",
   "createdAt": "2022-01-06T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "p9fbj9l701",
   "path": "/tpost/p9fbj9l701-rabotnik-proizvodstva-green-factory",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 322,
+  "order": 1958,
   "country": "pl",
   "title": "Работник производства Green Factory",
   "company": "Green Factory",
@@ -18129,14 +18150,15 @@
   "lang": "ru",
   "createdAt": "2022-01-06T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "8us2n0oid1",
   "path": "/tpost/8us2n0oid1-rabotnik-v-pekarnyu-la-lorraine",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 323,
+  "order": 1959,
   "country": "pl",
   "title": "Работник в пекарню La Lorraine",
   "company": "La Lorraine",
@@ -18247,14 +18269,15 @@
   "lang": "ru",
   "createdAt": "2022-01-04T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "b0bdz7dg81",
   "path": "/tpost/b0bdz7dg81-rabotnik-na-predpriyatie-att",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 324,
+  "order": 1960,
   "country": "pl",
   "title": "Работник на предприятие ATT",
   "company": "ATT",
@@ -18358,14 +18381,15 @@
   "lang": "ru",
   "createdAt": "2021-12-28T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "gxe0xur891",
   "path": "/tpost/gxe0xur891-rabota-na-proizvodstve-zamorozhennih-ovo",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 325,
+  "order": 1961,
   "country": "pl",
   "title": "Работа на производстве замороженных овощей и фруктов MASFROST",
   "company": "MASFROST",
@@ -18472,14 +18496,15 @@
   "lang": "ru",
   "createdAt": "2021-12-28T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ci2ku9cyr1",
   "path": "/tpost/ci2ku9cyr1-rabotnik-proizvodstva-rolpek",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 326,
+  "order": 1962,
   "country": "pl",
   "title": "Работник производства ROLPEK",
   "company": "ROLPEK",
@@ -18580,14 +18605,15 @@
   "lang": "ru",
   "createdAt": "2021-12-28T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "17mdixtgf1",
   "path": "/tpost/17mdixtgf1-rabotnik-na-proizvodstvo-nitok-ews",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 327,
+  "order": 1963,
   "country": "pl",
   "title": "Работник на производство ниток EWS",
   "company": "EWS",
@@ -18707,7 +18733,8 @@
   "lang": "ru",
   "createdAt": "2021-12-28T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ft235mxpf1",
@@ -18831,9 +18858,9 @@
  {
   "id": "ssnanntcy1",
   "path": "/tpost/ssnanntcy1-rabotnik-produktsii-lg-willdo",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 329,
+  "order": 1964,
   "country": "pl",
   "title": "Работник продукции LG Willdo",
   "company": "LG Willdo",
@@ -18938,14 +18965,15 @@
   "lang": "ru",
   "createdAt": "2021-12-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "uyfmfb7v01",
   "path": "/tpost/uyfmfb7v01-rabotnik-na-proizvodstve-kormov-dlya-zhi",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 330,
+  "order": 1965,
   "country": "pl",
   "title": "Работник на производстве кормов для животных Mispol",
   "company": "Mispol",
@@ -19045,7 +19073,8 @@
   "lang": "ru",
   "createdAt": "2021-12-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "7p4eioss61",
@@ -19159,9 +19188,9 @@
  {
   "id": "in4ott8kj1",
   "path": "/tpost/in4ott8kj1-rabotnik-proizvodstva-schultz",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 332,
+  "order": 1966,
   "country": "pl",
   "title": "Работник производства SCHULTZ",
   "company": "SCHULTZ",
@@ -19271,14 +19300,15 @@
   "lang": "ru",
   "createdAt": "2021-12-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "yvo7ixyll1",
   "path": "/tpost/yvo7ixyll1-rabotnik-na-proizvodstvo-ti-automotive-p",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 333,
+  "order": 1967,
   "country": "pl",
   "title": "Работник на производство TI Automotive Poland",
   "company": "TI Automotive Poland",
@@ -19400,14 +19430,15 @@
   "lang": "ru",
   "createdAt": "2021-12-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "tszzabum81",
   "path": "/tpost/tszzabum81-rabotnik-produktsii-van-pur",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 334,
+  "order": 1968,
   "country": "pl",
   "title": "Работник продукции VAN PUR",
   "company": "VAN PUR",
@@ -19508,14 +19539,15 @@
   "lang": "ru",
   "createdAt": "2021-12-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "yii7459eo1",
   "path": "/tpost/yii7459eo1-rabotnik-na-proizvodstvo-pallet-agrawood",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 335,
+  "order": 1969,
   "country": "pl",
   "title": "Работник на производство паллет AGRAWOOD",
   "company": "AGRAWOOD",
@@ -19627,14 +19659,15 @@
   "lang": "ru",
   "createdAt": "2021-12-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "agcteuk4y1",
   "path": "/tpost/agcteuk4y1-rabotnik-produktsii-iryd",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 336,
+  "order": 1970,
   "country": "pl",
   "title": "Работник продукции IRYD",
   "company": "IRYD",
@@ -19748,14 +19781,15 @@
   "lang": "ru",
   "createdAt": "2021-12-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "8rsdslx3k1",
   "path": "/tpost/8rsdslx3k1-upakovschik-okon-i-pomoschnik-proizvodst",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 337,
+  "order": 1971,
   "country": "pl",
   "title": "Упаковщик окон и помощник производства EKO OKNA",
   "company": "EKO OKNA",
@@ -19876,14 +19910,15 @@
   "lang": "ru",
   "createdAt": "2021-12-14T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "uzlz99n3g1",
   "path": "/tpost/uzlz99n3g1-rabotnik-komplektatsii-wearco",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 338,
+  "order": 1972,
   "country": "pl",
   "title": "Работник комплектации Wearco",
   "company": "Wearco",
@@ -19996,14 +20031,15 @@
   "lang": "ru",
   "createdAt": "2021-12-10T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "tvc6d5jml1",
   "path": "/tpost/tvc6d5jml1-rabotnik-linii-proizvodstva-gotovih-obed",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 339,
+  "order": 1973,
   "country": "pl",
   "title": "Работник линии производства готовых обедов STOCZEK NATURA",
   "company": "STOCZEK NATURA",
@@ -20121,14 +20157,15 @@
   "lang": "ru",
   "createdAt": "2021-12-10T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "cf10xzt721",
   "path": "/tpost/cf10xzt721-rabotnik-na-upakovku-sladostei-malpak",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 340,
+  "order": 1974,
   "country": "pl",
   "title": "Работник на упаковку сладостей Malpak",
   "company": "Malpak",
@@ -20227,14 +20264,15 @@
   "lang": "ru",
   "createdAt": "2021-12-10T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "9zh5uymla1",
   "path": "/tpost/9zh5uymla1-rabotnik-na-proizvodstvo-relax",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 341,
+  "order": 1975,
   "country": "pl",
   "title": "Работник на производство Relax",
   "company": "Relax",
@@ -20335,14 +20373,15 @@
   "lang": "ru",
   "createdAt": "2021-12-10T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "4cajx5zz01",
   "path": "/tpost/4cajx5zz01-rabotnik-na-proizvodstvo-wzpow",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 342,
+  "order": 1976,
   "country": "pl",
   "title": "Работник на производство WZPOW",
   "company": "WZPOW",
@@ -20438,14 +20477,15 @@
   "lang": "ru",
   "createdAt": "2021-12-10T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "nv6nj2n6p1",
   "path": "/tpost/nv6nj2n6p1-rabotnik-produktsii-gabi-bis",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 343,
+  "order": 1977,
   "country": "pl",
   "title": "Работник продукции GABI BIS",
   "company": "GABI BIS",
@@ -20547,14 +20587,15 @@
   "lang": "ru",
   "createdAt": "2021-12-10T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "9x4lvey771",
   "path": "/tpost/9x4lvey771-rabotnik-na-proizvodstvo-faurecia-jelcz",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 344,
+  "order": 1978,
   "country": "pl",
   "title": "Работник на производство FAURECIA / Jelcz Laskowice",
   "company": "Jelcz Laskowice",
@@ -20674,14 +20715,15 @@
   "lang": "ru",
   "createdAt": "2021-12-10T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ycmicm1d51",
   "path": "/tpost/ycmicm1d51-rabotnik-produktsii-termet",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 345,
+  "order": 1979,
   "country": "pl",
   "title": "Работник продукции Termet",
   "company": "Termet",
@@ -20800,7 +20842,8 @@
   "lang": "ru",
   "createdAt": "2021-12-09T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "b0a0s2zzz1",
@@ -20934,9 +20977,9 @@
  {
   "id": "9m7gyg92d1",
   "path": "/tpost/9m7gyg92d1-rabotnik-zavoda-heesung",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 347,
+  "order": 1980,
   "country": "pl",
   "title": "Работник завода Heesung",
   "company": "Heesung",
@@ -21047,14 +21090,15 @@
   "lang": "ru",
   "createdAt": "2021-12-08T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "7hafagpvd1",
   "path": "/tpost/7hafagpvd1-rabochie-na-proizvodstvo-mebeli-dlya-yah",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 348,
+  "order": 1981,
   "country": "pl",
   "title": "Рабочие на производство мебели для яхт и катамаранов SUNREEF",
   "company": "SUNREEF",
@@ -21160,14 +21204,15 @@
   "lang": "ru",
   "createdAt": "2021-12-08T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "xi97a5yli1",
   "path": "/tpost/xi97a5yli1-rabotnik-na-proizvodstvo-mebelnoi-kozhi",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 349,
+  "order": 1982,
   "country": "pl",
   "title": "Работник на производство мебельной кожи BADER",
   "company": "BADER",
@@ -21275,14 +21320,15 @@
   "lang": "ru",
   "createdAt": "2021-12-08T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "cjy9728ct1",
   "path": "/tpost/cjy9728ct1-rabotnik-proizvodstva-cedrob",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 350,
+  "order": 1983,
   "country": "pl",
   "title": "Работник производства CEDROB",
   "company": "CEDROB",
@@ -21396,14 +21442,15 @@
   "lang": "ru",
   "createdAt": "2021-12-06T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "m0h5a657v1",
   "path": "/tpost/m0h5a657v1-rabotnik-na-sklade-fresh-logistic",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 351,
+  "order": 1984,
   "country": "pl",
   "title": "Работник на складе FRESH LOGISTIC",
   "company": "FRESH LOGISTIC",
@@ -21515,14 +21562,15 @@
   "lang": "ru",
   "createdAt": "2021-12-06T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "rnkcgtxsh1",
   "path": "/tpost/rnkcgtxsh1-rabotnik-produktsii-kps-food",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 352,
+  "order": 1985,
   "country": "pl",
   "title": "Работник продукции KPS FOOD",
   "company": "KPS FOOD",
@@ -21630,14 +21678,15 @@
   "lang": "ru",
   "createdAt": "2021-12-06T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "cjg4jsjl11",
   "path": "/tpost/cjg4jsjl11-rabotnik-jac-products",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 353,
+  "order": 1986,
   "country": "pl",
   "title": "Работник JAC Products",
   "company": "JAC Products",
@@ -21758,14 +21807,15 @@
   "lang": "ru",
   "createdAt": "2021-12-06T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ibmeab8sv1",
   "path": "/tpost/ibmeab8sv1-rabotnik-predpriyatiya-delphi-powertrain",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 354,
+  "order": 1987,
   "country": "pl",
   "title": "Работник предприятия Delphi Powertrain",
   "company": "Delphi Powertrain",
@@ -21870,14 +21920,15 @@
   "lang": "ru",
   "createdAt": "2021-12-06T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ja7mbf9av1",
   "path": "/tpost/ja7mbf9av1-rabotnik-na-predpriyatie-rolnik",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 355,
+  "order": 1988,
   "country": "pl",
   "title": "Работник на предприятие Rolnik",
   "company": "Rolnik",
@@ -21985,14 +22036,15 @@
   "lang": "ru",
   "createdAt": "2021-12-06T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "y67zo9l6p1",
   "path": "/tpost/y67zo9l6p1-rabotnik-produktsii-as-pl",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 356,
+  "order": 1989,
   "country": "pl",
   "title": "Работник продукции AS-PL",
   "company": "AS-PL",
@@ -22100,14 +22152,15 @@
   "lang": "ru",
   "createdAt": "2021-11-30T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "56zkkzati1",
   "path": "/tpost/56zkkzati1-rabochii-na-sklad-prodovolstvennih-tovar",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 357,
+  "order": 1990,
   "country": "pl",
   "title": "Рабочий на склад продовольственных товаров Raben",
   "company": "Raben",
@@ -22221,7 +22274,8 @@
   "lang": "ru",
   "createdAt": "2021-11-30T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "7zn2obh921",
@@ -22331,9 +22385,9 @@
  {
   "id": "29o5g32g81",
   "path": "/tpost/29o5g32g81-rabotnik-avtomobilnoi-produktsii-faureci",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 359,
+  "order": 1991,
   "country": "pl",
   "title": "Работник автомобильной продукции Faurecia GRÓJEC",
   "company": "Faurecia GRÓJEC",
@@ -22456,14 +22510,15 @@
   "lang": "ru",
   "createdAt": "2021-11-30T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ka0tdtctd1",
   "path": "/tpost/ka0tdtctd1-sborschik-kartonnih-korobok-na-zavod-sto",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 360,
+  "order": 1998,
   "country": "pl",
   "title": "Сборщик картонных коробок на завод StoraEnso",
   "company": "StoraEnso",
@@ -22564,14 +22619,15 @@
   "lang": "ru",
   "createdAt": "2021-11-04T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "pkcdgc0pv1",
   "path": "/tpost/pkcdgc0pv1-viraschivanie-tsvetov-rabota-v-gollandii",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 4361,
+  "order": 1999,
   "country": "nl",
   "title": "Выращивание цветов, работа в Голландии",
   "company": "",
@@ -22667,14 +22723,15 @@
   "lang": "ru",
   "createdAt": "2021-11-04T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "bnculx4241",
   "path": "/tpost/bnculx4241-upakovschik-bumazhnoi-produktsii-na-firm",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 362,
+  "order": 2000,
   "country": "pl",
   "title": "Упаковщик бумажной продукции на фирму Hamelin",
   "company": "Hamelin",
@@ -22786,14 +22843,15 @@
   "lang": "ru",
   "createdAt": "2021-11-02T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "upzgzmyx41",
   "path": "/tpost/upzgzmyx41-raznorabochii-v-logisticheskuyu-kompaniy",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 363,
+  "order": 2001,
   "country": "pl",
   "title": "Разнорабочий в логистическую компанию Rhenus Group",
   "company": "Rhenus Group",
@@ -22899,14 +22957,15 @@
   "lang": "ru",
   "createdAt": "2021-11-02T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "3xgbkbz041",
   "path": "/tpost/3xgbkbz041-rabotnik-na-sovremennoe-proizvodstvo-vol",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 364,
+  "order": 2002,
   "country": "pl",
   "title": "Работник на современное производство Volkswagen",
   "company": "Volkswagen",
@@ -23013,14 +23072,15 @@
   "lang": "ru",
   "createdAt": "2021-11-02T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ax5on7j931",
   "path": "/tpost/ax5on7j931-elektrik-v-konditerskuyu-kompaniyu-wawel",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 365,
+  "order": 2003,
   "country": "pl",
   "title": "Электрик в кондитерскую компанию Wawel",
   "company": "Wawel",
@@ -23127,14 +23187,15 @@
   "lang": "ru",
   "createdAt": "2021-11-02T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "y4ubdjpl41",
   "path": "/tpost/y4ubdjpl41-rabotnik-na-sborku-gotovoi-produktsii-am",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 366,
+  "order": 2004,
   "country": "pl",
   "title": "Работник на сборку готовой продукции Amica",
   "company": "Amica",
@@ -23238,14 +23299,15 @@
   "lang": "ru",
   "createdAt": "2021-11-01T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "jz42kpicp1",
   "path": "/tpost/jz42kpicp1-upakovschik-stankov-gillette-na-predpriy",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 367,
+  "order": 2005,
   "country": "pl",
   "title": "Упаковщик станков Gillette на предприятие SONOCO",
   "company": "SONOCO",
@@ -23351,14 +23413,15 @@
   "lang": "ru",
   "createdAt": "2021-11-01T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "6p14rzyrs1",
   "path": "/tpost/6p14rzyrs1-voditel-gorodskogo-avtobusa",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 368,
+  "order": 2006,
   "country": "pl",
   "title": "Водитель городского автобуса",
   "company": "",
@@ -23458,14 +23521,15 @@
   "lang": "ru",
   "createdAt": "2021-11-01T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "tgc3rel501",
   "path": "/tpost/tgc3rel501-rabotnik-sklada-dhl",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 369,
+  "order": 2007,
   "country": "pl",
   "title": "Работник склада DHL",
   "company": "DHL",
@@ -23576,14 +23640,15 @@
   "lang": "ru",
   "createdAt": "2021-11-01T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "xk9nir7p51",
   "path": "/tpost/xk9nir7p51-rabotnik-lakokrasochnoi-produktsii-alucr",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 370,
+  "order": 2008,
   "country": "pl",
   "title": "Работник лакокрасочной продукции Alucrom MIDROC",
   "company": "Alucrom MIDROC",
@@ -23689,14 +23754,15 @@
   "lang": "ru",
   "createdAt": "2021-11-01T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "9ne9inenl1",
   "path": "/tpost/9ne9inenl1-rabotnik-na-proizvodstvo-elektricheskoi",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 371,
+  "order": 2009,
   "country": "pl",
   "title": "Работник на производство электрической бытовой техники Whirlpool",
   "company": "Whirlpool",
@@ -23814,14 +23880,15 @@
   "lang": "ru",
   "createdAt": "2021-11-01T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "li26c5ddn1",
   "path": "/tpost/li26c5ddn1-sortirovschik-pochti-inpost",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 372,
+  "order": 2010,
   "country": "pl",
   "title": "Сортировщик почты InPost",
   "company": "InPost",
@@ -23929,14 +23996,15 @@
   "lang": "ru",
   "createdAt": "2021-11-01T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "5ocl8c8se1",
   "path": "/tpost/5ocl8c8se1-upakovschik-na-logisticheskom-sklade-hav",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 373,
+  "order": 2011,
   "country": "pl",
   "title": "Упаковщик на логистическом складе Havi Logistic",
   "company": "Havi Logistic",
@@ -24045,14 +24113,15 @@
   "lang": "ru",
   "createdAt": "2021-10-31T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "30s6m8lk11",
   "path": "/tpost/30s6m8lk11-rabotnik-na-proizvodstvo-kabelei-tf-kabl",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 374,
+  "order": 2012,
   "country": "pl",
   "title": "Работник на производство кабелей TF Kable",
   "company": "TF Kable",
@@ -24163,14 +24232,15 @@
   "lang": "ru",
   "createdAt": "2021-10-31T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "pjlmltusz1",
   "path": "/tpost/pjlmltusz1-rabotnik-v-piekarnia-familijna",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 375,
+  "order": 2013,
   "country": "pl",
   "title": "Работник в Piekarnia Familijna",
   "company": "Piekarnia Familijna",
@@ -24280,14 +24350,15 @@
   "lang": "ru",
   "createdAt": "2021-10-31T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "hhjtnylj01",
   "path": "/tpost/hhjtnylj01-upakovschik-chipsov-lays-na-zavode-pepsi",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 376,
+  "order": 2014,
   "country": "pl",
   "title": "Упаковщик чипсов Lays на заводе Pepsico",
   "company": "Pepsico",
@@ -24403,14 +24474,15 @@
   "lang": "ru",
   "createdAt": "2021-10-31T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "rryt8sk331",
   "path": "/tpost/rryt8sk331-rabotnik-na-fabriku-morozhenogo-zielona",
   "active": false,
   "hot": false,
-  "order": 377,
+  "order": 2015,
   "country": "pl",
   "title": "Работник на фабрику мороженого ZIELONA BUDKA",
   "company": "ZIELONA BUDKA",
@@ -24534,14 +24606,15 @@
   "lang": "ru",
   "createdAt": "2021-10-29T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "aivbc3jx81",
   "path": "/tpost/aivbc3jx81-rabochii-na-proizvodstvo-ribnoi-produkts",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 378,
+  "order": 2016,
   "country": "pl",
   "title": "Рабочий на производство рыбной продукции Graal",
   "company": "Graal",
@@ -24646,14 +24719,15 @@
   "lang": "ru",
   "createdAt": "2021-10-29T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "shzbllxix1",
   "path": "/tpost/shzbllxix1-monter-operator-na-proizvodstve-fine-alt",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 379,
+  "order": 2017,
   "country": "pl",
   "title": "Монтер-оператор на производстве Fine Altech",
   "company": "Fine Altech",
@@ -24764,14 +24838,15 @@
   "lang": "ru",
   "createdAt": "2021-10-29T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "j2tcgcyo61",
   "path": "/tpost/j2tcgcyo61-rabotnik-proizvodstva-avtomobilnih-kompo",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 380,
+  "order": 2018,
   "country": "pl",
   "title": "Работник производства автомобильных компонентов Aptiv",
   "company": "Aptiv",
@@ -24877,14 +24952,15 @@
   "lang": "ru",
   "createdAt": "2021-10-29T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "sk7c4kyiv1",
   "path": "/tpost/sk7c4kyiv1-rabotnik-na-proizvodstvo-noutbukov-dell",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 381,
+  "order": 2019,
   "country": "pl",
   "title": "Работник на производство ноутбуков DELL",
   "company": "DELL",
@@ -24989,14 +25065,15 @@
   "lang": "ru",
   "createdAt": "2021-10-29T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "d0mr6u5jp1",
   "path": "/tpost/d0mr6u5jp1-upakovschik-odezhdi-arvato",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 382,
+  "order": 2020,
   "country": "pl",
   "title": "Упаковщик одежды Arvato",
   "company": "Arvato",
@@ -25119,14 +25196,15 @@
   "lang": "ru",
   "createdAt": "2021-10-29T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "b5syn3jev1",
   "path": "/tpost/b5syn3jev1-rabotnik-sklada-fm-logistic-ikea",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 383,
+  "order": 2021,
   "country": "pl",
   "title": "Работник склада FM Logistic IKEA",
   "company": "FM Logistic IKEA",
@@ -25239,14 +25317,15 @@
   "lang": "ru",
   "createdAt": "2021-10-29T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "arkxu4r3f1",
   "path": "/tpost/arkxu4r3f1-upakovschik-reklamnoi-produktsii-kompani",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 384,
+  "order": 2022,
   "country": "pl",
   "title": "Упаковщик рекламной продукции компании Mid Ocean",
   "company": "Mid Ocean",
@@ -25349,14 +25428,15 @@
   "lang": "ru",
   "createdAt": "2021-10-29T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "3hi6ysjhi1",
   "path": "/tpost/3hi6ysjhi1-rabotnik-proizvodstva-alpha-technology",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 385,
+  "order": 2023,
   "country": "pl",
   "title": "Работник производства Alpha Technology",
   "company": "Alpha Technology",
@@ -25468,14 +25548,15 @@
   "lang": "ru",
   "createdAt": "2021-10-28T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ng1ijp9td1",
   "path": "/tpost/ng1ijp9td1-rabochii-na-logisticheskii-sklad-3lp",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 386,
+  "order": 2024,
   "country": "pl",
   "title": "Рабочий на логистический склад 3LP",
   "company": "3LP",
@@ -25582,14 +25663,15 @@
   "lang": "ru",
   "createdAt": "2021-10-28T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "rjtvg5o3a1",
   "path": "/tpost/rjtvg5o3a1-rabotnik-proizvodstva-hutchinson",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 387,
+  "order": 2025,
   "country": "pl",
   "title": "Работник производства Hutchinson",
   "company": "Hutchinson",
@@ -25723,14 +25805,15 @@
   "lang": "ru",
   "createdAt": "2021-10-28T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "6x7dzvi561",
   "path": "/tpost/6x7dzvi561-rabochii-na-fabriku-pechenya-lambertz",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 388,
+  "order": 2026,
   "country": "pl",
   "title": "Рабочий на фабрику печенья Lambertz",
   "company": "Lambertz",
@@ -25837,14 +25920,15 @@
   "lang": "ru",
   "createdAt": "2021-10-28T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "0496yyifh1",
   "path": "/tpost/0496yyifh1-rabochii-na-sklad-kuehne-nagel",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 389,
+  "order": 2027,
   "country": "pl",
   "title": "Рабочий на склад Kuehne + Nagel",
   "company": "Nagel",
@@ -25947,14 +26031,15 @@
   "lang": "ru",
   "createdAt": "2021-10-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ln6eti3ht1",
   "path": "/tpost/ln6eti3ht1-rabochii-na-sklad-elektroniki-lg-pantos",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 390,
+  "order": 2028,
   "country": "pl",
   "title": "Рабочий на склад электроники LG Pantos Logistics",
   "company": "LG Pantos Logistics",
@@ -26077,14 +26162,15 @@
   "lang": "ru",
   "createdAt": "2021-10-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "vk5eug7e61",
   "path": "/tpost/vk5eug7e61-rabotnik-na-zavod-humax-nuritech",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 391,
+  "order": 2029,
   "country": "pl",
   "title": "Работник на завод Humax (Nuritech)",
   "company": "Humax",
@@ -26191,14 +26277,15 @@
   "lang": "ru",
   "createdAt": "2021-10-25T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "426shrixr1",
   "path": "/tpost/426shrixr1-rabotnik-na-sklad-internet-magazina-bren",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 392,
+  "order": 2030,
   "country": "pl",
   "title": "Работник на склад интернет-магазина брендовой одежды Ingram",
   "company": "Ingram",
@@ -26313,14 +26400,15 @@
   "lang": "ru",
   "createdAt": "2021-10-25T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "gkbn1mkxy1",
   "path": "/tpost/gkbn1mkxy1-tpv-displays-rabota-na-proizvodstve-tele",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 393,
+  "order": 2031,
   "country": "pl",
   "title": "TPV DISPLAYS — работа на производстве телевизоров",
   "company": "",
@@ -26436,14 +26524,15 @@
   "lang": "ru",
   "createdAt": "2021-10-25T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "mnmxd38of1",
   "path": "/tpost/mnmxd38of1-rabotnik-sklada-euro-rtv-agd",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 394,
+  "order": 2032,
   "country": "pl",
   "title": "Работник склада EURO RTV AGD",
   "company": "EURO RTV AGD",
@@ -26554,14 +26643,15 @@
   "lang": "ru",
   "createdAt": "2021-10-25T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ulftjm0ge1",
   "path": "/tpost/ulftjm0ge1-sotrudniki-na-sklad-internet-magazina-za",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 395,
+  "order": 2033,
   "country": "pl",
   "title": "Сотрудники на склад интернет-магазина Zalando",
   "company": "Zalando",
@@ -26691,14 +26781,15 @@
   "lang": "ru",
   "createdAt": "2021-10-25T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ketoavk501",
   "path": "/tpost/ketoavk501-rabotnik-na-zavod-avtomobilnoi-produktsi",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 396,
+  "order": 2034,
   "country": "pl",
   "title": "Работник на завод автомобильной продукции Faurecia Gorzów",
   "company": "Faurecia Gorzów",
@@ -26813,14 +26904,15 @@
   "lang": "ru",
   "createdAt": "2021-10-25T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "t66micenm1",
   "path": "/tpost/t66micenm1-rabotnik-na-proizvodstvo-hlebobulochnih",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 397,
+  "order": 2035,
   "country": "pl",
   "title": "Работник на производство хлебобулочных изделий ARYZTA",
   "company": "ARYZTA",
@@ -26931,14 +27023,15 @@
   "lang": "ru",
   "createdAt": "2021-10-22T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "rsj3ef9lu1",
   "path": "/tpost/rsj3ef9lu1-rabochii-na-zavod-lg-energy-novii-unikal",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 398,
+  "order": 2036,
   "country": "pl",
   "title": "Рабочий на завод LG Energy (новый уникальный проект от LG Chem)",
   "company": "LG Energy",
@@ -27066,14 +27159,15 @@
   "lang": "ru",
   "createdAt": "2021-10-22T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "i7648i4du1",
   "path": "/tpost/i7648i4du1-rabochii-v-supermarkete-biedronka-na-vik",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 399,
+  "order": 2037,
   "country": "pl",
   "title": "Рабочий в супермаркете Biedronka на выкладку товара",
   "company": "",
@@ -27199,14 +27293,15 @@
   "lang": "ru",
   "createdAt": "2021-10-22T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "zmpbssfyl1",
   "path": "/tpost/zmpbssfyl1-rabochii-na-avtomobilnom-zavode-toyota",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1400,
+  "order": 2038,
   "country": "de",
   "title": "Рабочий на автомобильном заводе Toyota",
   "company": "Toyota",
@@ -27331,14 +27426,15 @@
   "lang": "ru",
   "createdAt": "2021-10-22T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "fi9z755ue1",
   "path": "/tpost/fi9z755ue1-rabotnik-na-sklad-brendovoi-odezhdi-orsa",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 401,
+  "order": 2039,
   "country": "pl",
   "title": "Работник на склад брендовой одежды Orsay",
   "company": "Orsay",
@@ -27448,14 +27544,15 @@
   "lang": "ru",
   "createdAt": "2021-10-22T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "524nktial1",
   "path": "/tpost/524nktial1-rabotnik-na-proizvodstvo-derevyannoi-sad",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 402,
+  "order": 2040,
   "country": "pl",
   "title": "Работник на производство деревянной садовой архитектуры Forest-Style",
   "company": "Forest-Style",
@@ -27569,7 +27666,8 @@
   "lang": "ru",
   "createdAt": "2021-10-22T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "azfjs8obr1",
@@ -27705,7 +27803,7 @@
   "path": "/tpost/et2oso5xr1-proizvodstvo-avtokomponentov-valeo",
   "active": false,
   "hot": false,
-  "order": 404,
+  "order": 2041,
   "country": "pl",
   "title": "Производство автокомпонентов Valeo",
   "company": "Valeo",
@@ -27836,14 +27934,15 @@
   "lang": "ru",
   "createdAt": "2021-10-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "3hiu4htju1",
   "path": "/tpost/3hiu4htju1-rabochii-na-sklad-jeronimo",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 405,
+  "order": 2042,
   "country": "pl",
   "title": "Рабочий на склад Jeronimo",
   "company": "Jeronimo",
@@ -27975,14 +28074,15 @@
   "lang": "ru",
   "createdAt": "2021-10-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "irbsaoahk1",
   "path": "/tpost/irbsaoahk1-rabotnik-na-shokoladnuyu-fabriku-wedel",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 406,
+  "order": 2043,
   "country": "pl",
   "title": "Работник на шоколадную фабрику Wedel",
   "company": "Wedel",
@@ -28109,14 +28209,15 @@
   "lang": "ru",
   "createdAt": "2021-10-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "v2mo8cx601",
   "path": "/tpost/v2mo8cx601-rabotnik-na-vikladku-tovara-v-supermarke",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 407,
+  "order": 2044,
   "country": "pl",
   "title": "Работник на выкладку товара в супермаркет Ашан",
   "company": "",
@@ -28234,7 +28335,8 @@
   "lang": "ru",
   "createdAt": "2021-10-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "193js2x5k1",
@@ -28345,7 +28447,7 @@
  {
   "id": "xmzfbu8tb1",
   "path": "/tpost/xmzfbu8tb1-robota-pokovkoyu-v-gotel-v-grets",
-  "active": true,
+  "active": false,
   "hot": false,
   "order": 1013,
   "country": "gr",
@@ -35202,7 +35304,7 @@
  {
   "id": "nd2kllpva1",
   "path": "/tpost/nd2kllpva1-sklad-brendovogo-odyagu-ta-dekorativnih",
-  "active": true,
+  "active": false,
   "hot": false,
   "order": 1089,
   "country": "pl",
@@ -39001,7 +39103,7 @@
  {
   "id": "r8li9gcfn1",
   "path": "/tpost/r8li9gcfn1-pratsvnik-skladu",
-  "active": true,
+  "active": false,
   "hot": false,
   "order": 1124,
   "country": "pl",
@@ -59051,7 +59153,7 @@
  {
   "id": "fdzj0lx8j1",
   "path": "/tpost/fdzj0lx8j1-pratsvnik-avtomoblnogo-virobnitstva",
-  "active": true,
+  "active": false,
   "hot": false,
   "order": 1363,
   "country": "pl",
@@ -70690,7 +70792,7 @@
  {
   "id": "pvns3yjix1",
   "path": "/tpost/pvns3yjix1-pratsvnik-virobnitstva-dr-schneider",
-  "active": true,
+  "active": false,
   "hot": false,
   "order": 1477,
   "country": "pl",
@@ -74533,7 +74635,7 @@
  {
   "id": "tb5h2g07s1",
   "path": "/tpost/tb5h2g07s1-pratsvnik-skladu",
-  "active": true,
+  "active": false,
   "hot": false,
   "order": 1527,
   "country": "pl",
@@ -82675,7 +82777,7 @@
  {
   "id": "g49euv3mz1",
   "path": "/tpost/g49euv3mz1-pratsvnik-na-virobnitstvo-ta-pakuvannya",
-  "active": true,
+  "active": false,
   "hot": false,
   "order": 1602,
   "country": "pl",
@@ -97756,7 +97858,7 @@
  {
   "id": "pl8xcaop21",
   "path": "/tpost/pl8xcaop21-pratsvnik-na-virobnitstvo-vihlopnih-sist",
-  "active": true,
+  "active": false,
   "hot": false,
   "order": 1765,
   "country": "pl",
@@ -110374,9 +110476,9 @@
  {
   "id": "7gxvayovn1",
   "path": "/tpost/7gxvayovn1-upakovschik-kosmetiki-avon-v-polshe",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1187,
+  "order": 1992,
   "country": "pl",
   "title": "Упаковщик косметики AVON в Польше",
   "company": "",
@@ -110493,7 +110595,8 @@
   "lang": "ru",
   "createdAt": "2021-11-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "mx735ahp51",
@@ -110618,9 +110721,9 @@
  {
   "id": "uafim5a931",
   "path": "/tpost/uafim5a931-rabotnik-na-shokoladnuyu-fabriku-milka",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1189,
+  "order": 1993,
   "country": "pl",
   "title": "Работник на шоколадную фабрику Milka",
   "company": "Milka",
@@ -110750,14 +110853,15 @@
   "lang": "ru",
   "createdAt": "2021-11-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "9glzv0ezc1",
   "path": "/tpost/9glzv0ezc1-upakovschik-na-fabrike-sigaret-philip-mo",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1190,
+  "order": 1994,
   "country": "pl",
   "title": "Упаковщик на фабрике сигарет Philip Morris",
   "company": "Philip Morris",
@@ -110870,14 +110974,15 @@
   "lang": "ru",
   "createdAt": "2021-11-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "y7zjtpkb41",
   "path": "/tpost/y7zjtpkb41-rabotnik-na-sklad-novoi-odezhdi-i-obuvi",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1191,
+  "order": 1995,
   "country": "pl",
   "title": "Работник на склад новой одежды и обуви Adidas",
   "company": "Adidas",
@@ -110991,7 +111096,8 @@
   "lang": "ru",
   "createdAt": "2021-11-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "e6454ikuo1",
@@ -111110,7 +111216,7 @@
   "path": "/tpost/37oofcv1c1-upakovschik-na-sklad-brendovoi-odezhdi-p",
   "active": false,
   "hot": false,
-  "order": 1193,
+  "order": 1996,
   "country": "pl",
   "title": "Упаковщик на склад брендовой одежды Puma",
   "company": "Puma",
@@ -111247,7 +111353,8 @@
   "lang": "ru",
   "createdAt": "2021-11-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "3a0j1n0b71",
@@ -111977,7 +112084,7 @@
   "path": "/tpost/a0y2rprvh1-upakovschik-salfetok-ecowipes",
   "active": false,
   "hot": false,
-  "order": 1200,
+  "order": 1997,
   "country": "pl",
   "title": "Упаковщик салфеток EcoWipes",
   "company": "EcoWipes",
@@ -112097,14 +112204,15 @@
   "lang": "ru",
   "createdAt": "2021-11-15T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "inbezajpx1",
   "path": "/tpost/inbezajpx1-upakovschik-brendovoi-produktsii-nike",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1201,
+  "order": 2050,
   "country": "pl",
   "title": "Упаковщик брендовой продукции Nike",
   "company": "Nike",
@@ -112220,14 +112328,15 @@
   "lang": "ru",
   "createdAt": "2021-10-11T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ysv9y24m21",
   "path": "/tpost/ysv9y24m21-upakovschik-fasovschik-zefira",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1202,
+  "order": 2051,
   "country": "pl",
   "title": "Упаковщик-фасовщик зефира",
   "company": "",
@@ -112342,14 +112451,15 @@
   "lang": "ru",
   "createdAt": "2021-10-11T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "z2rfb8kia1",
   "path": "/tpost/z2rfb8kia1-upakovschik-konfet-ferrero-rosher",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1203,
+  "order": 2052,
   "country": "pl",
   "title": "Упаковщик конфет Ferrero Rosher",
   "company": "Ferrero Rosher",
@@ -112474,14 +112584,15 @@
   "lang": "ru",
   "createdAt": "2021-10-11T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "eyh5utkrc1",
   "path": "/tpost/eyh5utkrc1-gruzchik-upakovschik-na-sklad-kofe-nesca",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1204,
+  "order": 2053,
   "country": "pl",
   "title": "Грузчик-упаковщик на склад кофе Nescafe",
   "company": "Nescafe",
@@ -112596,14 +112707,15 @@
   "lang": "ru",
   "createdAt": "2021-10-11T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "j9zsp3pos1",
   "path": "/tpost/j9zsp3pos1-upakovschik-sortirovschik-na-sklad-baton",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1205,
+  "order": 2057,
   "country": "pl",
   "title": "Упаковщик-сортировщик на склад батончиков Twix",
   "company": "Twix",
@@ -112721,14 +112833,15 @@
   "lang": "ru",
   "createdAt": "2021-10-09T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ou6v9burb1",
   "path": "/tpost/ou6v9burb1-rabotnik-produktsii-na-predpriyatie-feli",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1206,
+  "order": 2058,
   "country": "pl",
   "title": "Работник продукции на предприятие Felix",
   "company": "Felix",
@@ -112833,7 +112946,8 @@
   "lang": "ru",
   "createdAt": "2021-10-08T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "3gy7p2kul1",
@@ -112959,9 +113073,9 @@
  {
   "id": "juaie0hxv1",
   "path": "/tpost/juaie0hxv1-upakovschik-odeyal-i-podushek-na-proizvo",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1208,
+  "order": 2059,
   "country": "pl",
   "title": "Упаковщик одеял и подушек на производство John Cotton",
   "company": "John Cotton",
@@ -113071,14 +113185,15 @@
   "lang": "ru",
   "createdAt": "2021-10-07T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "jtggl360i1",
   "path": "/tpost/jtggl360i1-upakovschik-na-konditerskuyu-fabriku-fer",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1209,
+  "order": 2060,
   "country": "pl",
   "title": "Упаковщик на кондитерскую фабрику Ferrero",
   "company": "Ferrero",
@@ -113194,14 +113309,15 @@
   "lang": "ru",
   "createdAt": "2021-10-07T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "fz590eyoe1",
   "path": "/tpost/fz590eyoe1-voditel-pogruzchika-na-sklad-sladostei",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1210,
+  "order": 2061,
   "country": "pl",
   "title": "Водитель погрузчика на склад сладостей",
   "company": "",
@@ -113311,14 +113427,15 @@
   "lang": "ru",
   "createdAt": "2021-10-07T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "9toeggcs01",
   "path": "/tpost/9toeggcs01-sortirovschik-tovarov-na-sklad-amazon",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1211,
+  "order": 2062,
   "country": "pl",
   "title": "Сортировщик товаров на склад Amazon",
   "company": "Amazon",
@@ -113448,14 +113565,15 @@
   "lang": "ru",
   "createdAt": "2021-10-07T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "b80virznd1",
   "path": "/tpost/b80virznd1-upakovschik-na-konditerskuyu-fabriku-kin",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1212,
+  "order": 2063,
   "country": "pl",
   "title": "Упаковщик на кондитерскую фабрику Kinder",
   "company": "Kinder",
@@ -113562,14 +113680,15 @@
   "lang": "ru",
   "createdAt": "2021-10-07T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "h30nb0rc51",
   "path": "/tpost/h30nb0rc51-upakovschik-na-konditerskuyu-fabriku-raf",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1213,
+  "order": 2064,
   "country": "pl",
   "title": "Упаковщик на кондитерскую фабрику Raffaello",
   "company": "Raffaello",
@@ -113670,14 +113789,15 @@
   "lang": "ru",
   "createdAt": "2021-10-07T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "oj47zzyyp1",
   "path": "/tpost/oj47zzyyp1-upakovschik-kruassanov-7-days-chipita",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1214,
+  "order": 2065,
   "country": "pl",
   "title": "Упаковщик круассанов 7-Days Chipita",
   "company": "7-Days Chipita",
@@ -113791,7 +113911,8 @@
   "lang": "ru",
   "createdAt": "2021-10-06T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "4iach5mnb1",
@@ -117978,9 +118099,9 @@
  {
   "id": "lnln22al71",
   "path": "/tpost/lnln22al71-shvei-na-predpriyatie-aj-group",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1251,
+  "order": 2045,
   "country": "pl",
   "title": "Швеи на предприятие AJ GROUP",
   "company": "AJ GROUP",
@@ -118090,14 +118211,15 @@
   "lang": "ru",
   "createdAt": "2021-10-15T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "4oavgu0sy1",
   "path": "/tpost/4oavgu0sy1-rabotnik-bartex-nabivka-lezhanok",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 2252,
+  "order": 2046,
   "country": "de",
   "title": "Работник Bartex (набивка лежанок)",
   "company": "Bartex",
@@ -118196,7 +118318,8 @@
   "lang": "ru",
   "createdAt": "2021-10-15T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "2b6vompl71",
@@ -118314,9 +118437,9 @@
  {
   "id": "4sej2dcr91",
   "path": "/tpost/4sej2dcr91-svarschik-metodom-migmag-v-stalmech",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1254,
+  "order": 2047,
   "country": "pl",
   "title": "Сварщик методом MIG/MAG в Stalmech",
   "company": "Stalmech",
@@ -118426,14 +118549,15 @@
   "lang": "ru",
   "createdAt": "2021-10-12T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "xyoxztymh1",
   "path": "/tpost/xyoxztymh1-operator-stankov-chpucnc-v-kompaniyu-bas",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1255,
+  "order": 2048,
   "country": "pl",
   "title": "Оператор станков ЧПУ/CNC в компанию Base Group",
   "company": "Base Group",
@@ -118539,14 +118663,15 @@
   "lang": "ru",
   "createdAt": "2021-10-12T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "h8fb2la0z1",
   "path": "/tpost/h8fb2la0z1-shlifovschik-s-gibkoi-metalla",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1256,
+  "order": 2049,
   "country": "pl",
   "title": "Шлифовщик с гибкой металла",
   "company": "",
@@ -118652,7 +118777,8 @@
   "lang": "ru",
   "createdAt": "2021-10-12T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "daxgvo6yk1",
@@ -118771,9 +118897,9 @@
  {
   "id": "75ddbhxf91",
   "path": "/tpost/75ddbhxf91-monter-metallokonstruktsii-s-opitom-vipo",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 3258,
+  "order": 2054,
   "country": "cz",
   "title": "Монтер металлоконструкций с опытом выполнения сварки",
   "company": "",
@@ -118875,14 +119001,15 @@
   "lang": "ru",
   "createdAt": "2021-10-11T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "tj32c5f9c1",
   "path": "/tpost/tj32c5f9c1-svarschik-metodom-migmag",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 3259,
+  "order": 2055,
   "country": "cz",
   "title": "Сварщик методом MIG/MAG",
   "company": "MIG/MAG",
@@ -118987,14 +119114,15 @@
   "lang": "ru",
   "createdAt": "2021-10-11T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "rpkn0y0m91",
   "path": "/tpost/rpkn0y0m91-trebuyutsya-skladskie-rabochie",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 3260,
+  "order": 2056,
   "country": "cz",
   "title": "Требуются складские рабочие",
   "company": "",
@@ -119085,14 +119213,15 @@
   "lang": "ru",
   "createdAt": "2021-10-11T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "p6965m7up1",
   "path": "/tpost/p6965m7up1-operator-pili-po-metallu",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 3261,
+  "order": 2066,
   "country": "cz",
   "title": "Оператор пилы по металлу",
   "company": "",
@@ -119192,14 +119321,15 @@
   "lang": "ru",
   "createdAt": "2021-10-04T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "kjcyhv2i81",
   "path": "/tpost/kjcyhv2i81-lakirovschik-po-metallu",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 3262,
+  "order": 2067,
   "country": "cz",
   "title": "Лакировщик по металлу",
   "company": "",
@@ -119305,14 +119435,15 @@
   "lang": "ru",
   "createdAt": "2021-10-04T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "cjexh3f6j1",
   "path": "/tpost/cjexh3f6j1-operator-gibochnogo-stanka-s-chpu",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 3263,
+  "order": 2068,
   "country": "cz",
   "title": "Оператор гибочного станка с ЧПУ",
   "company": "ЧПУ",
@@ -119424,7 +119555,8 @@
   "lang": "ru",
   "createdAt": "2021-09-28T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "teyy6tocl1",
@@ -119544,9 +119676,9 @@
  {
   "id": "rfsybf2la1",
   "path": "/tpost/rfsybf2la1-tokar-dip-500-dip-700",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1265,
+  "order": 2069,
   "country": "pl",
   "title": "Токарь (ДИП 500, ДИП 700)",
   "company": "",
@@ -119645,14 +119777,15 @@
   "lang": "ru",
   "createdAt": "2021-09-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "skjdf5e111",
   "path": "/tpost/skjdf5e111-mehanikslesar-v-otdel-podderzhki-raboti",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1266,
+  "order": 2070,
   "country": "pl",
   "title": "Механик/слесарь в отдел поддержки работы машин",
   "company": "",
@@ -119751,14 +119884,15 @@
   "lang": "ru",
   "createdAt": "2021-09-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "f0cgylvir1",
   "path": "/tpost/f0cgylvir1-operator-stankov-chpucnc",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1267,
+  "order": 2071,
   "country": "pl",
   "title": "Оператор станков ЧПУ/CNC",
   "company": "CNC",
@@ -119857,14 +119991,15 @@
   "lang": "ru",
   "createdAt": "2021-09-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "nb02pb81h1",
   "path": "/tpost/nb02pb81h1-santehnik",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1268,
+  "order": 2072,
   "country": "pl",
   "title": "Сантехник",
   "company": "",
@@ -119951,14 +120086,15 @@
   "lang": "ru",
   "createdAt": "2021-09-24T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "b72942c7r1",
   "path": "/tpost/b72942c7r1-stolyarplotnik",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1269,
+  "order": 2073,
   "country": "pl",
   "title": "Столяр/плотник",
   "company": "",
@@ -120051,14 +120187,15 @@
   "lang": "ru",
   "createdAt": "2021-09-24T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "2ybu60ydj1",
   "path": "/tpost/2ybu60ydj1-elektrikelektromonter",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1270,
+  "order": 2074,
   "country": "pl",
   "title": "Электрик/электромонтер",
   "company": "",
@@ -120153,14 +120290,15 @@
   "lang": "ru",
   "createdAt": "2021-09-24T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ttxzjjsvi1",
   "path": "/tpost/ttxzjjsvi1-monter-na-sborku-mobilnih-domov",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1271,
+  "order": 2075,
   "country": "pl",
   "title": "Монтер на сборку мобильных домов",
   "company": "",
@@ -120253,14 +120391,15 @@
   "lang": "ru",
   "createdAt": "2021-09-24T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "uknrxzgkm1",
   "path": "/tpost/uknrxzgkm1-svarschik-migmag-135-s-opitom-raboti",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1272,
+  "order": 2076,
   "country": "pl",
   "title": "Сварщик MIG/MAG 135 с опытом работы",
   "company": "",
@@ -120355,14 +120494,15 @@
   "lang": "ru",
   "createdAt": "2021-09-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "tsxm3bdy71",
   "path": "/tpost/tsxm3bdy71-gornichnaya-v-chetirehzvezdochnii-otel",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1273,
+  "order": 2077,
   "country": "pl",
   "title": "Горничная в четырехзвездочный отель",
   "company": "",
@@ -120459,14 +120599,15 @@
   "lang": "ru",
   "createdAt": "2021-09-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "h1xy1v1jk1",
   "path": "/tpost/h1xy1v1jk1-rabotnik-v-nebolshoi-otel",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1274,
+  "order": 2078,
   "country": "pl",
   "title": "Работник в небольшой отель",
   "company": "",
@@ -120559,14 +120700,15 @@
   "lang": "ru",
   "createdAt": "2021-09-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "9tpmdyubh1",
   "path": "/tpost/9tpmdyubh1-santehnik-v-bolshuyu-stroitelnuyu-kompan",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1275,
+  "order": 2079,
   "country": "pl",
   "title": "Сантехник в большую строительную компанию",
   "company": "",
@@ -120657,14 +120799,15 @@
   "lang": "ru",
   "createdAt": "2021-09-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "20hvh5y5a1",
   "path": "/tpost/20hvh5y5a1-rabota-na-mebelnoi-fabrike",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1276,
+  "order": 2080,
   "country": "pl",
   "title": "Работа на мебельной фабрике",
   "company": "",
@@ -120755,14 +120898,15 @@
   "lang": "ru",
   "createdAt": "2021-09-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "o8z6alk241",
   "path": "/tpost/o8z6alk241-rabotnik-na-mebelnuyu-fabriku",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1277,
+  "order": 2081,
   "country": "pl",
   "title": "Работник на мебельную фабрику",
   "company": "",
@@ -120856,14 +121000,15 @@
   "lang": "ru",
   "createdAt": "2021-09-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "bg6elpjos1",
   "path": "/tpost/bg6elpjos1-operator-pogruzchika-na-sklad",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1278,
+  "order": 2082,
   "country": "pl",
   "title": "Оператор погрузчика на склад",
   "company": "",
@@ -120954,14 +121099,15 @@
   "lang": "ru",
   "createdAt": "2021-09-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "6ky7y12uo1",
   "path": "/tpost/6ky7y12uo1-voditel-gorodskih-avtobusov",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1279,
+  "order": 2083,
   "country": "pl",
   "title": "Водитель городских автобусов",
   "company": "",
@@ -121060,14 +121206,15 @@
   "lang": "ru",
   "createdAt": "2021-09-22T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "v9clgkb4c1",
   "path": "/tpost/v9clgkb4c1-rabotnik-na-ribnii-zavod",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1280,
+  "order": 2084,
   "country": "pl",
   "title": "Работник на рыбный завод",
   "company": "",
@@ -121160,14 +121307,15 @@
   "lang": "ru",
   "createdAt": "2021-09-22T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "02h2mnb3j1",
   "path": "/tpost/02h2mnb3j1-rabotnik-malyarnogo-tseha-na-zavode",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1281,
+  "order": 2085,
   "country": "pl",
   "title": "Работник малярного цеха на заводе",
   "company": "",
@@ -121258,14 +121406,15 @@
   "lang": "ru",
   "createdAt": "2021-09-22T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ma7m5raup1",
   "path": "/tpost/ma7m5raup1-rabochii-na-derevoobrabativayuschii-zavo",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1282,
+  "order": 2086,
   "country": "pl",
   "title": "Рабочий на деревообрабатывающий завод",
   "company": "",
@@ -121363,7 +121512,8 @@
   "lang": "ru",
   "createdAt": "2021-09-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "re2sd8cih1",
@@ -121469,9 +121619,9 @@
  {
   "id": "kfh7va0kk1",
   "path": "/tpost/kfh7va0kk1-rabotnik-na-proizvodstvo-i-upakovku-beko",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1284,
+  "order": 2087,
   "country": "pl",
   "title": "Работник на производство и упаковку бекона",
   "company": "",
@@ -121565,14 +121715,15 @@
   "lang": "ru",
   "createdAt": "2021-09-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "49okbkshk1",
   "path": "/tpost/49okbkshk1-rabotnik-na-ptitsefabriku",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1285,
+  "order": 2088,
   "country": "pl",
   "title": "Работник на птицефабрику",
   "company": "",
@@ -121666,14 +121817,15 @@
   "lang": "ru",
   "createdAt": "2021-09-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "79pv1o7mm1",
   "path": "/tpost/79pv1o7mm1-rabotnik-logisticheskogo-sklada-tovarov",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1286,
+  "order": 2089,
   "country": "pl",
   "title": "Работник логистического склада товаров LG",
   "company": "LG",
@@ -121769,14 +121921,15 @@
   "lang": "ru",
   "createdAt": "2021-09-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "zvog711za1",
   "path": "/tpost/zvog711za1-rabotnik-tipografii-na-perepletnie-rabot",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1287,
+  "order": 2090,
   "country": "pl",
   "title": "Работник типографии на переплетные работы",
   "company": "",
@@ -121865,14 +122018,15 @@
   "lang": "ru",
   "createdAt": "2021-09-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "e4kzr0m2n1",
   "path": "/tpost/e4kzr0m2n1-shlifovschik-drevesini-na-mebelnuyu-fabr",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1288,
+  "order": 2091,
   "country": "pl",
   "title": "Шлифовщик древесины на мебельную фабрику",
   "company": "",
@@ -121964,7 +122118,8 @@
   "lang": "ru",
   "createdAt": "2021-09-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "l026ypupy1",
@@ -122069,9 +122224,9 @@
  {
   "id": "ka115cdz51",
   "path": "/tpost/ka115cdz51-rabotniki-na-proizvodstvo-kartonnih-upak",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1290,
+  "order": 2092,
   "country": "pl",
   "title": "Работники на производство картонных упаковок",
   "company": "",
@@ -122164,14 +122319,15 @@
   "lang": "ru",
   "createdAt": "2021-09-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ejyvf9uzh1",
   "path": "/tpost/ejyvf9uzh1-rabota-na-liteinom-proizvodstve",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1291,
+  "order": 2093,
   "country": "pl",
   "title": "Работа на литейном производстве",
   "company": "",
@@ -122263,7 +122419,8 @@
   "lang": "ru",
   "createdAt": "2021-09-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "j70oea1301",
@@ -122366,9 +122523,9 @@
  {
   "id": "xos07rp3l1",
   "path": "/tpost/xos07rp3l1-dispetcher-v-bolshuyu-transportnuyu-komp",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1293,
+  "order": 2094,
   "country": "pl",
   "title": "Диспетчер в большую транспортную компанию",
   "company": "",
@@ -122458,14 +122615,15 @@
   "lang": "ru",
   "createdAt": "2021-09-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "uy1xcrs101",
   "path": "/tpost/uy1xcrs101-ofitsiant-na-rabotu-v-chetirehzvezdochni",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1294,
+  "order": 2095,
   "country": "pl",
   "title": "Официант на работу в четырехзвездочный отель",
   "company": "",
@@ -122560,14 +122718,15 @@
   "lang": "ru",
   "createdAt": "2021-09-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "rkn6dam8y1",
   "path": "/tpost/rkn6dam8y1-svarschik-metallicheskih-konstruktsii-na",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1295,
+  "order": 2096,
   "country": "pl",
   "title": "Сварщик металлических конструкций на завод",
   "company": "",
@@ -122662,14 +122821,15 @@
   "lang": "ru",
   "createdAt": "2021-09-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "arkv5hsxr1",
   "path": "/tpost/arkv5hsxr1-prokladka-volokonno-opticheskih-linii",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1296,
+  "order": 2097,
   "country": "pl",
   "title": "Прокладка волоконно-оптических линий",
   "company": "",
@@ -122767,14 +122927,15 @@
   "lang": "ru",
   "createdAt": "2021-09-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "c4nmz113x1",
   "path": "/tpost/c4nmz113x1-rabotnik-na-upakovku-lososya",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1297,
+  "order": 2098,
   "country": "pl",
   "title": "Работник на упаковку лосося",
   "company": "",
@@ -122871,14 +123032,15 @@
   "lang": "ru",
   "createdAt": "2021-09-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "3g981vkf41",
   "path": "/tpost/3g981vkf41-rabotnik-na-ribnoe-predpriyatie",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1298,
+  "order": 2099,
   "country": "pl",
   "title": "Работник на рыбное предприятие",
   "company": "",
@@ -122972,14 +123134,15 @@
   "lang": "ru",
   "createdAt": "2021-09-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "ri7ac90il1",
   "path": "/tpost/ri7ac90il1-operator-avtopogruzchika-na-mebelnii-skl",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1299,
+  "order": 2100,
   "country": "pl",
   "title": "Оператор автопогрузчика на мебельный склад",
   "company": "",
@@ -123067,7 +123230,8 @@
   "lang": "ru",
   "createdAt": "2021-09-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "b5lfu06jl1",
@@ -123173,9 +123337,9 @@
  {
   "id": "ola3c6x3o1",
   "path": "/tpost/ola3c6x3o1-koordinator-v-bolshuyu-transportnuyu-kom",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1301,
+  "order": 2101,
   "country": "pl",
   "title": "Координатор в большую транспортную компанию",
   "company": "",
@@ -123268,14 +123432,15 @@
   "lang": "ru",
   "createdAt": "2021-09-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "3v9p5e71c1",
   "path": "/tpost/3v9p5e71c1-shlifovschik-po-metallu-na-zavod",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1302,
+  "order": 2102,
   "country": "pl",
   "title": "Шлифовщик по металлу на завод",
   "company": "",
@@ -123369,14 +123534,15 @@
   "lang": "ru",
   "createdAt": "2021-09-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "74to7bpl91",
   "path": "/tpost/74to7bpl91-rabota-na-sovremennom-ribnom-predpriyati",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1303,
+  "order": 2103,
   "country": "pl",
   "title": "Работа на современном рыбном предприятии",
   "company": "",
@@ -123470,14 +123636,15 @@
   "lang": "ru",
   "createdAt": "2021-09-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "b7sfthzjc1",
   "path": "/tpost/b7sfthzjc1-spetsialist-po-kontrolyu-kachestva-produ",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1304,
+  "order": 2104,
   "country": "pl",
   "title": "Специалист по контролю качества продукции (бананы)",
   "company": "",
@@ -123573,14 +123740,15 @@
   "lang": "ru",
   "createdAt": "2021-09-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "au6zmhygt1",
   "path": "/tpost/au6zmhygt1-rabochii-na-ukladku-bruschatki",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1305,
+  "order": 2105,
   "country": "pl",
   "title": "Рабочий на укладку брусчатки",
   "company": "",
@@ -123666,14 +123834,15 @@
   "lang": "ru",
   "createdAt": "2021-09-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "o20ltg9cy1",
   "path": "/tpost/o20ltg9cy1-rabochii-na-izgotovlenie-betonnih-zaboro",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1306,
+  "order": 2106,
   "country": "pl",
   "title": "Рабочий на изготовление бетонных заборов",
   "company": "",
@@ -123765,7 +123934,8 @@
   "lang": "ru",
   "createdAt": "2021-09-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "14j9hex5h1",
@@ -124072,9 +124242,9 @@
  {
   "id": "7b5ii69sa1",
   "path": "/tpost/7b5ii69sa1-kamenschik-shtukatur-v-krupnuyu-stroitel",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1310,
+  "order": 2107,
   "country": "pl",
   "title": "Каменщик-штукатур в крупную строительную компанию",
   "company": "",
@@ -124165,14 +124335,15 @@
   "lang": "ru",
   "createdAt": "2021-09-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "t1m8mukrc1",
   "path": "/tpost/t1m8mukrc1-komplektovschik-zakazov-na-sklade-mezhdu",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1311,
+  "order": 2108,
   "country": "pl",
   "title": "Комплектовщик заказов на складе международной компании",
   "company": "",
@@ -124260,14 +124431,15 @@
   "lang": "ru",
   "createdAt": "2021-09-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "hy1ap48xv1",
   "path": "/tpost/hy1ap48xv1-myasnikobvalschik-dichi",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1312,
+  "order": 2109,
   "country": "pl",
   "title": "Мясник/обвальщик дичи",
   "company": "",
@@ -124355,14 +124527,15 @@
   "lang": "ru",
   "createdAt": "2021-09-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "nf7ei7okt1",
   "path": "/tpost/nf7ei7okt1-rabotnik-v-malyarnii-tseh",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1313,
+  "order": 2110,
   "country": "pl",
   "title": "Работник в малярный цех",
   "company": "",
@@ -124453,14 +124626,15 @@
   "lang": "ru",
   "createdAt": "2021-09-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "gmx21z4am1",
   "path": "/tpost/gmx21z4am1-kamenschik-v-stroitelnuyu-kompaniyu",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1314,
+  "order": 2111,
   "country": "pl",
   "title": "Каменщик в строительную компанию",
   "company": "",
@@ -124552,14 +124726,15 @@
   "lang": "ru",
   "createdAt": "2021-09-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "3jel1vb1y1",
   "path": "/tpost/3jel1vb1y1-pomoschnik-dlya-raboti-s-myasom",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1315,
+  "order": 2112,
   "country": "pl",
   "title": "Помощник для работы с мясом",
   "company": "",
@@ -124662,14 +124837,15 @@
   "lang": "ru",
   "createdAt": "2021-09-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "nfvgn1zr71",
   "path": "/tpost/nfvgn1zr71-rabotniki-dlya-sbora-urozhaya",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1316,
+  "order": 2113,
   "country": "pl",
   "title": "Работники для сбора урожая",
   "company": "",
@@ -124771,14 +124947,15 @@
   "lang": "ru",
   "createdAt": "2021-09-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "gp04sxzvy1",
   "path": "/tpost/gp04sxzvy1-pomoschnik-dlya-ukladki-bruschatki",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1317,
+  "order": 2114,
   "country": "pl",
   "title": "Помощник для укладки брусчатки",
   "company": "",
@@ -124871,14 +125048,15 @@
   "lang": "ru",
   "createdAt": "2021-09-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "6je8adzhp1",
   "path": "/tpost/6je8adzhp1-medsestramedbrat-v-gorodskuyu-bolnitsu",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1318,
+  "order": 2115,
   "country": "pl",
   "title": "Медсестра/медбрат в городскую больницу",
   "company": "",
@@ -125001,14 +125179,15 @@
   "lang": "ru",
   "createdAt": "2021-09-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "v5ajhmr2a1",
   "path": "/tpost/v5ajhmr2a1-mehanik-po-obsluzhivaniyu-proizvodstvenn",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1319,
+  "order": 2116,
   "country": "pl",
   "title": "Механик по обслуживанию производственной линии",
   "company": "",
@@ -125103,14 +125282,15 @@
   "lang": "ru",
   "createdAt": "2021-09-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "gcton7z4g1",
   "path": "/tpost/gcton7z4g1-poroshkovii-malyar-na-sovremennii-zavod",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1320,
+  "order": 2117,
   "country": "pl",
   "title": "Порошковый маляр на современный завод производственных машин",
   "company": "",
@@ -125200,14 +125380,15 @@
   "lang": "ru",
   "createdAt": "2021-09-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "zl74hn49x1",
   "path": "/tpost/zl74hn49x1-rabotnik-na-kuhnyu-v-restoran-zharka-rib",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1321,
+  "order": 2118,
   "country": "pl",
   "title": "Работник на кухню в ресторан (жарка рыбы)",
   "company": "",
@@ -125297,14 +125478,15 @@
   "lang": "ru",
   "createdAt": "2021-09-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "x91srdbd81",
   "path": "/tpost/x91srdbd81-rabotnik-azs",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1322,
+  "order": 2119,
   "country": "pl",
   "title": "Работник АЗС",
   "company": "АЗС",
@@ -125396,14 +125578,15 @@
   "lang": "ru",
   "createdAt": "2021-09-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "4one03sxj1",
   "path": "/tpost/4one03sxj1-rabochii-v-dorozhno-stroitelnuyu-kompani",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1323,
+  "order": 2120,
   "country": "pl",
   "title": "Рабочий в дорожно-строительную компанию",
   "company": "",
@@ -125501,14 +125684,15 @@
   "lang": "ru",
   "createdAt": "2021-09-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "t67odofpo1",
   "path": "/tpost/t67odofpo1-rabochii-na-ustanovku-santehniki",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1324,
+  "order": 2121,
   "country": "pl",
   "title": "Рабочий на установку сантехники",
   "company": "",
@@ -125600,14 +125784,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "lt4fexx611",
   "path": "/tpost/lt4fexx611-operator-ekskavatora-s-opitom-raboti",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1325,
+  "order": 2122,
   "country": "pl",
   "title": "Оператор экскаватора с опытом работы",
   "company": "",
@@ -125700,14 +125885,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "rsu14gi5h1",
   "path": "/tpost/rsu14gi5h1-rabotnik-na-shveinoe-proizvodstvo",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1326,
+  "order": 2123,
   "country": "pl",
   "title": "Работник на швейное производство",
   "company": "",
@@ -125799,14 +125985,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "hrj0lcvzr1",
   "path": "/tpost/hrj0lcvzr1-vrach-vnutrennih-boleznei-terapevt-v-rai",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1327,
+  "order": 2124,
   "country": "pl",
   "title": "Врач внутренних болезней (терапевт) в районную больницу",
   "company": "",
@@ -125912,14 +126099,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "b768e1j4o1",
   "path": "/tpost/b768e1j4o1-rabota-dlya-muzhchin-na-proizvodstve",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1328,
+  "order": 2125,
   "country": "pl",
   "title": "Работа для мужчин на производстве",
   "company": "",
@@ -126015,14 +126203,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "nh487lux11",
   "path": "/tpost/nh487lux11-montazhnik-protivopozharnih-sistem-s-opi",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1329,
+  "order": 2126,
   "country": "pl",
   "title": "Монтажник противопожарных систем с опытом работы",
   "company": "",
@@ -126111,14 +126300,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "yenapv4p81",
   "path": "/tpost/yenapv4p81-santehnik-na-stroitelnuyu-ploschadku",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1330,
+  "order": 2127,
   "country": "pl",
   "title": "Сантехник на строительную площадку",
   "company": "",
@@ -126208,14 +126398,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "nlmm7yd8d1",
   "path": "/tpost/nlmm7yd8d1-montazhnik-s-opitom-raboti-s-fotoelektri",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1331,
+  "order": 2128,
   "country": "pl",
   "title": "Монтажник с опытом работы с фотоэлектрическими системами",
   "company": "",
@@ -126309,14 +126500,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "xa4n0lamo1",
   "path": "/tpost/xa4n0lamo1-rabota-gornichnoi-v-otele",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1332,
+  "order": 2129,
   "country": "pl",
   "title": "Работа горничной в отеле",
   "company": "",
@@ -126407,14 +126599,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "yz60nrcev1",
   "path": "/tpost/yz60nrcev1-rabotnik-v-sovremennuyu-pekarnyu",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1333,
+  "order": 2130,
   "country": "pl",
   "title": "Работник в современную пекарню",
   "company": "",
@@ -126507,14 +126700,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "fkn399frz1",
   "path": "/tpost/fkn399frz1-rabotnik-sklada-v-sovremennoi-pekarne",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1334,
+  "order": 2131,
   "country": "pl",
   "title": "Работник склада в современной пекарне",
   "company": "",
@@ -126605,14 +126799,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "zhcmnxya51",
   "path": "/tpost/zhcmnxya51-voditel-vilochnogo-avtopogruzchika",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1335,
+  "order": 2132,
   "country": "pl",
   "title": "Водитель вилочного автопогрузчика",
   "company": "",
@@ -126703,14 +126898,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "6skkssp921",
   "path": "/tpost/6skkssp921-pomoschnik-malyara-po-metallu",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1336,
+  "order": 2133,
   "country": "pl",
   "title": "Помощник маляра по металлу",
   "company": "",
@@ -126801,14 +126997,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "yflzeyelj1",
   "path": "/tpost/yflzeyelj1-rabochii-dlya-ustanovki-santehniki",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1337,
+  "order": 2134,
   "country": "pl",
   "title": "Рабочий для установки сантехники",
   "company": "",
@@ -126905,14 +127102,15 @@
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "6prehs2zs1",
   "path": "/tpost/6prehs2zs1-voditel-kategorii-s-e-v-polshe",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1338,
+  "order": 2135,
   "country": "pl",
   "title": "Водитель категории С + Е в Польше",
   "company": "",
@@ -127026,7 +127224,8 @@
   "lang": "ru",
   "createdAt": "2021-09-15T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-09"
  },
  {
   "id": "5r9mb9t141",

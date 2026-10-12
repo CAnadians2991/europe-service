@@ -73,7 +73,7 @@ export async function vacanciesMetadata(root: Root, slug: string[] = []): Promis
   if (!r) return {}
   const lang = r.lang
   const uk = lang === 'uk'
-  const active = await getActiveVacancies()
+  const active = await getActiveVacancies(lang)
   if (r.kind === 'all') {
     // as on Tilda («Актуальні вакансії», page13843894): its title and description, and it was hidden from search (noindex)
     return pageMeta({
@@ -110,7 +110,7 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
   if (!r) return null
   const lang = r.lang
   const uk = lang === 'uk'
-  const active = await getActiveVacancies()
+  const active = await getActiveVacancies(lang)
 
   if (r.kind === 'redirect') permanentRedirect(r.to)
   if (r.kind === 'vacancy') return <VacancyView v={r.v} as={r.as} />

@@ -8,7 +8,8 @@ import type { QuizVacancy } from "@/lib/quiz-engine";
 export const dynamic = "force-static";
 
 export async function GET() {
-  const list: QuizVacancy[] = (await getActiveVacancies()).map((v) => {
+  // the Ukrainian list (each has its Russian text or falls back to Ukrainian); Russian Tilda posts are for the RU catalog
+  const list: QuizVacancy[] = (await getActiveVacancies('uk')).map((v) => {
     const r = localize(v, "ru");
     return {
       id: v.id,

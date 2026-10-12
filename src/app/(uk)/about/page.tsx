@@ -26,7 +26,7 @@ export const metadata: Metadata = pageMeta({
 
 export default async function Page() {
   const about = await getAbout()
-  const active = await getActiveVacancies()
+  const active = await getActiveVacancies('uk')
   const facts: AboutFacts = { vacancies: active.length, countries: COUNTRIES.filter((c) => active.some((v) => v.country === c.code)).map((c) => c.code) }
   const faq = aboutFaq('uk', facts)
   return (

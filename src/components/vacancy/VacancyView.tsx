@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getAllVacancies, similar } from '@/lib/vacancies'
+import { forLang, getAllVacancies, similar } from '@/lib/vacancies'
 import { pageMeta, vacancyDescription } from '@/lib/seo'
 import { VacancyPage } from './VacancyPage'
 import type { Vacancy } from '@/lib/types'
@@ -36,7 +36,8 @@ export function vacancyPageMeta(v: Vacancy, as: 'uk' | 'ru' = v.lang ?? 'uk'): M
 /** `as`: the Russian page of a translated vacancy (/ru + Tilda address) */
 export async function VacancyView({ v, as }: { v: Vacancy; as?: 'uk' | 'ru' }) {
   const lang = as ?? v.lang ?? 'uk'
-  const all = await getAllVacancies()
+  // similar ones in the page's language
+  const all = forLang(await getAllVacancies(), lang === 'ru' ? 'ru' : 'uk')
   const list = similar(all, v, v.active ? 6 : 9)
   if (lang === 'ru' && v.lang !== 'ru') return <VacancyPage v={localize(v, 'ru')} similar={list} lang="ru" />
   return <VacancyPage v={v} similar={list} lang={lang} />

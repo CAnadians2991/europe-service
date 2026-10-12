@@ -16,7 +16,7 @@ const TILDA = path.resolve(ROOT, '../tilda-data')
 const META = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/import/out/tilda-meta.json'), 'utf8'))
 const PAGES = JSON.parse(fs.readFileSync(path.join(TILDA, 'pages.json'), 'utf8'))
 const RULES = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/legacy-redirects.json'), 'utf8'))
-const CONC = 8
+const CONC = Number(process.env.CONC || 8)
 
 const ZW = /[​-‍⁠﻿⠀]/g
 const dec = (s) =>
@@ -37,6 +37,11 @@ async function get(url) {
   for (let i = 0; i < 3; i++) {
     try {
       const r = await fetch(url, { redirect: 'manual', headers: { 'user-agent': 'ES-SEO-audit' } })
+      // Netlify throttles a fast crawl with 403/429 — wait and ask again
+      if ((r.status === 403 || r.status === 429) && i < 2) {
+        await new Promise((r) => setTimeout(r, 4000))
+        continue
+      }
       return { status: r.status, location: r.headers.get('location'), body: r.status === 200 ? await r.text() : '' }
     } catch (e) {
       if (i === 2) return { status: 0, error: String(e) }

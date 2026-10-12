@@ -12,8 +12,8 @@ import { CountriesInit } from '@/components/CountriesInit'
 import { fontVars } from '@/app/fonts'
 import type { CountryCode } from '@/lib/types'
 
-export async function countryCounts() {
-  const all = await getActiveVacancies()
+export async function countryCounts(lang?: 'uk' | 'ru') {
+  const all = await getActiveVacancies(lang)
   const counts: Partial<Record<CountryCode, number>> = {}
   for (const v of all) counts[v.country] = (counts[v.country] ?? 0) + 1
   return { counts, total: all.length }
@@ -21,7 +21,7 @@ export async function countryCounts() {
 
 export async function SiteShell({ lang, children }: { lang: 'uk' | 'ru'; children: React.ReactNode }) {
   const extraCountries = await ensureCountries()
-  const { counts, total } = await countryCounts()
+  const { counts, total } = await countryCounts(lang)
   return (
     <html lang={lang} className={fontVars} suppressHydrationWarning>
       <body className="flex min-h-dvh flex-col">

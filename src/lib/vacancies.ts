@@ -57,8 +57,17 @@ export async function getAllVacancies(): Promise<Vacancy[]> {
   return byOrder((parts as Vacancy[][]).flat())
 }
 
-export async function getActiveVacancies(): Promise<Vacancy[]> {
-  return (await getAllVacancies()).filter((v) => v.active)
+/**
+ * The vacancies a page of this language lists: UA pages — the Ukrainian ones, RU pages — the ones with a Russian text
+ * (a translation, or an old Russian Tilda post). Without `lang`: all open ones (sitemap, llms.txt, API).
+ */
+export function forLang(vs: Vacancy[], lang?: 'uk' | 'ru'): Vacancy[] {
+  if (!lang) return vs
+  return lang === 'ru' ? vs.filter((v) => v.lang === 'ru' || Boolean(v.ru?.title)) : vs.filter((v) => v.lang !== 'ru')
+}
+
+export async function getActiveVacancies(lang?: 'uk' | 'ru'): Promise<Vacancy[]> {
+  return forLang((await getAllVacancies()).filter((v) => v.active), lang)
 }
 
 /** local development without a database: the closed posts from data/vacancies.closed.json */

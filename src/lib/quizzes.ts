@@ -84,7 +84,9 @@ export const QUIZZES: QuizLanding[] = [
           : {}),
         ...(q.office ? { office: q.office } : {}),
         ...(q.employer ? { employer: q.employer } : {}),
-        noindex: Boolean(q.noindex),
+        // the Russian copies are new ad forms (Tilda had only the Ukrainian quizzes, those stay indexed as they were):
+        // a dozen near-identical «Подбор работы в Польше» pages — kept out of the index and the sitemap
+        noindex: Boolean(q.noindex) || ru,
       }
     }),
 ]

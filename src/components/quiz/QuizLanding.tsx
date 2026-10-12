@@ -48,7 +48,7 @@ function Bullets({ items, className = '' }: { items: string[]; className?: strin
 /** Shared view: also used by the parametrised /pidbir ad landing */
 export async function QuizLandingView({ q, lang = 'uk' }: { q: QL; lang?: 'uk' | 'ru' }) {
   const uk = lang === 'uk'
-  const all = await getActiveVacancies()
+  const all = await getActiveVacancies(lang)
   const counts: Partial<Record<CountryCode, number>> = {}
   for (const v of all) counts[v.country] = (counts[v.country] ?? 0) + 1
   const config: QuizConfig = q.steps

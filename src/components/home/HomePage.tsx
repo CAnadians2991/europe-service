@@ -150,7 +150,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
   const U: HomeContent = HOME.uk ?? {}
   const p = (path: string) => (uk ? path : (ruTwin(path) ?? '/ru'))
   const catalog = uk ? CATALOG_PATH : '/ru' + CATALOG_PATH
-  const all = await getActiveVacancies()
+  const all = await getActiveVacancies(lang)
   const byNew = [...all].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
   const hot = [...all.filter((v) => v.hot), ...byNew.filter((v) => !v.hot)].slice(0, 6).map((v) => toCard(localize(v, lang)))
   const countries = COUNTRIES.map((c) => ({ ...c, count: all.filter((v) => v.country === c.code).length })).filter((c) => c.count)

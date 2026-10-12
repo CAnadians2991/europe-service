@@ -347,6 +347,37 @@ if (!closed.some((v) => v.revived)) {
   stats.on = on.length
 }
 
+// Russian pages list Russian texts (owner: no Ukrainian on the RU site): the newest Russian Tilda post per employer + city
+// is switched on too — the catalog shows lang 'ru' posts on the RU pages only, the Ukrainian ones on the UA pages
+if (!closed.some((v) => v.revived && v.lang === 'ru')) {
+  const groups = new Map()
+  for (const v of closed) {
+    if (v.lang !== 'ru' || openToday.has(key(v))) continue
+    const g = groups.get(key(v))
+    if (!g || (v.createdAt || '') > (g.createdAt || '')) groups.set(key(v), v)
+  }
+  const base = 1000 + closed.filter((v) => v.revived).length
+  ;[...groups.values()]
+    .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
+    .forEach((v, i) => {
+      v.active = true
+      v.hot = false
+      v.order = base + i
+      v.revived = TODAY
+    })
+  stats.onRu = groups.size
+}
+
+// a revived post with the very title of one of today's vacancies is an older copy of that job: off the catalog
+// (its page keeps working) — no two catalog cards and <title>s for one vacancy
+const openTitle = new Set(active.filter((v) => v.active).flatMap((v) => [`${v.country}|${norm(v.title)}`, `${v.country}|${norm(v.ru?.title)}`]))
+stats.offDup = 0
+for (const v of closed)
+  if (v.revived && v.active && openTitle.has(`${v.country}|${norm(v.title)}`)) {
+    v.active = false
+    stats.offDup++
+  }
+
 const ks = stats.k.sort((a, b) => a - b)
 console.log({ ...stats, k: { min: ks[0], med: ks[Math.floor(ks.length / 2)], max: ks.at(-1) } })
 if (DRY) console.log(JSON.stringify(examples, null, 1))
