@@ -3,9 +3,8 @@
 // src/data/tilda-post-labels.json, so the post pages show the same headings and videos as on Tilda (owner: H1–H3
 // one-to-one). Read by VacancyPage; nothing in the database changes.
 // Videos (scripts/import/tilda-youtube.json: oEmbed check 2026-10-12 — live?, title, channel):
-//   kept   — employers' and other companies' channels, still public;
-//   held   — our «Europe Service» channel and private persons' channels: they wait for the face check (a former employee
-//            asked not to be shown) — HOLD_OK lists the ones checked;
+//   kept   — every public video of the post: employers' channels, our «Europe Service» channel and private persons'
+//            channels (owner 2026-10-12: the former employee who asked not to be shown is in none of them);
 //   left out — other recruitment agencies' channels and removed videos.
 // Run after extract_tilda_meta.py: node scripts/import/build_post_labels.mjs
 import fs from 'node:fs'
@@ -16,15 +15,8 @@ const META = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/import/out/tild
 const ws = (s) => s.replace(/[​-‍⁠﻿⠀]/g, '').replace(/ /g, ' ').replace(/\s+/g, ' ').trim()
 const YT = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/import/tilda-youtube.json'), 'utf8'))
 const POSTS = path.join(ROOT, '..', 'tilda-data', 'posts')
-const PERSONS = /^(Europe Service|Daria Latsina|Iurii Rytenko|Oleksandr Sidorov|Jessica Viggars|Glenn van der Burg|Sławomir Janiszewski|Вадим Бобров|Ярослав Остапенко|Dong Bill|Eshmat|fitandeasy|zemelkoffice|Fey)$/
 const AGENCIES = /^(Agencja JAMEL|Akcja Rekrutacja|Big jobs|OTTO Work Force Central Europe|ProstaPraca|Staffline|E&A uitzendbureau|РОБОТА ЗА КОРДОНОМ\. ПОЛЬЩА|Truvant)$/
-/** videos of the held channels that passed the face check */
-const HOLD_OK = new Set([])
-const ytOk = (id) => {
-  const y = YT[id]
-  if (!y?.live || AGENCIES.test(y.author)) return false
-  return !PERSONS.test(y.author) || HOLD_OK.has(id)
-}
+const ytOk = (id) => Boolean(YT[id]?.live) && !AGENCIES.test(YT[id].author)
 const ytOf = (uid) => {
   try {
     const t = JSON.parse(fs.readFileSync(path.join(POSTS, `${uid}.json`), 'utf8')).text || ''
