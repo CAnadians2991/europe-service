@@ -190,7 +190,7 @@ function OtherCountries({ lang, active }: { lang: Lang; active: Vacancy[] }) {
           {list.map(({ x, n }) => (
             <li key={x.code}>
               <Link href={uk ? x.path : (ruTwin(x.path) ?? '/ru' + x.path)} className="chip">
-                {uk ? x.name : x.nameRu} <span className="num text-[12px] opacity-70">{n}</span>
+                {uk ? x.name : x.nameRu} <span className="num text-[12px]">{n}</span>
               </Link>
             </li>
           ))}

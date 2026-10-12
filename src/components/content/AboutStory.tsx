@@ -90,7 +90,7 @@ export function AboutStory({ lang, facts }: { lang: Lang; facts: AboutFacts }) {
       {/* the story as an editorial column */}
       <section className="container-x grid gap-8 py-16 sm:py-20 lg:grid-cols-[220px_minmax(0,1fr)]" aria-labelledby="story-h">
         <p className="eyebrow self-start lg:pt-3">
-          <span className="opacity-80">01 —</span>
+          <span>01 —</span>
           {uk ? 'Наша історія' : 'Наша история'}
         </p>
         <div className="max-w-[720px]">
@@ -109,7 +109,7 @@ export function AboutStory({ lang, facts }: { lang: Lang; facts: AboutFacts }) {
       <section className="container-x pb-16 sm:pb-20" aria-labelledby="path-h">
         <div className="grid gap-8 lg:grid-cols-[220px_minmax(0,1fr)]">
           <p className="eyebrow self-start lg:pt-1">
-            <span className="opacity-80">02 —</span>
+            <span>02 —</span>
             {uk ? 'Шлях' : 'Путь'}
           </p>
           <h3 id="path-h" className="font-display text-[22px] font-semibold tracking-[-0.02em] sm:text-[28px]">{uk ? 'Шлях агентства' : 'Путь агентства'}</h3>

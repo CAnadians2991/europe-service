@@ -276,14 +276,14 @@ export function Catalog({
         </label>
         <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 scrollbar-none lg:mx-0 lg:flex-wrap lg:px-0">
           <Link href={countryHref('')} prefetch={false} scroll={false} className="chip shrink-0" data-active={!f.country} aria-current={!f.country ? 'true' : undefined} onClick={(e) => { e.preventDefault(); set('country', '') }}>
-            {uk ? 'Усі країни' : 'Все страны'} <span className="num text-[12px] opacity-90">{count('country', () => true)}</span>
+            {uk ? 'Усі країни' : 'Все страны'} <span className="num text-[12px]">{count('country', () => true)}</span>
           </Link>
           {COUNTRIES.map((c) => {
             const n = count('country', (v) => v.country === c.code)
             if (!n && f.country !== c.code) return null
             return (
               <Link key={c.code} href={countryHref(f.country === c.code ? '' : c.code)} prefetch={false} scroll={false} className="chip shrink-0" data-active={f.country === c.code} aria-current={f.country === c.code ? 'true' : undefined} onClick={(e) => { e.preventDefault(); set('country', f.country === c.code ? '' : c.code) }}>
-                {uk ? c.name : c.nameRu} <span className="num text-[12px] opacity-90">{n}</span>
+                {uk ? c.name : c.nameRu} <span className="num text-[12px]">{n}</span>
               </Link>
             )
           })}
