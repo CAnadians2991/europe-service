@@ -1,4 +1,5 @@
 import 'server-only'
+import https from 'node:https'
 import { hasDb, sql } from './db'
 import { SITE } from './site'
 import type { Lead } from './types'
@@ -98,6 +99,34 @@ function razemWorkFields(l: Lead) {
   }
 }
 
+/**
+ * The company's Bitrix server (europeservice.org.ua) answers HTTPS with Bitrix's default self-signed certificate, so a
+ * plain fetch refuses it. For that host only the certificate is not checked (mcpwork.org does the same); the traffic
+ * stays encrypted. Every other address goes through fetch as usual.
+ */
+const SELF_SIGNED = /(^|\.)europeservice\.org\.ua$/
+async function postJson(url: string, body: unknown): Promise<boolean> {
+  const u = new URL(url)
+  const data = JSON.stringify(body)
+  if (!SELF_SIGNED.test(u.hostname)) {
+    const r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: data, signal: AbortSignal.timeout(8000) })
+    return r.ok
+  }
+  return new Promise((resolve) => {
+    const req = https.request(
+      u,
+      { method: 'POST', rejectUnauthorized: false, timeout: 8000, headers: { 'content-type': 'application/json', 'content-length': Buffer.byteLength(data) } },
+      (res) => {
+        res.resume()
+        resolve((res.statusCode ?? 0) >= 200 && (res.statusCode ?? 0) < 300)
+      },
+    )
+    req.on('timeout', () => req.destroy())
+    req.on('error', () => resolve(false))
+    req.end(data)
+  })
+}
+
 async function toBitrix(l: Lead) {
   const hook = process.env.BITRIX_WEBHOOK_URL // e.g. https://xxx.bitrix24.ua/rest/1/abc123/
   if (!hook) return 'skip'
@@ -127,13 +156,8 @@ async function toBitrix(l: Lead) {
   if (interest && l.vacancyTitle) fields[interest] = l.vacancyTitle
   // the same custom field the old Tilda integration filled
   fields.UF_CRM_FORMNAME = `ES: ${formLabel(l.form)}`
-  const r = await fetch(hook.replace(/\/?$/, '/') + 'crm.lead.add.json', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ fields, params: { REGISTER_SONET_EVENT: 'Y' } }),
-    signal: AbortSignal.timeout(8000),
-  })
-  return r.ok ? 'ok' : 'error'
+  const ok = await postJson(hook.replace(/\/?$/, '/') + 'crm.lead.add.json', { fields, params: { REGISTER_SONET_EVENT: 'Y' } })
+  return ok ? 'ok' : 'error'
 }
 
 /**
@@ -166,13 +190,7 @@ async function toTildaHook(l: Lead) {
     tranid: `europeservice:${l.id}`,
     ...(cookies.length ? { COOKIES: cookies.join('; ') } : {}),
   }
-  const r = await fetch(url, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(body),
-    signal: AbortSignal.timeout(8000),
-  })
-  return r.ok ? 'ok' : 'error'
+  return (await postJson(url, body)) ? 'ok' : 'error'
 }
 
 /** Where the lead came from, in words (for the backup channels) */
