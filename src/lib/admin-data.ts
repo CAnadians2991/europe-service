@@ -49,7 +49,7 @@ export async function adminListRows(): Promise<AdminVacancyRow[]> {
     select id, path, active, coalesce((data->>'hot')::boolean, false) as hot,
       coalesce(data->>'title', '') as title, coalesce(data->>'company', '') as company, coalesce(data->>'city', '') as city,
       coalesce(data->>'country', 'pl') as country, coalesce(data->'photos'->>0, '') as photo,
-      data->'salary' - 'source' - 'uplift' as salary, coalesce(data->>'updatedAt', updated_at::text) as updated_at,
+      (data->'salary') - 'source' - 'uplift' - 'modern' as salary, coalesce(data->>'updatedAt', updated_at::text) as updated_at,
       (data->>'tildaUid') is not null as tilda, coalesce(data->'ru'->>'title', '') <> '' as ru
     from vacancies order by active desc, sort asc, updated_at desc`) as {
     id: string; path: string; active: boolean; hot: boolean; title: string; company: string; city: string; country: string
