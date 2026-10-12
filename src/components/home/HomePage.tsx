@@ -141,6 +141,12 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
   const uk = lang === 'uk'
   const t = TX[lang]
   const H: HomeContent = (uk ? HOME.uk : HOME.ru) ?? {}
+  // the step texts are Tilda's own sentences of the home page («Підбір вакансії» 3, «Оформлення договору» 4), one-to-one
+  const tildaSteps = (H.steps?.groups ?? []).flatMap((g) => g.items.map((x) => x.text.trim().replace(/([^.!?])$/, '$1.')))
+  const steps: [string, string][] =
+    tildaSteps.length === 7
+      ? STEPS[lang].map(([title], i) => [title, [[0], [1, 2], [3, 4], [5, 6]][i].map((k) => tildaSteps[k]).join(' ')])
+      : (STEPS[lang] as [string, string][])
   const U: HomeContent = HOME.uk ?? {}
   const p = (path: string) => (uk ? path : (ruTwin(path) ?? '/ru'))
   const catalog = uk ? CATALOG_PATH : '/ru' + CATALOG_PATH
@@ -241,7 +247,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
         <div className="container-x py-10 sm:py-14">
           <SectionHead id="steps-h" title={t.stepsTitle} />
           <ol className="mt-6 grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
-            {STEPS[lang].map(([title, text], i) => (
+            {steps.map(([title, text], i) => (
               <li key={title} className="grid grid-cols-[32px_minmax(0,1fr)] gap-x-3">
                 <span className="num grid size-8 place-items-center rounded-full bg-brand-600 text-[14px] font-semibold text-white">{i + 1}</span>
                 <span>

@@ -26,11 +26,10 @@ if (!fs.existsSync(META)) {
       .replace(/[’‘ʼ`´]/g, "'")
       .replace(/[«»“”„]/g, '"')
   const n = { title: 0, description: 0, h1: 0, levels: 0, robots: 0, related: 0 }
-  // Tilda values that belonged to ANOTHER article (copy-paste on Tilda) — ours stay; listed for the owner's decision
-  const NOT_TILDA = {
-    '/skolko-ukraincev-rabotaet-v-polshe-legalno': ['title'], // Tilda <title>: «Польща дозволила НЕ проходити обсервацію…»
-    '/ru/ukraincy-v-polshe-skolko-zarabatyvayut-tratyat-i-gde-ishchut-rabotu': ['description'], // the same observation text, in Ukrainian
-  }
+  // Tilda values that belonged to ANOTHER article (copy-paste on Tilda). Owner, 2026-10-12: old pages one-to-one, no
+  // exceptions — /skolko-ukraincev-rabotaet-v-polshe-legalno keeps Tilda's «Польща дозволила НЕ проходити обсервацію…»
+  // title and /ru/ukraincy-v-polshe-… its (Ukrainian) description. Add a path here only on the owner's word.
+  const NOT_TILDA = {}
   for (const [p, fields] of Object.entries(NOT_TILDA)) for (const f of fields) if (T[p]) T[p][f] = null
 
   /** h2/h3 blocks (also inside FAQ «details») get the level Tilda gave the same text */

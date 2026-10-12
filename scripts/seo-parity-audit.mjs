@@ -6,7 +6,7 @@
 //   title and meta description exactly as on Tilda, robots (noindex) as on Tilda, canonical = itself,
 //   every Tilda H1–H3 present (as a heading or, for Tilda's decorative «H1» numbers, as text), Tilda JSON-LD types kept,
 //   Tilda SEO-text sentences present (≥ 95 %).
-// Run: node scripts/seo-parity-audit.mjs [base] > seo-parity.json   (base defaults to the Netlify site)
+// Run: node scripts/seo-parity-audit.mjs [base] [pages] > seo-parity.json   (base defaults to the Netlify site; «pages» = Tilda pages only)
 import fs from 'node:fs'
 import path from 'node:path'
 
@@ -61,10 +61,17 @@ async function resolve(p) {
   return { status: 'loop', hops }
 }
 
+// pages_text/<alias or page id>.txt, first line «# alias  (page123.html)» → by the export file name
+const TEXT_BY_FILE = new Map()
+for (const f of fs.readdirSync(path.join(TILDA, 'pages_text'))) {
+  const head = fs.readFileSync(path.join(TILDA, 'pages_text', f), 'utf8').slice(0, 300)
+  const m = head.match(/\((page\d+\.html)\)/)
+  if (m) TEXT_BY_FILE.set(m[1], path.join(TILDA, 'pages_text', f))
+}
 // SEO text: the Tilda page's own text sentences (records, not the menu / footer)
-function tildaSentences(alias) {
-  const f = path.join(TILDA, 'pages_text', `${alias || 'index'}.txt`)
-  if (!fs.existsSync(f)) return []
+function tildaSentences(file) {
+  const f = TEXT_BY_FILE.get(file)
+  if (!f) return []
   const out = []
   let skip = false
   for (const line of fs.readFileSync(f, 'utf8').split('\n')) {
@@ -79,6 +86,7 @@ function tildaSentences(alias) {
   return [...new Set(out)]
 }
 
+const ONLY = process.argv[3] // 'pages' → the Tilda pages only
 const jobs = []
 const seen = new Set()
 const add = (j) => {
@@ -87,12 +95,14 @@ const add = (j) => {
   seen.add(k)
   jobs.push(j)
 }
-for (const p of PAGES) add({ kind: 'page', path: p.alias ? `/${p.alias}` : '/', tilda: p })
-for (const [p, post] of Object.entries(META.posts)) add({ kind: 'post', path: p, post })
-for (const f of fs.readdirSync(path.join(TILDA, 'sitemaps'))) {
+// every exported Tilda page (tilda-meta: title, description, robots, headings, JSON-LD), canonical from pages.json
+const CANON = new Map(PAGES.map((p) => [p.f, p.canon]))
+for (const [p, m] of Object.entries(META.pages)) add({ kind: 'page', path: p, tilda: { title: m.title, desc: m.description, noindex: m.noindex, canon: CANON.get(m.file), file: m.file } })
+if (ONLY !== 'pages') for (const [p, post] of Object.entries(META.posts)) add({ kind: 'post', path: p, post })
+if (ONLY !== 'pages') for (const f of fs.readdirSync(path.join(TILDA, 'sitemaps'))) {
   for (const m of fs.readFileSync(path.join(TILDA, 'sitemaps', f), 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)) add({ kind: 'feed', path: new URL(m[1]).pathname })
 }
-for (const r of RULES) if (!r.source.includes(':') && !r.source.includes('*')) add({ kind: 'rule', path: r.source, expect: r.destination })
+if (ONLY !== 'pages') for (const r of RULES) if (!r.source.includes(':') && !r.source.includes('*')) add({ kind: 'rule', path: r.source, expect: r.destination })
 
 const issues = []
 const flag = (j, what, detail) => issues.push({ path: j.path, kind: j.kind, what, detail })
@@ -127,7 +137,7 @@ async function worker() {
     const robots = (h.match(/<meta name="robots" content="([^"]*)"/) || [])[1] || ''
     const canonical = (h.match(/<link rel="canonical" href="([^"]*)"/) || [])[1] || ''
     const wantTitle = ws(j.kind === 'page' ? j.tilda.title : j.post.title)
-    const wantDesc = ws(j.kind === 'page' ? j.tilda.desc : j.post.descr)
+    const wantDesc = ws(j.kind === 'page' ? j.tilda.desc : j.post.descr).replace(/^.{0,3}$/, '') // «ʼ» etc. = no description
     if (wantTitle && title !== wantTitle) flag(j, 'title', `«${title}» ≠ Tilda «${wantTitle}»`)
     if (wantDesc && desc !== wantDesc) flag(j, 'description', `«${desc}» ≠ Tilda «${wantDesc}»`)
     const noindex = /noindex/.test(robots)
@@ -151,10 +161,10 @@ async function worker() {
         if (t && !ours.has(t)) flag(j, 'json-ld', `Tilda ${t} missing`)
       }
       // SEO text
-      const sents = tildaSentences(j.tilda.alias)
+      const sents = tildaSentences(j.tilda.file)
       if (sents.length >= 3 && !noindex) {
         const have = sents.filter((s) => text.includes(norm(s))).length
-        if (have / sents.length < 0.95) flag(j, 'seo text', `${have}/${sents.length} Tilda sentences`)
+        if (have / sents.length < 0.95) flag(j, 'seo text', `${have}/${sents.length} Tilda sentences; missing: ${sents.filter((x) => !text.includes(norm(x))).map((x) => ws(x).slice(0, 90)).join(' ¦ ')}`)
       }
     }
   }

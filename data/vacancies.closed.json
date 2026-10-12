@@ -11973,8 +11973,14 @@
   "photos": [
    "/media/v/old/4987c8f7c2.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/fe2af974",
+   "/media/hx/06635c88",
+   "/media/hx/d8ffa372",
+   "/media/hx/ab7bbcf3",
+   "/media/hx/72e57046"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -11982,7 +11988,8 @@
   "tildaUid": "20ofbexre1",
   "createdAt": "2021-08-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "943nk8r3b1",
@@ -15808,8 +15815,14 @@
   "photos": [
    "/media/v/old/5e56c46688.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/2933b751",
+   "/media/hx/04131da6",
+   "/media/hx/e65dc828",
+   "/media/hx/bbdb3b94",
+   "/media/hx/ccf4b36d"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -15817,7 +15830,8 @@
   "tildaUid": "gp3ni6d7z1",
   "createdAt": "2021-08-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "o1izvs9yu1",
@@ -28904,8 +28918,14 @@
   "photos": [
    "/media/v/old/fa9bafcc91.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/e075cbbe",
+   "/media/hx/9f4ba949",
+   "/media/hx/426f19ca",
+   "/media/hx/053a5bfe",
+   "/media/hx/93e813d3"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -28913,7 +28933,8 @@
   "tildaUid": "9jklat1f71",
   "createdAt": "2023-11-03T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "7yx79e2zm1",
@@ -29240,8 +29261,14 @@
   "photos": [
    "/media/v/old/34462e710f.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/6dde9228",
+   "/media/hx/83b4d400",
+   "/media/hx/5fd72c50",
+   "/media/hx/628e9b2f",
+   "/media/hx/2394b6c4"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -29249,7 +29276,8 @@
   "tildaUid": "465l3nfjk1",
   "createdAt": "2023-10-30T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "bjm6973i91",
@@ -29355,8 +29383,14 @@
   "photos": [
    "/media/v/old/97389ac109.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/2933b751",
+   "/media/hx/25ca015d",
+   "/media/hx/9e7b9764",
+   "/media/hx/fd22ba55",
+   "/media/hx/d8911fe4"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -29364,7 +29398,8 @@
   "tildaUid": "bjm6973i91",
   "createdAt": "2023-10-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "oiup7a8861",
@@ -29576,8 +29611,14 @@
   "photos": [
    "/media/v/old/fc98efe833.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/d259ce0b",
+   "/media/hx/8e9aeb37",
+   "/media/hx/e80b1d55",
+   "/media/hx/2933b751",
+   "/media/hx/fe1939d7"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -29585,7 +29626,8 @@
   "tildaUid": "2b5xrueek1",
   "createdAt": "2023-10-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "8ja2mb8zv1",
@@ -29792,8 +29834,14 @@
   "photos": [
    "/media/v/old/d9f832d3be.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/2e830395",
+   "/media/hx/fd22ba55",
+   "/media/hx/93422187",
+   "/media/hx/4e45e6c6",
+   "/media/hx/f7509c77"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -29801,7 +29849,8 @@
   "tildaUid": "gfrf8nhcf1",
   "createdAt": "2023-10-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "cbz314ij31",
@@ -30251,8 +30300,14 @@
   "photos": [
    "/media/v/old/145643eccc.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/54958489",
+   "/media/hx/1433f357",
+   "/media/hx/d8ffa372",
+   "/media/hx/e3ac8ced",
+   "/media/hx/628e9b2f"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -30260,7 +30315,8 @@
   "tildaUid": "fskn3nnv91",
   "createdAt": "2023-10-17T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "lza6m3niz1",
@@ -30481,8 +30537,14 @@
   "photos": [
    "/media/v/old/057f404427.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/d259ce0b",
+   "/media/hx/1f6d631f",
+   "/media/hx/ffa1cef1",
+   "/media/hx/628e9b2f",
+   "/media/hx/f55500e8"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -30490,7 +30552,8 @@
   "tildaUid": "v4vefxz6c1",
   "createdAt": "2023-10-09T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "pemz66bz61",
@@ -30792,8 +30855,14 @@
   "photos": [
    "/media/v/old/46ca538aa9.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/63ce914f",
+   "/media/hx/6d6d506e",
+   "/media/hx/e65dc828",
+   "/media/hx/9e7b9764",
+   "/media/hx/bf3f5cf3"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -30801,7 +30870,8 @@
   "tildaUid": "u933bmcil1",
   "createdAt": "2023-10-09T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "vxyrotrnd1",
@@ -33520,8 +33590,14 @@
   "photos": [
    "/media/v/old/c68fd7273a.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/72e57046",
+   "/media/hx/053a5bfe",
+   "/media/hx/e80b1d55",
+   "/media/hx/96d7115f",
+   "/media/hx/8c1399f2"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -33529,7 +33605,8 @@
   "tildaUid": "a33d0nf6o1",
   "createdAt": "2023-06-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "ctr7i97eg1",
@@ -33630,8 +33707,14 @@
   "photos": [
    "/media/v/old/744dccd7a0.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/ca6746a1",
+   "/media/hx/9b8fd9ac",
+   "/media/hx/93422187",
+   "/media/hx/54958489",
+   "/media/hx/d259ce0b"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -33639,7 +33722,8 @@
   "tildaUid": "ctr7i97eg1",
   "createdAt": "2023-05-29T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "gyk80zy5k1",
@@ -34321,8 +34405,14 @@
   "photos": [
    "/media/v/old/7e13cfe3d1.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/63ce914f",
+   "/media/hx/93e813d3",
+   "/media/hx/f55500e8",
+   "/media/hx/ccf4b36d",
+   "/media/hx/2933b751"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -34330,7 +34420,8 @@
   "tildaUid": "g2ckt634j1",
   "createdAt": "2023-05-16T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "tp6y7ya061",
@@ -34764,8 +34855,14 @@
   "photos": [
    "/media/v/old/fbab371871.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/2e830395",
+   "/media/hx/4cf26d1d",
+   "/media/hx/6344e4b9",
+   "/media/hx/43e439af",
+   "/media/hx/6d6d506e"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -34773,7 +34870,8 @@
   "tildaUid": "lc9f425rv1",
   "createdAt": "2023-05-10T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "ltj98exhy1",
@@ -34972,8 +35070,14 @@
   "photos": [
    "/media/v/old/3d0819081c.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/a14c66d2",
+   "/media/hx/4cf26d1d",
+   "/media/hx/8c1399f2",
+   "/media/hx/c10aebd2",
+   "/media/hx/6dde9228"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -34981,7 +35085,8 @@
   "tildaUid": "65xbirud31",
   "createdAt": "2023-05-03T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "czbfbk6ly1",
@@ -35671,8 +35776,14 @@
   "photos": [
    "/media/v/old/2eefc32f98.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4a80c797",
+   "/media/hx/370e234e",
+   "/media/hx/8c1399f2",
+   "/media/hx/eeb3f10c",
+   "/media/hx/9b8fd9ac"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -35680,7 +35791,8 @@
   "tildaUid": "c6epaer9a1",
   "createdAt": "2023-04-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "6r83hjt691",
@@ -35792,8 +35904,14 @@
   "photos": [
    "/media/v/old/3b313d1104.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4e45e6c6",
+   "/media/hx/9b8fd9ac",
+   "/media/hx/5fd72c50",
+   "/media/hx/06635c88",
+   "/media/hx/eda76fe7"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -35801,7 +35919,8 @@
   "tildaUid": "6r83hjt691",
   "createdAt": "2023-04-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "nahxofbat1",
@@ -36507,8 +36626,14 @@
   "photos": [
    "/media/v/old/9681679f49.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/9838154c",
+   "/media/hx/053a5bfe",
+   "/media/hx/8c1399f2",
+   "/media/hx/f28d568b",
+   "/media/hx/f7509c77"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -36516,7 +36641,8 @@
   "tildaUid": "6d6trah1u1",
   "createdAt": "2023-03-29T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "h47ivcbdk1",
@@ -36839,8 +36965,14 @@
   "photos": [
    "/media/v/old/52a7e49b14.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/2933b751",
+   "/media/hx/75139407",
+   "/media/hx/426f19ca",
+   "/media/hx/c10aebd2",
+   "/media/hx/8e9aeb37"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -36848,7 +36980,8 @@
   "tildaUid": "eerzuigts1",
   "createdAt": "2023-03-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "ibgee9va51",
@@ -38269,8 +38402,14 @@
   "photos": [
    "/media/v/old/f63bec2c5d.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/e075cbbe",
+   "/media/hx/f8b3bb6f",
+   "/media/hx/55d58977",
+   "/media/hx/acf653cc",
+   "/media/hx/370e234e"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -38278,7 +38417,8 @@
   "tildaUid": "am8u6dcno1",
   "createdAt": "2023-03-09T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "afdhp8ymf1",
@@ -38384,8 +38524,14 @@
   "photos": [
    "/media/v/old/48f8e5ef7c.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4a1bea5c",
+   "/media/hx/eac0b46b",
+   "/media/hx/e80b1d55",
+   "/media/hx/d8911fe4",
+   "/media/hx/c10aebd2"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -38393,7 +38539,8 @@
   "tildaUid": "afdhp8ymf1",
   "createdAt": "2023-03-08T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "m958xfnse1",
@@ -38715,8 +38862,14 @@
   "photos": [
    "/media/v/old/78470b61f2.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/54958489",
+   "/media/hx/23caa322",
+   "/media/hx/55d58977",
+   "/media/hx/ab7bbcf3",
+   "/media/hx/4cf26d1d"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -38724,7 +38877,8 @@
   "tildaUid": "bm77tn1xj1",
   "createdAt": "2023-03-04T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "k7mtkmoux1",
@@ -39425,8 +39579,14 @@
   "photos": [
    "/media/v/old/9f055b6c4c.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/d259ce0b",
+   "/media/hx/1f6d631f",
+   "/media/hx/5fd72c50",
+   "/media/hx/6d6d506e",
+   "/media/hx/c4d80a6b"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -39434,7 +39594,8 @@
   "tildaUid": "jyrikur8s1",
   "createdAt": "2023-03-01T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "3b6siuftl1",
@@ -39787,8 +39948,14 @@
   "photos": [
    "/media/v/old/9577379026.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/bf3f5cf3",
+   "/media/hx/23caa322",
+   "/media/hx/5fd72c50",
+   "/media/hx/a14c66d2",
+   "/media/hx/4e45e6c6"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -39796,7 +39963,8 @@
   "tildaUid": "mme4v8ks51",
   "createdAt": "2023-02-28T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "9f4ui0pco1",
@@ -39994,8 +40162,14 @@
   "photos": [
    "/media/v/old/2387c5047b.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/a14c66d2",
+   "/media/hx/1433f357",
+   "/media/hx/8c1399f2",
+   "/media/hx/628e9b2f",
+   "/media/hx/c4d80a6b"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -40003,7 +40177,8 @@
   "tildaUid": "6uydhoaki1",
   "createdAt": "2023-02-24T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "mj0xpcefk1",
@@ -40107,8 +40282,14 @@
   "photos": [
    "/media/v/old/0548d05611.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4a80c797",
+   "/media/hx/6d6d506e",
+   "/media/hx/d8ffa372",
+   "/media/hx/63ce914f",
+   "/media/hx/d259ce0b"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -40116,7 +40297,8 @@
   "tildaUid": "mj0xpcefk1",
   "createdAt": "2023-02-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "73z5d1g211",
@@ -40460,8 +40642,14 @@
   "photos": [
    "/media/v/old/9e3c77b450.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/678b9220",
+   "/media/hx/eac0b46b",
+   "/media/hx/93422187",
+   "/media/hx/628e9b2f",
+   "/media/hx/8e9aeb37"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -40469,7 +40657,8 @@
   "tildaUid": "otvauntzv1",
   "createdAt": "2023-02-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "1pnc5z1uu1",
@@ -40982,8 +41171,14 @@
   "photos": [
    "/media/v/old/3510d90300.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/54958489",
+   "/media/hx/e3ac8ced",
+   "/media/hx/5fd72c50",
+   "/media/hx/23caa322",
+   "/media/hx/24f62004"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -40991,7 +41186,8 @@
   "tildaUid": "r5bs0i9ed1",
   "createdAt": "2023-02-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "f621kzsyc1",
@@ -41924,8 +42120,14 @@
   "photos": [
    "/media/v/old/b38df5eeaa.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4a80c797",
+   "/media/hx/acf560f2",
+   "/media/hx/ffa1cef1",
+   "/media/hx/6dde9228",
+   "/media/hx/ab7bbcf3"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -41933,7 +42135,8 @@
   "tildaUid": "m3m5ivc8b1",
   "createdAt": "2023-02-13T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "zk5yxv3de1",
@@ -43258,8 +43461,14 @@
   "photos": [
    "/media/v/old/333c09117c.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/49e5b701",
+   "/media/hx/eac0b46b",
+   "/media/hx/426f19ca",
+   "/media/hx/4c1716b1",
+   "/media/hx/7b3d6bd3"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -43267,7 +43476,8 @@
   "tildaUid": "a96ilvvg41",
   "createdAt": "2023-02-06T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "egxczpo4x1",
@@ -44076,8 +44286,14 @@
   "photos": [
    "/media/v/old/60cc54e035.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/fe1939d7",
+   "/media/hx/6d6d506e",
+   "/media/hx/55d58977",
+   "/media/hx/9a1579bd",
+   "/media/hx/f7509c77"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -44085,7 +44301,8 @@
   "tildaUid": "tf6ineml11",
   "createdAt": "2023-01-26T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "0ladldyeb1",
@@ -44649,8 +44866,14 @@
   "photos": [
    "/media/v/old/1861bf9d7b.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/2933b751",
+   "/media/hx/1f6d631f",
+   "/media/hx/ffa1cef1",
+   "/media/hx/4a1bea5c",
+   "/media/hx/a14c66d2"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -44658,7 +44881,8 @@
   "tildaUid": "zrb4gsx6x1",
   "createdAt": "2023-01-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "6vje5ibl51",
@@ -44758,8 +44982,14 @@
   "photos": [
    "/media/v/old/dd920f8bdd.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4a80c797",
+   "/media/hx/83b4d400",
+   "/media/hx/9e7b9764",
+   "/media/hx/23caa322",
+   "/media/hx/54958489"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -44767,7 +44997,8 @@
   "tildaUid": "6vje5ibl51",
   "createdAt": "2023-01-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "3rtv1ru6i1",
@@ -44869,8 +45100,14 @@
   "photos": [
    "/media/v/old/cc741479ec.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4a1bea5c",
+   "/media/hx/acf653cc",
+   "/media/hx/e65dc828",
+   "/media/hx/d259ce0b",
+   "/media/hx/93e813d3"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -44878,7 +45115,8 @@
   "tildaUid": "3rtv1ru6i1",
   "createdAt": "2023-01-20T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "964gzztra1",
@@ -45096,8 +45334,14 @@
   "photos": [
    "/media/v/old/a0e6572a86.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/c4736ab6",
+   "/media/hx/04131da6",
+   "/media/hx/e80b1d55",
+   "/media/hx/acf653cc",
+   "/media/hx/4c1716b1"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -45105,7 +45349,8 @@
   "tildaUid": "llx6ryi431",
   "createdAt": "2023-01-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "vcp70oocp1",
@@ -46550,8 +46795,14 @@
   "photos": [
    "/media/v/old/907f60a1cf.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/63ce914f",
+   "/media/hx/96d7115f",
+   "/media/hx/98a44962",
+   "/media/hx/bbdb3b94",
+   "/media/hx/acf560f2"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -46559,7 +46810,8 @@
   "tildaUid": "g456faxhi1",
   "createdAt": "2022-12-29T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "v1pkf0dmg1",
@@ -48873,8 +49125,14 @@
   "photos": [
    "/media/v/old/044ce774d9.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/ccf4b36d",
+   "/media/hx/9f4ba949",
+   "/media/hx/426f19ca",
+   "/media/hx/8c1399f2",
+   "/media/hx/7b3d6bd3"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -48882,7 +49140,8 @@
   "tildaUid": "n0rnatl6g1",
   "createdAt": "2022-12-13T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "dsr4orf9r1",
@@ -48973,8 +49232,14 @@
   "photos": [
    "/media/v/old/0e368d6f0f.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/c4736ab6",
+   "/media/hx/fd22ba55",
+   "/media/hx/e65dc828",
+   "/media/hx/23caa322",
+   "/media/hx/628e9b2f"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -48982,7 +49247,8 @@
   "tildaUid": "dsr4orf9r1",
   "createdAt": "2022-12-13T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "xafl2a5fn1",
@@ -49742,8 +50008,14 @@
   "photos": [
    "/media/v/old/3bc5ec0349.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4c1716b1",
+   "/media/hx/9f4ba949",
+   "/media/hx/55d58977",
+   "/media/hx/e3ac8ced",
+   "/media/hx/a6520d12"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -49751,7 +50023,8 @@
   "tildaUid": "8yue62ezd1",
   "createdAt": "2022-12-09T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "pcpvrecm71",
@@ -50327,8 +50600,14 @@
   "photos": [
    "/media/v/old/aeb57269c5.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/6dde9228",
+   "/media/hx/23caa322",
+   "/media/hx/9e7b9764",
+   "/media/hx/d259ce0b",
+   "/media/hx/24f62004"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -50336,7 +50615,8 @@
   "tildaUid": "aprexp9om1",
   "createdAt": "2022-12-07T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "mia9rusjj1",
@@ -51511,8 +51791,14 @@
   "photos": [
    "/media/v/old/057ec469ac.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/ccf4b36d",
+   "/media/hx/04131da6",
+   "/media/hx/f55500e8",
+   "/media/hx/628e9b2f",
+   "/media/hx/f7509c77"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [
    {
@@ -51531,7 +51817,8 @@
   "tildaUid": "p8ksp7vjn1",
   "createdAt": "2022-10-06T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "fza8h60ko1",
@@ -52236,8 +52523,14 @@
   "photos": [
    "/media/v/old/b03dbef38c.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/a14c66d2",
+   "/media/hx/83b4d400",
+   "/media/hx/98a44962",
+   "/media/hx/1433f357",
+   "/media/hx/2394b6c4"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -52245,7 +52538,8 @@
   "tildaUid": "28u6jmjii1",
   "createdAt": "2022-09-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "b2oal5ale1",
@@ -53941,8 +54235,14 @@
   "photos": [
    "/media/v/old/51d90bbd03.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/d1521326",
+   "/media/hx/acf560f2",
+   "/media/hx/e65dc828",
+   "/media/hx/a14c66d2",
+   "/media/hx/2e830395"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -53950,7 +54250,8 @@
   "tildaUid": "cs93bfa9f1",
   "createdAt": "2022-09-12T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "kj0eo9gkl1",
@@ -54390,8 +54691,14 @@
   "photos": [
    "/media/v/old/c4eda8783a.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/54958489",
+   "/media/hx/c10aebd2",
+   "/media/hx/f55500e8",
+   "/media/hx/d8911fe4",
+   "/media/hx/a6520d12"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -54399,7 +54706,8 @@
   "tildaUid": "7tz0lk7v21",
   "createdAt": "2022-09-12T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "2cj39nnbl1",
@@ -55073,8 +55381,14 @@
   "photos": [
    "/media/v/old/5fbcdcd16a.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/9838154c",
+   "/media/hx/41f99e37",
+   "/media/hx/d8ffa372",
+   "/media/hx/a6520d12",
+   "/media/hx/fe2af974"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [
    {
@@ -55088,7 +55402,8 @@
   "tildaUid": "m6rmvmdhd1",
   "createdAt": "2022-09-08T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "70f5121ka1",
@@ -55776,8 +56091,14 @@
   "photos": [
    "/media/v/old/080bf02831.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/eeb3f10c",
+   "/media/hx/9b8fd9ac",
+   "/media/hx/9e7b9764",
+   "/media/hx/d8911fe4",
+   "/media/hx/c4736ab6"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -55785,7 +56106,8 @@
   "tildaUid": "86ttzxvxd1",
   "createdAt": "2022-09-04T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "ksv1ygdfh1",
@@ -57148,8 +57470,14 @@
   "photos": [
    "/media/v/old/5b65703a38.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/72e57046",
+   "/media/hx/93e813d3",
+   "/media/hx/5fd72c50",
+   "/media/hx/1f6d631f",
+   "/media/hx/2394b6c4"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -57157,7 +57485,8 @@
   "tildaUid": "o1x8hdv711",
   "createdAt": "2022-08-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "0ylchoeee1",
@@ -57497,8 +57826,14 @@
   "photos": [
    "/media/v/old/b0955d40b2.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/fe2af974",
+   "/media/hx/93e813d3",
+   "/media/hx/9e7b9764",
+   "/media/hx/1dd9c2fa",
+   "/media/hx/ab7bbcf3"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -57506,7 +57841,8 @@
   "tildaUid": "i9c5jihp81",
   "createdAt": "2022-08-22T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "f8xf0j2661",
@@ -57738,8 +58074,14 @@
   "photos": [
    "/media/v/old/26d9a9780e.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4c1716b1",
+   "/media/hx/1f6d631f",
+   "/media/hx/d8ffa372",
+   "/media/hx/d8911fe4",
+   "/media/hx/b41a4340"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -57747,7 +58089,8 @@
   "tildaUid": "nsc2yddgn1",
   "createdAt": "2022-08-22T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "blvon7jlz1",
@@ -62056,8 +62399,14 @@
   "photos": [
    "/media/v/old/597fa7c7c5.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/72e57046",
+   "/media/hx/1433f357",
+   "/media/hx/f55500e8",
+   "/media/hx/04131da6",
+   "/media/hx/4c1716b1"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -62065,7 +62414,8 @@
   "tildaUid": "4treaym1g1",
   "createdAt": "2022-08-03T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "zi3bge7mo1",
@@ -62176,8 +62526,14 @@
   "photos": [
    "/media/v/old/9dd03cf22e.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/bf3f5cf3",
+   "/media/hx/acf560f2",
+   "/media/hx/f55500e8",
+   "/media/hx/9a1579bd",
+   "/media/hx/41f99e37"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -62185,7 +62541,8 @@
   "tildaUid": "zi3bge7mo1",
   "createdAt": "2022-08-02T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "mszcf3gz51",
@@ -65759,8 +66116,14 @@
   "photos": [
    "/media/v/old/e51c817223.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/54958489",
+   "/media/hx/eac0b46b",
+   "/media/hx/e80b1d55",
+   "/media/hx/4a1bea5c",
+   "/media/hx/ccf4b36d"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -65768,7 +66131,8 @@
   "tildaUid": "spbc1z8lc1",
   "createdAt": "2022-07-05T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "ykagntlbf1",
@@ -67205,8 +67569,14 @@
   "photos": [
    "/media/v/old/55df92072c.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4a80c797",
+   "/media/hx/23caa322",
+   "/media/hx/5fd72c50",
+   "/media/hx/fe1939d7",
+   "/media/hx/acf653cc"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -67214,7 +67584,8 @@
   "tildaUid": "xkvgcy3r61",
   "createdAt": "2022-06-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "6dtk6m5rc1",
@@ -67317,8 +67688,14 @@
   "photos": [
    "/media/v/old/e6f46d0535.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4a1bea5c",
+   "/media/hx/41f99e37",
+   "/media/hx/e65dc828",
+   "/media/hx/04131da6",
+   "/media/hx/bf3f5cf3"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [
    {
@@ -67332,7 +67709,8 @@
   "tildaUid": "6dtk6m5rc1",
   "createdAt": "2022-06-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "b8b3u07721",
@@ -70543,8 +70921,14 @@
   "photos": [
    "/media/v/old/9dbb3fce7f.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4a1bea5c",
+   "/media/hx/acf560f2",
+   "/media/hx/f55500e8",
+   "/media/hx/24f62004",
+   "/media/hx/5fd72c50"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -70552,7 +70936,8 @@
   "tildaUid": "fjh84j9c21",
   "createdAt": "2022-05-26T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "kx3enl8z31",
@@ -71690,15 +72075,22 @@
   "photos": [
    "/media/v/old/c70fd3dc41.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/ccf4b36d",
+   "/media/hx/1f6d631f",
+   "/media/hx/93422187",
+   "/media/hx/70d757c1",
+   "/media/hx/9f4ba949"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
   "seoDescription": "",
   "tildaUid": "1k8k30d3g1",
   "createdAt": "2022-05-16T09:00:00.000Z",
-  "updatedAt": "2026-10-06T10:28:38.542Z"
+  "updatedAt": "2026-10-06T10:28:38.542Z",
+  "housingPool": true
  },
  {
   "id": "ksy6zbbbn1",
@@ -73441,8 +73833,14 @@
   "photos": [
    "/media/v/old/e952f8c7b1.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/24f62004",
+   "/media/hx/9f4ba949",
+   "/media/hx/e65dc828",
+   "/media/hx/628e9b2f",
+   "/media/hx/429113b5"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -73450,7 +73848,8 @@
   "tildaUid": "c32jol12p1",
   "createdAt": "2022-04-11T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "899s45bju1",
@@ -73873,8 +74272,14 @@
   "photos": [
    "/media/v/old/9d74231007.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/bf3f5cf3",
+   "/media/hx/83b4d400",
+   "/media/hx/55d58977",
+   "/media/hx/053a5bfe",
+   "/media/hx/628e9b2f"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -73882,7 +74287,8 @@
   "tildaUid": "l5z6u1e5n1",
   "createdAt": "2022-04-06T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "kr3ozvj7x1",
@@ -74231,8 +74637,14 @@
   "photos": [
    "/media/v/old/2c5a20bf24.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/2933b751",
+   "/media/hx/41f99e37",
+   "/media/hx/426f19ca",
+   "/media/hx/9e7b9764",
+   "/media/hx/93e813d3"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -74240,7 +74652,8 @@
   "tildaUid": "tb5h2g07s1",
   "createdAt": "2022-04-01T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "rsa0me4bh1",
@@ -78628,8 +79041,14 @@
   "photos": [
    "/media/v/old/dd57d0562d.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/54958489",
+   "/media/hx/1f6d631f",
+   "/media/hx/5fd72c50",
+   "/media/hx/6d6d506e",
+   "/media/hx/43e439af"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -78637,7 +79056,8 @@
   "tildaUid": "jng64nm6f1",
   "createdAt": "2022-01-28T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "iuktklcdn1",
@@ -80372,8 +80792,14 @@
   "photos": [
    "/media/v/old/904540118c.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/fe1939d7",
+   "/media/hx/a6520d12",
+   "/media/hx/5fd72c50",
+   "/media/hx/2394b6c4",
+   "/media/hx/9a1579bd"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [
    {
@@ -80392,7 +80818,8 @@
   "tildaUid": "2e0xdmdm61",
   "createdAt": "2022-01-13T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "f8jh3v2s61",
@@ -82916,15 +83343,22 @@
   "photos": [
    "/media/v/old/ef0c763078.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/e075cbbe",
+   "/media/hx/7b3d6bd3",
+   "/media/hx/d8ffa372",
+   "/media/hx/1e1e689b",
+   "/media/hx/72e57046"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
   "seoDescription": "",
   "tildaUid": "7uuyrkpbz1",
   "createdAt": "2021-12-17T09:00:00.000Z",
-  "updatedAt": "2026-10-06T10:28:38.542Z"
+  "updatedAt": "2026-10-06T10:28:38.542Z",
+  "housingPool": true
  },
  {
   "id": "o3e9ll1pt1",
@@ -85229,8 +85663,14 @@
   "photos": [
    "/media/v/old/1bb8811ec3.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4e45e6c6",
+   "/media/hx/8e9aeb37",
+   "/media/hx/ffa1cef1",
+   "/media/hx/b41a4340",
+   "/media/hx/6d6d506e"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -85238,7 +85678,8 @@
   "tildaUid": "dnazmol6o1",
   "createdAt": "2021-11-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "kp5vgmn6s1",
@@ -85675,8 +86116,14 @@
   "photos": [
    "/media/v/old/de5f46c15d.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/d1521326",
+   "/media/hx/06635c88",
+   "/media/hx/6344e4b9",
+   "/media/hx/1e1e689b",
+   "/media/hx/41f99e37"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -85684,7 +86131,8 @@
   "tildaUid": "xgr9e6mbf1",
   "createdAt": "2021-11-22T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "92th7oj0v1",
@@ -87592,8 +88040,14 @@
   "photos": [
    "/media/v/old/4d90831381.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/54958489",
+   "/media/hx/1f6d631f",
+   "/media/hx/5fd72c50",
+   "/media/hx/2933b751",
+   "/media/hx/4c1716b1"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -87601,7 +88055,8 @@
   "tildaUid": "hbgc75h5v1",
   "createdAt": "2021-11-10T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "hunvxek5t1",
@@ -88038,15 +88493,22 @@
   "photos": [
    "/media/v/old/467ee29ec2.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/fe1939d7",
+   "/media/hx/93e813d3",
+   "/media/hx/ffa1cef1",
+   "/media/hx/c4d80a6b",
+   "/media/hx/1e1e689b"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
   "seoDescription": "",
   "tildaUid": "5aid65ic21",
   "createdAt": "2021-11-09T09:00:00.000Z",
-  "updatedAt": "2026-10-06T10:28:38.542Z"
+  "updatedAt": "2026-10-06T10:28:38.542Z",
+  "housingPool": true
  },
  {
   "id": "vytveea411",
@@ -88993,8 +89455,14 @@
   "photos": [
    "/media/v/old/1da9f070a4.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/ca6746a1",
+   "/media/hx/9f4ba949",
+   "/media/hx/6344e4b9",
+   "/media/hx/628e9b2f",
+   "/media/hx/8e9aeb37"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -89002,7 +89470,8 @@
   "tildaUid": "0e3okhcrp1",
   "createdAt": "2021-11-02T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "ccg6z6ci91",
@@ -90404,8 +90873,14 @@
   "photos": [
    "/media/v/old/bc0170301e.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/b41a4340",
+   "/media/hx/96d7115f",
+   "/media/hx/98a44962",
+   "/media/hx/6344e4b9",
+   "/media/hx/72e57046"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -90413,7 +90888,8 @@
   "tildaUid": "54xa4nsex1",
   "createdAt": "2021-10-26T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "vgi553nxa1",
@@ -90791,8 +91267,14 @@
   "photos": [
    "/media/v/old/e92bab860d.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/67d3b59b",
+   "/media/hx/06635c88",
+   "/media/hx/f55500e8",
+   "/media/hx/eda76fe7",
+   "/media/hx/bbdb3b94"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -90800,7 +91282,8 @@
   "tildaUid": "56g6dp1or1",
   "createdAt": "2021-10-23T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "n8tpyi2ka1",
@@ -94048,8 +94531,14 @@
   "photos": [
    "/media/v/old/3a5d78892f.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/70d757c1",
+   "/media/hx/06635c88",
+   "/media/hx/ffa1cef1",
+   "/media/hx/4e45e6c6",
+   "/media/hx/bbdb3b94"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [
    {
@@ -94063,7 +94552,8 @@
   "tildaUid": "3c5a62vfv1",
   "createdAt": "2021-09-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "7yhmrf1c71",
@@ -97359,8 +97849,14 @@
   "photos": [
    "/media/v/old/fb4cfdbc90.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/6dde9228",
+   "/media/hx/43e439af",
+   "/media/hx/98a44962",
+   "/media/hx/49e5b701",
+   "/media/hx/628e9b2f"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [
    {
@@ -97374,7 +97870,8 @@
   "tildaUid": "pl8xcaop21",
   "createdAt": "2021-09-15T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "b45xtnzzj1",
@@ -100756,8 +101253,14 @@
   "photos": [
    "/media/v/old/9fa7d68c2f.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4c1716b1",
+   "/media/hx/41f99e37",
+   "/media/hx/98a44962",
+   "/media/hx/bbdb3b94",
+   "/media/hx/23caa322"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -100765,7 +101268,8 @@
   "tildaUid": "3zsoongxx1",
   "createdAt": "2021-08-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "inp1bsfru1",
@@ -105736,8 +106240,14 @@
   "photos": [
    "/media/v/old/446059b82e.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/b41a4340",
+   "/media/hx/eac0b46b",
+   "/media/hx/f55500e8",
+   "/media/hx/9a1579bd",
+   "/media/hx/8e9aeb37"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -105745,7 +106255,8 @@
   "tildaUid": "5cb02jfv61",
   "createdAt": "2021-08-12T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "lxx6fy0ck1",
@@ -108564,8 +109075,14 @@
   "photos": [
    "/media/v/old/a9a9ccedbb.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/6dde9228",
+   "/media/hx/a6520d12",
+   "/media/hx/93422187",
+   "/media/hx/75139407",
+   "/media/hx/1e1e689b"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -108573,7 +109090,8 @@
   "tildaUid": "gncta6ttk1",
   "createdAt": "2021-08-10T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "lji8oiisa1",
@@ -116953,8 +117471,14 @@
   "photos": [
    "/media/v/old/43e86dfc9f.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/4dbd0f25",
+   "/media/hx/08b3d862",
+   "/media/hx/8d2abe92",
+   "/media/hx/f1d10829",
+   "/media/hx/7b2ff1df"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -116962,7 +117486,8 @@
   "tildaUid": "d0kfrodue1",
   "createdAt": "2022-05-24T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "fpj6yx4531",
@@ -121917,8 +122442,14 @@
   "photos": [
    "/media/v/old/7a54443bd6.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/bf3f5cf3",
+   "/media/hx/7b3d6bd3",
+   "/media/hx/e65dc828",
+   "/media/hx/a14c66d2",
+   "/media/hx/49e5b701"
+  ],
+  "housingNote": "Пример жилья, которое предоставляют работодатели. Фото жилья именно этой вакансии пришлёт менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -121926,7 +122457,8 @@
   "tildaUid": "xos07rp3l1",
   "lang": "ru",
   "createdAt": "2021-09-21T09:00:00.000Z",
-  "updatedAt": "2026-10-06T10:28:38.542Z"
+  "updatedAt": "2026-10-06T10:28:38.542Z",
+  "housingPool": true
  },
  {
   "id": "uy1xcrs101",
@@ -125364,8 +125896,14 @@
   "photos": [
    "/media/v/old/f4f3b125c8.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/72e57046",
+   "/media/hx/9b8fd9ac",
+   "/media/hx/e65dc828",
+   "/media/hx/2394b6c4",
+   "/media/hx/24f62004"
+  ],
+  "housingNote": "Пример жилья, которое предоставляют работодатели. Фото жилья именно этой вакансии пришлёт менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -125373,7 +125911,8 @@
   "tildaUid": "hrj0lcvzr1",
   "lang": "ru",
   "createdAt": "2021-09-16T09:00:00.000Z",
-  "updatedAt": "2026-10-06T10:28:38.542Z"
+  "updatedAt": "2026-10-06T10:28:38.542Z",
+  "housingPool": true
  },
  {
   "id": "b768e1j4o1",
@@ -126591,8 +127130,14 @@
   "photos": [
    "/media/v/old/869e138829.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/a56d7c58",
+   "/media/hx/053bc33e",
+   "/media/hx/7657eb03",
+   "/media/hx/6df5b841",
+   "/media/hx/e9dfe1b9"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -126600,7 +127145,8 @@
   "tildaUid": "5r9mb9t141",
   "createdAt": "2024-11-11T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "9k98672bu1",
@@ -127066,8 +127612,14 @@
   "photos": [
    "/media/v/old/355e502046.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/6df5b841",
+   "/media/hx/9a622a4b",
+   "/media/hx/8d35cc47",
+   "/media/hx/ab1187b8",
+   "/media/hx/8dd7fa2c"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -127075,7 +127627,8 @@
   "tildaUid": "te4akakjh1",
   "createdAt": "2024-07-25T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "lrv80e9jo1",
@@ -127932,8 +128485,14 @@
   "photos": [
    "/media/v/old/c3bd9f4a77.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/8dd7fa2c",
+   "/media/hx/94c7d0d4",
+   "/media/hx/a6185d78",
+   "/media/hx/98f2832f",
+   "/media/hx/31dfd2e9"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -127941,7 +128500,8 @@
   "tildaUid": "5ykpogcjf1",
   "createdAt": "2023-10-09T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "vyc29v4le1",
@@ -133449,8 +134009,14 @@
   "photos": [
    "/media/v/old/fccfae0cfb.webp"
   ],
-  "housingPhotos": [],
-  "housingNote": "",
+  "housingPhotos": [
+   "/media/hx/992110b4",
+   "/media/hx/94c7d0d4",
+   "/media/hx/a6185d78",
+   "/media/hx/548b8177",
+   "/media/hx/d8911fe4"
+  ],
+  "housingNote": "Приклад житла, яке надають роботодавці. Фото житла саме цієї вакансії надішле менеджер.",
   "logo": "",
   "reviews": [],
   "seoTitle": "",
@@ -133458,7 +134024,8 @@
   "tildaUid": "nuxlhsh5z1",
   "createdAt": "2023-10-30T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "revived": "2026-10-09"
+  "revived": "2026-10-09",
+  "housingPool": true
  },
  {
   "id": "hn03mld541",

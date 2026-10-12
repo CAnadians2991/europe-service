@@ -204,7 +204,8 @@ export function ExtrasBlock({ lang }: { lang: Lang }) {
           <li className={row}>
             <div className="min-w-0 flex-1">
               <p className="text-[15.5px] font-semibold">{uk ? 'Страховий поліс на ваш термін' : 'Страховой полис на ваш срок'}</p>
-              <p className="text-[13px] text-ink-2">{uk ? 'Медичні витрати до 30 000 €, ціна залежить від терміну' : 'Медицинские расходы до 30 000 €, цена зависит от срока'}</p>
+              {/* Tilda's text of this service (services.json), one-to-one */}
+              <p className="text-[13px] text-ink-2">{(insOwn.features ?? []).slice(0, 2).join(' ')}</p>
             </div>
             <p className="num shrink-0 text-[15px] font-bold">{insOwn.price?.replace('₴ ', '')}{/грн/.test(insOwn.price ?? '') ? '' : ' грн'}</p>
             <LeadButton form="invoice:insurance" title={uk ? 'Розрахувати страховку' : 'Рассчитать страховку'} subtitle={insOwn.title} className="btn-ghost !min-h-10 shrink-0 !px-3 !text-[14px]">
@@ -219,7 +220,7 @@ export function ExtrasBlock({ lang }: { lang: Lang }) {
         <Link href={uk ? '/robocha-viza-v-polshchu' : '/ru/rabochaya-viza-v-polshu'} className="group flex flex-col rounded-2xl border border-line bg-white p-5 transition hover:border-ink">
           <p className="text-[12px] font-semibold uppercase tracking-[0.06em] text-brand-700">{uk ? 'Візовий супровід' : 'Визовое сопровождение'}</p>
           <p className="mt-1 text-[19px] font-bold leading-snug">{uk ? 'Робоча віза в Польщу на рік без прив’язки' : 'Рабочая виза в Польшу на год без привязки'}</p>
-          <p className="mt-1.5 text-[14px] text-ink-2">{uk ? 'Анкета, страховий поліс, запис у візовий центр і координація до візи.' : 'Анкета, страховой полис, запись в визовый центр и координация до визы.'}</p>
+          <p className="mt-1.5 text-[14px] text-ink-2">{uk ? 'Допомога з реєстрацією та координація по подачі документів в консульство. Анкета, страховий поліс, запис у візовий центр.' : 'Помощь с регистрацией и координация по подаче документов в консульство. Анкета, страховой полис, запись в визовый центр.'}</p>
           <p className="mt-auto flex items-center justify-between pt-3">
             <span className="num text-[20px] font-bold">15 000 грн</span>
             <span className="font-semibold text-brand-700 group-hover:underline">{uk ? 'Детальніше →' : 'Подробнее →'}</span>

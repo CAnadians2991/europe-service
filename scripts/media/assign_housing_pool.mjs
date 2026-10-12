@@ -35,8 +35,8 @@ for (const v of closed) {
     continue
   }
   if (v.housingPhotos?.length || MEDIA[v.path]?.housing?.length) continue
-  const houseText = [v.housing, ...(v.sections.find((s) => /^(Проживання|Проживание)$/.test(s.title))?.items ?? [])].join(' ')
-  if (OWN.test(houseText) && !v.housingFree) continue
+  // only the housing term itself: «доплата за власне житло» in the section text still means housing is offered
+  if (OWN.test(v.housing || '') && !v.housingFree) continue
   const local = POOL.filter((p) => p.country === v.country)
   const pool = local.length >= PER * 2 ? local : [...local, ...POOL.filter((p) => p.country !== v.country)]
   // one set per employer + city: the same employer's posts show the same photos

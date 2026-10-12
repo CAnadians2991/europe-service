@@ -100,7 +100,8 @@ export async function contentMetadata(path: string): Promise<Metadata> {
   // Tilda indexed /privacy, /oferta, /user_deal, /declaration — so do we; their Russian copies are new (not indexed)
   if (r.kind === 'legal') return pageMeta({ title: r.doc.seoTitle || r.doc.title, description: r.doc.seoDescription || r.doc.title, path, lang, noindex: lang === 'ru', absoluteTitle: true })
   const p = r.page
-  return pageMeta({ title: p.seoTitle || p.title || 'Europe Service', description: p.seoDescription || p.title || p.seoTitle || 'Europe Service', path, lang: p.lang, absoluteTitle: true, noindex: /^(\/ru)?\/links$/.test(path) })
+  return pageMeta({ title: p.seoTitle || p.title || 'Europe Service', description: p.seoDescription || p.title || p.seoTitle || 'Europe Service', path, lang: p.lang, absoluteTitle: true, // /links was indexable on Tilda (parity); its Russian copy is ours
+    noindex: path === '/ru/links' })
 }
 
 export async function ContentView({ path, lang }: { path: string; lang: Lang }) {
