@@ -26,6 +26,9 @@ export async function POST(req: NextRequest) {
   }
 
   const id = crypto.randomUUID()
+  // the host the visitor used (netlify.app before the domain switch, europeservice.com.ua after) — for Netlify Forms
+  const host = req.headers.get('x-forwarded-host') || req.headers.get('host')
+  const origin = host ? `https://${host}` : undefined
   // Bots: honeypot filled or submitted faster than a human could type → pretend success, store nothing
   if (body.hp || (body.t !== undefined && body.t < 1500)) return NextResponse.json({ ok: true, id })
 
@@ -60,11 +63,11 @@ export async function POST(req: NextRequest) {
   } catch (e) {
     // DB is down: still try to deliver so the lead is not lost
     console.error('[lead] save failed', e)
-    const d = await deliverLead(lead)
+    const d = await deliverLead(lead, origin)
     if (Object.values(d).includes('ok')) return NextResponse.json({ ok: true, id })
     return NextResponse.json({ ok: false, error: 'server' }, { status: 500 })
   }
 
-  after(() => deliverLead(lead))
+  after(() => deliverLead(lead, origin))
   return NextResponse.json({ ok: true, id })
 }

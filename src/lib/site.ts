@@ -191,6 +191,7 @@ export const NAV = [
   { href: '/about', label: 'Про нас' },
   { href: '/vidguki', label: 'Відгуки' },
   { href: '/news', label: 'Новини' },
+  { href: '/spivpratsya', label: 'Партнерам', wide: true },
   { href: '/contacts', label: 'Контакти' },
 ]
 
@@ -200,6 +201,7 @@ export const NAV_RU = [
   { href: '/ru/about', label: 'О нас' },
   { href: '/ru/otzyvy', label: 'Отзывы' },
   { href: '/ru/news', label: 'Новости' },
+  { href: '/ru/sotrudnichestvo', label: 'Партнёрам', wide: true },
   { href: '/ru/contacts', label: 'Контакты' },
 ]
 

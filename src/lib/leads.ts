@@ -271,16 +271,63 @@ async function toDiscord(l: Lead, inBitrix: boolean) {
   return r.ok ? 'ok' : 'error'
 }
 
-export async function deliverLead(l: Lead) {
-  // Bitrix first, so the backup channels can say whether it got there
-  const [telegram, bitrix, bitrixScript] = await Promise.all([
+/**
+ * Partnership requests (/spivpratsya and its RU/EN/PL pages) are not candidates: they go to the owner's mailbox with the
+ * subject «ПАРТНЕРСТВО» (owner, 2026-10-12) — through Netlify Forms (public/__forms.html, form «partnership»; the e-mail
+ * notification is set on the site), posted to the host the visitor used, so it works before and after the domain switch.
+ */
+async function toPartnerEmail(l: Lead, origin?: string) {
+  if (!l.form.startsWith('partner')) return 'skip'
+  const base = origin || process.env.URL
+  if (!base) return 'skip'
+  const a = l.answers ?? {}
+  const body = new URLSearchParams({
+    'form-name': 'partnership',
+    subject: 'ПАРТНЕРСТВО',
+    kind: a['Партнер'] || l.form,
+    name: l.name,
+    phone: l.phone,
+    email: a['Email'] || '',
+    company: a['Компанія'] || '',
+    country: a['Країна'] || '',
+    message: a['Запит'] || '',
+    page: SITE.url + l.page,
+    lang: a['Мова сторінки'] || '',
+    source: leadSource(l),
+  })
+  const r = await fetch(base.replace(/\/$/, '') + '/__forms.html', {
+    method: 'POST',
+    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    body: body.toString(),
+    redirect: 'manual',
+    signal: AbortSignal.timeout(8000),
+  })
+  return r.status < 400 ? 'ok' : 'error'
+}
+
+/** Test submissions (+380 10 000 xx xx — no such operator): stored in the admin as «Спам», delivered nowhere but the partnership
+ *  e-mail — so every form can be tried on the live site without a lead reaching the managers */
+export const isTestPhone = (phone: string) => /^\+38010\d{7}$/.test(phone)
+
+export async function deliverLead(l: Lead, origin?: string) {
+  if (isTestPhone(l.phone)) {
+    const email = await toPartnerEmail(l, origin).catch(() => 'error')
+    const delivered = { test: true, email }
+    if (hasDb) await sql`update leads set delivered = ${JSON.stringify(delivered)}, status = 'spam' where id = ${l.id}`.catch(() => {})
+    return delivered
+  }
+  // partners → e-mail (not Bitrix: managers there take candidates); candidates → Bitrix first, so the backup channels
+  // can say whether it got there
+  const partner = l.form.startsWith('partner')
+  const [telegram, bitrix, bitrixScript, email] = await Promise.all([
     toTelegram(l).catch(() => 'error'),
-    toBitrix(l).catch(() => 'error'),
-    toTildaHook(l).catch(() => 'error'),
+    partner ? 'skip' : toBitrix(l).catch(() => 'error'),
+    partner ? 'skip' : toTildaHook(l).catch(() => 'error'),
+    toPartnerEmail(l, origin).catch(() => 'error'),
   ])
   const inBitrix = bitrix === 'ok' || bitrixScript === 'ok'
-  const [webhook, discord] = await Promise.all([toWebhook(l, inBitrix).catch(() => 'error'), toDiscord(l, inBitrix).catch(() => 'error')])
-  const delivered = { telegram, bitrix, bitrix_script: bitrixScript, webhook, discord }
+  const [webhook, discord] = await Promise.all([toWebhook(l, inBitrix || email === 'ok').catch(() => 'error'), partner ? 'skip' : toDiscord(l, inBitrix).catch(() => 'error')])
+  const delivered = { telegram, bitrix, bitrix_script: bitrixScript, email, webhook, discord }
   if (hasDb) await sql`update leads set delivered = ${JSON.stringify(delivered)} where id = ${l.id}`.catch(() => {})
   return delivered
 }

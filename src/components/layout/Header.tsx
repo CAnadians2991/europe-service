@@ -91,7 +91,8 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
             </div>
           </div>
           {nav.slice(1).map((n) => (
-            <Link key={n.href} href={n.href} className={link}>
+            // «Партнерам» (B2B) only where the header has room; phones and laptops have it in the menu and the footer
+            <Link key={n.href} href={n.href} className={'wide' in n && n.wide ? link.replace('inline-flex', 'hidden 2xl:inline-flex') : link}>
               {n.label}
             </Link>
           ))}

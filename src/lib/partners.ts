@@ -37,6 +37,8 @@ type Copy = {
   h1: string
   /** the H1 of the old Tilda page at this address (kept as the <h1>; `h1` is then shown as the big line) */
   tildaH1?: string
+  /** a keyword H1 over the big headline (new pages; /cooperation keeps Tilda's «Our performance») */
+  seoH1?: string
   sub: string
   cta: string
   langs: string
@@ -63,6 +65,7 @@ export const PARTNER: Record<PartnerLang, Copy> = {
     home: 'Головна',
     eyebrow: 'Співпраця',
     h1: 'Закриємо вашу вакансію кандидатами з України',
+    seoH1: 'Співпраця з кадровим агентством: працівники з України для роботодавців і агенцій праці',
     sub: 'З 2018 року підбираємо працівників для роботодавців і агенцій праці в Європі. Відкриті до партнерства з агенціями з різних країн і рекрутерами-фрилансерами.',
     cta: 'Залишити заявку',
     langs: 'Ця сторінка іншими мовами:',
@@ -95,6 +98,8 @@ export const PARTNER: Record<PartnerLang, Copy> = {
       { q: 'Які позиції ви закриваєте?', a: 'Робітничі й технічні: склади й логістика, виробництво, харчова промисловість, автозаводи, будівництво, готелі й ресторани, прибирання, сільське господарство, водії. Під кожен запит збираємо окрему команду рекрутерів.' },
       { q: 'Звідки ваші кандидати?', a: `Переважно з України: ${VOLUME.offices} наших офісів (Київ, Львів, Рівне, Житомир, Одеса) і власні онлайн-канали. Кандидати проходять співбесіду й перевірку документів до виїзду.` },
       { q: 'Як стати рекрутером-фрилансером?', a: 'Залиште заявку з позначкою «Рекрутер-фрилансер». Менеджер розповість про вакансії, умови винагороди й навчання.' },
+      { q: 'Як почати співпрацю роботодавцю чи агенції?', a: 'Залиште заявку на цій сторінці: менеджер відділу партнерства уточнить позиції, кількість людей, умови й терміни, після чого ми підберемо кандидатів і узгодимо їхній виїзд.' },
+      { q: 'Чи працюєте ви офіційно?', a: 'Так. Europe Service працює з 2018 року, має ліцензію МСП № 223 від 15.02.2019 і 5 офісів в Україні. Кандидати виїжджають за офіційними договорами з роботодавцем.' },
     ],
   },
   ru: {
@@ -104,6 +109,7 @@ export const PARTNER: Record<PartnerLang, Copy> = {
     home: 'Главная',
     eyebrow: 'Сотрудничество',
     h1: 'Закроем вашу вакансию кандидатами из Украины',
+    seoH1: 'Сотрудничество с кадровым агентством: работники из Украины для работодателей и агентств труда',
     sub: 'С 2018 года подбираем работников для работодателей и агентств труда в Европе. Открыты к партнёрству с агентствами из разных стран и рекрутерами-фрилансерами.',
     cta: 'Оставить заявку',
     langs: 'Эта страница на других языках:',
@@ -136,6 +142,8 @@ export const PARTNER: Record<PartnerLang, Copy> = {
       { q: 'Какие позиции вы закрываете?', a: 'Рабочие и технические: склады и логистика, производство, пищевая промышленность, автозаводы, стройка, отели и рестораны, уборка, сельское хозяйство, водители. Под каждый запрос собираем отдельную команду рекрутеров.' },
       { q: 'Откуда ваши кандидаты?', a: `В основном из Украины: ${VOLUME.offices} наших офисов (Киев, Львов, Ровно, Житомир, Одесса) и собственные онлайн-каналы. Кандидаты проходят собеседование и проверку документов до выезда.` },
       { q: 'Как стать рекрутером-фрилансером?', a: 'Оставьте заявку с отметкой «Рекрутер-фрилансер». Менеджер расскажет о вакансиях, условиях вознаграждения и обучении.' },
+      { q: 'Как начать сотрудничество работодателю или агентству?', a: 'Оставьте заявку на этой странице: менеджер отдела партнёрства уточнит позиции, количество людей, условия и сроки, после чего мы подберём кандидатов и согласуем их выезд.' },
+      { q: 'Вы работаете официально?', a: 'Да. Europe Service работает с 2018 года, имеет лицензию МСП № 223 от 15.02.2019 и 5 офисов в Украине. Кандидаты выезжают по официальным договорам с работодателем.' },
     ],
   },
   en: {
@@ -188,6 +196,7 @@ export const PARTNER: Record<PartnerLang, Copy> = {
     home: 'Strona główna',
     eyebrow: 'Współpraca',
     h1: 'Pracownicy z Ukrainy dla Twojej firmy',
+    seoH1: 'Współpraca z agencją rekrutacyjną: pracownicy z Ukrainy dla pracodawców i agencji pracy',
     sub: 'Od 2018 roku rekrutujemy pracowników dla pracodawców i agencji pracy w Europie. Jesteśmy otwarci na współpracę z agencjami z różnych krajów i rekruterami freelancerami.',
     cta: 'Wyślij zapytanie',
     langs: 'Ta strona w innych językach:',
@@ -220,6 +229,8 @@ export const PARTNER: Record<PartnerLang, Copy> = {
       { q: 'Jakie stanowiska obsadzacie?', a: 'Stanowiska fizyczne i techniczne: magazyny i logistyka, produkcja, przemysł spożywczy, fabryki samochodów, budownictwo, hotele i restauracje, sprzątanie, rolnictwo, kierowcy. Do każdego zapytania tworzymy osobny zespół rekruterów.' },
       { q: 'Skąd pochodzą wasi kandydaci?', a: `Głównie z Ukrainy: nasze ${VOLUME.offices} biur (Kijów, Lwów, Równe, Żytomierz, Odessa) i własne kanały online. Każdy kandydat przechodzi rozmowę i weryfikację dokumentów przed wyjazdem.` },
       { q: 'Jak zostać rekruterem freelancerem?', a: 'Wyślij zapytanie i wybierz «Rekruter freelancer». Menedżer opowie o ofertach, warunkach wynagrodzenia i szkoleniu.' },
+      { q: 'Jak rozpocząć współpracę jako pracodawca lub agencja?', a: 'Wyślij zapytanie na tej stronie: menedżer ds. współpracy ustali stanowiska, liczbę osób, warunki i terminy, a następnie dobierzemy kandydatów i uzgodnimy ich przyjazd.' },
+      { q: 'Czy działacie oficjalnie?', a: 'Tak. Europe Service działa od 2018 roku, posiada licencję Ministerstwa Polityki Społecznej Ukrainy nr 223 z 15.02.2019 i 5 biur na Ukrainie. Kandydaci wyjeżdżają na podstawie oficjalnych umów z pracodawcą.' },
     ],
   },
 }
