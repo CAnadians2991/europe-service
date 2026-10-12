@@ -76,6 +76,7 @@ export async function CatalogPage({
   lang = 'uk',
   links,
   faq,
+  faqInText,
   code,
   extra,
 }: {
@@ -90,6 +91,8 @@ export async function CatalogPage({
   /** related landings (country × segment) for internal linking */
   links?: { title: string; items: { href: string; label: string; count?: number }[] }[]
   faq?: { q: string; a: string }[]
+  /** the Tilda text (seoText) already shows these questions as an accordion: only the FAQPage markup is added */
+  faqInText?: boolean
   /** country code for the decorative letters in the head */
   code?: string
   /** extra blocks after the list (city sections on country pages) */
@@ -134,7 +137,7 @@ export async function CatalogPage({
       {faq && faq.length > 0 && (
         <>
           <JsonLd data={faqLd(faq)} />
-          <Faq items={faq} lang={lang} />
+          {!faqInText && <Faq items={faq} lang={lang} />}
         </>
       )}
       <CtaBand

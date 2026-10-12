@@ -100,6 +100,14 @@ export async function vacanciesMetadata(root: Root, slug: string[] = []): Promis
   return vacancyPageMeta(r.v, r.as)
 }
 
+const qKey = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '')
+/** every FAQ question is already a Tilda accordion item in the landing text (35 landings) — the FAQ block would repeat it */
+function faqInText(l?: LandingPage) {
+  if (!l?.faq?.length) return false
+  const shown = new Set(l.blocks.flatMap((b) => (b.type === 'details' ? [qKey(b.summary)] : [])))
+  return l.faq.every((f) => shown.has(qKey(f.q)))
+}
+
 function SeoText({ landing }: { landing?: LandingPage }) {
   if (!landing?.blocks?.length) return null
   return <Blocks blocks={landing.blocks} nested />
@@ -151,6 +159,7 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
         preset={{ country: c.code }}
         links={landingLinks.length ? [{ title: uk ? 'Популярні вакансії' : 'Популярные вакансии', items: landingLinks.map((l) => ({ href: l.href, label: l.label })) }] : undefined}
         faq={landing?.faq}
+        faqInText={Boolean(landing?.blocks?.length) && faqInText(landing)}
         extra={
           <>
             {c.code === 'pl' && <OtherCountries lang={lang} active={active} />}
@@ -226,6 +235,7 @@ export function LandingCatalog({ lang, landing: l, path, active }: { lang: Lang;
       preset={narrowed || all ? undefined : { country: c.code }}
       links={links.length ? [{ title: uk ? 'Дивіться також' : 'Смотрите также', items: links.map((x) => ({ href: x.href, label: x.label })) }] : undefined}
       faq={l.faq}
+      faqInText={faqInText(l)}
       seoText={<SeoText landing={l} />}
     />
   )
