@@ -77,7 +77,7 @@ export function Analytics() {
       w.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' })
       add(`https://www.googletagmanager.com/gtm.js?id=${TRACKING.gtm}`)
       if (TRACKING.ga4) add(`https://www.googletagmanager.com/gtag/js?id=${TRACKING.ga4}`)
-      setTimeout(loadPixels, 1200)
+      setTimeout(() => void pixelsAllowed().then((ok) => ok && loadPixels()), 1200)
     }
     const events = ['pointerdown', 'keydown', 'touchstart', 'scroll'] as const
     events.forEach((e) => addEventListener(e, load, { once: true, passive: true }))
@@ -89,6 +89,21 @@ export function Analytics() {
   }, [])
 
   return null
+}
+
+/**
+ * Meta / TikTok / Clarity set cookies and track people, so in the EEA/UK they load only after «Прийняти всі» on the
+ * banner (Ukraine and the rest: no banner, they load as before). Google tags follow Consent Mode (consentBootstrap).
+ */
+async function pixelsAllowed(): Promise<boolean> {
+  const c = document.cookie.match(/(?:^|; )pw_consent=([^;]*)/)?.[1]
+  if (c) return c === 'all'
+  const needs = await fetch('/api/geo')
+    .then((r) => r.json())
+    .then((d: { consent?: boolean }) => Boolean(d.consent))
+    .catch(() => true)
+  if (!needs) return true
+  return new Promise((resolve) => addEventListener('pw-consent', (e) => resolve(Boolean((e as CustomEvent<boolean>).detail)), { once: true }))
 }
 
 function loadPixels() {

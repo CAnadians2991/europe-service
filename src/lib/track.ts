@@ -3,8 +3,8 @@
 /**
  * Conversion tracking. Mirrors what the Tilda site did so the existing GTM container (GTM-TGV63W5)
  * keeps working without changes:
- *  - Tilda pushed `{event: "submit_<formId>"}` after a *successful* submit; GTM fires the Google Ads
- *    lead conversion + GA4 generate_lead on events matching /^submit_form/.
+ *  - Tilda pushed `{event: "submit_<formId>"}` after a *successful* submit (GTM v19 only has dead UA tags on them);
+ *    GA4 gets «generate_lead» straight from the site (gtag is defined by the GTM's GA4 tag).
  *  - the Tilda head code also pushed `{event: 'form_completion', name, phone_number, email}` (enhanced conversions);
  *    we push the same object.
  *  - tel: link clicks are caught by GTM's own click trigger; Ringostat counts calls itself.
@@ -60,6 +60,12 @@ export async function trackLead(opts: { form: string; leadId: string; phone: str
   })
   // same shape as the Tilda head snippet: phone digits with the country code, placeholder e-mail (the form has none)
   pushDL({ event: 'form_completion', name: opts.name ?? '', phone_number: opts.phone.replace(/\D/g, ''), email: '' })
+  // GA4 lead (2026-10-13 audit: the GTM container v19 has no tag for submit_form_* — only dead Universal Analytics
+  // ones — so leads reached neither GA4 nor Ads). Mark «generate_lead» as a key event in GA4 and import it into Ads;
+  // don't add a second GA4 lead tag in GTM.
+  try {
+    win.gtag?.('event', 'generate_lead', { form_id: formId, lead_id: opts.leadId, vacancy: opts.vacancy ?? '', value: opts.value ?? 1, currency: 'UAH' })
+  } catch {}
   try {
     win.fbq?.('track', 'Lead', { content_name: opts.vacancy || opts.form }, { eventID: opts.leadId })
   } catch {}

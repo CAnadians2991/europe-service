@@ -14,6 +14,8 @@ function apply(all: boolean) {
     ad_personalization: v,
     analytics_storage: v,
   })
+  // the ad pixels (Meta, TikTok, Clarity) wait for this choice in the EEA — see Analytics.tsx
+  window.dispatchEvent(new CustomEvent('pw-consent', { detail: all }))
 }
 
 /** Shown only to visitors from the EEA/UK (Google Consent Mode v2 requirement). Ukraine: no banner. */

@@ -378,6 +378,34 @@ for (const v of closed)
     stats.offDup++
   }
 
+// pass 2 (2026-10-13, visual QA): the Tilda import read «30,47 зл/год (від 6100 зл/міс)» as an hourly range
+// 30,47–6 100 — the monthly figure goes back to monthMin/monthMax; and the intro still quoted the old rate
+// («Ставка 23,80 зл/год») — its pay sentences get the post's factor, housing sentences the housing one
+const MONTH = new RegExp(String.raw`(${NUM})(?:\s*[-–—]\s*(${NUM}))?\s*(?:${CURS.PLN}|${CURS.EUR}|${CURS.CZK}|${CURS.RON})\s*\/?\s*(?:міс|мес|month)`, 'iu')
+stats.ranges = 0
+stats.intros = 0
+for (const v of closed) {
+  const s = v.salary
+  if (s.hourMin && s.hourMax && s.hourMax > s.hourMin * 3) {
+    const m = (s.text || '').match(MONTH)
+    s.monthMin = m ? Math.round(toFloat(m[1]) / 10) * 10 : Math.round(s.hourMax / 10) * 10
+    s.monthMax = m && m[2] ? Math.round(toFloat(m[2]) / 10) * 10 : null
+    s.hourMax = s.hourMin
+    stats.ranges++
+  }
+  if (s.modern && !s.modern.intro && v.intro) {
+    const k = s.modern.factor
+    const kh = Math.min(k, 1.6)
+    const main = s.currency || 'PLN'
+    v.intro = v.intro
+      .split(/(?<=[.!?;])\s+/)
+      .map((x) => (PAY_ITEM.test(x) ? scaleLine(x, k, main) : /житл|прожив|жиль/iu.test(x) ? scaleLine(x, kh, main) : x))
+      .join(' ')
+    s.modern.intro = true
+    stats.intros++
+  }
+}
+
 const ks = stats.k.sort((a, b) => a - b)
 console.log({ ...stats, k: { min: ks[0], med: ks[Math.floor(ks.length / 2)], max: ks.at(-1) } })
 if (DRY) console.log(JSON.stringify(examples, null, 1))
