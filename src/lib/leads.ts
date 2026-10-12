@@ -134,7 +134,9 @@ async function toBitrix(l: Lead) {
   const hook = process.env.BITRIX_WEBHOOK_URL // e.g. https://xxx.bitrix24.ua/rest/1/abc123/
   if (!hook) return 'skip'
   const fields: Record<string, unknown> = {
-    TITLE: `ES: ${l.name || l.phone} — ${formLabel(l.form)}${l.vacancyTitle ? `: ${l.vacancyTitle}` : ''}`,
+    // exactly as the Tilda site's leads arrive («Заявка з сайту ES: Дмитро», source WEB, «Бот») — Bitrix robots route them
+    // to Discord #орг-заявки by that source; the form and vacancy go to the comments
+    TITLE: `Заявка з сайту ES: ${l.name || l.phone}`,
     NAME: l.name || undefined,
     PHONE: [{ VALUE: l.phone, VALUE_TYPE: 'MOBILE' }],
     SOURCE_ID: process.env.BITRIX_SOURCE_ID || 'WEB',
