@@ -20,7 +20,7 @@ export interface Landing {
 /** country landings + «fixed» pages (Tilda city / job type / profession pages) whose list is their own */
 export async function catalogLandings(lang: 'uk' | 'ru'): Promise<{ landings: Landing[]; fixed: string[] }> {
   await ensureCountries()
-  const active = await getActiveVacancies()
+  const active = await getActiveVacancies(lang)
   const has = new Set(active.map((v) => v.country))
   const out: Landing[] = [{ path: CATALOG_PATH, country: '' }]
   for (const c of COUNTRIES) if (has.has(c.code)) out.push({ path: c.path, country: c.code })
