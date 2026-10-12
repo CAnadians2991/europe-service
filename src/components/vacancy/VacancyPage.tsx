@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { vacancyMedia } from '@/lib/vacancy-media'
+import tildaLabels from '@/data/tilda-post-labels.json'
 import { VideoCards } from '@/components/reviews/VideoCards'
 import { Gallery } from './Gallery'
 import { VacancyCard } from './VacancyCard'
@@ -34,6 +35,9 @@ const isHousing = (title: string) => /прожив|житл|жил[ьи]/i.test(
 const isSubhead = (it: string) => /:\s*$/.test(it) && it.length < 60
 /** Section titles that were <h3> labels in Tilda's post text («Відгуки про роботу:», «Отзывы о работе:») keep that level */
 const isTildaH3 = (title: string) => /^(відгуки? про роботу|отзывы? о работе)\s*:?$/i.test(title.trim())
+/** Tilda's own labels in the post («Відео з роботи:», «Огляд продукції:», «Фото житла:», «Відгуки про роботу:») — shown as on Tilda */
+type PostLabels = { videos?: string[]; housing?: string[]; reviews?: string[]; photos?: string[]; yt?: string[] }
+const LABELS = tildaLabels as Record<string, PostLabels>
 /** «безкоштовне» alone repeats the green tag */
 const isJustFree = (t: string) => /^(безкоштовн|бесплатн)\S*\.?$/i.test(t.trim())
 
@@ -167,6 +171,9 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
   ]
 
   // the agency's own Drive media for this vacancy: housing photos join the housing block, workplace photos the gallery
+  const labels = LABELS[v.path.toLowerCase()] ?? {}
+  // the post's YouTube videos from the Tilda text (the import lost them) when the vacancy has none of its own
+  const ytVideos = v.videos?.length ? v.videos : (labels.yt ?? [])
   const extra = vacancyMedia(v.path, lang)
   // example photos from the shared pool give way to the real housing of this vacancy
   const pooled = v.housingPool && extra.housing.length > 0
@@ -175,7 +182,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
   const housingAt = v.sections.findIndex((x) => isHousing(x.title))
   const housingFigure = housing.length > 0 && (
     <figure className="mt-5">
-      <h3 className="eyebrow">{t.housingPhotos}</h3>
+      <h3 className="eyebrow">{labels.housing?.[0] ?? t.housingPhotos}</h3>
       <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {housing.map((p, k) => (
           <a key={p} href={src(p, 1200)} target="_blank" rel="noopener" className="block overflow-hidden bg-surface">
@@ -331,11 +338,17 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
                 </section>
               )}
 
-              {v.videos && v.videos.length > 0 && (
+              {ytVideos.length > 0 && (
                 <section aria-labelledby="video-h">
-                  <RegisterHead id="video-h" n={++n} title={t.videos} />
-                  <div className={`mt-4 grid gap-4 ${v.videos.length > 1 ? 'sm:grid-cols-2' : ''} [&>div>div]:!my-0 [&>div>div]:!rounded-none`}>
-                    {v.videos.map((id) => (
+                  <RegisterHead id="video-h" n={++n} title={labels.videos?.[0] ?? t.videos} as={labels.videos ? 'h3' : 'h2'} />
+                  {/* a post with several Tilda video labels («Відео з роботи:», «Відео з житла:») keeps them all */}
+                  {labels.videos?.slice(1).map((l) => (
+                    <h3 key={l} className="eyebrow mt-3">
+                      {l}
+                    </h3>
+                  ))}
+                  <div className={`mt-4 grid gap-4 ${ytVideos.length > 1 ? 'sm:grid-cols-2' : ''} [&>div>div]:!my-0 [&>div>div]:!rounded-none`}>
+                    {ytVideos.map((id) => (
                       <div key={id}>
                         <YouTube id={id} title={`${t.videos}: ${v.title}`} lang={lang} />
                       </div>
@@ -361,7 +374,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
                 <RegisterHead
                   id="vrev-h"
                   as="h3"
-                  title={t.reviews}
+                  title={labels.reviews?.[0] ?? t.reviews}
                   aside={
                     <Link href={uk ? '/vidguki#review-form-h' : '/ru/otzyvy#review-form-h'} className="inline-flex min-h-11 items-center text-[15px] font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[3px] hover:decoration-brand-700">
                       {t.leaveReview}
