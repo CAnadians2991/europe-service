@@ -176,7 +176,8 @@ export function Catalog({
     const res = cards.filter((v) => match(v))
     if (f.sort === 'salary') res.sort((a, b) => salaryEurMonth(b.salary) - salaryEurMonth(a.salary))
     else if (f.sort === 'new') res.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
-    else res.sort((a, b) => Number(b.hot) - Number(a.hot) || a.order - b.order)
+    // «Рекомендовані» = the order set in the admin («Порядок на сайті»); «Топ» is for the home page
+    else res.sort((a, b) => a.order - b.order)
     return res
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cards, f])

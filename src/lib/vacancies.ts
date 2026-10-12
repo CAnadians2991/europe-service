@@ -51,9 +51,10 @@ export async function getAllVacancies(): Promise<Vacancy[]> {
   await ensureCountries()
   const parts = await Promise.all(Array.from({ length: PARTS }, (_, i) => cachedPart(i)))
   // a brand-new Netlify Database is empty until the first CI build seeds it — show the Tilda import meanwhile
+  // one order for all parts — the admin can move a revived post above today's ones (stable sort keeps ties as read)
   const byOrder = (xs: Vacancy[]) => xs.sort((a, b) => a.order - b.order)
-  if (parts.some((p) => p === null) || !parts[0]!.length) return [...SEED, ...byOrder([...(await revivedFromFile())])]
-  return [...parts[0]!, ...byOrder(parts.slice(1).flat() as Vacancy[])]
+  if (parts.some((p) => p === null) || !parts[0]!.length) return byOrder([...SEED, ...(await revivedFromFile())])
+  return byOrder((parts as Vacancy[][]).flat())
 }
 
 export async function getActiveVacancies(): Promise<Vacancy[]> {

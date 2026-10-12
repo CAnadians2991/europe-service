@@ -9,6 +9,7 @@ import { deleteVacancy, duplicateVacancy, restoreDeleted, setActive, setHot } fr
 import { belowMinimum } from '@/lib/salary-check'
 import type { AdminVacancyRow } from '@/lib/admin-data'
 import { Confirm, Notice, PageHead, Switch, Tag, fmtDate } from './ui'
+import { VacancyOrder } from './VacancyOrder'
 
 export type ListFilter = { status: 'open' | 'closed' | 'all' | 'hot'; country: string; q: string }
 
@@ -43,6 +44,8 @@ export function VacancyList({ items, deleted, initial }: { items: AdminVacancyRo
   const [busyId, setBusyId] = useState('')
   const [confirm, setConfirm] = useState<AdminVacancyRow | null>(null)
   const [err, setErr] = useState('')
+  // «Порядок на сайті»: the switched-on vacancies of the chosen country, to drag into the catalog's order
+  const [ordering, setOrdering] = useState(false)
 
   // fresh rows from the server (after a switch or a refresh) replace the optimistic values
   const [seen, setSeen] = useState(items)
@@ -151,22 +154,28 @@ export function VacancyList({ items, deleted, initial }: { items: AdminVacancyRo
           )}
         </div>
         <div className="-mx-1 flex gap-1.5 overflow-x-auto px-1 scrollbar-none">
-          {STATUS.map(([k, label]) => (
-            <button key={k} type="button" className="chip shrink-0" aria-pressed={f.status === k} onClick={() => filter({ status: k })}>
-              {label} <span className="num text-[12.5px] opacity-70">{count(k)}</span>
-            </button>
-          ))}
+          {!ordering &&
+            STATUS.map(([k, label]) => (
+              <button key={k} type="button" className="chip shrink-0" aria-pressed={f.status === k} onClick={() => filter({ status: k })}>
+                {label} <span className="num text-[12.5px] opacity-70">{count(k)}</span>
+              </button>
+            ))}
+          <button type="button" className="chip shrink-0 md:ml-auto" aria-pressed={ordering} onClick={() => setOrdering((o) => !o)}>
+            ⇅ Порядок на сайті
+          </button>
         </div>
       </div>
 
-      {low > 0 && (
+      {ordering && <VacancyOrder items={rows} country={f.country} onClose={() => setOrdering(false)} />}
+
+      {!ordering && low > 0 && (
         <Notice tone="err">
           <span className="num">{low}</span> вакансій на сайті мають ставку нижчу за мінімальну в Польщі (31,40 zł/год брутто, 4 806 zł/міс) — позначені «ставка ↓». Оновіть ставки.
         </Notice>
       )}
-      {err && <Notice tone="err">{err}</Notice>}
+      {!ordering && err && <Notice tone="err">{err}</Notice>}
 
-      <ul className={`card divide-y divide-line overflow-visible ${pending ? 'opacity-90' : ''}`}>
+      <ul hidden={ordering} className={`card divide-y divide-line overflow-visible ${pending ? 'opacity-90' : ''}`}>
         {list.slice(0, limit).map((v) => {
           const edit = `/admin/vacancies/${encodeURIComponent(v.id)}`
           const low = v.active && belowMinimum(v)
@@ -237,7 +246,7 @@ export function VacancyList({ items, deleted, initial }: { items: AdminVacancyRo
         })}
         {!list.length && <li className="px-4 py-10 text-center text-muted">Нічого не знайдено. Змініть пошук або фільтр.</li>}
       </ul>
-      {list.length > limit && (
+      {!ordering && list.length > limit && (
         <div className="flex flex-wrap items-center justify-center gap-3">
           <span className="num text-[13px] text-muted">
             показано {limit} з {list.length}
@@ -246,7 +255,7 @@ export function VacancyList({ items, deleted, initial }: { items: AdminVacancyRo
         </div>
       )}
 
-      {deleted.length > 0 && (
+      {!ordering && deleted.length > 0 && (
         <details className="card">
           <summary className="cursor-pointer list-none px-4 py-3 sm:px-5 [&::-webkit-details-marker]:hidden">
             <span className="eyebrow">Кошик</span> <span className="num ml-2 text-[13px] text-muted">{deleted.length} за 60 днів</span>

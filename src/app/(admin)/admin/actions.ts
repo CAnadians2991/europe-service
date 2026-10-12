@@ -226,6 +226,31 @@ export async function setHot(id: string, hot: boolean) {
   refresh(['/', '/ru'])
 }
 
+/**
+ * «Порядок на сайті»: `ids` — the switched-on vacancies of one country (or all) in the new order. They take the places
+ * the same vacancies held in the site's order, then every row is renumbered 10, 20, 30… (sort = data.order), so the
+ * catalog shows exactly this order. No history rows (1 400+ per save); scripts/seed-db.mjs --refresh keeps the order.
+ */
+export async function reorderVacancies(ids: string[]) {
+  await requireAdmin()
+  if (!hasDb) throw new Error('База даних не підключена')
+  const rows = (await sql`select id, sort from vacancies order by sort asc, updated_at desc`) as { id: string; sort: number }[]
+  const known = new Set(rows.map((r) => r.id))
+  const queue = ids.filter((id, i) => typeof id === 'string' && known.has(id) && ids.indexOf(id) === i)
+  const moving = new Set(queue)
+  let k = 0
+  const next = rows.map((r) => (moving.has(r.id) ? queue[k++] : r.id))
+  const old = new Map(rows.map((r) => [r.id, r.sort]))
+  const changed = next.map((id, i) => [id, (i + 1) * 10] as const).filter(([id, s]) => old.get(id) !== s)
+  if (changed.length)
+    await sql.query(
+      `update vacancies t set sort = s.sort, data = jsonb_set(t.data, '{order}', to_jsonb(s.sort))
+       from (select unnest($1::text[]) as id, unnest($2::int[]) as sort) s where t.id = s.id`,
+      [changed.map((c) => c[0]), changed.map((c) => c[1])],
+    )
+  refresh(['/vacancies', '/ru/vacancies', '/vacancies/aktualni_vakansii', ...COUNTRIES.map((c) => c.path), '/'])
+}
+
 export async function deleteVacancy(id: string) {
   await requireAdmin()
   await ensureCountries()

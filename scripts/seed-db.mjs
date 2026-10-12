@@ -38,9 +38,10 @@ if (process.argv.includes('--refresh')) {
       return `($${b + 1}, $${b + 2}::boolean, $${b + 3}::int, $${b + 4}::jsonb)`
     })
     const rows = await sql.query(
-      `update vacancies t set data = s.data, active = s.active, sort = s.sort, updated_at = now()
+      // the order stays the admin's («Порядок на сайті» renumbers rows without history entries)
+      `update vacancies t set data = s.data || jsonb_build_object('order', t.sort), active = s.active, updated_at = now()
        from (values ${values.join(', ')}) as s(id, active, sort, data)
-       where t.id = s.id and t.data is distinct from s.data
+       where t.id = s.id and t.data is distinct from (s.data || jsonb_build_object('order', t.sort))
          and not exists (select 1 from vacancy_history h where h.vacancy_id = t.id)
        returning t.id`,
       params,
