@@ -153,7 +153,7 @@ export function JobCategories({ lang, all, photos, catalog }: { lang: Lang; all:
               className={`flex h-full min-h-14 flex-col justify-center rounded-xl bg-brand-600 px-4 py-3 text-white transition hover:bg-brand-700 ${b.full ? '' : 'max-sm:aspect-auto'} ${l.full ? 'lg:min-h-0 lg:flex-row lg:items-center lg:justify-between' : ''}`}
             >
               <span className="text-[15px] font-semibold leading-tight sm:text-[17px]">{uk ? `Усі ${all.length} ${plural(all.length, ['вакансія', 'вакансії', 'вакансій'])}` : `Все ${all.length} ${plural(all.length, ['вакансия', 'вакансии', 'вакансий'])}`}</span>
-              <span className="mt-1 text-[13px] text-white/90 lg:mt-0">{uk ? 'Дивитися каталог →' : 'Смотреть каталог →'}</span>
+              <span className="mt-1 text-[13px] font-medium text-white lg:mt-0">{uk ? 'Дивитися каталог →' : 'Смотреть каталог →'}</span>
             </Link>
           </li>
         </ul>

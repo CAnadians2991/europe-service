@@ -91,13 +91,13 @@ export function MobileMenu({
                     <IconChevronDown className={`size-5 text-muted transition-transform duration-200 ${vac ? 'rotate-180' : ''}`} />
                   </button>
                   <div id="mm-countries" hidden={!vac} className="pb-2">
-                    <Link href={nav[0].href} className="mb-1 flex min-h-11 items-center justify-between bg-white px-3 text-[14.5px] font-semibold text-brand-700 active:bg-brand-50">
+                    <Link href={nav[0].href} prefetch={false} className="mb-1 flex min-h-11 items-center justify-between bg-white px-3 text-[14.5px] font-semibold text-brand-700 active:bg-brand-50">
                       {uk ? 'Усі вакансії' : 'Все вакансии'} <span aria-hidden>→</span>
                     </Link>
                     <ul className="grid grid-cols-2 gap-x-4">
                       {countries.map((c) => (
                         <li key={c.code} className="border-b border-line/70">
-                          <Link href={localHref(c.path, lang)} className="flex min-h-11 items-center gap-2 pl-1 text-[14.5px] font-medium active:bg-white">
+                          <Link href={localHref(c.path, lang)} prefetch={false} className="flex min-h-11 items-center gap-2 pl-1 text-[14.5px] font-medium active:bg-white">
                             <Flag code={c.code} className="h-3.5 w-[21px]" />
                             <span className="min-w-0 flex-1 truncate">{uk ? c.name : c.nameRu}</span>
                             <span className="num text-[12px] text-muted">{c.count}</span>

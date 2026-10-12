@@ -51,7 +51,8 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
 
         <nav aria-label={lang === 'uk' ? 'Головне меню' : 'Главное меню'} className="ml-6 hidden flex-1 items-center lg:flex">
           <div className="group relative">
-            <Link href={catalog} className={`${link} gap-1.5 !font-semibold !text-ink`}>
+            {/* catalog pages carry every card (≈110 KB): no prefetch from the header on every page */}
+            <Link href={catalog} prefetch={false} className={`${link} gap-1.5 !font-semibold !text-ink`}>
               {nav[0].label}
               <span className="num bg-brand-600 px-1.5 py-0.5 text-[11.5px] font-semibold text-white">{total}</span>
               <IconChevronDown className="size-4 opacity-60 transition group-hover:rotate-180" />
@@ -63,7 +64,7 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
                   <ul className="mt-3 grid grid-cols-2 gap-x-6">
                     {countries.map((c) => (
                       <li key={c.code} className="border-b border-line">
-                        <Link href={localHref(c.path, lang)} className="flex min-h-11 items-center gap-3 py-2 text-[15px] font-medium hover:text-brand-700">
+                        <Link href={localHref(c.path, lang)} prefetch={false} className="flex min-h-11 items-center gap-3 py-2 text-[15px] font-medium hover:text-brand-700">
                           <Flag code={c.code} className="h-4 w-6" />
                           <span className="flex-1">{lang === 'uk' ? c.name : c.nameRu}</span>
                           <span className="num text-[13px] text-muted">{counts[c.code]}</span>
@@ -71,7 +72,7 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
                       </li>
                     ))}
                   </ul>
-                  <Link href={catalog} className="mt-5 flex items-center justify-between bg-ink px-4 py-3 text-[15px] font-semibold text-white hover:bg-night-2">
+                  <Link href={catalog} prefetch={false} className="mt-5 flex items-center justify-between bg-ink px-4 py-3 text-[15px] font-semibold text-white hover:bg-night-2">
                     {lang === 'uk' ? `Усі ${total} ${plural(total, ['вакансія', 'вакансії', 'вакансій'])}` : `Все ${total} ${plural(total, ['вакансия', 'вакансии', 'вакансий'])}`} <IconArrow className="size-4" />
                   </Link>
                 </div>
@@ -80,7 +81,7 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
                   <ul className="mt-3">
                     {popular.map((l) => (
                       <li key={l.href} className="border-b border-line">
-                        <Link href={l.href} className="flex min-h-11 items-center justify-between py-2 text-[15px] font-medium hover:text-brand-700">
+                        <Link href={l.href} prefetch={false} className="flex min-h-11 items-center justify-between py-2 text-[15px] font-medium hover:text-brand-700">
                           {l.label} <span aria-hidden className="text-muted">→</span>
                         </Link>
                       </li>
