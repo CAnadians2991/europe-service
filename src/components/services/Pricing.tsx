@@ -60,7 +60,7 @@ export function PackagesBlock({ lang }: { lang: Lang }) {
             const p = prices[i]
             const featured = t.id === 'standard'
             return (
-              <li key={t.id} id={`pkg-${t.id}`} className={`relative flex scroll-mt-24 flex-col rounded-2xl border bg-white p-5 ${featured ? 'border-brand-600 shadow-[0_20px_50px_-28px_rgb(30_134_74/0.6)] ring-1 ring-brand-600' : 'border-line'}`}>
+              <li key={t.id} id={`pkg-${t.id}`} className={`relative flex scroll-mt-24 flex-col overflow-visible rounded-2xl border bg-white p-5 ${featured ? 'border-brand-600 shadow-[0_20px_50px_-28px_rgb(30_134_74/0.6)] ring-1 ring-brand-600' : 'border-line'}`}>
                 {t.badge && <span className={`absolute -top-3.5 left-5 z-10 rounded-full px-3 py-1 text-[12px] font-semibold leading-snug ${featured ? 'bg-brand-600 text-white' : 'bg-ink text-white'}`}>{t.badge}</span>}
                 <div className="flex items-baseline justify-between gap-3">
                   <h2 className="text-[22px]">{t.name}</h2>
