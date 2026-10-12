@@ -17,10 +17,13 @@ export async function saveLead(l: Lead) {
 }
 
 /** Same phone for the same vacancy (or the same general form) within 10 minutes → a repeat submit (no second notification).
- *  Another vacancy from the same person is a new lead: the manager must see both. */
+ *  Another vacancy from the same person is a new lead: the manager must see both — unless it comes within 2 minutes:
+ *  one person firing forms at several vacancies in a row (seen on mcpwork.org, 2026-10-09) is one lead, not ten. */
 export async function recentDuplicate(phone: string, vacancyId: string | null): Promise<string | null> {
   if (!hasDb) return null
-  const rows = (await sql`select id from leads where phone = ${phone} and vacancy_id is not distinct from ${vacancyId} and created_at > now() - interval '10 minutes' order by created_at desc limit 1`) as { id: string }[]
+  const rows = (await sql`select id from leads where phone = ${phone}
+      and (created_at > now() - interval '2 minutes' or (vacancy_id is not distinct from ${vacancyId} and created_at > now() - interval '10 minutes'))
+      order by created_at desc limit 1`) as { id: string }[]
   return rows[0]?.id ?? null
 }
 

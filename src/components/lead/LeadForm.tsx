@@ -13,6 +13,19 @@ export const PHONE_CODES = [
   { code: '+420', cc: 'CZ', flag: '🇨🇿', len: 9, hint: '601 234 567' },
   { code: '+49', cc: 'DE', flag: '🇩🇪', len: 11, hint: '1512 3456789' },
   { code: '+373', cc: 'MD', flag: '🇲🇩', len: 8, hint: '621 12 345' },
+  // the countries we send people to (people already there leave their local number) — as on mcpwork.org
+  { code: '+421', cc: 'SK', flag: '🇸🇰', len: 9, hint: '912 345 678' },
+  { code: '+370', cc: 'LT', flag: '🇱🇹', len: 8, hint: '612 34567' },
+  { code: '+36', cc: 'HU', flag: '🇭🇺', len: 9, hint: '20 123 4567' },
+  { code: '+40', cc: 'RO', flag: '🇷🇴', len: 9, hint: '712 345 678' },
+  { code: '+31', cc: 'NL', flag: '🇳🇱', len: 9, hint: '6 12345678' },
+  { code: '+43', cc: 'AT', flag: '🇦🇹', len: 11, hint: '664 1234567' },
+  { code: '+30', cc: 'GR', flag: '🇬🇷', len: 10, hint: '691 234 5678' },
+  { code: '+39', cc: 'IT', flag: '🇮🇹', len: 10, hint: '312 345 6789' },
+  { code: '+32', cc: 'BE', flag: '🇧🇪', len: 9, hint: '470 12 34 56' },
+  { code: '+371', cc: 'LV', flag: '🇱🇻', len: 8, hint: '21 234 567' },
+  { code: '+33', cc: 'FR', flag: '🇫🇷', len: 9, hint: '6 12 34 56 78' },
+  { code: '+44', cc: 'GB', flag: '🇬🇧', len: 10, hint: '7400 123456' },
   { code: '+', cc: '', flag: '🌍', len: 12, hint: 'код країни і номер', hintRu: 'код страны и номер' },
 ]
 
