@@ -17,6 +17,14 @@ export async function proxy(req: NextRequest) {
     return NextResponse.redirect(url, 308)
   }
 
+  // Markdown versions of the pages (/<page>.md, /sitemap.md, /llm/<lang>/<topic>.md): one handler builds them
+  if (pathname.endsWith('.md')) {
+    // the handler reads the address from the header (a rewrite may hand it the original URL rather than the target's query)
+    const headers = new Headers(req.headers)
+    headers.set('x-md-path', pathname)
+    return NextResponse.rewrite(new URL(`/api/md?p=${encodeURIComponent(pathname)}`, req.url), { request: { headers } })
+  }
+
   // Admin: auth only (matching is case-insensitive on Vercel, so /ADMIN is guarded too); only the trailing slash is normalised
   if (/^\/admin(?:\/|$)/i.test(pathname)) {
     if (pathname.length > 1 && pathname.endsWith('/')) return permanent(req, pathname.replace(/\/+$/, ''))

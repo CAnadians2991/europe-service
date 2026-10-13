@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { forLang, getAllVacancies, similar } from '@/lib/vacancies'
-import { pageMeta, vacancyDescription } from '@/lib/seo'
+import { pageMeta, vacancyDescription, vacancyTitle } from '@/lib/seo'
 import { VacancyPage } from './VacancyPage'
 import type { Vacancy } from '@/lib/types'
 import { hasRu, localize } from '@/lib/vacancy-i18n'
@@ -22,7 +22,9 @@ export function vacancyPageMeta(v: Vacancy, as: 'uk' | 'ru' = v.lang ?? 'uk'): M
   const shown = as === 'ru' && translated ? localize(v, 'ru') : v
   const alternates = translated ? { uk: v.path, ru: '/ru' + v.path, 'x-default': v.path } : undefined
   return pageMeta({
-    title: shown === v && generatedSeoTitle(v) ? v.title : shown.seoTitle || shown.title,
+    // Tilda posts keep Tilda's title; a vacancy created on this site gets the place in it («… — Варшава»), so it does not
+    // repeat the title of the old Tilda post of the same employer (10 such pairs, crawl 13.10.2026)
+    title: shown === v && generatedSeoTitle(v) ? v.title : shown.seoTitle || (!v.tildaUid && !v.path.includes('/tpost/') ? vacancyTitle(shown, as) : shown.title),
     absoluteTitle: true,
     description: vacancyDescription(shown, as),
     path: shown.path,

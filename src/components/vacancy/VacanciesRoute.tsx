@@ -53,6 +53,9 @@ export async function resolveVacancies(root: Root, slug: string[] = []): Promise
   if (landing && landing.kind === 'country' && COUNTRY[landing.country]) return { kind: 'country', path, lang, country: COUNTRY[landing.country], landing }
   if (landing) return { kind: 'landing', path, lang, landing }
   const country = COUNTRIES.find((c) => c.path === ukPath)
+  // /ru/vacancies/chekhiia, /ru/vakansii/england: Tilda's Russian page of the country has its own slug
+  // (/ru/vacancies/rabota_v_chekhii, /ru/vacancies/england) — this address only duplicated it (crawl 13.10.2026)
+  if (country && lang === 'ru' && ruTwin(country.path) && ruTwin(country.path) !== path) return { kind: 'redirect', path, lang, to: ruTwin(country.path)! }
   if (country) return { kind: 'country', path, lang, country }
   // vacancy posts: /vacancies/netherlands/tpost/<id>-<slug> (Tilda's address), or a card link like /vacancies/hm
   const v = await getVacancyByPath(path)
@@ -148,6 +151,20 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
     const s = countrySeo(c, lang, r.landing)
     const landing = r.landing ?? countryLanding(c.code, lang)
     const landingLinks = (landing?.links ?? []).filter((l) => l.href.startsWith('/'))
+    // every Tilda city / sphere / profession page of this country in this language, grouped — 56 of them had no
+    // internal link at all (crawl 13.10.2026); Tilda's own «popular» list stays first
+    const own = new Set(landingLinks.map((l) => l.href))
+    const KINDS: [LandingPage['kind'][], string, string][] = [
+      [['city'], 'Міста', 'Города'],
+      [['category'], 'Сфери роботи', 'Сферы работы'],
+      [['profession'], 'Професії', 'Профессии'],
+      [['audience', 'contract', 'season', 'info'], 'Добірки', 'Подборки'],
+    ]
+    const sameCountry = LANDINGS.filter((x) => x.lang === lang && x.country === c.code && !x.canonical && x.path !== r.path && !own.has(x.path))
+    const groups = KINDS.map(([kinds, ukT, ruT]) => ({
+      title: uk ? ukT : ruT,
+      items: sameCountry.filter((x) => kinds.includes(x.kind)).map((x) => ({ href: x.path, label: x.h1 || x.title })),
+    })).filter((g) => g.items.length)
     return (
       <CatalogPage
         form={`country-${c.code}`}
@@ -157,7 +174,7 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
         crumbs={[crumbHome(lang), crumbAll(lang), { name: uk ? `Робота ${c.inName}` : `Работа ${c.inNameRu}`, path: r.path }]}
         cards={cards}
         preset={{ country: c.code }}
-        links={landingLinks.length ? [{ title: uk ? 'Популярні вакансії' : 'Популярные вакансии', items: landingLinks.map((l) => ({ href: l.href, label: l.label })) }] : undefined}
+        links={[...(landingLinks.length ? [{ title: uk ? 'Популярні вакансії' : 'Популярные вакансии', items: landingLinks.map((l) => ({ href: l.href, label: l.label })) }] : []), ...groups]}
         faq={landing?.faq}
         faqInText={Boolean(landing?.blocks?.length) && faqInText(landing)}
         extra={

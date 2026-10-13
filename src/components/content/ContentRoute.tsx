@@ -111,7 +111,8 @@ export async function contentMetadata(path: string): Promise<Metadata> {
   }
   if (r.kind === 'landing') return pageMeta({ title: r.l.title, description: r.l.description || r.l.h1, path, lang: r.l.lang, absoluteTitle: true, hreflang: Boolean(r.l.twin), canonical: r.l.canonical })
   const lang = path.startsWith('/ru/') ? 'ru' : 'uk'
-  if (r.kind === 'quiz') return pageMeta({ title: r.q.title, description: r.q.description, path, lang, noindex: r.q.noindex, absoluteTitle: true })
+  // the Russian copies of the quizzes are noindex, so a Ukrainian quiz has no hreflang pair (44 pairs pointed at noindex pages)
+  if (r.kind === 'quiz') return pageMeta({ title: r.q.title, description: r.q.description, path, lang, noindex: r.q.noindex, absoluteTitle: true, hreflang: false })
   // Tilda indexed /privacy, /oferta, /user_deal, /declaration — so do we; their Russian copies are new (not indexed)
   if (r.kind === 'legal') return pageMeta({ title: r.doc.seoTitle || r.doc.title, description: r.doc.seoDescription || r.doc.title, path, lang, noindex: lang === 'ru', absoluteTitle: true })
   const p = r.page

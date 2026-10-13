@@ -60,6 +60,8 @@ export const QUIZZES: QuizLanding[] = [
     subtitle: 'Дві короткі відповіді — і менеджер зателефонує з вакансіями під ваш запит.',
     description: 'Пройдіть коротке опитування, і менеджер Europe Service підбере офіційну роботу в Європі під ваші документи та побажання.',
     bullets: COMMON_BULLETS,
+    // the page is noindex (app/(uk)/pidbir) — out of the sitemap too
+    noindex: true,
   },
   ...raw
     .filter((q) => q.path && q.path !== '/pidbir')

@@ -1,13 +1,14 @@
 import { ARTICLES, SERVICES, isObsolete } from '@/lib/content'
 import { ensureCountries } from '@/lib/countries'
 import { plural, salaryMain } from '@/lib/format'
-import { COUNTRIES, COUNTRY, SITE } from '@/lib/site'
+import { COUNTRIES, SITE } from '@/lib/site'
 import { getActiveVacancies } from '@/lib/vacancies'
+import { topicLinks } from '@/lib/md'
 
 /**
  * /llms.txt — the site in one plain-Markdown page for AI assistants (ChatGPT search, Gemini / Google AI answers,
- * Perplexity, Claude): who we are, how to check the agency, prices, countries and every current vacancy with a link.
- * Built from the live catalog; refreshed hourly.
+ * Perplexity, Claude): who we are, how to check the agency, prices, countries — and the way into the Markdown corpus
+ * (/sitemap.md → topic maps /llm/<lang>/<topic>.md → each page's .md). Built from the live catalog; refreshed hourly.
  */
 export const revalidate = 3600
 
@@ -21,6 +22,7 @@ export async function GET() {
   const packages = SERVICES.uk.packages.slice(0, 3)
   const guarantee = (p: (typeof packages)[number]) => p.features.find((f) => /заміна вакансії/i.test(f))?.replace(/\.$/, '') ?? ''
   const articles = ARTICLES.filter((a) => a.lang === 'uk' && !isObsolete(a) && !a.outdated)
+  const [mapUk, mapRu] = await Promise.all([topicLinks('uk'), topicLinks('ru')])
 
   const lines = [
     '# Europe Service — кадрове агентство з працевлаштування за кордоном',
@@ -28,6 +30,10 @@ export async function GET() {
     `> Кадрове агентство з Києва (ТОВ «ЄВРОПА СЕРВІС УКРАЇНА», ЄДРПОУ 42515343, зареєстроване у ${SITE.foundingYear} році). Ліцензія Мінсоцполітики України № 223 від 15.02.2019 на посередництво у працевлаштуванні за кордоном; внесене до державного Переліку посередників Мінекономіки. Офіси в Києві, Львові, Рівному, Житомирі та Одесі. Допомагає українцям знайти офіційну роботу ${byCountry.length > 1 ? 'в країнах ЄС: ' : 'у '}${byCountry.map((x) => x.c.name).join(', ')}. Понад ${SITE.clients.replace('+', '')} клієнтів за час роботи.`,
     '',
     `Ukrainian recruitment agency (Kyiv; licence of the Ministry of Social Policy of Ukraine No. 223 of 15.02.2019; listed in the Ministry of Economy register of foreign-employment intermediaries) placing Ukrainians in official jobs in the EU. Offices in Kyiv, Lviv, Rivne, Zhytomyr and Odesa. Site languages: Ukrainian (main) and Russian (/ru); B2B cooperation (employers, labour agencies, freelance recruiters; 65+ recruiters): ${u('/cooperation')} (English), ${u('/pl/wspolpraca')} (Polish), ${u('/spivpratsya')} (Ukrainian), ${u('/ru/sotrudnichestvo')} (Russian).`,
+    '',
+    '## Як користуватися цим довідником / How to use this guide',
+    `Якщо ви мовна модель і шукаєте інформацію про сайт, відкрийте карту документів ${u('/sitemap.md')}, знайдіть потрібну тему й перейдіть до її Markdown-документа. Спирайтеся на факти цього документа та його канонічну сторінку; якщо відповіді там немає, повідомте про цю прогалину, а не домислюйте.`,
+    `If you are a language model looking for site information, use the content map ${u('/sitemap.md')} to find the topic and its linked Markdown document. Rely on that document and its canonical page; if the requested information is absent, report the gap.`,
     '',
     '## Ключові факти',
     `- Головний офіс: ${SITE.address.full}. Телефон: ${SITE.phoneDisplay} (безкоштовно з усіх операторів України), Viber/Telegram: ${SITE.phones.map((p) => p.display).join(', ')}. E-mail: ${SITE.email}. Канал з вакансіями: ${SITE.telegram}`,
@@ -68,21 +74,21 @@ export async function GET() {
     `- [Російська версія сайту](${u('/ru')})`,
     '',
     '## Робота за країнами',
-    ...byCountry.map((x) => `- [Робота ${x.c.inName}](${u(x.c.path)}): ${vac(x.list.length)}`),
+    ...byCountry.map((x) => {
+      const pays = x.list.map((v) => salaryMain(v.salary)).filter(Boolean)
+      return `- [Робота ${x.c.inName}](${u(x.c.path)}): ${vac(x.list.length)}${pays.length ? `, наприклад ${pays[0]}` : ''}`
+    }),
     '',
-    '## Актуальні вакансії',
-    ...byCountry.flatMap((x) => [
-      '',
-      `### ${x.c.name}`,
-      ...x.list.map((v) => {
-        const pay = salaryMain(v.salary)
-        const bits = [v.city || COUNTRY[v.country]?.name, pay && `зарплата ${pay}${v.salary.net ? ' на руки' : ''}`, v.housingFree ? 'житло безкоштовно' : v.housing && 'житло надається'].filter(Boolean)
-        return `- [${v.title}](${u(v.path)}) — ${bits.join('; ')}`
-      }),
-    ]),
+    '## Markdown-карта сайту',
+    `- [Усі документи сайту](${u('/sitemap.md')}): кожна сторінка з її Markdown-версією, за мовою й темою`,
+    ...mapUk.map((m) => `- [${m.title}](${m.url}): ${m.count} — ${m.about}`),
+    '',
+    '### Російською / In Russian',
+    ...mapRu.map((m) => `- [${m.title}](${m.url}): ${m.count} — ${m.about}`),
     '',
     '## Корисні статті',
-    ...articles.map((a) => `- [${a.title}](${u(a.path)})`),
+    ...articles.slice(0, 30).map((a) => `- [${a.title}](${u(a.path)})`),
+    `- Усі статті: ${mapUk.find((m) => m.url.endsWith('/guides.md'))?.url ?? u('/news')}`,
     '',
   ]
   return new Response(lines.join('\n'), { headers: { 'content-type': 'text/markdown; charset=utf-8', 'cache-control': 'public, max-age=3600' } })

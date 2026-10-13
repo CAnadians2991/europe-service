@@ -110,12 +110,19 @@ export async function getVacancyByPath(path: string): Promise<Vacancy | undefine
 }
 
 /** Addresses of the closed vacancies (they stay online as on Tilda) — for the sitemap */
-export async function getClosedVacancyPaths(): Promise<{ path: string; updatedAt: string }[]> {
+export async function getClosedVacancyPaths(): Promise<{ path: string; updatedAt: string; hasRu: boolean; title: string; ruTitle: string; country: string; lang: 'uk' | 'ru' }[]> {
   if (!hasDb) return []
   try {
-    return ((await sql`select path, updated_at from vacancies where not active order by path`) as { path: string; updated_at: string }[]).map((r) => ({
+    // hasRu: a translated post has its Russian page at /ru + its address (vacancy-i18n hasRu); titles for the Markdown maps
+    const rows = (await sql`select path, updated_at, data->>'title' as title, coalesce(data->'ru'->>'title', '') as ru_title, data->>'country' as country, coalesce(data->>'lang', 'uk') as lang from vacancies where not active order by path`) as { path: string; updated_at: string; title: string; ru_title: string; country: string; lang: 'uk' | 'ru' }[]
+    return rows.map((r) => ({
       path: r.path,
       updatedAt: new Date(r.updated_at).toISOString(),
+      hasRu: Boolean(r.ru_title) && r.lang !== 'ru',
+      title: r.title,
+      ruTitle: r.ru_title,
+      country: r.country,
+      lang: r.lang,
     }))
   } catch {
     return []
@@ -144,12 +151,30 @@ export function toCard(v: Vacancy): VacancyCard {
   }
 }
 
-/** Similar vacancies for "Дивіться також" */
+const hash32 = (s: string) => {
+  let h = 2166136261
+  for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619) >>> 0
+  return h
+}
+
+/** Similar vacancies for "Дивіться також": the closest by country / sphere / city first, then this vacancy's neighbours
+ *  in a stable ring of the same country and sphere — so every vacancy is linked from a few others (crawl 13.10.2026:
+ *  477 old posts had no internal link at all, because the top of the list was the same everywhere). */
 export function similar(all: Vacancy[], v: Vacancy, n = 6): Vacancy[] {
   const score = (x: Vacancy) =>
     (x.country === v.country ? 4 : 0) + (x.category === v.category ? 2 : 0) + (x.city === v.city ? 1 : 0) + (x.hot ? 0.5 : 0)
-  return all
-    .filter((x) => x.active && x.id !== v.id)
-    .sort((a, b) => score(b) - score(a) || a.order - b.order)
-    .slice(0, n)
+  const pool = all.filter((x) => x.active && x.id !== v.id)
+  const top = [...pool].sort((a, b) => score(b) - score(a) || a.order - b.order).slice(0, Math.ceil(n / 2))
+  const rest = pool.filter((x) => !top.includes(x) && x.country === v.country)
+  const same = rest.filter((x) => x.category === v.category)
+  const me = hash32(v.id)
+  const next = (xs: Vacancy[]) => [...xs].sort((a, b) => ((hash32(a.id) - me) >>> 0) - ((hash32(b.id) - me) >>> 0))
+  const ring = [...next(same.length >= n - top.length ? same : rest)]
+  const out = [...top, ...ring.slice(0, n - top.length)]
+  // a small country: fill from the best of the rest
+  for (const x of [...pool].sort((a, b) => score(b) - score(a) || a.order - b.order)) {
+    if (out.length >= n) break
+    if (!out.includes(x)) out.push(x)
+  }
+  return out
 }
