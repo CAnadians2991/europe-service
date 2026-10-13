@@ -6,7 +6,7 @@ import { localHref, ruTwin } from '@/lib/alt-routes'
 import { localize } from '@/lib/vacancy-i18n'
 import { plural } from '@/lib/format'
 import { videoCards } from '@/lib/video-reviews'
-import { organizationLd, websiteLd, faqLd, tildaHomeProductLd } from '@/lib/seo'
+import { organizationLd, websiteLd, faqLd } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { Photo } from '@/components/ui/Photo'
 import { Flag } from '@/components/ui/Flag'
@@ -170,7 +170,6 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       <JsonLd data={organizationLd(lang)} />
       <JsonLd data={websiteLd()} />
       <JsonLd data={faqLd(faq)} />
-      {uk && <JsonLd data={tildaHomeProductLd()} />}
 
       {/* ───────── HERO: what we do + the request form right away ───────── */}
       <HomeHero lang={lang} photos={heroList} />

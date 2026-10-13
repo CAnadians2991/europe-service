@@ -91,6 +91,10 @@ function tildaSentences(file) {
   return [...new Set(out)]
 }
 
+// Owner-approved departures from Tilda (2026-10-13): these fields are ours now, not Tilda's
+const OWNER_CHANGED = { '/poslugi': ['title'], '/ru/services': ['title'], '/ru/vacancies': ['title', 'description'] }
+const changed = (p, f) => (OWNER_CHANGED[p] ?? []).includes(f)
+
 const ONLY = process.argv[3] // 'pages' → the Tilda pages only
 const jobs = []
 const seen = new Set()
@@ -143,8 +147,8 @@ async function worker() {
     const canonical = (h.match(/<link rel="canonical" href="([^"]*)"/) || [])[1] || ''
     const wantTitle = ws(j.kind === 'page' ? j.tilda.title : j.post.title)
     const wantDesc = ws(j.kind === 'page' ? j.tilda.desc : j.post.descr).replace(/^.{0,3}$/, '') // «ʼ» etc. = no description
-    if (wantTitle && title !== wantTitle) flag(j, 'title', `«${title}» ≠ Tilda «${wantTitle}»`)
-    if (wantDesc && desc !== wantDesc) flag(j, 'description', `«${desc}» ≠ Tilda «${wantDesc}»`)
+    if (wantTitle && title !== wantTitle && !changed(j.path, 'title')) flag(j, 'title', `«${title}» ≠ Tilda «${wantTitle}»`)
+    if (wantDesc && desc !== wantDesc && !changed(j.path, 'description')) flag(j, 'description', `«${desc}» ≠ Tilda «${wantDesc}»`)
     const noindex = /noindex/.test(robots)
     if (j.kind === 'page' && noindex !== Boolean(j.tilda.noindex)) flag(j, 'robots', `ours ${robots || 'index'} · Tilda ${j.tilda.noindex ? 'noindex' : 'index'}`)
     if (!noindex && canonical && new URL(canonical).pathname.toLowerCase() !== j.path.toLowerCase().replace(/\/$/, '') && !(j.path === '/' && new URL(canonical).pathname === '/')) flag(j, 'canonical', canonical)
@@ -163,7 +167,8 @@ async function worker() {
       const ours = new Set([...h.matchAll(/"@type":"([^"]+)"/g)].map((m) => m[1]))
       for (const ld of META.pages[j.path]?.jsonld ?? []) {
         const t = ld['@type']
-        if (t && !ours.has(t)) flag(j, 'json-ld', `Tilda ${t} missing`)
+        // Tilda's Product + 5/33 rating was dropped on the owner's word (2026-10-13)
+        if (t && t !== 'Product' && !ours.has(t)) flag(j, 'json-ld', `Tilda ${t} missing`)
       }
       // SEO text
       const sents = tildaSentences(j.tilda.file)

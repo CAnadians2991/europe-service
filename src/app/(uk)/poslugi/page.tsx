@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import { pageMeta } from '@/lib/seo'
 import { ServicesPage } from '@/components/content/ServicesPage'
+import { packagesFrom } from '@/lib/content'
 
-// title and description exactly as on Tilda (the page ranks with them)
+// description as on Tilda; the title says what the page answers (owner, 2026-10-13 — Tilda's «Наші послуги - europeservice.com.ua»
+// told a searcher nothing); the price comes from the packages, so it stays true
 export const metadata: Metadata = pageMeta({
-  title: "Наші послуги - europeservice.com.ua",
+  title: `Послуги та ціни: пакети від ${packagesFrom('uk')} — Europe Service`,
   absoluteTitle: true,
   description: "Наші послуги ✅ Без посередників ⚡ Нові вакансії 2026",
   path: '/poslugi',

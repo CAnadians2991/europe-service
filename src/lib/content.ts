@@ -113,6 +113,12 @@ export const SERVICES = {
   ru: { ...EMPTY_SERVICES, ...S.ru } as ServicesLang,
 }
 
+/** «1 099 грн» — the cheapest support package (the services pages' title names it) */
+export function packagesFrom(lang: 'uk' | 'ru') {
+  const n = Math.min(...SERVICES[lang].packages.map((p) => Number(String(p.price ?? '').replace(/\D/g, ''))).filter((x) => x > 0))
+  return Number.isFinite(n) ? `${n.toLocaleString('uk-UA').replace(/\s/g, '\u00a0')} грн` : ''
+}
+
 export const ARTICLES = ((articlesData as unknown as { articles?: Article[] }).articles ?? []) as Article[]
 const BY_PATH = new Map(ARTICLES.map((a) => [a.path, a]))
 export const getArticle = (path: string) => BY_PATH.get(path)

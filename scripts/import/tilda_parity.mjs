@@ -29,7 +29,8 @@ if (!fs.existsSync(META)) {
   // Tilda values that belonged to ANOTHER article (copy-paste on Tilda). Owner, 2026-10-12: old pages one-to-one, no
   // exceptions — /skolko-ukraincev-rabotaet-v-polshe-legalno keeps Tilda's «Польща дозволила НЕ проходити обсервацію…»
   // title and /ru/ukraincy-v-polshe-… its (Ukrainian) description. Add a path here only on the owner's word.
-  const NOT_TILDA = {}
+  // Owner, 2026-10-13: /ru/vacancies — the year in Tilda's title and description is brought to the current one (2025 → 2026)
+  const NOT_TILDA = { '/ru/vacancies': ['title', 'description'] }
   for (const [p, fields] of Object.entries(NOT_TILDA)) for (const f of fields) if (T[p]) T[p][f] = null
 
   /** h2/h3 blocks (also inside FAQ «details») get the level Tilda gave the same text */
@@ -144,7 +145,12 @@ if (!fs.existsSync(META)) {
     return o
   }
   const LD = {}
-  for (const [p, t] of Object.entries(T)) if (t.jsonld?.length) LD[p] = t.jsonld.map(fixLd)
+  // Owner, 2026-10-13: Tilda's «Product» with AggregateRating 5/33 (/, /vacancies, /news) is dropped — a job is not a
+  // product and self-served ratings risk a manual action for structured-data spam; the Review blocks stay
+  for (const [p, t] of Object.entries(T)) {
+    const keep = (t.jsonld ?? []).filter((x) => x['@type'] !== 'Product')
+    if (keep.length) LD[p] = keep.map(fixLd)
+  }
   fs.writeFileSync(path.resolve(HERE, '../../src/data/tilda-jsonld.json'), JSON.stringify(LD, null, 1) + '\n')
   n.jsonld = Object.keys(LD).length
 

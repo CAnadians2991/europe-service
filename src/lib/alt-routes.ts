@@ -16,6 +16,7 @@ const STATIC: Record<string, string> = {
   '/pidbir': '/ru/podbor',
   '/news': '/ru/news',
   '/spivpratsya': '/ru/sotrudnichestvo',
+  '/zarplaty': '/ru/zarplaty',
 }
 const { vacancyRu: _vr, ...pairs } = twins as Record<string, unknown> & { vacancyRu?: string[] }
 // service landings with their own Russian slugs (visa)

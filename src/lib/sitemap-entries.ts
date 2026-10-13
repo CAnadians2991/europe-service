@@ -71,6 +71,9 @@ export async function sitemapEntries(): Promise<MetadataRoute.Sitemap> {
   // closed vacancy posts stay online at their Tilda addresses (Tilda listed them in sitemap-feed-*.xml too)
   for (const c of await getClosedVacancyPaths()) pushVac(c.path, c.hasRu, { lastModified: c.updatedAt, changeFrequency: 'yearly', priority: 0.3 }, 0.3)
   for (const p of ['/poslugi', '/about', '/vidguki', '/contacts', '/news']) push(p, { lastModified: now, changeFrequency: 'monthly', priority: 0.6 })
+  // the salary index follows today's vacancies
+  push('/zarplaty', { lastModified: lastVac, changeFrequency: 'weekly', priority: 0.7 })
+  push('/ru/zarplaty', { lastModified: lastVac, changeFrequency: 'weekly', priority: 0.5 }, 'ru')
   for (const p of ['/ru/services', '/ru/about', '/ru/otzyvy', '/ru/contacts', '/ru/news']) push(p, { lastModified: now, changeFrequency: 'monthly', priority: 0.45 }, 'ru')
   // «Співпраця» in four languages: one hreflang cluster (uk / ru / en / pl, x-default = en)
   const partnerLangs = Object.fromEntries(Object.entries(partnerAlternates()).map(([k, p]) => [k, u(p)]))

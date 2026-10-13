@@ -24,6 +24,7 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
         ['/vacancies/married_couple', 'Робота для сімейних пар'],
         ['/countires', 'Корисне про країни'],
         ['/news', 'Новини та статті'],
+        ['/zarplaty', 'Індекс зарплат'],
       ]
     : [
         ['/ru' + CATALOG_PATH, 'Все вакансии'],
@@ -33,6 +34,7 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
         ['/ru/vacancies/married_couple', 'Работа для семейных пар'],
         ['/ru/countires', 'Полезное о странах'],
         ['/ru/news', 'Новости и статьи'],
+        ['/ru/zarplaty', 'Индекс зарплат'],
       ]
   const company: [string, string][] = uk
     ? [

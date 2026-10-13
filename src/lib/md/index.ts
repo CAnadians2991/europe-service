@@ -34,6 +34,8 @@ const HTML_PAGES: Record<string, { lang: MdLang; title: string; topic: string; p
   '/ru/services': { lang: 'ru', title: 'Услуги и цены Europe Service', topic: 'services', purpose: 'пакеты сопровождения «Базовый», «Стандарт», «Премиум»: цены, что входит, замена вакансии' },
   '/news': { lang: 'uk', title: 'Новини та статті Europe Service', topic: 'guides', purpose: 'перелік статей про роботу, візи й життя за кордоном' },
   '/ru/news': { lang: 'ru', title: 'Новости и статьи Europe Service', topic: 'guides', purpose: 'список статей о работе, визах и жизни за границей' },
+  '/zarplaty': { lang: 'uk', title: 'Індекс зарплат Europe Service', topic: 'salaries', purpose: 'ставки за годину й на місяць за країнами, сферами й договорами за актуальними вакансіями; щомісяця' },
+  '/ru/zarplaty': { lang: 'ru', title: 'Индекс зарплат Europe Service', topic: 'salaries', purpose: 'ставки в час и в месяц по странам, сферам и договорам по актуальным вакансиям; ежемесячно' },
   [PARTNER_PATHS.uk]: { lang: 'uk', title: 'Співпраця з Europe Service для роботодавців, агентств і рекрутерів', topic: 'partners', purpose: 'умови співпраці, обсяги, як почати' },
   [PARTNER_PATHS.ru]: { lang: 'ru', title: 'Сотрудничество с Europe Service для работодателей, агентств и рекрутеров', topic: 'partners', purpose: 'условия сотрудничества, объёмы, как начать' },
   [PARTNER_PATHS.en]: { lang: 'en', title: 'Partner with Europe Service: employers, labour agencies, recruiters', topic: 'partners', purpose: 'cooperation terms, volumes, how to start' },
@@ -44,6 +46,7 @@ const TOPICS: Record<string, (lang: MdLang) => { title: string; about: string }>
   agency: (l) => ({ title: t(l, 'Агентство Europe Service', 'Агентство Europe Service', 'About Europe Service', 'O Europe Service'), about: t(l, 'хто ми, ліцензія № 223, офіси, контакти, відгуки клієнтів', 'кто мы, лицензия № 223, офисы, контакты, отзывы клиентов') }),
   services: (l) => ({ title: t(l, 'Послуги та ціни', 'Услуги и цены'), about: t(l, 'пакети супроводу, ціни в гривнях, що входить, гарантія заміни вакансії', 'пакеты сопровождения, цены в гривнах, что входит, гарантия замены вакансии') }),
   visa: (l) => ({ title: t(l, 'Робоча віза в Польщу та відрядження A1', 'Рабочая виза в Польшу и командировка A1'), about: t(l, 'віза D на рік, ціна супроводу, документи, строки, робота в Нідерландах і Німеччині з польською візою', 'виза D на год, цена сопровождения, документы, сроки, работа в Нидерландах и Германии с польской визой') }),
+  salaries: (l) => ({ title: t(l, 'Зарплати за кордоном', 'Зарплаты за границей'), about: t(l, 'індекс зарплат за актуальними вакансіями: медіани за країнами, сферами й договорами, зміна за місяць', 'индекс зарплат по актуальным вакансиям: медианы по странам, сферам и договорам, изменение за месяц') }),
   guides: (l) => ({ title: t(l, 'Статті та новини', 'Статьи и новости'), about: t(l, 'як виїхати, документи, податки, життя в країнах ЄС; архівні статті позначені', 'как выехать, документы, налоги, жизнь в странах ЕС; архивные статьи отмечены') }),
   legal: (l) => ({ title: t(l, 'Юридичні документи', 'Юридические документы'), about: t(l, 'публічна оферта, політика конфіденційності, угода користувача, декларація', 'публичная оферта, политика конфиденциальности, пользовательское соглашение, декларация') }),
   quizzes: (l) => ({ title: t(l, 'Підбір вакансії', 'Подбор вакансии'), about: t(l, 'короткі анкети: менеджер підбирає вакансію й передзвонює', 'короткие анкеты: менеджер подбирает вакансию и перезванивает') }),
@@ -189,7 +192,7 @@ async function buildDoc(item: MdItem, origin: string): Promise<MdDoc | null> {
 
 const LANGS: MdLang[] = ['uk', 'ru', 'en', 'pl']
 const LANG_NAME: Record<MdLang, string> = { uk: 'українською', ru: 'російською', en: 'англійською', pl: 'польською' }
-const topicOrder = (topic: string) => (['agency', 'services', 'visa', 'partners'].includes(topic) ? 0 : topic.startsWith('jobs-pl') ? 1 : topic.startsWith('vacancies-pl') ? 2 : topic.startsWith('jobs-') ? 3 : topic.startsWith('vacancies-') ? 4 : 5)
+const topicOrder = (topic: string) => (['agency', 'services', 'salaries', 'visa', 'partners'].includes(topic) ? 0 : topic.startsWith('jobs-pl') ? 1 : topic.startsWith('vacancies-pl') ? 2 : topic.startsWith('jobs-') ? 3 : topic.startsWith('vacancies-') ? 4 : 5)
 
 function groups(inv: MdItem[]) {
   const by = new Map<string, MdItem[]>()

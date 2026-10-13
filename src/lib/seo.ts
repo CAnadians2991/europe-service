@@ -144,14 +144,11 @@ export function breadcrumbLd(items: { name: string; path: string }[]) {
 }
 
 /**
- * Tilda's own JSON-LD of an old page (Product + AggregateRating on /, /vacancies, /news; Review on /about, /vidguki,
- * /contacts, /vidguki/greece, /greece_video), from src/data/tilda-jsonld.json (scripts/import/tilda_parity.mjs) —
- * rendered next to ours: the owner keeps every old page's structured data one-to-one.
+ * Tilda's own JSON-LD of an old page (Review on /about, /vidguki, /vidguki/greece, /greece_video; Organization on
+ * /contacts), from src/data/tilda-jsonld.json (scripts/import/tilda_parity.mjs) — rendered next to ours. Tilda's
+ * «Product» with a 5/33 rating on /, /vacancies and /news was dropped on the owner's word (2026-10-13).
  */
 export const tildaLd = (path: string): object[] => (tildaJsonLd as Record<string, object[]>)[path] ?? []
-
-/** The Tilda Product block of the home page */
-export const tildaHomeProductLd = () => tildaLd('/')[0]
 
 export function faqLd(items: { q: string; a: string }[]) {
   return {

@@ -6776,9 +6776,9 @@
  {
   "id": "rd609iss91",
   "path": "/tpost/rd609iss91-monterelektromonter-na-zavod-alstom",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 222,
+  "order": 13122,
   "country": "pl",
   "title": "Монтер/електромонтер на завод ALSTOM",
   "company": "ALSTOM",
@@ -6888,7 +6888,8 @@
   "tildaUid": "rd609iss91",
   "createdAt": "2021-10-13T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "jc5m1y7p11",
@@ -7413,9 +7414,9 @@
  {
   "id": "uibtpcs201",
   "path": "/tpost/uibtpcs201-potrbn-shve-na-bartex",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1228,
+  "order": 13102,
   "country": "de",
   "title": "Потрібні швеї на Bartex",
   "company": "Bartex",
@@ -7527,7 +7528,8 @@
   "tildaUid": "uibtpcs201",
   "createdAt": "2021-10-13T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "xmml9t0z71",
@@ -8754,9 +8756,9 @@
  {
   "id": "9gbd9svnr1",
   "path": "/tpost/9gbd9svnr1-robota-na-mashin-chpu-plazma",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 2239,
+  "order": 13142,
   "country": "cz",
   "title": "Робота на машині ЧПУ (плазма)",
   "company": "ЧПУ",
@@ -8873,7 +8875,8 @@
   "tildaUid": "9gbd9svnr1",
   "createdAt": "2021-09-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "evzlprf7j1",
@@ -11679,9 +11682,9 @@
  {
   "id": "5x0fz1dp11",
   "path": "/tpost/5x0fz1dp11-pratsvnik-na-virobnitstvo-kartonnih-upak",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 265,
+  "order": 13112,
   "country": "pl",
   "title": "Працівник на виробництво картонних упакувань",
   "company": "",
@@ -11786,7 +11789,8 @@
   "tildaUid": "5x0fz1dp11",
   "createdAt": "2021-08-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "xjh4s9tyc1",
@@ -12802,9 +12806,9 @@
  {
   "id": "hspi8joyf1",
   "path": "/tpost/hspi8joyf1-operator-avtonavantazhuvacha-na-sklad-to",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 275,
+  "order": 13192,
   "country": "pl",
   "title": "Оператор автонавантажувача на склад товарів LG",
   "company": "LG",
@@ -12913,7 +12917,8 @@
   "tildaUid": "hspi8joyf1",
   "createdAt": "2021-08-25T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "ohy17i6gp1",
@@ -35857,9 +35862,9 @@
  {
   "id": "zfuks4lc21",
   "path": "/tpost/zfuks4lc21-sklad-brendovogo-odyagu-lpp-reserved-cro",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 540,
+  "order": 13132,
   "country": "pl",
   "title": "Склад брендового одягу LPP (RESERVED, CROPP, HOUSE, MOHITO, SINSAY)",
   "company": "LPP",
@@ -35966,7 +35971,8 @@
   "tildaUid": "zfuks4lc21",
   "createdAt": "2023-04-11T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "3yjfuy9yt1",
@@ -119351,9 +119357,9 @@
  {
   "id": "2b6vompl71",
   "path": "/tpost/2b6vompl71-shvei-bartex",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 2253,
+  "order": 13152,
   "country": "de",
   "title": "Швеи Bartex",
   "company": "Bartex",
@@ -119460,7 +119466,8 @@
   "lang": "ru",
   "createdAt": "2021-10-13T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "4sej2dcr91",
@@ -119814,9 +119821,9 @@
  {
   "id": "daxgvo6yk1",
   "path": "/tpost/daxgvo6yk1-mehanikslesar-v-kompaniyu-base-group",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1257,
+  "order": 13162,
   "country": "pl",
   "title": "Механик/слесарь в компанию Base Group",
   "company": "Base Group",
@@ -119924,7 +119931,8 @@
   "lang": "ru",
   "createdAt": "2021-10-12T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "75ddbhxf91",
@@ -120599,9 +120607,9 @@
  {
   "id": "teyy6tocl1",
   "path": "/tpost/teyy6tocl1-rabota-na-mashine-chpu-plazma",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 3264,
+  "order": 13202,
   "country": "cz",
   "title": "Работа на машине ЧПУ (плазма)",
   "company": "ЧПУ",
@@ -120710,7 +120718,8 @@
   "lang": "ru",
   "createdAt": "2021-09-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "rfsybf2la1",
@@ -125119,9 +125128,9 @@
  {
   "id": "xort3v7rg1",
   "path": "/tpost/xort3v7rg1-rabotnik-na-proizvodstvo-mebeli-i-matras",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1308,
+  "order": 13212,
   "country": "pl",
   "title": "Работник на производство мебели и матрасов",
   "company": "",
@@ -125221,14 +125230,15 @@
   "lang": "ru",
   "createdAt": "2021-09-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "1hdnk05jn1",
   "path": "/tpost/1hdnk05jn1-rabotniki-na-proizvodstvo-avtostekla",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 1309,
+  "order": 13222,
   "country": "pl",
   "title": "Работники на производство автостекла",
   "company": "",
@@ -125321,7 +125331,8 @@
   "lang": "ru",
   "createdAt": "2021-09-18T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "7b5ii69sa1",
@@ -130406,9 +130417,9 @@
  {
   "id": "tj4u02zv01",
   "path": "/tpost/tj4u02zv01-elektrik-v-kompanyu-iveco-czech-republic",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 3357,
+  "order": 13172,
   "country": "cz",
   "title": "Електрик в компанію Iveco Czech Republic",
   "company": "Iveco Czech Republic",
@@ -130530,7 +130541,8 @@
   "tildaUid": "tj4u02zv01",
   "createdAt": "2023-01-27T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "ju72s63zs1",
@@ -131805,9 +131817,9 @@
  {
   "id": "9f4h9i6pj1",
   "path": "/tpost/9f4h9i6pj1-koval-na-metalurgine-virobnitstvo-tatra",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 3369,
+  "order": 13232,
   "country": "cz",
   "title": "Коваль на металургійне виробництво Tatra Metalurgie",
   "company": "Tatra Metalurgie",
@@ -131914,7 +131926,8 @@
   "tildaUid": "9f4h9i6pj1",
   "createdAt": "2022-10-21T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "k4buonoc81",
@@ -137070,9 +137083,9 @@
  {
   "id": "sox83ekov1",
   "path": "/tpost/sox83ekov1-kurr-v-pochtovu-kompanyu-deutsche-post-d",
-  "active": false,
+  "active": true,
   "hot": false,
-  "order": 2415,
+  "order": 13182,
   "country": "de",
   "title": "Кур'єр в почтову компанію Deutsche Post DHL Group",
   "company": "Deutsche Post DHL Group",
@@ -137187,7 +137200,8 @@
   "tildaUid": "sox83ekov1",
   "createdAt": "2022-11-14T09:00:00.000Z",
   "updatedAt": "2026-10-06T10:28:38.542Z",
-  "housingPool": true
+  "housingPool": true,
+  "revived": "2026-10-13"
  },
  {
   "id": "jpusl75sm1",
