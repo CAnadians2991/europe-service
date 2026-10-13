@@ -19,10 +19,8 @@ export async function proxy(req: NextRequest) {
 
   // Markdown versions of the pages (/<page>.md, /sitemap.md, /llm/<lang>/<topic>.md): one handler builds them
   if (pathname.endsWith('.md')) {
-    // the handler reads the address from the header (a rewrite may hand it the original URL rather than the target's query)
-    const headers = new Headers(req.headers)
-    headers.set('x-md-path', pathname)
-    return NextResponse.rewrite(new URL(`/api/md?p=${encodeURIComponent(pathname)}`, req.url), { request: { headers } })
+    // the address goes into the target's path: the CDN keys its cache on the path (a query was ignored — every .md got one body)
+    return NextResponse.rewrite(new URL(`/api/md${pathname}`, req.url))
   }
 
   // Admin: auth only (matching is case-insensitive on Vercel, so /ADMIN is guarded too); only the trailing slash is normalised

@@ -2,7 +2,7 @@ import { pageMd, sitemapMd, topicMd } from '@/lib/md'
 import { pageOfMd, pageUrl, type MdLang } from '@/lib/md/core'
 import { SITE } from '@/lib/site'
 
-// Markdown versions of the pages (/<page>.md, /sitemap.md, /llm/<lang>/<topic>.md) — proxy.ts rewrites those addresses here.
+// Markdown versions of the pages (/<page>.md, /sitemap.md, /llm/<lang>/<topic>.md) — proxy.ts rewrites /<x>.md to /api/md/<x>.md.
 // Built from the same data as the HTML at request time and cached by the CDN for an hour.
 export const dynamic = 'force-dynamic'
 
@@ -16,12 +16,21 @@ const headers = (canonical?: string): HeadersInit => ({
 })
 const notFound = () => new Response(`# Not found\n\nThis address has no Markdown document. Map of all documents: ${SITE.url}/sitemap.md\n`, { status: 404, headers: { ...headers(), 'cache-control': 'public, max-age=300' } })
 
-export async function GET(req: Request) {
+export async function GET(req: Request, { params }: { params: Promise<{ slug: string[] }> }) {
   const u = new URL(req.url)
-  let p = req.headers.get('x-md-path') || u.searchParams.get('p') || (u.pathname.endsWith('.md') ? u.pathname : '')
+  let p = '/' + (await params).slug.join('/')
   try {
     p = decodeURIComponent(p)
   } catch {}
+  try {
+    return await respond(req, u, p)
+  } catch (e) {
+    console.error('[md]', p, e)
+    return new Response(`# Temporary error\n\nTry again later or open the page itself: ${SITE.url}${pageOfMd(p) === '/' ? '' : pageOfMd(p)}\n`, { status: 503, headers: { ...headers(), 'cache-control': 'no-store', 'netlify-cdn-cache-control': 'no-store' } })
+  }
+}
+
+async function respond(req: Request, u: URL, p: string) {
   if (p === '/sitemap.md') return new Response(await sitemapMd(), { headers: headers() })
   const topic = p.match(/^\/llm\/(uk|ru|en|pl)\/([a-z0-9-]+)\.md$/)
   if (topic) {

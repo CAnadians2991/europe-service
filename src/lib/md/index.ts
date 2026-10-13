@@ -70,7 +70,7 @@ export interface MdItem {
   note?: string
 }
 
-const vacNote = (v: Vacancy, lang: L2) => [v.city || (lang === 'ru' ? COUNTRY[v.country]?.nameRu : COUNTRY[v.country]?.name), salaryMain(v.salary, lang)].filter(Boolean).join('; ')
+const vacNote = (v: Vacancy, lang: L2) => [v.city || (lang === 'ru' ? COUNTRY[v.country]?.nameRu : COUNTRY[v.country]?.name), v.salary ? salaryMain(v.salary, lang) : ''].filter(Boolean).join('; ')
 
 /** every page of the XML sitemap, classified (the Markdown corpus = exactly the canonical indexable pages) */
 async function buildInventory(): Promise<MdItem[]> {
@@ -136,10 +136,11 @@ async function buildInventory(): Promise<MdItem[]> {
     if (p) out.push({ path, lang: p.lang, title: p.title, topic: 'agency' })
     // anything else in the sitemap has no Markdown yet: it stays out of the maps (listed in the private register)
   }
-  return out
+  // a record without a title (an old closed post) is listed by its address
+  return out.map((x) => ({ ...x, title: x.title || x.path }))
 }
 
-export const mdInventory = unstable_cache(buildInventory, ['md-inventory-v2'], { tags: [VACANCIES_TAG], revalidate: 3600 })
+export const mdInventory = unstable_cache(buildInventory, ['md-inventory-v3'], { tags: [VACANCIES_TAG], revalidate: 3600 })
 
 const activeFor = async (lang: L2) => forLang((await getAllVacancies()).filter((v) => v.active), lang)
 
@@ -204,7 +205,7 @@ function groups(inv: MdItem[]) {
     .sort((a, b) => LANGS.indexOf(a.lang) - LANGS.indexOf(b.lang) || topicOrder(a.topic) - topicOrder(b.topic) || a.topic.localeCompare(b.topic))
 }
 
-const line = (x: MdItem) => `- [${x.title.replace(/[[\]]/g, '')}](${mdUrl(x.path)})${x.note ? ` — ${x.note}` : ''}`
+const line = (x: MdItem) => `- [${(x.title || x.path).replace(/[[\]]/g, '').replace(/\s+/g, ' ').trim()}](${mdUrl(x.path)})${x.note ? ` — ${x.note}` : ''}`
 
 /** /sitemap.md: the topic maps, then every page of the corpus with its Markdown address, by language and topic */
 export async function sitemapMd(): Promise<string> {
