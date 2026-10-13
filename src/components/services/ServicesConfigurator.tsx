@@ -187,18 +187,18 @@ export function ServicesConfigurator({ lang, tiers, addons, payLine, note, stamp
             <div className="-mr-1 -mt-1 size-[72px] shrink-0 text-brand-700/80">{stamp}</div>
           </div>
 
-          <dl className="mt-5 grid gap-3 text-[15.5px]">
+          <div className="mt-5 grid gap-3 text-[15.5px]">
             <div className="flex items-baseline gap-2">
-              <dt className="font-semibold">
+              <span className="font-semibold">
                 {uk ? 'Пакет' : 'Пакет'} «{tier.name}»
-              </dt>
+              </span>
               <span aria-hidden className="h-0 flex-1 translate-y-[-3px] border-b border-dotted border-line-strong" />
-              <dd className="num font-semibold">{fmt(tier.price)}</dd>
+              <span className="num font-semibold">{fmt(tier.price)}</span>
             </div>
             <div className="flex items-baseline gap-2 text-ink-2">
-              <dt>{uk ? 'Підбір вакансії' : 'Подбор вакансии'}</dt>
+              <span>{uk ? 'Підбір вакансії' : 'Подбор вакансии'}</span>
               <span aria-hidden className="h-0 flex-1 translate-y-[-3px] border-b border-dotted border-line-strong" />
-              <dd className="num">0&nbsp;грн</dd>
+              <span className="num">0&nbsp;грн</span>
             </div>
             {addons.map((a) => {
               const inc = a.includedIn.includes(tier.id)
@@ -221,7 +221,7 @@ export function ServicesConfigurator({ lang, tiers, addons, payLine, note, stamp
                 </div>
               )
             })}
-          </dl>
+          </div>
 
           <div className="mt-5 flex items-baseline justify-between gap-3 border-t-2 border-ink pt-4">
             <span className="text-[15px] font-semibold">{uk ? 'До сплати' : 'К оплате'}</span>
