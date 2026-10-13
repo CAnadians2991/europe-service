@@ -14,7 +14,8 @@ const SEED = seed as unknown as Vacancy[]
  * (2026-10) the open list is ~3,5 MB. part 0 = today's vacancies, 1…PARTS-1 = the revived posts split by id.
  * The switched-off pages are read one by one (getVacancyByPath).
  */
-const PARTS = 4
+// 7 since 2026-10-13: the Russian texts of the ~900 revived posts doubled their size (4 parts were 2,3–2,6 MB each)
+const PARTS = 7
 async function readPart(part: number): Promise<Vacancy[] | null> {
   if (!hasDb) return null
   try {
@@ -30,7 +31,7 @@ async function readPart(part: number): Promise<Vacancy[] | null> {
   }
 }
 
-const cachedPart = unstable_cache(readPart, ['vacancies-open-v11'], { tags: [VACANCIES_TAG] })
+const cachedPart = unstable_cache(readPart, ['vacancies-open-v12'], { tags: [VACANCIES_TAG] })
 
 /** local development without a database: today's vacancies + the revived posts from data/vacancies.closed.json */
 let revivedLocal: Vacancy[] | null = null
