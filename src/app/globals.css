@@ -800,3 +800,37 @@ html[data-bottom-bar] .contact-fab-dock {
     background: linear-gradient(90deg, #5ec58a 0%, #38af60 35%, #2f9a86 65%, #578fc7 100%);
   }
 }
+
+/* ── services page (components/services/ServicesConfigurator.tsx) ── */
+/* the replacement-period bar: the logo gradient, growing from the left when a package is picked */
+.svc-bar {
+  background-image: linear-gradient(90deg, #38af60 0%, #2f9a86 60%, #578fc7 100%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  [aria-checked='true'] .svc-bar {
+    animation: svc-grow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-origin: left center;
+  }
+  .svc-num {
+    animation: svc-pop 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+@keyframes svc-grow {
+  from {
+    transform: scaleX(0.15);
+  }
+}
+@keyframes svc-pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+/* the receipt: a white sheet with the gradient rule on top */
+.svc-receipt {
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lift);
+}
