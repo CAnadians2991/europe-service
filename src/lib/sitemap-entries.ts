@@ -24,17 +24,18 @@ export async function sitemapEntries(): Promise<MetadataRoute.Sitemap> {
     const ru = ruTwin(ukPath)
     return ru ? { alternates: { languages: { uk: u(ukPath), ru: u(ru), 'x-default': u(ukPath) } } } : {}
   }
-  const entry = (path: string, e: Omit<MetadataRoute.Sitemap[number], 'url'>, lang: 'uk' | 'ru' = 'uk') => ({
+  const entry = (path: string, e: Omit<MetadataRoute.Sitemap[number], 'url'>, lang: 'uk' | 'ru' = 'uk', pair = true) => ({
     url: u(path),
     ...e,
-    ...alt(lang === 'uk' ? path : (ukTwin(path) ?? '')),
+    ...(pair ? alt(lang === 'uk' ? path : (ukTwin(path) ?? '')) : {}),
   })
   const seen = new Set<string>()
   const out: MetadataRoute.Sitemap = []
-  const push = (path: string, e: Omit<MetadataRoute.Sitemap[number], 'url'>, lang: 'uk' | 'ru' = 'uk') => {
+  /** pair = false: the page has no hreflang pair (its Russian copy is noindex — quizzes, legal documents) */
+  const push = (path: string, e: Omit<MetadataRoute.Sitemap[number], 'url'>, lang: 'uk' | 'ru' = 'uk', pair = true) => {
     if (seen.has(path)) return
     seen.add(path)
-    out.push(entry(path, e, lang))
+    out.push(entry(path, e, lang, pair))
   }
 
   push('/', { lastModified: lastVac, changeFrequency: 'daily', priority: 1 })
@@ -81,12 +82,12 @@ export async function sitemapEntries(): Promise<MetadataRoute.Sitemap> {
   for (const a of ARTICLES) {
     push(a.path, { lastModified: a.datePublished ? new Date(a.datePublished) : a.date ? new Date(a.date) : now, changeFrequency: 'yearly', priority: 0.5 }, a.lang)
   }
-  for (const q of QUIZZES) if (!q.noindex) push(q.path, { lastModified: now, changeFrequency: 'monthly', priority: 0.4 }, q.path.startsWith('/ru/') ? 'ru' : 'uk')
+  for (const q of QUIZZES) if (!q.noindex) push(q.path, { lastModified: now, changeFrequency: 'monthly', priority: 0.4 }, q.path.startsWith('/ru/') ? 'ru' : 'uk', false)
   for (const v of VISA_PAGES) push(v.path, { lastModified: new Date(v.updated.split('.').reverse().join('-')), changeFrequency: 'monthly', priority: v.lang === 'uk' ? 0.85 : 0.6 }, v.lang)
   for (const p of ['/charity', '/ru/charity']) push(p, { lastModified: now, changeFrequency: 'yearly', priority: 0.3 }, p.startsWith('/ru/') ? 'ru' : 'uk')
   // indexable Tilda pages that were missing here (crawl 13.10.2026): the legal documents (their Russian copies are noindex)
   // and /links; Tilda's sitemap listed them
-  for (const d of LEGAL) if (!d.path.startsWith('/ru/')) push(d.path, { lastModified: now, changeFrequency: 'yearly', priority: 0.2 })
+  for (const d of LEGAL) if (!d.path.startsWith('/ru/')) push(d.path, { lastModified: now, changeFrequency: 'yearly', priority: 0.2 }, 'uk', false)
   if (pageByPath('/links')) push('/links', { lastModified: now, changeFrequency: 'monthly', priority: 0.3 })
   return out
 }

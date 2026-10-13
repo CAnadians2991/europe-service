@@ -17,6 +17,13 @@ const generatedSeoTitle = (v: Vacancy) =>
  * A vacancy post at its Tilda address (/tpost/<id>-<slug>, /vacancies/netherlands/tpost/…).
  * Title = the post title as on Tilda; closed vacancies stay indexable like they were (no JobPosting for them).
  */
+/** vacancyTitle keeps a long title without the place; a new vacancy needs the place to differ from the old Tilda post */
+function placeTitle(v: Vacancy, as: 'uk' | 'ru') {
+  const t = vacancyTitle(v, as)
+  const city = v.city?.trim()
+  return t === v.title && city && !v.title.toLowerCase().includes(city.toLowerCase()) ? `${v.title} — ${city}` : t
+}
+
 export function vacancyPageMeta(v: Vacancy, as: 'uk' | 'ru' = v.lang ?? 'uk'): Metadata {
   const translated = hasRu(v) && v.lang !== 'ru'
   const shown = as === 'ru' && translated ? localize(v, 'ru') : v
@@ -24,7 +31,7 @@ export function vacancyPageMeta(v: Vacancy, as: 'uk' | 'ru' = v.lang ?? 'uk'): M
   return pageMeta({
     // Tilda posts keep Tilda's title; a vacancy created on this site gets the place in it («… — Варшава»), so it does not
     // repeat the title of the old Tilda post of the same employer (10 such pairs, crawl 13.10.2026)
-    title: shown === v && generatedSeoTitle(v) ? v.title : shown.seoTitle || (!v.tildaUid && !v.path.includes('/tpost/') ? vacancyTitle(shown, as) : shown.title),
+    title: shown === v && generatedSeoTitle(v) ? v.title : shown.seoTitle || (!v.tildaUid && !v.path.includes('/tpost/') ? placeTitle(shown, as) : shown.title),
     absoluteTitle: true,
     description: vacancyDescription(shown, as),
     path: shown.path,

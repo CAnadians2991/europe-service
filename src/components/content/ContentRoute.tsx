@@ -114,7 +114,8 @@ export async function contentMetadata(path: string): Promise<Metadata> {
   // the Russian copies of the quizzes are noindex, so a Ukrainian quiz has no hreflang pair (44 pairs pointed at noindex pages)
   if (r.kind === 'quiz') return pageMeta({ title: r.q.title, description: r.q.description, path, lang, noindex: r.q.noindex, absoluteTitle: true, hreflang: false })
   // Tilda indexed /privacy, /oferta, /user_deal, /declaration — so do we; their Russian copies are new (not indexed)
-  if (r.kind === 'legal') return pageMeta({ title: r.doc.seoTitle || r.doc.title, description: r.doc.seoDescription || r.doc.title, path, lang, noindex: lang === 'ru', absoluteTitle: true })
+  // …and no hreflang pair, since the Russian copy is noindex
+  if (r.kind === 'legal') return pageMeta({ title: r.doc.seoTitle || r.doc.title, description: r.doc.seoDescription || r.doc.title, path, lang, noindex: lang === 'ru', absoluteTitle: true, hreflang: false })
   const p = r.page
   return pageMeta({ title: p.seoTitle || p.title || 'Europe Service', description: p.seoDescription || p.title || p.seoTitle || 'Europe Service', path, lang: p.lang, absoluteTitle: true, // /links was indexable on Tilda (parity); its Russian copy is ours
     noindex: path === '/ru/links' })
