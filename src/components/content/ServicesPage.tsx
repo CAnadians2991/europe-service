@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { SERVICES, type Package } from '@/lib/content'
+import { SERVICES } from '@/lib/content'
 import { Breadcrumbs } from '@/components/vacancy/CatalogPage'
 import { RichText } from './Blocks'
 import { CtaBand, Faq, HOME_FAQ, HOME_FAQ_RU } from '@/components/sections/Sections'
@@ -112,7 +112,6 @@ export function ServicesPage({ lang }: { lang: Lang }) {
   const insOwn = pk.find((p) => /Наш страхов/.test(p.title))
   const abroad = pk.filter((p) => /Переоформ/.test(p.title))
   const addon = (id: 'sim-pl' | 'insurance-10') => PRODUCT[id]
-  const cityOf = (p: Package) => p.title.replace(/^Переоформлення документів для роботи |^Переоформление документов для работы /, '').replace(/^в /, '').replace(/^./, (c) => c.toUpperCase())
 
   return (
     <>
@@ -325,7 +324,7 @@ export function ServicesPage({ lang }: { lang: Lang }) {
                   {abroad.map((p) => (
                     <PriceRow
                       key={p.title}
-                      title={cityOf(p)}
+                      title={p.title}
                       note={uk ? 'Підбір вакансії, маршрут, квитки, супровід' : 'Подбор вакансии, маршрут, билеты, сопровождение'}
                       price={p.price ?? ''}
                       action={

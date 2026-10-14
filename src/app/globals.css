@@ -834,3 +834,11 @@ html[data-bottom-bar] .contact-fab-dock {
   overflow: hidden;
   box-shadow: var(--shadow-lift);
 }
+
+/* Ringostat's own floating call button sits half off the left edge on phones and covers the text;
+   phones already have the call button in the header and in «Зв'язок» (numbers are still swapped for tracking) */
+@media (max-width: 1023px) {
+  .rngst_phone_button {
+    display: none !important;
+  }
+}
