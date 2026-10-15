@@ -27,3 +27,36 @@
   for = "/brand/*"
   [headers.values]
     Cache-Control = "public, max-age=2592000"
+
+# The rest of the media (owner 2026-10-15: «фото й відео мають вантажитись моментально») — without these rules Netlify
+# sent max-age=0 and every view re-checked every file. /media/hx and /media/r names are content hashes → a year;
+# named files (team photos, review videos and covers, press, the vx folders) → 30 days.
+[[headers]]
+  for = "/media/hx/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/media/r/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/media/vx/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/media/team/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/media/press/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/reviews/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
