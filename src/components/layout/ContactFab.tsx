@@ -99,7 +99,7 @@ export function ContactFab({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
             if (!open) trackEvent('contact_open', { place: 'contact-fab' })
             setOpen(!open)
           }}
-          className={`pointer-events-auto relative grid size-[58px] place-items-center text-white shadow-[var(--shadow-lift)] transition-colors ${open ? 'bg-ink hover:bg-night-2' : 'bg-brand-600 hover:bg-brand-700 active:bg-brand-700'}`}
+          className={`pointer-events-auto relative grid size-[58px] place-items-center text-white shadow-[var(--shadow-lift)] transition ${open ? 'bg-ink hover:bg-night-2' : 'bg-logo hover:brightness-[0.92]'}`}
         >
           <IconChat className={`absolute size-7 transition duration-200 motion-reduce:transition-none ${open ? 'rotate-90 opacity-0' : 'opacity-100'}`} />
           <IconClose className={`absolute size-7 transition duration-200 motion-reduce:transition-none ${open ? 'opacity-100' : '-rotate-90 opacity-0'}`} />

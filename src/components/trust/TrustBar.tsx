@@ -15,9 +15,6 @@ export function TrustBar({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
           </span>
         </Link>
         <span className="hidden text-muted lg:inline">{uk ? 'Київ · Львів · Рівне · Житомир · Одеса' : 'Киев · Львов · Ровно · Житомир · Одесса'}</span>
-        <a href={`tel:${SITE.phone}`} className="ml-auto hidden shrink-0 items-center gap-2 hover:text-brand-700 md:flex">
-          {SITE.phoneDisplay} <span className="text-muted">{uk ? '— безкоштовно' : '— бесплатно'}</span>
-        </a>
       </div>
     </div>
   )

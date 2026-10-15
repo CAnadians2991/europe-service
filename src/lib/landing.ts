@@ -5,7 +5,8 @@ import { placeOf } from './places'
 import type { Block } from './content'
 import type { Category, CountryCode, Vacancy } from './types'
 
-export type CountrySeo = { title: string; description: string; h1: string; text: string; body: string[] }
+/** text — summary (Markdown, fallbacks included); lead — the line under the H1: only a text of its own, never a repeat of the SEO text below */
+export type CountrySeo = { title: string; description: string; h1: string; text: string; lead: string; body: string[] }
 
 /**
  * SEO landing pages carried over from Tilda (country pages, Polish city / job type / profession pages, Czech pages…):
@@ -124,6 +125,7 @@ export function countrySeo(c: CountryInfo, lang: 'uk' | 'ru', landing?: LandingP
     description: own?.description || custom.description || t.description,
     h1: own?.h1 || t.h1,
     text: own?.intro || custom.text || (firstP ? sentences(firstP.text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1'), 230) : '') || t.text,
+    lead: own?.intro || custom.text || '',
     body: own ? [] : t.body,
   }
 }

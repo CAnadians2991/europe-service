@@ -133,13 +133,9 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
       <CatalogPage
         form="catalog-all"
         lang={lang}
-        // Tilda's H1 of this page; the description of the list goes in the lead line
+        // Tilda's H1 of this page
         title={uk ? 'Терміновий заїзд' : 'Срочный заезд'}
-        text={
-          uk
-            ? 'Усі вакансії за кордоном: офіційна робота в Польщі, Німеччині, Чехії, Литві, Нідерландах та інших країнах ЄС. Оберіть країну й сферу або залиште заявку — підберемо вакансію під ваш запит.'
-            : 'Все вакансии за границей: официальная работа в Польше, Германии, Чехии, Литве, Нидерландах и других странах ЕС. Выберите страну и сферу или оставьте заявку — подберём вакансию под ваш запрос.'
-        }
+        text=""
         crumbs={[crumbHome(lang), { ...crumbAll(lang), path: r.path }]}
         cards={cards}
       />
@@ -170,7 +166,7 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
         form={`country-${c.code}`}
         lang={lang}
         title={s.h1}
-        text={s.text}
+        text={s.lead}
         crumbs={[crumbHome(lang), crumbAll(lang), { name: uk ? `Робота ${c.inName}` : `Работа ${c.inNameRu}`, path: r.path }]}
         cards={cards}
         preset={{ country: c.code }}

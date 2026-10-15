@@ -53,8 +53,9 @@ const HERO = {
 }
 
 /**
- * First screen as a magazine spread: a solid brand-green plane with one big white headline and one real photo of
- * a person at work. No blobs, pills, floating cards or icon tiles — the look every template has.
+ * First screen (owner 2026-10-15: the solid green plane «looks like 2007»): a light page, a dark headline whose second
+ * line is in the logo gradient, one CTA in the logo gradient, one real photo of people at work — full height on the
+ * right on desktop with one rounded corner towards the text, edge to edge on top on phones.
  */
 /** Hero photo (owner's pick, 2026-10): a woman and a man in hard hats in a warehouse aisle — from our IKEA vacancy, 1200 px */
 const HERO_PHOTO = '/media/v/chekhiia-ikea/38a6b6c422'
@@ -64,19 +65,24 @@ export function HomeHero({ lang, photos }: { lang: Lang; photos: string[] }) {
   const uk = lang === 'uk'
   const photo = HERO_PHOTO || photos[0]
   return (
-    <section className="relative bg-[linear-gradient(135deg,#25834f_0%,#1f7d5e_58%,#2a7a85_100%)] text-white" aria-labelledby="hero-h">
-      <div className="mx-auto grid max-w-[1440px] lg:min-h-[600px] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)]">
+    <section className="relative border-b border-line bg-white" aria-labelledby="hero-h">
+      <div className="mx-auto grid max-w-[1440px] lg:min-h-[620px] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
         {/* photo first on phones */}
-        <div className="relative aspect-[4/3] overflow-hidden bg-ink sm:aspect-[16/9] lg:order-2 lg:aspect-auto">
+        <div className="relative aspect-[16/10] overflow-hidden bg-surface sm:aspect-[16/9] lg:order-2 lg:aspect-auto lg:rounded-bl-[48px]">
           {photo && <Photo base={photo} alt={uk ? 'Працівники складу в касках' : 'Работники склада в касках'} sizes="(max-width: 1024px) 100vw, 50vw" priority className="absolute inset-0 size-full object-cover object-[18%_40%]" />}
+          {/* the logo gradient along the photo's foot */}
+          <span className="rule-grad absolute inset-x-0 bottom-0 !h-1.5" aria-hidden />
         </div>
 
-        <div className="flex flex-col justify-center px-4 py-9 sm:px-8 sm:py-12 lg:order-1 lg:py-16 lg:pl-[max(2rem,calc((min(100vw,1440px)-1240px)/2+1rem))] lg:pr-14 xl:pr-20">
-          <h1 id="hero-h" className="font-sans text-[15px] font-semibold leading-snug tracking-normal text-white/95 sm:text-[17px]">{t.seoH1}</h1>
-          <p className="mt-3 font-display text-[38px] font-bold leading-[1.02] tracking-[-0.035em] text-white min-[380px]:text-[42px] sm:text-[60px] lg:text-[68px] xl:text-[76px]">
-            {t.h1a} <span className="block text-[#c9f0d8]">{t.h1b}</span>
+        <div className="flex flex-col justify-center px-4 pb-10 pt-7 sm:px-8 sm:py-12 lg:order-1 lg:py-16 lg:pl-[max(2rem,calc((min(100vw,1440px)-1240px)/2+1rem))] lg:pr-14 xl:pr-20">
+          <h1 id="hero-h" className="flex items-center gap-2.5 font-sans text-[14.5px] font-semibold leading-snug tracking-normal text-brand-700 sm:text-[16px]">
+            <span className="bg-logo size-2 shrink-0 rounded-full" aria-hidden />
+            {t.seoH1}
+          </h1>
+          <p className="mt-3 text-balance font-display text-[36px] font-bold leading-[1.03] tracking-[-0.035em] text-ink min-[380px]:text-[40px] sm:text-[58px] lg:text-[64px] xl:text-[72px]">
+            {t.h1a} <span className="grad-text block pb-1">{t.h1b}</span>
           </p>
-          <p className="mt-5 max-w-[540px] text-[17px] leading-relaxed text-white sm:text-[18.5px]">{t.sub}</p>
+          <p className="mt-4 max-w-[520px] text-[16.5px] leading-relaxed text-ink-2 sm:text-[18px]">{t.sub}</p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <LeadButton
               form={uk ? 'home-hero' : 'home-hero-ru'}
@@ -84,19 +90,17 @@ export function HomeHero({ lang, photos }: { lang: Lang; photos: string[] }) {
               subtitle={t.formSub}
               submitLabel={t.send}
               contactPrefs
-              className="btn !min-h-14 w-full bg-white !px-7 !text-[17px] text-brand-800 hover:bg-brand-50 sm:w-auto"
+              className="btn-accent !min-h-14 w-full !px-7 !text-[17px] shadow-[0_10px_24px_-12px_rgb(26_127_110/0.55)] sm:w-auto"
             >
               {t.cta} <span aria-hidden>→</span>
             </LeadButton>
-            <a href={`tel:${SITE.phone}`} className="btn num !min-h-14 w-full border border-white/35 !px-6 text-white hover:border-white sm:w-auto">
+            <a href={`tel:${SITE.phone}`} className="btn-ghost num !min-h-14 w-full !px-6 sm:w-auto">
               {SITE.phoneDisplay}
             </a>
           </div>
-          <p className="mt-4 text-[13.5px] text-white/90">{t.under}</p>
+          <p className="mt-4 text-[13.5px] text-muted">{t.under}</p>
         </div>
       </div>
-      {/* the logo gradient as a seam between the hero and the page */}
-      <div className="rule-grad !h-1" aria-hidden />
     </section>
   )
 }
@@ -150,7 +154,7 @@ export function JobCategories({ lang, all, photos, catalog }: { lang: Lang; all:
           <li className={`w-[40%] shrink-0 snap-start sm:w-auto ${b.cls} ${m.cls} ${l.cls}`}>
             <Link
               href={catalog}
-              className={`flex h-full min-h-14 flex-col justify-center rounded-xl bg-brand-600 px-4 py-3 text-white transition hover:bg-brand-700 ${b.full ? '' : 'max-sm:aspect-auto'} ${l.full ? 'lg:min-h-0 lg:flex-row lg:items-center lg:justify-between' : ''}`}
+              className={`flex h-full min-h-14 flex-col justify-center rounded-xl bg-logo px-4 py-3 text-white transition hover:brightness-[0.92] ${b.full ? '' : 'max-sm:aspect-auto'} ${l.full ? 'lg:min-h-0 lg:flex-row lg:items-center lg:justify-between' : ''}`}
             >
               <span className="text-[15px] font-semibold leading-tight sm:text-[17px]">{uk ? `Усі ${all.length} ${plural(all.length, ['вакансія', 'вакансії', 'вакансій'])}` : `Все ${all.length} ${plural(all.length, ['вакансия', 'вакансии', 'вакансий'])}`}</span>
               <span className="mt-1 text-[13px] font-medium text-white lg:mt-0">{uk ? 'Дивитися каталог →' : 'Смотреть каталог →'}</span>

@@ -162,9 +162,15 @@
 @utility btn {
   @apply inline-flex min-h-12 items-center justify-center gap-2.5 rounded-xl px-6 py-3 text-[16px] leading-none font-semibold transition-[background-color,box-shadow,color,border-color] duration-150 select-none active:translate-y-px disabled:pointer-events-none disabled:opacity-60 aria-busy:opacity-100;
 }
-/* Main call to action — corporate green */
+/* Fill in the logo gradient (green → teal → blue), deepened so white text keeps ≥ 4.6:1 — owner 2026-10-15:
+   buttons in the logo's colours, plain green only for small marks (badges, counters, checks) */
+@utility bg-logo {
+  background-color: #1e864a;
+  background-image: linear-gradient(100deg, #1e864a 0%, #1a7f6e 55%, #3a72ad 100%);
+}
+/* Main call to action — the logo gradient */
 @utility btn-accent {
-  @apply btn bg-brand-600 text-white hover:bg-brand-700;
+  @apply btn bg-logo text-white transition-[filter,box-shadow,color] hover:brightness-[0.92];
 }
 /* Secondary solid — forest ink */
 @utility btn-primary {
@@ -311,6 +317,7 @@
 /* On the gradient band the green button turns white (unlayered: must win over the btn-accent utility) */
 .brand-band .btn-accent {
   background-color: #ffffff;
+  background-image: none;
   color: var(--color-ink);
 }
 .brand-band .btn-accent:hover {
@@ -325,7 +332,8 @@
   background-color: rgb(255 255 255 / 0.1);
 }
 .brand-band :is(.bg-paper, .bg-white) .btn-accent {
-  background-color: var(--color-brand-600);
+  background-color: #1e864a;
+  background-image: linear-gradient(100deg, #1e864a 0%, #1a7f6e 55%, #3a72ad 100%);
   color: #ffffff;
 }
 
@@ -799,40 +807,6 @@ html[data-bottom-bar] .contact-fab-dock {
     border-radius: 999px;
     background: linear-gradient(90deg, #5ec58a 0%, #38af60 35%, #2f9a86 65%, #578fc7 100%);
   }
-}
-
-/* ── services page (components/services/ServicesConfigurator.tsx) ── */
-/* the replacement-period bar: the logo gradient, growing from the left when a package is picked */
-.svc-bar {
-  background-image: linear-gradient(90deg, #38af60 0%, #2f9a86 60%, #578fc7 100%);
-}
-@media (prefers-reduced-motion: no-preference) {
-  [aria-checked='true'] .svc-bar {
-    animation: svc-grow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-    transform-origin: left center;
-  }
-  .svc-num {
-    animation: svc-pop 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-}
-@keyframes svc-grow {
-  from {
-    transform: scaleX(0.15);
-  }
-}
-@keyframes svc-pop {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-}
-/* the receipt: a white sheet with the gradient rule on top */
-.svc-receipt {
-  background: #fff;
-  border: 1px solid var(--color-line);
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: var(--shadow-lift);
 }
 
 /* Ringostat's own floating call button sits half off the left edge on phones and covers the text;

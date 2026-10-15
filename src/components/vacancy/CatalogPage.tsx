@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { Catalog, type Filters } from './Catalog'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbLd, faqLd } from '@/lib/seo'
-import { SITE } from '@/lib/site'
 import { plural } from '@/lib/format'
 import type { VacancyCard } from '@/lib/types'
 import { CtaBand, Faq } from '@/components/sections/Sections'
@@ -31,9 +30,8 @@ export function Breadcrumbs({ items }: { items: { name: string; path: string }[]
   )
 }
 
-/** Page head of a catalog page: crumbs, the Tilda H1, the intro, live figures; a big country code in the corporate gradient */
-export function CatalogHero({ title, text, crumbs, count, lang = 'uk', code }: { title: string; text: string; crumbs: { name: string; path: string }[]; count: number; lang?: 'uk' | 'ru'; code?: string }) {
-  const uk = lang === 'uk'
+/** Page head of a catalog page: crumbs, the Tilda H1, a lead line of its own (the count is in the filters, the phone in the header); a big country code in the corporate gradient */
+export function CatalogHero({ title, text, crumbs, code }: { title: string; text: string; crumbs: { name: string; path: string }[]; code?: string }) {
   return (
     <section className="relative overflow-hidden border-b border-line bg-white">
       <span aria-hidden className="grad-text pointer-events-none absolute -right-4 top-1/2 hidden -translate-y-1/2 select-none font-display text-[220px] font-bold leading-none tracking-[-0.06em] opacity-[0.16] lg:block">
@@ -43,22 +41,6 @@ export function CatalogHero({ title, text, crumbs, count, lang = 'uk', code }: {
         <div className="text-ink-2"><Breadcrumbs items={crumbs} /></div>
         <h1 className="mt-1 max-w-4xl text-[24px] leading-tight min-[380px]:text-[26px] sm:text-[38px]">{title}</h1>
         {text && <p className="mt-2 max-w-3xl text-[15px] leading-relaxed text-ink-2 sm:text-[16px]">{text}</p>}
-        <dl className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[13px] text-ink-2">
-          <div className="flex items-baseline gap-2">
-            <dt className="text-muted">{uk ? 'Вакансій' : 'Вакансий'}</dt>
-            <dd className="num text-[15px] font-semibold text-brand-700">{count}</dd>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <dt className="text-muted">{uk ? 'Оновлено' : 'Обновлено'}</dt>
-            <dd className="font-semibold text-ink">{new Date().toLocaleDateString(uk ? 'uk-UA' : 'ru-RU', { day: 'numeric', month: 'long' })}</dd>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <dt className="text-muted">{uk ? 'Безкоштовно' : 'Бесплатно'}</dt>
-            <dd>
-              <a href={`tel:${SITE.phone}`} className="font-semibold text-ink hover:text-brand-700">{SITE.phoneDisplay}</a>
-            </dd>
-          </div>
-        </dl>
       </div>
       <div className="rule-grad" />
     </section>
@@ -99,10 +81,9 @@ export async function CatalogPage({
   extra?: React.ReactNode
 }) {
   const uk = lang === 'uk'
-  const count = cards.filter((c) => (!preset?.country || c.country === preset.country) && (!preset?.category || c.category === preset.category) && (!preset?.housingFree || c.housingFree)).length
   return (
     <>
-      <CatalogHero title={title} text={text} crumbs={crumbs} count={count} lang={lang} code={code ?? preset?.country} />
+      <CatalogHero title={title} text={text} crumbs={crumbs} code={code ?? preset?.country} />
       <div id="catalog" className="container-x scroll-mt-24 py-5 sm:py-8">
         <Catalog cards={cards} preset={preset} leadForm={form} lang={lang} {...await catalogLandings(lang)} />
       </div>
