@@ -255,3 +255,100 @@ export const COUNTRY_NAMES: Record<string, { en: string; pl: string }> = {
   fr: { en: 'France', pl: 'Francja' },
   ca: { en: 'Canada', pl: 'Kanada' },
 }
+
+/** job types in English / Polish for the partner pages' charts */
+export const SECTOR_NAMES: Record<string, { en: string; pl: string }> = {
+  warehouse: { en: 'Warehouse / logistics', pl: 'Magazyn / logistyka' },
+  factory: { en: 'Factory / production', pl: 'Fabryka / produkcja' },
+  food: { en: 'Food production', pl: 'Produkcja żywności' },
+  auto: { en: 'Automotive plants', pl: 'Zakłady motoryzacyjne' },
+  retail: { en: 'Retail', pl: 'Handel' },
+  horeca: { en: 'Hotels, restaurants', pl: 'Hotele, restauracje' },
+  cleaning: { en: 'Cleaning', pl: 'Sprzątanie' },
+  construction: { en: 'Construction', pl: 'Budownictwo' },
+  agro: { en: 'Agriculture', pl: 'Rolnictwo' },
+  driver: { en: 'Drivers, couriers', pl: 'Kierowcy, kurierzy' },
+  care: { en: 'Care', pl: 'Opieka' },
+  other: { en: 'Other', pl: 'Inne' },
+}
+
+export const OFFICE_CITIES: Record<PartnerLang, string[]> = {
+  uk: ['Київ', 'Львів', 'Рівне', 'Житомир', 'Одеса'],
+  ru: ['Киев', 'Львов', 'Ровно', 'Житомир', 'Одесса'],
+  en: ['Kyiv', 'Lviv', 'Rivne', 'Zhytomyr', 'Odesa'],
+  pl: ['Kijów', 'Lwów', 'Równe', 'Żytomierz', 'Odessa'],
+}
+
+/**
+ * Owner 2026-10-15: «підсвіти, що в нас багато рекрутерів, що ми працюємо легально і оперативно закриваємо вакансії»,
+ * charts. Short lines only; the charts are live counts of the open vacancies on the site.
+ */
+export const PARTNER_PLUS: Record<
+  PartnerLang,
+  { whyTitle: string; why: { key: 'team' | 'legal' | 'fast'; title: string; text: string }[]; dataTitle: string; bySector: string; byCountry: string; dataNote: string; teamTitle: string; teamText: string; legalTitle: string; legal: string[] }
+> = {
+  uk: {
+    whyTitle: 'Чому з нами швидко й надійно',
+    why: [
+      { key: 'team', title: `${VOLUME.recruiters}+ рекрутерів`, text: `${VOLUME.offices} офісів в Україні й власні онлайн-канали — шукаємо паралельно.` },
+      { key: 'legal', title: 'Легально з 2018 року', text: 'Ліцензія МСП № 223 від 15.02.2019, у Переліку посередників Мінекономіки.' },
+      { key: 'fast', title: 'Оперативно закриваємо вакансії', text: 'Бриф, відбір і документи ведемо одночасно — кандидати виїжджають без затримок.' },
+    ],
+    dataTitle: 'Наші вакансії зараз',
+    bySector: 'За сферами',
+    byCountry: 'За країнами',
+    dataNote: 'Відкриті вакансії на сайті — оновлюються автоматично.',
+    teamTitle: 'Команда й офіси',
+    teamText: `${VOLUME.recruiters}+ рекрутерів у ${VOLUME.offices} офісах`,
+    legalTitle: 'Офіційно',
+    legal: ['ТОВ «Європа Сервіс Україна»', 'ЄДРПОУ 42515343', 'Ліцензія МСП № 223 від 15.02.2019', 'У Переліку посередників Мінекономіки'],
+  },
+  ru: {
+    whyTitle: 'Почему с нами быстро и надёжно',
+    why: [
+      { key: 'team', title: `${VOLUME.recruiters}+ рекрутеров`, text: `${VOLUME.offices} офисов в Украине и собственные онлайн-каналы — ищем параллельно.` },
+      { key: 'legal', title: 'Легально с 2018 года', text: 'Лицензия МСП № 223 от 15.02.2019, в Перечне посредников Минэкономики.' },
+      { key: 'fast', title: 'Оперативно закрываем вакансии', text: 'Бриф, отбор и документы ведём одновременно — кандидаты выезжают без задержек.' },
+    ],
+    dataTitle: 'Наши вакансии сейчас',
+    bySector: 'По сферам',
+    byCountry: 'По странам',
+    dataNote: 'Открытые вакансии на сайте — обновляются автоматически.',
+    teamTitle: 'Команда и офисы',
+    teamText: `${VOLUME.recruiters}+ рекрутеров в ${VOLUME.offices} офисах`,
+    legalTitle: 'Официально',
+    legal: ['ООО «Европа Сервис Украина»', 'ЕГРПОУ 42515343', 'Лицензия МСП № 223 от 15.02.2019', 'В Перечне посредников Минэкономики'],
+  },
+  en: {
+    whyTitle: 'Why it is fast and safe with us',
+    why: [
+      { key: 'team', title: `${VOLUME.recruiters}+ recruiters`, text: `${VOLUME.offices} offices in Ukraine and our own online channels — the search runs in parallel.` },
+      { key: 'legal', title: 'Licensed since 2018', text: 'Licence of the Ministry of Social Policy of Ukraine № 223 of 15.02.2019; listed by the Ministry of Economy.' },
+      { key: 'fast', title: 'We fill vacancies fast', text: 'Brief, screening and documents run at the same time — candidates travel without delays.' },
+    ],
+    dataTitle: 'Our open vacancies now',
+    bySector: 'By sector',
+    byCountry: 'By country',
+    dataNote: 'Open vacancies on the site, updated automatically.',
+    teamTitle: 'Team and offices',
+    teamText: `${VOLUME.recruiters}+ recruiters in ${VOLUME.offices} offices`,
+    legalTitle: 'Official',
+    legal: ['Europe Service Ukraine LLC', 'EDRPOU 42515343', 'Licence № 223 of 15.02.2019', 'Listed by the Ministry of Economy of Ukraine'],
+  },
+  pl: {
+    whyTitle: 'Dlaczego z nami szybko i bezpiecznie',
+    why: [
+      { key: 'team', title: `${VOLUME.recruiters}+ rekruterów`, text: `${VOLUME.offices} biur w Ukrainie i własne kanały online — szukamy równolegle.` },
+      { key: 'legal', title: 'Legalnie od 2018 roku', text: 'Licencja Ministerstwa Polityki Społecznej Ukrainy nr 223 z 15.02.2019, wpis w wykazie Ministerstwa Gospodarki.' },
+      { key: 'fast', title: 'Szybko obsadzamy wakaty', text: 'Brief, selekcja i dokumenty idą równocześnie — kandydaci wyjeżdżają bez opóźnień.' },
+    ],
+    dataTitle: 'Nasze wakaty teraz',
+    bySector: 'Według branż',
+    byCountry: 'Według krajów',
+    dataNote: 'Otwarte wakaty na stronie, aktualizowane automatycznie.',
+    teamTitle: 'Zespół i biura',
+    teamText: `${VOLUME.recruiters}+ rekruterów w ${VOLUME.offices} biurach`,
+    legalTitle: 'Oficjalnie',
+    legal: ['Europe Service Ukraine LLC', 'EDRPOU 42515343', 'Licencja nr 223 z 15.02.2019', 'Wpis w wykazie Ministerstwa Gospodarki Ukrainy'],
+  },
+}

@@ -1,7 +1,10 @@
 import Link from 'next/link'
 import { getActiveVacancies } from '@/lib/vacancies'
-import { COUNTRIES, SITE } from '@/lib/site'
-import { COUNTRY_NAMES, PARTNER, PARTNER_LANGS, PARTNER_PATHS, type PartnerLang } from '@/lib/partners'
+import { CATEGORIES, COUNTRIES, SITE } from '@/lib/site'
+import { COUNTRY_NAMES, OFFICE_CITIES, PARTNER, PARTNER_LANGS, PARTNER_PATHS, PARTNER_PLUS, SECTOR_NAMES, type PartnerLang } from '@/lib/partners'
+import { TEAM_PHOTOS } from '@/components/trust/TeamStory'
+import { LicenseStamp } from '@/components/trust/LicenseStamp'
+import { IconCertificate, IconClock, IconUsers } from '@/components/ui/icons'
 import { breadcrumbLd, faqLd, organizationLd } from '@/lib/seo'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { Photo } from '@/components/ui/Photo'
@@ -17,9 +20,17 @@ export const PARTNER_PHOTO = '/media/team/team-awards'
  */
 export async function PartnersPage({ lang, photo = PARTNER_PHOTO }: { lang: PartnerLang; photo?: string }) {
   const t = PARTNER[lang]
+  const x = PARTNER_PLUS[lang]
   const all = await getActiveVacancies(lang === 'ru' ? 'ru' : 'uk')
+  // live charts: open vacancies by job type and by country (the owner: «додай графіки»)
+  const sectors = CATEGORIES.filter((c) => c.code !== 'other')
+    .map((c) => ({ label: lang === 'uk' ? c.name : lang === 'ru' ? c.nameRu : (SECTOR_NAMES[c.code]?.[lang] ?? c.name), n: all.filter((v) => v.category === c.code).length }))
+    .filter((c) => c.n)
+    .sort((a, b) => b.n - a.n)
+    .slice(0, 7)
   const countries = COUNTRIES.map((c) => ({ ...c, n: all.filter((v) => v.country === c.code).length })).filter((c) => c.n)
   const cname = (c: (typeof countries)[number]) => (lang === 'uk' ? c.name : lang === 'ru' ? c.nameRu : (COUNTRY_NAMES[c.code]?.[lang] ?? c.name))
+  const byCountry = [...countries].sort((a, b) => b.n - a.n).slice(0, 7)
   const home = lang === 'ru' ? '/ru' : '/'
   const crumbs = [
     { name: t.home, path: lang === 'en' || lang === 'pl' ? '/' : home },
@@ -102,6 +113,89 @@ export async function PartnersPage({ lang, photo = PARTNER_PHOTO }: { lang: Part
         <div className="rule-grad" />
       </section>
 
+      {/* ───────── why: many recruiters, legal, fast ───────── */}
+      <section className="container-x pt-12 sm:pt-16" aria-labelledby="why-h">
+        <h2 id="why-h" className="text-[26px] sm:text-[36px]">{x.whyTitle}</h2>
+        <ul className="mt-6 grid gap-3 sm:grid-cols-3 sm:gap-4">
+          {x.why.map((w) => (
+            <li key={w.key} className="rounded-[18px] bg-white p-5 ring-1 ring-line">
+              <span className="bg-logo grid size-11 place-items-center rounded-xl text-white" aria-hidden>
+                {w.key === 'team' ? <IconUsers className="size-6" /> : w.key === 'legal' ? <IconCertificate className="size-6" /> : <IconClock className="size-6" />}
+              </span>
+              <h3 className="mt-4 text-[19px] font-semibold leading-snug">{w.title}</h3>
+              <p className="mt-1.5 text-[15px] leading-relaxed text-ink-2">{w.text}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* ───────── live charts: open vacancies by job type and by country ───────── */}
+      <section className="container-x py-12 sm:py-16" aria-labelledby="data-h">
+        <h2 id="data-h" className="text-[26px] sm:text-[36px]">{x.dataTitle}</h2>
+        <div className="mt-6 grid gap-4 lg:grid-cols-2">
+          {(
+            [
+              [x.bySector, sectors.map((c) => ({ key: c.label, label: c.label, n: c.n, flag: '' }))],
+              [x.byCountry, byCountry.map((c) => ({ key: c.code, label: cname(c), n: c.n, flag: c.code }))],
+            ] as const
+          ).map(([title, rows]) => {
+            const max = Math.max(...rows.map((r) => r.n), 1)
+            return (
+              <figure key={title} className="rounded-[18px] bg-white p-5 ring-1 ring-line sm:p-6">
+                <figcaption className="text-[15px] font-semibold text-muted">{title}</figcaption>
+                <ul className="mt-4 grid gap-2.5">
+                  {rows.map((r) => (
+                    <li key={r.key} className="grid grid-cols-[minmax(0,9rem)_minmax(0,1fr)_3rem] items-center gap-3 text-[14px] sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)_3.5rem]">
+                      <span className="flex min-w-0 items-center gap-2 leading-tight">
+                        {r.flag && <Flag code={r.flag} className="h-3.5 w-[21px]" />}
+                        <span className="min-w-0">{r.label}</span>
+                      </span>
+                      <span className="h-3 overflow-hidden rounded-full bg-surface" aria-hidden>
+                        <span className="bg-logo block h-full rounded-full" style={{ width: `${Math.max(4, (r.n / max) * 100)}%` }} />
+                      </span>
+                      <span className="num text-right font-semibold">{r.n}</span>
+                    </li>
+                  ))}
+                </ul>
+              </figure>
+            )
+          })}
+        </div>
+        <p className="mt-3 text-[13px] text-muted">{x.dataNote}</p>
+      </section>
+
+      {/* ───────── team, offices, the legal basis ───────── */}
+      <section className="border-y border-line bg-white" aria-labelledby="team-h">
+        <div className="container-x grid gap-8 py-12 sm:py-16 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-start">
+          <div>
+            <h2 id="team-h" className="text-[26px] sm:text-[36px]">{x.teamTitle}</h2>
+            <p className="mt-2 text-[17px] font-semibold text-brand-700">{x.teamText}</p>
+            <div className="mt-5 grid grid-cols-2 gap-2 sm:gap-3">
+              <Photo base={TEAM_PHOTOS.office} alt={x.teamTitle} sizes="(max-width: 1024px) 50vw, 360px" className="aspect-[3/4] w-full rounded-[18px] object-cover object-[50%_35%]" />
+              <Photo base={TEAM_PHOTOS.sign} alt={x.teamTitle} sizes="(max-width: 1024px) 50vw, 360px" className="aspect-[3/4] w-full rounded-[18px] object-cover object-[50%_30%]" />
+            </div>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {OFFICE_CITIES[lang].map((c) => (
+                <li key={c} className="rounded-full bg-brand-50 px-3 py-1.5 text-[14px] font-semibold text-brand-800">{c}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-[18px] bg-cream p-5 ring-1 ring-line sm:p-6">
+            <h3 className="text-[19px] font-semibold">{x.legalTitle}</h3>
+            <div className="mt-4 flex items-start gap-4">
+              <div className="size-24 shrink-0">
+                <LicenseStamp lang={lang === 'ru' ? 'ru' : 'uk'} uid="partners" className="size-full" />
+              </div>
+              <ul className="grid gap-1.5 text-[14.5px] leading-snug text-ink-2">
+                {x.legal.map((l) => (
+                  <li key={l}>{l}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ───────── who we work with ───────── */}
       <section className="container-x py-12 sm:py-20" aria-labelledby="who-h">
         <h2 id="who-h" className="text-[26px] sm:text-[38px]">{t.whoTitle}</h2>
@@ -135,20 +229,6 @@ export async function PartnersPage({ lang, photo = PARTNER_PHOTO }: { lang: Part
             ))}
           </ol>
         </div>
-      </section>
-
-      {/* ───────── countries ───────── */}
-      <section className="container-x py-12 sm:py-16" aria-labelledby="where-h">
-        <h2 id="where-h" className="text-[22px] sm:text-[28px]">{t.countriesTitle}</h2>
-        <ul className="mt-5 flex flex-wrap gap-2">
-          {countries.map((c) => (
-            <li key={c.code} className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3.5 py-2 text-[14.5px] font-medium">
-              <Flag code={c.code} className="h-3.5 w-[21px]" />
-              {cname(c)}
-            </li>
-          ))}
-        </ul>
-        <p className="mt-6 text-[13.5px] text-muted">{t.trust}</p>
       </section>
 
       {/* ───────── form + FAQ ───────── */}

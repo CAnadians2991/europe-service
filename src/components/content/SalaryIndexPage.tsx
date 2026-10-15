@@ -315,7 +315,7 @@ export async function SalaryIndexPage({ lang }: { lang: Lang }) {
           ))}
         </ul>
         <p className="mt-5 text-[13.5px] text-muted">
-          {uk ? 'Оновлено' : 'Обновлено'}: <time dateTime={ix.at}>{new Date(ix.at).toLocaleDateString(uk ? 'uk-UA' : 'ru-UA', { day: 'numeric', month: 'long', year: 'numeric' })}</time>.{' '}
+          {uk ? 'Оновлено' : 'Обновлено'}: <time dateTime={ix.at}>{new Date(ix.at).toLocaleDateString(uk ? 'uk-UA' : 'ru-UA', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Kyiv' })}</time>.{' '}
           {uk ? 'Цитуючи, будь ласка, посилайтеся на цю сторінку.' : 'При цитировании, пожалуйста, ссылайтесь на эту страницу.'}
         </p>
       </section>

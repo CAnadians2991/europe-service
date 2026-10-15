@@ -75,7 +75,7 @@ export function slugify(s: string) {
 }
 
 export function formatDate(iso: string, locale = 'uk-UA') {
-  return new Date(iso).toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })
+  return new Date(iso).toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Kyiv' })
 }
 
 /** Normalize a UA/EU phone to +digits; returns '' when clearly invalid */
