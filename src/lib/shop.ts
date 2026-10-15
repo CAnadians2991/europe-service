@@ -16,6 +16,9 @@ export interface Product {
   /** short line under the title in the cart */
   note?: string
   noteRu?: string
+  /** what a package includes — listed in the cart so the payer sees what the money is for (owner 2026-10-15) */
+  features?: string[]
+  featuresRu?: string[]
   /** more than one makes sense (SIM cards, insurance for two people) */
   multiple?: boolean
   /** page that explains the product */
@@ -70,6 +73,7 @@ function fromPackages(): Product[] {
         return p.group?.startsWith('Пакети') ? `Пакет «${t}»` : t
       })(),
       price,
+      ...(p.group?.startsWith('Пакети') ? { features: p.features, featuresRu: SERVICES.ru?.packages[i]?.features ?? p.features } : {}),
       multiple: !p.group?.startsWith('Пакети'),
       href: '/poslugi',
       hrefRu: '/ru/services',

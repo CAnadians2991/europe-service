@@ -137,7 +137,7 @@ export function ServicesPage({ lang }: { lang: Lang }) {
                 <IconDoc className="size-6" />
               </span>
               <span className="min-w-0">
-                <span className="block font-display text-[21px] font-semibold leading-tight sm:text-[24px]">{uk ? 'Робоча віза в Польщу на рік' : 'Рабочая виза в Польшу на год'}</span>
+                <span className="block font-display text-[21px] font-semibold leading-tight sm:text-[24px]">{uk ? 'Робоча віза в Польщу на рік без прив’язки' : 'Рабочая виза в Польшу на год без привязки'}</span>
                 <span className="mt-1 block text-[14px] leading-snug text-white/85">{uk ? 'Допомога з реєстрацією та координація по подачі документів в консульство.' : 'Помощь с регистрацией и координация по подаче документов в консульство.'}</span>
               </span>
             </span>

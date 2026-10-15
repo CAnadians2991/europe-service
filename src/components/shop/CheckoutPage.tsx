@@ -6,7 +6,7 @@ import { Checkout } from './Checkout'
 /** /oplata — the cart: what is being paid, who pays, how (methods switch on with the bank keys in env) */
 export function CheckoutPage({ lang }: { lang: 'uk' | 'ru' }) {
   const uk = lang === 'uk'
-  const products = PRODUCTS.map(({ id, title, titleRu, price, note, noteRu, multiple, href, hrefRu }) => ({ id, title, titleRu, price, note, noteRu, multiple, href, hrefRu }))
+  const products = PRODUCTS.map(({ id, title, titleRu, price, note, noteRu, features, featuresRu, multiple, href, hrefRu }) => ({ id, title, titleRu, price, note, noteRu, features, featuresRu, multiple, href, hrefRu }))
   return (
     <div className="container-x py-4 sm:py-8">
       <div className="text-ink-2">

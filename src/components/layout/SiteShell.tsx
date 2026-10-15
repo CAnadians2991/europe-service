@@ -1,6 +1,5 @@
 import Script from 'next/script'
 import { Header } from './Header'
-import { TrustBar } from '@/components/trust/TrustBar'
 import { Footer } from './Footer'
 import { LeadModalProvider } from '@/components/lead/LeadModal'
 import { Analytics, consentBootstrap } from '@/components/Analytics'
@@ -30,7 +29,6 @@ export async function SiteShell({ lang, children }: { lang: 'uk' | 'ru'; childre
         </a>
         <CountriesInit list={extraCountries} />
         <LeadModalProvider lang={lang} counts={counts}>
-          <TrustBar lang={lang} />
           <Header lang={lang} counts={counts} total={total} />
           <main id="main" className="flex-1">
             {children}

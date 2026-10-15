@@ -5,9 +5,10 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { readCart, writeCart } from '@/lib/cart'
 import { readAttribution, trackEvent } from '@/lib/track'
 import type { CartLine, MethodId, MethodInfo, Product } from '@/lib/shop'
+import { IconCheck } from '@/components/ui/icons'
 
 type Lang = 'uk' | 'ru'
-type PublicProduct = Pick<Product, 'id' | 'title' | 'titleRu' | 'price' | 'note' | 'noteRu' | 'multiple' | 'href' | 'hrefRu'>
+type PublicProduct = Pick<Product, 'id' | 'title' | 'titleRu' | 'price' | 'note' | 'noteRu' | 'features' | 'featuresRu' | 'multiple' | 'href' | 'hrefRu'>
 
 const fmt = (kop: number) => new Intl.NumberFormat('uk-UA', { maximumFractionDigits: 0 }).format(Math.round(kop / 100)).replace(/[   ]/g, ' ') + ' грн'
 const fmtPart = (kop: number) => new Intl.NumberFormat('uk-UA', { maximumFractionDigits: 2, minimumFractionDigits: kop % 100 ? 2 : 0 }).format(kop / 100).replace(/[   ]/g, ' ') + ' грн'
@@ -245,6 +246,16 @@ export function Checkout({ products, methods, lang, ofertaHref }: { products: Pu
                     )}
                   </p>
                   {(lang === 'ru' ? l.p.noteRu : l.p.note) && <p className="truncate text-[12.5px] leading-snug text-muted">{lang === 'ru' ? l.p.noteRu : l.p.note}</p>}
+                  {(lang === 'ru' ? l.p.featuresRu : l.p.features)?.length ? (
+                    <ul className="mt-1.5 grid gap-1 pb-1">
+                      {(lang === 'ru' ? l.p.featuresRu! : l.p.features!).map((f) => (
+                        <li key={f} className="flex gap-2 text-[13px] leading-snug text-ink-2">
+                          <IconCheck className="mt-0.5 size-3.5 shrink-0 text-brand-600" />
+                          {f.replace(/\.$/, '')}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
                   {l.p.multiple && (
                     <span className="mt-1.5 inline-flex items-center rounded-lg border border-line" aria-label={t.qty}>
                       <button type="button" className="grid size-9 place-items-center text-[17px] hover:bg-brand-50" onClick={() => update(l.id, l.qty - 1)} aria-label="−">

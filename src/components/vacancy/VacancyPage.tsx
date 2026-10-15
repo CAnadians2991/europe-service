@@ -43,7 +43,7 @@ const isJustFree = (t: string) => /^(безкоштовн|бесплатн)\S*\.
 
 const TX = {
   uk: {
-    home: 'Головна', vac: 'Вакансії', work: 'Робота', no: 'Вакансія №',
+    home: 'Головна', vac: 'Вакансії', work: 'Робота',
     terms: 'Ключові умови', salary: 'Зарплата', net: 'на руки', gross: 'брутто',
     place: 'Місце роботи', schedule: 'Графік', contract: 'Договір', housing: 'Проживання', employer: 'Роботодавець', free: 'Житло безкоштовно',
     apply: 'Заявка на вакансію', book: 'Забронювати місце', bookText: 'Залиште номер — менеджер перевірить наявність місць і розповість деталі.',
@@ -65,7 +65,7 @@ const TX = {
     also: 'Дивіться також', alsoLabel: 'Схожі вакансії', all: 'Усі вакансії',
   },
   ru: {
-    home: 'Главная', vac: 'Вакансии', work: 'Работа', no: 'Вакансия №',
+    home: 'Главная', vac: 'Вакансии', work: 'Работа',
     terms: 'Ключевые условия', salary: 'Зарплата', net: 'на руки', gross: 'брутто',
     place: 'Место работы', schedule: 'График', contract: 'Договор', housing: 'Проживание', employer: 'Работодатель', free: 'Жильё бесплатно',
     apply: 'Заявка на вакансию', book: 'Забронировать место', bookText: 'Оставьте номер — менеджер проверит наличие мест и расскажет детали.',
@@ -183,10 +183,11 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
   const housingFigure = housing.length > 0 && (
     <figure className="mt-5">
       <h3 className="eyebrow">{labels.housing?.[0] ?? t.housingPhotos}</h3>
-      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
+      {/* one swipeable row (owner 2026-10-15: the grid took half a phone screen); the next photo peeks in */}
+      <div className="-mx-4 mt-3 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:px-0">
         {housing.map((p, k) => (
-          <a key={p} href={src(p, 1200)} target="_blank" rel="noopener" className="block overflow-hidden bg-surface">
-            <Photo base={p} alt={`${t.housingAlt} ${k + 1}`} sizes="(max-width: 640px) 50vw, 260px" className="aspect-[4/3] w-full object-cover" />
+          <a key={p} href={src(p, 1200)} target="_blank" rel="noopener" className="block w-[72%] shrink-0 snap-start overflow-hidden rounded-xl bg-surface sm:w-[260px]">
+            <Photo base={p} alt={`${t.housingAlt} ${k + 1}`} sizes="(max-width: 640px) 72vw, 260px" className="aspect-[4/3] w-full object-cover" />
           </a>
         ))}
       </div>
@@ -261,9 +262,6 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
                 <span className="text-[15px] font-semibold text-ink underline-offset-[3px] group-hover:underline">{cName}</span>
               </HoverLink>
               {cat && v.category !== 'other' && <span className="border border-line px-2 py-[3px] text-[14px] font-medium text-ink-2">{uk ? cat.name : cat.nameRu}</span>}
-              <span className="num ml-auto hidden text-[12.5px] uppercase tracking-[0.06em] text-muted sm:inline">
-                {t.no} {v.id.slice(0, 10).toUpperCase()}
-              </span>
             </div>
 
             <div className="mt-2 flex items-start gap-5">

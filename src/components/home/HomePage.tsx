@@ -191,9 +191,6 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
         </div>
       </section>
 
-      {/* ───────── OUR OFFICE & TEAM right under the figures (owner 2026-10-15: «фото команди вище») ───────── */}
-      <TeamSection lang={lang} compact />
-
       {/* ───────── GUARANTEES: trust before the offer ───────── */}
       <Guarantees lang={lang} vacancies={all.length} countries={countries.length} />
 
@@ -234,6 +231,9 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
           ))}
         </div>
       </section>
+
+      {/* ───────── OUR OFFICE & TEAM after the hot vacancies (owner 2026-10-15) ───────── */}
+      <TeamSection lang={lang} compact />
 
       {/* ───────── «Відгуки про нас» (Tilda heading): video reviews ───────── */}
       <ClientVideos lang={lang} videos={videos} title={t.reviews} />
