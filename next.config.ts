@@ -3,7 +3,11 @@ import legacy from './src/data/legacy-redirects.json'
 import tildaPages from './src/data/tilda-page-redirects.json'
 
 const nextConfig: NextConfig = {
+  // Prerender of ~490 pages reads the whole vacancy catalog from the database: under load a page can need more than
+  // the default 60 s (15.10 the build stopped after 3 timeouts on /news/mob_operator_t-mobile) — more time, fewer workers
+  staticPageGenerationTimeout: 240,
   experimental: {
+    cpus: 4,
     globalNotFound: true,
     serverActions: { bodySizeLimit: '4mb' },
   },

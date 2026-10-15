@@ -842,3 +842,14 @@ html[data-bottom-bar] .contact-fab-dock {
     display: none !important;
   }
 }
+
+/* Ringostat's callback form opens by itself as a full-screen frame: never over the cart and the payment,
+   and not on phones (its button is hidden there; a full-screen pop-up on a phone is an intrusive interstitial for Google) */
+@media (max-width: 1023px) {
+  body > #wrapper_id:has(> iframe) {
+    display: none !important;
+  }
+}
+html:has(#cart-h) body > #wrapper_id:has(> iframe) {
+  display: none !important;
+}
