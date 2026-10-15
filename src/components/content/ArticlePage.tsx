@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import type { Article } from '@/lib/content'
 import { ARTICLES, isObsolete } from '@/lib/content'
-import { Blocks } from './Blocks'
+import { Blocks, RichText } from './Blocks'
 import { Breadcrumbs } from '@/components/vacancy/CatalogPage'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { LeadForm } from '@/components/lead/LeadForm'
@@ -83,6 +83,9 @@ export function ArticlePage({ a, posts = [] }: { a: Article; posts?: Article[] }
   const blocks = (first?.type === 'h2' && first.text === a.title) || (first?.type === 'img' && first.src === a.cover) ? a.blocks.slice(1) : a.blocks
   const d = dateText(a)
   const ed = EDITOR[a.lang]
+  const key = (t: string) => t.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '')
+  const inText = new Set(JSON.stringify(a.blocks).match(/"(?:text|summary)":"([^"]*)"/g)?.map((m) => key(m.slice(m.indexOf(':') + 2, -1))) ?? [])
+  const faq = (a.faq ?? []).every((f) => inText.has(key(f.q))) ? [] : (a.faq ?? [])
   const updated = a.dateModified ? formatDate(a.dateModified, uk ? 'uk-UA' : 'ru-RU') : ''
   const label = a.listing ? (uk ? 'Рубрика' : 'Рубрика') : a.outdated ? (uk ? 'Архів' : 'Архив') : uk ? 'Новини та статті' : 'Новости и статьи'
   return (
@@ -170,6 +173,31 @@ export function ArticlePage({ a, posts = [] }: { a: Article; posts?: Article[] }
             <div className="[&>.prose-pw>*:first-child]:mt-0">
               <Blocks blocks={blocks} />
             </div>
+            {/* the FAQ is marked up as FAQPage — so it must be on the page too (unless the text already asks the same questions) */}
+            {faq.length > 0 && (
+              <section className="mt-12" aria-labelledby="faq-h">
+                <h2 id="faq-h" className="text-[24px] sm:text-[28px]">
+                  {uk ? 'Часті запитання' : 'Частые вопросы'}
+                </h2>
+                <div className="mt-5 border-t-[3px] border-ink">
+                  {faq.map((f) => (
+                    <details key={f.q} className="group border-b border-line">
+                      <summary className="flex min-h-12 cursor-pointer list-none items-start gap-4 py-4 [&::-webkit-details-marker]:hidden">
+                        <h3 className="flex-1 font-sans text-[16.5px] font-semibold leading-snug tracking-normal text-ink">{f.q}</h3>
+                        <span aria-hidden className="grid size-8 shrink-0 place-items-center border border-line text-ink transition group-open:rotate-45 group-open:border-brand-600 group-open:bg-brand-600 group-open:text-white">
+                          <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+                            <path d="M12 5v14M5 12h14" />
+                          </svg>
+                        </span>
+                      </summary>
+                      <p className="-mt-1 pb-5 pr-12 text-[16px] leading-relaxed text-ink-2">
+                        <RichText text={f.a} />
+                      </p>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            )}
             {posts.length > 0 && (
               <section className="mt-12" aria-label={uk ? 'Матеріали рубрики' : 'Материалы рубрики'}>
                 <p className="eyebrow">
