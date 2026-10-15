@@ -12,7 +12,13 @@ export function src(base: string, w: 240 | 480 | 800 | 1200 = 1200) {
 }
 
 /** 240 / 480 / 800 / 1200 — a 120 px thumbnail at DPR 2 takes the 240 one (~6 KB), a phone-wide photo the 800 one */
-export const srcSet = (base: string) => `${src(base, 240)} 240w, ${src(base, 480)} 480w, ${src(base, 800)} 800w, ${src(base, 1200)} 1200w`
+export const srcSet = (base: string) =>
+  OLD.test(base)
+    ? `${base.replace(/\.webp$/, '-240.webp')} 240w, ${base.replace(/\.webp$/, '-480.webp')} 480w, ${base} 800w`
+    : `${src(base, 240)} 240w, ${src(base, 480)} 480w, ${src(base, 800)} 800w, ${src(base, 1200)} 1200w`
+
+/** the old Tilda covers of the revived posts: one ~800 px file each, with -240 / -480 beside it (scripts/media-thumbs.mjs) */
+const OLD = /^\/media\/v\/old\/[0-9a-f]+\.webp$/
 
 export function Photo({
   base,
@@ -22,6 +28,7 @@ export function Photo({
   priority,
   width = 1200,
   height = 800,
+  position,
 }: {
   base: string
   alt: string
@@ -30,9 +37,11 @@ export function Photo({
   priority?: boolean
   width?: number
   height?: number
+  /** CSS object-position of the crop (the faces / subject of the photo, from src/data/photo-focus.json) */
+  position?: string
 }) {
   if (!base) return null
-  const single = /\.(svg|png|jpe?g|webp|avif|gif)$/i.test(base)
+  const single = /\.(svg|png|jpe?g|webp|avif|gif)$/i.test(base) && !OLD.test(base)
   return (
     <img
       src={src(base, 1200)}
@@ -45,6 +54,7 @@ export function Photo({
       fetchPriority={priority ? 'high' : undefined}
       decoding="async"
       className={className}
+      style={position ? { objectPosition: position } : undefined}
     />
   )
 }

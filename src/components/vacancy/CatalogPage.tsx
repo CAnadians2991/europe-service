@@ -47,6 +47,17 @@ export function CatalogHero({ title, text, crumbs, code }: { title: string; text
   )
 }
 
+/** vacancies per country under the page's own non-country filters (job type, free housing) — for the country chips */
+function countryTotals(cards: VacancyCard[], preset: Partial<Filters>) {
+  const out: Partial<Record<string, number>> = {}
+  for (const c of cards) {
+    if (preset.category && c.category !== preset.category) continue
+    if (preset.housingFree && !c.housingFree) continue
+    out[c.country] = (out[c.country] ?? 0) + 1
+  }
+  return out
+}
+
 export async function CatalogPage({
   title,
   text,
@@ -85,7 +96,9 @@ export async function CatalogPage({
     <>
       <CatalogHero title={title} text={text} crumbs={crumbs} code={code ?? preset?.country} />
       <div id="catalog" className="container-x scroll-mt-24 py-5 sm:py-8">
-        <Catalog cards={cards} preset={preset} leadForm={form} lang={lang} {...await catalogLandings(lang)} />
+        {/* a country page ships only its own cards: the other countries' chips lead to their own pages anyway — their
+            counts come from here (15.10.2026: /vacancies carried all 1 174 cards, 1.2 MB of HTML) */}
+        <Catalog cards={preset?.country ? cards.filter((c) => c.country === preset.country) : cards} countryTotals={preset?.country ? countryTotals(cards, preset) : undefined} preset={preset} leadForm={form} lang={lang} {...await catalogLandings(lang)} />
       </div>
       {links?.some((g) => g.items.length) && (
         <nav className="container-x space-y-6 pb-10" aria-label={uk ? 'Популярні добірки' : 'Популярные подборки'}>

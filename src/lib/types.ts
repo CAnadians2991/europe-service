@@ -111,8 +111,13 @@ export interface Vacancy {
 /** Light version shipped to the client-side catalog */
 export type VacancyCard = Pick<
   Vacancy,
-  'id' | 'path' | 'country' | 'title' | 'company' | 'city' | 'hubCity' | 'category' | 'genders' | 'salary' | 'schedule' | 'housingFree' | 'hot' | 'order' | 'logo'
-> & { photo: string; updatedAt: string }
+  'id' | 'path' | 'country' | 'title' | 'company' | 'city' | 'hubCity' | 'category' | 'salary' | 'schedule' | 'housingFree' | 'hot' | 'order' | 'logo'
+> & {
+  photo: string
+  /** CSS object-position of the cover crop (faces), from src/data/photo-focus.json — absent = centre */
+  photoPos?: string
+  updatedAt: string
+}
 
 export interface Lead {
   id: string

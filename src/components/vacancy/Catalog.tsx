@@ -80,8 +80,11 @@ export function Catalog({
   leadForm = 'catalog',
   landings,
   fixed,
+  countryTotals,
 }: {
   cards: Card[]
+  /** a country page holds only its own cards: the other countries' chip counts come from the server */
+  countryTotals?: Partial<Record<string, number>>
   preset?: Partial<Filters>
   lang?: 'uk' | 'ru'
   leadForm?: string
@@ -183,6 +186,14 @@ export function Catalog({
   }, [cards, f])
 
   const count = (k: keyof Filters, pred: (v: Card) => boolean) => cards.filter((v) => match(v, k) && pred(v)).length
+  /** a country chip's number: counted here, or the server's total for a country this page does not hold (hidden while a
+   *  search or a city narrows the list — that number would not be honest) */
+  const chipN = (code: CountryCode | ''): number | null => {
+    if (!countryTotals) return code ? count('country', (v) => v.country === code) : count('country', () => true)
+    if (code === base.country) return count('country', (v) => v.country === code)
+    if (f.q || f.city) return null
+    return code ? (countryTotals[code] ?? 0) : Object.values(countryTotals).reduce<number>((s, x) => s + (x ?? 0), 0)
+  }
   const cities = useMemo(() => {
     const m = new Map<string, number>()
     for (const v of cards) if (match(v, 'city')) { const c = vacancyCity(v); if (c) m.set(c, (m.get(c) ?? 0) + 1) }
@@ -276,14 +287,14 @@ export function Catalog({
         </label>
         <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 scrollbar-none lg:mx-0 lg:flex-wrap lg:px-0">
           <Link href={countryHref('')} prefetch={false} scroll={false} className="chip shrink-0" data-active={!f.country} aria-current={!f.country ? 'true' : undefined} onClick={(e) => { e.preventDefault(); set('country', '') }}>
-            {uk ? 'Усі країни' : 'Все страны'} <span className="num text-[12px]">{count('country', () => true)}</span>
+            {uk ? 'Усі країни' : 'Все страны'} {chipN('') != null && <span className="num text-[12px]">{chipN('')}</span>}
           </Link>
           {COUNTRIES.map((c) => {
-            const n = count('country', (v) => v.country === c.code)
-            if (!n && f.country !== c.code) return null
+            const n = chipN(c.code)
+            if (!(countryTotals ? countryTotals[c.code] : n) && f.country !== c.code) return null
             return (
               <Link key={c.code} href={countryHref(f.country === c.code ? '' : c.code)} prefetch={false} scroll={false} className="chip shrink-0" data-active={f.country === c.code} aria-current={f.country === c.code ? 'true' : undefined} onClick={(e) => { e.preventDefault(); set('country', f.country === c.code ? '' : c.code) }}>
-                {uk ? c.name : c.nameRu} <span className="num text-[12px]">{n}</span>
+                {uk ? c.name : c.nameRu} {n != null && <span className="num text-[12px]">{n}</span>}
               </Link>
             )
           })}

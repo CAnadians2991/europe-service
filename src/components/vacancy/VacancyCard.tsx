@@ -29,7 +29,7 @@ export function VacancyCard({ v, priority, lang = 'uk' }: { v: Card; priority?: 
     <article className="group relative grid grid-cols-[72px_minmax(0,1fr)_18px] items-center gap-x-3 border-b border-line bg-white p-3 transition-colors hover:bg-brand-50/60 active:bg-brand-50 min-[420px]:grid-cols-[96px_minmax(0,1fr)_18px] sm:grid-cols-[132px_minmax(0,1fr)_auto_20px] sm:gap-x-5 sm:p-4">
       <div className="relative aspect-square overflow-hidden rounded-xl bg-surface sm:aspect-[4/3]">
         {v.photo ? (
-          <Photo base={v.photo} alt={v.title} priority={priority} sizes="(max-width: 640px) 96px, 140px" className="size-full object-cover" />
+          <Photo base={v.photo} alt={v.title} priority={priority} sizes="(max-width: 640px) 96px, 140px" position={v.photoPos} className="size-full object-cover" />
         ) : (
           <div className="brand-band grid size-full place-items-center p-1.5 text-center text-[11.5px] font-semibold text-white">{v.company || (uk ? cat?.name : cat?.nameRu)}</div>
         )}

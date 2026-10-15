@@ -2,7 +2,7 @@
 // 1. Every `<base>-480.webp` under public/ gets a `<base>-240.webp` (cards show photos at 96–140 px: phones took the
 //    480 px file). Made from the 800 px variant, WebP q70.
 // 2. Outliers are re-encoded at q72 when that is smaller: 1200 px > 150 KB, 800 px > 90 KB.
-// Idempotent. Run: node scripts/media-thumbs.mjs
+// 3. see below (old single-file covers). Idempotent. Run: node scripts/media-thumbs.mjs
 import fs from 'node:fs'
 import path from 'node:path'
 import sharp from 'sharp'
@@ -31,4 +31,18 @@ for (const [suffix, limit] of [['-1200.webp', 150_000], ['-800.webp', 90_000]]) 
     }
   }
 }
-console.log({ thumbs: made, reencoded: shrunk, savedKB: Math.round(saved / 1024) })
+// 3. Old Tilda covers (public/media/v/old/<hash>.webp, one ~800 px file each, 1 226 of them — the covers of the revived
+//    posts): `<hash>-240.webp` and `<hash>-480.webp` beside them, so a 96–140 px card thumbnail stops loading the 800 px file
+let oldMade = 0
+const OLD = path.join(ROOT, 'media/v/old')
+if (fs.existsSync(OLD)) {
+  for (const f of fs.readdirSync(OLD).filter((f) => /^[0-9a-f]+\.webp$/.test(f))) {
+    for (const w of [240, 480]) {
+      const out = path.join(OLD, f.replace(/\.webp$/, `-${w}.webp`))
+      if (fs.existsSync(out)) continue
+      await sharp(path.join(OLD, f)).resize({ width: w, withoutEnlargement: true }).webp({ quality: w === 240 ? 70 : 72, effort: 6 }).toFile(out)
+      oldMade++
+    }
+  }
+}
+console.log({ thumbs: made, oldThumbs: oldMade, reencoded: shrunk, savedKB: Math.round(saved / 1024) })

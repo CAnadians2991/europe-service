@@ -1,6 +1,7 @@
 import 'server-only'
 import { unstable_cache } from 'next/cache'
 import seed from '@/data/vacancies.seed.json'
+import { focusOf } from './photo-focus'
 import { hasDb, sql } from './db'
 import { ensureCountries } from './countries'
 import type { Vacancy, VacancyCard } from './types'
@@ -130,6 +131,9 @@ export async function getClosedVacancyPaths(): Promise<{ path: string; updatedAt
   }
 }
 
+/** drop null / undefined / false values (they read the same as absent on the client) */
+const compact = <T extends Record<string, unknown>>(o: T) => Object.fromEntries(Object.entries(o).filter(([, x]) => x !== null && x !== undefined && x !== false)) as Partial<T>
+
 export function toCard(v: Vacancy): VacancyCard {
   return {
     id: v.id,
@@ -139,17 +143,18 @@ export function toCard(v: Vacancy): VacancyCard {
     company: v.company,
     city: v.city,
     category: v.category,
-    genders: v.genders,
-    // what a card shows (the Tilda source text and the rate history stay on the vacancy)
-    salary: { text: v.salary.text.slice(0, 60), hourMin: v.salary.hourMin, hourMax: v.salary.hourMax, monthMin: v.salary.monthMin, monthMax: v.salary.monthMax, currency: v.salary.currency, net: v.salary.net, unlabelled: v.salary.unlabelled },
+    // what a card shows (the Tilda source text and the rate history stay on the vacancy); empty fields are left out —
+    // the catalog ships every card of its country in the page (15.10.2026: ~1 KB a card, 1.2 MB of HTML on /vacancies)
+    salary: compact({ text: v.salary.text.slice(0, 60), hourMin: v.salary.hourMin, hourMax: v.salary.hourMax, monthMin: v.salary.monthMin, monthMax: v.salary.monthMax, currency: v.salary.currency, net: v.salary.net, unlabelled: v.salary.unlabelled }) as Vacancy['salary'],
     schedule: v.schedule.split(/[,;]/)[0].slice(0, 60),
-    housingFree: v.housingFree,
-    hot: v.hot,
+    ...(v.housingFree ? { housingFree: true } : {}),
+    ...(v.hot ? { hot: true } : {}),
     order: v.order,
     photo: v.photos[0] ?? '',
-    logo: v.logo ?? '',
-    updatedAt: v.updatedAt,
-  }
+    ...(focusOf(v.photos[0]) ? { photoPos: focusOf(v.photos[0]) } : {}),
+    ...(v.logo ? { logo: v.logo } : {}),
+    updatedAt: v.updatedAt.slice(0, 10),
+  } as VacancyCard
 }
 
 const hash32 = (s: string) => {
