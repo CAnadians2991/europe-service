@@ -59,14 +59,18 @@ export const SITE = {
   workCountries: ['pl', 'cz', 'de', 'nl', 'lt', 'lv', 'sk', 'ro', 'hu', 'gr', 'it', 'be', 'at', 'fr', 'gb'],
 } as const
 
+/**
+ * Owner 2026-10-15: no ads on this site, organic only. The Tilda-era GTM container (GTM-TGV63W5 — not in the owner's account;
+ * it loaded a foreign GA4, Meta pixel, Clarity and the Ads tag) and the Meta / TikTok pixels are off; analytics go to the
+ * owner's own GA4 «Europe Service - GA4» (G-YRNKR8HSLM). Any of them can come back through the NEXT_PUBLIC_* env vars.
+ */
 export const TRACKING = {
-  gtm: process.env.NEXT_PUBLIC_GTM_ID ?? 'GTM-TGV63W5',
-  ga4: process.env.NEXT_PUBLIC_GA4_ID ?? '',
-  /** pixels from the Tilda site's head code */
-  metaPixels: (process.env.NEXT_PUBLIC_META_PIXELS ?? '220638836565314,1169462396749207').split(',').filter(Boolean),
-  tiktok: process.env.NEXT_PUBLIC_TIKTOK_PIXEL ?? 'D0GVKVRC77UD5RFHNP5G',
+  gtm: process.env.NEXT_PUBLIC_GTM_ID ?? '',
+  ga4: process.env.NEXT_PUBLIC_GA4_ID ?? 'G-YRNKR8HSLM',
+  metaPixels: (process.env.NEXT_PUBLIC_META_PIXELS ?? '').split(',').filter(Boolean),
+  tiktok: process.env.NEXT_PUBLIC_TIKTOK_PIXEL ?? '',
   clarity: process.env.NEXT_PUBLIC_CLARITY_ID ?? '',
-  /** Ringostat call tracking (swaps the phone numbers; calls are a Google Ads conversion) */
+  /** Ringostat call tracking (swaps the phone numbers; counts calls by source) */
   ringostat: process.env.NEXT_PUBLIC_RINGOSTAT ?? 'https://script.ringostat.com/v4/58/5874bb630f4ed6a4e6b406e8c557d24323bb4273.js',
 }
 

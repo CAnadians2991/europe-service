@@ -74,10 +74,12 @@ export function Analytics() {
       events.forEach((e) => removeEventListener(e, load))
       const w = window as unknown as Record<string, unknown> & { dataLayer: unknown[] }
       w.dataLayer = w.dataLayer || []
-      w.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' })
-      add(`https://www.googletagmanager.com/gtm.js?id=${TRACKING.gtm}`)
+      if (TRACKING.gtm) {
+        w.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' })
+        add(`https://www.googletagmanager.com/gtm.js?id=${TRACKING.gtm}`)
+      }
       if (TRACKING.ga4) add(`https://www.googletagmanager.com/gtag/js?id=${TRACKING.ga4}`)
-      setTimeout(() => void pixelsAllowed().then((ok) => ok && loadPixels()), 1200)
+      if (TRACKING.metaPixels.length || TRACKING.tiktok || TRACKING.clarity) setTimeout(() => void pixelsAllowed().then((ok) => ok && loadPixels()), 1200)
     }
     const events = ['pointerdown', 'keydown', 'touchstart', 'scroll'] as const
     events.forEach((e) => addEventListener(e, load, { once: true, passive: true }))
