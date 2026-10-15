@@ -83,7 +83,7 @@ export interface Vacancy {
   headline: string
   intro: string
   sections: Section[]
-  /** Image base URLs; variants: `${base}-480.webp`, `${base}-1200.webp` */
+  /** Image base URLs; variants: `${base}-240.webp` … `${base}-1200.webp` */
   photos: string[]
   housingPhotos: string[]
   housingNote: string

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { HoverLink } from '@/components/ui/HoverLink'
 import { CATALOG_PATH, COUNTRIES, SITE } from '@/lib/site'
 import { QuizButton } from '@/components/lead/LeadModal'
 import { SocialLinks } from './SocialLinks'
@@ -79,9 +79,9 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
               <ul className="mt-2 flex flex-wrap gap-x-4">
                 {cities.map((c) => (
                   <li key={c.href}>
-                    <Link href={c.href} className={a}>
+                    <HoverLink href={c.href} className={a}>
                       {c.text}
-                    </Link>
+                    </HoverLink>
                   </li>
                 ))}
               </ul>
@@ -93,9 +93,9 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
               <ul className="mt-2 flex flex-wrap gap-x-4">
                 {directions.map((d) => (
                   <li key={d.href + d.title}>
-                    <Link href={d.href} className={a}>
+                    <HoverLink href={d.href} className={a}>
                       {d.title}
-                    </Link>
+                    </HoverLink>
                   </li>
                 ))}
               </ul>
@@ -117,9 +117,9 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
               <br />
               {uk ? 'Ліцензія МСП № 223 від 15.02.2019 · у Переліку Мінекономіки' : 'Лицензия МСП № 223 от 15.02.2019 · в Перечне Минэкономики'}
               <br />
-              <Link href={uk ? '/declaration' : '/ru/declaration'} className="text-white underline underline-offset-[3px]">
+              <HoverLink href={uk ? '/declaration' : '/ru/declaration'} className="text-white underline underline-offset-[3px]">
                 {uk ? 'Декларація Мінекономіки' : 'Декларация Минэкономики'}
-              </Link>
+              </HoverLink>
             </p>
           </div>
           <p className={`${head} mt-8`}>{uk ? 'Ми в соцмережах' : 'Мы в соцсетях'}</p>
@@ -131,9 +131,9 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
           <ul className="mt-3">
             {COUNTRIES.filter((c) => counts[c.code]).map((c) => (
               <li key={c.code}>
-                <Link href={localHref(c.path, lang)} className={a}>
+                <HoverLink href={localHref(c.path, lang)} className={a}>
                   {uk ? `Робота ${c.inName}` : `Работа ${c.inNameRu}`}
-                </Link>
+                </HoverLink>
               </li>
             ))}
           </ul>
@@ -144,9 +144,9 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
           <ul className="mt-3">
             {popular.map(([href, label]) => (
               <li key={href}>
-                <Link href={href} className={a}>
+                <HoverLink href={href} className={a}>
                   {label}
-                </Link>
+                </HoverLink>
               </li>
             ))}
           </ul>
@@ -154,9 +154,9 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
           <ul className="mt-3">
             {company.map(([href, label]) => (
               <li key={href}>
-                <Link href={href} className={a}>
+                <HoverLink href={href} className={a}>
                   {label}
-                </Link>
+                </HoverLink>
               </li>
             ))}
           </ul>
@@ -198,15 +198,15 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
             © {SITE.name} 2018–{year}
           </p>
           <p className="flex flex-wrap items-center gap-x-5">
-            <Link href={uk ? '/privacy' : '/ru/privacy'} className="inline-flex min-h-11 items-center hover:text-white">
+            <HoverLink href={uk ? '/privacy' : '/ru/privacy'} className="inline-flex min-h-11 items-center hover:text-white">
               {uk ? 'Політика конфіденційності' : 'Политика конфиденциальности'}
-            </Link>
-            <Link href={uk ? '/oferta' : '/ru/oferta'} className="inline-flex min-h-11 items-center hover:text-white">
+            </HoverLink>
+            <HoverLink href={uk ? '/oferta' : '/ru/oferta'} className="inline-flex min-h-11 items-center hover:text-white">
               {uk ? 'Договір оферти' : 'Договор оферты'}
-            </Link>
-            <Link href={uk ? '/user_deal' : '/ru/user_deal'} className="inline-flex min-h-11 items-center hover:text-white">
+            </HoverLink>
+            <HoverLink href={uk ? '/user_deal' : '/ru/user_deal'} className="inline-flex min-h-11 items-center hover:text-white">
               {uk ? 'Угода користувача' : 'Пользовательское соглашение'}
-            </Link>
+            </HoverLink>
           </p>
         </div>
       </div>

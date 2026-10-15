@@ -1,17 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 /**
- * Responsive image for our pre-optimized media: each `base` has `${base}-480.webp`, `-800.webp` and `-1200.webp`
+ * Responsive image for our pre-optimized media: each `base` has `${base}-240.webp`, `-480.webp`, `-800.webp` and `-1200.webp`
+ * (240 since 2026-10-15, scripts/media-thumbs.mjs: card thumbnails at 96–140 px took the 480 one)
  * (imported from Tilda into /public/media, or uploaded via the admin into Vercel Blob).
  * No runtime image optimization needed → zero cost and instant CDN delivery.
  */
-export function src(base: string, w: 480 | 800 | 1200 = 1200) {
+export function src(base: string, w: 240 | 480 | 800 | 1200 = 1200) {
   if (!base) return ''
   if (/\.(svg|png|jpe?g|webp|avif|gif)$/i.test(base)) return base
   return `${base}-${w}.webp`
 }
 
-/** 480 / 800 / 1200 — phones at DPR 2 take the 800 one (~25 KB instead of ~45 KB) */
-export const srcSet = (base: string) => `${src(base, 480)} 480w, ${src(base, 800)} 800w, ${src(base, 1200)} 1200w`
+/** 240 / 480 / 800 / 1200 — a 120 px thumbnail at DPR 2 takes the 240 one (~6 KB), a phone-wide photo the 800 one */
+export const srcSet = (base: string) => `${src(base, 240)} 240w, ${src(base, 480)} 480w, ${src(base, 800)} 800w, ${src(base, 1200)} 1200w`
 
 export function Photo({
   base,

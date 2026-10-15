@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { HoverLink } from '@/components/ui/HoverLink'
 import { CATEGORIES, SITE } from '@/lib/site'
 import { plural } from '@/lib/format'
 import type { Category, Vacancy } from '@/lib/types'
@@ -139,7 +139,7 @@ export function JobCategories({ lang, all, photos, catalog }: { lang: Lang; all:
             const n = all.filter((v) => v.category === c.code).length
             return (
               <li key={c.code} className="w-[34%] shrink-0 snap-start sm:w-auto">
-                <Link href={`${catalog}?type=${c.code}`} className="group block">
+                <HoverLink href={`${catalog}?type=${c.code}`} className="group block">
                   <span className="zoom-img block overflow-hidden rounded-xl bg-surface">
                     <Photo base={photos[c.code]!} alt="" sizes="(max-width: 640px) 32vw, (max-width: 1024px) 24vw, 220px" className="aspect-[4/3] w-full origin-[80%_90%] scale-[1.2] object-cover object-[70%_70%] transition group-hover:scale-[1.26]" />
                   </span>
@@ -147,18 +147,18 @@ export function JobCategories({ lang, all, photos, catalog }: { lang: Lang; all:
                   <span className="num block text-[12px] text-muted sm:text-[13px]">
                     {n} {plural(n, t.vac as [string, string, string])}
                   </span>
-                </Link>
+                </HoverLink>
               </li>
             )
           })}
           <li className={`w-[40%] shrink-0 snap-start sm:w-auto ${b.cls} ${m.cls} ${l.cls}`}>
-            <Link
+            <HoverLink
               href={catalog}
               className={`flex h-full min-h-14 flex-col justify-center rounded-xl bg-logo px-4 py-3 text-white transition hover:brightness-[0.92] ${b.full ? '' : 'max-sm:aspect-auto'} ${l.full ? 'lg:min-h-0 lg:flex-row lg:items-center lg:justify-between' : ''}`}
             >
               <span className="text-[15px] font-semibold leading-tight sm:text-[17px]">{uk ? `Усі ${all.length} ${plural(all.length, ['вакансія', 'вакансії', 'вакансій'])}` : `Все ${all.length} ${plural(all.length, ['вакансия', 'вакансии', 'вакансий'])}`}</span>
               <span className="mt-1 text-[13px] font-medium text-white lg:mt-0">{uk ? 'Дивитися каталог →' : 'Смотреть каталог →'}</span>
-            </Link>
+            </HoverLink>
           </li>
         </ul>
       </div>
@@ -207,12 +207,12 @@ export function ClientVideos({ lang, videos, title }: { lang: Lang; videos: Vide
           text={lang === 'uk' ? 'Наші клієнти — про роботу, житло й менеджерів.' : 'Наши клиенты — о работе, жилье и менеджерах.'}
         />
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-          <Link href={lang === 'uk' ? '/vidguki' : '/ru/otzyvy'} className="btn-ghost">
+          <HoverLink href={lang === 'uk' ? '/vidguki' : '/ru/otzyvy'} className="btn-ghost">
             {lang === 'uk' ? 'Усі відгуки' : 'Все отзывы'} →
-          </Link>
-          <Link href={lang === 'uk' ? '/vacancies/z-zhytlom' : '/ru/vacancies/s-zhilem'} className="text-[15px] font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[4px]">
+          </HoverLink>
+          <HoverLink href={lang === 'uk' ? '/vacancies/z-zhytlom' : '/ru/vacancies/s-zhilem'} className="text-[15px] font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[4px]">
             {lang === 'uk' ? 'Вакансії з житлом →' : 'Вакансии с жильём →'}
-          </Link>
+          </HoverLink>
         </div>
       </div>
       <div className="mt-6">

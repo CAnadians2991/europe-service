@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { HoverLink } from '@/components/ui/HoverLink'
 import { vacancyMedia } from '@/lib/vacancy-media'
 import tildaLabels from '@/data/tilda-post-labels.json'
 import { VideoCards } from '@/components/reviews/VideoCards'
@@ -256,10 +256,10 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
             </div>
 
             <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
-              <Link href={cPath} className="group inline-flex min-h-11 items-center gap-2.5">
+              <HoverLink href={cPath} className="group inline-flex min-h-11 items-center gap-2.5">
                 <span className="num bg-ink px-1.5 py-0.5 text-[12.5px] font-semibold uppercase text-white">{v.country}</span>
                 <span className="text-[15px] font-semibold text-ink underline-offset-[3px] group-hover:underline">{cName}</span>
-              </Link>
+              </HoverLink>
               {cat && v.category !== 'other' && <span className="border border-line px-2 py-[3px] text-[14px] font-medium text-ink-2">{uk ? cat.name : cat.nameRu}</span>}
               <span className="num ml-auto hidden text-[12.5px] uppercase tracking-[0.06em] text-muted sm:inline">
                 {t.no} {v.id.slice(0, 10).toUpperCase()}
@@ -376,9 +376,9 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
                   as="h3"
                   title={labels.reviews?.[0] ?? t.reviews}
                   aside={
-                    <Link href={uk ? '/vidguki#review-form-h' : '/ru/otzyvy#review-form-h'} className="inline-flex min-h-11 items-center text-[15px] font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[3px] hover:decoration-brand-700">
+                    <HoverLink href={uk ? '/vidguki#review-form-h' : '/ru/otzyvy#review-form-h'} className="inline-flex min-h-11 items-center text-[15px] font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[3px] hover:decoration-brand-700">
                       {t.leaveReview}
-                    </Link>
+                    </HoverLink>
                   }
                 />
                 <div className="mt-4 grid gap-4 sm:grid-cols-2 sm:[&>*:last-child:nth-child(odd)]:col-span-2">
@@ -404,9 +404,9 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
               </ol>
               <p className="mt-4 text-[15px] leading-relaxed text-muted">
                 {t.freeNote}{' '}
-                <Link href={uk ? '/poslugi' : '/ru/services'} className="font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[3px] hover:decoration-brand-700">
+                <HoverLink href={uk ? '/poslugi' : '/ru/services'} className="font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[3px] hover:decoration-brand-700">
                   {t.prices}
-                </Link>
+                </HoverLink>
               </p>
             </section>
 
@@ -451,9 +451,9 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
           <div className="container-x">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <SectionHead id="sim-h" eyebrow={t.alsoLabel} title={t.also} />
-              <Link href={cPath} className="btn-ghost">
+              <HoverLink href={cPath} className="btn-ghost">
                 {c ? `${t.all} ${uk ? c.inName : c.inNameRu}` : t.all} <IconArrow className="size-4" />
-              </Link>
+              </HoverLink>
             </div>
             <div className="mt-8 overflow-hidden rounded-[18px] border-x border-t border-line">
               {similar.map((x) => (

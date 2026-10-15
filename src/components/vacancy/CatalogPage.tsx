@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { HoverLink } from '@/components/ui/HoverLink'
 import { Catalog, type Filters } from './Catalog'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbLd, faqLd } from '@/lib/seo'
@@ -18,7 +18,7 @@ export function Breadcrumbs({ items }: { items: { name: string; path: string }[]
             <li key={it.path} className={`flex items-center gap-1.5 ${i < items.length - 1 ? 'shrink-0' : 'min-w-0'}`}>
               {i > 0 && <span aria-hidden className="opacity-40">/</span>}
               {i < items.length - 1 ? (
-                <Link href={it.path} className="inline-flex min-h-10 items-center underline-offset-[3px] hover:underline">{it.name}</Link>
+                <HoverLink href={it.path} className="inline-flex min-h-10 items-center underline-offset-[3px] hover:underline">{it.name}</HoverLink>
               ) : (
                 <span aria-current="page" className="truncate text-muted">{it.name}</span>
               )}
@@ -95,10 +95,10 @@ export async function CatalogPage({
               <ul className="mt-3 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
                 {g.items.map((l) => (
                   <li key={l.href} className="border-b border-line">
-                    <Link href={l.href} className="flex min-h-11 items-center justify-between gap-3 py-2 text-[15px] font-medium hover:text-brand-700">
+                    <HoverLink href={l.href} className="flex min-h-11 items-center justify-between gap-3 py-2 text-[15px] font-medium hover:text-brand-700">
                       <span>{l.label}</span>
                       {l.count != null ? <span className="num text-[13px] text-muted">{l.count}</span> : <span aria-hidden className="text-muted">→</span>}
-                    </Link>
+                    </HoverLink>
                   </li>
                 ))}
               </ul>

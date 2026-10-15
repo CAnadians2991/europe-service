@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { HoverLink } from '@/components/ui/HoverLink'
 import { getActiveVacancies, toCard } from '@/lib/vacancies'
 import { ARTICLES, HOME, REVIEWS, isObsolete, type HomeContent } from '@/lib/content'
 import { CATALOG_PATH, COUNTRIES } from '@/lib/site'
@@ -203,11 +203,11 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
         <ul className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
           {countries.map((c) => (
             <li key={c.code}>
-              <Link href={localHref(c.path, lang)} className="group flex min-h-12 items-center gap-2.5 rounded-xl border border-line bg-white px-2.5 py-1.5 transition hover:border-brand-600">
+              <HoverLink href={localHref(c.path, lang)} className="group flex min-h-12 items-center gap-2.5 rounded-xl border border-line bg-white px-2.5 py-1.5 transition hover:border-brand-600">
                 <Flag code={c.code} className="h-5 w-[30px]" />
                 <span className="min-w-0 flex-1 truncate text-[14px] font-semibold leading-tight group-hover:text-brand-700 sm:text-[15px]">{uk ? c.name : c.nameRu}</span>
                 <span className="num shrink-0 text-[12.5px] text-muted">{c.count}</span>
-              </Link>
+              </HoverLink>
             </li>
           ))}
         </ul>
@@ -224,13 +224,13 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
             <h2 id="hot-h" className="accent-bar text-[24px] sm:text-[36px]">{t.hot}</h2>
             <h3 className="mt-2 font-sans text-[16.5px] font-normal leading-relaxed tracking-normal text-ink-2">{t.hotText}</h3>
           </div>
-          <Link href={catalog} className="btn-ghost">
+          <HoverLink href={catalog} className="btn-ghost">
             {t.all(all.length)} <IconArrow className="size-4" />
-          </Link>
+          </HoverLink>
         </div>
         <div className="mt-8 overflow-hidden rounded-[18px] border-x border-t border-line bg-white">
-          {hot.map((v, i) => (
-            <VacancyCard key={v.id} v={v} lang={lang} priority={i === 0} />
+          {hot.map((v) => (
+            <VacancyCard key={v.id} v={v} lang={lang} />
           ))}
         </div>
       </section>
@@ -260,9 +260,9 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
             <QuizButton id="steps" className="btn-accent !px-6">
               {t.pick} <IconArrow className="size-4" />
             </QuizButton>
-            <Link href={uk ? '/poslugi' : '/ru/services'} className="text-[15px] font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[4px]">
+            <HoverLink href={uk ? '/poslugi' : '/ru/services'} className="text-[15px] font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[4px]">
               {uk ? 'Пакет супроводу від 1 099 грн — що входить →' : 'Пакет сопровождения от 1 099 грн — что входит →'}
-            </Link>
+            </HoverLink>
           </div>
         </div>
       </section>
@@ -280,17 +280,17 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
         <section className="container-x py-10 sm:py-14" aria-labelledby="art-h">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHead id="art-h" title={t.articles} />
-            <Link href={p('/news')} className="btn-ghost">
+            <HoverLink href={p('/news')} className="btn-ghost">
               {t.allArticles} <IconArrow className="size-4" />
-            </Link>
+            </HoverLink>
           </div>
           <ul className="mt-5 grid gap-x-8 border-t border-line sm:grid-cols-2 lg:grid-cols-3">
             {articles.slice(0, 3).map((a) => (
               <li key={a.path} className="border-b border-line">
-                <Link href={a.path} className="group grid grid-cols-[72px_minmax(0,1fr)] items-center gap-3 py-3">
+                <HoverLink href={a.path} className="group grid grid-cols-[72px_minmax(0,1fr)] items-center gap-3 py-3">
                   <Photo base={(a.cover || a.ogImage) as string} alt="" width={96} height={72} sizes="72px" className="aspect-[4/3] w-full rounded-lg object-cover" />
                   <span className="text-[15px] font-semibold leading-snug group-hover:text-brand-700">{a.title}</span>
-                </Link>
+                </HoverLink>
               </li>
             ))}
           </ul>

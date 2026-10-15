@@ -8,7 +8,8 @@ import { LeadButton } from '@/components/lead/LeadModal'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { servicesLd } from '@/lib/services-ld'
 import { PRODUCT, uahPrice } from '@/lib/shop'
-import { IconCheck } from '@/components/ui/icons'
+import { IconCertificate, IconCheck, IconDoc, IconPhone, IconShield } from '@/components/ui/icons'
+import { Flag } from '@/components/ui/Flag'
 import { PackagePay } from '@/components/services/PackagePay'
 
 // Owner 2026-10-15: «просто опиши пакети як на Personal Work», phones first, nothing said twice.
@@ -63,19 +64,33 @@ function PackageCard({ p, id, base, featured, lang }: { p: Package; id: (typeof 
   )
 }
 
-/** one price-list row: name (and a note where Tilda had one), price, action */
-function PriceRow({ title, note, price, action }: { title: string; note?: string; price: string; action: React.ReactNode }) {
+/** a small service card: icon, name, price, action — read at a glance (owner: «60% тексту не читають») */
+function ServiceCard({ icon, title, price, tag, action, more }: { icon: React.ReactNode; title: string; price: string; tag?: string; action: React.ReactNode; more?: React.ReactNode }) {
   return (
-    <li className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 py-4">
-      <div className="col-span-2 min-w-0">
-        <p className="text-[16px] font-semibold leading-snug">{title}</p>
-        {note && <p className="mt-1 text-[14px] leading-snug text-ink-2">{note}</p>}
+    <li className="flex flex-col rounded-[18px] bg-cream p-4 ring-1 ring-line">
+      <div className="flex items-start gap-3">
+        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-white text-brand-700 ring-1 ring-line" aria-hidden>
+          {icon}
+        </span>
+        <div className="min-w-0 flex-1">
+          <h3 className="text-[16px] font-semibold leading-snug">{title}</h3>
+          {tag && <p className="mt-1 inline-block rounded-full bg-brand-50 px-2 py-0.5 text-[12px] font-semibold text-brand-800">{tag}</p>}
+        </div>
       </div>
-      <p className="num whitespace-nowrap text-[17px] font-semibold">{price}</p>
-      <div className="justify-self-end">{action}</div>
+      {more}
+      <div className="mt-auto flex items-center justify-between gap-3 pt-4">
+        <p className="num whitespace-nowrap text-[20px] font-semibold tracking-[-0.01em]">{price}</p>
+        {action}
+      </div>
     </li>
   )
 }
+
+const COUNTRY = [
+  { re: /Німеччин|Германи/, code: 'de', uk: 'Німеччина', ru: 'Германия' },
+  { re: /Нідерланд|Нидерланд/, code: 'nl', uk: 'Нідерланди', ru: 'Нидерланды' },
+  { re: /Греці|Греци/, code: 'gr', uk: 'Греція', ru: 'Греция' },
+]
 
 export function ServicesPage({ lang }: { lang: Lang }) {
   const s = SERVICES[lang]
@@ -110,71 +125,89 @@ export function ServicesPage({ lang }: { lang: Lang }) {
       </section>
 
       <section className="border-y border-line bg-white" aria-labelledby="extras-h">
-        <div className="container-x grid gap-10 py-12 lg:grid-cols-2 lg:gap-14">
-          <div>
-            <h2 id="extras-h" className="text-[24px] sm:text-[30px]">
-              {uk ? 'Послуги Europe Service' : 'Услуги Europe Service'}
-            </h2>
-            <ul className="mt-3 divide-y divide-line border-b border-line">
-              {(['sim-pl', 'insurance-10'] as const).map((id) => {
-                const p = PRODUCT[id]
-                if (!p) return null
-                return (
-                  <PriceRow
-                    key={id}
-                    title={uk ? p.title : p.titleRu}
-                    price={fmt(p.price)}
-                    action={
-                      <AddToCart id={p.id} title={p.title} price={p.price} multiple lang={lang} className={action}>
-                        {uk ? 'Додати' : 'Добавить'}
-                      </AddToCart>
-                    }
-                  />
-                )
-              })}
-              {insOwn && (
-                <PriceRow
-                  title={uk ? 'Страховий поліс на ваш термін' : 'Страховой полис на ваш срок'}
-                  note={(insOwn.features ?? []).slice(0, 2).join(' ')}
-                  price={`${insOwn.price?.replace('₴ ', '')}${/грн/.test(insOwn.price ?? '') ? '' : ' грн'}`}
+        <div className="container-x py-12">
+          <h2 id="extras-h" className="text-[24px] sm:text-[30px]">
+            {uk ? 'Послуги Europe Service' : 'Услуги Europe Service'}
+          </h2>
+
+          {/* the work visa: the big one, set apart */}
+          <Link href={uk ? '/robocha-viza-v-polshchu' : '/ru/rabochaya-viza-v-polshu'} className="bg-logo group mt-5 flex flex-col gap-4 rounded-[22px] p-5 text-white shadow-[var(--shadow-lift)] sm:flex-row sm:items-center sm:justify-between sm:p-6">
+            <span className="flex items-start gap-3.5">
+              <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-white/15" aria-hidden>
+                <IconDoc className="size-6" />
+              </span>
+              <span className="min-w-0">
+                <span className="block font-display text-[21px] font-semibold leading-tight sm:text-[24px]">{uk ? 'Робоча віза в Польщу на рік' : 'Рабочая виза в Польшу на год'}</span>
+                <span className="mt-1 block text-[14px] leading-snug text-white/85">{uk ? 'Допомога з реєстрацією та координація по подачі документів в консульство.' : 'Помощь с регистрацией и координация по подаче документов в консульство.'}</span>
+              </span>
+            </span>
+            <span className="flex items-center justify-between gap-4 sm:justify-end">
+              <span className="num whitespace-nowrap font-display text-[28px] font-semibold">15 000 грн</span>
+              <span className="btn-white !min-h-11 !px-5 !text-[15px]">{uk ? 'Детальніше' : 'Подробнее'}</span>
+            </span>
+          </Link>
+
+          <ul className="mt-3 grid gap-3 sm:grid-cols-3">
+            {(['sim-pl', 'insurance-10'] as const).map((id) => {
+              const p = PRODUCT[id]
+              if (!p) return null
+              return (
+                <ServiceCard
+                  key={id}
+                  icon={id === 'sim-pl' ? <IconPhone className="size-5" /> : <IconShield className="size-5" />}
+                  title={uk ? p.title : p.titleRu}
+                  tag={uk ? 'є в Стандарті й Преміумі' : 'есть в Стандарте и Премиуме'}
+                  price={fmt(p.price)}
                   action={
-                    <LeadButton form="invoice:insurance" title={uk ? 'Розрахувати страховку' : 'Рассчитать страховку'} subtitle={insOwn.title} className={action}>
-                      {uk ? 'Розрахувати' : 'Рассчитать'}
-                    </LeadButton>
+                    <AddToCart id={p.id} title={p.title} price={p.price} multiple lang={lang} className={action}>
+                      {uk ? 'Додати' : 'Добавить'}
+                    </AddToCart>
                   }
                 />
-              )}
-              <PriceRow
-                title={uk ? 'Робоча віза в Польщу на рік без прив’язки' : 'Рабочая виза в Польшу на год без привязки'}
-                note={uk ? 'Допомога з реєстрацією та координація по подачі документів в консульство.' : 'Помощь с регистрацией и координация по подаче документов в консульство.'}
-                price="15 000 грн"
+              )
+            })}
+            {insOwn && (
+              <ServiceCard
+                icon={<IconCertificate className="size-5" />}
+                title={uk ? 'Страховка на ваш термін' : 'Страховка на ваш срок'}
+                price={`${insOwn.price?.replace('₴ ', '').replace('-', '–')}${/грн/.test(insOwn.price ?? '') ? '' : ' грн'}`}
+                more={
+                  // Tilda's wording of this service (SEO text) — one tap away, not in the way
+                  <details className="group mt-2 text-[13.5px] text-ink-2">
+                    <summary className="cursor-pointer list-none font-semibold text-brand-700 [&::-webkit-details-marker]:hidden">{uk ? 'Умови' : 'Условия'} <span aria-hidden className="inline-block transition group-open:rotate-90">›</span></summary>
+                    <p className="mt-1.5 leading-snug">{(insOwn.features ?? []).slice(0, 2).join(' ')}</p>
+                  </details>
+                }
                 action={
-                  <Link href={uk ? '/robocha-viza-v-polshchu' : '/ru/rabochaya-viza-v-polshu'} className={action}>
-                    {uk ? 'Детальніше' : 'Подробнее'}
-                  </Link>
+                  <LeadButton form="invoice:insurance" title={uk ? 'Розрахувати страховку' : 'Рассчитать страховку'} subtitle={insOwn.title} className={action}>
+                    {uk ? 'Розрахувати' : 'Рассчитать'}
+                  </LeadButton>
                 }
               />
-            </ul>
-          </div>
+            )}
+          </ul>
 
           {abroad.length > 0 && (
-            <div>
-              <h2 className="text-[24px] leading-snug sm:text-[30px]">{uk ? 'Послуги інші країни Європи: Німеччина, Нідерланди, Греція' : 'Услуги другие страны Европы: Германия, Нидерланды, Греция'}</h2>
-              <ul className="mt-3 divide-y divide-line border-b border-line">
-                {abroad.map((p) => (
-                  <PriceRow
-                    key={p.title}
-                    title={p.title}
-                    price={p.price ?? ''}
-                    action={
+            <>
+              <h2 className="mt-12 text-[22px] leading-snug sm:text-[26px]">{uk ? 'Послуги інші країни Європи: Німеччина, Нідерланди, Греція' : 'Услуги другие страны Европы: Германия, Нидерланды, Греция'}</h2>
+              <ul className="mt-4 grid gap-3 sm:grid-cols-3">
+                {abroad.map((p) => {
+                  const c = COUNTRY.find((x) => x.re.test(p.title))
+                  return (
+                    <li key={p.title} className="flex items-center gap-3 rounded-[18px] bg-cream p-4 ring-1 ring-line">
+                      {c && <Flag code={c.code} className="h-6 w-9 shrink-0 rounded-[3px]" title={uk ? c.uk : c.ru} />}
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-[16px] font-semibold leading-tight">{c ? (uk ? c.uk : c.ru) : p.title}</h3>
+                        <p className="num mt-0.5 text-[15px] font-semibold text-ink-2">{p.price}</p>
+                      </div>
                       <LeadButton form={`invoice:${p.title}`} title={uk ? 'Дізнатися ціну' : 'Узнать цену'} subtitle={p.title} className={action}>
                         {uk ? 'Рахунок' : 'Счёт'}
                       </LeadButton>
-                    }
-                  />
-                ))}
+                    </li>
+                  )
+                })}
               </ul>
-            </div>
+            </>
           )}
         </div>
       </section>

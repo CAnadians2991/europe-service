@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { HoverLink } from '@/components/ui/HoverLink'
 import { Photo } from '@/components/ui/Photo'
 import { IconChevron } from '@/components/ui/icons'
 import { CATEGORY, COUNTRY } from '@/lib/site'
@@ -40,9 +40,9 @@ export function VacancyCard({ v, priority, lang = 'uk' }: { v: Card; priority?: 
 
       <div className="min-w-0">
         <h3 className="line-clamp-2 text-[15px] font-semibold leading-snug text-ink sm:text-[17px]">
-          <Link href={v.path} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-brand-600">
+          <HoverLink href={v.path} className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-brand-600">
             {v.title}
-          </Link>
+          </HoverLink>
         </h3>
         <p className="mt-0.5 truncate text-[13px] text-muted">{[city, uk ? c?.name : c?.nameRu].filter(Boolean).join(', ')}</p>
         {/* phones: the pay under the place, one line */}

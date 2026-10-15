@@ -65,7 +65,7 @@ export function Gallery({ photos, alt, priority, lang = 'uk' }: { photos: string
               className="relative overflow-hidden bg-surface opacity-65 transition-opacity hover:opacity-100 aria-[current=true]:opacity-100 aria-[current=true]:after:absolute aria-[current=true]:after:inset-x-0 aria-[current=true]:after:bottom-0 aria-[current=true]:after:h-[3px] aria-[current=true]:after:bg-brand-600 aria-[current=true]:after:content-['']"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={src(p, 480)} alt="" width={480} height={320} loading="lazy" className="aspect-[3/2] w-full object-cover" />
+              <img src={src(p, 480)} srcSet={`${src(p, 240)} 240w, ${src(p, 480)} 480w`} sizes="120px" alt="" width={480} height={320} loading="lazy" className="aspect-[3/2] w-full object-cover" />
             </button>
           ))}
         </div>

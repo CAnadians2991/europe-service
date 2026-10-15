@@ -303,8 +303,8 @@ export async function uploadImage(fd: FormData): Promise<{ ok: true; base: strin
     const key = `v/${folder}/${hash}`
     const store = uploads()
     await Promise.all(
-      ([480, 800, 1200] as const).map(async (w) => {
-        const out = await img.clone().resize({ width: w, withoutEnlargement: true }).webp({ quality: w === 480 ? 72 : 78 }).toBuffer()
+      ([240, 480, 800, 1200] as const).map(async (w) => {
+        const out = await img.clone().resize({ width: w, withoutEnlargement: true }).webp({ quality: w <= 480 ? 72 : 78 }).toBuffer()
         await store.set(`${key}-${w}.webp`, new Uint8Array(out).buffer, { metadata: { contentType: 'image/webp' } })
       }),
     )
