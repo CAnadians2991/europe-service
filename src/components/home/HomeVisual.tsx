@@ -71,7 +71,7 @@ export function HomeHero({ lang, photos }: { lang: Lang; photos: string[] }) {
           {photo && <Photo base={photo} alt={uk ? 'Працівники складу в касках' : 'Работники склада в касках'} sizes="(max-width: 1024px) 100vw, 50vw" priority className="absolute inset-0 size-full object-cover object-[18%_40%]" />}
         </div>
 
-        <div className="flex flex-col justify-center px-4 py-9 sm:px-8 sm:py-12 lg:order-1 lg:py-16 lg:pl-[max(2rem,calc((100vw-1240px)/2+1rem))] lg:pr-14 xl:pr-20">
+        <div className="flex flex-col justify-center px-4 py-9 sm:px-8 sm:py-12 lg:order-1 lg:py-16 lg:pl-[max(2rem,calc((min(100vw,1440px)-1240px)/2+1rem))] lg:pr-14 xl:pr-20">
           <h1 id="hero-h" className="font-sans text-[15px] font-semibold leading-snug tracking-normal text-white/95 sm:text-[17px]">{t.seoH1}</h1>
           <p className="mt-3 font-display text-[38px] font-bold leading-[1.02] tracking-[-0.035em] text-white min-[380px]:text-[42px] sm:text-[60px] lg:text-[68px] xl:text-[76px]">
             {t.h1a} <span className="block text-[#c9f0d8]">{t.h1b}</span>
