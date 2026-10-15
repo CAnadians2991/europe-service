@@ -71,7 +71,8 @@ export const SITE = {
  * owner's own GA4 «Europe Service - GA4» (G-YRNKR8HSLM). Any of them can come back through the NEXT_PUBLIC_* env vars.
  */
 export const TRACKING = {
-  gtm: process.env.NEXT_PUBLIC_GTM_ID ?? '',
+  /** the owner's own container (account «Europe Service», i.litvin@, 15.10.2026) — it holds the GA4 tag G-YRNKR8HSLM */
+  gtm: process.env.NEXT_PUBLIC_GTM_ID ?? 'GTM-KWPMZBPS',
   ga4: process.env.NEXT_PUBLIC_GA4_ID ?? 'G-YRNKR8HSLM',
   metaPixels: (process.env.NEXT_PUBLIC_META_PIXELS ?? '').split(',').filter(Boolean),
   tiktok: process.env.NEXT_PUBLIC_TIKTOK_PIXEL ?? '',

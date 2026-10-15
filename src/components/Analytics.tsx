@@ -12,7 +12,7 @@ export const consentBootstrap = `window.dataLayer=window.dataLayer||[];function 
 gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:600,region:${JSON.stringify(EEA.split(','))}});
 gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});
 try{var c=document.cookie.match(/(?:^|; )pw_consent=([^;]*)/);if(c){var g=c[1]==='all'?'granted':'denied';gtag('consent','update',{ad_storage:g,ad_user_data:g,ad_personalization:g,analytics_storage:g})}}catch(e){}
-gtag('set','url_passthrough',true);gtag('js',new Date());${TRACKING.ga4 ? `gtag('config','${TRACKING.ga4}');` : ''}`
+gtag('set','url_passthrough',true);gtag('js',new Date());${TRACKING.ga4 && !TRACKING.gtm ? `gtag('config','${TRACKING.ga4}');` : ''}`
 
 export function Analytics() {
   const pathname = usePathname()
@@ -78,7 +78,10 @@ export function Analytics() {
         w.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' })
         add(`https://www.googletagmanager.com/gtm.js?id=${TRACKING.gtm}`)
       }
-      if (TRACKING.ga4) add(`https://www.googletagmanager.com/gtag/js?id=${TRACKING.ga4}`)
+      // GA4 lives in the GTM container (its Google Analytics tag, Initialization – All Pages): loading gtag.js here too
+      // would count every page twice. Without a container the site loads GA4 itself. The site's gtag('event', …) calls
+      // (generate_lead, contact_click, cart events) go to the same dataLayer and reach GA4 either way.
+      if (TRACKING.ga4 && !TRACKING.gtm) add(`https://www.googletagmanager.com/gtag/js?id=${TRACKING.ga4}`)
       if (TRACKING.metaPixels.length || TRACKING.tiktok || TRACKING.clarity) setTimeout(() => void pixelsAllowed().then((ok) => ok && loadPixels()), 1200)
     }
     const events = ['pointerdown', 'keydown', 'touchstart', 'scroll'] as const
