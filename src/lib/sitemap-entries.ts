@@ -83,7 +83,7 @@ export async function sitemapEntries(): Promise<MetadataRoute.Sitemap> {
     out.push({ url: u(p), lastModified: new Date('2026-10-07'), changeFrequency: 'monthly', priority: p === '/spivpratsya' ? 0.6 : 0.5, alternates: { languages: partnerLangs } })
   }
   for (const a of ARTICLES) {
-    push(a.path, { lastModified: a.datePublished ? new Date(a.datePublished) : a.date ? new Date(a.date) : now, changeFrequency: 'yearly', priority: 0.5 }, a.lang)
+    push(a.path, { lastModified: a.dateModified ? new Date(a.dateModified) : a.datePublished ? new Date(a.datePublished) : a.date ? new Date(a.date) : now, changeFrequency: 'yearly', priority: 0.5 }, a.lang)
   }
   for (const q of QUIZZES) if (!q.noindex) push(q.path, { lastModified: now, changeFrequency: 'monthly', priority: 0.4 }, q.path.startsWith('/ru/') ? 'ru' : 'uk', false)
   for (const v of VISA_PAGES) push(v.path, { lastModified: new Date(v.updated.split('.').reverse().join('-')), changeFrequency: 'monthly', priority: v.lang === 'uk' ? 0.85 : 0.6 }, v.lang)

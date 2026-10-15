@@ -229,7 +229,7 @@ export function VisaLanding({ p }: { p: VisaPage }) {
           </p>
         </article>
         {p.links.length > 0 && (
-          <aside className="lg:sticky lg:top-28 lg:self-start">
+          <aside className="lg:sticky lg:top-28 lg:self-start lg:max-h-[calc(100dvh-120px)] lg:overflow-y-auto lg:overscroll-contain [scrollbar-width:thin]">
             <p className="eyebrow">{uk ? 'Дивіться також' : 'Смотрите также'}</p>
             <ul className="mt-4 border-t-[3px] border-ink">
               {p.links.map((x) => (

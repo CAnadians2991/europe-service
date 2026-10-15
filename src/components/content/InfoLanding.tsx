@@ -22,7 +22,7 @@ export function InfoLanding({ l, path }: { l: LandingPage; path: string }) {
           <Blocks blocks={l.blocks} />
         </article>
         {links.length > 0 && (
-          <aside className="lg:sticky lg:top-28 lg:self-start">
+          <aside className="lg:sticky lg:top-28 lg:self-start lg:max-h-[calc(100dvh-120px)] lg:overflow-y-auto lg:overscroll-contain [scrollbar-width:thin]">
             <p className="eyebrow">{uk ? 'Корисно' : 'Полезно'}</p>
             <ul className="mt-4 border-t-[3px] border-ink">
               {links.map((x) => (

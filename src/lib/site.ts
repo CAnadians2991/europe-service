@@ -1,5 +1,11 @@
 import type { Category, CountryCode, Gender } from './types'
 
+/** Editor who signs the articles (owner 2026-10-15: «Ігор Сидоренко, головний редактор») — byline and schema.org author */
+export const EDITOR = {
+  uk: { name: 'Ігор Сидоренко', role: 'головний редактор', jobTitle: 'Головний редактор' },
+  ru: { name: 'Игорь Сидоренко', role: 'главный редактор', jobTitle: 'Главный редактор' },
+} as const
+
 export const SITE = {
   name: 'Europe Service',
   legalName: 'ТОВ «ЄВРОПА СЕРВІС УКРАЇНА»',
@@ -186,11 +192,13 @@ export const GENDERS: { code: Gender; name: string; nameRu: string; short: strin
 ]
 
 /** All vacancies of every country — Tilda's «Актуальні вакансії / Термінові заїзди» page, now a real catalog */
+/** all countries in one list (Tilda's «Терміновий заїзд» page, noindex) — the «Усі країни» chip and «Усі N вакансій» */
 export const CATALOG_PATH = '/vacancies/aktualni_vakansii'
 export const CATALOG_PATH_RU = '/ru/vacancies/aktualni_vakansii'
 
 export const NAV = [
-  { href: CATALOG_PATH, label: 'Вакансії' },
+  // «Вакансії» = /vacancies, the main SEO page (Робота в Польщі), as Tilda's menu linked it (930 links; owner 2026-10-15)
+  { href: '/vacancies', label: 'Вакансії' },
   { href: '/poslugi', label: 'Послуги' },
   { href: '/about', label: 'Про нас' },
   { href: '/vidguki', label: 'Відгуки' },
@@ -200,7 +208,7 @@ export const NAV = [
 ]
 
 export const NAV_RU = [
-  { href: CATALOG_PATH_RU, label: 'Вакансии' },
+  { href: '/ru/vacancies', label: 'Вакансии' },
   { href: '/ru/services', label: 'Услуги' },
   { href: '/ru/about', label: 'О нас' },
   { href: '/ru/otzyvy', label: 'Отзывы' },

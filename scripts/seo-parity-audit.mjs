@@ -92,7 +92,13 @@ function tildaSentences(file) {
 }
 
 // Owner-approved departures from Tilda (2026-10-13): these fields are ours now, not Tilda's
-const OWNER_CHANGED = { '/poslugi': ['title'], '/ru/services': ['title'], '/ru/vacancies': ['title', 'description'] }
+const OWNER_CHANGED = {
+  '/poslugi': ['title'],
+  '/ru/services': ['title'],
+  '/ru/vacancies': ['title', 'description'],
+  // 2026-10-15: the all-countries list (noindex on Tilda) is «Усі вакансії», not «Терміновий заїзд» / «Актуальні вакансії … 2022»
+  '/vacancies/aktualni_vakansii': ['title', 'headings'],
+}
 const changed = (p, f) => (OWNER_CHANGED[p] ?? []).includes(f)
 
 const ONLY = process.argv[3] // 'pages' → the Tilda pages only
@@ -156,7 +162,7 @@ async function worker() {
     const heads = new Set([...h.matchAll(/<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/g)].map((m) => norm(m[1].replace(/<[^>]+>/g, ' '))))
     const text = norm(strip(h).replace(/<[^>]+>/g, ' '))
     const tHeads = j.kind === 'page' ? META.pages[j.path]?.headings ?? [] : j.post.headings ?? []
-    for (const [lvl, t] of tHeads) {
+    for (const [lvl, t] of changed(j.path, 'headings') ? [] : tHeads) {
       const n = norm(t)
       if (!n || heads.has(n)) continue
       if (text.includes(n)) continue
@@ -172,7 +178,7 @@ async function worker() {
       }
       // SEO text
       const sents = tildaSentences(j.tilda.file)
-      if (sents.length >= 3 && !noindex) {
+      if (sents.length >= 3 && !noindex && !changed(j.path, 'text')) {
         const have = sents.filter((s) => text.includes(norm(s))).length
         if (have / sents.length < 0.95) flag(j, 'seo text', `${have}/${sents.length} Tilda sentences; missing: ${sents.filter((x) => !text.includes(norm(x))).map((x) => ws(x).slice(0, 90)).join(' ¦ ')}`)
       }

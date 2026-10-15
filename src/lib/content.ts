@@ -25,6 +25,10 @@ export interface Article {
   cover?: string | null
   blocks: Block[]
   datePublished?: string | null
+  /** last substantive update (a rewrite to the current rules) — shown as «Оновлено» and used as dateModified */
+  dateModified?: string | null
+  /** one line on what that update changed (the Markdown version shows it) */
+  changes?: string
   outdated?: boolean
   outdatedNote?: string
   faq?: { q: string; a: string }[]

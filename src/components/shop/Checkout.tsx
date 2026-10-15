@@ -313,7 +313,7 @@ export function Checkout({ products, methods, lang, ofertaHref }: { products: Pu
       </div>
 
       {/* method + pay */}
-      <aside className={`${box} lg:sticky lg:top-24`} aria-labelledby="how-h">
+      <aside className={`${box} lg:sticky lg:top-24 lg:max-h-[calc(100dvh-120px)] lg:overflow-y-auto lg:overscroll-contain [scrollbar-width:thin]`} aria-labelledby="how-h">
         <h2 id="how-h" className={`${head} px-4 pb-1 pt-3`}>
           {t.how}
         </h2>

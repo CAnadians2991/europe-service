@@ -165,7 +165,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
   const chats = Boolean(SITE.chat.telegram || SITE.chat.viber || SITE.chat.whatsapp)
   const crumbs = [
     { name: t.home, path: uk ? '/' : '/ru' },
-    { name: t.vac, path: catalog },
+    { name: t.vac, path: uk ? '/vacancies' : '/ru/vacancies' },
     ...(c ? [{ name: `${t.work} ${uk ? c.inName : c.inNameRu}`, path: cPath }] : []),
     { name: v.company || v.title, path: v.path },
   ]
@@ -414,7 +414,8 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
 
           {/* ───────── sticky application panel (desktop) ───────── */}
           <aside className="hidden lg:block" aria-label={t.apply}>
-            <div className="sticky top-[96px] space-y-3">
+            {/* taller than a laptop screen (pay, form, contacts): it scrolls inside instead of being cut off at the bottom */}
+            <div className="sticky top-[96px] -mx-3 max-h-[calc(100dvh-104px)] space-y-3 overflow-y-auto overscroll-contain px-3 pb-3 [scrollbar-width:thin]">
               <div className="border border-line bg-white shadow-[var(--shadow-lift)]">
                 <div className="border-b border-line px-6 pb-5 pt-5">
                   <div className="flex items-center justify-between gap-3">

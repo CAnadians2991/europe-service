@@ -69,7 +69,7 @@ export async function resolveVacancies(root: Root, slug: string[] = []): Promise
 }
 
 const crumbHome = (lang: Lang) => ({ name: lang === 'uk' ? 'Головна' : 'Главная', path: lang === 'uk' ? '/' : '/ru' })
-const crumbAll = (lang: Lang) => ({ name: lang === 'uk' ? 'Вакансії' : 'Вакансии', path: lang === 'uk' ? CATALOG_PATH : '/ru' + CATALOG_PATH })
+const crumbAll = (lang: Lang) => ({ name: lang === 'uk' ? 'Вакансії' : 'Вакансии', path: lang === 'uk' ? '/vacancies' : '/ru/vacancies' })
 
 export async function vacanciesMetadata(root: Root, slug: string[] = []): Promise<Metadata> {
   const r = await resolveVacancies(root, slug)
@@ -80,7 +80,8 @@ export async function vacanciesMetadata(root: Root, slug: string[] = []): Promis
   if (r.kind === 'all') {
     // as on Tilda («Актуальні вакансії», page13843894): its title and description, and it was hidden from search (noindex)
     return pageMeta({
-      title: uk ? 'Актуальні вакансії Europe Service 2022' : 'Актуальные вакансии Europe Service 2022',
+      // owner 2026-10-15: one plain name (Tilda's «Актуальні вакансії … 2022» / «Терміновий заїзд» read as a second, stale catalog)
+      title: uk ? 'Усі вакансії Europe Service' : 'Все вакансии Europe Service',
       description: uk
         ? 'Свіжі вакансії для клієнтів Європа Сервіс ⚡ Актуальна робота дял чоловіків, жінок і сімейних пар'
         : 'Все актуальные вакансии Europe Service: Польша, Германия, Чехия, Литва, Нидерланды и другие страны ЕС. Официальное трудоустройство, жильё, сопровождение.',
@@ -133,10 +134,9 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
       <CatalogPage
         form="catalog-all"
         lang={lang}
-        // Tilda's H1 of this page
-        title={uk ? 'Терміновий заїзд' : 'Срочный заезд'}
+        title={uk ? 'Усі вакансії' : 'Все вакансии'}
         text=""
-        crumbs={[crumbHome(lang), { ...crumbAll(lang), path: r.path }]}
+        crumbs={[crumbHome(lang), crumbAll(lang), { name: uk ? 'Усі вакансії' : 'Все вакансии', path: r.path }]}
         cards={cards}
       />
     )
@@ -167,7 +167,7 @@ export async function VacanciesPage({ root, slug = [] }: { root: Root; slug?: st
         lang={lang}
         title={s.h1}
         text={s.lead}
-        crumbs={[crumbHome(lang), crumbAll(lang), { name: uk ? `Робота ${c.inName}` : `Работа ${c.inNameRu}`, path: r.path }]}
+        crumbs={[crumbHome(lang), ...(c.code === 'pl' ? [] : [crumbAll(lang)]), { name: uk ? `Робота ${c.inName}` : `Работа ${c.inNameRu}`, path: r.path }]}
         cards={cards}
         preset={{ country: c.code }}
         links={[...(landingLinks.length ? [{ title: uk ? 'Популярні вакансії' : 'Популярные вакансии', items: landingLinks.map((l) => ({ href: l.href, label: l.label })) }] : []), ...groups]}
@@ -235,7 +235,7 @@ export function LandingCatalog({ lang, landing: l, path, active }: { lang: Lang;
   const c = (all ? undefined : COUNTRY[l.country]) ?? COUNTRY.pl
   const { list, narrowed } = landingList(l, active)
   const links = (l.links ?? []).filter((x) => x.href.startsWith('/'))
-  const countryPath = all ? (uk ? CATALOG_PATH : '/ru' + CATALOG_PATH) : uk ? c.path : '/ru' + c.path
+  const countryPath = all ? (uk ? '/vacancies' : '/ru/vacancies') : uk ? c.path : '/ru' + c.path
   const parent = all ? (uk ? 'Вакансії' : 'Вакансии') : uk ? `Робота ${c.inName}` : `Работа ${c.inNameRu}`
   return (
     <CatalogPage

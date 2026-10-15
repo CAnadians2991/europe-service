@@ -1,5 +1,5 @@
 import 'server-only'
-import { COUNTRY, GENDERS, SITE, type CountryInfo } from '@/lib/site'
+import { COUNTRY, EDITOR, GENDERS, SITE, type CountryInfo } from '@/lib/site'
 import { salaryHour, salaryMain } from '@/lib/format'
 import { localize } from '@/lib/vacancy-i18n'
 import { countryLanding, countrySeo, landingList, LANDINGS, type LandingPage } from '@/lib/landing'
@@ -81,9 +81,11 @@ export function articleDoc(a: Article): MdDoc {
     title: a.title,
     purpose: t(a.lang, 'стаття Europe Service про роботу й життя за кордоном', 'статья Europe Service о работе и жизни за границей'),
     topic: 'guides',
-    updated: date ?? undefined,
+    updated: a.dateModified || date || undefined,
     body: [
+      a.listing ? '' : t(a.lang, `Автор: ${EDITOR.uk.name}, ${EDITOR.uk.role}`, `Автор: ${EDITOR.ru.name}, ${EDITOR.ru.role}`),
       date ? t(a.lang, `Опубліковано: ${date.slice(0, 10)}`, `Опубликовано: ${date.slice(0, 10)}`) : '',
+      a.dateModified ? t(a.lang, `Оновлено: ${a.dateModified.slice(0, 10)}`, `Обновлено: ${a.dateModified.slice(0, 10)}`) + (a.changes ? ` — ${a.changes}` : '') : '',
       a.outdated && a.outdatedNote ? `> ${a.outdatedNote}` : a.outdated ? t(a.lang, '> Архівна стаття: правила з того часу могли змінитися.', '> Архивная статья: правила с того времени могли измениться.') : '',
       blocksMd(a.blocks),
       faqMd(a.faq, a.lang),

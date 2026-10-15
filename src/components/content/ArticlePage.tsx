@@ -6,7 +6,7 @@ import { Breadcrumbs } from '@/components/vacancy/CatalogPage'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { LeadForm } from '@/components/lead/LeadForm'
 import { Photo } from '@/components/ui/Photo'
-import { SITE } from '@/lib/site'
+import { EDITOR, SITE } from '@/lib/site'
 import { faqLd } from '@/lib/seo'
 import { formatDate } from '@/lib/format'
 
@@ -82,6 +82,8 @@ export function ArticlePage({ a, posts = [] }: { a: Article; posts?: Article[] }
   const first = a.blocks[0] as { type: string; text?: string; src?: string } | undefined
   const blocks = (first?.type === 'h2' && first.text === a.title) || (first?.type === 'img' && first.src === a.cover) ? a.blocks.slice(1) : a.blocks
   const d = dateText(a)
+  const ed = EDITOR[a.lang]
+  const updated = a.dateModified ? formatDate(a.dateModified, uk ? 'uk-UA' : 'ru-RU') : ''
   const label = a.listing ? (uk ? 'Рубрика' : 'Рубрика') : a.outdated ? (uk ? 'Архів' : 'Архив') : uk ? 'Новини та статті' : 'Новости и статьи'
   return (
     <>
@@ -94,8 +96,10 @@ export function ArticlePage({ a, posts = [] }: { a: Article; posts?: Article[] }
           inLanguage: uk ? 'uk-UA' : 'ru-UA',
           mainEntityOfPage: SITE.url + a.path,
           image: a.cover ? (/\.(svg|png|jpe?g|webp)$/.test(a.cover) ? SITE.url + a.cover : `${SITE.url}${a.cover}-1200.webp`) : `${SITE.url}/og-default.jpg`,
-          ...(a.datePublished ? { datePublished: a.datePublished, dateModified: a.datePublished } : {}),
-          author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+          ...(a.datePublished ? { datePublished: a.datePublished, dateModified: a.dateModified || a.datePublished } : {}),
+          author: a.listing
+            ? { '@type': 'Organization', name: SITE.name, url: SITE.url }
+            : { '@type': 'Person', name: ed.name, jobTitle: ed.jobTitle, worksFor: { '@type': 'Organization', name: SITE.name, url: SITE.url } },
           publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url, logo: { '@type': 'ImageObject', url: `${SITE.url}/brand/icon-512.png` } },
         }}
       />
@@ -126,6 +130,27 @@ export function ArticlePage({ a, posts = [] }: { a: Article; posts?: Article[] }
                 )}
               </p>
               <h1 className="mt-3 text-[27px] min-[380px]:text-[30px] sm:text-[42px]">{a.title}</h1>
+              {!a.listing && (
+                <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] text-ink-2">
+                  <span aria-hidden className="grid size-8 shrink-0 place-items-center rounded-full bg-logo text-[12px] font-semibold text-white">
+                    {ed.name
+                      .split(' ')
+                      .map((w) => w[0])
+                      .join('')}
+                  </span>
+                  <span>
+                    <span className="font-semibold text-ink">{ed.name}</span>, {ed.role}
+                  </span>
+                  {updated && (
+                    <>
+                      <span aria-hidden className="opacity-40">·</span>
+                      <span>
+                        {uk ? 'Оновлено' : 'Обновлено'} <time dateTime={a.dateModified!.slice(0, 10)}>{updated}</time>
+                      </span>
+                    </>
+                  )}
+                </p>
+              )}
               {a.outdated && (
                 <div role="note" className="mt-6 flex flex-col gap-3 border border-line-strong bg-surface p-4 sm:flex-row sm:items-start sm:gap-4 sm:p-5">
                   <span className="num self-start bg-ink px-2 py-1 text-[11.5px] font-semibold uppercase tracking-[0.08em] text-white">{uk ? 'Архівний матеріал' : 'Архивный материал'}</span>
@@ -164,7 +189,7 @@ export function ArticlePage({ a, posts = [] }: { a: Article; posts?: Article[] }
             )}
           </div>
           <aside>
-            <div className="border border-line bg-white lg:sticky lg:top-[96px]">
+            <div className="border border-line bg-white lg:sticky lg:top-[96px] lg:max-h-[calc(100dvh-120px)] lg:overflow-y-auto lg:overscroll-contain [scrollbar-width:thin]">
               <div className="rule-grad" />
               <div className="p-6">
                 <p className="eyebrow">{uk ? 'Консультація' : 'Консультация'}</p>
