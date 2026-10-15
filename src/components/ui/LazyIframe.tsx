@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 /**
  * Google Maps embed mounted only when it comes near the screen. Chrome loads loading="lazy" iframes ~3000 px ahead,
  * so the map (≈600 KB of Maps JS) started during page load and held back the first paint by ~1 s on mobile.
- * The box keeps its size from the start, so nothing jumps when the map appears.
+ * The box keeps its size from the start, so nothing jumps when the map appears; 2.5 s after load it mounts anyway.
  */
 export function LazyIframe({ title, src, className }: { title: string; src: string; className: string }) {
   const box = useRef<HTMLDivElement>(null)
@@ -24,7 +24,15 @@ export function LazyIframe({ title, src, className }: { title: string; src: stri
       { rootMargin: '300px' },
     )
     io.observe(el)
-    return () => io.disconnect()
+    // and a few seconds after the page has loaded in any case — a map must never stay an empty box
+    const late = () => window.setTimeout(() => setShow(true), 2500)
+    let timer = 0
+    if (document.readyState === 'complete') timer = late()
+    else addEventListener('load', () => (timer = late()), { once: true })
+    return () => {
+      io.disconnect()
+      clearTimeout(timer)
+    }
   }, [])
 
   return (

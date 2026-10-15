@@ -15,7 +15,9 @@ function officeHeading(lang: 'uk' | 'ru', city: string) {
   return offices.find((o) => o.cityKey === city)?.heading || (lang === 'uk' ? `Контакти офісу у м. ${city}` : `Контакты офиса в г. ${city}`)
 }
 
-const MAP = 'https://www.google.com/maps?q=' + encodeURIComponent('вул. Січових Стрільців, 77, Київ') + '&output=embed'
+// Google's own embed address for a search (what /maps?q=…&output=embed now 301-redirects to — and that redirect carries
+// X-Frame-Options: SAMEORIGIN, so browsers that check it showed an empty box): the query goes base64 into «pb»
+const MAP = 'https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1z' + Buffer.from('вул. Січових Стрільців, 77, Київ').toString('base64').replace(/=+$/, '')
 
 /** One line of the contacts sheet: a mono label on the left, the means of contact on the right */
 function Line({ label, children, id }: { label: string; children: React.ReactNode; id?: string }) {

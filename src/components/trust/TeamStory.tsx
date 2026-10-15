@@ -26,12 +26,12 @@ const TX = {
   uk: {
     h: 'Наш офіс і команда',
     lead: 'Europe Service заснували люди, які самі працювали в Польщі. З 2018 року і до сьогодні ми не зупиняли допомогу українцям у працевлаштуванні за кордоном.',
-    facts: ['65+ рекрутерів', '5 офісів в Україні', 'з 2018 року'],
+    facts: ['65+ рекрутерів', 'з 2018 року'],
     visit: 'Записатися на зустріч в офісі',
     visitSub: 'Залиште номер — узгодимо зручний час і офіс, менеджер підготує для вас підбірку вакансій.',
     visitBtn: 'Записатися',
     more: 'Більше про нас',
-    alt: { awards: 'Команда Europe Service з нагородами Ukrainian Business Award', sign: 'Менеджерки Europe Service в офісі', video: 'Команда Europe Service отримує нагороду' },
+    alt: { awards: 'Команда Europe Service з нагородами Ukrainian Business Award', sign: 'Менеджерки Europe Service в офісі', office: 'Команда київського офісу Europe Service', video: 'Команда Europe Service отримує нагороду' },
     galleryH: 'Як ми працюємо — у фото',
     gallery: [
       ['awards', 'Команда з нагородами Ukrainian Business Award'],
@@ -48,12 +48,12 @@ const TX = {
   ru: {
     h: 'Наш офис и команда',
     lead: 'Europe Service основали люди, которые сами работали в Польше. С 2018 года и до сегодня мы не прекращали помогать украинцам с трудоустройством за границей.',
-    facts: ['65+ рекрутеров', '5 офисов в Украине', 'с 2018 года'],
+    facts: ['65+ рекрутеров', 'с 2018 года'],
     visit: 'Записаться на встречу в офисе',
     visitSub: 'Оставьте номер — согласуем удобное время и офис, менеджер подготовит для вас подборку вакансий.',
     visitBtn: 'Записаться',
     more: 'Больше о нас',
-    alt: { awards: 'Команда Europe Service с наградами Ukrainian Business Award', sign: 'Менеджеры Europe Service в офисе', video: 'Команда Europe Service получает награду' },
+    alt: { awards: 'Команда Europe Service с наградами Ukrainian Business Award', sign: 'Менеджеры Europe Service в офисе', office: 'Команда киевского офиса Europe Service', video: 'Команда Europe Service получает награду' },
     galleryH: 'Как мы работаем — в фото',
     gallery: [
       ['awards', 'Команда с наградами Ukrainian Business Award'],
@@ -69,7 +69,7 @@ const TX = {
   },
 }
 
-/** Home: a compact block — the story in two lines, three facts, a photo mosaic with the award clip, a visit button */
+/** The story in two lines, two facts, a visit button and a photo mosaic: the awards photo over two more (home: the managers and the Kyiv office; About: the managers and the award clip) */
 export function TeamSection({ lang, compact }: { lang: Lang; compact?: boolean }) {
   const t = TX[lang]
   const uk = lang === 'uk'
@@ -98,13 +98,15 @@ export function TeamSection({ lang, compact }: { lang: Lang; compact?: boolean }
             </Link>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-2 sm:gap-3">
+        {/* photos first on phones (owner: the team higher up), on the right on desktop */}
+        <div className="order-first grid grid-cols-2 gap-2 sm:gap-3 lg:order-none">
           <Photo base={TEAM_PHOTOS.awards} alt={t.alt.awards} sizes="(max-width: 1024px) 100vw, 680px" className="col-span-2 aspect-[3/2] w-full rounded-[18px] object-cover" />
-          {!compact && (
-            <>
-              <Photo base={TEAM_PHOTOS.sign} alt={t.alt.sign} sizes="(max-width: 1024px) 50vw, 340px" className="aspect-[3/4] w-full rounded-[18px] object-cover object-[50%_30%]" />
-              <LoopVideo src={CLIP.src} poster={CLIP.poster} label={t.alt.video} className="aspect-[3/4] w-full rounded-[18px] bg-surface object-cover" />
-            </>
+          <Photo base={TEAM_PHOTOS.sign} alt={t.alt.sign} sizes="(max-width: 1024px) 50vw, 340px" className="aspect-[3/4] w-full rounded-[18px] object-cover object-[50%_30%]" />
+          {/* home: the Kyiv office team under the awards photo; elsewhere the award clip */}
+          {compact ? (
+            <Photo base={TEAM_PHOTOS.office} alt={t.alt.office} sizes="(max-width: 1024px) 50vw, 340px" className="aspect-[3/4] w-full rounded-[18px] object-cover object-[50%_35%]" />
+          ) : (
+            <LoopVideo src={CLIP.src} poster={CLIP.poster} label={t.alt.video} className="aspect-[3/4] w-full rounded-[18px] bg-surface object-cover" />
           )}
         </div>
       </div>

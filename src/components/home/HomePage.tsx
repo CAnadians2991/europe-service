@@ -191,7 +191,10 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
         </div>
       </section>
 
-      {/* ───────── GUARANTEES first: trust before the offer ───────── */}
+      {/* ───────── OUR OFFICE & TEAM right under the figures (owner 2026-10-15: «фото команди вище») ───────── */}
+      <TeamSection lang={lang} compact />
+
+      {/* ───────── GUARANTEES: trust before the offer ───────── */}
       <Guarantees lang={lang} vacancies={all.length} countries={countries.length} />
 
       {/* ───────── COUNTRIES — compact index (owner, 2026-10: above the job types) ───────── */}
@@ -237,9 +240,6 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
 
       {/* ───────── about us from outside: the 1+1 story and the awards ───────── */}
       <PressAwards lang={lang} />
-
-      {/* ───────── OUR OFFICE & TEAM (owner's shoot), then the documents ───────── */}
-      <TeamSection lang={lang} compact />
 
       {/* ───────── STEPS — compact (owner, 2026-10: «not that important to take so much space») ───────── */}
       <section className="border-y border-line bg-white" aria-labelledby="steps-h">
