@@ -1,13 +1,13 @@
 'use client'
 
-import { Portal } from '@/components/ui/Portal'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { VacancyCard } from './VacancyCard'
 import { CATEGORIES, COUNTRIES, COUNTRY } from '@/lib/site'
 import { salaryEurMonth, vacancyCity } from '@/lib/format'
-import { IconClose, IconFilter, IconSearch } from '@/components/ui/icons'
+import { IconBed, IconChevronDown, IconClose, IconSearch } from '@/components/ui/icons'
+import { Flag } from '@/components/ui/Flag'
+import { plural } from '@/lib/format'
 import { LeadForm } from '@/components/lead/LeadForm'
 import { ANY_REQUEST } from '@/components/lead/AnyRequest'
 import { QuizButton } from '@/components/lead/LeadModal'
@@ -97,7 +97,6 @@ export function Catalog({
   const base = useMemo(() => ({ ...EMPTY, ...preset }), [preset])
   const [f, setF] = useState<Filters>(base)
   const [ready, setReady] = useState(false)
-  const [sheet, setSheet] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
   const leaving = useRef(false)
@@ -117,17 +116,6 @@ export function Catalog({
     if (url !== location.pathname + location.search) history.replaceState(history.state, '', url)
   }, [f, base, ready])
 
-  useEffect(() => {
-    document.documentElement.style.overflow = sheet ? 'hidden' : ''
-    if (!sheet) return
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setSheet(false)
-    addEventListener('keydown', onKey)
-    return () => {
-      removeEventListener('keydown', onKey)
-      document.documentElement.style.overflow = ''
-    }
-  }, [sheet])
-
   /** the landing these filters belong to (+ the rest as ?query), or null when the current page already is it */
   const targetOf = (next: Filters, keep = ''): string | null => {
     if (!landings?.length) return null
@@ -146,20 +134,7 @@ export function Catalog({
   const set = <K extends keyof Filters>(k: K, v: Filters[K]) => {
     const next = { ...f, [k]: v, ...(k === 'country' ? { city: '' } : {}) }
     setF(next)
-    // in the phone filter sheet the page changes when it is closed («Показати»)
-    if (NAV_KEYS.includes(k) && !sheet) go(next)
-  }
-  const wasSheet = useRef(false)
-  useEffect(() => {
-    if (wasSheet.current && !sheet) go(f)
-    wasSheet.current = sheet
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sheet])
-
-  /** country chips are real links to the country pages (crawlable), with the same move as a click */
-  const countryHref = (code: CountryCode | '') => {
-    const next = { ...f, country: code, city: '' }
-    return targetOf(next) ?? pathname + toQuery(next, base)
+    if (NAV_KEYS.includes(k)) go(next)
   }
 
   // facets are computed from items matching all *other* filters, so counts are always honest
@@ -201,42 +176,8 @@ export function Catalog({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cards, f])
 
-  const activeCount = [f.category, f.city, f.housingFree ? '1' : ''].filter(Boolean).length + (f.country && f.country !== base.country ? 1 : 0)
   const dirty = JSON.stringify(f) !== JSON.stringify(base)
-
-  const filtersPanel = (
-    <div className="grid gap-5 lg:grid-cols-[1fr_1fr_auto] lg:items-end lg:gap-4">
-      <label className="block">
-        <span className="label">{uk ? 'Сфера' : 'Сфера'}</span>
-        <select className="field select-code !pr-9" value={f.category} onChange={(e) => set('category', e.target.value as Category)}>
-          <option value="">{uk ? 'Усі сфери' : 'Все сферы'}</option>
-          {CATEGORIES.map((c) => {
-            const n = count('category', (v) => v.category === c.code)
-            return n ? (
-              <option key={c.code} value={c.code}>
-                {uk ? c.name : c.nameRu} ({n})
-              </option>
-            ) : null
-          })}
-        </select>
-      </label>
-      <label className="block">
-        <span className="label">{uk ? 'Місто' : 'Город'}</span>
-        <select className="field select-code !pr-9" value={f.city} onChange={(e) => set('city', e.target.value)}>
-          <option value="">{uk ? 'Усі міста' : 'Все города'}</option>
-          {cities.map(([c, n]) => (
-            <option key={c} value={c}>
-              {c} ({n})
-            </option>
-          ))}
-        </select>
-      </label>
-      <label className="flex min-h-[52px] cursor-pointer items-center gap-3 border-[1.5px] border-line-strong bg-white px-4 py-3 lg:mb-0">
-        <input type="checkbox" className="size-5 accent-[var(--color-ok)]" checked={f.housingFree} onChange={(e) => set('housingFree', e.target.checked)} />
-        <span className="text-[15px] font-semibold text-ink-2">{uk ? 'Житло безкоштовно' : 'Жильё бесплатно'}</span>
-      </label>
-    </div>
-  )
+  const catName = (c: Category | '') => (c ? ((x) => (x ? (uk ? x.name : x.nameRu) : ''))(CATEGORIES.find((x) => x.code === c)) : '')
 
   // «Показати ще» — back to the first page whenever the filters change
   const sig = JSON.stringify(f)
@@ -272,62 +213,117 @@ export function Catalog({
 
   return (
     <section aria-label={uk ? 'Каталог вакансій' : 'Каталог вакансий'}>
-      {/* search + country chips */}
-      <div className="flex flex-col gap-2.5">
-        <label className="relative block lg:max-w-[520px]">
+      {/* Search bar (owner 2026-10-15: the chip wall + boxed selects were «кошмар»). One line on desktop like the big job boards
+          (Indeed / Pracuj / Airbnb-style segments): search | country | sphere | city | housing; on phones the search on top and
+          the four filters as a 2×2 grid of tiles that open the phone's own picker. The country still moves to its page. */}
+      <div className="grid grid-cols-2 gap-2 lg:flex lg:items-stretch lg:gap-0 lg:rounded-[18px] lg:border lg:border-line lg:bg-white lg:shadow-[0_14px_34px_-26px_rgb(15_36_27/0.45)]">
+        <label className="relative col-span-2 flex min-h-[54px] items-center rounded-[14px] border border-line-strong bg-white transition focus-within:border-brand-600 focus-within:ring-[3px] focus-within:ring-brand-100 lg:min-w-0 lg:flex-[2.3] lg:rounded-l-[18px] lg:rounded-r-none lg:border-0 lg:focus-within:ring-0">
           <span className="sr-only">{uk ? 'Пошук вакансії' : 'Поиск вакансии'}</span>
-          <IconSearch className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-muted" />
+          <IconSearch className="pointer-events-none absolute left-4 size-5 text-muted" />
           <input
             type="search"
-            className="field !py-2.5 !pl-11"
-            placeholder={uk ? 'Пошук: склад, Toyota, Варшава…' : 'Поиск: склад, Toyota, Варшава…'}
+            enterKeyHint="search"
+            className="h-full w-full min-w-0 bg-transparent py-3 pl-12 pr-11 text-[16px] text-ink outline-none placeholder:text-muted/80 [&::-webkit-search-cancel-button]:hidden"
+            placeholder={uk ? 'Посада, компанія або місто' : 'Должность, компания или город'}
             value={f.q}
             onChange={(e) => set('q', e.target.value)}
           />
+          {f.q && (
+            <button type="button" onClick={() => set('q', '')} aria-label={uk ? 'Очистити пошук' : 'Очистить поиск'} className="absolute right-1.5 grid size-10 place-items-center rounded-full text-muted hover:bg-surface hover:text-ink">
+              <IconClose className="size-4" />
+            </button>
+          )}
         </label>
-        <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 scrollbar-none lg:mx-0 lg:flex-wrap lg:px-0">
-          <Link href={countryHref('')} prefetch={false} scroll={false} className="chip shrink-0" data-active={!f.country} aria-current={!f.country ? 'true' : undefined} onClick={(e) => { e.preventDefault(); set('country', '') }}>
-            {uk ? 'Усі країни' : 'Все страны'} {chipN('') != null && <span className="num text-[12px]">{chipN('')}</span>}
-          </Link>
-          {COUNTRIES.map((c) => {
-            const n = chipN(c.code)
-            if (!(countryTotals ? countryTotals[c.code] : n) && f.country !== c.code) return null
-            return (
-              <Link key={c.code} href={countryHref(f.country === c.code ? '' : c.code)} prefetch={false} scroll={false} className="chip shrink-0" data-active={f.country === c.code} aria-current={f.country === c.code ? 'true' : undefined} onClick={(e) => { e.preventDefault(); set('country', f.country === c.code ? '' : c.code) }}>
-                {uk ? c.name : c.nameRu} {n != null && <span className="num text-[12px]">{n}</span>}
-              </Link>
-            )
-          })}
-        </div>
+
+        <Seg
+          label={uk ? 'Країна' : 'Страна'}
+          active={Boolean(f.country) && f.country !== base.country}
+          value={
+            f.country ? (
+              <>
+                <Flag code={f.country} className="h-3.5 w-5" />
+                {uk ? COUNTRY[f.country].name : COUNTRY[f.country].nameRu}
+              </>
+            ) : uk ? 'Усі країни' : 'Все страны'
+          }
+        >
+          <select aria-label={uk ? 'Країна' : 'Страна'} className={SELECT} value={f.country} onChange={(e) => set('country', e.target.value as CountryCode | '')}>
+            <option value="">
+              {uk ? 'Усі країни' : 'Все страны'}
+              {chipN('') != null ? ` (${chipN('')})` : ''}
+            </option>
+            {COUNTRIES.map((c) => {
+              const n = chipN(c.code)
+              if (!(countryTotals ? countryTotals[c.code] : n) && f.country !== c.code) return null
+              return (
+                <option key={c.code} value={c.code}>
+                  {uk ? c.name : c.nameRu}
+                  {n != null ? ` (${n})` : ''}
+                </option>
+              )
+            })}
+          </select>
+        </Seg>
+
+        <Seg label={uk ? 'Сфера' : 'Сфера'} active={Boolean(f.category) && f.category !== base.category} value={catName(f.category) || (uk ? 'Усі сфери' : 'Все сферы')}>
+          <select aria-label={uk ? 'Сфера' : 'Сфера'} className={SELECT} value={f.category} onChange={(e) => set('category', e.target.value as Category)}>
+            <option value="">{uk ? 'Усі сфери' : 'Все сферы'}</option>
+            {CATEGORIES.map((c) => {
+              const n = count('category', (v) => v.category === c.code)
+              return n || f.category === c.code ? (
+                <option key={c.code} value={c.code}>
+                  {uk ? c.name : c.nameRu} ({n})
+                </option>
+              ) : null
+            })}
+          </select>
+        </Seg>
+
+        <Seg label={uk ? 'Місто' : 'Город'} active={Boolean(f.city)} value={f.city || (uk ? 'Усі міста' : 'Все города')}>
+          <select aria-label={uk ? 'Місто' : 'Город'} className={SELECT} value={f.city} onChange={(e) => set('city', e.target.value)}>
+            <option value="">{uk ? 'Усі міста' : 'Все города'}</option>
+            {cities.map(([c, n]) => (
+              <option key={c} value={c}>
+                {c} ({n})
+              </option>
+            ))}
+          </select>
+        </Seg>
+
+        <label
+          data-active={f.housingFree}
+          className="group relative flex min-h-[54px] cursor-pointer items-center gap-1.5 rounded-[14px] border border-line-strong bg-white px-3 py-2 lg:gap-3 transition focus-within:ring-[3px] focus-within:ring-brand-100 data-[active=true]:border-brand-600 data-[active=true]:bg-brand-50 lg:shrink-0 lg:rounded-l-none lg:rounded-r-[18px] lg:border-0 lg:border-l lg:border-line lg:px-5 lg:data-[active=true]:border-line lg:data-[active=true]:bg-brand-50"
+        >
+          <input type="checkbox" aria-label={uk ? 'Житло безкоштовно' : 'Жильё бесплатно'} className="peer sr-only" checked={f.housingFree} onChange={(e) => set('housingFree', e.target.checked)} />
+          <IconBed className="hidden size-5 shrink-0 text-brand-700 lg:block" />
+          <span className="min-w-0 flex-1 leading-tight">
+            <span className="block text-[12px] font-medium text-muted">{uk ? 'Житло' : 'Жильё'}</span>
+            <span className="block truncate text-[14.5px] font-semibold text-ink lg:text-[15px]">{uk ? 'Безкоштовне' : 'Бесплатное'}</span>
+          </span>
+          {/* switch */}
+          <span aria-hidden className="relative h-5 w-8 shrink-0 rounded-full bg-line-strong transition-colors peer-checked:bg-brand-600 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-600 after:absolute after:left-0.5 after:top-0.5 after:size-4 after:rounded-full after:bg-white after:shadow after:transition-transform peer-checked:after:translate-x-3 lg:h-6 lg:w-10 lg:after:size-5 lg:peer-checked:after:translate-x-4" />
+        </label>
       </div>
 
-      {/* desktop filters */}
-      <div className="mt-4 hidden border border-line bg-white p-5 lg:block">{filtersPanel}</div>
-
-      {/* result bar */}
-      <div className="mt-3 flex flex-wrap items-center gap-3">
-        <p className="text-[13.5px] font-medium text-ink-2" aria-live="polite">
-          {uk ? 'Знайдено' : 'Найдено'}: <span className="text-[15px] font-semibold text-brand-700">{list.length}</span>
+      {/* result line */}
+      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1">
+        <p className="font-display text-[17px] font-semibold text-ink sm:text-[18px]" aria-live="polite">
+          <span className="num">{list.length.toLocaleString(uk ? 'uk-UA' : 'ru-RU')}</span>{' '}
+          {uk ? plural(list.length, ['вакансія', 'вакансії', 'вакансій']) : plural(list.length, ['вакансия', 'вакансии', 'вакансий'])}
         </p>
         {dirty && (
-          <button type="button" onClick={() => setF(base)} className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-brand-700 hover:underline">
-            <IconClose className="size-4" /> {uk ? 'Скинути фільтри' : 'Сбросить фильтры'}
+          <button type="button" onClick={() => setF(base)} className="inline-flex min-h-10 items-center gap-1 text-[14px] font-semibold text-brand-700 hover:underline">
+            <IconClose className="size-4" /> {uk ? 'Скинути' : 'Сбросить'}
           </button>
         )}
-        <div className="ml-auto flex items-center gap-2">
-          <button type="button" onClick={() => setSheet(true)} className="chip lg:hidden">
-            <IconFilter className="size-4" /> {uk ? 'Фільтри' : 'Фильтры'}
-            {activeCount > 0 && <span className="num grid size-5 place-items-center bg-brand-600 text-[11px] font-semibold text-white">{activeCount}</span>}
-          </button>
-          <label className="flex items-center gap-2 text-sm text-muted">
-            <span className="hidden sm:inline">{uk ? 'Сортувати:' : 'Сортировать:'}</span>
-            <select aria-label={uk ? 'Сортування' : 'Сортировка'} className="select-code min-h-11 border border-line-strong bg-white py-2 pl-3 pr-8 text-[16px] font-semibold text-ink-2" value={f.sort} onChange={(e) => set('sort', e.target.value as Filters['sort'])}>
-              <option value="rec">{uk ? 'Рекомендовані' : 'Рекомендуемые'}</option>
-              <option value="salary">{uk ? 'Вища зарплата' : 'Выше зарплата'}</option>
-              <option value="new">{uk ? 'Нові' : 'Новые'}</option>
-            </select>
-          </label>
-        </div>
+        <label className="relative ml-auto flex min-h-10 items-center text-[14px] text-muted">
+          <span className="mr-1.5 hidden sm:inline">{uk ? 'Сортування:' : 'Сортировка:'}</span>
+          <select aria-label={uk ? 'Сортування' : 'Сортировка'} className="select-code cursor-pointer bg-transparent py-2 pl-1 pr-6 text-[16px] font-semibold text-ink outline-none sm:text-[15px]" value={f.sort} onChange={(e) => set('sort', e.target.value as Filters['sort'])}>
+            <option value="rec">{uk ? 'Рекомендовані' : 'Рекомендуемые'}</option>
+            <option value="salary">{uk ? 'Вища зарплата' : 'Выше зарплата'}</option>
+            <option value="new">{uk ? 'Нові' : 'Новые'}</option>
+          </select>
+        </label>
       </div>
 
       {/* Tilda's heading over the list (/italy, /greece …) */}
@@ -359,29 +355,24 @@ export function Catalog({
         </div>
       )}
 
-      {/* mobile bottom sheet */}
-      {sheet && (
-        <Portal>
-        <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label={uk ? 'Фільтри' : 'Фильтры'}>
-          <div className="absolute inset-0 bg-night/50" onClick={() => setSheet(false)} />
-          <div className="absolute inset-x-0 bottom-0 max-h-[88dvh] overflow-y-auto border-t-[3px] border-brand-500 bg-white p-5 pb-[max(20px,env(safe-area-inset-bottom))] animate-[pwIn_.18s_ease-out]">
-            <div className="mb-4 flex items-center justify-between">
-              <p className="text-lg font-bold">{uk ? 'Фільтри' : 'Фильтры'}</p>
-              <button type="button" onClick={() => setSheet(false)} aria-label={uk ? 'Закрити' : 'Закрыть'} className="grid size-11 place-items-center border border-line hover:border-ink">
-                <IconClose className="size-5" />
-              </button>
-            </div>
-            {filtersPanel}
-            <div className="mt-6 flex gap-2">
-              <button type="button" className="btn-ghost" onClick={() => setF(base)}>{uk ? 'Скинути' : 'Сбросить'}</button>
-              <button type="button" className="btn-primary flex-1" onClick={() => setSheet(false)}>
-                {uk ? `Показати ${list.length}` : `Показать ${list.length}`}
-              </button>
-            </div>
-          </div>
-        </div>
-        </Portal>
-      )}
     </section>
+  )
+}
+
+/** the native picker covers the whole tile (the phone's own wheel / list opens wherever it is tapped) */
+const SELECT = 'absolute inset-0 h-full w-full cursor-pointer appearance-none opacity-0 text-[16px]'
+
+/** One filter: a small label over the chosen value; active (not the page's own default) = brand tint */
+function Seg({ label, value, active, children }: { label: string; value: React.ReactNode; active?: boolean; children: React.ReactNode }) {
+  return (
+    <div
+      data-active={Boolean(active)}
+      className="relative flex min-h-[54px] min-w-0 flex-col justify-center rounded-[14px] border border-line-strong bg-white py-2 pl-3.5 pr-9 transition hover:border-ink/40 focus-within:ring-[3px] focus-within:ring-brand-100 data-[active=true]:border-brand-600 data-[active=true]:bg-brand-50 lg:flex-1 lg:rounded-none lg:border-0 lg:border-l lg:border-line lg:pl-5 lg:hover:bg-cream lg:data-[active=true]:border-line lg:data-[active=true]:bg-brand-50"
+    >
+      <span className="text-[12px] font-medium leading-tight text-muted">{label}</span>
+      <span className="mt-0.5 flex min-w-0 items-center gap-2 truncate text-[15px] font-semibold leading-tight text-ink">{value}</span>
+      <IconChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted" />
+      {children}
+    </div>
   )
 }
