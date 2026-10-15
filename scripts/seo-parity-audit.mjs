@@ -139,7 +139,9 @@ const OWNER_CHANGED = {
   "/tpost/sv9e13f421-polscha-prodovzhu-legalzatsyu-ukrantsv-s": ["text"],
   "/tpost/y5tt2m41b1-mozhno-li-ofitsialno-trudoustroitsya-v-p": ["text"],
 }
-const changed = (p, f) => (OWNER_CHANGED[p] ?? []).includes(f)
+// 2026-10-15: the quiz / form landings are noindex now (0 clicks in GSC over 3 months; they competed with the country pages)
+const QUIZ = /^\/(?:ru\/)?(?:kviz|form_|jooble-kviz|poland-international|visacanada)/
+const changed = (p, f) => (OWNER_CHANGED[p] ?? []).includes(f) || (f === 'robots' && QUIZ.test(p))
 
 const ONLY = process.argv[3] // 'pages' → the Tilda pages only
 const jobs = []
@@ -196,7 +198,7 @@ async function worker() {
     if (wantTitle && title !== wantTitle && !changed(j.path, 'title')) flag(j, 'title', `«${title}» ≠ Tilda «${wantTitle}»`)
     if (wantDesc && desc !== wantDesc && !changed(j.path, 'description')) flag(j, 'description', `«${desc}» ≠ Tilda «${wantDesc}»`)
     const noindex = /noindex/.test(robots)
-    if (j.kind === 'page' && noindex !== Boolean(j.tilda.noindex)) flag(j, 'robots', `ours ${robots || 'index'} · Tilda ${j.tilda.noindex ? 'noindex' : 'index'}`)
+    if (j.kind === 'page' && noindex !== Boolean(j.tilda.noindex) && !changed(j.path, 'robots')) flag(j, 'robots', `ours ${robots || 'index'} · Tilda ${j.tilda.noindex ? 'noindex' : 'index'}`)
     if (!noindex && canonical && new URL(canonical).pathname.toLowerCase() !== j.path.toLowerCase().replace(/\/$/, '') && !(j.path === '/' && new URL(canonical).pathname === '/')) flag(j, 'canonical', canonical)
     // headings
     const heads = new Set([...h.matchAll(/<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/g)].map((m) => norm(m[1].replace(/<[^>]+>/g, ' '))))

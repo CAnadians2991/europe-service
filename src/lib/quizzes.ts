@@ -86,9 +86,10 @@ export const QUIZZES: QuizLanding[] = [
           : {}),
         ...(q.office ? { office: q.office } : {}),
         ...(q.employer ? { employer: q.employer } : {}),
-        // the Russian copies are new ad forms (Tilda had only the Ukrainian quizzes, those stay indexed as they were):
-        // a dozen near-identical «Подбор работы в Польше» pages — kept out of the index and the sitemap
-        noindex: Boolean(q.noindex) || ru,
+        // all quiz forms are out of the index and the sitemap (owner 2026-10-15): Tilda's ad landings with a form only —
+        // 0 clicks from Google in 3 months (GSC), while their headings («Підбір роботи в Польщі»…) competed with the real
+        // country and city pages. The addresses keep working for ads and old links.
+        noindex: true,
       }
     }),
 ]
