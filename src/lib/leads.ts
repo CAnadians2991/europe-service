@@ -238,7 +238,8 @@ async function toWebhook(l: Lead, inBitrix: boolean) {
       id: l.id,
       lead: { ...l, formLabel: formLabel(l.form), site: SITE.url },
     }),
-    signal: AbortSignal.timeout(8000),
+    // runs after the visitor already got «дякуємо» (after()): wait longer — 3 of 21 leads on 15.10 hit the old 8 s limit
+    signal: AbortSignal.timeout(15000),
     redirect: 'follow',
   }).catch((e) => {
     // Apps Script often answers after 8 s but still writes the row — a slow answer is not a lost backup
@@ -250,6 +251,8 @@ async function toWebhook(l: Lead, inBitrix: boolean) {
 }
 
 /** Instant message in a Discord channel (Server settings → Integrations → Webhooks). ⚠️ when Bitrix did not take it. */
+/** Discord gets every lead from the Bitrix robot (#орг-заявки); the site posts itself only when Bitrix did not take the lead —
+ *  an alarm, no duplicates (owner's check 15.10.2026) */
 async function toDiscord(l: Lead, inBitrix: boolean) {
   const url = process.env.DISCORD_WEBHOOK_URL
   if (!url) return 'skip'
@@ -326,7 +329,7 @@ export async function deliverLead(l: Lead, origin?: string) {
     toPartnerEmail(l, origin).catch(() => 'error'),
   ])
   const inBitrix = bitrix === 'ok' || bitrixScript === 'ok'
-  const [webhook, discord] = await Promise.all([toWebhook(l, inBitrix || email === 'ok').catch(() => 'error'), partner ? 'skip' : toDiscord(l, inBitrix).catch(() => 'error')])
+  const [webhook, discord] = await Promise.all([toWebhook(l, inBitrix || email === 'ok').catch(() => 'error'), partner || inBitrix ? 'skip' : toDiscord(l, inBitrix).catch(() => 'error')])
   const delivered = { telegram, bitrix, bitrix_script: bitrixScript, email, webhook, discord }
   if (hasDb) await sql`update leads set delivered = ${JSON.stringify(delivered)} where id = ${l.id}`.catch(() => {})
   return delivered

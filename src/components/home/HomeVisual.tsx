@@ -1,5 +1,5 @@
 import { HoverLink } from '@/components/ui/HoverLink'
-import { CATEGORIES, SITE } from '@/lib/site'
+import { CATEGORIES } from '@/lib/site'
 import { plural } from '@/lib/format'
 import type { Category, Vacancy } from '@/lib/types'
 import { Photo } from '@/components/ui/Photo'
@@ -94,9 +94,6 @@ export function HomeHero({ lang, photos }: { lang: Lang; photos: string[] }) {
             >
               {t.cta} <span aria-hidden>→</span>
             </LeadButton>
-            <a href={`tel:${SITE.phone}`} className="btn-ghost num !min-h-14 w-full !px-6 sm:w-auto">
-              {SITE.phoneDisplay}
-            </a>
           </div>
           <p className="mt-4 text-[13.5px] text-muted">{t.under}</p>
         </div>
