@@ -10,6 +10,8 @@ import { LeadForm } from '@/components/lead/LeadForm'
 import { ChatButtons } from '@/components/lead/ChatButtons'
 import { LicenseStamp } from '@/components/trust/LicenseStamp'
 import { IconArrow, IconCheck } from '@/components/ui/icons'
+import { PRODUCT } from '@/lib/shop'
+import { PackagePay } from '@/components/services/PackagePay'
 
 /** Service JSON-LD: what is sold, by whom, for how much — the facts AI answers quote */
 function serviceLd(p: VisaPage) {
@@ -31,6 +33,8 @@ function serviceLd(p: VisaPage) {
 /** Landing of the visa package: package card, the scheme, steps with timing, documents, honest limits, FAQ, form */
 export function VisaLanding({ p }: { p: VisaPage }) {
   const uk = p.lang === 'uk'
+  // the page's own product in the cart (the Polish work visa, 15 000 грн) — paid straight from here (owner 2026-10-16)
+  const product = Object.values(PRODUCT).find((x) => x && (x.href === p.path || x.hrefRu === p.path))
   const home = { name: uk ? 'Головна' : 'Главная', path: uk ? '/' : '/ru' }
   return (
     <>
@@ -79,9 +83,20 @@ export function VisaLanding({ p }: { p: VisaPage }) {
               ))}
             </ul>
             <div className="flex items-center justify-between gap-4 px-6 py-4 sm:px-7">
-              <a href="#visa-form" className="btn-accent flex-1 justify-center">
-                {uk ? 'Оформити візу' : 'Оформить визу'}
-              </a>
+              {product ? (
+                <span className="grid flex-1 gap-2">
+                  <PackagePay id={product.id} title={uk ? product.title : product.titleRu} price={product.price} lang={p.lang} className="btn-accent w-full justify-center">
+                    {uk ? `Оплатити ${p.price.amount}` : `Оплатить ${p.price.amount}`}
+                  </PackagePay>
+                  <a href="#visa-form" className="btn-ghost w-full justify-center !min-h-11 !text-[15px]">
+                    {uk ? 'Спершу консультація' : 'Сначала консультация'}
+                  </a>
+                </span>
+              ) : (
+                <a href="#visa-form" className="btn-accent flex-1 justify-center">
+                  {uk ? 'Оформити візу' : 'Оформить визу'}
+                </a>
+              )}
               <LicenseStamp lang={p.lang} uid="visa" className="size-20 shrink-0 rotate-[-10deg] text-brand-700/85 mix-blend-multiply" />
             </div>
           </aside>

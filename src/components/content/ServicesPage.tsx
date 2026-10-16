@@ -131,7 +131,7 @@ export function ServicesPage({ lang }: { lang: Lang }) {
           </h2>
 
           {/* the work visa: the big one, set apart */}
-          <Link href={uk ? '/robocha-viza-v-polshchu' : '/ru/rabochaya-viza-v-polshu'} className="bg-logo group mt-5 flex flex-col gap-4 rounded-[22px] p-5 text-white shadow-[var(--shadow-lift)] sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <div className="bg-logo group mt-5 flex flex-col gap-4 rounded-[22px] p-5 text-white shadow-[var(--shadow-lift)] sm:flex-row sm:items-center sm:justify-between sm:p-6">
             <span className="flex items-start gap-3.5">
               <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-white/15" aria-hidden>
                 <IconDoc className="size-6" />
@@ -141,11 +141,19 @@ export function ServicesPage({ lang }: { lang: Lang }) {
                 <span className="mt-1 block text-[14px] leading-snug text-white/85">{uk ? 'Допомога з реєстрацією та координація по подачі документів в консульство.' : 'Помощь с регистрацией и координация по подаче документов в консульство.'}</span>
               </span>
             </span>
-            <span className="flex items-center justify-between gap-4 sm:justify-end">
-              <span className="num whitespace-nowrap font-display text-[28px] font-semibold">15 000 грн</span>
-              <span className="btn-white !min-h-11 !px-5 !text-[15px]">{uk ? 'Детальніше' : 'Подробнее'}</span>
+            <span className="flex flex-wrap items-center gap-3 sm:justify-end">
+              <span className="num mr-auto whitespace-nowrap font-display text-[28px] font-semibold sm:mr-1">15 000 грн</span>
+              {/* owner 2026-10-16: the visa is paid right here, like the packages */}
+              {PRODUCT['visa-pl'] && (
+                <PackagePay id="visa-pl" title={uk ? PRODUCT['visa-pl'].title : PRODUCT['visa-pl'].titleRu} price={PRODUCT['visa-pl'].price} lang={lang} className="btn-white !min-h-11 !px-5 !text-[15px]">
+                  {uk ? 'Оплатити' : 'Оплатить'}
+                </PackagePay>
+              )}
+              <Link href={uk ? '/robocha-viza-v-polshchu' : '/ru/rabochaya-viza-v-polshu'} className="inline-flex min-h-11 items-center rounded-[14px] px-4 text-[15px] font-semibold text-white underline decoration-white/50 underline-offset-4 hover:decoration-white">
+                {uk ? 'Детальніше' : 'Подробнее'}
+              </Link>
             </span>
-          </Link>
+          </div>
 
           <ul className="mt-3 grid gap-3 sm:grid-cols-3">
             {(['sim-pl', 'insurance-10'] as const).map((id) => {
