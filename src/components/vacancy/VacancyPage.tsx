@@ -25,6 +25,7 @@ import { localize } from '@/lib/vacancy-i18n'
 import { ruTwin } from '@/lib/alt-routes'
 import type { ReviewItem } from '@/lib/content'
 import type { Review, Vacancy } from '@/lib/types'
+import { Strands } from '@/components/motion/Strands'
 
 const norm = (t: string) => t.toLowerCase().replace(/[^a-zа-яіїєґё0-9]/gi, '')
 /** Tilda pasted its own crumbs into some intros («Главная / Вакансии / Philips») — not content */
@@ -250,7 +251,8 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
 
       <article aria-labelledby="vacancy-h">
         {/* ───────── page head: crumbs, country code, H1, the key terms as a spec sheet ───────── */}
-        <section className="border-b border-line bg-white">
+        <section className="relative isolate overflow-clip border-b border-line bg-white">
+          <Strands count={9} seed={47} className="-z-10 opacity-60" />
           <div className="container-x pb-7 pt-2 sm:pb-9">
             <div className="text-ink-2">
               <Breadcrumbs items={crumbs} />

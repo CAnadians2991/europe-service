@@ -12,6 +12,7 @@ import { LicenseStamp } from '@/components/trust/LicenseStamp'
 import { IconArrow, IconCheck } from '@/components/ui/icons'
 import { PRODUCT } from '@/lib/shop'
 import { PackagePay } from '@/components/services/PackagePay'
+import { Strands } from '@/components/motion/Strands'
 
 /** Service JSON-LD: what is sold, by whom, for how much — the facts AI answers quote */
 function serviceLd(p: VisaPage) {
@@ -263,7 +264,8 @@ export function VisaLanding({ p }: { p: VisaPage }) {
 
       {/* ───────── FORM ───────── */}
       <section id="visa-form" className="container-x scroll-mt-28 pb-16 sm:pb-20" aria-labelledby="visa-form-h">
-        <div className="brand-band grid gap-8 overflow-hidden p-7 text-white sm:p-10 lg:grid-cols-[1.1fr_1fr] lg:p-12">
+        <div className="brand-band relative isolate grid gap-8 overflow-hidden p-7 text-white sm:p-10 lg:grid-cols-[1.1fr_1fr] lg:p-12">
+          <Strands tone="light" count={9} seed={53} className="-z-10" />
           <div>
             <p className="eyebrow !text-white/80">{p.price.title}</p>
             <h2 id="visa-form-h" className="mt-3 text-[26px] leading-tight text-white sm:text-[34px]">

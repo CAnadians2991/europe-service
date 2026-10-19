@@ -13,6 +13,7 @@ import { ANY_REQUEST } from '@/components/lead/AnyRequest'
 import { QuizButton } from '@/components/lead/LeadModal'
 import type { Category, CountryCode, Gender, VacancyCard as Card } from '@/lib/types'
 import type { Landing } from '@/lib/catalog-landings'
+import { Strands } from '@/components/motion/Strands'
 
 export interface Filters {
   q: string
@@ -189,7 +190,8 @@ export function Catalog({
   if (f.category && f.category !== 'other') quizPreset.work = f.category
 
   const leadCard = (key: string) => (
-    <div key={key} className="brand-band grid gap-5 border-b border-line p-5 text-white sm:grid-cols-[1fr_auto] sm:items-center sm:p-6">
+    <div key={key} className="brand-band relative isolate grid gap-5 overflow-hidden border-b border-line p-5 text-white sm:grid-cols-[1fr_auto] sm:items-center sm:p-6">
+      <Strands tone="light" count={7} seed={61} flip className="-z-10" />
       <div>
         <p className="eyebrow !text-white/85">{ANY_REQUEST[lang].eyebrow}</p>
         <p className="mt-2 font-display text-[20px] font-semibold leading-tight sm:text-[22px]">{ANY_REQUEST[lang].title}</p>

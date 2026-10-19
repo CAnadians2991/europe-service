@@ -6,6 +6,7 @@ import { plural } from '@/lib/format'
 import type { VacancyCard } from '@/lib/types'
 import { CtaBand, Faq } from '@/components/sections/Sections'
 import { catalogLandings } from '@/lib/catalog-landings'
+import { Strands } from '@/components/motion/Strands'
 
 export function Breadcrumbs({ items }: { items: { name: string; path: string }[] }) {
   return (
@@ -33,7 +34,8 @@ export function Breadcrumbs({ items }: { items: { name: string; path: string }[]
 /** Page head of a catalog page: crumbs, the Tilda H1, a lead line of its own (the count is in the filters, the phone in the header); a big country code in the corporate gradient */
 export function CatalogHero({ title, text, crumbs, code }: { title: string; text: string; crumbs: { name: string; path: string }[]; code?: string }) {
   return (
-    <section className="relative overflow-hidden border-b border-line bg-white">
+    <section className="relative isolate overflow-hidden border-b border-line bg-white">
+      <Strands count={10} seed={23} flip className="-z-10 opacity-70" />
       <span aria-hidden className="grad-text pointer-events-none absolute -right-4 top-1/2 hidden -translate-y-1/2 select-none font-display text-[220px] font-bold leading-none tracking-[-0.06em] opacity-[0.16] lg:block">
         {(code || 'eu').toUpperCase()}
       </span>

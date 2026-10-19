@@ -6,6 +6,7 @@ import { LicenseStamp } from '@/components/trust/LicenseStamp'
 import type { CountryCode } from '@/lib/types'
 import { localHref } from '@/lib/alt-routes'
 import { HOME } from '@/lib/content'
+import { Strands } from '@/components/motion/Strands'
 
 export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Partial<Record<CountryCode, number>> }) {
   const uk = lang === 'uk'
@@ -54,7 +55,8 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
         ['/ru/sotrudnichestvo', 'Сотрудничество для бизнеса'],
       ]
   return (
-    <footer className="site-footer mt-auto bg-night pb-[calc(76px+env(safe-area-inset-bottom))] text-white lg:pb-0">
+    <footer className="site-footer isolate overflow-clip mt-auto bg-night pb-[calc(76px+env(safe-area-inset-bottom))] text-white lg:pb-0">
+      <Strands tone="light" count={10} seed={89} className="-z-10 !bottom-auto !h-[460px] opacity-40" />
       <div className="rule-grad" />
       <div className="container-x grid gap-8 border-b border-white/10 py-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <p className="max-w-2xl font-display text-[26px] font-semibold leading-[1.15] tracking-[-0.02em] sm:text-[36px]">

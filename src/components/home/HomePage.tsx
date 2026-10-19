@@ -21,6 +21,7 @@ import { ClientVideos, HomeHero, JobCategories, categoryPhotos } from './HomeVis
 import { TeamSection } from '@/components/trust/TeamStory'
 import { Blocks } from '@/components/content/Blocks'
 import { ReadMore } from '@/components/ui/ReadMore'
+import { Strands } from '@/components/motion/Strands'
 
 const TX = {
   uk: {
@@ -242,7 +243,8 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
       <PressAwards lang={lang} />
 
       {/* ───────── STEPS — compact (owner, 2026-10: «not that important to take so much space») ───────── */}
-      <section className="border-y border-line bg-white" aria-labelledby="steps-h">
+      <section className="relative isolate overflow-clip border-y border-line bg-white" aria-labelledby="steps-h">
+        <Strands count={10} seed={11} flip className="-z-10 opacity-60" />
         <div className="container-x py-10 sm:py-14">
           <SectionHead id="steps-h" title={t.stepsTitle} />
           <ol className="mt-6 grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">

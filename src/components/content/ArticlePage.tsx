@@ -9,6 +9,7 @@ import { Photo } from '@/components/ui/Photo'
 import { EDITOR, SITE } from '@/lib/site'
 import { faqLd } from '@/lib/seo'
 import { formatDate } from '@/lib/format'
+import { Strands } from '@/components/motion/Strands'
 
 export function articleSummary(a: Article) {
   if (a.seoDescription) return a.seoDescription
@@ -108,7 +109,8 @@ export function ArticlePage({ a, posts = [] }: { a: Article; posts?: Article[] }
       />
       {a.faq?.length ? <JsonLd data={faqLd(a.faq)} /> : null}
       <article>
-        <header className="border-b border-line bg-white">
+        <header className="relative isolate overflow-clip border-b border-line bg-white">
+          <Strands count={9} seed={37} flip className="-z-10 opacity-60" />
           <div className="container-x pb-8 pt-2 sm:pb-10">
             <div className="text-ink-2">
               <Breadcrumbs

@@ -861,6 +861,12 @@ html:has(#cart-h) body > #wrapper_id:has(> iframe) {
   --t-hover: 180ms;
   --t-reveal: 800ms;
   --stagger-item: 70ms;
+  /* transitions-dev «texts reveal» (18): a heading and its line rise with a staggered blur */
+  --stagger-dur: 500ms;
+  --stagger-distance: 12px;
+  --stagger-stagger: 40ms;
+  --stagger-blur: 3px;
+  --stagger-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* header: the palette's gradient bar with a rounded foot */
@@ -918,7 +924,21 @@ html:has(#cart-h) body > #wrapper_id:has(> iframe) {
 
 /* section entrances (components/motion/Reveal.tsx marks sections below the fold) */
 @media (prefers-reduced-motion: no-preference) {
-  html.js main section.rv-wait :is(h2, .eyebrow, h2 + p, header > p),
+  /* headings: transitions-dev «texts reveal» — up 12px out of a 3px blur, the line under it 40ms later */
+  html.js main section.rv-wait :is(h2, .eyebrow, h2 + p, header > p) {
+    opacity: 0;
+    transform: translateY(var(--stagger-distance));
+    filter: blur(var(--stagger-blur));
+  }
+  html.js main section.rv-wait.rv-in :is(h2, .eyebrow, h2 + p, header > p) {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+    transition:
+      opacity var(--stagger-dur) var(--stagger-ease),
+      transform var(--stagger-dur) var(--stagger-ease),
+      filter var(--stagger-dur) var(--stagger-ease);
+  }
   html.js main section.rv-wait :is(ul, ol) > li,
   html.js main section.rv-wait .grid > * {
     opacity: 0;
@@ -928,7 +948,6 @@ html:has(#cart-h) body > #wrapper_id:has(> iframe) {
     opacity: 0;
     transform: scale(1.04);
   }
-  html.js main section.rv-wait.rv-in :is(h2, .eyebrow, h2 + p, header > p),
   html.js main section.rv-wait.rv-in :is(ul, ol) > li,
   html.js main section.rv-wait.rv-in .grid > * {
     opacity: 1;
@@ -949,7 +968,7 @@ html:has(#cart-h) body > #wrapper_id:has(> iframe) {
     transition-delay: 0ms;
   }
   html.js main section.rv-in :is(h2 + p, header > p) {
-    transition-delay: 90ms;
+    transition-delay: var(--stagger-stagger);
   }
   html.js main section.rv-in :is(:is(ul, ol) > li, .grid > *):nth-child(1) { transition-delay: 160ms; }
   html.js main section.rv-in :is(:is(ul, ol) > li, .grid > *):nth-child(2) { transition-delay: 230ms; }

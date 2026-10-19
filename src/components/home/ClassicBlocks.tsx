@@ -5,6 +5,7 @@ import { IconArrow } from '@/components/ui/icons'
 import { COUNTRY, SITE } from '@/lib/site'
 import { salaryHour, salaryMonth, vacancyCity } from '@/lib/format'
 import type { Vacancy } from '@/lib/types'
+import { Strands } from '@/components/motion/Strands'
 
 /** Vacancy card with labelled details and «Детальніше» — a white sheet with a hairline frame, square corners */
 export function ClassicVacancyCard({ v, className = '', lang = 'uk' }: { v: Vacancy; className?: string; lang?: 'uk' | 'ru' }) {
@@ -108,7 +109,8 @@ export function ClassicCta({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
   const uk = lang === 'uk'
   return (
     <section className="container-x py-16" aria-label={uk ? 'Підібрати вакансію' : 'Подобрать вакансию'}>
-      <div className="brand-band grid gap-8 p-7 text-white sm:p-10 lg:grid-cols-[minmax(0,1.3fr)_auto] lg:items-end lg:p-12">
+      <div className="brand-band relative isolate grid gap-8 overflow-hidden p-7 text-white sm:p-10 lg:grid-cols-[minmax(0,1.3fr)_auto] lg:items-end lg:p-12">
+        <Strands tone="light" count={10} seed={29} flip className="-z-10" />
         <div>
           <p className="eyebrow !text-white/85">{uk ? 'Підбір за 1 хвилину' : 'Подбор за 1 минуту'}</p>
           <p className="mt-3 font-display text-[28px] font-semibold leading-[1.1] tracking-[-0.02em] sm:text-[40px]">

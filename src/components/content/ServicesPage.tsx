@@ -12,6 +12,7 @@ import { IconCertificate, IconCheck, IconDoc, IconPhone, IconShield } from '@/co
 import { Flag } from '@/components/ui/Flag'
 import { PackagePay } from '@/components/services/PackagePay'
 import { VariantPay, type VariantOption } from '@/components/services/VariantPay'
+import { Strands } from '@/components/motion/Strands'
 
 // Owner 2026-10-15: «просто опиши пакети як на Personal Work», phones first, nothing said twice.
 // Tilda's headings and SEO sentences of this page stay (H1, the offer line, «Послуги Europe Service», the other-countries heading).
@@ -56,7 +57,8 @@ function PackageCard({ p, id, base, featured, lang }: { p: Package; id: (typeof 
   const price = PRODUCT[id]?.price ?? uahPrice(p.price) ?? 0
   const old = uahPrice(p.oldPrice)
   return (
-    <article className={`flex flex-col rounded-[22px] p-5 sm:p-6 ${featured ? 'brand-band text-white shadow-[var(--shadow-lift)]' : 'bg-white ring-1 ring-line'}`}>
+    <article className={`relative isolate flex flex-col overflow-hidden rounded-[22px] p-5 sm:p-6 ${featured ? 'brand-band text-white shadow-[var(--shadow-lift)]' : 'bg-white ring-1 ring-line'}`}>
+      {featured && <Strands tone="light" count={7} seed={73} className="-z-10" />}
       <div className="flex items-center justify-between gap-3">
         <h3 className="font-display text-[23px] font-semibold tracking-[-0.01em]">{p.title}</h3>
         {featured && <span className="rounded-full bg-white px-2.5 py-1 text-[11.5px] font-bold uppercase tracking-[0.06em] text-brand-800">{uk ? 'Рекомендуємо' : 'Рекомендуем'}</span>}

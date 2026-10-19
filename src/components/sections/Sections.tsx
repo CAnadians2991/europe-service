@@ -4,6 +4,7 @@ import { IconCheck, IconStar } from '@/components/ui/icons'
 import { LeadForm } from '@/components/lead/LeadForm'
 import { SITE } from '@/lib/site'
 import type { ReviewItem } from '@/lib/content'
+import { Strands } from '@/components/motion/Strands'
 
 /** Section head: register label (optionally numbered «01 —»), the title, a short lead */
 export function SectionHead({ eyebrow, title, text, center, id, dark, index }: { eyebrow?: string; title: string; text?: string; center?: boolean; id?: string; dark?: boolean; index?: number }) {
@@ -106,7 +107,8 @@ export function Faq({ items, title, eyebrow, lang = 'uk' }: { items: { q: string
 export function CtaBand({ title, text, form, lang = 'uk' }: { title: string; text: string; form: string; lang?: 'uk' | 'ru' }) {
   return (
     <section className="container-x py-16" aria-label={title}>
-      <div className="brand-band grid gap-8 overflow-hidden p-7 text-white sm:p-10 lg:grid-cols-[1.1fr_1fr] lg:p-12">
+      <div className="brand-band relative isolate grid gap-8 overflow-hidden p-7 text-white sm:p-10 lg:grid-cols-[1.1fr_1fr] lg:p-12">
+        <Strands tone="light" count={9} seed={41} className="-z-10" />
         <div>
           <h2 className="text-[26px] leading-tight sm:text-[34px]">{title}</h2>
           <p className="mt-3 max-w-md text-[16px] text-white/75">{text}</p>
