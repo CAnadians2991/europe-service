@@ -54,7 +54,7 @@ export function Footer({ lang = 'uk', counts }: { lang?: 'uk' | 'ru'; counts: Pa
         ['/ru/sotrudnichestvo', 'Сотрудничество для бизнеса'],
       ]
   return (
-    <footer className="mt-auto bg-night pb-[calc(76px+env(safe-area-inset-bottom))] text-white lg:pb-0">
+    <footer className="site-footer mt-auto bg-night pb-[calc(76px+env(safe-area-inset-bottom))] text-white lg:pb-0">
       <div className="rule-grad" />
       <div className="container-x grid gap-8 border-b border-white/10 py-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <p className="max-w-2xl font-display text-[26px] font-semibold leading-[1.15] tracking-[-0.02em] sm:text-[36px]">

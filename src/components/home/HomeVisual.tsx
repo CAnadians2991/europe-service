@@ -3,6 +3,7 @@ import { CATEGORIES } from '@/lib/site'
 import { plural } from '@/lib/format'
 import type { Category, Vacancy } from '@/lib/types'
 import { Photo } from '@/components/ui/Photo'
+import { Strands } from '@/components/motion/Strands'
 import { LeadButton } from '@/components/lead/LeadModal'
 import { SectionHead } from '@/components/sections/Sections'
 import { VideoCards } from '@/components/reviews/VideoCards'
@@ -65,11 +66,13 @@ export function HomeHero({ lang, photos }: { lang: Lang; photos: string[] }) {
   const uk = lang === 'uk'
   const photo = HERO_PHOTO || photos[0]
   return (
-    <section className="relative border-b border-line bg-white" aria-labelledby="hero-h">
+    <section className="relative isolate overflow-clip border-b border-line bg-white" aria-labelledby="hero-h">
+      {/* the brand strands drifting behind the words (the new design, owner 2026-10-19) */}
+      <Strands count={12} seed={17} className="-z-10 opacity-90" />
       <div className="mx-auto grid max-w-[1440px] lg:min-h-[620px] lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
         {/* photo first on phones */}
         <div className="relative aspect-[16/10] overflow-hidden bg-surface sm:aspect-[16/9] lg:order-2 lg:aspect-auto lg:rounded-bl-[48px]">
-          {photo && <Photo base={photo} alt={uk ? 'Працівники складу в касках' : 'Работники склада в касках'} sizes="(max-width: 1024px) 100vw, 50vw" priority className="absolute inset-0 size-full object-cover object-[18%_40%]" />}
+          {photo && <Photo base={photo} alt={uk ? 'Працівники складу в касках' : 'Работники склада в касках'} sizes="(max-width: 1024px) 100vw, 50vw" priority className="hero-photo absolute inset-0 size-full object-cover object-[18%_40%]" />}
           {/* the logo gradient along the photo's foot */}
           <span className="rule-grad absolute inset-x-0 bottom-0 !h-1.5" aria-hidden />
         </div>
@@ -80,7 +83,17 @@ export function HomeHero({ lang, photos }: { lang: Lang; photos: string[] }) {
             {t.seoH1}
           </h1>
           <p className="mt-3 text-balance font-display text-[36px] font-bold leading-[1.03] tracking-[-0.035em] text-ink min-[380px]:text-[40px] sm:text-[58px] lg:text-[64px] xl:text-[72px]">
-            {t.h1a} <span className="grad-text block pb-1">{t.h1b}</span>
+            {/* the signature move: each line rises out of its mask on load (only with the script and motion allowed) */}
+            <span className="hero-mask">
+              <span className="hero-line" style={{ '--i': 0 } as React.CSSProperties}>
+                {t.h1a}
+              </span>
+            </span>{' '}
+            <span className="hero-mask">
+              <span className="hero-line grad-text pb-1" style={{ '--i': 1 } as React.CSSProperties}>
+                {t.h1b}
+              </span>
+            </span>
           </p>
           <p className="mt-4 max-w-[520px] text-[16.5px] leading-relaxed text-ink-2 sm:text-[18px]">{t.sub}</p>
           <div className="mt-7 flex flex-wrap items-center gap-3">

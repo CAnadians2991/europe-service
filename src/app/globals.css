@@ -1,10 +1,10 @@
 @import 'tailwindcss';
 
 /* ------------------------------------------------------------------
-   Europe Service — «Реєстр» design system
-   An official, document-like voice in the corporate colours: the logo gradient green #5EC58A → blue #578FC7,
-   deep forest ink, warm off-white paper, hairline rules, sharp corners. Unbounded (display) × Golos Text (text)
-   × IBM Plex Mono (figures and requisites).
+   Europe Service — the new design (owner 2026-10-19), laid over the same blocks and texts.
+   Official palette: accent #66CC88 (#47C271, #38AE60) · additional #578FC7 (#3B7BB9) · CTA #DD6031
+   (#E37750, #CC4D20) · gradient #66CC88 → #578FC7 with white text on it. Soft rounded surfaces,
+   Wix Madefor Display × Text, slow brand motion (off for reduced motion).
    ------------------------------------------------------------------ */
 
 @theme {
@@ -13,54 +13,60 @@
   /* no monospace any more: «mono» labels and figures use the text face with tabular numbers */
   --font-mono: var(--font-text), ui-sans-serif, system-ui, sans-serif;
 
-  /* corporate greens (buttons use 600/700: white text ≥ 4.4:1) */
-  --color-brand-50: #eef7f1;
-  --color-brand-100: #d7efe0;
-  --color-brand-200: #afdfc2;
-  --color-brand-300: #7ccb9c;
-  --color-brand-500: #38af60;
-  --color-brand-600: #1e864a;
-  --color-brand-700: #186f3d;
-  --color-brand-800: #135a32;
-  /* the two ends of the logo gradient */
-  --color-leaf: #5ec58a;
+  /* the official accent green; 600–800 are its deepened shades for text and small marks on white */
+  --color-brand-50: #eaf7ef;
+  --color-brand-100: #d3f0de;
+  --color-brand-200: #a9e2bd;
+  --color-brand-300: #7fd5a0;
+  --color-brand-400: #66cc88;
+  --color-brand-500: #38ae60;
+  --color-brand-600: #2a8a4d;
+  --color-brand-700: #22783f;
+  --color-brand-800: #1b6334;
+  /* the gradient's two ends (official) */
+  --color-leaf: #66cc88;
   --color-sky: #578fc7;
-  --color-sky-700: #3d6f9f;
+  --color-sky-700: #3b7bb9;
+  /* call to action (official) */
+  --color-cta: #dd6031;
+  --color-cta-light: #e37750;
+  --color-cta-dark: #cc4d20;
+  --color-cta-50: #fdece4;
   /* legacy token names used by components */
   --color-violet-600: #578fc7;
-  --color-violet-700: #3d6f9f;
-  --color-accent-500: #38af60;
-  --color-accent-600: #1e864a;
-  --color-accent-700: #176b3b;
+  --color-violet-700: #3b7bb9;
+  --color-accent-500: #38ae60;
+  --color-accent-600: #2a8a4d;
+  --color-accent-700: #22783f;
   --color-sun: #e9a52a;
   --color-sun-100: #fbf0d9;
   --color-sun-600: #b37508;
   --color-night: #0f241b;
   --color-night-2: #163126;
-  --color-night-3: #186f3d;
+  --color-night-3: #22783f;
   --color-danger: #b42318;
-  --color-ok: #1e864a;
-  --color-ok-100: #d7efe0;
+  --color-ok: #2a8a4d;
+  --color-ok-100: #d3f0de;
 
   --color-ink: #0f241b;
   --color-ink-2: #33463c;
   --color-muted: #5b6c63;
-  --color-line: #dbe3dc;
-  --color-line-strong: #b9c7bd;
-  --color-surface: #eef2ec;
-  --color-cream: #f6f7f2;
+  --color-line: #e2e9e5;
+  --color-line-strong: #c4d1c9;
+  --color-surface: #eaf1ee;
+  --color-cream: #f3f6f5;
   --color-paper: #ffffff;
 
-  /* sharp, document-like corners everywhere (rounded-* utilities follow these) */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
-  --radius-xl: 6px;
-  --radius-2xl: 8px;
-  --radius-3xl: 10px;
-  --radius-card: 6px;
-  --shadow-card: 0 1px 0 rgb(15 36 27 / 0.04);
-  --shadow-lift: 0 18px 40px -24px rgb(15 36 27 / 0.35);
+  /* soft rounded surfaces (rounded-* utilities follow these) */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 26px;
+  --radius-card: 20px;
+  --shadow-card: 0 12px 32px -22px rgb(15 36 27 / 0.3);
+  --shadow-lift: 0 30px 60px -32px rgb(15 36 27 / 0.38);
 
   --animate-rise: rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
@@ -124,34 +130,41 @@
   @apply mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8;
 }
 
-/* Corporate gradient (the logo: green → blue) with a faint register grid */
+/* The brand gradient as a surface — it slowly breathes. Bands carry text, so they use the palette's deeper pair
+   (#38AE60 → #3B7BB9) under the official ends; white text on it, as the palette asks */
 @utility brand-band {
-  background-color: #1e864a;
-  background-image:
-    linear-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(255 255 255 / 0.06) 1px, transparent 1px),
-    linear-gradient(118deg, #1a7a43 0%, #23925e 34%, #2f9a86 62%, #4a8cc2 100%);
-  background-size:
-    56px 56px,
-    56px 56px,
-    100% 100%;
-  --notch: #23925e;
+  background-color: #3fa86a;
+  background-image: linear-gradient(120deg, #38ae60 0%, #4f9fa0 30%, #3b7bb9 55%, #47c271 80%, #578fc7 100%);
+  background-size: 260% 260%;
+  animation: gradMove 16s ease-in-out infinite;
+  --notch: #3fa86a;
 }
+/* highlighted words: the gradient's deeper pair, slowly shimmering */
 @utility grad-text {
-  background-image: linear-gradient(100deg, #1e864a 0%, #2f9a86 55%, #3d6f9f 100%);
+  background-image: linear-gradient(110deg, #38ae60 0%, #3b7bb9 45%, #38ae60 90%);
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: textShift 7s ease-in-out infinite alternate;
 }
-/* 3-px rule in the logo gradient */
+/* 3-px rule in the brand gradient */
 @utility rule-grad {
   height: 3px;
-  background-image: linear-gradient(90deg, #5ec58a 0%, #38af60 35%, #2f9a86 65%, #578fc7 100%);
+  background-image: linear-gradient(90deg, #66cc88 0%, #578fc7 100%);
 }
 
 /* Section label: «01 — Вакансії» — small caps line in the text face */
 @utility eyebrow {
-  @apply inline-flex items-center gap-2 font-sans text-[13px] font-semibold tracking-[0.06em] text-brand-700 uppercase;
+  @apply inline-flex items-center gap-2 font-sans text-[14px] font-semibold tracking-normal text-brand-700 normal-case;
+  &::before {
+    content: '';
+    width: 18px;
+    height: 3px;
+    flex: none;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #66cc88, #578fc7);
+  }
 }
 @utility num {
   @apply font-mono;
@@ -160,17 +173,17 @@
 
 /* min-h-12: every button is a ≥ 44px touch target. Pressed: a 1px shift (no zoom). */
 @utility btn {
-  @apply inline-flex min-h-12 items-center justify-center gap-2.5 rounded-xl px-6 py-3 text-[16px] leading-none font-semibold transition-[background-color,box-shadow,color,border-color] duration-150 select-none active:translate-y-px disabled:pointer-events-none disabled:opacity-60 aria-busy:opacity-100;
+  @apply inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full px-6 py-3 text-[16px] leading-none font-semibold transition-[background-color,box-shadow,color,border-color] duration-150 select-none active:translate-y-px disabled:pointer-events-none disabled:opacity-60 aria-busy:opacity-100;
 }
 /* Fill in the logo gradient (green → teal → blue), deepened so white text keeps ≥ 4.6:1 — owner 2026-10-15:
    buttons in the logo's colours, plain green only for small marks (badges, counters, checks) */
 @utility bg-logo {
-  background-color: #1e864a;
-  background-image: linear-gradient(100deg, #1e864a 0%, #1a7f6e 55%, #3a72ad 100%);
+  background-color: #5fae9a;
+  background-image: linear-gradient(110deg, #66cc88 0%, #578fc7 100%);
 }
-/* Main call to action — the logo gradient */
+/* Main call to action — the palette's CTA orange */
 @utility btn-accent {
-  @apply btn bg-logo text-white transition-[filter,box-shadow,color] hover:brightness-[0.92];
+  @apply btn bg-cta text-white shadow-[0_12px_26px_-14px_rgb(221_96_49/0.85)] transition-[background-color,box-shadow,color] hover:bg-cta-dark;
 }
 /* Secondary solid — forest ink */
 @utility btn-primary {
@@ -191,11 +204,11 @@
   @apply inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line-strong bg-white px-3 py-1 text-[14px] font-medium text-ink-2 transition-colors hover:border-ink hover:text-ink;
   &[aria-pressed='true'],
   &[data-active='true'] {
-    @apply border-brand-600 bg-brand-600 text-white hover:text-white;
+    @apply border-transparent bg-logo text-white shadow-[0_10px_22px_-14px_rgb(59_123_185/0.8)] hover:text-white;
   }
 }
 @utility card {
-  @apply rounded-2xl border border-line bg-white;
+  @apply rounded-2xl border border-line bg-white shadow-[var(--shadow-card)];
 }
 @utility field {
   @apply block w-full rounded-xl border-[1.5px] border-line-strong bg-white px-4 py-3.5 text-[16px] text-ink outline-none transition placeholder:text-muted/70 focus:border-brand-600 focus:ring-[3px] focus:ring-brand-100;
@@ -257,6 +270,20 @@
   }
 }
 
+@keyframes gradMove {
+  0%,
+  100% {
+    background-position: 0% 40%;
+  }
+  50% {
+    background-position: 100% 60%;
+  }
+}
+@keyframes textShift {
+  to {
+    background-position: 100% 0;
+  }
+}
 @keyframes rise {
   from {
     opacity: 0;
@@ -314,15 +341,7 @@
   }
 }
 
-/* On the gradient band the green button turns white (unlayered: must win over the btn-accent utility) */
-.brand-band .btn-accent {
-  background-color: #ffffff;
-  background-image: none;
-  color: var(--color-ink);
-}
-.brand-band .btn-accent:hover {
-  background-color: var(--color-brand-50);
-}
+/* On the gradient band the CTA stays orange — the palette's action colour on its gradient */
 .brand-band .btn-ghost {
   border-color: rgb(255 255 255 / 0.55);
   color: #fff;
@@ -331,10 +350,12 @@
   border-color: #fff;
   background-color: rgb(255 255 255 / 0.1);
 }
-.brand-band :is(.bg-paper, .bg-white) .btn-accent {
-  background-color: #1e864a;
-  background-image: linear-gradient(100deg, #1e864a 0%, #1a7f6e 55%, #3a72ad 100%);
-  color: #ffffff;
+/* eyebrow on a band: white text and rule */
+.brand-band .eyebrow {
+  color: #fff;
+}
+.brand-band .eyebrow::before {
+  background: #fff;
 }
 
 /* ── 3-D ES suitcase (components/home/Suitcase3D.tsx) ── */
@@ -826,4 +847,173 @@ html[data-bottom-bar] .contact-fab-dock {
 }
 html:has(#cart-h) body > #wrapper_id:has(> iframe) {
   display: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════════════════════════════
+   The new design's motion (owner 2026-10-19), after design-taste-frontend (motion §1, §4, §6, §8) and the
+   transitions-dev motion tokens. Transform and opacity only; hidden states only under html.js with motion allowed.
+   ══════════════════════════════════════════════════════════════════════════════════════════════════════ */
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --t-press: 140ms;
+  --t-hover: 180ms;
+  --t-reveal: 800ms;
+  --stagger-item: 70ms;
+}
+
+/* header: the palette's gradient bar with a rounded foot */
+.site-header {
+  background-image: linear-gradient(110deg, #66cc88 0%, #578fc7 100%);
+  border-radius: 0 0 24px 24px;
+  box-shadow: 0 14px 30px -20px rgb(59 123 185 / 0.7);
+}
+.site-header .hdr-link {
+  color: rgb(255 255 255 / 0.9);
+}
+.site-header .hdr-link:hover,
+.site-header .hdr-link.is-strong {
+  color: #fff;
+}
+.site-header .hdr-link::after {
+  background: #fff;
+}
+.site-header .hdr-tools > :is(a, button):not(.btn-accent) {
+  color: #fff;
+  border-color: rgb(255 255 255 / 0.45);
+}
+.site-header .hdr-tools > :is(a, button):not(.btn-accent):hover {
+  background-color: rgb(255 255 255 / 0.16);
+  border-color: #fff;
+}
+.site-header .hdr-tools .hdr-phone-sub {
+  color: rgb(255 255 255 / 0.8);
+}
+
+/* footer: the brand gradient as its top edge */
+.site-footer {
+  position: relative;
+}
+.site-footer::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, #66cc88, #578fc7);
+}
+
+/* press feedback on every button */
+@media (prefers-reduced-motion: no-preference) {
+  :is(.btn-accent, .btn-ghost, .btn-white, .btn-primary, .btn-dark) {
+    transition:
+      background-color var(--t-hover) var(--ease-out),
+      box-shadow var(--t-hover) var(--ease-out),
+      transform var(--t-press) var(--ease-out);
+  }
+  :is(.btn-accent, .btn-ghost, .btn-white, .btn-primary, .btn-dark):active {
+    transform: scale(0.97);
+  }
+}
+
+/* section entrances (components/motion/Reveal.tsx marks sections below the fold) */
+@media (prefers-reduced-motion: no-preference) {
+  html.js main section.rv-wait :is(h2, .eyebrow, h2 + p, header > p),
+  html.js main section.rv-wait :is(ul, ol) > li,
+  html.js main section.rv-wait .grid > * {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  html.js main section.rv-wait img {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  html.js main section.rv-wait.rv-in :is(h2, .eyebrow, h2 + p, header > p),
+  html.js main section.rv-wait.rv-in :is(ul, ol) > li,
+  html.js main section.rv-wait.rv-in .grid > * {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 700ms var(--ease-out),
+      transform var(--t-reveal) var(--ease-expo);
+  }
+  html.js main section.rv-wait.rv-in img {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 900ms var(--ease-out),
+      transform 1200ms var(--ease-soft);
+  }
+  /* reading order: heading first, then the words, then the items one by one */
+  html.js main section.rv-in :is(.eyebrow, h2) {
+    transition-delay: 0ms;
+  }
+  html.js main section.rv-in :is(h2 + p, header > p) {
+    transition-delay: 90ms;
+  }
+  html.js main section.rv-in :is(:is(ul, ol) > li, .grid > *):nth-child(1) { transition-delay: 160ms; }
+  html.js main section.rv-in :is(:is(ul, ol) > li, .grid > *):nth-child(2) { transition-delay: 230ms; }
+  html.js main section.rv-in :is(:is(ul, ol) > li, .grid > *):nth-child(3) { transition-delay: 300ms; }
+  html.js main section.rv-in :is(:is(ul, ol) > li, .grid > *):nth-child(4) { transition-delay: 370ms; }
+  html.js main section.rv-in :is(:is(ul, ol) > li, .grid > *):nth-child(5) { transition-delay: 440ms; }
+  html.js main section.rv-in :is(:is(ul, ol) > li, .grid > *):nth-child(6) { transition-delay: 510ms; }
+  html.js main section.rv-in :is(:is(ul, ol) > li, .grid > *):nth-child(n + 7) { transition-delay: 580ms; }
+}
+
+/* the home hero: the headline rises out of its mask on load (the signature move), the photo breathes */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .hero-line {
+    display: block;
+    transform: translateY(105%);
+    animation: heroLine 900ms var(--ease-expo) forwards;
+    animation-delay: calc(120ms + var(--i, 0) * 110ms);
+  }
+  .hero-photo {
+    animation: heroDrift 22s var(--ease-soft) infinite alternate;
+  }
+}
+.hero-mask {
+  display: block;
+  overflow: clip;
+  padding-bottom: 0.06em;
+}
+@keyframes heroLine {
+  to {
+    transform: none;
+  }
+}
+@keyframes heroDrift {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.07) translate3d(-1.5%, -1%, 0);
+  }
+}
+
+/* the brand strands (components/motion/Strands.tsx) */
+.strands {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .strands .strand {
+    stroke-dasharray: 1500 1700;
+    animation: strandFlow linear infinite;
+  }
+  .strands-drift {
+    animation: strandDrift 24s ease-in-out infinite alternate;
+  }
+}
+@keyframes strandFlow {
+  to {
+    stroke-dashoffset: -3200;
+  }
+}
+@keyframes strandDrift {
+  to {
+    transform: translate3d(-40px, 18px, 0) rotate(-1.5deg);
+  }
 }

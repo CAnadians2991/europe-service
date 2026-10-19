@@ -15,7 +15,7 @@ export function Breadcrumbs({ items }: { items: { name: string; path: string }[]
         {/* one line on a phone: the current page (it repeats the H1 anyway) is cut with «…» */}
         <ol className="flex items-center gap-x-1.5 whitespace-nowrap">
           {items.map((it, i) => (
-            <li key={it.path} className={`flex items-center gap-1.5 ${i < items.length - 1 ? 'shrink-0' : 'min-w-0'}`}>
+            <li key={`${i}:${it.path}`} className={`flex items-center gap-1.5 ${i < items.length - 1 ? 'shrink-0' : 'min-w-0'}`}>
               {i > 0 && <span aria-hidden className="opacity-40">/</span>}
               {i < items.length - 1 ? (
                 <HoverLink href={it.path} className="inline-flex min-h-10 items-center underline-offset-[3px] hover:underline">{it.name}</HoverLink>

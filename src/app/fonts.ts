@@ -1,20 +1,20 @@
-import { Geologica, Onest } from 'next/font/google'
+import { Wix_Madefor_Display, Wix_Madefor_Text } from 'next/font/google'
 
 /**
- * Europe Service type system (2026-10: the owner found Unbounded + mono hard to read)
- * - Geologica: headlines and big numbers — clear geometric shapes, full Cyrillic incl. ї є ґ, not stretched
- * - Onest: everything else — a Cyrillic-first text face built for screens, tabular figures for salaries and phones
+ * Europe Service type system (owner 2026-10-19: the new design's faces on the live site)
+ * - Wix Madefor Display: headlines and big numbers
+ * - Wix Madefor Text: everything else — full Cyrillic (ї є ґ), tabular figures for salaries and phones
  */
-export const display = Geologica({
-  subsets: ['cyrillic', 'latin', 'latin-ext'],
+export const display = Wix_Madefor_Display({
+  subsets: ['cyrillic', 'cyrillic-ext', 'latin', 'latin-ext'],
   weight: ['500', '600', '700', '800'],
   display: 'swap',
   variable: '--font-display-face',
   fallback: ['Arial', 'sans-serif'],
 })
 
-export const sans = Onest({
-  subsets: ['cyrillic', 'latin', 'latin-ext'],
+export const sans = Wix_Madefor_Text({
+  subsets: ['cyrillic', 'cyrillic-ext', 'latin', 'latin-ext'],
   weight: ['400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-text',

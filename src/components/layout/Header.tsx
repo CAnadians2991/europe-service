@@ -38,24 +38,25 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
   const countries = COUNTRIES.filter((c) => counts[c.code])
   const catalog = lang === 'uk' ? CATALOG_PATH : CATALOG_PATH_RU
   const popular = popularLinks(lang)
-  const link = 'relative inline-flex h-[72px] items-center whitespace-nowrap px-3 text-[15px] font-medium text-ink-2 transition-colors hover:text-ink after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-brand-500 after:transition-transform hover:after:scale-x-100'
+  const link = 'hdr-link relative inline-flex h-[72px] items-center whitespace-nowrap px-3 text-[15px] font-medium text-ink-2 transition-colors hover:text-ink after:absolute after:inset-x-3 after:bottom-0 after:h-[3px] after:origin-left after:scale-x-0 after:bg-brand-500 after:transition-transform hover:after:scale-x-100'
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
+    // the palette's gradient bar (owner 2026-10-19: the new design on the live site); colours in globals.css (.site-header)
+    <header className="site-header sticky top-0 z-40">
       <div className="container-x flex h-16 items-center gap-3 lg:h-[72px]">
         <MobileHeaderSlot lang={lang} home={lang === 'uk' ? '/' : '/ru'}>
           <Link href={lang === 'uk' ? '/' : '/ru'} className="flex h-11 shrink-0 items-center" aria-label={lang === 'uk' ? 'Europe Service — на головну' : 'Europe Service — на главную'}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/logo.svg" alt="Europe Service" width={160} height={43} fetchPriority="high" className="h-[34px] w-auto lg:h-[38px]" />
+            <img src="/brand/logo-on-gradient.svg" alt="Europe Service" width={160} height={43} fetchPriority="high" className="h-[34px] w-auto lg:h-[38px]" />
           </Link>
         </MobileHeaderSlot>
 
         <nav aria-label={lang === 'uk' ? 'Головне меню' : 'Главное меню'} className="ml-6 hidden flex-1 items-center lg:flex">
           <MenuGroup className="group relative">
             {/* catalog pages carry every card (≈110 KB): no prefetch from the header on every page */}
-            <Link href={nav[0].href} prefetch={false} className={`${link} gap-1.5 !font-semibold !text-ink`}>
+            <Link href={nav[0].href} prefetch={false} className={`${link} is-strong gap-1.5 !font-semibold`}>
               {nav[0].label}
-              <span className="num bg-brand-600 px-1.5 py-0.5 text-[11.5px] font-semibold text-white">{total}</span>
+              <span className="num rounded-full bg-white px-2 py-0.5 text-[11.5px] font-semibold text-brand-700">{total}</span>
               <IconChevronDown className="size-4 opacity-60 transition group-hover:rotate-180" />
             </Link>
             <div className="invisible absolute -left-3 top-full z-50 w-[720px] opacity-0 transition duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 group-data-[closed]:!invisible group-data-[closed]:!opacity-0">
@@ -100,10 +101,10 @@ export function Header({ lang = 'uk', counts, total }: HeaderProps) {
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-1.5 lg:gap-3">
+        <div className="hdr-tools ml-auto flex items-center gap-1.5 lg:gap-3">
           <a href={`tel:${SITE.phone}`} className="hidden h-11 flex-col items-start justify-center whitespace-nowrap px-1 text-ink hover:text-brand-700 xl:flex">
             <span className="num text-[15px] font-semibold leading-tight">{SITE.phoneDisplay}</span>
-            <span className="text-[12px] leading-tight text-muted">{lang === 'uk' ? 'безкоштовно' : 'бесплатно'}</span>
+            <span className="hdr-phone-sub text-[12px] leading-tight text-muted">{lang === 'uk' ? 'безкоштовно' : 'бесплатно'}</span>
           </a>
           <LangSwitch lang={lang} className="header-lang grid h-11 min-w-10 place-items-center border border-line px-2 font-mono text-[12.5px] font-semibold text-muted hover:border-ink hover:text-ink sm:min-w-11 sm:px-2.5" />
           <CartBadge lang={lang} />

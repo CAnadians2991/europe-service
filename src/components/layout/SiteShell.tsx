@@ -10,6 +10,7 @@ import { ensureCountries } from '@/lib/countries'
 import { CountriesInit } from '@/components/CountriesInit'
 import { fontVars } from '@/app/fonts'
 import type { CountryCode } from '@/lib/types'
+import { Reveal } from '@/components/motion/Reveal'
 
 export async function countryCounts(lang?: 'uk' | 'ru') {
   const all = await getActiveVacancies(lang)
@@ -40,6 +41,10 @@ export async function SiteShell({ lang, children }: { lang: 'uk' | 'ru'; childre
         {/* App Router: beforeInteractive is valid in the root layout (this shell is rendered by the root layouts) */}
         {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
         <Script id="consent-mode" strategy="beforeInteractive">{consentBootstrap}</Script>
+        {/* motion only with the script running: hidden-until-revealed states live under html.js */}
+        {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
+        <Script id="js-flag" strategy="beforeInteractive">{"document.documentElement.classList.add('js')"}</Script>
+        <Reveal />
         <Analytics />
       </body>
     </html>
