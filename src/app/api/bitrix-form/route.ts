@@ -1,7 +1,8 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import https from 'node:https'
 import { z } from 'zod'
-import { BITRIX_FORMS } from '@/lib/bitrix-form'
+import { BITRIX_FORMS, normalizeValue } from '@/lib/bitrix-form'
+import { latinName, passportNo } from '@/lib/passport-latin'
 
 const Body = z.object({
   form: z.string().max(40),
@@ -64,7 +65,8 @@ export async function POST(req: NextRequest) {
   const values: Record<string, string[]> = {}
   for (const f of form.fields) {
     if (f.type === 'page') continue
-    let v = (body.values[f.name] ?? '').trim()
+    // names / passport number in capital Latin, codes as digits — the same rules the form applies while typing
+    let v = normalizeValue(f, (body.values[f.name] ?? '').trim(), latinName, passportNo)
     if (f.type === 'list' && v && !f.items?.some((i) => i.value === v)) v = ''
     if (f.type === 'date' && v) {
       const m = v.match(/^(\d{4})-(\d{2})-(\d{2})$/)
