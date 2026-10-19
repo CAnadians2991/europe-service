@@ -108,7 +108,7 @@ function razemWorkFields(l: Lead) {
  * stays encrypted. Every other address goes through fetch as usual.
  */
 const SELF_SIGNED = /(^|\.)europeservice\.org\.ua$/
-async function postJson(url: string, body: unknown): Promise<boolean> {
+export async function postJson(url: string, body: unknown): Promise<boolean> {
   const u = new URL(url)
   const data = JSON.stringify(body)
   if (!SELF_SIGNED.test(u.hostname)) {

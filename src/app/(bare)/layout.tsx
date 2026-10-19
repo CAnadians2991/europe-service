@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: { default: SITE.name, template: '%s | Europe Service' },
   robots: { index: false, follow: false },
 }
-export const viewport: Viewport = { themeColor: '#1560f5', width: 'device-width', initialScale: 1 }
+export const viewport: Viewport = { themeColor: '#1e864a', width: 'device-width', initialScale: 1 }
 
 export default function BareRoot({ children }: { children: React.ReactNode }) {
   return (
