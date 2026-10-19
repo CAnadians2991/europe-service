@@ -7,10 +7,11 @@ import { AddToCart } from '@/components/shop/AddToCart'
 import { LeadButton } from '@/components/lead/LeadModal'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { servicesLd } from '@/lib/services-ld'
-import { PRODUCT, uahPrice } from '@/lib/shop'
+import { PRODUCT, VARIANT_GROUPS, uahPrice, variantId } from '@/lib/shop'
 import { IconCertificate, IconCheck, IconDoc, IconPhone, IconShield } from '@/components/ui/icons'
 import { Flag } from '@/components/ui/Flag'
 import { PackagePay } from '@/components/services/PackagePay'
+import { VariantPay, type VariantOption } from '@/components/services/VariantPay'
 
 // Owner 2026-10-15: «просто опиши пакети як на Personal Work», phones first, nothing said twice.
 // Tilda's headings and SEO sentences of this page stay (H1, the offer line, «Послуги Europe Service», the other-countries heading).
@@ -18,6 +19,24 @@ import { PackagePay } from '@/components/services/PackagePay'
 type Lang = 'uk' | 'ru'
 const fmt = (kop: number) => new Intl.NumberFormat('uk-UA').format(Math.round(kop / 100)).replace(/[   ]/g, ' ') + ' грн'
 const IDS = ['basic', 'standard', 'premium'] as const
+
+/** the amounts a service is sold for (as on pay.europeservice.com.ua) → the picker's options and the price line */
+function variants(groupId: string, lang: Lang) {
+  const g = VARIANT_GROUPS.find((x) => x.id === groupId)
+  if (!g) return null
+  const uk = lang === 'uk'
+  const options: VariantOption[] = g.options.map((o) => {
+    const p = PRODUCT[variantId(g, o)]
+    const term = uk ? o.label : o.labelRu
+    return { id: p.id, price: p.price, title: uk ? p.title : p.titleRu, label: term ? `${term} — ${fmt(p.price)}` : fmt(p.price) }
+  })
+  const ps = options.map((o) => o.price)
+  const min = Math.min(...ps)
+  const max = Math.max(...ps)
+  const range = min === max ? fmt(min) : `${fmt(min).replace(' грн', '')}–${fmt(max)}`
+  return { g, options, range }
+}
+const PICK = 'field select-code !w-auto min-w-0 !rounded-[12px] !py-2.5 !pl-3 !pr-8 !text-[14.5px] font-semibold'
 
 /** questions about the packages themselves (owner, 2026-10-07: switching = pay for the new one, the old one is refunded) */
 const SERVICE_FAQ = {
@@ -65,7 +84,7 @@ function PackageCard({ p, id, base, featured, lang }: { p: Package; id: (typeof 
 }
 
 /** a small service card: icon, name, price, action — read at a glance (owner: «60% тексту не читають») */
-function ServiceCard({ icon, title, price, tag, action, more }: { icon: React.ReactNode; title: string; price: string; tag?: string; action: React.ReactNode; more?: React.ReactNode }) {
+function ServiceCard({ icon, title, price, tag, action, more, wide }: { icon: React.ReactNode; title: string; price: string; tag?: string; action: React.ReactNode; more?: React.ReactNode; wide?: boolean }) {
   return (
     <li className="flex flex-col rounded-[18px] bg-cream p-4 ring-1 ring-line">
       <div className="flex items-start gap-3">
@@ -78,7 +97,7 @@ function ServiceCard({ icon, title, price, tag, action, more }: { icon: React.Re
         </div>
       </div>
       {more}
-      <div className="mt-auto flex items-center justify-between gap-3 pt-4">
+      <div className={`mt-auto pt-4 ${wide ? 'grid gap-3' : 'flex items-center justify-between gap-3'}`}>
         <p className="num whitespace-nowrap text-[20px] font-semibold tracking-[-0.01em]">{price}</p>
         {action}
       </div>
@@ -102,6 +121,7 @@ export function ServicesPage({ lang }: { lang: Lang }) {
   const insOwn = pk.find((p) => /Наш страхов/.test(p.title))
   const abroad = pk.filter((p) => /Переоформ/.test(p.title))
   const action = 'btn-ghost !min-h-11 !px-4 !text-[14.5px]'
+  const ins = variants('insurance', lang)
 
   return (
     <>
@@ -178,7 +198,8 @@ export function ServicesPage({ lang }: { lang: Lang }) {
               <ServiceCard
                 icon={<IconCertificate className="size-5" />}
                 title={uk ? 'Страховка на ваш термін' : 'Страховка на ваш срок'}
-                price={`${insOwn.price?.replace('₴ ', '').replace('-', '–')}${/грн/.test(insOwn.price ?? '') ? '' : ' грн'}`}
+                price={ins?.range ?? `${insOwn.price?.replace('₴ ', '').replace('-', '–')}${/грн/.test(insOwn.price ?? '') ? '' : ' грн'}`}
+                wide={Boolean(ins)}
                 more={
                   // Tilda's wording of this service (SEO text) — one tap away, not in the way
                   <details className="group mt-2 text-[13.5px] text-ink-2">
@@ -187,9 +208,15 @@ export function ServicesPage({ lang }: { lang: Lang }) {
                   </details>
                 }
                 action={
-                  <LeadButton form="invoice:insurance" title={uk ? 'Розрахувати страховку' : 'Рассчитать страховку'} subtitle={insOwn.title} className={action}>
-                    {uk ? 'Розрахувати' : 'Рассчитать'}
-                  </LeadButton>
+                  ins ? (
+                    <VariantPay options={ins.options} multiple lang={lang} label={uk ? 'Термін страховки' : 'Срок страховки'} selectClassName={`${PICK} flex-1`} className={`${action} shrink-0`}>
+                      {uk ? 'Додати' : 'Добавить'}
+                    </VariantPay>
+                  ) : (
+                    <LeadButton form="invoice:insurance" title={uk ? 'Розрахувати страховку' : 'Рассчитать страховку'} subtitle={insOwn.title} className={action}>
+                      {uk ? 'Розрахувати' : 'Рассчитать'}
+                    </LeadButton>
+                  )
                 }
               />
             )}
@@ -201,16 +228,25 @@ export function ServicesPage({ lang }: { lang: Lang }) {
               <ul className="mt-4 grid gap-3 sm:grid-cols-3">
                 {abroad.map((p) => {
                   const c = COUNTRY.find((x) => x.re.test(p.title))
+                  const v = c ? variants(`docs-${c.code}`, lang) : null
                   return (
-                    <li key={p.title} className="flex items-center gap-3 rounded-[18px] bg-cream p-4 ring-1 ring-line">
-                      {c && <Flag code={c.code} className="h-6 w-9 shrink-0 rounded-[3px]" title={uk ? c.uk : c.ru} />}
-                      <div className="min-w-0 flex-1">
-                        <h3 className="text-[16px] font-semibold leading-tight">{c ? (uk ? c.uk : c.ru) : p.title}</h3>
-                        <p className="num mt-0.5 text-[15px] font-semibold text-ink-2">{p.price}</p>
+                    <li key={p.title} className="flex flex-col gap-3 rounded-[18px] bg-cream p-4 ring-1 ring-line">
+                      <div className="flex items-center gap-3">
+                        {c && <Flag code={c.code} className="h-6 w-9 shrink-0 rounded-[3px]" title={uk ? c.uk : c.ru} />}
+                        <div className="min-w-0 flex-1">
+                          <h3 className="text-[16px] font-semibold leading-tight">{c ? (uk ? c.uk : c.ru) : p.title}</h3>
+                          <p className="num mt-0.5 text-[15px] font-semibold text-ink-2">{v?.range ?? p.price}</p>
+                        </div>
                       </div>
-                      <LeadButton form={`invoice:${p.title}`} title={uk ? 'Дізнатися ціну' : 'Узнать цену'} subtitle={p.title} className={action}>
-                        {uk ? 'Рахунок' : 'Счёт'}
-                      </LeadButton>
+                      {v ? (
+                        <VariantPay options={v.options} lang={lang} label={uk ? 'Сума' : 'Сумма'} selectClassName={`${PICK} flex-1`} className="btn-accent !min-h-11 shrink-0 !px-5 !text-[15px]">
+                          {uk ? 'Оплатити' : 'Оплатить'}
+                        </VariantPay>
+                      ) : (
+                        <LeadButton form={`invoice:${p.title}`} title={uk ? 'Дізнатися ціну' : 'Узнать цену'} subtitle={p.title} className={action}>
+                          {uk ? 'Рахунок' : 'Счёт'}
+                        </LeadButton>
+                      )}
                     </li>
                   )
                 })}

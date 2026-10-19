@@ -58,6 +58,57 @@ const EXTRA: Product[] = [
   },
 ]
 
+/**
+ * Sold in several amounts, exactly as pay.europeservice.com.ua sells them (owner 2026-10-19: «всі ціни мають бути як там»):
+ * documents for Germany / the Netherlands / Greece and the insurance by term. One product per amount — the cart and the
+ * server stay as they are; the «Послуги» page shows a picker of the group.
+ */
+export interface VariantGroup {
+  id: string
+  title: string
+  titleRu: string
+  /** what the amount buys, as on pay.europeservice.com.ua */
+  features?: string[]
+  featuresRu?: string[]
+  multiple?: boolean
+  options: { suffix: string; uah: number; label?: string; labelRu?: string }[]
+}
+const DOCS = ['Переоформлення документів для працевлаштування', 'Повний супровід до виходу на роботу', 'Створення CV для роботодавця', 'Особистий менеджер']
+const DOCS_RU = ['Переоформление документов для трудоустройства', 'Полное сопровождение до выхода на работу', 'Создание CV для работодателя', 'Личный менеджер']
+const amounts = (...uah: number[]) => uah.map((n) => ({ suffix: String(n), uah: n }))
+export const VARIANT_GROUPS: VariantGroup[] = [
+  { id: 'docs-de', title: 'Переоформлення документів для роботи в Німеччині', titleRu: 'Переоформление документов для работы в Германии', features: DOCS, featuresRu: DOCS_RU, options: amounts(5200, 7800, 10400) },
+  { id: 'docs-nl', title: 'Переоформлення документів для роботи в Нідерландах', titleRu: 'Переоформление документов для работы в Нидерландах', features: DOCS, featuresRu: DOCS_RU, options: amounts(5200, 7800, 10400, 13000) },
+  { id: 'docs-gr', title: 'Переоформлення документів для роботи в Греції', titleRu: 'Переоформление документов для работы в Греции', features: DOCS, featuresRu: DOCS_RU, options: amounts(7800) },
+  {
+    id: 'insurance',
+    title: 'Страховий поліс',
+    titleRu: 'Страховой полис',
+    multiple: true,
+    options: [
+      { suffix: '30', uah: 600, label: '30 днів', labelRu: '30 дней' },
+      { suffix: '90', uah: 1200, label: '90 днів', labelRu: '90 дней' },
+      { suffix: '180', uah: 2000, label: '180 днів', labelRu: '180 дней' },
+      { suffix: '365', uah: 2500, label: '365 днів', labelRu: '365 дней' },
+    ],
+  },
+]
+export const variantId = (g: VariantGroup, o: VariantGroup['options'][number]) => `${g.id}-${o.suffix}`
+function fromVariants(): Product[] {
+  return VARIANT_GROUPS.flatMap((g) =>
+    g.options.map((o) => ({
+      id: variantId(g, o),
+      title: o.label ? `${g.title} на ${o.label}` : g.title,
+      titleRu: o.labelRu ? `${g.titleRu} на ${o.labelRu}` : g.titleRu,
+      price: o.uah * 100,
+      ...(g.features ? { features: g.features, featuresRu: g.featuresRu } : {}),
+      multiple: Boolean(g.multiple),
+      href: '/poslugi',
+      hrefRu: '/ru/services',
+    })),
+  )
+}
+
 function fromPackages(): Product[] {
   const out: Product[] = []
   SERVICES.uk.packages.forEach((p: Package, i: number) => {
@@ -82,7 +133,7 @@ function fromPackages(): Product[] {
   return out
 }
 
-export const PRODUCTS: Product[] = [...fromPackages(), ...EXTRA]
+export const PRODUCTS: Product[] = [...fromPackages(), ...EXTRA, ...fromVariants()]
 export const PRODUCT = Object.fromEntries(PRODUCTS.map((p) => [p.id, p])) as Record<ProductId, Product>
 /** package title on the «Послуги» page (either language) → product id */
 const BY_PACKAGE = new Map<string, ProductId>()
