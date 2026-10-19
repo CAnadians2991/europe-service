@@ -169,7 +169,8 @@ export function ArticlePage({ a, posts = [] }: { a: Article; posts?: Article[] }
 
         <div className="container-x grid gap-10 py-10 sm:py-12 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-14">
           <div className="min-w-0 max-w-[760px]">
-            {a.cover && <Photo base={a.cover} alt={a.title} priority sizes="(max-width: 768px) 100vw, 760px" className="mb-8 aspect-[16/9] w-full bg-surface object-cover" />}
+            {a.cover && <Photo base={a.cover} alt={a.title} priority sizes="(max-width: 768px) 100vw, 760px" className={`${a.coverCredit ? 'mb-2' : 'mb-8'} aspect-[16/9] w-full bg-surface object-cover`} />}
+            {a.cover && a.coverCredit && <p className="mb-8 text-[12.5px] text-muted">{a.coverCredit}</p>}
             <div className="[&>.prose-pw>*:first-child]:mt-0">
               <Blocks blocks={blocks} />
             </div>

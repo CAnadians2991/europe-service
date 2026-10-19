@@ -23,6 +23,8 @@ export interface Article {
   ogImage?: string | null
   date?: string | null
   cover?: string | null
+  /** who took the cover photo and its licence (found pictures, e.g. CC0 from Wikimedia Commons) */
+  coverCredit?: string
   blocks: Block[]
   datePublished?: string | null
   /** last substantive update (a rewrite to the current rules) — shown as «Оновлено» and used as dateModified */

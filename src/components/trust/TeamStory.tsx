@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { Photo } from '@/components/ui/Photo'
 import { LoopVideo } from '@/components/ui/LoopVideo'
-import { LeadButton } from '@/components/lead/LeadModal'
 
 type Lang = 'uk' | 'ru'
 
@@ -87,9 +86,6 @@ export function TeamSection({ lang, compact }: { lang: Lang; compact?: boolean }
             ))}
           </ul>
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
-            <LeadButton form="office-visit" title={t.visit} subtitle={t.visitSub} submitLabel={t.visitBtn} className="btn-accent !px-6">
-              {t.visit}
-            </LeadButton>
             <Link href={uk ? '/about' : '/ru/about'} className="inline-flex min-h-11 items-center font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[4px]">
               {t.more} →
             </Link>

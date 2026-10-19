@@ -1,7 +1,6 @@
 import { Photo } from '@/components/ui/Photo'
 import { LazyIframe } from '@/components/ui/LazyIframe'
 import { IconTelegram, IconViber } from '@/components/ui/icons'
-import { LeadButton } from '@/components/lead/LeadModal'
 import { SITE } from '@/lib/site'
 import type { About } from '@/lib/about-types'
 
@@ -63,9 +62,6 @@ export function OfficeTeam({ about, heading, showTeam = true, lang = 'uk' }: { a
               ))}
             </ul>
             <div className="mt-7 flex flex-wrap gap-3">
-              <LeadButton form="office-visit" title={t.visit} subtitle={t.visitSub} submitLabel={t.visitBtn} className="btn-accent">
-                {t.visit}
-              </LeadButton>
               <a href={`tel:${SITE.phone}`} className="btn-ghost num">
                 {SITE.phoneDisplay}
               </a>
