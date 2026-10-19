@@ -1,0 +1,1414 @@
+{
+ "12_nsna6n": {
+  "id": "12",
+  "sec": "nsna6n",
+  "lang": "ua",
+  "address": "https://europeservice.org.ua",
+  "title": "Форма реєстрації на вакансію",
+  "desc": "Вітаємо, дякуємо що обрали нашу компанію для працевлаштування. Заповніть цю форму для оформлення договору з роботодавцем. Вибачте, що вона така довга, то не ми, то бюрократія❤️",
+  "button": "Відправити",
+  "dateFormat": "DD.MM.YYYY",
+  "fields": [
+   {
+    "name": "page_3227142",
+    "type": "page",
+    "label": "Сторінка 1"
+   },
+   {
+    "name": "CONTACT_PHONE",
+    "type": "phone",
+    "label": "Телефон",
+    "required": true
+   },
+   {
+    "name": "CONTACT_UF_CRM_1598516665856",
+    "type": "string",
+    "label": "Польський номер"
+   },
+   {
+    "name": "CONTACT_EMAIL",
+    "type": "email",
+    "label": "E-mail"
+   },
+   {
+    "name": "CONTACT_NAME",
+    "type": "name",
+    "label": "Ім'я (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_LAST_NAME",
+    "type": "last-name",
+    "label": "Прізвище (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_62B5BEA041BC6",
+    "type": "string",
+    "label": "Прізвище при народжені (англійською)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590486151564",
+    "type": "list",
+    "label": "Тип документа",
+    "items": [
+     {
+      "label": "Закордоний паспорт",
+      "value": "1323"
+     },
+     {
+      "label": "ID карта",
+      "value": "1325"
+     },
+     {
+      "label": "Внутрішній паспорт",
+      "value": "3581"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590064945603",
+    "type": "list",
+    "label": "Біометричний паспорт?",
+    "items": [
+     {
+      "label": "Так",
+      "value": "1227"
+     },
+     {
+      "label": "Ні",
+      "value": "1229"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_63CA80ED46805",
+    "type": "string",
+    "label": "Вік (приклад: 55 56 )"
+   },
+   {
+    "name": "CONTACT_BIRTHDATE",
+    "type": "date",
+    "label": "Дата народження"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1583932297515",
+    "type": "string",
+    "label": "Серія, номер паспорта"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065082012",
+    "type": "date",
+    "label": "Термін дії паспорта від:"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065106016",
+    "type": "date",
+    "label": "Термін дії паспорта до:"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065233017",
+    "type": "string",
+    "label": "Місце народження в закордонному паспорті:"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1583932420",
+    "type": "text",
+    "label": "Прописка (Країна, область, місто, вулиця, номер будинку, квартира)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590066021772",
+    "type": "string",
+    "label": "Поштовий індекс"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065483420",
+    "type": "list",
+    "label": "Цивільний стан",
+    "items": [
+     {
+      "label": "одружений/заміжня",
+      "value": "1231"
+     },
+     {
+      "label": "неодружений/незаміжня",
+      "value": "1233"
+     },
+     {
+      "label": "розведений/а",
+      "value": "2690"
+     },
+     {
+      "label": "вдівець/вдова",
+      "value": "2691"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1667469538056",
+    "type": "string",
+    "label": "PESEL"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062088244",
+    "type": "string",
+    "label": "Ім'я батька (англійською)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062099682",
+    "type": "string",
+    "label": "Ім'я матері (англійською)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062148798",
+    "type": "list",
+    "label": "Розмір футболки",
+    "items": [
+     {
+      "label": "S",
+      "value": "1195"
+     },
+     {
+      "label": "M",
+      "value": "1197"
+     },
+     {
+      "label": "L",
+      "value": "1199"
+     },
+     {
+      "label": "XL",
+      "value": "1201"
+     },
+     {
+      "label": "XXL",
+      "value": "1203"
+     },
+     {
+      "label": "XXXL",
+      "value": "1205"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062273957",
+    "type": "list",
+    "label": "Розмір штанів",
+    "items": [
+     {
+      "label": "S",
+      "value": "1207"
+     },
+     {
+      "label": "M",
+      "value": "1209"
+     },
+     {
+      "label": "L",
+      "value": "1211"
+     },
+     {
+      "label": "XL",
+      "value": "1213"
+     },
+     {
+      "label": "XXL",
+      "value": "1215"
+     },
+     {
+      "label": "XXXL",
+      "value": "1217"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065684648",
+    "type": "string",
+    "label": "Розмір взуття"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590067284878",
+    "type": "string",
+    "label": "Зріст (см)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1687269862353",
+    "type": "string",
+    "label": "Ім'я родича та номер телефону по якому можна буде зателефонувати в разі екстренного випадку"
+   },
+   {
+    "name": "page_3105196",
+    "type": "page",
+    "label": "Сторінка 2"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1679326655090",
+    "type": "list",
+    "label": "Характер перебування в Польщі",
+    "items": [
+     {
+      "label": "Моє перебування є тимчасовим, і я не перебуваю в Польщі з наміром постійного проживання",
+      "value": "3582"
+     },
+     {
+      "label": "Моє перебування постійне",
+      "value": "3583"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1679326809640",
+    "type": "list",
+    "label": "Термін перебування в Польщі не покидаючи її кордонів",
+    "items": [
+     {
+      "label": "Менше 6 місяців",
+      "value": "3584"
+     },
+     {
+      "label": "7 місяців",
+      "value": "3585"
+     },
+     {
+      "label": "8 місяців",
+      "value": "3586"
+     },
+     {
+      "label": "9 місяців",
+      "value": "3587"
+     },
+     {
+      "label": "10 місяців",
+      "value": "3588"
+     },
+     {
+      "label": "11 місяців",
+      "value": "3589"
+     },
+     {
+      "label": "12 місяців",
+      "value": "3590"
+     },
+     {
+      "label": "Більше 365 днів",
+      "value": "3591"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1679326931719",
+    "type": "list",
+    "label": "Чи є Карта Побиту?",
+    "items": [
+     {
+      "label": "Так",
+      "value": "3592"
+     },
+     {
+      "label": "Ні",
+      "value": "3593"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1679327170187",
+    "type": "list",
+    "label": "Так/Ні",
+    "items": [
+     {
+      "label": "Так",
+      "value": "3594"
+     },
+     {
+      "label": "Ні",
+      "value": "3595"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1679327656596",
+    "type": "list",
+    "label": "Оберіть кількість місяців роботи через EWL",
+    "items": [
+     {
+      "label": "Ні",
+      "value": "3598"
+     },
+     {
+      "label": "1 місяць",
+      "value": "3599"
+     },
+     {
+      "label": "2 місяці",
+      "value": "3600"
+     },
+     {
+      "label": "3 місяці",
+      "value": "3601"
+     },
+     {
+      "label": "4 місяці",
+      "value": "3602"
+     },
+     {
+      "label": "5 місяців",
+      "value": "3603"
+     },
+     {
+      "label": "6 місяців",
+      "value": "3604"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1679327793022",
+    "type": "list",
+    "label": "Оберіть кількість місяців роботи через інших замовників",
+    "items": [
+     {
+      "label": "Ні",
+      "value": "3605"
+     },
+     {
+      "label": "1 місяць",
+      "value": "3606"
+     },
+     {
+      "label": "2 місяці",
+      "value": "3607"
+     },
+     {
+      "label": "3 місяці",
+      "value": "3608"
+     },
+     {
+      "label": "4 місяці",
+      "value": "3609"
+     },
+     {
+      "label": "5 місяців",
+      "value": "3610"
+     },
+     {
+      "label": "6 місяців",
+      "value": "3611"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1679327442181",
+    "type": "list",
+    "label": "Чи працюєте ви в Польщі більше 6 місяців?",
+    "items": [
+     {
+      "label": "Так",
+      "value": "3596"
+     },
+     {
+      "label": "Ні",
+      "value": "3597"
+     }
+    ]
+   }
+  ]
+ },
+ "17_aaqtgt": {
+  "id": "17",
+  "sec": "aaqtgt",
+  "lang": "ua",
+  "address": "https://europeservice.org.ua",
+  "title": "Форма реєстрації на вакансію",
+  "desc": "Вітаємо, дякуємо що обрали нашу компанію для працевлаштування. Заповніть цю форму для оформлення договору з роботодавцем. Вибачте, що вона така довга, то не ми, то бюрократія❤️",
+  "button": "Відправити",
+  "dateFormat": "DD.MM.YYYY",
+  "fields": [
+   {
+    "name": "CONTACT_PHONE",
+    "type": "phone",
+    "label": "Телефон",
+    "required": true
+   },
+   {
+    "name": "CONTACT_IM",
+    "type": "string",
+    "label": "Номер VIBER"
+   },
+   {
+    "name": "CONTACT_EMAIL",
+    "type": "email",
+    "label": "E-mail"
+   },
+   {
+    "name": "CONTACT_NAME",
+    "type": "name",
+    "label": "Ім'я (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_LAST_NAME",
+    "type": "last-name",
+    "label": "Прізвище (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_62B5BEA041BC6",
+    "type": "string",
+    "label": "Прізвище при народжені (англійською)"
+   },
+   {
+    "name": "CONTACT_BIRTHDATE",
+    "type": "date",
+    "label": "Дата народження"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590486151564",
+    "type": "list",
+    "label": "Тип документа",
+    "items": [
+     {
+      "label": "Закордоний паспорт",
+      "value": "1323"
+     },
+     {
+      "label": "ID карта",
+      "value": "1325"
+     },
+     {
+      "label": "Внутрішній паспорт",
+      "value": "3581"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590064945603",
+    "type": "list",
+    "label": "Біометричний паспорт?",
+    "items": [
+     {
+      "label": "Так",
+      "value": "1227"
+     },
+     {
+      "label": "Ні",
+      "value": "1229"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1583932297515",
+    "type": "string",
+    "label": "Серія, номер паспорта"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065082012",
+    "type": "date",
+    "label": "Термін дії паспорта від:"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065106016",
+    "type": "date",
+    "label": "Термін дії паспорта до:"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065233017",
+    "type": "string",
+    "label": "Місце народження в закордонному паспорті:"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1685026028619",
+    "type": "string",
+    "label": "Орган що видав закордонний паспорт"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1583932420",
+    "type": "text",
+    "label": "Прописка (Країна, область, місто, вулиця, номер будинку, квартира)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590066021772",
+    "type": "string",
+    "label": "Поштовий індекс"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065483420",
+    "type": "list",
+    "label": "Цивільний стан",
+    "items": [
+     {
+      "label": "одружений/заміжня",
+      "value": "1231"
+     },
+     {
+      "label": "неодружений/незаміжня",
+      "value": "1233"
+     },
+     {
+      "label": "розведений/а",
+      "value": "2690"
+     },
+     {
+      "label": "вдівець/вдова",
+      "value": "2691"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1667469538056",
+    "type": "string",
+    "label": "PESEL"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1675074345090",
+    "type": "string",
+    "label": "Ідентифікаційний код"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062088244",
+    "type": "string",
+    "label": "Ім'я батька (англійською)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062099682",
+    "type": "string",
+    "label": "Ім'я матері (англійською)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1685026655701",
+    "type": "string",
+    "label": "Дівоче прізвище матері (англійською)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062148798",
+    "type": "list",
+    "label": "Розмір футболки",
+    "items": [
+     {
+      "label": "S",
+      "value": "1195"
+     },
+     {
+      "label": "M",
+      "value": "1197"
+     },
+     {
+      "label": "L",
+      "value": "1199"
+     },
+     {
+      "label": "XL",
+      "value": "1201"
+     },
+     {
+      "label": "XXL",
+      "value": "1203"
+     },
+     {
+      "label": "XXXL",
+      "value": "1205"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062273957",
+    "type": "list",
+    "label": "Розмір штанів",
+    "items": [
+     {
+      "label": "S",
+      "value": "1207"
+     },
+     {
+      "label": "M",
+      "value": "1209"
+     },
+     {
+      "label": "L",
+      "value": "1211"
+     },
+     {
+      "label": "XL",
+      "value": "1213"
+     },
+     {
+      "label": "XXL",
+      "value": "1215"
+     },
+     {
+      "label": "XXXL",
+      "value": "1217"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065684648",
+    "type": "string",
+    "label": "Розмір взуття"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590067284878",
+    "type": "string",
+    "label": "Зріст (см)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1687269862353",
+    "type": "string",
+    "label": "Ім'я родича та номер телефону по якому можна буде зателефонувати в разі екстренного випадку"
+   }
+  ]
+ },
+ "22_2xhng8": {
+  "id": "22",
+  "sec": "2xhng8",
+  "lang": "ua",
+  "address": "https://europeservice.org.ua",
+  "title": "Форма реєстрації на вакансію",
+  "desc": "Вітаємо, дякуємо що обрали нашу компанію для працевлаштування. Заповніть цю форму для оформлення договору з роботодавцем. Вибачте, що вона така довга, то не ми, то бюрократія❤️",
+  "button": "Відправити",
+  "dateFormat": "DD.MM.YYYY",
+  "fields": [
+   {
+    "name": "CONTACT_PHONE",
+    "type": "phone",
+    "label": "Телефон",
+    "required": true
+   },
+   {
+    "name": "CONTACT_IM",
+    "type": "string",
+    "label": "Номер VIBER"
+   },
+   {
+    "name": "CONTACT_EMAIL",
+    "type": "email",
+    "label": "E-mail"
+   },
+   {
+    "name": "CONTACT_NAME",
+    "type": "name",
+    "label": "Ім'я (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_LAST_NAME",
+    "type": "last-name",
+    "label": "Прізвище (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590486151564",
+    "type": "list",
+    "label": "Тип документа",
+    "items": [
+     {
+      "label": "Закордоний паспорт",
+      "value": "1323"
+     },
+     {
+      "label": "ID карта",
+      "value": "1325"
+     },
+     {
+      "label": "Внутрішній паспорт",
+      "value": "3581"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590064945603",
+    "type": "list",
+    "label": "Біометричний паспорт?",
+    "items": [
+     {
+      "label": "Так",
+      "value": "1227"
+     },
+     {
+      "label": "Ні",
+      "value": "1229"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1583932420",
+    "type": "text",
+    "label": "Прописка (Країна, область, місто, вулиця, номер будинку, квартира)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590066021772",
+    "type": "string",
+    "label": "Поштовий індекс"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1667469538056",
+    "type": "string",
+    "label": "PESEL"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062088244",
+    "type": "string",
+    "label": "Ім'я батька (англійською)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062099682",
+    "type": "string",
+    "label": "Ім'я матері (англійською)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065684648",
+    "type": "string",
+    "label": "Розмір взуття"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062273957",
+    "type": "list",
+    "label": "Розмір штанів",
+    "items": [
+     {
+      "label": "S",
+      "value": "1207"
+     },
+     {
+      "label": "M",
+      "value": "1209"
+     },
+     {
+      "label": "L",
+      "value": "1211"
+     },
+     {
+      "label": "XL",
+      "value": "1213"
+     },
+     {
+      "label": "XXL",
+      "value": "1215"
+     },
+     {
+      "label": "XXXL",
+      "value": "1217"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062148798",
+    "type": "list",
+    "label": "Розмір футболки",
+    "items": [
+     {
+      "label": "S",
+      "value": "1195"
+     },
+     {
+      "label": "M",
+      "value": "1197"
+     },
+     {
+      "label": "L",
+      "value": "1199"
+     },
+     {
+      "label": "XL",
+      "value": "1201"
+     },
+     {
+      "label": "XXL",
+      "value": "1203"
+     },
+     {
+      "label": "XXXL",
+      "value": "1205"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590067284878",
+    "type": "string",
+    "label": "Зріст (см)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1687269862353",
+    "type": "string",
+    "label": "Ім'я родича та номер телефону по якому можна буде зателефонувати в разі екстренного випадку"
+   }
+  ]
+ },
+ "24_qhgfx2": {
+  "id": "24",
+  "sec": "qhgfx2",
+  "lang": "ua",
+  "address": "https://europeservice.org.ua",
+  "title": "Форма реєстрації на вакансію",
+  "desc": "Вітаємо, дякуємо що обрали нашу компанію для працевлаштування❤️. Заповніть цю форму для оформлення договору з роботодавцем.",
+  "button": "Відправити",
+  "dateFormat": "DD.MM.YYYY",
+  "fields": [
+   {
+    "name": "CONTACT_PHONE",
+    "type": "phone",
+    "label": "Телефон",
+    "required": true
+   },
+   {
+    "name": "CONTACT_IM",
+    "type": "string",
+    "label": "Номер VIBER"
+   },
+   {
+    "name": "CONTACT_EMAIL",
+    "type": "email",
+    "label": "E-mail"
+   },
+   {
+    "name": "CONTACT_NAME",
+    "type": "name",
+    "label": "Ім'я (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_LAST_NAME",
+    "type": "last-name",
+    "label": "Прізвище (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590486151564",
+    "type": "list",
+    "label": "Тип документа",
+    "items": [
+     {
+      "label": "Закордоний паспорт",
+      "value": "1323"
+     },
+     {
+      "label": "ID карта",
+      "value": "1325"
+     },
+     {
+      "label": "Внутрішній паспорт",
+      "value": "3581"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590064945603",
+    "type": "list",
+    "label": "Біометричний паспорт?",
+    "items": [
+     {
+      "label": "Так",
+      "value": "1227"
+     },
+     {
+      "label": "Ні",
+      "value": "1229"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1667469538056",
+    "type": "string",
+    "label": "PESEL"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1687269862353",
+    "type": "string",
+    "label": "Ім'я родича та номер телефону по якому можна буде зателефонувати в разі екстренного випадку"
+   }
+  ]
+ },
+ "26_fme2nk": {
+  "id": "26",
+  "sec": "fme2nk",
+  "lang": "ua",
+  "address": "https://europeservice.org.ua",
+  "title": "Форма реєстрації на вакансію",
+  "desc": "Вітаємо, дякуємо що обрали нашу компанію для працевлаштування. Заповніть цю форму для оформлення договору з роботодавцем. Вибачте, що вона така довга, то не ми, то бюрократія❤️",
+  "button": "Відправити",
+  "dateFormat": "DD.MM.YYYY",
+  "fields": [
+   {
+    "name": "CONTACT_PHONE",
+    "type": "phone",
+    "label": "Телефон",
+    "required": true
+   },
+   {
+    "name": "CONTACT_IM",
+    "type": "string",
+    "label": "Номер VIBER"
+   },
+   {
+    "name": "CONTACT_EMAIL",
+    "type": "email",
+    "label": "E-mail"
+   },
+   {
+    "name": "CONTACT_NAME",
+    "type": "name",
+    "label": "Ім'я (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_LAST_NAME",
+    "type": "last-name",
+    "label": "Прізвище (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590486151564",
+    "type": "list",
+    "label": "Тип документа",
+    "items": [
+     {
+      "label": "Закордоний паспорт",
+      "value": "1323"
+     },
+     {
+      "label": "ID карта",
+      "value": "1325"
+     },
+     {
+      "label": "Внутрішній паспорт",
+      "value": "3581"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590064945603",
+    "type": "list",
+    "label": "Біометричний паспорт?",
+    "items": [
+     {
+      "label": "Так",
+      "value": "1227"
+     },
+     {
+      "label": "Ні",
+      "value": "1229"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1583932297515",
+    "type": "string",
+    "label": "Серія, номер паспорта"
+   },
+   {
+    "name": "CONTACT_BIRTHDATE",
+    "type": "date",
+    "label": "Дата народження"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065082012",
+    "type": "date",
+    "label": "Термін дії паспорта від:"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065106016",
+    "type": "date",
+    "label": "Термін дії паспорта до:"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1667469538056",
+    "type": "string",
+    "label": "PESEL"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1687269862353",
+    "type": "string",
+    "label": "Ім'я родича та номер телефону по якому можна буде зателефонувати в разі екстренного випадку"
+   }
+  ]
+ },
+ "27_makuhi": {
+  "id": "27",
+  "sec": "makuhi",
+  "lang": "ua",
+  "address": "https://europeservice.org.ua",
+  "title": "Форма реєстрації на вакансію",
+  "desc": "Вітаємо, дякуємо що обрали нашу компанію для працевлаштування. Заповніть цю форму для оформлення договору з роботодавцем. Вибачте, що вона така довга, то не ми, то бюрократія❤️",
+  "button": "Відправити",
+  "dateFormat": "DD.MM.YYYY",
+  "fields": [
+   {
+    "name": "CONTACT_PHONE",
+    "type": "phone",
+    "label": "Телефон",
+    "required": true
+   },
+   {
+    "name": "CONTACT_IM",
+    "type": "string",
+    "label": "Номер VIBER"
+   },
+   {
+    "name": "CONTACT_EMAIL",
+    "type": "email",
+    "label": "E-mail"
+   },
+   {
+    "name": "CONTACT_NAME",
+    "type": "name",
+    "label": "Ім'я (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_LAST_NAME",
+    "type": "last-name",
+    "label": "Прізвище (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590486151564",
+    "type": "list",
+    "label": "Тип документа",
+    "items": [
+     {
+      "label": "Закордоний паспорт",
+      "value": "1323"
+     },
+     {
+      "label": "ID карта",
+      "value": "1325"
+     },
+     {
+      "label": "Внутрішній паспорт",
+      "value": "3581"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590064945603",
+    "type": "list",
+    "label": "Біометричний паспорт?",
+    "items": [
+     {
+      "label": "Так",
+      "value": "1227"
+     },
+     {
+      "label": "Ні",
+      "value": "1229"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1583932420",
+    "type": "text",
+    "label": "Прописка (Країна, область, місто, вулиця, номер будинку, квартира)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590066021772",
+    "type": "string",
+    "label": "Поштовий індекс"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1667469538056",
+    "type": "string",
+    "label": "PESEL"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062148798",
+    "type": "list",
+    "label": "Розмір футболки",
+    "items": [
+     {
+      "label": "S",
+      "value": "1195"
+     },
+     {
+      "label": "M",
+      "value": "1197"
+     },
+     {
+      "label": "L",
+      "value": "1199"
+     },
+     {
+      "label": "XL",
+      "value": "1201"
+     },
+     {
+      "label": "XXL",
+      "value": "1203"
+     },
+     {
+      "label": "XXXL",
+      "value": "1205"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062273957",
+    "type": "list",
+    "label": "Розмір штанів",
+    "items": [
+     {
+      "label": "S",
+      "value": "1207"
+     },
+     {
+      "label": "M",
+      "value": "1209"
+     },
+     {
+      "label": "L",
+      "value": "1211"
+     },
+     {
+      "label": "XL",
+      "value": "1213"
+     },
+     {
+      "label": "XXL",
+      "value": "1215"
+     },
+     {
+      "label": "XXXL",
+      "value": "1217"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065684648",
+    "type": "string",
+    "label": "Розмір взуття"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590067284878",
+    "type": "string",
+    "label": "Зріст (см)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1675073710241",
+    "type": "double",
+    "label": "Талія (см)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1675073685294",
+    "type": "double",
+    "label": "Вага (кг)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1687269862353",
+    "type": "string",
+    "label": "Ім'я родича та номер телефону по якому можна буде зателефонувати в разі екстренного випадку"
+   }
+  ]
+ },
+ "28_ym9ewr": {
+  "id": "28",
+  "sec": "ym9ewr",
+  "lang": "ua",
+  "address": "https://europeservice.org.ua",
+  "title": "Форма реєстрації на вакансію",
+  "desc": "Вітаємо, дякуємо що обрали нашу компанію для працевлаштування. Заповніть цю форму для оформлення договору з роботодавцем. Вибачте, що вона така довга, то не ми, то бюрократія❤️",
+  "button": "Відправити",
+  "dateFormat": "DD.MM.YYYY",
+  "fields": [
+   {
+    "name": "CONTACT_PHONE",
+    "type": "phone",
+    "label": "Телефон",
+    "required": true
+   },
+   {
+    "name": "CONTACT_IM",
+    "type": "string",
+    "label": "Номер VIBER"
+   },
+   {
+    "name": "CONTACT_EMAIL",
+    "type": "email",
+    "label": "E-mail"
+   },
+   {
+    "name": "CONTACT_NAME",
+    "type": "name",
+    "label": "Ім'я (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_LAST_NAME",
+    "type": "last-name",
+    "label": "Прізвище (англійською як в паспорті)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_62B5BEA041BC6",
+    "type": "string",
+    "label": "Прізвище при народжені (англійською)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590486151564",
+    "type": "list",
+    "label": "Тип документа",
+    "items": [
+     {
+      "label": "Закордоний паспорт",
+      "value": "1323"
+     },
+     {
+      "label": "ID карта",
+      "value": "1325"
+     },
+     {
+      "label": "Внутрішній паспорт",
+      "value": "3581"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590064945603",
+    "type": "list",
+    "label": "Біометричний паспорт?",
+    "items": [
+     {
+      "label": "Так",
+      "value": "1227"
+     },
+     {
+      "label": "Ні",
+      "value": "1229"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065233017",
+    "type": "string",
+    "label": "Місце народження в закордонному паспорті:"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1583932420",
+    "type": "text",
+    "label": "Прописка (Країна, область, місто, вулиця, номер будинку, квартира)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590066021772",
+    "type": "string",
+    "label": "Поштовий індекс"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065483420",
+    "type": "list",
+    "label": "Цивільний стан",
+    "items": [
+     {
+      "label": "одружений/заміжня",
+      "value": "1231"
+     },
+     {
+      "label": "неодружений/незаміжня",
+      "value": "1233"
+     },
+     {
+      "label": "розведений/а",
+      "value": "2690"
+     },
+     {
+      "label": "вдівець/вдова",
+      "value": "2691"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1667469538056",
+    "type": "string",
+    "label": "PESEL"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1675074345090",
+    "type": "string",
+    "label": "Ідентифікаційний код"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062088244",
+    "type": "string",
+    "label": "Ім'я батька (англійською)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062099682",
+    "type": "string",
+    "label": "Ім'я матері (англійською)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1685026655701",
+    "type": "string",
+    "label": "Дівоче прізвище матері (англійською)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062148798",
+    "type": "list",
+    "label": "Розмір футболки",
+    "items": [
+     {
+      "label": "S",
+      "value": "1195"
+     },
+     {
+      "label": "M",
+      "value": "1197"
+     },
+     {
+      "label": "L",
+      "value": "1199"
+     },
+     {
+      "label": "XL",
+      "value": "1201"
+     },
+     {
+      "label": "XXL",
+      "value": "1203"
+     },
+     {
+      "label": "XXXL",
+      "value": "1205"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590062273957",
+    "type": "list",
+    "label": "Розмір штанів",
+    "items": [
+     {
+      "label": "S",
+      "value": "1207"
+     },
+     {
+      "label": "M",
+      "value": "1209"
+     },
+     {
+      "label": "L",
+      "value": "1211"
+     },
+     {
+      "label": "XL",
+      "value": "1213"
+     },
+     {
+      "label": "XXL",
+      "value": "1215"
+     },
+     {
+      "label": "XXXL",
+      "value": "1217"
+     }
+    ]
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590065684648",
+    "type": "string",
+    "label": "Розмір взуття"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1590067284878",
+    "type": "string",
+    "label": "Зріст (см)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1675073710241",
+    "type": "double",
+    "label": "Талія (см)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1675073685294",
+    "type": "double",
+    "label": "Вага (кг)"
+   },
+   {
+    "name": "CONTACT_UF_CRM_1687269862353",
+    "type": "string",
+    "label": "Ім'я родича та номер телефону по якому можна буде зателефонувати в разі екстренного випадку"
+   }
+  ]
+ }
+}

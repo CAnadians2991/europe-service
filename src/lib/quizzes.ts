@@ -1,6 +1,7 @@
 import quizzesData from '@/data/content/quizzes.json'
 import type { QStep } from './quiz-engine'
 import type { CountryCode } from './types'
+import { bitrixFormKey } from './bitrix-form'
 
 /**
  * Ad landing pages with a quiz. The Tilda URLs (/kviz-poland, /kviz-chekhia, /form_1 …) are kept — running ads point there.
@@ -27,6 +28,8 @@ export interface QuizLanding {
   /** branch quiz (kviz-kyiv-filia …) — the city goes into the lead */
   office?: string
   employer?: string
+  /** Tilda's /form_* pages: Bitrix's own registration form (key in src/data/bitrix-forms.json) instead of the quiz */
+  bitrixForm?: string
 }
 
 interface RawQuiz {
@@ -43,6 +46,7 @@ interface RawQuiz {
   employer?: string
   recruiting?: boolean
   noindex?: boolean
+  bitrixForm?: { form: string }
 }
 
 const WORK = new Set(['warehouse', 'factory', 'food', 'horeca'])
@@ -86,6 +90,7 @@ export const QUIZZES: QuizLanding[] = [
           : {}),
         ...(q.office ? { office: q.office } : {}),
         ...(q.employer ? { employer: q.employer } : {}),
+        ...(q.bitrixForm?.form ? { bitrixForm: bitrixFormKey(q.bitrixForm.form) } : {}),
         // all quiz forms are out of the index and the sitemap (owner 2026-10-15): Tilda's ad landings with a form only —
         // 0 clicks from Google in 3 months (GSC), while their headings («Підбір роботи в Польщі»…) competed with the real
         // country and city pages. The addresses keep working for ads and old links.

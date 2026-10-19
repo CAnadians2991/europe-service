@@ -16,6 +16,8 @@ import { localize } from '@/lib/vacancy-i18n'
 import { localHref } from '@/lib/alt-routes'
 import { plural } from '@/lib/format'
 import type { CountryCode } from '@/lib/types'
+import { BITRIX_FORMS } from '@/lib/bitrix-form'
+import { BitrixForm } from './BitrixForm'
 
 export function quizMetadata(path: string): Metadata {
   const q = getQuiz(path)
@@ -48,6 +50,23 @@ function Bullets({ items, className = '' }: { items: string[]; className?: strin
 /** Shared view: also used by the parametrised /pidbir ad landing */
 export async function QuizLandingView({ q, lang = 'uk' }: { q: QL; lang?: 'uk' | 'ru' }) {
   const uk = lang === 'uk'
+  // the registration forms managers send to candidates: Bitrix's form, as on Tilda (it makes a contact, not a lead)
+  const bx = q.bitrixForm ? BITRIX_FORMS[q.bitrixForm] : undefined
+  if (q.bitrixForm && bx)
+    return (
+      <section className="border-b border-line bg-white">
+        <div className="container-x max-w-2xl pb-14 pt-6 sm:pt-10">
+          <h1 className="text-[28px] sm:text-[40px]">{q.h1}</h1>
+          {bx.desc && <p className="mt-4 text-[16.5px] leading-relaxed text-ink-2">{bx.desc}</p>}
+          <div className="-mx-4 mt-8 border-y border-line bg-white sm:mx-0 sm:border-x">
+            <div className="rule-grad" />
+            <div className="p-4 pb-6 min-[380px]:p-5 sm:p-8">
+              <BitrixForm formKey={q.bitrixForm} form={bx} lang={lang} />
+            </div>
+          </div>
+        </div>
+      </section>
+    )
   const all = await getActiveVacancies(lang)
   const counts: Partial<Record<CountryCode, number>> = {}
   for (const v of all) counts[v.country] = (counts[v.country] ?? 0) + 1
