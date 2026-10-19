@@ -13,8 +13,10 @@ const Body = z.object({
 
 /** Bitrix's own form handler — the same request its form script sends (multipart form data) */
 function fill(address: string, fd: FormData, origin: string): Promise<{ ok: boolean; message?: string }> {
-  return new Response(fd).arrayBuffer().then((buf) => {
-    const type = new Response(fd).headers.get('content-type') ?? ''
+  // one Response for both: every serialisation of a FormData gets its own multipart boundary
+  const body = new Response(fd)
+  const type = body.headers.get('content-type') ?? ''
+  return body.arrayBuffer().then((buf) => {
     return new Promise((resolve) => {
       const req = https.request(
         `${address}/bitrix/services/main/ajax.php?action=crm.site.form.fill`,
