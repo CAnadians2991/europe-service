@@ -1,6 +1,7 @@
 import 'server-only'
 import crypto from 'node:crypto'
 import { PayError, type Provider } from './types'
+import { latinName } from '@/lib/passport-latin'
 
 /**
  * monobank acquiring (monopay): card, Apple Pay, Google Pay on monobank's page.
@@ -19,7 +20,8 @@ export const monopay: Provider = {
       ccy: 980,
       merchantPaymInfo: {
         reference: o.id,
-        destination: o.lang === 'ru' ? `Оплата услуг Europe Service, заказ ${o.id}` : `Оплата послуг Europe Service, замовлення ${o.id}`,
+        // what the bank shows in the FOP's statement (owner 2026-10-26): «Консультаційні послуги LEONID VELICHKO», no brand, no order number
+        destination: `Консультаційні послуги ${latinName(o.customer.name).trim()}`.trim(),
         basketOrder: o.lines.map((l) => ({ name: l.title, qty: l.qty, sum: l.price, total: l.sum, unit: 'шт.', code: l.id })),
       },
       redirectUrl: urls.result,
