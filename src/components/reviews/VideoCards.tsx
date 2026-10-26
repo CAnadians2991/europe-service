@@ -21,7 +21,7 @@ export function VideoCards({ items, lang, layout = 'grid' }: { items: VideoCard[
   }
   return (
     <>
-      <ul className={layout === 'row' ? '-mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-4' : 'grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4'}>
+      <ul className={layout === 'row' ? '-mx-4 flex snap-x scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-4' : 'grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4'}>
         {items.map((v) => (
           <li key={v.key} className={layout === 'row' ? 'w-[62%] shrink-0 snap-start sm:w-auto' : ''}>
             <button type="button" onClick={() => open(v)} className="group relative block aspect-[4/5] w-full overflow-hidden rounded-2xl bg-ink text-left" aria-label={`${uk ? 'Дивитися відгук' : 'Смотреть отзыв'}: ${v.name} — ${v.title}`}>

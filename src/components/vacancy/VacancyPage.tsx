@@ -16,18 +16,39 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { YouTube } from '@/components/content/YouTube'
 import { Photo, src } from '@/components/ui/Photo'
 import { ReviewCard, SectionHead } from '@/components/sections/Sections'
-import { IconArrow, IconPhone } from '@/components/ui/icons'
+import { IconArrow, IconHome, IconPhone } from '@/components/ui/icons'
 import { CATALOG_PATH, CATALOG_PATH_RU, CATEGORY, COUNTRY, SITE } from '@/lib/site'
 import { jobPostingLd } from '@/lib/seo'
 import { salaryHour, salaryMonth, vacancyCity } from '@/lib/format'
 import { toCard } from '@/lib/vacancies'
 import { localize } from '@/lib/vacancy-i18n'
 import { ruTwin } from '@/lib/alt-routes'
-import type { ReviewItem } from '@/lib/content'
+import { REVIEWS, type ReviewItem } from '@/lib/content'
+import { videoCards } from '@/lib/video-reviews'
 import type { Review, Vacancy } from '@/lib/types'
 import { Strands } from '@/components/motion/Strands'
 
 const norm = (t: string) => t.toLowerCase().replace(/[^a-zа-яіїєґё0-9]/gi, '')
+
+/** the kind of work in a review's «vacancy» stamp, by the vacancy's category */
+const KIND: Partial<Record<string, RegExp>> = {
+  warehouse: /склад|комплект|сортув|пакув|логіст/i, factory: /завод|виробн|фабрик|оператор|цех/i, auto: /авто|завод|оператор/i,
+  food: /м.?яс|харч|птах|печив|солод|шоколад|сніданк|риб/i, retail: /магазин|супермаркет|касир|викладк/i, horeca: /готел|покоїв|офіціант|кухар|ресепш|кемпінг/i,
+  cleaning: /прибир|клінінг|покоїв/i, agro: /ферм|теплиц|збир|сільськ/i,
+}
+/** reviews of the whole site for a vacancy without its own (owner 2026-10-26: reviews on every vacancy, as on the concept):
+ *  the same employer first, then the same city, then the same kind of work; fresh ones first among equals */
+function relevantReviews<T extends Pick<ReviewItem, 'vacancy' | 'city' | 'date'>>(v: Vacancy, list: T[], n: number): T[] {
+  const company = (v.company ?? '').toLowerCase().replace(/[^\p{L}\p{N} ]/gu, ' ').split(' ').filter((w) => w.length > 2)
+  const city = (vacancyCity(v) ?? '').toLowerCase()
+  const kind = KIND[v.category]
+  const score = (r: T) => {
+    const hay = `${r.vacancy ?? ''} ${r.city ?? ''}`.toLowerCase()
+    return (company.some((w) => hay.includes(w)) ? 10 : 0) + (city && hay.includes(city) ? 6 : 0) + (kind?.test(r.vacancy ?? '') ? 3 : 0)
+  }
+  const d = (r: T) => (r.date ?? '').split('.').reverse().join('')
+  return list.map((r) => ({ r, s: score(r) })).sort((a, b) => b.s - a.s || d(b.r).localeCompare(d(a.r))).slice(0, n).map((x) => x.r)
+}
 /** Tilda pasted its own crumbs into some intros («Главная / Вакансии / Philips») — not content */
 const isCrumbTrail = (t: string) => /^(главная|головна)\s*\//i.test(t.trim())
 /** «Проживання» / «Житло» / «Проживание» / «Жильё»: the housing photos belong in this block */
@@ -181,20 +202,49 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
   const housing = [...new Set([...(pooled ? [] : v.housingPhotos), ...extra.housing])]
   const photos = [...new Set([...v.photos, ...extra.work])]
   const housingAt = v.sections.findIndex((x) => isHousing(x.title))
-  const housingFigure = housing.length > 0 && (
-    <figure className="mt-5">
-      <h3 className="eyebrow">{labels.housing?.[0] ?? t.housingPhotos}</h3>
-      {/* one swipeable row (owner 2026-10-15: the grid took half a phone screen); the next photo peeks in */}
-      <div className="-mx-4 mt-3 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:px-0">
-        {housing.map((p, k) => (
-          <a key={p} href={src(p, 1200)} target="_blank" rel="noopener" className="block w-[72%] shrink-0 snap-start overflow-hidden rounded-xl bg-surface sm:w-[260px]">
-            <Photo base={p} alt={`${t.housingAlt} ${k + 1}`} sizes="(max-width: 640px) 72vw, 260px" className="aspect-[4/3] w-full object-cover" />
-          </a>
-        ))}
-      </div>
-      {v.housingNote && !pooled && <figcaption className="mt-2.5 text-[15px] leading-snug text-muted">{v.housingNote}</figcaption>}
+  // the housing block as on the concept: short chips (free / couples / Wi-Fi), then the photos in one rounded swipe row
+  const housingText = housingAt >= 0 ? v.sections[housingAt].items.join(' ') : ''
+  const housingChips = [
+    v.housingFree ? { label: t.free, free: true } : v.housing ? { label: v.housing.replace(/^надається\s*[—-]\s*/i, ''), free: false } : null,
+    /(пар|сімейн|семейн)[^.;]{0,40}(окрем|кімнат|комнат)/i.test(housingText) ? { label: uk ? 'Пари — окрема кімната' : 'Пары — отдельная комната', free: false } : null,
+    /wi-?fi|інтернет|интернет/i.test(housingText) ? { label: 'Wi-Fi', free: false } : null,
+  ].filter((x): x is { label: string; free: boolean } => Boolean(x))
+  const housingFigure = (housing.length > 0 || housingChips.length > 0) && (
+    <figure className="mt-4">
+      {housingChips.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {housingChips.map((x) => (
+            <span key={x.label} className={`inline-flex min-h-9 items-center gap-2 rounded-xl px-3 text-[14.5px] font-semibold ${x.free ? 'bg-brand-100 text-brand-800' : 'bg-white text-ink ring-1 ring-line'}`}>
+              <IconHome className={`size-4 shrink-0 ${x.free ? 'text-brand-700' : 'text-brand-600'}`} />
+              {x.label}
+            </span>
+          ))}
+        </div>
+      )}
+      {housing.length > 0 && (
+        <>
+          <h3 className="eyebrow mt-5">{labels.housing?.[0] ?? t.housingPhotos}</h3>
+          {/* one swipeable row (owner 2026-10-15: the grid took half a phone screen); the next photo peeks in */}
+          <div className="-mx-4 mt-3 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:mx-0 sm:px-0">
+            {housing.map((p, k) => (
+              <a key={p} href={src(p, 1200)} target="_blank" rel="noopener" className="block w-[78%] max-w-[420px] shrink-0 snap-center overflow-hidden rounded-[20px] bg-surface shadow-[0_14px_30px_-22px_rgb(16_36_27/0.6)] sm:w-[300px] sm:snap-start">
+                <Photo base={p} alt={`${t.housingAlt} ${k + 1}`} sizes="(max-width: 640px) 78vw, 300px" className="aspect-[4/3] w-full object-cover transition duration-500 hover:scale-[1.03]" />
+              </a>
+            ))}
+          </div>
+          {v.housingNote && !pooled && <figcaption className="mt-2 text-[15px] leading-snug text-muted">{v.housingNote}</figcaption>}
+        </>
+      )}
     </figure>
   )
+
+  // reviews on every vacancy: its own first, then the closest ones of the whole site; the same for the video reviews
+  const ownReviews = v.reviews.map((r) => toReviewItem(r, lang))
+  const reviewsShown = [
+    ...ownReviews,
+    ...relevantReviews(v, REVIEWS.filter((r) => !r.video && r.text.length > 40 && !ownReviews.some((o) => o.text === r.text)), 8),
+  ].slice(0, 8)
+  const videosShown = extra.videos.length > 0 ? extra.videos : videoCards(relevantReviews(v, REVIEWS.filter((r) => r.video), 8), lang).slice(0, 8)
 
   const terms: { label: string; value: React.ReactNode; wide?: boolean }[] = [
     {
@@ -202,8 +252,8 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
       label: payLabel,
       value: (
         <>
-          <span className="num block text-[20px] font-semibold leading-tight text-ink sm:text-[22px] xl:text-[20px]">{pay}</span>
-          {month && hour && <span className="num mt-0.5 block text-[15px] font-medium text-brand-700">{hour}</span>}
+          <span className="num block text-[18px] font-semibold leading-tight text-ink sm:text-[22px] xl:text-[20px]">{pay}</span>
+          {month && hour && <span className="num mt-0.5 block text-[13.5px] font-medium text-brand-700 sm:text-[15px]">{hour}</span>}
         </>
       ),
     },
@@ -214,7 +264,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
       label: t.housing,
       value: (v.housing || v.housingFree) && (
         <span className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
-          {v.housingFree && <span className="whitespace-nowrap bg-brand-100 px-2 py-0.5 text-[15px] font-semibold text-brand-800">{t.free}</span>}
+          {v.housingFree && <span className="whitespace-nowrap bg-brand-100 px-2 py-0.5 text-[13.5px] font-semibold text-brand-800 sm:text-[15px]">{t.free}</span>}
           {v.housing && !(v.housingFree && isJustFree(v.housing)) && <span>{v.housing}</span>}
         </span>
       ),
@@ -224,8 +274,8 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
 
   const ctaRow = (place: 'vacancy-top' | 'vacancy-bottom') => (
     <div data-cta className="flex gap-2 lg:hidden">
-      <QuickApply id={v.id} title={v.title} lang={lang} form={form(place)} label={t.book} submitLabel={t.book} className="btn-accent min-w-0 flex-1 !px-4" />
-      <ChatButtons place={place} lang={lang} compact />
+      <QuickApply id={v.id} title={v.title} lang={lang} form={form(place)} label={t.book} submitLabel={t.book} className="btn-accent !min-h-11 min-w-0 flex-1 !px-4 !py-2.5 !text-[15.5px]" />
+      <ChatButtons place={place} lang={lang} compact className="!min-h-11 !px-3.5 !py-2.5" />
     </div>
   )
 
@@ -278,17 +328,18 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
             </div>
 
 
-            <p className="eyebrow mt-7">{t.terms}</p>
-            <dl className="mt-3 grid border-t-[3px] border-ink sm:grid-cols-2 sm:gap-x-10 xl:grid-cols-3">
+            {/* phones (owner 2026-10-26: «зменш, багато екрану займає»): tighter rows, smaller labels */}
+            <p className="eyebrow mt-4 sm:mt-7">{t.terms}</p>
+            <dl className="mt-2 grid border-t-2 border-ink sm:mt-3 sm:grid-cols-2 sm:gap-x-10 sm:border-t-[3px] xl:grid-cols-3">
               {terms.map((x) => (
-                <div key={x.label} className={`grid grid-cols-[112px_minmax(0,1fr)] items-baseline gap-x-4 border-b border-line py-3.5 min-[420px]:grid-cols-[132px_minmax(0,1fr)] ${x.wide ? 'sm:col-span-2 xl:col-span-1' : ''}`}>
-                  <dt className="font-mono text-[12px] font-medium uppercase leading-snug tracking-[0.08em] text-muted">{x.label}</dt>
-                  <dd className="text-[16px] font-semibold leading-snug text-ink">{x.value}</dd>
+                <div key={x.label} className={`grid grid-cols-[92px_minmax(0,1fr)] items-baseline gap-x-3 border-b border-line py-2 min-[420px]:grid-cols-[112px_minmax(0,1fr)] sm:grid-cols-[132px_minmax(0,1fr)] sm:gap-x-4 sm:py-3.5 ${x.wide ? 'sm:col-span-2 xl:col-span-1' : ''}`}>
+                  <dt className="font-mono text-[10.5px] font-medium uppercase leading-snug tracking-[0.06em] text-muted sm:text-[12px] sm:tracking-[0.08em]">{x.label}</dt>
+                  <dd className="text-[14.5px] font-semibold leading-snug text-ink sm:text-[16px]">{x.value}</dd>
                 </div>
               ))}
             </dl>
 
-            <div className="mt-5">{ctaRow('vacancy-top')}</div>
+            <div className="mt-3 sm:mt-5">{ctaRow('vacancy-top')}</div>
           </div>
           <div className="rule-grad" />
         </section>
@@ -299,16 +350,22 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
             <Gallery photos={photos} alt={v.title} priority lang={lang} />
 
             {/* phones: the form right after the photos */}
-            <section id="apply-mobile" aria-labelledby="apply-mobile-h" className="mt-8 border border-line border-t-[3px] border-t-ink bg-white p-5 lg:hidden">
-              <p className="eyebrow">{t.apply}</p>
-              <h2 id="apply-mobile-h" className="mt-2 text-[22px] text-ink">{t.book}</h2>
-              <p className="mt-2 text-[16px] leading-relaxed text-ink-2">{t.bookText}</p>
-              <p className="mt-2 text-[15px] font-semibold text-brand-800">{ANY_REQUEST[lang].short}</p>
-              <div className="mt-4">
-                <LeadForm form={form('vacancy')} vacancyId={v.id} vacancyTitle={v.title} submitLabel={t.book} lang={lang} />
+            {/* owner 2026-10-26: «форму забронювати меньшу в 2 рази» — one short line, smaller fields, messengers + phone in one row */}
+            <section id="apply-mobile" aria-labelledby="apply-mobile-h" className="mt-6 rounded-[18px] border border-line bg-white p-4 shadow-[0_16px_34px_-28px_rgb(16_36_27/0.6)] lg:hidden">
+              <h2 id="apply-mobile-h" className="text-[18px] text-ink">{t.book}</h2>
+              <p className="mt-0.5 text-[13.5px] leading-snug text-ink-2">{t.callback}</p>
+              {/* labels stay for screen readers; the placeholders say the same on screen */}
+              <div className="mt-3 [&_.field]:!py-2.5 [&_.field]:!text-[15px] [&_form]:!space-y-2 [&_label]:sr-only [&_p]:!mt-2 [&_p]:!text-[11.5px] [&_button[type=submit]]:!min-h-11 [&_button[type=submit]]:!py-2.5 [&_button[type=submit]]:!text-[15.5px]">
+                <LeadForm form={form('vacancy')} vacancyId={v.id} vacancyTitle={v.title} submitLabel={t.book} compact lang={lang} namePlaceholder={uk ? 'Ім’я (необов’язково)' : 'Имя (необязательно)'} />
               </div>
-              <LicenseBadge className="mt-4" lang={lang} />
-              <div className="mt-5 border-t border-line pt-4">{contacts('vacancy-mobile')}</div>
+              <div className="mt-2.5 flex items-center gap-2 border-t border-line pt-2.5">
+                <ChatButtons place="vacancy-mobile" lang={lang} compact className="!min-h-10 !px-3 !py-2" />
+                <a href={`tel:${SITE.phone}`} className="ml-auto flex min-h-10 items-center gap-1.5 text-ink hover:text-brand-700">
+                  <IconPhone className="size-4 shrink-0 text-brand-600" />
+                  <span className="num text-[15px] font-semibold">{SITE.phoneDisplay}</span>
+                </a>
+              </div>
+              <LicenseBadge className="mt-1.5 !text-[11.5px]" lang={lang} />
             </section>
 
             {(v.intro && !isCrumbTrail(v.intro)) || (v.headline && norm(v.headline) !== norm(v.title)) ? (
@@ -358,36 +415,41 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
               )}
             </div>
 
-            {extra.videos.length > 0 && (
-              <section className="mt-10" aria-labelledby="vvid-h">
-                <RegisterHead id="vvid-h" as="h3" title={uk ? 'Відеовідгуки працівників' : 'Видеоотзывы работников'} />
-                <div className="mt-4">
-                  <VideoCards items={extra.videos} lang={lang} />
-                </div>
-              </section>
-            )}
-
-            <AnyRequest lang={lang} id="vacancy-any-request" preset={{ country: v.country }} className="mt-10" />
-
-            {v.reviews.length > 0 && (
+            {reviewsShown.length > 0 && (
               <section className="mt-10" aria-labelledby="vrev-h">
                 <RegisterHead
                   id="vrev-h"
                   as="h3"
                   title={labels.reviews?.[0] ?? t.reviews}
                   aside={
-                    <HoverLink href={uk ? '/vidguki#review-form-h' : '/ru/otzyvy#review-form-h'} className="inline-flex min-h-11 items-center text-[15px] font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[3px] hover:decoration-brand-700">
-                      {t.leaveReview}
+                    <HoverLink href={uk ? '/vidguki' : '/ru/otzyvy'} className="inline-flex min-h-11 items-center gap-1.5 text-[15px] font-semibold text-brand-700 hover:text-brand-800">
+                      {uk ? 'Усі відгуки' : 'Все отзывы'} <IconArrow className="size-4" />
                     </HoverLink>
                   }
                 />
-                <div className="mt-4 grid gap-4 sm:grid-cols-2 sm:[&>*:last-child:nth-child(odd)]:col-span-2">
-                  {v.reviews.map((r) => (
-                    <ReviewCard key={r.name + r.text.slice(0, 16)} r={toReviewItem(r, lang)} lang={lang} />
+                <div className="-mx-4 mt-4 flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:mx-0 sm:px-0">
+                  {reviewsShown.map((r) => (
+                    <div key={r.name + r.text.slice(0, 16)} className="w-[84%] max-w-[360px] shrink-0 snap-start [&>figure]:rounded-[18px] [&>figure]:p-5 [&_blockquote]:line-clamp-6 [&_blockquote]:text-[15px]">
+                      <ReviewCard r={r} lang={lang} />
+                    </div>
                   ))}
+                </div>
+                <HoverLink href={uk ? '/vidguki#review-form-h' : '/ru/otzyvy#review-form-h'} className="mt-2 inline-flex min-h-11 items-center text-[14.5px] font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[3px] hover:decoration-brand-700">
+                  {t.leaveReview}
+                </HoverLink>
+              </section>
+            )}
+
+            {videosShown.length > 0 && (
+              <section className="mt-10" aria-labelledby="vvid-h">
+                <RegisterHead id="vvid-h" as="h3" title={uk ? 'Відеовідгуки працівників' : 'Видеоотзывы работников'} />
+                <div className="mt-4">
+                  <VideoCards items={videosShown} lang={lang} layout="row" />
                 </div>
               </section>
             )}
+
+            <AnyRequest lang={lang} id="vacancy-any-request" preset={{ country: v.country }} className="mt-10" />
 
             <section className="mt-10" aria-labelledby="how-h">
               <RegisterHead id="how-h" title={t.how} />
