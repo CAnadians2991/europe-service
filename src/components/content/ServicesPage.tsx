@@ -19,22 +19,28 @@ import { VariantPay, type VariantOption } from '@/components/services/VariantPay
 type Lang = 'uk' | 'ru'
 const fmt = (kop: number) => new Intl.NumberFormat('uk-UA').format(Math.round(kop / 100)).replace(/[   ]/g, ' ') + ' грн'
 const IDS = ['basic', 'standard', 'premium'] as const
+/** pay.europeservice.com.ua prices these services as € × 52 → the euro amount, rounded to 5 */
+const toEur = (kop: number) => Math.round(kop / 100 / 52 / 5) * 5
 
 /** the amounts a service is sold for (as on pay.europeservice.com.ua) → the picker's options and the price line */
 function variants(groupId: string, lang: Lang) {
   const g = VARIANT_GROUPS.find((x) => x.id === groupId)
   if (!g) return null
   const uk = lang === 'uk'
+  // the other-country documents: hryvnias, with the rough euros next to them (owner 2026-10-28) — Tilda's € prices × 52
+  const eur = groupId.startsWith('docs-')
   const options: VariantOption[] = g.options.map((o) => {
     const p = PRODUCT[variantId(g, o)]
     const term = uk ? o.label : o.labelRu
-    return { id: p.id, price: p.price, title: uk ? p.title : p.titleRu, label: term ? `${term} — ${fmt(p.price)}` : fmt(p.price) }
+    const price = eur ? `${fmt(p.price)} (≈ €${toEur(p.price)})` : fmt(p.price)
+    return { id: p.id, price: p.price, title: uk ? p.title : p.titleRu, label: term ? `${term} — ${price}` : price }
   })
   const ps = options.map((o) => o.price)
   const min = Math.min(...ps)
   const max = Math.max(...ps)
   const range = min === max ? fmt(min) : `${fmt(min).replace(' грн', '')}–${fmt(max)}`
-  return { g, options, range }
+  const rangeEur = eur ? (min === max ? `≈ €${toEur(min)}` : `≈ €${toEur(min)}–${toEur(max)}`) : ''
+  return { g, options, range, rangeEur }
 }
 const PICK = 'field select-code !w-auto min-w-0 !rounded-[12px] !py-2.5 !pl-3 !pr-8 !text-[14.5px] font-semibold'
 
@@ -230,14 +236,26 @@ export function ServicesPage({ lang }: { lang: Lang }) {
                   const c = COUNTRY.find((x) => x.re.test(p.title))
                   const v = c ? variants(`docs-${c.code}`, lang) : null
                   return (
-                    <li key={p.title} className="flex flex-col gap-3 rounded-[18px] bg-cream p-4 ring-1 ring-line">
+                    <li key={p.title} className="flex flex-col gap-3 rounded-[18px] bg-cream p-4 ring-1 ring-line [&>div:last-child]:mt-auto">
                       <div className="flex items-center gap-3">
                         {c && <Flag code={c.code} className="h-6 w-9 shrink-0 rounded-[3px]" title={uk ? c.uk : c.ru} />}
                         <div className="min-w-0 flex-1">
                           <h3 className="text-[16px] font-semibold leading-tight">{c ? (uk ? c.uk : c.ru) : p.title}</h3>
-                          <p className="num mt-0.5 text-[15px] font-semibold text-ink-2">{v?.range ?? p.price}</p>
+                          <p className="num mt-0.5 text-[15px] font-semibold text-ink-2">{v?.range ?? p.price}{v?.rangeEur && <span className="ml-1.5 font-medium text-muted">{v.rangeEur}</span>}</p>
                         </div>
                       </div>
+                      {/* what the service includes, one-to-one with Tilda's cards (owner 2026-10-28: «розпис послуг … як було на тільді») */}
+                      {p.features.length > 0 && (
+                        <ul className="grid gap-1.5">
+                          {p.features.map((f) => (
+                            <li key={f} className="flex gap-2 text-[14px] leading-snug text-ink-2">
+                              <IconCheck className="mt-0.5 size-4 shrink-0 text-brand-600" />
+                              {f.charAt(0).toUpperCase() + f.slice(1).replace(/\.$/, '')}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      {p.note && <p className="text-[12.5px] leading-snug text-muted">{p.note}</p>}
                       {v ? (
                         <VariantPay options={v.options} lang={lang} label={uk ? 'Сума' : 'Сумма'} selectClassName={`${PICK} flex-1`} className="btn-accent !min-h-11 shrink-0 !px-5 !text-[15px]">
                           {uk ? 'Оплатити' : 'Оплатить'}
