@@ -112,9 +112,9 @@ function ServiceCard({ icon, title, price, tag, action, more, wide }: { icon: Re
 }
 
 const COUNTRY = [
-  { re: /Німеччин|Германи/, code: 'de', uk: 'Німеччина', ru: 'Германия' },
-  { re: /Нідерланд|Нидерланд/, code: 'nl', uk: 'Нідерланди', ru: 'Нидерланды' },
-  { re: /Греці|Греци/, code: 'gr', uk: 'Греція', ru: 'Греция' },
+  { re: /Німеччин|Германи/, code: 'de', uk: 'Німеччина', ru: 'Германия', ukOf: 'Німеччини', ruOf: 'Германии' },
+  { re: /Нідерланд|Нидерланд/, code: 'nl', uk: 'Нідерланди', ru: 'Нидерланды', ukOf: 'Нідерландів', ruOf: 'Нидерландов' },
+  { re: /Греці|Греци/, code: 'gr', uk: 'Греція', ru: 'Греция', ukOf: 'Греції', ruOf: 'Греции' },
 ]
 
 export function ServicesPage({ lang }: { lang: Lang }) {
@@ -255,7 +255,8 @@ export function ServicesPage({ lang }: { lang: Lang }) {
                           ))}
                         </ul>
                       )}
-                      {p.note && <p className="text-[12.5px] leading-snug text-muted">{p.note}</p>}
+                      {/* Tilda had this line only under Germany; the owner (2026-10-28) wants it on every country */}
+                      {(p.note || c) && <p className="text-[12.5px] leading-snug text-muted">{p.note ?? (uk ? `*ціна залежить від регіону ${c!.ukOf} та роботодавця` : `*цена зависит от региона ${c!.ruOf} и работодателя`)}</p>}
                       {v ? (
                         <VariantPay options={v.options} lang={lang} label={uk ? 'Сума' : 'Сумма'} selectClassName={`${PICK} flex-1`} className="btn-accent !min-h-11 shrink-0 !px-5 !text-[15px]">
                           {uk ? 'Оплатити' : 'Оплатить'}
