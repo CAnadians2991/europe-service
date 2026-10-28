@@ -78,7 +78,7 @@ const DOCS_RU = ['Переоформление документов для тр�
 const amounts = (...uah: number[]) => uah.map((n) => ({ suffix: String(n), uah: n }))
 export const VARIANT_GROUPS: VariantGroup[] = [
   { id: 'docs-de', title: 'Переоформлення документів для роботи в Німеччині', titleRu: 'Переоформление документов для работы в Германии', features: DOCS, featuresRu: DOCS_RU, options: amounts(5200, 7800, 10400) },
-  { id: 'docs-nl', title: 'Переоформлення документів для роботи в Нідерландах', titleRu: 'Переоформление документов для работы в Нидерландах', features: DOCS, featuresRu: DOCS_RU, options: amounts(5200, 7800, 10400, 13000) },
+  { id: 'docs-nl', title: 'Переоформлення документів для роботи в Нідерландах', titleRu: 'Переоформление документов для работы в Нидерландах', features: DOCS, featuresRu: DOCS_RU, options: amounts(10400) }, // one price since 2026-10-28 (owner): 10 400 грн ≈ €200
   { id: 'docs-gr', title: 'Переоформлення документів для роботи в Греції', titleRu: 'Переоформление документов для работы в Греции', features: DOCS, featuresRu: DOCS_RU, options: amounts(7800) },
   {
     id: 'insurance',
