@@ -104,7 +104,7 @@ export async function QuizLandingView({ q, lang = 'uk' }: { q: QL; lang?: 'uk' |
             <p className="mt-4 max-w-xl text-[16.5px] leading-relaxed text-ink-2 sm:text-[18px]">{q.subtitle}</p>
             {/* Ads policy (Dishonest pricing / Misrepresentation): price model and who we are — above the fold on phones */}
             <p className="mt-4 font-mono text-[13px] leading-relaxed text-ink-2 lg:hidden">
-              {jobs ? <>{uk ? 'Вакансія безкоштовна · супровід від 1099\u00a0грн' : 'Вакансия бесплатна · сопровождение от 1099\u00a0грн'} ·{' '}</> : 'Europe Service · '}
+              {jobs ? <>{uk ? 'Вакансія безкоштовна · супровід від 1199\u00a0грн' : 'Вакансия бесплатна · сопровождение от 1199\u00a0грн'} ·{' '}</> : 'Europe Service · '}
               <Link href={about} className="whitespace-nowrap font-semibold text-ink underline decoration-line-strong underline-offset-[3px] hover:decoration-ink">
                 {edrpou}
               </Link>
@@ -119,7 +119,7 @@ export async function QuizLandingView({ q, lang = 'uk' }: { q: QL; lang?: 'uk' |
                   <p className="font-semibold text-ink">Europe Service</p>
                   <p>{license}</p>
                   <p>{edrpou}</p>
-                  {jobs && <p className="mt-1 text-ink">{uk ? 'Вакансія безкоштовна · супровід від 1099\u00a0грн' : 'Вакансия бесплатна · сопровождение от 1099\u00a0грн'}</p>}
+                  {jobs && <p className="mt-1 text-ink">{uk ? 'Вакансія безкоштовна · супровід від 1199\u00a0грн' : 'Вакансия бесплатна · сопровождение от 1199\u00a0грн'}</p>}
                   <Link href={about} className="mt-1 inline-flex min-h-11 items-center gap-1.5 font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[3px] hover:decoration-brand-700">
                     {uk ? 'Перевірити ліцензію' : 'Проверить лицензию'} <IconArrow className="size-3.5" />
                   </Link>

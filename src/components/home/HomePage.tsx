@@ -261,7 +261,7 @@ export async function HomePage({ lang }: { lang: 'uk' | 'ru' }) {
               {t.pick} <IconArrow className="size-4" />
             </QuizButton>
             <HoverLink href={uk ? '/poslugi' : '/ru/services'} className="text-[15px] font-semibold text-brand-700 underline decoration-brand-300 underline-offset-[4px]">
-              {uk ? 'Пакет супроводу від 1 099 грн — що входить →' : 'Пакет сопровождения от 1 099 грн — что входит →'}
+              {uk ? 'Пакет супроводу від 1 199 грн — що входить →' : 'Пакет сопровождения от 1 199 грн — что входит →'}
             </HoverLink>
           </div>
         </div>

@@ -14,7 +14,7 @@ td.addRule('hidden', {
   filter: (n) => n.nodeType === 1 && ((n as HTMLElement).getAttribute('aria-hidden') === 'true' || (n as HTMLElement).hasAttribute('hidden') || (n as HTMLElement).getAttribute('data-md') === 'skip'),
   replacement: () => '',
 })
-// a crossed-out old price stays visibly old: «~~1 899 грн~~ 1 599 грн»
+// a crossed-out old price stays visibly old: «~~1 899 грн~~ 1 699 грн»
 td.addRule('strike', {
   filter: (n) => ['DEL', 'S'].includes(n.nodeName) || (n.nodeType === 1 && /\bline-through\b/.test((n as HTMLElement).getAttribute('class') || '')),
   replacement: (c) => (c.trim() ? `~~${c.trim()}~~ ` : ''),

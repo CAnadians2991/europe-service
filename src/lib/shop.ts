@@ -35,7 +35,7 @@ const slug = (s: string) =>
 
 const TRANSLIT: Record<string, string> = { Базовий: 'basic', Стандарт: 'standard', Преміум: 'premium', 'Польська сім-карта': 'sim-pl', 'Страховий поліс на 10 днів': 'insurance-10', 'Польська робоча віза на 1 рік': 'visa-pl' }
 
-/** «1099 грн», «₴ 400» → kopecks; ranges and other currencies → null */
+/** «1199 грн», «₴ 400» → kopecks; ranges and other currencies → null */
 export function uahPrice(p: string | null | undefined): number | null {
   if (!p || /€|\$|-|–/.test(p)) return null
   const m = p.replace(/\s/g, '').match(/(\d+)/)

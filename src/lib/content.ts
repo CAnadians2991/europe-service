@@ -117,7 +117,7 @@ export const SERVICES = {
   ru: { ...EMPTY_SERVICES, ...S.ru } as ServicesLang,
 }
 
-/** «1 099 грн» — the cheapest of the three support packages (Базовий / Стандарт / Преміум; the list goes on with
+/** «1 199 грн» — the cheapest of the three support packages (Базовий / Стандарт / Преміум; the list goes on with
  *  single services such as insurance) — the services pages' title names it */
 export function packagesFrom(lang: 'uk' | 'ru') {
   const n = Math.min(...SERVICES[lang].packages.slice(0, 3).map((p) => Number(String(p.price ?? '').replace(/\D/g, ''))).filter((x) => x > 0))
