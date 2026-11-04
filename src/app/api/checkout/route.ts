@@ -1,12 +1,10 @@
-import { NextResponse, after, type NextRequest } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 import { z } from 'zod'
-import { priceCart, uah, type MethodId } from '@/lib/shop'
+import { priceCart } from '@/lib/shop'
 import { methods, PROVIDERS } from '@/lib/pay'
 import { PayError } from '@/lib/pay/types'
 import { createOrder, newOrderId, setOrder } from '@/lib/orders'
-import { deliverLead, saveLead } from '@/lib/leads'
 import { normalizePhone } from '@/lib/format'
-import type { Lead } from '@/lib/types'
 
 const Body = z.object({
   lines: z.array(z.object({ id: z.string().max(60), qty: z.number().int().min(1).max(10) })).min(1).max(20),
@@ -26,11 +24,11 @@ const Body = z.object({
   t: z.number().optional(),
 })
 
-const METHOD_LABEL: Record<MethodId, string> = { monopay: 'monopay (картка)', monoparts: 'monobank — Покупка частинами', privatparts: 'ПриватБанк — Оплата частинами', manual: 'через менеджера' }
-
 /**
  * Cart → order: prices from the catalog (never from the browser), the order saved, then the bank's page or app.
- * Every order also goes to the managers as a lead (form «oplata»), so a stuck payment is followed up.
+ * No lead and no «заявка»: clients pay only when their manager sends them here, so an order is not a new client
+ * (owner 04.11.2026 — each order used to land on «Бот» and another manager called a client who had just paid).
+ * Orders are in the admin «Оплати».
  */
 export async function POST(req: NextRequest) {
   let b: z.infer<typeof Body>
@@ -53,31 +51,12 @@ export async function POST(req: NextRequest) {
 
   const id = newOrderId()
   const customer = { name: b.customer.name, phone, ...(b.customer.email ? { email: b.customer.email } : {}), ...(b.customer.comment ? { comment: b.customer.comment } : {}) }
-  const lead: Lead = {
-    id: crypto.randomUUID(),
-    createdAt: new Date().toISOString(),
-    name: customer.name,
-    phone,
-    form: b.lang === 'ru' ? 'oplata-ru' : 'oplata',
-    answers: {
-      Замовлення: id,
-      Склад: lines.map((l) => `${l.title}${l.qty > 1 ? ` × ${l.qty}` : ''}`).join('; '),
-      Сума: uah(total),
-      Оплата: METHOD_LABEL[b.method] + (parts ? `, ${parts} платежів` : ''),
-      ...(customer.email ? { Email: customer.email } : {}),
-      ...(customer.comment ? { Коментар: customer.comment } : {}),
-    },
-    page: b.page,
-    status: 'new',
-  }
   const order = { id, status: b.method === 'manual' ? ('manual' as const) : ('new' as const), method: b.method, amount: total, parts, items: lines, customer, lang: b.lang, page: b.page, attr: b.attr }
   try {
     await createOrder(order)
-    await saveLead(lead)
   } catch (e) {
     console.error('[checkout] save failed', e)
   }
-  after(() => deliverLead(lead))
 
   if (b.method === 'manual') return NextResponse.json({ ok: true, id, total, next: { kind: 'done' } })
 
