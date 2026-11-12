@@ -60,7 +60,11 @@ export async function POST(req: NextRequest) {
 
   if (b.method === 'manual') return NextResponse.json({ ok: true, id, total, next: { kind: 'done' } })
 
-  const origin = req.nextUrl.origin
+  // the address the visitor used, as the proxy in front saw it (Netlify, or Caddy on our server — there Next itself only
+  // sees http://container:3000): the bank's webhook and the return page must point to the public https address
+  const fwdHost = req.headers.get('x-forwarded-host')?.split(',')[0].trim()
+  const fwdProto = req.headers.get('x-forwarded-proto')?.split(',')[0].trim()
+  const origin = fwdHost ? `${fwdProto === 'http' ? 'http' : 'https'}://${fwdHost}` : req.nextUrl.origin
   const result = `${origin}${b.lang === 'ru' ? '/ru' : ''}/oplata/status?order=${id}`
   const webhook = `${origin}/api/pay/${b.method}`
   try {
