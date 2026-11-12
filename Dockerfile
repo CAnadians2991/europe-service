@@ -15,8 +15,8 @@ ENV NEXT_OUTPUT=standalone NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max-old-spac
 ARG REBUILD_ID=0
 RUN --mount=type=secret,id=env,target=/run/secrets/env \
     echo "build $REBUILD_ID" && \
-    node --env-file=/run/secrets/env scripts/vps/check-db.mjs && \
-    node --env-file=/run/secrets/env node_modules/next/dist/bin/next build
+    node scripts/vps/with-env.mjs /run/secrets/env scripts/vps/check-db.mjs && \
+    node scripts/vps/with-env.mjs /run/secrets/env node_modules/next/dist/bin/next build
 
 FROM node:24-bookworm-slim AS run
 WORKDIR /app
