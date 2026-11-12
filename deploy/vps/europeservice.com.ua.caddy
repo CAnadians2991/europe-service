@@ -34,12 +34,15 @@ es-site--test.2-31-204-33.sslip.io {
 	import es_site
 }
 
-#DOMAIN europeservice.com.ua {
-#DOMAIN 	import es_site
-#DOMAIN }
-#DOMAIN www.europeservice.com.ua {
-#DOMAIN 	redir https://europeservice.com.ua{uri} permanent
-#DOMAIN }
-#DOMAIN http://europeservice.com.ua, http://www.europeservice.com.ua {
-#DOMAIN 	redir https://europeservice.com.ua{uri} 301
-#DOMAIN }
+#APEX europeservice.com.ua {
+#APEX 	import es_site
+#APEX }
+#APEX http://europeservice.com.ua {
+#APEX 	redir https://europeservice.com.ua{uri} 301
+#APEX }
+#WWW www.europeservice.com.ua {
+#WWW 	redir https://europeservice.com.ua{uri} permanent
+#WWW }
+#WWW http://www.europeservice.com.ua {
+#WWW 	redir https://europeservice.com.ua{uri} 301
+#WWW }
