@@ -6,6 +6,8 @@ services:
     build:
       context: ./app
       secrets: [env]
+      args:
+        REBUILD_ID: ${REBUILD_ID:-0}
     image: es-site-web
     container_name: es-site-web
     restart: unless-stopped

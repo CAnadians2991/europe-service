@@ -20,6 +20,7 @@ rm -rf app.old && { [ -d app ] && mv app app.old || true; } && mv app.new app
 cp app/deploy/vps/compose.yml compose.yml
 cp app/deploy/vps/deploy.sh deploy.sh.new && chmod +x deploy.sh.new && mv deploy.sh.new deploy.sh
 
+export REBUILD_ID="$(date +%s)-$REV"
 if ! docker compose build web; then
   echo "$(date '+%F %T') BUILD FAILED — the running container is untouched"
   rm -rf app && mv app.old app
