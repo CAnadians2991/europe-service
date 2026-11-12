@@ -1,0 +1,45 @@
+# europeservice.com.ua — Next.js in the container es-site-web (/srv/es-site), since 12.11.2026 instead of Netlify.
+# Copied to /srv/caddy-sites on the server (imported by the ES dashboard's Caddy). The domain blocks are added at the DNS switch
+# (deploy/vps/README.md); until then the site answers only on the test address.
+(es_site) {
+	encode zstd gzip
+	request_body {
+		max_size 30MB
+	}
+	# the same Cache-Control as netlify.toml gave the files from public/ (Next's own /media/* rule is replaced here)
+	header /media/v/* >Cache-Control "public, max-age=31536000, immutable"
+	header /media/hx/* >Cache-Control "public, max-age=31536000, immutable"
+	header /media/r/* >Cache-Control "public, max-age=31536000, immutable"
+	header /media/c/* >Cache-Control "public, max-age=2592000"
+	header /media/vx/* >Cache-Control "public, max-age=2592000"
+	header /media/team/* >Cache-Control "public, max-age=2592000"
+	header /media/press/* >Cache-Control "public, max-age=2592000"
+	header /media/a/* >Cache-Control "public, max-age=0, must-revalidate"
+	header /brand/* >Cache-Control "public, max-age=2592000"
+	header /reviews/* >Cache-Control "public, max-age=2592000"
+	reverse_proxy es-site-web:3000 {
+		# a visitor must not pretend to come through a CDN with its own country header
+		header_up -Cf-Ipcountry
+		header_up -X-Nf-Geo
+		header_up -X-Country
+		header_up -X-Nf-Country
+		header_up -X-Vercel-Ip-Country
+		# while the container restarts after a deploy, requests wait (up to 30 s) instead of failing
+		lb_try_duration 30s
+		lb_try_interval 250ms
+	}
+}
+
+es-site--test.2-31-204-33.sslip.io {
+	import es_site
+}
+
+#DOMAIN europeservice.com.ua {
+#DOMAIN 	import es_site
+#DOMAIN }
+#DOMAIN www.europeservice.com.ua {
+#DOMAIN 	redir https://europeservice.com.ua{uri} permanent
+#DOMAIN }
+#DOMAIN http://europeservice.com.ua, http://www.europeservice.com.ua {
+#DOMAIN 	redir https://europeservice.com.ua{uri} 301
+#DOMAIN }

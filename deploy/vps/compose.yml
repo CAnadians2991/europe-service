@@ -1,0 +1,30 @@
+# europeservice.com.ua — Next.js standalone in the container es-site-web (/srv/es-site on the server, since 12.11.2026).
+# Caddy of the ES dashboard proxies it through the docker network «edge» (/srv/caddy-sites/europeservice.com.ua.caddy).
+# .env.production lives next to this file on the server only (not in git — the repo is public).
+services:
+  web:
+    build:
+      context: ./app
+      secrets: [env]
+    image: es-site-web
+    container_name: es-site-web
+    restart: unless-stopped
+    env_file: ./.env.production
+    environment:
+      BLOBS_DIR: /data/blobs
+      GEOIP_DIR: /data/geoip
+    volumes:
+      - nextcache:/app/.next/cache
+      - ./blobs:/data/blobs
+      - /srv/geoip:/data/geoip:ro
+    networks: [edge]
+    mem_limit: 2g
+    logging: { driver: json-file, options: { max-size: 20m, max-file: "5" } }
+secrets:
+  env:
+    file: ./.env.production
+volumes:
+  nextcache:
+networks:
+  edge:
+    external: true

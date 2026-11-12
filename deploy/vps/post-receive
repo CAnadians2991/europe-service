@@ -1,0 +1,9 @@
+#!/bin/bash
+# /srv/<name>.git/hooks/post-receive — a push to main starts deploy.sh in the background
+NAME=$(basename "$(pwd)" .git)
+while read -r old new ref; do
+  if [ "$ref" = refs/heads/main ]; then
+    echo "→ deploy $NAME ${new:0:7} started; log: ssh es-vps-deploy tail -f /srv/$NAME/deploy.log"
+    nohup "/srv/$NAME/deploy.sh" >> "/srv/$NAME/deploy.log" 2>&1 < /dev/null &
+  fi
+done

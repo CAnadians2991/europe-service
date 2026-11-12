@@ -3,6 +3,8 @@ import legacy from './src/data/legacy-redirects.json'
 import tildaPages from './src/data/tilda-page-redirects.json'
 
 const nextConfig: NextConfig = {
+  // our own server (Docker, scripts/vps): a self-contained server.js; Netlify builds keep its own adapter output
+  ...(process.env.NEXT_OUTPUT === 'standalone' ? { output: 'standalone' as const } : {}),
   // Prerender of ~490 pages reads the whole vacancy catalog from the database: under load a page can need more than
   // the default 60 s (15.10 the build stopped after 3 timeouts on /news/mob_operator_t-mobile) — more time, fewer workers
   staticPageGenerationTimeout: 240,
@@ -50,9 +52,9 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // temporary hosts (*.vercel.app, *.netlify.app) must never compete with personalwork.com.ua in search
+        // temporary hosts (*.vercel.app, *.netlify.app, the server's *.sslip.io test address) must never compete with the domain in search
         source: '/:path*',
-        has: [{ type: 'host', value: '(?<sub>.*)\\.(?:vercel|netlify)\\.app' }],
+        has: [{ type: 'host', value: '(?<sub>.*)\\.(?:(?:vercel|netlify)\\.app|sslip\\.io)' }],
         headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
       },
       {

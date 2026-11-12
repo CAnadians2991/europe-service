@@ -1,0 +1,9 @@
+.git
+node_modules
+.next
+.netlify
+.env*
+*.local.md
+tsconfig.tsbuildinfo
+deno.lock
+deploy

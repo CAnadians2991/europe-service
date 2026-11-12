@@ -281,7 +281,8 @@ async function toDiscord(l: Lead, inBitrix: boolean) {
  */
 async function toPartnerEmail(l: Lead, origin?: string) {
   if (!l.form.startsWith('partner')) return 'skip'
-  const base = origin || process.env.URL
+  // PARTNER_FORMS_BASE: on our own server the form still goes to Netlify Forms of the old site (its e-mail notification)
+  const base = process.env.PARTNER_FORMS_BASE || origin || process.env.URL
   if (!base) return 'skip'
   const a = l.answers ?? {}
   const body = new URLSearchParams({

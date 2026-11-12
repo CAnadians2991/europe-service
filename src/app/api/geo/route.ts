@@ -1,10 +1,12 @@
 import { NextResponse, type NextRequest } from 'next/server'
+import { clientIp, countryOfIp } from '@/lib/geoip'
 
 const EEA = new Set('AT,BE,BG,HR,CY,CZ,DK,EE,FI,FR,DE,GR,HU,IS,IE,IT,LV,LI,LT,LU,MT,NL,NO,PL,PT,RO,SK,SI,ES,SE,CH,GB'.split(','))
 
-/** Visitor country from the host's geo headers: Vercel (x-vercel-ip-country) or Netlify (x-country / x-nf-geo JSON, plain or base64) */
+/** Visitor country from the host's geo headers: Vercel (x-vercel-ip-country), Netlify (x-country / x-nf-geo JSON, plain or base64),
+ *  Cloudflare (cf-ipcountry); on our own server without a CDN header — the visitor's IP in the ip2country table */
 function visitorCountry(req: NextRequest) {
-  const direct = req.headers.get('x-vercel-ip-country') || req.headers.get('x-country') || req.headers.get('x-nf-country')
+  const direct = req.headers.get('x-vercel-ip-country') || req.headers.get('x-country') || req.headers.get('x-nf-country') || req.headers.get('cf-ipcountry')
   if (direct) return direct.toUpperCase()
   const geo = req.headers.get('x-nf-geo')
   if (geo) {
@@ -15,7 +17,7 @@ function visitorCountry(req: NextRequest) {
       } catch {}
     }
   }
-  return ''
+  return countryOfIp(clientIp(req.headers))
 }
 
 /** Tells the client whether the visitor needs a cookie-consent prompt (EEA/UK only). */
