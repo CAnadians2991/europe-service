@@ -15,6 +15,7 @@ const Body = z.object({
   attr: z.record(z.string(), z.string().max(500)).optional(),
   hp: z.string().nullish(),
   t: z.number().optional(),
+  resent: z.boolean().optional(),
 })
 
 export async function POST(req: NextRequest) {
@@ -29,8 +30,12 @@ export async function POST(req: NextRequest) {
   // the host the visitor used (netlify.app before the domain switch, europeservice.com.ua after) — for Netlify Forms
   const host = req.headers.get('x-forwarded-host') || req.headers.get('host')
   const origin = host ? `https://${host}` : undefined
-  // Bots: honeypot filled or submitted faster than a human could type → pretend success, store nothing
-  if (body.hp || (body.t !== undefined && body.t < 1500)) return NextResponse.json({ ok: true, id })
+  // Bots: honeypot filled → pretend success, store nothing. A very fast submit (autofill, a second tap) used to be dropped
+  // the same way — the person saw «Дякуємо» and nobody called; now it is delivered like any lead with a note for the manager.
+  if (body.hp) return NextResponse.json({ ok: true, id })
+  const answers = { ...(body.answers ?? {}) }
+  if (body.t !== undefined && body.t < 1500) answers['⚠️ Перевірити'] = `дуже швидке надсилання (${Math.max(0, Math.round(body.t))} мс після відкриття форми)`
+  if (body.resent) answers['Примітка'] = 'надіслано повторно з браузера після збою зв’язку'
 
   const phone = normalizePhone(body.phone)
   if (!phone) return NextResponse.json({ ok: false, error: 'phone' }, { status: 422 })
@@ -45,7 +50,7 @@ export async function POST(req: NextRequest) {
     form: body.form,
     vacancyId: body.vacancyId,
     vacancyTitle: body.vacancyTitle,
-    answers: body.answers,
+    answers,
     page: body.page,
     referrer: a.referrer || req.headers.get('referer') || undefined,
     utm: { ...utm, ...(a.landing ? { landing: a.landing } : {}) },
@@ -57,7 +62,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const dup = await recentDuplicate(phone, body.vacancyId || null)
+    const dup = await recentDuplicate(phone, body.vacancyId || null, body.resent)
     if (dup) return NextResponse.json({ ok: true, id: dup, duplicate: true })
     await saveLead(lead)
   } catch (e) {

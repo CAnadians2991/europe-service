@@ -1,3 +1,4 @@
+import { TG_BOT } from './tg-bot'
 import type { Category, CountryCode, Gender } from './types'
 
 /** Editor who signs the articles (owner 2026-10-15: «Ігор Сидоренко, головний редактор») — byline and schema.org author */
@@ -44,9 +45,9 @@ export const SITE = {
   /** Channels (broadcast, can't write a message there) */
   telegram: 'https://t.me/europeservicepl',
   viber: 'https://invite.viber.com/?g2=AQBWlwFv5gdTdUrrbsIPs5k7qT3KjJ02JtV2pctD95fAJJgf2nXl7SmI%2F3Zt8DmV&lang=uk',
-  /** Direct chats with a manager */
+  /** Direct chats: Telegram = the recruiting bot with the page's code (lib/tg-bot.ts — use tgBotHref / useTgBotHref for the link) */
   chat: {
-    telegram: process.env.NEXT_PUBLIC_CHAT_TELEGRAM ?? 'https://t.me/+380633339078',
+    telegram: TG_BOT,
     viber: process.env.NEXT_PUBLIC_CHAT_VIBER ?? 'viber://chat?number=%2B380633339078',
     whatsapp: process.env.NEXT_PUBLIC_CHAT_WHATSAPP ?? '',
   },
@@ -56,7 +57,7 @@ export const SITE = {
   tiktok: 'https://www.tiktok.com/@europe_service',
   youtube: 'https://www.youtube.com/channel/UCPPNiE5b4nMi_W4tCRkVIRA',
   reviewsChannel: '',
-  facebook: 'https://www.facebook.com/Europeservice.com.ua/',
+  facebook: 'https://www.facebook.com/profile.php?id=100086012095860',
   payUrl: 'https://pay.europeservice.com.ua/',
   /** company registered 03.10.2018 (declaration page); licence № 223 since 15.02.2019 */
   foundingYear: 2018,

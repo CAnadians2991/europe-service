@@ -5,11 +5,12 @@ import { usePathname } from 'next/navigation'
 import { IconChat, IconClose, IconFacebook, IconInstagram, IconPhone, IconTelegram, IconViber } from '@/components/ui/icons'
 import { SITE } from '@/lib/site'
 import { trackContact, trackEvent } from '@/lib/track'
+import { tgBotHref } from '@/lib/tg-bot'
 
 /**
  * Always-on-screen «Зв'язок» button (replaces the Bitrix24 site button, which only had Instagram and Facebook).
  * Opens a white sheet of labelled channels — big rows with words, not bare icons, for a 40+ audience.
- * Telegram / Viber rows appear once the manager-chat links are filled in (SITE.chat).
+ * Telegram = the recruiting bot with this page's code; Facebook = the Messenger chat when set, else the page.
  */
 
 type Channel = 'phone' | 'viber' | 'telegram' | 'instagram' | 'facebook'
@@ -38,9 +39,9 @@ export function ContactFab({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
   // top → bottom; the messengers people use most sit closest to the thumb
   const items = [
     { ch: 'phone', href: `tel:${SITE.phone}`, label: t.call, sub: SITE.phoneDisplay, I: IconPhone, color: 'text-brand-600' },
-    { ch: 'facebook', href: SITE.messenger, label: 'Facebook', I: IconFacebook, color: 'text-[#0866FF]' },
+    { ch: 'facebook', href: SITE.messenger || SITE.facebook, label: 'Facebook', I: IconFacebook, color: 'text-[#0866FF]' },
     { ch: 'instagram', href: SITE.instagramDm, label: 'Instagram', I: IconInstagram, color: 'text-[#E1306C]' },
-    SITE.chat.telegram && { ch: 'telegram', href: SITE.chat.telegram, label: 'Telegram', I: IconTelegram, color: 'text-[#1c8cc2]' },
+    SITE.chat.telegram && { ch: 'telegram', href: tgBotHref(pathname), label: 'Telegram', I: IconTelegram, color: 'text-[#1c8cc2]' },
     SITE.chat.viber && { ch: 'viber', href: SITE.chat.viber, label: 'Viber', I: IconViber, color: 'text-[#6150d8]' },
   ].filter(Boolean) as { ch: Channel; href: string; label: string; sub?: string; I: typeof IconPhone; color: string }[]
 

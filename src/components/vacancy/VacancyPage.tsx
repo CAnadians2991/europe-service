@@ -5,6 +5,7 @@ import { VideoCards } from '@/components/reviews/VideoCards'
 import { Gallery } from './Gallery'
 import { VacancyCard } from './VacancyCard'
 import { Breadcrumbs } from './CatalogPage'
+import { SocialIcons } from '@/components/layout/SocialLinks'
 import { ContactLinks } from './ContactLinks'
 import { QuickApply } from './QuickApply'
 import { LicenseBadge } from '@/components/trust/LicenseBadge'
@@ -237,6 +238,7 @@ export function VacancyPage({ v, similar, lang = 'uk' }: { v: Vacancy; similar: 
         <span className="num text-[17px] font-semibold">{SITE.phoneDisplay}</span>
         <span className="text-[14px] text-muted">{t.orCall}</span>
       </a>
+      <SocialIcons lang={lang} place={`${place}-social`} className="mt-3" />
     </div>
   )
 

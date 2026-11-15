@@ -1,4 +1,6 @@
 import { freshDate } from '@/lib/format'
+import { TgBotLink } from '@/components/lead/TgBotLink'
+import { SocialLinks } from '@/components/layout/SocialLinks'
 import { Photo, src } from '@/components/ui/Photo'
 import { IconCheck, IconStar } from '@/components/ui/icons'
 import { LeadForm } from '@/components/lead/LeadForm'
@@ -73,15 +75,14 @@ export function Faq({ items, title, eyebrow, lang = 'uk' }: { items: { q: string
         <SectionHead id="faq-h" eyebrow={eyebrow} title={title} />
         <p className="mt-4 max-w-sm text-ink-2">
           {uk ? 'Не знайшли відповідь? Напишіть у' : 'Не нашли ответ? Напишите в'}{' '}
-          <a href={SITE.chat.telegram || SITE.telegram} target="_blank" rel="noopener" className="font-semibold text-brand-700 underline underline-offset-2">
-            Telegram
-          </a>{' '}
+          <TgBotLink className="font-semibold text-brand-700 underline underline-offset-2">Telegram</TgBotLink>{' '}
           {uk ? 'або зателефонуйте' : 'или позвоните'}{' '}
           <a href={`tel:${SITE.phone}`} className="font-semibold text-brand-700 underline underline-offset-2">
             {SITE.phoneDisplay}
           </a>
           .
         </p>
+        <SocialLinks lang={lang} place="faq" compact className="mt-5 max-w-sm" />
       </div>
       <div className="border-t-[3px] border-ink">
         {items.map((f, i) => (

@@ -5,6 +5,7 @@ import { LeadModalProvider } from '@/components/lead/LeadModal'
 import { Analytics, consentBootstrap } from '@/components/Analytics'
 import { ConsentBanner } from '@/components/ConsentBanner'
 import { ContactFab } from './ContactFab'
+import { ResendPending } from '@/components/lead/ResendPending'
 import { getActiveVacancies } from '@/lib/vacancies'
 import { ensureCountries } from '@/lib/countries'
 import { CountriesInit } from '@/components/CountriesInit'
@@ -35,6 +36,7 @@ export async function SiteShell({ lang, children }: { lang: 'uk' | 'ru'; childre
           </main>
           <Footer lang={lang} counts={counts} />
           <ContactFab lang={lang} />
+          <ResendPending />
           <ConsentBanner lang={lang} />
         </LeadModalProvider>
         {/* App Router: beforeInteractive is valid in the root layout (this shell is rendered by the root layouts) */}

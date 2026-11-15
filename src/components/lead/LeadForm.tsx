@@ -5,6 +5,7 @@ import { useEffect, useId, useRef, useState } from 'react'
 import { readAttribution, trackEvent, trackLead } from '@/lib/track'
 import { SITE } from '@/lib/site'
 import { IconTelegram, IconViber } from '@/components/ui/icons'
+import { clearPending, postLead, savePending, SendError, type LeadPayload, type SendFailure } from './send'
 
 /** `cc` — the 2-letter country code shown in the select (the register style uses codes, not emoji flags) */
 export const PHONE_CODES = [
@@ -92,6 +93,8 @@ const T = {
     badPhone: 'Введіть номер повністю — наприклад, 67 123 45 67',
     needName: 'Вкажіть ім’я',
     fail: 'Не вдалося надіслати. Спробуйте ще раз або зателефонуйте нам.',
+    failTimeout: 'Надсилання триває надто довго — можливо, слабкий інтернет. Спробуйте ще раз або зателефонуйте нам.',
+    kept: 'Ми зберегли заявку на цьому пристрої й надішлемо її, коли ви знову відкриєте сайт.',
     agree: 'Натискаючи кнопку, ви погоджуєтесь з',
     policy: 'політикою конфіденційності',
     okTitle: 'Дякуємо! Заявку отримано',
@@ -109,6 +112,8 @@ const T = {
     badPhone: 'Введите номер полностью — например, 67 123 45 67',
     needName: 'Укажите имя',
     fail: 'Не удалось отправить. Попробуйте ещё раз или позвоните нам.',
+    failTimeout: 'Отправка длится слишком долго — возможно, слабый интернет. Попробуйте ещё раз или позвоните нам.',
+    kept: 'Мы сохранили заявку на этом устройстве и отправим её, когда вы снова откроете сайт.',
     agree: 'Нажимая кнопку, вы соглашаетесь с',
     policy: 'политикой конфиденциальности',
     okTitle: 'Спасибо! Заявка получена',
@@ -148,6 +153,7 @@ export function LeadForm({
   const [when, setWhen] = useState('')
   const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
   const [err, setErr] = useState<{ name?: string; phone?: string; extra?: string }>({})
+  const [fail, setFail] = useState<{ kind: SendFailure; kept: boolean } | null>(null)
 
   /** «+48 512 345 678» / «0048…» pasted or autofilled while another code is selected → switch the code (it used to become +380 485 123 456) */
   const onPhone = (raw: string) => {
@@ -190,32 +196,32 @@ export function LeadForm({
     setErr(errors)
     if (Object.keys(errors).length) return
     setState('sending')
+    setFail(null)
+    const body: LeadPayload = {
+      name: name.trim(),
+      phone: full,
+      form,
+      vacancyId,
+      vacancyTitle,
+      answers: { ...(answers || {}), ...(messenger ? { messenger } : {}), ...(when ? { 'Коли зручно': when } : {}) },
+      page: location.pathname,
+      attr: readAttribution(),
+      hp: fd.get('company_site'),
+      t: now() - started.current,
+    }
     try {
-      const attr = readAttribution()
-      const res = await fetch('/api/lead', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          name: name.trim(),
-          phone: full,
-          form,
-          vacancyId,
-          vacancyTitle,
-          answers: { ...(answers || {}), ...(messenger ? { messenger } : {}), ...(when ? { 'Коли зручно': when } : {}) },
-          page: location.pathname,
-          attr,
-          hp: fd.get('company_site'),
-          t: now() - started.current,
-        }),
-      })
-      const data = await res.json().catch(() => ({}))
-      if (!res.ok || !data.ok) throw new Error(data.error || 'fail')
+      const data = await postLead(body)
+      clearPending()
       setState('done')
       // a repeat submit of the same phone (server says duplicate) must not count as a second Ads conversion
-      if (conversion && !data.duplicate) trackLead({ form, leadId: data.id, phone: full, name: name.trim(), vacancy: vacancyTitle })
+      if (conversion && !data.duplicate) trackLead({ form, leadId: data.id ?? '', phone: full, name: name.trim(), vacancy: vacancyTitle })
       else trackEvent(`${form}_submit`, { form_id: form })
       onSuccess?.()
-    } catch {
+    } catch (e) {
+      const kind: SendFailure = e instanceof SendError ? e.kind : 'network'
+      // no connection / no answer: kept on the device and sent again on the next page load (send.ts) — unless the server refused the data
+      const kept = kind !== 'invalid' && savePending(body, Boolean(conversion))
+      setFail({ kind, kept })
       setState('error')
     }
   }
@@ -292,7 +298,7 @@ export function LeadForm({
           </button>
         </div>
         {(err.name || err.phone || state === 'error') && (
-          <p id={`${id}-err`} role="alert" className={`mt-2 text-[15px] font-semibold ${dark ? 'text-white' : 'text-danger'}`}>{err.name || err.phone || t.fail}</p>
+          <p id={`${id}-err`} role="alert" className={`mt-2 text-[15px] font-semibold ${dark ? 'text-white' : 'text-danger'}`}>{err.name || err.phone || (fail?.kind === 'timeout' ? t.failTimeout : t.fail)}{!err.name && !err.phone && fail?.kept && <span className="mt-1 block font-normal">{t.kept}</span>}</p>
         )}
         <p className={`mt-3 text-[14px] leading-snug ${dark ? 'text-white/85' : 'text-muted'}`}>{policy}</p>
       </form>
@@ -404,7 +410,8 @@ export function LeadForm({
       </button>
       {state === 'error' && (
         <p role="alert" className={`text-[15px] font-semibold ${dark ? 'text-white' : 'text-danger'}`}>
-          {t.fail} <a className="num whitespace-nowrap underline" href={`tel:${SITE.phone}`}>{SITE.phoneDisplay}</a>
+          {fail?.kind === 'timeout' ? t.failTimeout : t.fail} <a className="num whitespace-nowrap underline" href={`tel:${SITE.phone}`}>{SITE.phoneDisplay}</a>
+          {fail?.kept && <span className="mt-1 block font-normal">{t.kept}</span>}
         </p>
       )}
       <p className={`text-[14px] leading-snug ${dark ? 'text-white/75' : 'text-muted'}`}>{policy}</p>

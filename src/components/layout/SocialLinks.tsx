@@ -27,6 +27,32 @@ const ITEMS = [
   { key: 'reviews', href: SITE.reviewsChannel, uk: 'Відгуки в Telegram', ru: 'Отзывы в Telegram', I: TelegramReviews, color: 'text-[#1c8cc2]', ch: 'telegram' },
 ] as const satisfies readonly { key: string; href: string; uk: string; ru: string; I: React.ComponentType<{ className?: string }>; color: string; ch: Channel | null }[]
 
+/** channels with an address (an empty one — e.g. no reviews channel yet — isn't shown) */
+const LIVE = ITEMS.filter((x) => x.href)
+
+/** The same channels as a row of icon buttons (44px, named for screen readers and on hover) — for tight spots like the vacancy sidebar */
+export function SocialIcons({ lang = 'uk', place, className = '' }: { lang?: 'uk' | 'ru'; place: string; className?: string }) {
+  return (
+    <ul className={`flex flex-wrap gap-1.5 ${className}`} aria-label={lang === 'uk' ? 'Ми в соцмережах' : 'Мы в соцсетях'}>
+      {LIVE.filter((x) => x.key !== 'reviews').map(({ key, href, uk, ru, I, color, ch }) => (
+        <li key={key}>
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener"
+            aria-label={lang === 'uk' ? uk : ru}
+            title={lang === 'uk' ? uk : ru}
+            onClick={() => ch && trackContact(ch, place)}
+            className={`grid size-11 place-items-center border border-line bg-white transition-colors hover:border-ink active:bg-brand-50 ${color}`}
+          >
+            <I className="size-5" />
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 export function SocialLinks({
   lang = 'uk',
   variant = 'light',
@@ -47,7 +73,7 @@ export function SocialLinks({
   return (
     <div className={`@container ${className}`}>
       <ul className="grid grid-cols-1 gap-1.5 @min-[18rem]:grid-cols-2 @min-[36rem]:grid-cols-3">
-        {ITEMS.map(({ key, href, uk, ru, I, color, ch }) => (
+        {LIVE.map(({ key, href, uk, ru, I, color, ch }) => (
           <li key={key} className="min-w-0">
             <a
               href={href}
