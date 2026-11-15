@@ -77,12 +77,12 @@ export async function trackLead(opts: { form: string; leadId: string; phone: str
 }
 
 /** Messenger / non-conversion contact clicks — for analytics only (no Ads conversion) */
-export function trackContact(channel: 'telegram' | 'viber' | 'phone' | 'instagram' | 'facebook', place: string) {
+export function trackContact(channel: 'telegram' | 'viber' | 'whatsapp' | 'phone' | 'instagram' | 'facebook', place: string) {
   pushDL({ event: 'contact_click', channel, place })
   try {
     w()?.gtag?.('event', 'contact_click', { channel, place })
   } catch {}
-  if (channel === 'telegram' || channel === 'viber') {
+  if (channel === 'telegram' || channel === 'viber' || channel === 'whatsapp') {
     try {
       w()?.fbq?.('track', 'Contact', { content_name: channel })
     } catch {}

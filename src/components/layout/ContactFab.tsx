@@ -2,18 +2,18 @@
 
 import { useEffect, useId, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { IconChat, IconClose, IconFacebook, IconInstagram, IconPhone, IconTelegram, IconViber } from '@/components/ui/icons'
+import { IconChat, IconClose, IconFacebook, IconInstagram, IconPhone, IconTelegram, IconViber, IconWhatsApp } from '@/components/ui/icons'
 import { SITE } from '@/lib/site'
 import { trackContact, trackEvent } from '@/lib/track'
-import { tgBotHref } from '@/lib/tg-bot'
+import { useChatLinks } from '@/components/lead/TgBotLink'
 
 /**
  * Always-on-screen «Зв'язок» button (replaces the Bitrix24 site button, which only had Instagram and Facebook).
  * Opens a white sheet of labelled channels — big rows with words, not bare icons, for a 40+ audience.
- * Telegram = the recruiting bot with this page's code; Facebook = the Messenger chat when set, else the page.
+ * Telegram = the recruiting bot with this page's code; Viber / WhatsApp = the manager line, opening the chat at once; Facebook = the Messenger chat when set, else the page.
  */
 
-type Channel = 'phone' | 'viber' | 'telegram' | 'instagram' | 'facebook'
+type Channel = 'phone' | 'viber' | 'whatsapp' | 'telegram' | 'instagram' | 'facebook'
 
 const TX = {
   uk: { open: 'Зв’язатися з нами', close: 'Закрити', call: 'Зателефонувати', title: 'Напишіть або зателефонуйте' },
@@ -28,6 +28,7 @@ export function ContactFab({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
   const open = openOn === pathname
   const setOpen = (v: boolean) => setOpenOn(v ? pathname : null)
   const id = useId()
+  const link = useChatLinks()
 
   useEffect(() => {
     if (!open) return
@@ -41,8 +42,9 @@ export function ContactFab({ lang = 'uk' }: { lang?: 'uk' | 'ru' }) {
     { ch: 'phone', href: `tel:${SITE.phone}`, label: t.call, sub: SITE.phoneDisplay, I: IconPhone, color: 'text-brand-600' },
     { ch: 'facebook', href: SITE.messenger || SITE.facebook, label: 'Facebook', I: IconFacebook, color: 'text-[#0866FF]' },
     { ch: 'instagram', href: SITE.instagramDm, label: 'Instagram', I: IconInstagram, color: 'text-[#E1306C]' },
-    SITE.chat.telegram && { ch: 'telegram', href: tgBotHref(pathname), label: 'Telegram', I: IconTelegram, color: 'text-[#1c8cc2]' },
-    SITE.chat.viber && { ch: 'viber', href: SITE.chat.viber, label: 'Viber', I: IconViber, color: 'text-[#6150d8]' },
+    SITE.chat.telegram && { ch: 'telegram', href: link.telegram, label: 'Telegram', I: IconTelegram, color: 'text-[#1c8cc2]' },
+    SITE.chat.viber && { ch: 'viber', href: link.viber, label: 'Viber', I: IconViber, color: 'text-[#6150d8]' },
+    SITE.chat.whatsapp && { ch: 'whatsapp', href: link.whatsapp, label: 'WhatsApp', I: IconWhatsApp, color: 'text-[#1a9e4b]' },
   ].filter(Boolean) as { ch: Channel; href: string; label: string; sub?: string; I: typeof IconPhone; color: string }[]
 
   // the cart has its own bottom bar (total + pay) — the round chat button would sit on top of it

@@ -34,7 +34,7 @@ function Line({ label, children, id }: { label: string; children: React.ReactNod
 export async function ContactsPage({ lang }: { lang: 'uk' | 'ru' }) {
   const uk = lang === 'uk'
   const about = await getAbout()
-  const hasChats = Boolean(SITE.chat.telegram || SITE.chat.viber)
+  const hasChats = Boolean(SITE.chat.telegram || SITE.chat.viber || SITE.chat.whatsapp)
   return (
     <>
       <PageHero
@@ -67,8 +67,11 @@ export async function ContactsPage({ lang }: { lang: 'uk' | 'ru' }) {
           {hasChats && (
             <Line label={uk ? 'Месенджери' : 'Мессенджеры'} id="chat-h">
               <p className="text-[16px] font-semibold text-ink">{uk ? 'Напишіть менеджеру' : 'Напишите менеджеру'}</p>
-              <p className="mt-0.5 text-[15px] text-ink-2">{uk ? 'Viber і Telegram — найшвидший спосіб поставити запитання.' : 'Viber и Telegram — самый быстрый способ задать вопрос.'}</p>
+              <p className="mt-0.5 text-[15px] text-ink-2">{uk ? 'Telegram, Viber і WhatsApp — найшвидший спосіб поставити запитання.' : 'Telegram, Viber и WhatsApp — самый быстрый способ задать вопрос.'}</p>
               <ChatButtons place="contacts" lang={lang} className="mt-3 max-w-md" />
+              <p className="mt-2 text-[14px] text-muted">
+                Viber {uk ? 'і' : 'и'} WhatsApp: <span className="num">{SITE.chatPhone.display}</span>
+              </p>
             </Line>
           )}
           <Line label="Email">

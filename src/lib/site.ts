@@ -45,12 +45,15 @@ export const SITE = {
   /** Channels (broadcast, can't write a message there) */
   telegram: 'https://t.me/europeservicepl',
   viber: 'https://invite.viber.com/?g2=AQBWlwFv5gdTdUrrbsIPs5k7qT3KjJ02JtV2pctD95fAJJgf2nXl7SmI%2F3Zt8DmV&lang=uk',
-  /** Direct chats: Telegram = the recruiting bot with the page's code (lib/tg-bot.ts — use tgBotHref / useTgBotHref for the link) */
+  /** Direct chats. Telegram = the recruiting bot with the page's code (lib/tg-bot.ts — links via useChatLinks / tgBotHref);
+   *  Viber and WhatsApp = the manager line +38 (073) 333 23 48 (owner 15.11.2026), opening the conversation at once */
   chat: {
     telegram: TG_BOT,
-    viber: process.env.NEXT_PUBLIC_CHAT_VIBER ?? 'viber://chat?number=%2B380633339078',
-    whatsapp: process.env.NEXT_PUBLIC_CHAT_WHATSAPP ?? '',
+    viber: 'viber://chat?number=%2B380733332348',
+    whatsapp: 'https://wa.me/380733332348',
   },
+  /** the number behind the Viber / WhatsApp buttons */
+  chatPhone: { tel: '+380733332348', display: '+38 (073) 333 23 48' },
   instagram: 'https://www.instagram.com/europe_service_ukraine/',
   instagramDm: 'https://ig.me/m/europe_service_ukraine',
   messenger: '',
@@ -65,6 +68,9 @@ export const SITE = {
   /** countries the agency places people in — «N країн Європи» counts these plus any country with vacancies */
   workCountries: ['pl', 'cz', 'de', 'nl', 'lt', 'lv', 'sk', 'ro', 'hu', 'gr', 'it', 'be', 'at', 'fr', 'gb'],
 } as const
+
+/** WhatsApp on a computer: straight into WhatsApp Web's chat (wa.me would stop at a «Continue to chat» page) */
+export const whatsappDesktop = `https://web.whatsapp.com/send?phone=${SITE.chatPhone.tel.slice(1)}`
 
 /**
  * Owner 2026-10-15: no ads on this site, organic only. The Tilda-era GTM container (GTM-TGV63W5 — not in the owner's account;

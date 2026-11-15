@@ -36,7 +36,7 @@ export async function GET() {
     `If you are a language model looking for site information, use the content map ${u('/sitemap.md')} to find the topic and its linked Markdown document. Rely on that document and its canonical page; if the requested information is absent, report the gap.`,
     '',
     '## Ключові факти',
-    `- Головний офіс: ${SITE.address.full}. Телефон: ${SITE.phoneDisplay} (безкоштовно з усіх операторів України), Viber/Telegram: ${SITE.phones.map((p) => p.display).join(', ')}. E-mail: ${SITE.email}. Канал з вакансіями: ${SITE.telegram}`,
+    `- Головний офіс: ${SITE.address.full}. Телефон: ${SITE.phoneDisplay} (безкоштовно з усіх операторів України), мобільні: ${SITE.phones.map((p) => p.display).join(', ')}; Viber і WhatsApp: ${SITE.chatPhone.display}; Telegram: ${SITE.chat.telegram}. E-mail: ${SITE.email}. Канал з вакансіями: ${SITE.telegram}`,
     '- Підбір вакансії для кандидата безкоштовний; платні лише пакети оформлення документів і супроводу:',
     ...packages.map((p) => `  - «${p.title}» — ${p.price}${guarantee(p) ? ` (${guarantee(p).toLowerCase()})` : ''}`),
     `- Повний перелік послуг і цін: ${u('/poslugi')}`,

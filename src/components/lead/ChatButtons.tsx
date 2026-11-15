@@ -1,21 +1,22 @@
 'use client'
 
-import { IconTelegram, IconViber } from '@/components/ui/icons'
+import { IconTelegram, IconViber, IconWhatsApp } from '@/components/ui/icons'
 import { SITE } from '@/lib/site'
 import { trackContact } from '@/lib/track'
-import { useTgBotHref } from './TgBotLink'
+import { useChatLinks } from './TgBotLink'
 
 /**
- * «Написати в Telegram / Viber» — a direct chat with a manager. Most candidates (≈90%) write in a messenger rather than
+ * «Написати в Telegram / Viber / WhatsApp» — a direct chat with a manager. Most candidates (≈90%) write in a messenger rather than
  * call or fill in a form, so these sit right next to the main buttons. Telegram = the recruiting bot with this page's code.
  */
 export function ChatButtons({ place, lang = 'uk', className = '', inline, compact }: { place: string; lang?: 'uk' | 'ru'; className?: string; inline?: boolean; compact?: boolean }) {
   const uk = lang === 'uk'
-  const tg = useTgBotHref()
+  const link = useChatLinks()
   const chats = [
-    SITE.chat.telegram && { ch: 'telegram' as const, href: tg, label: uk ? 'Написати в Telegram' : 'Написать в Telegram', short: 'Telegram', I: IconTelegram, bg: 'text-[#1c8cc2]' },
-    SITE.chat.viber && { ch: 'viber' as const, href: SITE.chat.viber, label: uk ? 'Написати у Viber' : 'Написать в Viber', short: 'Viber', I: IconViber, bg: 'text-[#6150d8]' },
-  ].filter(Boolean) as { ch: 'telegram' | 'viber'; href: string; label: string; short: string; I: typeof IconTelegram; bg: string }[]
+    SITE.chat.telegram && { ch: 'telegram' as const, href: link.telegram, label: uk ? 'Написати в Telegram' : 'Написать в Telegram', short: 'Telegram', I: IconTelegram, bg: 'text-[#1c8cc2]' },
+    SITE.chat.viber && { ch: 'viber' as const, href: link.viber, label: uk ? 'Написати у Viber' : 'Написать в Viber', short: 'Viber', I: IconViber, bg: 'text-[#6150d8]' },
+    SITE.chat.whatsapp && { ch: 'whatsapp' as const, href: link.whatsapp, label: uk ? 'Написати у WhatsApp' : 'Написать в WhatsApp', short: 'WhatsApp', I: IconWhatsApp, bg: 'text-[#1a9e4b]' },
+  ].filter(Boolean) as { ch: 'telegram' | 'viber' | 'whatsapp'; href: string; label: string; short: string; I: typeof IconTelegram; bg: string }[]
   if (!chats.length) return null
   // inline: pills that sit in a row of other buttons (same size as them)
   if (inline)
@@ -33,7 +34,7 @@ export function ChatButtons({ place, lang = 'uk', className = '', inline, compac
       </a>
     ))
   return (
-    <div className={`grid gap-2 ${chats.length > 1 ? 'grid-cols-2' : 'grid-cols-1'} ${className}`}>
+    <div className={`grid gap-2 ${chats.length > 2 ? 'grid-cols-3' : chats.length > 1 ? 'grid-cols-2' : 'grid-cols-1'} ${className}`}>
       {chats.map(({ ch, href, label, short, I, bg }) => (
         <a key={ch} href={href} target="_blank" rel="noopener" onClick={() => trackContact(ch, place)} className={`btn border border-line-strong bg-white !py-3.5 !text-[16px] text-ink hover:border-ink`}>
           <I className={`size-5 shrink-0 ${bg}`} />
