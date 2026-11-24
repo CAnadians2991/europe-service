@@ -183,25 +183,25 @@ function Hero({ hero, title, crumbs, n, uk, country, form }: { hero: ShowcaseDat
     <section className="relative isolate overflow-hidden bg-ink lg:bg-cream/50">
       <div className="absolute inset-0 -z-10 lg:hidden">
         <Photo base={hero.photo} alt="" priority sizes="100vw" position={hero.pos} className="size-full object-cover" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(8_20_14/0.3)_0%,transparent_14%,transparent_40%,rgb(8_20_14/0.6)_62%,rgb(8_20_14/0.9)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(6_16_12/0.45)_0%,rgb(6_16_12/0.05)_16%,rgb(6_16_12/0.15)_30%,rgb(6_16_12/0.72)_46%,rgb(6_16_12/0.9)_70%,rgb(6_16_12/0.94)_100%)]" />
       </div>
       <div className="container-x grid min-h-[min(88svh,720px)] content-between gap-8 pb-7 pt-2 lg:min-h-0 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center lg:gap-12 lg:py-12">
         <div className="text-white/80 lg:col-span-2 lg:text-ink-2 [&_[aria-current]]:text-white/65 lg:[&_[aria-current]]:text-muted">
           <Breadcrumbs items={crumbs} />
         </div>
         <div className="lg:row-start-2">
-          <p className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-[13px] font-semibold text-white backdrop-blur-md lg:bg-brand-50 lg:text-brand-800">
+          <p className="inline-flex items-center gap-2 rounded-full bg-black/45 px-3 py-1.5 text-[13px] font-semibold text-white backdrop-blur-md lg:bg-brand-50 lg:text-brand-800">
             <span className="size-2 rounded-full bg-[#66CC88]" />
             {uk ? 'Набір на сезон 2027' : 'Набор на сезон 2027'}
           </p>
-          <h1 className="mt-3 text-balance text-[34px] leading-[1.05] tracking-[-0.02em] text-white min-[400px]:text-[38px] lg:text-[56px] lg:text-ink">{title}</h1>
-          <p className="mt-3 max-w-xl text-[16.5px] leading-snug text-white/90 lg:text-[19px] lg:text-ink-2">{hero.sub}</p>
+          <h1 className="mt-3 text-balance text-[34px] leading-[1.05] tracking-[-0.02em] text-white [text-shadow:0_2px_16px_rgb(0_0_0/0.45)] min-[400px]:text-[38px] lg:text-[56px] lg:text-ink lg:[text-shadow:none]">{title}</h1>
+          <p className="mt-3 max-w-xl text-[17px] font-medium leading-snug text-white [text-shadow:0_1px_10px_rgb(0_0_0/0.5)] lg:text-[19px] lg:font-normal lg:text-ink-2 lg:[text-shadow:none]">{hero.sub}</p>
           <dl className="mt-5 grid grid-cols-2 gap-2 lg:mt-7 lg:grid-cols-3 lg:gap-3">
             {hero.stats.map(([v, l], i) => (
-              <div key={l} className={`rounded-2xl border border-white/20 bg-white/12 px-3.5 py-2.5 backdrop-blur-md lg:border-line lg:bg-white lg:px-4 lg:py-3.5 ${i === 2 ? 'col-span-2 flex items-baseline gap-2 lg:col-span-1 lg:block' : ''}`}>
+              <div key={l} className={`rounded-2xl border border-white/15 bg-black/45 px-3.5 py-2.5 backdrop-blur-md lg:border-line lg:bg-white lg:px-4 lg:py-3.5 ${i === 2 ? 'col-span-2 flex items-baseline gap-2 lg:col-span-1 lg:block' : ''}`}>
                 <dt className="sr-only">{l}</dt>
                 <dd className="num whitespace-nowrap text-[19px] font-bold leading-tight text-white lg:text-[21px] lg:text-ink xl:text-[23px]">{v}</dd>
-                <dd className="mt-0.5 text-[12px] leading-tight text-white/80 lg:text-[13.5px] lg:text-muted">{l}</dd>
+                <dd className="mt-0.5 text-[13px] leading-tight text-white/90 lg:text-[13.5px] lg:text-muted">{l}</dd>
               </div>
             ))}
           </dl>
@@ -210,7 +210,7 @@ function Hero({ hero, title, crumbs, n, uk, country, form }: { hero: ShowcaseDat
               {uk ? 'Підібрати вакансію' : 'Подобрать вакансию'}
             </QuizButton>
             {n > 0 && (
-              <a href="#catalog" className="btn w-full border-[1.5px] border-white/50 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 sm:w-auto lg:border-ink/25 lg:bg-transparent lg:text-ink lg:hover:border-ink lg:hover:bg-white">
+              <a href="#catalog" className="btn w-full border-[1.5px] border-white/60 bg-black/35 text-white backdrop-blur-md hover:bg-black/50 sm:w-auto lg:border-ink/25 lg:bg-transparent lg:text-ink lg:hover:border-ink lg:hover:bg-white">
                 {uk ? `Вакансії (${n})` : `Вакансии (${n})`}
               </a>
             )}
@@ -230,10 +230,11 @@ function Pluses({ title, pluses, alt }: { title: string; pluses: ShowcaseData['p
     <section className="bg-white py-9 sm:py-14">
       <div className="container-x">
         <h2 className={H2}>{title}</h2>
-        <ul className="-mx-4 mt-6 flex snap-x gap-2.5 overflow-x-auto px-4 [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-3 lg:overflow-visible lg:px-0">
-          {pluses.photos.map((p, i) => (
-            <li key={p} className="w-[72%] shrink-0 snap-start overflow-hidden rounded-[20px] bg-surface sm:w-[44%] lg:w-auto">
-              <Photo base={p} alt={`${alt} ${i + 1}`} sizes="(max-width: 1024px) 72vw, 300px" className="aspect-[4/5] w-full object-cover" />
+        <ul className="-mx-4 mt-6 flex snap-x gap-2 overflow-x-auto px-4 [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-6 lg:gap-2.5 lg:overflow-visible lg:px-0">
+          {pluses.photos.map((p) => (
+            <li key={p.src} className="relative w-[46%] shrink-0 snap-start overflow-hidden rounded-[16px] bg-surface sm:w-[30%] lg:w-auto">
+              <Photo base={p.src} alt={`${alt}: ${p.caption}`} sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 210px" className="aspect-[4/5] w-full object-cover" />
+              <span className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgb(0_0_0/0.65))] px-2.5 pb-2 pt-6 text-[12.5px] font-semibold leading-tight text-white">{p.caption}</span>
             </li>
           ))}
         </ul>
@@ -470,15 +471,29 @@ export async function AdLanding({
         </div>
       </section>
     ),
+    // owner 24.11.2026: «ще 1 кнопку броні десь посередині для заявки»
+    book: show && (
+      <section key="book" className="container-x py-6 sm:py-10">
+        <div className="bg-logo grid gap-4 rounded-[24px] px-5 py-6 text-white sm:grid-cols-[1fr_auto] sm:items-center sm:px-9 sm:py-8">
+          <div>
+            <p className="font-display text-[22px] font-semibold leading-tight sm:text-[28px]">{uk ? 'Забронюйте місце на сезон 2027' : 'Забронируйте место на сезон 2027'}</p>
+            <p className="mt-1.5 text-[15px] text-white/90 sm:text-[16px]">{uk ? 'Найкращі готелі розбирають взимку й навесні.' : 'Лучшие отели разбирают зимой и весной.'}</p>
+          </div>
+          <QuizButton id={`${form}-book`} preset={{ country }} className="btn-white w-full sm:w-auto sm:px-8">
+            {uk ? 'Забронювати місце' : 'Забронировать место'}
+          </QuizButton>
+        </div>
+      </section>
+    ),
     other: textGroups.filter((g) => !isPlus(g) && !isAgency(g)).map(groupSection),
     agency: textGroups.filter(isAgency).map(groupSection),
   }
   // the reviews page opens with the reviews, the video page with the videos; the main landing with the pluses
   const order = /vidguki|otzyvy/.test(path)
-    ? ['reviews', 'reviewVideos', 'plus', 'life', 'jobs', 'housing', 'steps', 'team', 'other', 'agency']
+    ? ['reviews', 'reviewVideos', 'book', 'plus', 'life', 'jobs', 'housing', 'steps', 'team', 'other', 'agency']
     : /video/.test(path)
-      ? ['reviewVideos', 'team', 'life', 'housing', 'plus', 'jobs', 'reviews', 'steps', 'other', 'agency']
-      : ['plus', 'life', 'jobs', 'reviewVideos', 'reviews', 'housing', 'steps', 'team', 'other', 'agency']
+      ? ['reviewVideos', 'team', 'life', 'book', 'housing', 'plus', 'jobs', 'reviews', 'steps', 'other', 'agency']
+      : ['plus', 'life', 'jobs', 'reviewVideos', 'reviews', 'book', 'housing', 'steps', 'team', 'other', 'agency']
 
   return (
     <>

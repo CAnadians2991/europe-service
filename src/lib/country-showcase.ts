@@ -36,7 +36,7 @@ type Showcase = {
   /** the first screen: a photo, one line under the H1 and three figures (owner 24.11.2026: «блоки 1 і 2 міняй кардинально») */
   hero: { photo: string; pos?: string } & Record<Lang, { sub: string; stats: [string, string][] }>
   /** the second block: real photos of the place and what the work gives besides the pay and housing (those are in the hero) */
-  pluses: { photos: string[] } & Record<Lang, [Icon, string, string][]>
+  pluses: { photos: [string, string, string][] } & Record<Lang, [Icon, string, string][]>
   /** our own clips (public/reviews/video/<key>.mp4, logo burned in) — the managers' trip, client reviews, promo reels */
   own?: { key: string; dur: string; part: 'team' | 'review' | 'life'; uk: string; ru: string }[]
   /** the managers who went the client's way: an office photo of them and their names */
@@ -78,7 +78,22 @@ const SHOWCASE: Record<string, Showcase> = {
     },
     pluses: {
       // the employers' own photos of a Greek hotel (vacancy-media «work»)
-      photos: ['/media/vx/3po2letnz1/866361a4', '/media/vx/3po2letnz1/89ed8d22', '/media/vx/3po2letnz1/4670fb5e', '/media/vx/3po2letnz1/8e265865'],
+      // the employers' photos of Greek hotels (vacancy-media «work» and the vacancies' own photos), owner 24.11.2026:
+      // «більше фон моря і типу роботи: номер, море, ресторан, загальний вигляд готелю з видом на море»
+      photos: [
+        ['/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/2f9489428b', 'Номер з видом на море', 'Номер с видом на море'],
+        ['/media/vx/3po2letnz1/866361a4', 'Двір готелю', 'Двор отеля'],
+        ['/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/86dc324103', 'Ресторан для гостей', 'Ресторан для гостей'],
+        ['/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/c470ec93a8', 'Готель із басейном', 'Отель с бассейном'],
+        ['/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/2e31192ddd', 'Балкон над морем', 'Балкон над морем'],
+        ['/media/vx/3po2letnz1/89ed8d22', 'Територія готелю', 'Территория отеля'],
+        ['/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/5b43a82678', 'Готель серед зелені', 'Отель среди зелени'],
+        ['/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/edd02d0c80', 'Пляж біля готелю', 'Пляж у отеля'],
+        ['/media/vx/3po2letnz1/4670fb5e', 'Корпуси біля моря', 'Корпуса у моря'],
+        ['/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/f56931fe8d', 'Набережна', 'Набережная'],
+        ['/media/vx/3po2letnz1/8e265865', 'Готель на острові', 'Отель на острове'],
+        ['/media/v/greece-robota-barmenom-retseptsionistom-kukharem-ofitsiantom-v/38150f3289', 'Вид на море', 'Вид на море'],
+      ],
       uk: [
         ['meal', 'Харчування в готелі', '2–3 рази на день, безкоштовно'],
         ['sea', 'Робота біля моря', 'Родос, Крит, Кос, Корфу, Халкідіки — після зміни пляж'],
@@ -158,7 +173,12 @@ const SHOWCASE: Record<string, Showcase> = {
       ru: { sub: 'Отели, кемпинг и Gardaland Park — с жильём, без опыта и знания языка.', stats: [['от 1 190 €', 'в месяц на руки'], ['0 €', 'за жильё'], ['март–октябрь', 'сезон 2027']] },
     },
     pluses: {
-      photos: ['/media/v/italy-pratsivnyk-z-obsluhovuvannia-terytorii/bef20f37ad', '/media/v/italy-pokoivka-v-4-zirkovyi-hotel-v/03b80c392a', '/media/v/italy-prybyralnytsia-turystychnykh-budynochkiv/77177d817c', '/media/v/italy-pokoivka-v-4-zirkovyi-hotel-italii/65395e8407'],
+      photos: [
+        ['/media/v/italy-pratsivnyk-z-obsluhovuvannia-terytorii/bef20f37ad', 'Gardaland Park', 'Gardaland Park'],
+        ['/media/v/italy-pokoivka-v-4-zirkovyi-hotel-v/03b80c392a', 'Готель 4*', 'Отель 4*'],
+        ['/media/v/italy-prybyralnytsia-turystychnykh-budynochkiv/77177d817c', 'Кемпінг у Римі', 'Кемпинг в Риме'],
+        ['/media/v/italy-pokoivka-v-4-zirkovyi-hotel-italii/65395e8407', 'Номери готелю', 'Номера отеля'],
+      ],
       uk: [
         ['meal', 'Ваучери на харчування', '100–120 € на місяць понад зарплату'],
         ['city', 'Туристичні міста', 'Верона, Венеція, Рим, Мілан, озеро Гарда'],
@@ -252,7 +272,7 @@ export function countryShowcase(country: string, lang: Lang) {
   return {
     film: s.film ? { id: s.film.id, title: s.film[lang] } : undefined,
     hero: { photo: s.hero.photo, pos: s.hero.pos, ...s.hero[lang] },
-    pluses: { photos: s.pluses.photos, items: s.pluses[lang] },
+    pluses: { photos: s.pluses.photos.map(([src, u, r]) => ({ src, caption: lang === 'uk' ? u : r })), items: s.pluses[lang] },
     life: [...own('life'), ...s.life.map((v) => ytCard(v, lang, lifeBadge))],
     reviewVideos: [...own('review'), ...driveOf('review', B.review), ...s.reviewVideos.map((v) => ytCard(v, lang, B.review))],
     teamVideos: own('team'),
