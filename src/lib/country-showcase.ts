@@ -34,7 +34,7 @@ type Showcase = {
   /** what we do for the client, step by step */
   steps: Record<Lang, [string, string][]>
   /** the first screen: a photo, one line under the H1 and three figures (owner 24.11.2026: «блоки 1 і 2 міняй кардинально») */
-  hero: { photo: string; pos?: string } & Record<Lang, { sub: string; stats: [string, string][] }>
+  hero: { photo: string; pos?: string; inset?: string } & Record<Lang, { sub: string; stats: [string, string][]; alt: string; insetAlt?: string }>
   /** the second block: real photos of the place and what the work gives besides the pay and housing (those are in the hero) */
   pluses: { photos: [string, string, string][] } & Record<Lang, [Icon, string, string][]>
   /** our own clips (public/reviews/video/<key>.mp4, logo burned in) — the managers' trip, client reviews, promo reels */
@@ -70,11 +70,12 @@ const SHOWCASE: Record<string, Showcase> = {
     ],
     howToVideos: ['fTVihjGSlHk', 'FmTWYA8fX10', 'lkoi0qLhdyQ', 'MXxlw9JrKZw'].map((id) => ({ id, ...HOWTO_GR })),
     hero: {
-      // a frame of our managers' own video in Greece (IMG_3517, Piraeus marina)
-      photo: '/media/landing/greece-marina',
-      pos: '50% 40%',
-      uk: { sub: 'Готелі на островах і в Халкідіках — офіційно, з житлом і харчуванням.', stats: [['від 1 090 €', 'на місяць на руки'], ['0 €', 'за житло'], ['квітень–листопад', 'сезон 2027']] },
-      ru: { sub: 'Отели на островах и в Халкидиках — официально, с жильём и питанием.', stats: [['от 1 090 €', 'в месяц на руки'], ['0 €', 'за жильё'], ['апрель–ноябрь', 'сезон 2027']] },
+      // owner 24.11.2026: the hotel must be seen at once — a Greek hotel with a pool + a balcony over the sea (vacancy photos)
+      photo: '/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/c470ec93a8',
+      pos: '50% 50%',
+      inset: '/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/2e31192ddd',
+      uk: { alt: 'Готель із басейном у Греції', insetAlt: 'Балкон готелю з видом на море', sub: 'Готелі на островах і в Халкідіках — офіційно, з житлом і харчуванням.', stats: [['від 1 090 €', 'на місяць на руки'], ['0 €', 'за житло'], ['квітень–листопад', 'сезон 2027']] },
+      ru: { alt: 'Отель с бассейном в Греции', insetAlt: 'Балкон отеля с видом на море', sub: 'Отели на островах и в Халкидиках — официально, с жильём и питанием.', stats: [['от 1 090 €', 'в месяц на руки'], ['0 €', 'за жильё'], ['апрель–ноябрь', 'сезон 2027']] },
     },
     pluses: {
       // the employers' own photos of a Greek hotel (vacancy-media «work»)
@@ -84,8 +85,8 @@ const SHOWCASE: Record<string, Showcase> = {
         ['/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/2f9489428b', 'Номер з видом на море', 'Номер с видом на море'],
         ['/media/vx/3po2letnz1/866361a4', 'Двір готелю', 'Двор отеля'],
         ['/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/86dc324103', 'Ресторан для гостей', 'Ресторан для гостей'],
-        ['/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/c470ec93a8', 'Готель із басейном', 'Отель с бассейном'],
-        ['/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/2e31192ddd', 'Балкон над морем', 'Балкон над морем'],
+        ['/media/landing/greece-marina', 'Гавань Пірея', 'Гавань Пирея'],
+        ['/media/v/greece-robota-barmenom-retseptsionistom-kukharem-ofitsiantom-v/3e70e75bde', 'Фреш на терасі', 'Фреш на террасе'],
         ['/media/vx/3po2letnz1/89ed8d22', 'Територія готелю', 'Территория отеля'],
         ['/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/5b43a82678', 'Готель серед зелені', 'Отель среди зелени'],
         ['/media/v/greece-robota-pokoivkoiu-v-hoteli-v-hretsii/edd02d0c80', 'Пляж біля готелю', 'Пляж у отеля'],
@@ -169,8 +170,8 @@ const SHOWCASE: Record<string, Showcase> = {
     hero: {
       photo: '/media/v/italy-pokoivka-v-4-zirkovyi-hotel-italii/347f5f80a8',
       pos: '50% 40%',
-      uk: { sub: 'Готелі, кемпінг і Gardaland Park — з житлом, без досвіду й знання мови.', stats: [['від 1 190 €', 'на місяць на руки'], ['0 €', 'за житло'], ['березень–жовтень', 'сезон 2027']] },
-      ru: { sub: 'Отели, кемпинг и Gardaland Park — с жильём, без опыта и знания языка.', stats: [['от 1 190 €', 'в месяц на руки'], ['0 €', 'за жильё'], ['март–октябрь', 'сезон 2027']] },
+      uk: { alt: 'Покоївка в готелі в Італії', sub: 'Готелі, кемпінг і Gardaland Park — з житлом, без досвіду й знання мови.', stats: [['від 1 190 €', 'на місяць на руки'], ['0 €', 'за житло'], ['березень–жовтень', 'сезон 2027']] },
+      ru: { alt: 'Горничная в отеле в Италии', sub: 'Отели, кемпинг и Gardaland Park — с жильём, без опыта и знания языка.', stats: [['от 1 190 €', 'в месяц на руки'], ['0 €', 'за жильё'], ['март–октябрь', 'сезон 2027']] },
     },
     pluses: {
       photos: [
@@ -271,7 +272,7 @@ export function countryShowcase(country: string, lang: Lang) {
     .filter((r, i, all) => all.findIndex((x) => x.date === r.date && x.name.slice(0, 3) === r.name.slice(0, 3)) === i)
   return {
     film: s.film ? { id: s.film.id, title: s.film[lang] } : undefined,
-    hero: { photo: s.hero.photo, pos: s.hero.pos, ...s.hero[lang] },
+    hero: { photo: s.hero.photo, pos: s.hero.pos, inset: s.hero.inset, ...s.hero[lang] },
     pluses: { photos: s.pluses.photos.map(([src, u, r]) => ({ src, caption: lang === 'uk' ? u : r })), items: s.pluses[lang] },
     life: [...own('life'), ...s.life.map((v) => ytCard(v, lang, lifeBadge))],
     reviewVideos: [...own('review'), ...driveOf('review', B.review), ...s.reviewVideos.map((v) => ytCard(v, lang, B.review))],

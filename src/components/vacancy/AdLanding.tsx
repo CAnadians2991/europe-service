@@ -177,31 +177,34 @@ function PlusIcon({ name }: { name: Icon }) {
   )
 }
 
-/** First screen: on a phone the photo fills it with the text over it; on a desktop text left, the photo right */
+/** First screen: light, readable (owner 24.11.2026: «дуже темно, висвітли»). Phone: the photo of a hotel first, the
+ *  text under it on a light ground; desktop: the text left, the photo right. A small sea photo sits on its corner. */
 function Hero({ hero, title, crumbs, n, uk, country, form }: { hero: ShowcaseData['hero']; title: string; crumbs: { name: string; path: string }[]; n: number; uk: boolean; country: string; form: string }) {
   return (
-    <section className="relative isolate overflow-hidden bg-ink lg:bg-cream/50">
-      <div className="absolute inset-0 -z-10 lg:hidden">
-        <Photo base={hero.photo} alt="" priority sizes="100vw" position={hero.pos} className="size-full object-cover" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(6_16_12/0.45)_0%,rgb(6_16_12/0.05)_16%,rgb(6_16_12/0.15)_30%,rgb(6_16_12/0.72)_46%,rgb(6_16_12/0.9)_70%,rgb(6_16_12/0.94)_100%)]" />
-      </div>
-      <div className="container-x grid min-h-[min(88svh,720px)] content-between gap-8 pb-7 pt-2 lg:min-h-0 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center lg:gap-12 lg:py-12">
-        <div className="text-white/80 lg:col-span-2 lg:text-ink-2 [&_[aria-current]]:text-white/65 lg:[&_[aria-current]]:text-muted">
+    <section className="bg-cream/60">
+      <div className="container-x grid gap-x-12 pb-8 pt-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center lg:pb-14">
+        <div className="text-ink-2 lg:col-span-2">
           <Breadcrumbs items={crumbs} />
         </div>
-        <div className="lg:row-start-2">
-          <p className="inline-flex items-center gap-2 rounded-full bg-black/45 px-3 py-1.5 text-[13px] font-semibold text-white backdrop-blur-md lg:bg-brand-50 lg:text-brand-800">
-            <span className="size-2 rounded-full bg-[#66CC88]" />
+        <div className={`relative mt-1 lg:col-start-2 lg:row-start-2 lg:mt-4 ${hero.inset ? 'mb-6 lg:mb-0' : ''}`}>
+          <Photo base={hero.photo} alt={hero.alt} priority sizes="(max-width: 1024px) 100vw, 600px" position={hero.pos} className="aspect-[16/10] w-full rounded-[22px] object-cover shadow-[0_24px_50px_-28px_rgb(15_36_27/0.5)] lg:aspect-[5/4] lg:rounded-[28px]" />
+          {hero.inset && (
+            <Photo base={hero.inset} alt={hero.insetAlt ?? ''} sizes="220px" className="absolute -bottom-6 right-3 aspect-square w-[34%] rounded-[16px] border-4 border-white object-cover shadow-[0_14px_30px_-12px_rgb(15_36_27/0.55)] lg:-bottom-8 lg:-right-6 lg:w-[34%] lg:rounded-[20px] lg:border-[6px]" />
+          )}
+        </div>
+        <div className="mt-5 lg:col-start-1 lg:row-start-2 lg:mt-4">
+          <p className="inline-flex items-center gap-2 rounded-full bg-brand-50 px-3 py-1.5 text-[13px] font-semibold text-brand-800 ring-1 ring-brand-100">
+            <span className="size-2 rounded-full bg-[#38AE60]" />
             {uk ? 'Набір на сезон 2027' : 'Набор на сезон 2027'}
           </p>
-          <h1 className="mt-3 text-balance text-[34px] leading-[1.05] tracking-[-0.02em] text-white [text-shadow:0_2px_16px_rgb(0_0_0/0.45)] min-[400px]:text-[38px] lg:text-[56px] lg:text-ink lg:[text-shadow:none]">{title}</h1>
-          <p className="mt-3 max-w-xl text-[17px] font-medium leading-snug text-white [text-shadow:0_1px_10px_rgb(0_0_0/0.5)] lg:text-[19px] lg:font-normal lg:text-ink-2 lg:[text-shadow:none]">{hero.sub}</p>
+          <h1 className="mt-3 text-balance text-[32px] leading-[1.06] tracking-[-0.02em] text-ink min-[400px]:text-[36px] lg:text-[56px]">{title}</h1>
+          <p className="mt-3 max-w-xl text-[17px] leading-snug text-ink-2 lg:text-[19px]">{hero.sub}</p>
           <dl className="mt-5 grid grid-cols-2 gap-2 lg:mt-7 lg:grid-cols-3 lg:gap-3">
             {hero.stats.map(([v, l], i) => (
-              <div key={l} className={`rounded-2xl border border-white/15 bg-black/45 px-3.5 py-2.5 backdrop-blur-md lg:border-line lg:bg-white lg:px-4 lg:py-3.5 ${i === 2 ? 'col-span-2 flex items-baseline gap-2 lg:col-span-1 lg:block' : ''}`}>
+              <div key={l} className={`rounded-2xl border border-line bg-white px-3.5 py-2.5 lg:px-4 lg:py-3.5 ${i === 2 ? 'col-span-2 flex items-baseline gap-2 lg:col-span-1 lg:block' : ''}`}>
                 <dt className="sr-only">{l}</dt>
-                <dd className="num whitespace-nowrap text-[19px] font-bold leading-tight text-white lg:text-[21px] lg:text-ink xl:text-[23px]">{v}</dd>
-                <dd className="mt-0.5 text-[13px] leading-tight text-white/90 lg:text-[13.5px] lg:text-muted">{l}</dd>
+                <dd className="num whitespace-nowrap text-[19px] font-bold leading-tight text-ink lg:whitespace-normal lg:text-[21px] xl:text-[23px]">{v}</dd>
+                <dd className="mt-0.5 text-[13px] leading-tight text-muted lg:text-[13.5px]">{l}</dd>
               </div>
             ))}
           </dl>
@@ -210,14 +213,11 @@ function Hero({ hero, title, crumbs, n, uk, country, form }: { hero: ShowcaseDat
               {uk ? 'Підібрати вакансію' : 'Подобрать вакансию'}
             </QuizButton>
             {n > 0 && (
-              <a href="#catalog" className="btn w-full border-[1.5px] border-white/60 bg-black/35 text-white backdrop-blur-md hover:bg-black/50 sm:w-auto lg:border-ink/25 lg:bg-transparent lg:text-ink lg:hover:border-ink lg:hover:bg-white">
+              <a href="#catalog" className="btn-ghost w-full sm:w-auto">
                 {uk ? `Вакансії (${n})` : `Вакансии (${n})`}
               </a>
             )}
           </div>
-        </div>
-        <div className="hidden lg:row-start-2 lg:block">
-          <Photo base={hero.photo} alt={title} priority sizes="560px" position={hero.pos} className="aspect-[4/5] max-h-[620px] w-full rounded-[28px] object-cover shadow-[0_30px_60px_-30px_rgb(15_36_27/0.55)]" />
         </div>
       </div>
     </section>
