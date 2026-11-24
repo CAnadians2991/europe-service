@@ -69,7 +69,7 @@ export async function GET() {
     `- [Співпраця для бізнесу](${u('/spivpratsya')}) · [EN](${u('/cooperation')}) · [PL](${u('/pl/wspolpraca')})`,
     `- [Робоча віза в Польщу на рік (віза D, 15 000 грн)](${u('/robocha-viza-v-polshchu')})`,
     `- [Робота в Нідерландах по польській візі (відрядження A1)](${u('/robota-v-niderlandakh-po-polskij-vizi')})`,
-    `- [Робота в Німеччині по польській візі (A1 + віза Vander Elst)](${u('/robota-v-nimechchyni-po-polskij-vizi')})`,
+    `- [Робота в Німеччині по польській візі (відрядження A1)](${u('/robota-v-nimechchyni-po-polskij-vizi')})`,
     `- [Як перевірити кадрове агентство](${u('/yak-pereviryty-agentstvo')})`,
     `- [Часті питання](${u('/faq')})`,
     `- [Російська версія сайту](${u('/ru')})`,
