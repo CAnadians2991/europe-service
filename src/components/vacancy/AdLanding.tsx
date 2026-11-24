@@ -347,15 +347,30 @@ export async function AdLanding({
         )}
       </section>
     ),
+    team: show?.team && (
+      <section key="team" className={sec}>
+        <h2 className={H2}>{uk ? 'Ми перевірили все самі' : 'Мы проверили всё сами'}</h2>
+        <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start">
+          <figure>
+            <Photo base={show.team.photo} alt={show.team.caption} sizes="(max-width: 1024px) 100vw, 480px" className="aspect-[4/5] w-full rounded-[16px] object-cover" />
+            <figcaption className="mt-2 text-[13.5px] text-muted">{show.team.caption}</figcaption>
+          </figure>
+          <div>
+            <p className="max-w-2xl text-[16px] leading-relaxed text-ink-2 sm:text-[17px]">{show.team.text}</p>
+            <VideoGrid items={show.teamVideos} lang={lang} first={6} />
+          </div>
+        </div>
+      </section>
+    ),
     other: textGroups.filter((g) => !isPlus(g) && !isAgency(g)).map(groupSection),
     agency: textGroups.filter(isAgency).map(groupSection),
   }
   // the reviews page opens with the reviews, the video page with the videos; the main landing with the pluses
   const order = /vidguki|otzyvy/.test(path)
-    ? ['reviews', 'reviewVideos', 'plus', 'life', 'jobs', 'housing', 'steps', 'other', 'agency']
+    ? ['reviews', 'reviewVideos', 'plus', 'life', 'jobs', 'housing', 'steps', 'team', 'other', 'agency']
     : /video/.test(path)
-      ? ['reviewVideos', 'life', 'housing', 'plus', 'jobs', 'reviews', 'steps', 'other', 'agency']
-      : ['plus', 'life', 'jobs', 'reviewVideos', 'reviews', 'housing', 'steps', 'other', 'agency']
+      ? ['reviewVideos', 'team', 'life', 'housing', 'plus', 'jobs', 'reviews', 'steps', 'other', 'agency']
+      : ['plus', 'life', 'jobs', 'reviewVideos', 'reviews', 'housing', 'steps', 'team', 'other', 'agency']
 
   return (
     <>

@@ -31,6 +31,10 @@ type Showcase = {
   mediaPaths: string[]
   /** what we do for the client, step by step */
   steps: Record<Lang, [string, string][]>
+  /** our own clips (public/reviews/video/<key>.mp4, logo burned in) — the managers' trip, client reviews, promo reels */
+  own?: { key: string; dur: string; part: 'team' | 'review' | 'life'; uk: string; ru: string }[]
+  /** the managers who went the client's way: an office photo of them and their names */
+  team?: { photo: string; uk: { caption: string; text: string }; ru: { caption: string; text: string } }
 }
 
 const LIFE_GR = { uk: '', ru: '' }
@@ -60,6 +64,31 @@ const SHOWCASE: Record<string, Showcase> = {
     ],
     howToVideos: ['fTVihjGSlHk', 'FmTWYA8fX10', 'lkoi0qLhdyQ', 'MXxlw9JrKZw'].map((id) => ({ id, ...HOWTO_GR })),
     reviewRx: /Грец|Крит|Родос|Корфу|Халкід|Таос|Тасос/,
+    // owner 24.11.2026: the trip clips are Tetiana Chupryna and Khrystyna Ihnashova (face-checked against the office photos)
+    own: [
+      { key: 'gr-team-sim-athens', dur: '1:02', part: 'team', uk: 'SIM-картки для працівників в Афінах', ru: 'SIM-карты для работников в Афинах' },
+      { key: 'gr-team-trip-3', dur: '0:31', part: 'team', uk: 'Документи й місце роботи', ru: 'Документы и место работы' },
+      { key: 'gr-team-trip-1', dur: '0:20', part: 'team', uk: 'Менеджерки в Греції', ru: 'Менеджеры в Греции' },
+      { key: 'gr-team-trip-2', dur: '0:30', part: 'team', uk: 'Переліт і перші дні', ru: 'Перелёт и первые дни' },
+      { key: 'gr-team-trip-4', dur: '0:14', part: 'team', uk: 'Welcome to Greece', ru: 'Welcome to Greece' },
+      // owner 24.11.2026: «от це топ відгук» — the first review card
+      { key: 'gr-review-balcony', dur: '1:17', part: 'review', uk: 'Чому я поїхала працювати в Грецію', ru: 'Почему я поехала работать в Грецию' },
+      { key: 'gr-review-hotel', dur: '1:28', part: 'review', uk: 'Відгук з Греції', ru: 'Отзыв из Греции' },
+      { key: 'gr-review-cafe', dur: '1:28', part: 'review', uk: 'Бариста й бармен у готелі', ru: 'Бариста и бармен в отеле' },
+      { key: 'gr-promo-1', dur: '0:21', part: 'life', uk: '', ru: '' },
+      { key: 'gr-promo-2', dur: '0:31', part: 'life', uk: '', ru: '' },
+    ],
+    team: {
+      photo: '/media/team/managers-awards',
+      uk: {
+        caption: 'Христина й Тетяна в офісі Europe Service',
+        text: 'Наші менеджерки Тетяна й Христина їздили до Греції й пройшли весь шлях клієнта: переліт, дорогу від аеропорту, оформлення документів, SIM-картку, житло й місце роботи. Тому на консультації ми розповідаємо не з чуток, а з власного досвіду — і знаємо, з чим допомогти на кожному кроці.',
+      },
+      ru: {
+        caption: 'Кристина и Татьяна в офисе Europe Service',
+        text: 'Наши менеджеры Татьяна и Кристина ездили в Грецию и прошли весь путь клиента: перелёт, дорогу из аэропорта, оформление документов, SIM-карту, жильё и место работы. Поэтому на консультации мы рассказываем не понаслышке, а из собственного опыта — и знаем, с чем помочь на каждом шаге.',
+      },
+    },
     mediaPaths: ['/tpost/3po2letnz1-robota-pokovkoyu-v-gotel-v-grets', '/tpost/9legx8dt21-pratsvnik-gotelyu-v-grets', '/tpost/okggzvdvt1-robota-barmenom-retseptsonstom-kuharem-o'],
     steps: {
       uk: [
@@ -151,6 +180,9 @@ export function countryShowcase(country: string, lang: Lang) {
   const driveOf = (kind: string, badge: string) =>
     drive.filter((v) => (v.kind ?? 'review') === kind && !seen.has(v.src) && seen.add(v.src)).map((v) => clip(v, badge))
 
+  const own = (part: string) =>
+    (s.own ?? []).filter((o) => o.part === part).map((o): VideoCard => ({ key: o.key, src: `/reviews/video/${o.key}.mp4`, yt: false, cover: `/reviews/video/${o.key}-cover-800.webp`, title: o[lang], name: '', place: '', dur: o.dur, badge: '' }))
+
   const rows = reviews as Review[]
   const textReviews = rows
     // about this country: tagged so, or mentions it and was not written from a town elsewhere (Wrocław…)
@@ -161,8 +193,10 @@ export function countryShowcase(country: string, lang: Lang) {
     .filter((r, i, all) => all.findIndex((x) => x.date === r.date && x.name.slice(0, 3) === r.name.slice(0, 3)) === i)
   return {
     film: s.film ? { id: s.film.id, title: s.film[lang] } : undefined,
-    life: s.life.map((v) => ytCard(v, lang, lifeBadge)),
-    reviewVideos: [...driveOf('review', B.review), ...s.reviewVideos.map((v) => ytCard(v, lang, B.review))],
+    life: [...own('life'), ...s.life.map((v) => ytCard(v, lang, lifeBadge))],
+    reviewVideos: [...own('review'), ...driveOf('review', B.review), ...s.reviewVideos.map((v) => ytCard(v, lang, B.review))],
+    teamVideos: own('team'),
+    team: s.team ? { photo: s.team.photo, ...s.team[lang] } : undefined,
     housingVideos: [...driveOf('housing', B.housing), ...s.housingVideos.map((v) => ytCard(v, lang, B.housing))],
     howToVideos: s.howToVideos.map((v) => ytCard(v, lang, B.howto)),
     housingPhotos: [...new Set(s.mediaPaths.flatMap((p) => MEDIA[p]?.housing ?? []))],
