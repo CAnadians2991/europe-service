@@ -3,9 +3,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { VacancyCard } from './VacancyCard'
-import { CATEGORIES, COUNTRIES, COUNTRY } from '@/lib/site'
+import { COUNTRIES, COUNTRY } from '@/lib/site'
 import { salaryEurMonth, vacancyCity } from '@/lib/format'
-import { IconBed, IconChevronDown, IconClose, IconSearch } from '@/components/ui/icons'
+import { IconChevronDown, IconClose } from '@/components/ui/icons'
 import { Flag } from '@/components/ui/Flag'
 import { plural } from '@/lib/format'
 import { LeadForm } from '@/components/lead/LeadForm'
@@ -177,7 +177,6 @@ export function Catalog({
   }, [cards, f])
 
   const dirty = JSON.stringify(f) !== JSON.stringify(base)
-  const catName = (c: Category | '') => (c ? ((x) => (x ? (uk ? x.name : x.nameRu) : ''))(CATEGORIES.find((x) => x.code === c)) : '')
 
   // «Показати ще» — back to the first page whenever the filters change
   const sig = JSON.stringify(f)
@@ -213,35 +212,17 @@ export function Catalog({
 
   return (
     <section aria-label={uk ? 'Каталог вакансій' : 'Каталог вакансий'}>
-      {/* Search bar (owner 2026-10-15: the chip wall + boxed selects were «кошмар»). One line on desktop like the big job boards
-          (Indeed / Pracuj / Airbnb-style segments): search | country | sphere | city | housing; on phones the search on top and
-          the four filters as a 2×2 grid of tiles that open the phone's own picker. The country still moves to its page. */}
-      <div className="grid grid-cols-2 gap-2 lg:flex lg:items-stretch lg:gap-0 lg:rounded-[18px] lg:border lg:border-line lg:bg-white lg:shadow-[0_14px_34px_-26px_rgb(15_36_27/0.45)]">
-        <label className="relative col-span-2 flex min-h-[54px] items-center rounded-[14px] border border-line-strong bg-white transition focus-within:border-brand-600 focus-within:ring-[3px] focus-within:ring-brand-100 lg:min-w-0 lg:flex-[2.3] lg:rounded-l-[18px] lg:rounded-r-none lg:border-0 lg:focus-within:ring-0">
-          <span className="sr-only">{uk ? 'Пошук вакансії' : 'Поиск вакансии'}</span>
-          <IconSearch className="pointer-events-none absolute left-4 size-5 text-muted" />
-          <input
-            type="search"
-            enterKeyHint="search"
-            className="h-full w-full min-w-0 bg-transparent py-3 pl-12 pr-11 text-[16px] text-ink outline-none placeholder:text-muted/80 [&::-webkit-search-cancel-button]:hidden"
-            placeholder={uk ? 'Посада, компанія або місто' : 'Должность, компания или город'}
-            value={f.q}
-            onChange={(e) => set('q', e.target.value)}
-          />
-          {f.q && (
-            <button type="button" onClick={() => set('q', '')} aria-label={uk ? 'Очистити пошук' : 'Очистить поиск'} className="absolute right-1.5 grid size-10 place-items-center rounded-full text-muted hover:bg-surface hover:text-ink">
-              <IconClose className="size-4" />
-            </button>
-          )}
-        </label>
-
+      {/* Filters: country and city only (owner 2026-11-24: no search, sphere or housing; small tiles on every page).
+          The tiles open the phone's own picker; the country still moves to its page. Sphere / housing presets of the
+          landing pages keep working through the page's own base filters. */}
+      <div className="grid max-w-xl grid-cols-2 gap-2">
         <Seg
           label={uk ? 'Країна' : 'Страна'}
           active={Boolean(f.country) && f.country !== base.country}
           value={
             f.country ? (
               <>
-                <Flag code={f.country} className="h-3.5 w-5" />
+                <Flag code={f.country} className="h-3 w-4" />
                 {uk ? COUNTRY[f.country].name : COUNTRY[f.country].nameRu}
               </>
             ) : uk ? 'Усі країни' : 'Все страны'
@@ -265,20 +246,6 @@ export function Catalog({
           </select>
         </Seg>
 
-        <Seg label={uk ? 'Сфера' : 'Сфера'} active={Boolean(f.category) && f.category !== base.category} value={catName(f.category) || (uk ? 'Усі сфери' : 'Все сферы')}>
-          <select aria-label={uk ? 'Сфера' : 'Сфера'} className={SELECT} value={f.category} onChange={(e) => set('category', e.target.value as Category)}>
-            <option value="">{uk ? 'Усі сфери' : 'Все сферы'}</option>
-            {CATEGORIES.map((c) => {
-              const n = count('category', (v) => v.category === c.code)
-              return n || f.category === c.code ? (
-                <option key={c.code} value={c.code}>
-                  {uk ? c.name : c.nameRu} ({n})
-                </option>
-              ) : null
-            })}
-          </select>
-        </Seg>
-
         <Seg label={uk ? 'Місто' : 'Город'} active={Boolean(f.city)} value={f.city || (uk ? 'Усі міста' : 'Все города')}>
           <select aria-label={uk ? 'Місто' : 'Город'} className={SELECT} value={f.city} onChange={(e) => set('city', e.target.value)}>
             <option value="">{uk ? 'Усі міста' : 'Все города'}</option>
@@ -290,19 +257,6 @@ export function Catalog({
           </select>
         </Seg>
 
-        <label
-          data-active={f.housingFree}
-          className="group relative flex min-h-[54px] cursor-pointer items-center gap-1.5 rounded-[14px] border border-line-strong bg-white px-3 py-2 lg:gap-3 transition focus-within:ring-[3px] focus-within:ring-brand-100 data-[active=true]:border-brand-600 data-[active=true]:bg-brand-50 lg:shrink-0 lg:rounded-l-none lg:rounded-r-[18px] lg:border-0 lg:border-l lg:border-line lg:px-5 lg:data-[active=true]:border-line lg:data-[active=true]:bg-brand-50"
-        >
-          <input type="checkbox" aria-label={uk ? 'Житло безкоштовно' : 'Жильё бесплатно'} className="peer sr-only" checked={f.housingFree} onChange={(e) => set('housingFree', e.target.checked)} />
-          <IconBed className="hidden size-5 shrink-0 text-brand-700 lg:block" />
-          <span className="min-w-0 flex-1 leading-tight">
-            <span className="block text-[12px] font-medium text-muted">{uk ? 'Житло' : 'Жильё'}</span>
-            <span className="block truncate text-[14.5px] font-semibold text-ink lg:text-[15px]">{uk ? 'Безкоштовне' : 'Бесплатное'}</span>
-          </span>
-          {/* switch */}
-          <span aria-hidden className="relative h-5 w-8 shrink-0 rounded-full bg-line-strong transition-colors peer-checked:bg-brand-600 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-600 after:absolute after:left-0.5 after:top-0.5 after:size-4 after:rounded-full after:bg-white after:shadow after:transition-transform peer-checked:after:translate-x-3 lg:h-6 lg:w-10 lg:after:size-5 lg:peer-checked:after:translate-x-4" />
-        </label>
       </div>
 
       {/* result line */}
@@ -367,11 +321,11 @@ function Seg({ label, value, active, children }: { label: string; value: React.R
   return (
     <div
       data-active={Boolean(active)}
-      className="relative flex min-h-[54px] min-w-0 flex-col justify-center rounded-[14px] border border-line-strong bg-white py-2 pl-3.5 pr-9 transition hover:border-ink/40 focus-within:ring-[3px] focus-within:ring-brand-100 data-[active=true]:border-brand-600 data-[active=true]:bg-brand-50 lg:flex-1 lg:rounded-none lg:border-0 lg:border-l lg:border-line lg:pl-5 lg:hover:bg-cream lg:data-[active=true]:border-line lg:data-[active=true]:bg-brand-50"
+      className="relative flex min-h-11 min-w-0 flex-col justify-center rounded-[12px] border border-line-strong bg-white py-1.5 pl-3 pr-8 transition hover:border-ink/40 focus-within:ring-[3px] focus-within:ring-brand-100 data-[active=true]:border-brand-600 data-[active=true]:bg-brand-50"
     >
-      <span className="text-[12px] font-medium leading-tight text-muted">{label}</span>
-      <span className="mt-0.5 flex min-w-0 items-center gap-2 truncate text-[15px] font-semibold leading-tight text-ink">{value}</span>
-      <IconChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted" />
+      <span className="text-[11px] font-medium leading-tight text-muted">{label}</span>
+      <span className="flex min-w-0 items-center gap-1.5 truncate text-[14px] font-semibold leading-tight text-ink">{value}</span>
+      <IconChevronDown className="pointer-events-none absolute right-2.5 top-1/2 size-4 -translate-y-1/2 text-muted" />
       {children}
     </div>
   )
