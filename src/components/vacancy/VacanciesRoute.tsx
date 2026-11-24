@@ -244,6 +244,7 @@ export function LandingCatalog({ lang, landing: l, path, active }: { lang: Lang;
     return (
       <AdLanding
         lang={lang}
+        path={l.path}
         title={l.h1 || l.title}
         intro={l.intro || ''}
         crumbs={crumbs}
@@ -254,6 +255,9 @@ export function LandingCatalog({ lang, landing: l, path, active }: { lang: Lang;
         country={c.code}
         inName={uk ? c.inName : c.inNameRu}
         form={`landing-${l.path.split('/').pop()}`}
+        vacancyReviews={active
+          .filter((v) => v.country === c.code)
+          .flatMap((v) => (localize(v, lang).reviews ?? []).filter((r) => r.text).map((r) => ({ name: r.name, text: r.text, date: r.date, vacancy: localize(v, lang).title })))}
       />
     )
   return (

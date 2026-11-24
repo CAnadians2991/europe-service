@@ -41,7 +41,7 @@ const EXTRA: Extra[] = [
 /** the first cards on the home page: old and new reviews mixed, different countries and jobs */
 const ORDER = ['shein-magnice-2026-08', 'zhenia-chocolate-pl', 'karina-food-cz', 'dh-niezabyszewo-2026-05', 'nazar-kifli-hu', 'zara-psary-2026-04', 'petro-poultry-pl', 'notino-rajhrad-2025-09']
 
-export type VideoCard = { key: string; src: string; yt: boolean; cover: string; title: string; name: string; place: string; dur?: string }
+export type VideoCard = { key: string; src: string; yt: boolean; cover: string; title: string; name: string; place: string; dur?: string; badge?: string; wide?: boolean }
 
 const isYt = (v: string) => /^[\w-]{8,15}$/.test(v)
 const base = (v: string) => v.split('/').pop()!.replace(/\.mp4$/, '')
