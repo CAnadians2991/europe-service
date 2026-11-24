@@ -9,6 +9,7 @@ import { hasRu, localize } from '@/lib/vacancy-i18n'
 import { ruTwin, ukTwin } from '@/lib/alt-routes'
 import { ensureCountries } from '@/lib/countries'
 import { CatalogPage } from './CatalogPage'
+import { AdLanding } from './AdLanding'
 import { CitySections } from './CitySections'
 import { VacancyView, vacancyPageMeta } from './VacancyView'
 import { Blocks } from '@/components/content/Blocks'
@@ -237,13 +238,31 @@ export function LandingCatalog({ lang, landing: l, path, active }: { lang: Lang;
   const links = (l.links ?? []).filter((x) => x.href.startsWith('/'))
   const countryPath = all ? (uk ? '/vacancies' : '/ru/vacancies') : uk ? c.path : '/ru' + c.path
   const parent = all ? (uk ? 'Вакансії' : 'Вакансии') : uk ? `Робота ${c.inName}` : `Работа ${c.inNameRu}`
+  const crumbs = [crumbHome(lang), { name: parent, path: countryPath }, { name: l.h1 || l.title, path }]
+  // an ad landing of one country: the story first, the vacancies at the bottom (owner 24.11.2026)
+  if (l.kind === 'ad' && !all)
+    return (
+      <AdLanding
+        lang={lang}
+        title={l.h1 || l.title}
+        intro={l.intro || ''}
+        crumbs={crumbs}
+        blocks={l.blocks}
+        faq={l.faq}
+        cards={cards.filter((x) => x.country === c.code)}
+        allCards={cards}
+        country={c.code}
+        inName={uk ? c.inName : c.inNameRu}
+        form={`landing-${l.path.split('/').pop()}`}
+      />
+    )
   return (
     <CatalogPage
       form={`landing-${l.path.split('/').pop()}`}
       lang={lang}
       title={l.h1 || l.title}
       text={l.intro || ''}
-      crumbs={[crumbHome(lang), { name: parent, path: countryPath }, { name: l.h1 || l.title, path }]}
+      crumbs={crumbs}
       cards={narrowed ? list.map((v) => toCard(localize(v, lang))) : cards}
       preset={narrowed || all ? undefined : { country: c.code }}
       links={links.length ? [{ title: uk ? 'Дивіться також' : 'Смотрите также', items: links.map((x) => ({ href: x.href, label: x.label })) }] : undefined}
