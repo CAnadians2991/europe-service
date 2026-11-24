@@ -14,6 +14,8 @@ type Lang = 'uk' | 'ru'
 type Yt = { id: string; wide?: boolean; uk: string; ru: string }
 type Review = { name: string; text: string; lang: Lang; date?: string; vacancy?: string; city?: string; country?: string; video?: string }
 
+export type Icon = 'meal' | 'sea' | 'shield' | 'bus' | 'clock' | 'users' | 'city' | 'doc' | 'star'
+
 type Showcase = {
   /** the horizontal film for the top of the page */
   film?: Yt
@@ -31,6 +33,10 @@ type Showcase = {
   mediaPaths: string[]
   /** what we do for the client, step by step */
   steps: Record<Lang, [string, string][]>
+  /** the first screen: a photo, one line under the H1 and three figures (owner 24.11.2026: «блоки 1 і 2 міняй кардинально») */
+  hero: { photo: string; pos?: string } & Record<Lang, { sub: string; stats: [string, string][] }>
+  /** the second block: real photos of the place and what the work gives besides the pay and housing (those are in the hero) */
+  pluses: { photos: string[] } & Record<Lang, [Icon, string, string][]>
   /** our own clips (public/reviews/video/<key>.mp4, logo burned in) — the managers' trip, client reviews, promo reels */
   own?: { key: string; dur: string; part: 'team' | 'review' | 'life'; uk: string; ru: string }[]
   /** the managers who went the client's way: an office photo of them and their names */
@@ -63,6 +69,33 @@ const SHOWCASE: Record<string, Showcase> = {
       ...['tLoPFwmmJX4', 'zQqtKP3s8Fw', 'BwqfHSto05Q', 'xCv38kYDyXE', '5gtQFQNPHGQ'].map((id) => ({ id, ...HOUSING_GR })),
     ],
     howToVideos: ['fTVihjGSlHk', 'FmTWYA8fX10', 'lkoi0qLhdyQ', 'MXxlw9JrKZw'].map((id) => ({ id, ...HOWTO_GR })),
+    hero: {
+      // a frame of our managers' own video in Greece (IMG_3517, Piraeus marina)
+      photo: '/media/landing/greece-marina',
+      pos: '50% 40%',
+      uk: { sub: 'Готелі на островах і в Халкідіках — офіційно, з житлом і харчуванням.', stats: [['від 1 090 €', 'на місяць на руки'], ['0 €', 'за житло'], ['квітень–листопад', 'сезон 2027']] },
+      ru: { sub: 'Отели на островах и в Халкидиках — официально, с жильём и питанием.', stats: [['от 1 090 €', 'в месяц на руки'], ['0 €', 'за жильё'], ['апрель–ноябрь', 'сезон 2027']] },
+    },
+    pluses: {
+      // the employers' own photos of a Greek hotel (vacancy-media «work»)
+      photos: ['/media/vx/3po2letnz1/866361a4', '/media/vx/3po2letnz1/89ed8d22', '/media/vx/3po2letnz1/4670fb5e', '/media/vx/3po2letnz1/8e265865'],
+      uk: [
+        ['meal', 'Харчування в готелі', '2–3 рази на день, безкоштовно'],
+        ['sea', 'Робота біля моря', 'Родос, Крит, Кос, Корфу, Халкідіки — після зміни пляж'],
+        ['shield', 'Страховка й пенсійні внески', 'Повне медичне страхування від роботодавця'],
+        ['bus', 'Квиток компенсують', 'У більшості вакансій — після контракту'],
+        ['clock', 'Додаткові години оплачуються', 'Кожна година понад графік — окремо'],
+        ['users', 'Можна без досвіду', 'Покоївка, мийник посуду, працівник готелю'],
+      ],
+      ru: [
+        ['meal', 'Питание в отеле', '2–3 раза в день, бесплатно'],
+        ['sea', 'Работа у моря', 'Родос, Крит, Кос, Корфу, Халкидики — после смены пляж'],
+        ['shield', 'Страховка и пенсионные взносы', 'Полная медицинская страховка от работодателя'],
+        ['bus', 'Билет компенсируют', 'В большинстве вакансий — после контракта'],
+        ['clock', 'Дополнительные часы оплачиваются', 'Каждый час сверх графика — отдельно'],
+        ['users', 'Можно без опыта', 'Горничная, мойщик посуды, работник отеля'],
+      ],
+    },
     reviewRx: /Грец|Крит|Родос|Корфу|Халкід|Таос|Тасос/,
     // owner 24.11.2026: the trip clips are Tetiana Chupryna and Khrystyna Ihnashova (face-checked against the office photos)
     own: [
@@ -118,6 +151,31 @@ const SHOWCASE: Record<string, Showcase> = {
     ],
     housingVideos: [],
     howToVideos: [],
+    hero: {
+      photo: '/media/v/italy-pokoivka-v-4-zirkovyi-hotel-italii/347f5f80a8',
+      pos: '50% 40%',
+      uk: { sub: 'Готелі, кемпінг і Gardaland Park — з житлом, без досвіду й знання мови.', stats: [['від 1 190 €', 'на місяць на руки'], ['0 €', 'за житло'], ['березень–жовтень', 'сезон 2027']] },
+      ru: { sub: 'Отели, кемпинг и Gardaland Park — с жильём, без опыта и знания языка.', stats: [['от 1 190 €', 'в месяц на руки'], ['0 €', 'за жильё'], ['март–октябрь', 'сезон 2027']] },
+    },
+    pluses: {
+      photos: ['/media/v/italy-pratsivnyk-z-obsluhovuvannia-terytorii/bef20f37ad', '/media/v/italy-pokoivka-v-4-zirkovyi-hotel-v/03b80c392a', '/media/v/italy-prybyralnytsia-turystychnykh-budynochkiv/77177d817c', '/media/v/italy-pokoivka-v-4-zirkovyi-hotel-italii/65395e8407'],
+      uk: [
+        ['meal', 'Ваучери на харчування', '100–120 € на місяць понад зарплату'],
+        ['city', 'Туристичні міста', 'Верона, Венеція, Рим, Мілан, озеро Гарда'],
+        ['bus', 'Проїзний до роботи', 'У частині вакансій — від роботодавця'],
+        ['users', 'Без досвіду й мови', 'Навчають на місці, координатор поруч'],
+        ['doc', 'Офіційне оформлення', 'Договір; частина вакансій — через польську компанію з A1'],
+        ['star', 'Пріоритет на наступний сезон', 'Тим, хто відпрацював сезон'],
+      ],
+      ru: [
+        ['meal', 'Ваучеры на питание', '100–120 € в месяц сверх зарплаты'],
+        ['city', 'Туристические города', 'Верона, Венеция, Рим, Милан, озеро Гарда'],
+        ['bus', 'Проездной до работы', 'В части вакансий — от работодателя'],
+        ['users', 'Без опыта и языка', 'Обучают на месте, координатор рядом'],
+        ['doc', 'Официальное оформление', 'Договор; часть вакансий — через польскую компанию с A1'],
+        ['star', 'Приоритет на следующий сезон', 'Тем, кто отработал сезон'],
+      ],
+    },
     reviewRx: /Італ|Итал|Гарда|Верон/,
     mediaPaths: [],
     steps: {
@@ -193,6 +251,8 @@ export function countryShowcase(country: string, lang: Lang) {
     .filter((r, i, all) => all.findIndex((x) => x.date === r.date && x.name.slice(0, 3) === r.name.slice(0, 3)) === i)
   return {
     film: s.film ? { id: s.film.id, title: s.film[lang] } : undefined,
+    hero: { photo: s.hero.photo, pos: s.hero.pos, ...s.hero[lang] },
+    pluses: { photos: s.pluses.photos, items: s.pluses[lang] },
     life: [...own('life'), ...s.life.map((v) => ytCard(v, lang, lifeBadge))],
     reviewVideos: [...own('review'), ...driveOf('review', B.review), ...s.reviewVideos.map((v) => ytCard(v, lang, B.review))],
     teamVideos: own('team'),
